@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【採用説明会資料】インバウンド市場の未来を創る - Global Daily</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap');
+        
+        :root {
+            --bg-color: #f5f5f7;
+            --container-bg: #ffffff;
+            --text-primary: #1d1d1f;
+            --text-secondary: #515154;
+            --border-color: #d2d2d7;
+            --accent-color: #007aff;
+            --card-bg: #f8f9fa;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--bg-color);
+            font-family: 'Noto Sans JP', -apple-system, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .screen-view {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            height: 90vh;
+            max-height: 675px;
+            background: var(--container-bg);
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header, .footer {
+            height: 60px;
+            padding: 0 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--container-bg);
+            flex-shrink: 0;
+            z-index: 100;
+        }
+        
+        .footer {
+            height: 50px;
+            border-bottom: none;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .logo { height: 60px; }
+        .slide-info, .page-number { font-size: 14px; font-weight: 500; color: var(--text-secondary); }
+        
+        .main { flex: 1; position: relative; overflow: hidden; }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            padding: 25px 45px;
+            display: none;
+            overflow: hidden;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 1;
+        }
+        
+        .slide h1 { font-size: 2em; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; line-height: 1.3; text-align: center; }
+        .slide h2 { font-size: 1.5em; font-weight: 600; color: var(--text-primary); margin-bottom: 10px; }
+        .slide h3 { font-size: 1.05em; font-weight: 600; margin-bottom: 6px; color: var(--text-primary); }
+        .slide p { font-size: 0.95em; line-height: 1.6; color: var(--text-secondary); margin-bottom: 10px; max-width: 800px; text-align: center; margin-left: auto; margin-right: auto; }
+
+        .center { width: 100%; }
+        .split { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; width: 100%; align-items: center; }
+        .split h1, .split p { text-align: left; }
+        
+        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-top: 15px; width: 100%; }
+        .card { padding: 15px; border-radius: 14px; background: var(--card-bg); border: 1px solid var(--border-color); text-align: center; }
+        .card h3 { color: var(--accent-color); font-size: 0.95em; }
+        .card p { font-size: 0.85em; color: var(--text-secondary); margin: 0; }
+
+        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.3); color: white; border: none; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; font-size: 20px; z-index: 100; display: flex; justify-content: center; align-items: center; }
+        .nav-btn:hover { background: rgba(0,0,0,0.5); }
+        #prevBtn { left: 20px; }
+        #nextBtn { right: 20px; }
+
+        .progress { width: 200px; height: 5px; background: #e5e5e5; border-radius: 2.5px; overflow: hidden; }
+        .progress-bar { height: 100%; background: var(--accent-color); transition: width 0.3s; }
+        
+        .hero { background: #1d1d1f; color: white; }
+        .hero h1, .hero h2, .hero h3 { color: white; }
+        .hero p { color: #a1a1a6; }
+        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.15; z-index: 0; }
+        .center, .split { position: relative; z-index: 1; }
+
+        .stats { display: flex; justify-content: center; gap: 50px; margin-top: 20px; }
+        .stat-item { text-align: center; }
+        .stat-number { font-size: 2.2em; font-weight: 700; color: var(--accent-color); }
+        .stat-label { font-size: 0.85em; color: var(--text-secondary); margin-top: 4px; }
+        
+        img { max-width: 100%; height: auto; border-radius: 12px; object-fit: cover; }
+        .source { font-size: 0.7em; color: #999; text-align: right; width: 100%; margin-top: 8px; }
+        
+        .reason-list { list-style: none; margin-top: 10px; padding-left: 8px; }
+        .reason-list li { font-size: 0.95em; line-height: 1.5; margin-bottom: 10px; }
+        .reason-list li strong { font-weight: 700; font-size: 0.95em; color: var(--accent-color); display: block; }
+        .reason-list li span { font-size: 0.85em; color: var(--text-secondary); }
+
+        .chart-wrapper { width: 100%; margin-top: 8px; }
+        .ranking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 25px; }
+        .ranking-list { list-style: none; padding: 0; margin: 0; }
+        .ranking-list li { display: flex; align-items: center; padding: 6px 0; border-bottom: 1px solid #f0f0f0; }
+        .ranking-list .rank { font-size: 0.95em; font-weight: 700; color: #888; width: 30px; }
+        .ranking-list .flag { font-size: 1.3em; margin: 0 10px; }
+        .ranking-list .country { font-size: 0.95em; font-weight: 500; }
+        .ranking-list .value { margin-left: auto; font-size: 0.95em; font-weight: 600; }
+        .ranking-list li.highlight { background-color: #fffbe6; border-left: 3px solid #fcc419; padding-left: 8px; }
+        .ranking-list li.highlight .rank, .ranking-list li.highlight .country, .ranking-list li.highlight .value { color: #d9480f; font-weight: 700; }
+
+        .pie-chart-wrapper { display: flex; justify-content: center; align-items: center; gap: 35px; }
+        .pie-chart { width: 160px; height: 160px; border-radius: 50%; position: relative; }
+        .pie-chart.donut::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 50%; height: 50%; background: var(--container-bg); border-radius: 50%; }
+        .pie-legend { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+        .pie-legend li { display: flex; align-items: center; font-size: 0.9em; font-weight: 500; }
+        .pie-legend .color-box { width: 12px; height: 12px; border-radius: 3px; margin-right: 8px; }
+        .pie-legend .percent { font-weight: 700; margin-left: auto; min-width: 45px; text-align: right; }
+
+        .recovery-chart-container { text-align: center; }
+        .recovery-chart-annotation { font-weight: 600; color: var(--accent-color); background-color: #e6f7ff; padding: 5px 10px; border-radius: 6px; display: inline-block; margin-bottom: 10px; font-size: 0.85em; }
+        .recovery-chart-wrapper { height: 180px; display: flex; justify-content: space-around; align-items: flex-end; border-left: 2px solid #ddd; border-bottom: 2px solid #ddd; padding: 6px 12px 0 12px; }
+        .recovery-chart-wrapper .bar-item { width: 45px; text-align: center; display: flex; flex-direction: column-reverse; }
+        .recovery-chart-wrapper .bar { background-color: #a0aec0; border-radius: 3px 3px 0 0; }
+        .recovery-chart-wrapper .bar-item.recovering .bar { background-color: var(--accent-color); }
+        .recovery-chart-wrapper .bar-item.recovered .bar { background-color: #48bb78; }
+        .recovery-chart-wrapper .year { font-weight: 600; margin-top: 4px; font-size: 0.75em; }
+        .recovery-chart-wrapper .value { font-size: 0.7em; font-weight: 500; color: #555; margin-bottom: 3px; }
+
+        .job-card { cursor: pointer; transition: all 0.3s ease; }
+        .job-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        .job-icon { font-size: 2em; margin-bottom: 8px; }
+        .job-skills { font-size: 0.75em; color: var(--accent-color); font-weight: 500; margin-top: 6px; padding: 3px 6px; background: rgba(0,122,255,0.1); border-radius: 10px; }
+
+        .employee-stories { max-width: 700px; margin: 15px auto; }
+        .story-card { background: var(--card-bg); border-radius: 14px; padding: 18px; border: 2px solid transparent; display: none; }
+        .story-card.active { border-color: var(--accent-color); display: block; }
+        .story-header { display: flex; align-items: center; margin-bottom: 12px; }
+        .story-avatar { font-size: 2.2em; margin-right: 12px; }
+        .story-info h3 { margin: 0; font-size: 1.05em; }
+        .story-info p { margin: 2px 0 0 0; color: var(--text-secondary); font-size: 0.8em; }
+        .story-content p { font-size: 0.95em; line-height: 1.6; margin-bottom: 10px; font-style: italic; text-align: left; }
+        .story-achievement { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 8px 12px; border-radius: 10px; }
+        .achievement-label { font-size: 0.8em; opacity: 0.9; }
+        .achievement-value { font-weight: 600; display: block; margin-top: 2px; font-size: 0.9em; }
+        .story-navigation { display: flex; justify-content: center; gap: 8px; margin-top: 15px; }
+        .story-nav-btn { background: var(--card-bg); border: 2px solid var(--border-color); padding: 6px 14px; border-radius: 18px; cursor: pointer; font-weight: 500; font-size: 0.85em; }
+        .story-nav-btn.active, .story-nav-btn:hover { background: var(--accent-color); color: white; border-color: var(--accent-color); }
+
+        .growth-timeline { display: flex; justify-content: space-between; margin-top: 20px; position: relative; max-width: 900px; margin-left: auto; margin-right: auto; }
+        .growth-timeline::before { content: ''; position: absolute; top: 40px; left: 10%; right: 10%; height: 3px; background: linear-gradient(to right, var(--accent-color), #5856d6, #af52de, #48bb78); z-index: 1; }
+        .timeline-item { flex: 1; text-align: center; position: relative; z-index: 2; margin: 0 4px; }
+        .timeline-year { width: 50px; height: 50px; background: linear-gradient(135deg, var(--accent-color), #5856d6); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8em; font-weight: 700; margin: 0 auto 10px auto; box-shadow: 0 4px 10px rgba(0,0,0,0.12); }
+        .timeline-item:nth-child(2) .timeline-year { background: linear-gradient(135deg, #5856d6, #af52de); }
+        .timeline-item:nth-child(3) .timeline-year { background: linear-gradient(135deg, #af52de, #ff9500); }
+        .timeline-item:nth-child(4) .timeline-year { background: linear-gradient(135deg, #ff9500, #48bb78); }
+        .timeline-content { background: white; border-radius: 10px; padding: 10px; box-shadow: 0 3px 12px rgba(0,0,0,0.06); border: 1px solid var(--border-color); }
+        .timeline-content h3 { margin-bottom: 6px; font-size: 0.9em; }
+        .timeline-content ul { list-style: none; padding: 0; margin: 6px 0; }
+        .timeline-content li { padding: 2px 0; color: var(--text-secondary); font-size: 0.75em; }
+        .timeline-content li:before { content: '✓'; color: var(--accent-color); font-weight: bold; margin-right: 4px; }
+        .timeline-achievement { background: linear-gradient(135deg, #ff6b6b, #ff8e8e); color: white; padding: 5px 8px; border-radius: 10px; font-weight: 600; margin-top: 6px; font-size: 0.7em; }
+
+        .org-chart { position: relative; max-width: 550px; margin: 15px auto; height: 250px; }
+        .org-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; }
+        .org-logo { width: 70px; height: 70px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 20px rgba(0,0,0,0.1); border: 3px solid var(--accent-color); }
+        .org-branch { position: absolute; }
+        .org-branch:nth-child(2) { top: 0; left: 50%; transform: translateX(-50%); }
+        .org-branch:nth-child(3) { top: 50%; right: 0; transform: translateY(-50%); }
+        .org-branch:nth-child(4) { bottom: 0; left: 50%; transform: translateX(-50%); }
+        .org-branch:nth-child(5) { top: 50%; left: 0; transform: translateY(-50%); }
+        .org-node { width: 105px; padding: 8px; background: var(--card-bg); border-radius: 10px; text-align: center; border: 2px solid var(--border-color); box-shadow: 0 3px 10px rgba(0,0,0,0.06); }
+        .sales-node.active { background: linear-gradient(135deg, #007aff, #5856d6); color: white; border-color: #007aff; }
+        .sales-node.active h3, .sales-node.active p { color: white; }
+        .org-icon { font-size: 1.3em; margin-bottom: 4px; }
+        .org-node h3 { font-size: 0.8em; margin-bottom: 2px; }
+        .org-node p { font-size: 0.65em; margin: 0; }
+        .org-highlight { margin-top: 12px; padding: 8px 15px; background: linear-gradient(135deg, #ff6b6b, #ff8e8e); color: white; border-radius: 18px; text-align: center; font-size: 0.85em; }
+
+        .sales-role-container { max-width: 800px; margin: 20px auto; }
+        .sales-flow { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+        .flow-item { flex: 1; text-align: center; padding: 15px 10px; background: var(--card-bg); border-radius: 14px; border: 2px solid var(--border-color); }
+        .sales-center { background: linear-gradient(135deg, var(--accent-color), #5856d6); color: white; border-color: var(--accent-color); flex: 1.2; }
+        .sales-center h3, .sales-center p { color: white; }
+        .flow-icon { font-size: 2em; margin-bottom: 8px; }
+        .flow-item h3 { margin-bottom: 6px; font-size: 1em; }
+        .flow-item p { font-size: 0.8em; margin: 0; }
+        .flow-arrow { display: flex; flex-direction: column; align-items: center; margin: 0 6px; }
+        .arrow-line { width: 3px; height: 35px; background: linear-gradient(to bottom, var(--accent-color), #48bb78); border-radius: 2px; position: relative; }
+        .arrow-line::after { content: '▶'; position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%) rotate(90deg); color: #48bb78; font-size: 0.9em; }
+        .arrow-text { font-size: 0.7em; color: var(--text-secondary); text-align: center; margin-top: 6px; font-weight: 500; }
+
+        .sales-process { display: flex; flex-direction: column; gap: 10px; max-width: 700px; margin: 18px auto; }
+        .process-step { display: flex; align-items: center; padding: 12px; background: var(--card-bg); border-radius: 10px; border-left: 4px solid var(--accent-color); }
+        .process-step:nth-child(2) { border-left-color: #5856d6; }
+        .process-step:nth-child(3) { border-left-color: #af52de; }
+        .process-step:nth-child(4) { border-left-color: #ff9500; }
+        .process-step:nth-child(5) { border-left-color: #48bb78; }
+        .step-number { width: 32px; height: 32px; background: linear-gradient(135deg, var(--accent-color), #5856d6); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1em; font-weight: 700; margin-right: 15px; flex-shrink: 0; }
+        .process-step:nth-child(2) .step-number { background: linear-gradient(135deg, #5856d6, #af52de); }
+        .process-step:nth-child(3) .step-number { background: linear-gradient(135deg, #af52de, #ff9500); }
+        .process-step:nth-child(4) .step-number { background: linear-gradient(135deg, #ff9500, #ff6b6b); }
+        .process-step:nth-child(5) .step-number { background: linear-gradient(135deg, #ff6b6b, #48bb78); }
+        .step-content h3 { margin-bottom: 3px; font-size: 1em; }
+        .step-content p { margin: 0; color: var(--text-secondary); font-size: 0.85em; }
+
+        .client-industries { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin: 15px auto; max-width: 900px; }
+        .industry-item { text-align: center; padding: 12px 8px; background: var(--card-bg); border-radius: 14px; border: 2px solid var(--border-color); }
+        .industry-icon { font-size: 2em; margin-bottom: 6px; }
+        .percentage-circle { position: relative; width: 50px; height: 50px; margin: 0 auto 6px auto; }
+        .percentage-circle svg { width: 100%; height: 100%; }
+        .percentage-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 0.9em; font-weight: 700; }
+        .industry-info h3 { font-size: 0.9em; margin-bottom: 4px; }
+        .industry-info p { font-size: 0.7em; color: var(--text-secondary); margin: 0; }
+
+        .nationality-split { display: flex; justify-content: center; gap: 50px; margin: 20px 0; }
+        .nationality-item { display: flex; flex-direction: column; align-items: center; }
+        .nationality-icon { font-size: 2.5em; margin-bottom: 6px; }
+        .nationality-info .percentage { display: block; font-size: 1.8em; font-weight: 700; color: var(--accent-color); }
+        .nationality-info .label { font-size: 0.95em; color: var(--text-primary); font-weight: 500; }
+        .flag-row { display: flex; justify-content: center; gap: 12px; margin: 8px 0; }
+        .country-flag { font-size: 1.8em; }
+
+        .sales-foundation { background: linear-gradient(135deg, rgba(0,122,255,0.08), rgba(72,187,120,0.05)); padding: 18px; border-radius: 14px; margin: 15px auto; border-left: 4px solid var(--accent-color); max-width: 700px; }
+        .sales-foundation h2 { color: var(--accent-color); margin-bottom: 8px; text-align: center; font-size: 1.2em; }
+        .sales-foundation p { text-align: center; font-size: 0.95em; line-height: 1.5; }
+        .essence-note { margin-top: 10px; padding: 8px 12px; background: linear-gradient(135deg, rgba(255,107,107,0.1), rgba(255,142,142,0.1)); border-radius: 8px; border-left: 3px solid #ff6b6b; }
+
+        .career-paths { max-width: 800px; margin: 18px auto; }
+        .career-center { display: flex; justify-content: center; margin-bottom: 20px; }
+        .sales-core { width: 90px; height: 90px; background: linear-gradient(135deg, var(--accent-color), #5856d6); color: white; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 1em; font-weight: 700; text-align: center; box-shadow: 0 6px 20px rgba(0,0,0,0.12); }
+        .career-branches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+        .career-path { text-align: center; padding: 12px; background: var(--card-bg); border-radius: 10px; border: 2px solid var(--border-color); }
+        .path-icon { font-size: 1.8em; margin-bottom: 8px; }
+        .career-path h3 { font-size: 0.9em; margin-bottom: 5px; }
+        .career-path p { font-size: 0.75em; color: var(--text-secondary); margin: 0; }
+
+        .candidate-icon { font-size: 1.8em; margin-bottom: 8px; }
+        .example-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 15px; }
+        .example-item { background: var(--card-bg); padding: 12px; border-radius: 10px; border: 1px solid var(--border-color); }
+        .example-number { display: inline-flex; width: 24px; height: 24px; background: linear-gradient(135deg, var(--accent-color), #5856d6); color: white; border-radius: 50%; font-size: 0.75em; font-weight: 700; align-items: center; justify-content: center; margin-bottom: 6px; }
+        .example-item h4 { font-size: 0.95em; margin-bottom: 5px; }
+        .example-item p { font-size: 0.8em; color: var(--text-secondary); margin: 0; line-height: 1.4; }
+
+        .mind-card { background: white; padding: 18px 15px; border-radius: 14px; border: 2px solid var(--border-color); transition: all 0.3s ease; position: relative; overflow: hidden; }
+        .mind-card:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.08); border-color: var(--accent-color); }
+    </style>
+</head>
+<body>
+    <div class="screen-view">
+        <div class="container">
+            <header class="header">
+                <img src="https://www.gldaily.com/gld-kanri/wp-content/themes/gldaily/assets/images/logo.png" alt="Global Daily" class="logo">
+                <div class="slide-info">
+                    <span id="slideTitle"></span> | <span id="slideNumber"></span>
+                </div>
+            </header>
+            <main class="main">
+            
+            <!-- 1: 오프닝 -->
+            <div class="slide active hero">
+                <img src="https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?q=80&w=2070" alt="Fushimi Inari Shrine" class="hero-bg">
+                <div class="center">
+                    <h1>日本経済の新たな主役<br>「インバウンド市場」の可能性</h1>
+                    <p style="font-size: 1.1em;">この巨大な成長市場の未来を、共に創る仲間を募集します</p>
+                </div>
+            </div>
+
+            <!-- 2: 인바운드란? -->
+            <div class="slide">
+                <div class="center">
+                    <h1>そもそも「インバウンド」とは？</h1>
+                    <p>ニュースでよく聞く言葉ですが、まずはその意味を正確に理解しましょう。</p>
+                    <div class="split" style="max-width: 700px; margin: 15px auto 0 auto; align-items: stretch;">
+                        <div class="card" style="display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px;">
+                            <h2 style="color: var(--accent-color); font-size: 1.3em;">インバウンド (Inbound)</h2>
+                            <p style="font-size: 2.2em; margin: 6px 0; line-height: 1;">✈️ → 🇯🇵</p>
+                            <p style="margin: 0;">海外から日本へ<br>旅行に来ること (訪日旅行)</p>
+                        </div>
+                        <div class="card" style="display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px;">
+                            <h2 style="color: #f5576c; font-size: 1.3em;">アウトバウンド (Outbound)</h2>
+                            <p style="font-size: 2.2em; margin: 6px 0; line-height: 1;">🇯🇵 → ✈️</p>
+                            <p style="margin: 0;">日本から海外へ<br>旅行に行くこと (海外旅行)</p>
+                        </div>
+                    </div>
+                    <p style="margin-top: 15px;">今日お話しするのは、この「インバウンド」ビジネスの最前線です。</p>
+                </div>
+            </div>
+
+            <!-- 3: 시장규모 2025 -->
+            <div class="slide hero">
+                <div class="center">
+                    <h1>史上最高を記録！2025年インバウンド市場</h1>
+                    <p>訪日客数・消費額ともに過去最高を更新。日本は世界有数の観光大国へ。</p>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-number">4,288万人</div>
+                            <div class="stat-label">2025年 訪日外客数<br><strong>(過去最高・前年比+15.8%)</strong></div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">9.5兆円</div>
+                            <div class="stat-label">2025年 旅行消費額<br><strong>(過去最高・前年比+16.4%)</strong></div>
+                        </div>
+                    </div>
+                    <p class="source" style="color: #a1a1a6; text-align: center; margin-top: 15px;">出典: JNTO・観光庁 (2026年1月発表 確定値)</p>
+                </div>
+            </div>
+
+            <!-- 4: 세계 TOP10 -->
+            <div class="slide">
+                <div class="center">
+                    <h1>世界が認める、観光大国ニッポン</h1>
+                    <p>2024年、日本は世界7位の観光大国へ。<strong>私たちが働く市場は、世界的な注目を集める舞台です。</strong></p>
+                    <div class="chart-wrapper">
+                        <div class="ranking-grid">
+                            <ul class="ranking-list">
+                                <li><span class="rank">1</span><span class="flag">🇫🇷</span><span class="country">フランス</span><span class="value">1億50万</span></li>
+                                <li><span class="rank">2</span><span class="flag">🇪🇸</span><span class="country">スペイン</span><span class="value">9,120万</span></li>
+                                <li><span class="rank">3</span><span class="flag">🇺🇸</span><span class="country">アメリカ</span><span class="value">7,550万</span></li>
+                                <li><span class="rank">4</span><span class="flag">🇮🇹</span><span class="country">イタリア</span><span class="value">6,230万</span></li>
+                                <li><span class="rank">5</span><span class="flag">🇹🇷</span><span class="country">トルコ</span><span class="value">5,980万</span></li>
+                            </ul>
+                            <ul class="ranking-list">
+                                <li><span class="rank">6</span><span class="flag">🇲🇽</span><span class="country">メキシコ</span><span class="value">4,650万</span></li>
+                                <li class="highlight"><span class="rank">7</span><span class="flag">🇯🇵</span><span class="country">日本</span><span class="value">3,686万</span></li>
+                                <li><span class="rank">8</span><span class="flag">🇬🇧</span><span class="country">イギリス</span><span class="value">3,380万</span></li>
+                                <li><span class="rank">9</span><span class="flag">🇩🇪</span><span class="country">ドイツ</span><span class="value">3,330万</span></li>
+                                <li><span class="rank">10</span><span class="flag">🇬🇷</span><span class="country">ギリシャ</span><span class="value">3,250万</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="source">出典: UNWTO (2024年確定値)</p>
+                </div>
+            </div>
+            
+            <!-- 5: 왜 인바운드? -->
+            <div class="slide">
+                <div class="split">
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=1926" alt="Modern business meeting" style="height: 100%; object-fit: cover;">
+                    </div>
+                    <div>
+                        <h1 style="text-align: left; font-size: 1.7em; line-height: 1.2; margin-bottom: 10px;">なぜ今、インバウンドに<br>取り組むべきなのか？</h1>
+                        <ul class="reason-list">
+                            <li>
+                                <strong>1. 国内需要縮小の補完</strong>
+                                <span>少子高齢化で国内消費が減少する中、外需が日本経済を支える重要な柱に。</span>
+                            </li>
+                            <li>
+                                <strong>2. 地方創生の起爆剤</strong>
+                                <span>地域の隠れた資源を世界に発信し、関係人口の創出に繋がります。</span>
+                            </li>
+                            <li>
+                                <strong>3. 新しい雇用と人材育成</strong>
+                                <span>国際感覚ある人材が育ち、世界で活躍する機会が生まれます。</span>
+                            </li>
+                            <li>
+                                <strong>4. 国際的地位の強化</strong>
+                                <span>日本のファンを世界中に増やし、ソフトパワーの拡大に直結します。</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6: V자 회복 -->
+            <div class="slide">
+                <div class="center">
+                    <h1>驚異的な回復力と、未来への成長</h1>
+                    <p>コロナ禍からのV字回復を超え、2025年は史上最高の4,288万人を記録。</p>
+                    <div class="chart-wrapper recovery-chart-container">
+                        <div class="recovery-chart-annotation">
+                            <strong>2020年 コロナ禍で急落 → 2025年 史上最高を記録</strong>
+                        </div>
+                        <div class="recovery-chart-wrapper">
+                            <div class="bar-item" style="height: 74%;"><div class="value">3,188万</div><div class="bar" style="height: 100%;"></div><div class="year">2019</div></div>
+                            <div class="bar-item" style="height: 10%;"><div class="value">412万</div><div class="bar" style="height: 100%;"></div><div class="year">2020</div></div>
+                            <div class="bar-item" style="height: 1%;"><div class="value">25万</div><div class="bar" style="height: 100%;"></div><div class="year">2021</div></div>
+                            <div class="bar-item" style="height: 9%;"><div class="value">383万</div><div class="bar" style="height: 100%;"></div><div class="year">2022</div></div>
+                            <div class="bar-item recovering" style="height: 58%;"><div class="value">2,507万</div><div class="bar" style="height: 100%;"></div><div class="year">2023</div></div>
+                            <div class="bar-item recovering" style="height: 86%;"><div class="value">3,702万</div><div class="bar" style="height: 100%;"></div><div class="year">2024</div></div>
+                            <div class="bar-item recovered" style="height: 100%;"><div class="value">4,288万</div><div class="bar" style="height: 100%;"></div><div class="year">2025</div></div>
+                        </div>
+                        <p class="source">出典: JNTO 2026年1月発表</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7: WHO 국적별 -->
+            <div class="slide">
+                <div class="center">
+                    <h1>WHO: 誰が日本に来ているのか？</h1>
+                    <p>2025年は韓国が中国を抜いて首位に。多様な国・地域から日本を訪れています。</p>
+                    <div class="chart-wrapper">
+                        <div class="ranking-grid">
+                            <ul class="ranking-list">
+                                <li><span class="rank">1</span><span class="flag">🇰🇷</span><span class="country">韓国</span><span class="value">945.9万</span></li>
+                                <li><span class="rank">2</span><span class="flag">🇨🇳</span><span class="country">中国</span><span class="value">909.6万</span></li>
+                                <li><span class="rank">3</span><span class="flag">🇹🇼</span><span class="country">台湾</span><span class="value">676.3万</span></li>
+                            </ul>
+                            <ul class="ranking-list">
+                                <li><span class="rank">4</span><span class="flag">🇺🇸</span><span class="country">アメリカ</span><span class="value">330.7万</span></li>
+                                <li><span class="rank">5</span><span class="flag">🇹🇭</span><span class="country">タイ</span><span class="value">272.6万</span></li>
+                                <li><span class="rank">6</span><span class="flag">🇭🇰</span><span class="country">香港</span><span class="value">251.7万</span></li>
+                            </ul>
+                        </div>
+                        <div style="text-align: center; margin-top: 12px;">
+                            <strong style="font-size: 1.2em; color: var(--accent-color);">年間総数: 4,288万人 </strong>
+                            <span style="font-size: 1em; font-weight: 600; color: #48bb78;">(前年比 +15.8%)</span>
+                        </div>
+                    </div>
+                    <p class="source">出典: JNTO 2026年1月発表 確定値</p>
+                </div>
+            </div>
+
+            <!-- 8: WHAT 소비 -->
+            <div class="slide">
+                <div class="split">
+                    <div>
+                        <div class="chart-wrapper">
+                            <div class="pie-chart-wrapper">
+                                <div class="pie-chart donut" style="background: conic-gradient(#3498db 0% 35%, #f1c40f 35% 58%, #e74c3c 58% 79%, #9b59b6 79% 100%);"></div>
+                                <ul class="pie-legend">
+                                    <li><span class="color-box" style="background: #3498db;"></span>宿泊費<span class="percent">35.0%</span></li>
+                                    <li><span class="color-box" style="background: #f1c40f;"></span>買物代<span class="percent">23.0%</span></li>
+                                    <li><span class="color-box" style="background: #e74c3c;"></span>飲食費<span class="percent">21.0%</span></li>
+                                    <li><span class="color-box" style="background: #9b59b6;"></span>その他<span class="percent">21.0%</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h1 style="font-size: 1.6em;">WHAT: 9.5兆円は何に？</h1>
+                        <p style="text-align: left;">旅行者の支出で最も大きいのは宿泊費、次いで買物、飲食の順。<br><br><strong>1人当たり消費額は22.9万円で、「体験」への支出も増加傾向。</strong></p>
+                        <p class="source" style="text-align: left;">出典: 観光庁 2026年1月発表</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9: HOW 정보수집 -->
+            <div class="slide">
+                <div class="center">
+                    <h1>HOW: 彼らはどうやって情報を集めるのか？</h1>
+                    <p>旅行者が最も信頼するのは、SNSや動画サイトなどオンライン上の「リアルな声」。<strong>まさにここが私たちの主戦場。</strong></p>
+                    <div class="chart-wrapper">
+                        <div style="display: flex; flex-direction: column; gap: 10px; max-width: 600px; margin: 0 auto;">
+                            <div style="display: flex; align-items: center; background: var(--card-bg); padding: 10px 15px; border-radius: 8px; border-left: 4px solid #007aff;">
+                                <div style="width: 55%; font-weight: 500; font-size: 0.95em;">📱 インターネット (SNS, Blog等)</div>
+                                <div style="flex: 1; background: #f0f0f0; border-radius: 6px; height: 20px; margin: 0 10px;">
+                                    <div style="height: 100%; background: linear-gradient(90deg, #007aff, #5856d6); border-radius: 6px; width: 72.8%; display: flex; align-items: center; justify-content: flex-end; padding-right: 6px; color: white; font-weight: 600; font-size: 0.8em;">72.8%</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; background: var(--card-bg); padding: 10px 15px; border-radius: 8px; border-left: 4px solid #5856d6;">
+                                <div style="width: 55%; font-weight: 500; font-size: 0.95em;">✈️ 旅行会社のHP・アプリ</div>
+                                <div style="flex: 1; background: #f0f0f0; border-radius: 6px; height: 20px; margin: 0 10px;">
+                                    <div style="height: 100%; background: linear-gradient(90deg, #5856d6, #af52de); border-radius: 6px; width: 45.2%; display: flex; align-items: center; justify-content: flex-end; padding-right: 6px; color: white; font-weight: 600; font-size: 0.8em;">45.2%</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; background: var(--card-bg); padding: 10px 15px; border-radius: 8px; border-left: 4px solid #ff9500;">
+                                <div style="width: 55%; font-weight: 500; font-size: 0.95em;">🇯🇵 JNTO公式HP</div>
+                                <div style="flex: 1; background: #f0f0f0; border-radius: 6px; height: 20px; margin: 0 10px;">
+                                    <div style="height: 100%; background: linear-gradient(90deg, #ff9500, #ffcc02); border-radius: 6px; width: 38.5%; display: flex; align-items: center; justify-content: flex-end; padding-right: 6px; color: white; font-weight: 600; font-size: 0.8em;">38.5%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="source">出典: 観光庁アンケート</p>
+                </div>
+            </div>
+            
+            <!-- 10: 과제 -->
+            <div class="slide">
+                <div class="center">
+                    <h1>しかし、市場は新たな課題に直面しています</h1>
+                    <p>量の拡大から「質の向上」へ。解決すべき課題も変化しています。</p>
+                    <div class="cards" style="grid-template-columns: repeat(4, 1fr);">
+                        <div class="card"><h3>💰 支出額の伸び悩み</h3><p>一人当たりの消費額をどう増やすか？</p></div>
+                        <div class="card"><h3>🌏 多様な顧客への対応</h3><p>画一的でない満足をどう提供？</p></div>
+                        <div class="card"><h3>📱 効果的な情報発信</h3><p>価値あるメッセージをどう届ける？</p></div>
+                        <div class="card"><h3>🗣️ 言葉・文化の壁</h3><p>翻訳機では伝わらない価値は？</p></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 11: 미션 -->
+            <div class="slide hero">
+                <div class="center">
+                    <h1>私たちのミッションは、<br>「最高の日本体験」をプロデュースすること</h1>
+                    <p style="font-size: 1.05em; margin-top: 12px;">
+                        旅行者の「知りたい」と、企業の「伝えたい」を繋ぎ、<br>
+                        双方にとって忘れられない価値を創造する。それが私たちの仕事です。
+                    </p>
+                </div>
+            </div>
+
+            <!-- 12: 클라이언트 업종 -->
+            <div class="slide">
+                <div class="center">
+                    <h1>私たちのクライアント業界</h1>
+                    <p>インバウンドを必要とする様々な業界と連携しています。</p>
+                    <div class="client-industries">
+                        <div class="industry-item">
+                            <div class="industry-icon">🏭</div>
+                            <div class="percentage-circle">
+                                <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" stroke="#f0f0f0" stroke-width="8" fill="none"/><circle cx="50" cy="50" r="40" stroke="#007aff" stroke-width="8" fill="none" stroke-dasharray="251" stroke-dashoffset="95" transform="rotate(-90 50 50)"/></svg>
+                                <span class="percentage-text">62%</span>
+                            </div>
+                            <div class="industry-info"><h3>製造業・メーカー</h3><p>化粧品・医薬品・食品</p></div>
+                        </div>
+                        <div class="industry-item">
+                            <div class="industry-icon">🏨</div>
+                            <div class="percentage-circle">
+                                <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" stroke="#f0f0f0" stroke-width="8" fill="none"/><circle cx="50" cy="50" r="40" stroke="#5856d6" stroke-width="8" fill="none" stroke-dasharray="251" stroke-dashoffset="206" transform="rotate(-90 50 50)"/></svg>
+                                <span class="percentage-text">18%</span>
+                            </div>
+                            <div class="industry-info"><h3>宿泊・観光</h3><p>ホテル・旅館・施設</p></div>
+                        </div>
+                        <div class="industry-item">
+                            <div class="industry-icon">🛍️</div>
+                            <div class="percentage-circle">
+                                <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" stroke="#f0f0f0" stroke-width="8" fill="none"/><circle cx="50" cy="50" r="40" stroke="#af52de" stroke-width="8" fill="none" stroke-dasharray="251" stroke-dashoffset="221" transform="rotate(-90 50 50)"/></svg>
+                                <span class="percentage-text">12%</span>
+                            </div>
+                            <div class="industry-info"><h3>小売・飲食</h3><p>百貨店・レストラン</p></div>
+                        </div>
+                        <div class="industry-item">
+                            <div class="industry-icon">🏛️</div>
+                            <div class="percentage-circle">
+                                <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" stroke="#f0f0f0" stroke-width="8" fill="none"/><circle cx="50" cy="50" r="40" stroke="#48bb78" stroke-width="8" fill="none" stroke-dasharray="251" stroke-dashoffset="231" transform="rotate(-90 50 50)"/></svg>
+                                <span class="percentage-text">8%</span>
+                            </div>
+                            <div class="industry-info"><h3>自治体・その他</h3><p>都道府県・交通機関</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 13: 조직도 -->
+            <div class="slide">
+                <div class="center">
+                    <h1>グローバル・デイリーの組織構成</h1>
+                    <p>各部門が連携して、インバウンド市場の課題解決に取り組んでいます</p>
+                    <div class="org-chart">
+                        <div class="org-center">
+                            <div class="org-logo">
+                                <img src="https://www.gldaily.com/gld-kanri/wp-content/themes/gldaily/assets/images/logo.png" alt="Global Daily" style="height: 30px;">
+                            </div>
+                        </div>
+                        <div class="org-branch"><div class="org-node sales-node active"><div class="org-icon">💼</div><h3>営業本部</h3><p>フロント営業</p></div></div>
+                        <div class="org-branch"><div class="org-node"><div class="org-icon">📊</div><h3>マーケティング</h3><p>戦略立案・分析</p></div></div>
+                        <div class="org-branch"><div class="org-node"><div class="org-icon">📱</div><h3>メディア</h3><p>JAPANKURU等</p></div></div>
+                        <div class="org-branch"><div class="org-node"><div class="org-icon">🎨</div><h3>クリエイティブ</h3><p>コンテンツ制作</p></div></div>
+                    </div>
+                    <div class="org-highlight"><strong>👆 あなたが活躍するのは「営業本部」です</strong></div>
+                </div>
+            </div>
+
+            <!-- 14: 다국적 -->
+            <div class="slide">
+                <div class="center">
+                    <h1>多国籍メンバーで構成</h1>
+                    <p>8カ国の多様なメンバーが、それぞれの文化的背景を活かしています。</p>
+                    <div class="nationality-split">
+                        <div class="nationality-item">
+                            <div class="nationality-icon">🇯🇵</div>
+                            <div class="nationality-info"><span class="percentage">50%</span><span class="label">日本</span></div>
+                        </div>
+                        <div class="nationality-item">
+                            <div class="nationality-icon">🌍</div>
+                            <div class="nationality-info"><span class="percentage">50%</span><span class="label">外国籍</span></div>
+                        </div>
+                    </div>
+                    <h3 style="margin-bottom: 10px;">8カ国の多様なメンバー</h3>
+                    <div class="flag-row">
+                        <span class="country-flag">🇯🇵</span><span class="country-flag">🇨🇳</span><span class="country-flag">🇰🇷</span><span class="country-flag">🇹🇼</span><span class="country-flag">🇭🇰</span><span class="country-flag">🇹🇭</span><span class="country-flag">🇲🇾</span><span class="country-flag">🇺🇸</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 15: 영업 역할 -->
+            <div class="slide">
+                <div class="center">
+                    <h1>営業本部の役割</h1>
+                    <p>インバウンド市場の最前線で、企業と訪日観光客を繋ぐ架け橋となる仕事です</p>
+                    <div class="sales-role-container">
+                        <div class="sales-flow">
+                            <div class="flow-item">
+                                <div class="flow-icon">🏢</div>
+                                <h3>クライアント企業</h3>
+                                <p>ホテル・観光施設<br>自治体・小売店</p>
+                            </div>
+                            <div class="flow-arrow"><div class="arrow-line"></div><div class="arrow-text">課題ヒアリング<br>ソリューション提案</div></div>
+                            <div class="flow-item sales-center">
+                                <div class="flow-icon">🎯</div>
+                                <h3>営業（あなた）</h3>
+                                <p style="font-weight: 700;">コンサルティング営業</p>
+                            </div>
+                            <div class="flow-arrow"><div class="arrow-line"></div><div class="arrow-text">最適な体験<br>情報発信</div></div>
+                            <div class="flow-item">
+                                <div class="flow-icon">✈️</div>
+                                <h3>訪日観光客</h3>
+                                <p>韓国・中国・台湾<br>欧米・東南アジア</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 16: 영업 프로세스 -->
+            <div class="slide">
+                <div class="center">
+                    <h1>営業の具体的な業務フロー</h1>
+                    <p>提案から実行・検証まで、一貫してプロジェクトをリードします</p>
+                    <div class="sales-process">
+                        <div class="process-step"><div class="step-number">1</div><div class="step-content"><h3>リサーチ・ヒアリング</h3><p>クライアントの課題や目標を深くヒアリング。市場データを活用した現状分析。</p></div></div>
+                        <div class="process-step"><div class="step-number">2</div><div class="step-content"><h3>戦略立案・提案書作成</h3><p>マーケティングチームと連携し、最適なソリューションを企画・提案。</p></div></div>
+                        <div class="process-step"><div class="step-number">3</div><div class="step-content"><h3>プレゼンテーション</h3><p>クライアントに直接提案。質疑応答を通じて信頼関係を構築。</p></div></div>
+                        <div class="process-step"><div class="step-number">4</div><div class="step-content"><h3>プロジェクト進行管理</h3><p>各部門と連携しながら、進捗管理とクライアント対応。</p></div></div>
+                        <div class="process-step"><div class="step-number">5</div><div class="step-content"><h3>効果検証・改善提案</h3><p>実施結果を分析し、次回に向けた改善策を提案。</p></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 17: 12 솔루션 -->
+            <div class="slide">
+                <div class="center">
+                    <h1>営業が活用する「12のソリューション」</h1>
+                    <p>クライアントの課題に合わせて、最適なソリューションを組み合わせて提案します</p>
+                    <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-top: 12px;">
+                        <div style="background: linear-gradient(135deg, rgba(0,122,255,0.15), rgba(88,86,214,0.1)); padding: 10px 6px; border-radius: 10px; text-align: center; border: 2px solid var(--accent-color);"><div style="font-size: 1.4em;">🌏</div><div style="font-size: 0.75em; font-weight: 600; color: var(--accent-color);">JAPANKURU</div><div style="font-size: 0.65em; color: var(--text-secondary);">多言語メディア</div></div>
+                        <div style="background: linear-gradient(135deg, rgba(0,122,255,0.15), rgba(88,86,214,0.1)); padding: 10px 6px; border-radius: 10px; text-align: center; border: 2px solid var(--accent-color);"><div style="font-size: 1.4em;">💬</div><div style="font-size: 0.75em; font-weight: 600; color: var(--accent-color);">korekoko</div><div style="font-size: 0.65em; color: var(--text-secondary);">外国人コミュニティ</div></div>
+                        <div style="background: var(--card-bg); padding: 10px 6px; border-radius: 10px; text-align: center; border: 1px solid var(--border-color);"><div style="font-size: 1.4em;">📰</div><div style="font-size: 0.75em; font-weight: 600;">海外メディア</div><div style="font-size: 0.65em; color: var(--text-secondary);">タイアップ</div></div>
+                        <div style="background: var(--card-bg); padding: 10px 6px; border-radius: 10px; text-align: center; border: 1px solid var(--border-color);"><div style="font-size: 1.4em;">⭐</div><div style="font-size: 0.75em; font-weight: 600;">インフルエンサー</div><div style="font-size: 0.65em; color: var(--text-secondary);">KOL活用</div></div>
+                        <div style="background: var(--card-bg); padding: 10px 6px; border-radius: 10px; text-align: center; border: 1px solid var(--border-color);"><div style="font-size: 1.4em;">📊</div><div style="font-size: 0.75em; font-weight: 600;">リサーチ</div><div style="font-size: 0.65em; color: var(--text-secondary);">市場調査</div></div>
+                        <div style="background: var(--card-bg); padding: 10px 6px; border-radius: 10px; text-align: center; border: 1px solid var(--border-color);"><div style="font-size: 1.4em;">🎯</div><div style="font-size: 0.75em; font-weight: 600;">デジタル広告</div><div style="font-size: 0.65em; color: var(--text-secondary);">SNS・検索</div></div>
+                        <div style="background: var(--card-bg); padding: 10px 6px; border-radius: 10px; text-align: center; border: 1px solid var(--border-color);"><div style="font-size: 1.4em;">🎪</div><div style="font-size: 0.75em; font-weight: 600;">イベント</div><div style="font-size: 0.65em; color: var(--text-secondary);">旅行博出展</div></div>
+                        <div style="background: var(--card-bg); padding: 10px 6px; border-radius: 10px; text-align: center; border: 1px solid var(--border-color);"><div style="font-size: 1.4em;">🎓</div><div style="font-size: 0.75em; font-weight: 600;">セミナー</div><div style="font-size: 0.65em; color: var(--text-secondary);">研修・講演</div></div>
+                        <div style="background: var(--card-bg); padding: 10px 6px; border-radius: 10px; text-align: center; border: 1px solid var(--border-color);"><div style="font-size: 1.4em;">🚀</div><div style="font-size: 0.75em; font-weight: 600;">海外進出</div><div style="font-size: 0.65em; color: var(--text-secondary);">現地法人設立</div></div>
+                        <div style="background: var(--card-bg); padding: 10px 6px; border-radius: 10px; text-align: center; border: 1px solid var(--border-color);"><div style="font-size: 1.4em;">✈️</div><div style="font-size: 0.75em; font-weight: 600;">旅行商品</div><div style="font-size: 0.65em; color: var(--text-secondary);">ツアー企画</div></div>
+                        <div style="background: var(--card-bg); padding: 10px 6px; border-radius: 10px; text-align: center; border: 1px solid var(--border-color);"><div style="font-size: 1.4em;">🎬</div><div style="font-size: 0.75em; font-weight: 600;">映像制作</div><div style="font-size: 0.65em; color: var(--text-secondary);">PR動画</div></div>
+                        <div style="background: var(--card-bg); padding: 10px 6px; border-radius: 10px; text-align: center; border: 1px solid var(--border-color);"><div style="font-size: 1.4em;">🎨</div><div style="font-size: 0.75em; font-weight: 600;">多言語LP</div><div style="font-size: 0.65em; color: var(--text-secondary);">ランディングページ</div></div>
+                    </div>
+                    <div style="display: flex; gap: 15px; margin-top: 15px;">
+                        <div style="flex: 1; background: linear-gradient(135deg, rgba(0,122,255,0.08), rgba(88,86,214,0.05)); padding: 15px; border-radius: 12px; border: 2px solid rgba(0,122,255,0.2);">
+                            <h3 style="color: var(--accent-color); font-size: 1em; margin-bottom: 5px;">🌏 JAPANKURU - 自社多言語メディア</h3>
+                            <p style="font-size: 0.85em; margin: 0; text-align: left;">日本の魅力を7言語で世界に発信</p>
+                            <div style="display: flex; gap: 20px; margin-top: 8px;"><div style="text-align: center;"><div style="font-size: 1.1em; font-weight: 700; color: var(--accent-color);">140万+</div><div style="font-size: 0.7em; color: var(--text-secondary);">フォロワー</div></div><div style="text-align: center;"><div style="font-size: 1.1em; font-weight: 700; color: var(--accent-color);">7言語</div><div style="font-size: 0.7em; color: var(--text-secondary);">対応</div></div><div style="text-align: center;"><div style="font-size: 1.1em; font-weight: 700; color: var(--accent-color);">200万</div><div style="font-size: 0.7em; color: var(--text-secondary);">月間PV</div></div></div>
+                        </div>
+                        <div style="flex: 1; background: linear-gradient(135deg, rgba(72,187,120,0.08), rgba(76,175,80,0.05)); padding: 15px; border-radius: 12px; border: 2px solid rgba(72,187,120,0.2);">
+                            <h3 style="color: #48bb78; font-size: 1em; margin-bottom: 5px;">💬 korekoko - 在留外国人コミュニティ</h3>
+                            <p style="font-size: 0.85em; margin: 0; text-align: left;">日本に住む外国人のリアルな声を活用</p>
+                            <div style="display: flex; gap: 20px; margin-top: 8px;"><div style="text-align: center;"><div style="font-size: 1.1em; font-weight: 700; color: #48bb78;">320万</div><div style="font-size: 0.7em; color: var(--text-secondary);">在留外国人</div></div><div style="text-align: center;"><div style="font-size: 1.1em; font-weight: 700; color: #48bb78;">8カ国</div><div style="font-size: 0.7em; color: var(--text-secondary);">ネットワーク</div></div><div style="text-align: center;"><div style="font-size: 1.1em; font-weight: 700; color: #48bb78;">リアル</div><div style="font-size: 0.7em; color: var(--text-secondary);">口コミ拡散</div></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 18: 선배 스토리 -->
+            <div class="slide">
+                <div class="center">
+                    <h1>先輩社員のリアルストーリー</h1>
+                    <p>実際に働く先輩たちの声を聞いてみましょう。</p>
+                    <div class="employee-stories">
+                        <div class="story-card active" data-story="0">
+                            <div class="story-header"><div class="story-avatar">👨‍💼</div><div class="story-info"><h3>菅野さん</h3><p>代理店事業部 / 新卒入社15年目</p></div></div>
+                            <div class="story-content">
+                                <p>「クライアントや社内からの『ありがとう』という言葉、そして海外の人が実際に『行動してくれた』という反響が出た時に最高の充実感を得られます。」</p>
+                                <div class="story-achievement"><span class="achievement-label">モチベーション:</span><span class="achievement-value">目標達成と新しい提案への挑戦</span></div>
+                            </div>
+                        </div>
+                        <div class="story-card" data-story="1">
+                            <div class="story-header"><div class="story-avatar">👨‍💻</div><div class="story-info"><h3>笹本さん</h3><p>営業部 / 中途入社3年目</p></div></div>
+                            <div class="story-content">
+                                <p>「前の会社と比べて圧倒的に風通しが良く、会社内でやったことのない新しい事例を成約できた時は特に嬉しいです。」</p>
+                                <div class="story-achievement"><span class="achievement-label">成長実感:</span><span class="achievement-value">未経験案件の成約とスピード向上</span></div>
+                            </div>
+                        </div>
+                        <div class="story-card" data-story="2">
+                            <div class="story-header"><div class="story-avatar">👩‍💼</div><div class="story-info"><h3>王さん</h3><p>営業部 / 中途入社2年目</p></div></div>
+                            <div class="story-content">
+                                <p>「外国人として海外と繋がりがある仕事で自分を活かせると感じて入社。他社と違う分析でクライアントに選ばれた時は成長を実感。」</p>
+                                <div class="story-achievement"><span class="achievement-label">大きな目標:</span><span class="achievement-value">役員か起業を目指して日々チャレンジ中</span></div>
+                            </div>
+                        </div>
+                        <div class="story-card" data-story="3">
+                            <div class="story-header"><div class="story-avatar">👨‍🎯</div><div class="story-info"><h3>谷本さん</h3><p>営業部 / 中途入社2年目</p></div></div>
+                            <div class="story-content">
+                                <p>「入社半年は苦戦しましたが、それ以降クライアント獲得と数字も取れるようになりました。」</p>
+                                <div class="story-achievement"><span class="achievement-label">実績:</span><span class="achievement-value">キャリア新人賞・優秀社員賞ダブル受賞</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="story-navigation">
+                        <button class="story-nav-btn active" data-target="0">菅野さん</button>
+                        <button class="story-nav-btn" data-target="1">笹本さん</button>
+                        <button class="story-nav-btn" data-target="2">王さん</button>
+                        <button class="story-nav-btn" data-target="3">谷本さん</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 19: 성장 로드맵 -->
+            <div class="slide">
+                <div class="center">
+                    <h1>あなたの成長ロードマップ</h1>
+                    <p>入社後、どのように成長していけるのか。先輩たちの実例です。</p>
+                    <div class="growth-timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-year">6ヶ月</div>
+                            <div class="timeline-content"><h3>基礎を固める</h3><ul><li>業界知識の習得</li><li>先輩のサポート業務</li></ul><div class="timeline-achievement">小規模PJ担当</div></div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">1年目</div>
+                            <div class="timeline-content"><h3>専門性を伸ばす</h3><ul><li>独立したPJ運営</li><li>クライアント直接対応</li></ul><div class="timeline-achievement">中規模リーダー</div></div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">2年目</div>
+                            <div class="timeline-content"><h3>後輩育成</h3><ul><li>新入社員メンター</li><li>社内研修講師</li></ul><div class="timeline-achievement">社内表彰</div></div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">3年目</div>
+                            <div class="timeline-content"><h3>チームを牽引</h3><ul><li>新規事業企画</li><li>チーム戦略立案</li></ul><div class="timeline-achievement">マネージャー候補</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 20: 영업력 -->
+            <div class="slide">
+                <div class="center">
+                    <h1>すべての基盤となる「営業力」</h1>
+                    <p>外国人がどんな心理で日本に来て、コンテンツを消費するのか？その本質を理解することから始まります。</p>
+                    <div class="sales-foundation">
+                        <h2>営業の真髄とは</h2>
+                        <p><strong>外国人の心理を理解し</strong> → <strong>魅力的なコンテンツに仕上げ</strong> → <strong>クライアントに提案し、選ばれる力</strong></p>
+                        <div class="essence-note"><p style="margin: 0; text-align: center;">この本質を理解することで、仕事が格段に <span style="color: #ff6b6b; font-weight: 700;">楽しく・やりがいがあり・成果の出る</span>ものに</p></div>
+                    </div>
+                    <div class="career-paths">
+                        <div class="career-center"><div class="sales-core">営業力<br><span style="font-size: 0.75em;">すべての基盤</span></div></div>
+                        <div class="career-branches">
+                            <div class="career-path"><div class="path-icon">🎨</div><h3>クリエイティブ</h3><p>コンテンツ制作<br>デザイン・映像</p></div>
+                            <div class="career-path"><div class="path-icon">📊</div><h3>マーケティング</h3><p>戦略立案<br>データ分析</p></div>
+                            <div class="career-path"><div class="path-icon">💼</div><h3>経営・会計</h3><p>マネジメント<br>財務・企画</p></div>
+                            <div class="career-path"><div class="path-icon">⭐</div><h3>営業スペシャリスト</h3><p>トップ営業<br>新規事業開拓</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 21: 왜 영업부터? -->
+            <div class="slide">
+                <div class="center">
+                    <h1 style="font-size: 1.8em;">なぜ「営業」から始めるのか？</h1>
+                    <p>スキルは後から身につく。でも、<strong>「届ける力」</strong>は最初から鍛えないと伸びない。</p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 18px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                        <div style="background: linear-gradient(135deg, rgba(0,122,255,0.08), rgba(88,86,214,0.05)); padding: 18px; border-radius: 14px; border: 2px solid rgba(0,122,255,0.2); text-align: left;">
+                            <div style="font-size: 1.8em; margin-bottom: 8px;">🎯</div>
+                            <h3 style="color: var(--accent-color); margin-bottom: 8px; font-size: 1.1em;">営業 = コンサルティング</h3>
+                            <p style="line-height: 1.5; margin: 0; font-size: 0.9em;">単なる「売る人」ではありません。クライアントの課題を発見し、最適な解決策を提案する<strong>「課題解決のプロ」</strong>です。</p>
+                        </div>
+                        <div style="background: linear-gradient(135deg, rgba(72,187,120,0.08), rgba(76,175,80,0.05)); padding: 18px; border-radius: 14px; border: 2px solid rgba(72,187,120,0.2); text-align: left;">
+                            <div style="font-size: 1.8em; margin-bottom: 8px;">🌱</div>
+                            <h3 style="color: #48bb78; margin-bottom: 8px; font-size: 1.1em;">すべてのキャリアの土台</h3>
+                            <p style="line-height: 1.5; margin: 0; font-size: 0.9em;">マーケター、クリエイター、経営者…どんな道に進んでも、<strong>「人を動かす力」</strong>は必ず武器になります。</p>
+                        </div>
+                    </div>
+                    <div style="margin-top: 18px; padding: 12px 20px; background: var(--card-bg); border-radius: 10px; border-left: 4px solid var(--accent-color); max-width: 600px; margin-left: auto; margin-right: auto;">
+                        <p style="margin: 0; font-size: 1em; line-height: 1.4; text-align: center;">
+                            <strong style="color: var(--accent-color);">「スキルより、スタンス」</strong><br>
+                            <span style="color: var(--text-secondary);">私たちが見ているのは、今のスキルではなく、成長への姿勢です。</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 22: 3가지 마인드 -->
+            <div class="slide">
+                <div class="center">
+                    <h1 style="font-size: 1.7em;">グローバル・デイリーが求める3つのマインド</h1>
+                    <p style="margin-bottom: 15px;">経験やスキルよりも、この3つの姿勢を大切にしています。</p>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; max-width: 900px; margin: 0 auto;">
+                        <div class="mind-card">
+                            <div style="position: absolute; top: -12px; right: -12px; font-size: 4em; opacity: 0.05; transform: rotate(15deg);">🔍</div>
+                            <div style="font-size: 2.2em; margin-bottom: 8px;">🔍</div>
+                            <h3 style="color: var(--accent-color); font-size: 1em; margin-bottom: 8px; line-height: 1.3;">「知らない」を<br>楽しめる人</h3>
+                            <p style="font-size: 0.85em; line-height: 1.5; color: var(--text-secondary); margin: 0;">
+                                「なぜ韓国人はこれが好き？」<br>「中国のSNSトレンドは？」<br>
+                                <strong style="color: var(--text-primary); display: block; margin-top: 6px;">答えのない問いにワクワクできる好奇心</strong>
+                            </p>
+                        </div>
+                        <div class="mind-card">
+                            <div style="position: absolute; top: -12px; right: -12px; font-size: 4em; opacity: 0.05; transform: rotate(15deg);">💬</div>
+                            <div style="font-size: 2.2em; margin-bottom: 8px;">💬</div>
+                            <h3 style="color: #5856d6; font-size: 1em; margin-bottom: 8px; line-height: 1.3;">「届ける」に<br>こだわる人</h3>
+                            <p style="font-size: 0.85em; line-height: 1.5; color: var(--text-secondary); margin: 0;">
+                                広告を作って終わりじゃない。<br>「本当に届いたか？」まで追う。<br>
+                                <strong style="color: var(--text-primary); display: block; margin-top: 6px;">結果にこだわる責任感と執着心</strong>
+                            </p>
+                        </div>
+                        <div class="mind-card">
+                            <div style="position: absolute; top: -12px; right: -12px; font-size: 4em; opacity: 0.05; transform: rotate(15deg);">🔄</div>
+                            <div style="font-size: 2.2em; margin-bottom: 8px;">🔄</div>
+                            <h3 style="color: #ff9500; font-size: 1em; margin-bottom: 8px; line-height: 1.3;">「変化」を<br>恐れない人</h3>
+                            <p style="font-size: 0.85em; line-height: 1.5; color: var(--text-secondary); margin: 0;">
+                                昨日の正解が今日は違うかも。<br>新しいSNS、新しい国、新しい手法。<br>
+                                <strong style="color: var(--text-primary); display: block; margin-top: 6px;">柔軟に適応し、進化し続ける姿勢</strong>
+                            </p>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; text-align: center;">
+                        <p style="font-size: 0.95em; color: var(--text-secondary); margin: 0;">✨ この3つがあれば、スキルは必ず後からついてきます</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 23: 이런 사람과 -->
+            <div class="slide">
+                <div class="center">
+                    <h1 style="font-size: 1.7em;">こんな人と働きたい</h1>
+                    <p style="margin-bottom: 12px;">営業を通じて成長し、将来は様々な分野で活躍できる人材を求めています。</p>
+                    <div class="cards" style="grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 12px;">
+                        <div class="card" style="padding: 15px;"><div class="candidate-icon">🗣️</div><h3 style="margin-bottom: 6px; font-size: 0.95em;">伝えることが好きな人</h3><p style="font-size: 0.85em; line-height: 1.4;">自分の言葉で人を動かす喜びを知っている。プレゼンに苦手意識がない方。</p></div>
+                        <div class="card" style="padding: 15px;"><div class="candidate-icon">🌏</div><h3 style="margin-bottom: 6px; font-size: 0.95em;">異文化に興味がある人</h3><p style="font-size: 0.85em; line-height: 1.4;">「外国人はなぜ？」という疑問を持てる。海外経験や語学力があれば尚良し。</p></div>
+                        <div class="card" style="padding: 15px;"><div class="candidate-icon">📈</div><h3 style="margin-bottom: 6px; font-size: 0.95em;">数字で語れる人</h3><p style="font-size: 0.85em; line-height: 1.4;">感覚だけでなく、データで仮説を立て、結果を検証することに抵抗がない方。</p></div>
+                    </div>
+                    <div style="margin-top: 18px;">
+                        <h2 style="margin-bottom: 10px; font-size: 1.1em; text-align: center;">入社後、こんな仕事をします</h2>
+                        <div class="example-grid">
+                            <div class="example-item"><span class="example-number">01</span><h4>市場リサーチ</h4><p>なぜ韓国人は日本の地方都市に興味を持つのか？データと現地の声から仮説を立てる</p></div>
+                            <div class="example-item"><span class="example-number">02</span><h4>提案書作成・プレゼン</h4><p>化粧品メーカーに、中国人女性に刺さるSNS戦略を企画し、直接提案する</p></div>
+                            <div class="example-item"><span class="example-number">03</span><h4>プロジェクト運営</h4><p>クリエイティブチームと連携し、キャンペーンの進行管理から効果検証まで担当</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 24: 성장환경 -->
+            <div class="slide">
+                <div class="split">
+                    <div>
+                        <h1 style="font-size: 1.7em;">成長できる環境</h1>
+                        <p style="text-align: left;">私たちは、皆さんの成長が会社の成長に繋がると信じています。</p>
+                        <div class="cards" style="grid-template-columns: 1fr; text-align: left; margin-top: 10px; gap: 10px;">
+                            <div class="card" style="text-align: left; padding: 15px;"><h3 style="font-size: 0.95em;">多様なキャリアパス</h3><p>専門性を極めるスペシャリスト、チームを率いるマネージャーなど、多彩な道が選べます。</p></div>
+                            <div class="card" style="text-align: left; padding: 15px;"><h3 style="font-size: 0.95em;">研修・学習支援</h3><p>業界トップランナーを招いた勉強会や、書籍購入補助など、学ぶ意欲をサポートします。</p></div>
+                        </div>
+                    </div>
+                    <div><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070" alt="Team"></div>
+                </div>
+            </div>
+
+            <!-- 25: 엔딩 -->
+            <div class="slide hero">
+                <div class="center">
+                    <h1>あなたの物語は、ここから始まる。</h1>
+                    <p style="font-size: 1.1em;">インバウンド市場の未来を、私たちと一緒に創りませんか？<br>皆さんのエントリーを心からお待ちしています。</p>
+                </div>
+            </div>
+
+            </main>
+            <footer class="footer">
+                <div class="page-number" id="pageNum"></div>
+                <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+                <div style="font-size: 12px; color: #888;">© Global Daily Inc.</div>
+            </footer>
+            <div class="nav-buttons">
+                <button id="prevBtn" class="nav-btn">‹</button>
+                <button id="nextBtn" class="nav-btn">›</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const slides = Array.from(document.querySelectorAll('.slide'));
+        const totalSlides = slides.length;
+        const slideTitleEl = document.getElementById('slideTitle');
+        const slideNumberEl = document.getElementById('slideNumber');
+        const pageNumEl = document.getElementById('pageNum');
+        const progressBarEl = document.getElementById('progressBar');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentSlide = 0;
+        
+        const slideTitles = ['オープニング','インバウンドとは？','市場規模 2025','世界TOP10','産業の重要性','市場の回復','訪日客の国籍','消費データ','情報収集','市場の課題','ミッション','クライアント業界','組織構成','多国籍メンバー','営業本部の役割','営業業務フロー','12のソリューション','先輩社員の声','成長ロードマップ','営業力の重要性','なぜ営業から？','求める3つのマインド','こんな人と働きたい','成長できる環境','採用情報'];
+
+        function showSlide(index) {
+            slides.forEach(function(slide) { slide.classList.remove('active'); });
+            currentSlide = index;
+            if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+            if (currentSlide < 0) currentSlide = 0;
+            slides[currentSlide].classList.add('active');
+            slideTitleEl.textContent = slideTitles[currentSlide] || '';
+            var pageInfo = (currentSlide + 1) + ' / ' + totalSlides;
+            slideNumberEl.textContent = pageInfo;
+            pageNumEl.textContent = pageInfo;
+            progressBarEl.style.width = ((currentSlide + 1) / totalSlides * 100) + '%';
+        }
+
+        nextBtn.addEventListener('click', function() { showSlide(currentSlide + 1); });
+        prevBtn.addEventListener('click', function() { showSlide(currentSlide - 1); });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextBtn.click(); }
+            if (e.key === 'ArrowLeft') { e.preventDefault(); prevBtn.click(); }
+        });
+        
+        var storyNavBtns = document.querySelectorAll('.story-nav-btn');
+        var storyCards = document.querySelectorAll('.story-card');
+        storyNavBtns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var targetStory = btn.getAttribute('data-target');
+                storyNavBtns.forEach(function(b) { b.classList.remove('active'); });
+                storyCards.forEach(function(card) { card.classList.remove('active'); });
+                btn.classList.add('active');
+                if (storyCards[targetStory]) storyCards[targetStory].classList.add('active');
+            });
+        });
+        
+        showSlide(0);
+    </script>
+</body>
+</html>
