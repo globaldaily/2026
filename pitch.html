@@ -120,6 +120,7 @@
         border:12px solid var(--light-gray);
         position:relative;
         display:flex;align-items:center;justify-content:center;
+        animation:pulse-ring 2s ease-in-out infinite;
     }
     .stat-ring::before{
         content:'';position:absolute;inset:-12px;
@@ -129,6 +130,14 @@
         border-right-color:var(--primary);
         border-bottom-color:var(--primary);
         transform:rotate(-10deg);
+    }
+    @keyframes pulse-ring{
+        0%,100%{box-shadow:0 0 0 0 rgba(196,30,58,0.4)}
+        50%{box-shadow:0 0 0 15px rgba(196,30,58,0)}
+    }
+    @keyframes qr-pulse{
+        0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,0.4)}
+        50%{box-shadow:0 0 0 12px rgba(255,255,255,0)}
     }
     
     /* 애니메이션 */
@@ -174,10 +183,12 @@
     <div class="slide active">
         <div class="bg-gradient top-right"></div>
         <div class="bg-pattern"></div>
+        <!-- 세계지도 배경 -->
+        <div style="position:absolute;inset:0;background:url('https://www.gldaily.com/gld-kanri/wp-content/uploads/2025/06/vecteezy_global-network-connection-world-map-point-and-line_6826888.svg') center/cover no-repeat;opacity:0.08;pointer-events:none"></div>
         <div class="header">
             <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2025/07/GLD_type02_white_1178_785-2-1.png" alt="GLOBAL DAILY" class="logo">
         </div>
-        <div class="anim-fade">
+        <div class="anim-fade" style="position:relative;z-index:2">
             <p class="t-en t-primary" style="font-size:16px;letter-spacing:8px;margin-bottom:20px">SINCE 2008</p>
             <h1 class="t-huge">
                 インバウンドの答えは<br>
@@ -280,16 +291,29 @@
                 流行り廃りではない、<br>
                 <span class="t-primary">「売れ続ける仕組み」</span>を構築。
             </h2>
-            <div class="grid" style="margin-top:50px">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:40px">
                 <div style="border-left:8px solid var(--primary);padding-left:30px">
-                    <p class="t-sm t-muted">2009年〜現在</p>
-                    <p class="t-xl" style="margin-top:10px;line-height:1.4">龍角散<br>太田胃散</p>
+                    <p class="t-sm t-muted" style="margin-bottom:12px">2009年〜現在｜医薬品</p>
+                    <div style="display:flex;gap:20px;flex-wrap:wrap">
+                        <span style="font-size:36px;font-weight:900">龍角散</span>
+                        <span style="font-size:36px;font-weight:900">太田胃散</span>
+                    </div>
                 </div>
-                <div style="border-left:8px solid var(--light-gray);padding-left:30px">
-                    <p class="t-sm t-muted">2011年〜現在</p>
-                    <p class="t-xl" style="margin-top:10px;line-height:1.4">ニチバン<br>第一三共</p>
+                <div style="border-left:8px solid var(--primary);padding-left:30px">
+                    <p class="t-sm t-muted" style="margin-bottom:12px">2011年〜現在｜医薬品・日用品</p>
+                    <div style="display:flex;gap:20px;flex-wrap:wrap">
+                        <span style="font-size:36px;font-weight:900">ニチバン</span>
+                        <span style="font-size:36px;font-weight:900">第一三共</span>
+                    </div>
                 </div>
             </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:30px;padding-top:30px;border-top:1px solid rgba(255,255,255,0.1)">
+                <span style="background:rgba(255,255,255,0.06);padding:12px 24px;border-radius:8px;font-size:22px;font-weight:700">JR東日本</span>
+                <span style="background:rgba(255,255,255,0.06);padding:12px 24px;border-radius:8px;font-size:22px;font-weight:700">西武鉄道</span>
+                <span style="background:rgba(255,255,255,0.06);padding:12px 24px;border-radius:8px;font-size:22px;font-weight:700">大丸</span>
+                <span style="background:rgba(255,255,255,0.06);padding:12px 24px;border-radius:8px;font-size:22px;font-weight:700;color:var(--gray)">and more...</span>
+            </div>
+            <p style="font-size:18px;color:var(--gray);margin-top:24px">幅広い業界で「指名される仕組み」を一緒に構築しています。</p>
         </div>
         <div class="footer">
             <span>03 / TRACK RECORD</span>
@@ -371,7 +395,10 @@
                 <!-- 訪日外国人 -->
                 <div style="text-align:center">
                     <p style="font-size:13px;color:#888;margin-bottom:8px;letter-spacing:1px">訪日外国人数</p>
-                    <p style="font-size:80px;font-weight:900;line-height:1;color:white;letter-spacing:-2px">4,268<span style="font-size:28px;font-weight:400;color:#aaa;margin-left:4px">万人</span></p>
+                    <div style="display:flex;align-items:center;justify-content:center;gap:12px">
+                        <p style="font-size:80px;font-weight:900;line-height:1;color:white;letter-spacing:-2px">4,268<span style="font-size:28px;font-weight:400;color:#aaa;margin-left:4px">万人</span></p>
+                        <span style="font-size:36px;color:#C41E3A;font-weight:900">↑</span>
+                    </div>
                     <p style="font-size:12px;color:#666;margin-top:6px">2025年（過去最高）</p>
                 </div>
 
@@ -381,8 +408,11 @@
                 <!-- 旅行消費額 -->
                 <div style="text-align:center">
                     <p style="font-size:13px;color:#888;margin-bottom:8px;letter-spacing:1px">旅行消費額</p>
-                    <p style="font-size:80px;font-weight:900;line-height:1;letter-spacing:-2px"><span class="t-primary">9.5</span><span style="font-size:28px;font-weight:400;color:#aaa;margin-left:4px">兆円</span></p>
-                    <p style="font-size:12px;color:#666;margin-top:6px">2025年（前年比 +17%）</p>
+                    <div style="display:flex;align-items:center;justify-content:center;gap:12px">
+                        <p style="font-size:80px;font-weight:900;line-height:1;letter-spacing:-2px"><span class="t-primary">9.5</span><span style="font-size:28px;font-weight:400;color:#aaa;margin-left:4px">兆円</span></p>
+                        <span style="background:#C41E3A;color:white;font-size:16px;font-weight:900;padding:6px 12px;border-radius:6px">+17%</span>
+                    </div>
+                    <p style="font-size:12px;color:#666;margin-top:6px">2025年（前年比）</p>
                 </div>
 
             </div>
@@ -439,9 +469,12 @@
         <div class="anim-fade">
             <h2 class="t-lg">インバウンド施策、<span class="t-primary">ここが分かれ道。</span></h2>
             <div class="grid" style="margin-top:40px">
-                <div class="card" style="opacity:0.8">
-                    <p style="font-size:22px;color:var(--gray);margin-bottom:20px">ありがちなパターン</p>
-                    <ul style="list-style:none;font-size:22px;line-height:2.2">
+                <div class="card" style="opacity:0.9;position:relative">
+                    <div style="position:absolute;top:-20px;left:-20px;width:56px;height:56px;background:#333;border-radius:50%;display:flex;align-items:center;justify-content:center">
+                        <span style="font-size:32px;color:#888">✕</span>
+                    </div>
+                    <p style="font-size:20px;color:var(--gray);margin-bottom:20px;margin-left:30px">ありがちなパターン</p>
+                    <ul style="list-style:none;font-size:22px;line-height:2.2;color:#aaa">
                         <li>・売りたい情報の直翻訳</li>
                         <li>・単発インフルエンサー施策</li>
                         <li style="background:rgba(255,255,255,0.06);padding:5px 12px;margin:5px -12px;border-radius:6px">
@@ -449,8 +482,11 @@
                         </li>
                     </ul>
                 </div>
-                <div class="card" style="background:rgba(196,30,58,0.08);border:2px solid var(--primary)">
-                    <p style="font-size:22px;color:var(--primary);margin-bottom:20px">グローバル・デイリーの考え方</p>
+                <div class="card" style="background:rgba(196,30,58,0.08);border:2px solid var(--primary);position:relative">
+                    <div style="position:absolute;top:-20px;left:-20px;width:56px;height:56px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center">
+                        <span style="font-size:28px;color:white;font-weight:900">◎</span>
+                    </div>
+                    <p style="font-size:20px;color:var(--primary);margin-bottom:20px;margin-left:30px">グローバル・デイリーの考え方</p>
                     <ul style="list-style:none;font-size:22px;line-height:2.2;font-weight:700">
                         <li>・現地の「買いたい」文脈へ変換</li>
                         <li>・18年蓄積した現地提携網</li>
@@ -477,7 +513,7 @@
             <h2 class="t-xl" style="margin-top:15px;line-height:1.3">
                 社内の外国人スタッフの声は<br>
                 貴重。でも、それだけでは<br>
-                <span class="t-primary">見えない景色</span>がある。
+                <span style="background:linear-gradient(90deg,#C41E3A,#ff6b6b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:900">見えない景色</span>がある。
             </h2>
             <div class="accent-line"></div>
             <p style="font-size:26px;line-height:1.8;max-width:800px">
@@ -504,7 +540,10 @@
                 インバウンドの答えは、<br>
                 対象国の「現地」にこそある。
             </h2>
-            <p class="t-lg" style="font-weight:400">私自ら現地へ飛び、ルートを18年構築してきました。</p>
+            <p class="t-lg" style="font-weight:400;display:flex;align-items:center;justify-content:center;gap:15px">
+                <span style="font-size:36px">✈️</span>
+                私自ら現地へ飛び、ルートを18年構築してきました。
+            </p>
         </div>
         <div class="footer">
             <span>09 / OUR BELIEF</span>
@@ -520,23 +559,35 @@
         </div>
         <div class="anim-fade" style="text-align:center">
             <h2 class="t-xl"><span class="t-primary">3軸</span>の視点を掛け合わせる。</h2>
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:30px;margin-top:60px">
-                <div class="card card-accent" style="padding:45px 30px;text-align:center">
-                    <p class="t-en t-primary" style="font-size:18px;letter-spacing:2px;margin-bottom:15px">AXIS 01</p>
-                    <p style="font-size:28px;font-weight:900;margin-bottom:20px">日本人<span style="font-size:20px;opacity:0.6">（メーカー）</span></p>
-                    <p class="t-muted" style="font-size:18px;line-height:1.6">製品の「魂」と<br>「価値」を定義</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:30px;margin-top:50px;position:relative">
+                <!-- 연결선 시각화 -->
+                <div style="position:absolute;top:50%;left:33%;width:34%;height:2px;background:linear-gradient(90deg,transparent,rgba(196,30,58,0.3),transparent)"></div>
+                <div class="card card-accent" style="padding:40px 25px;text-align:center">
+                    <div style="width:60px;height:60px;border-radius:50%;background:rgba(196,30,58,0.2);border:3px solid var(--primary);margin:0 auto 15px;display:flex;align-items:center;justify-content:center">
+                        <span style="font-size:24px">🏭</span>
+                    </div>
+                    <p class="t-en t-primary" style="font-size:16px;letter-spacing:2px;margin-bottom:10px">AXIS 01</p>
+                    <p style="font-size:26px;font-weight:900;margin-bottom:15px">日本人<span style="font-size:18px;opacity:0.6">（メーカー）</span></p>
+                    <p class="t-muted" style="font-size:17px;line-height:1.6">製品の「魂」と<br>「価値」を定義</p>
                 </div>
-                <div class="card" style="padding:45px 30px;text-align:center;border-left:6px solid var(--white)">
-                    <p class="t-en" style="font-size:18px;letter-spacing:2px;margin-bottom:15px;opacity:0.5">AXIS 02</p>
-                    <p style="font-size:28px;font-weight:900;margin-bottom:20px">現地パートナー</p>
-                    <p class="t-muted" style="font-size:18px;line-height:1.6">現地の「今」を知る<br>トレンド視点</p>
+                <div class="card" style="padding:40px 25px;text-align:center;border-left:6px solid var(--white)">
+                    <div style="width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,0.1);border:3px solid #666;margin:0 auto 15px;display:flex;align-items:center;justify-content:center">
+                        <span style="font-size:24px">🌏</span>
+                    </div>
+                    <p class="t-en" style="font-size:16px;letter-spacing:2px;margin-bottom:10px;opacity:0.5">AXIS 02</p>
+                    <p style="font-size:26px;font-weight:900;margin-bottom:15px">現地パートナー</p>
+                    <p class="t-muted" style="font-size:17px;line-height:1.6">現地の「今」を知る<br>トレンド視点</p>
                 </div>
-                <div class="card" style="padding:45px 30px;text-align:center;border-left:6px solid var(--gray)">
-                    <p class="t-en" style="font-size:18px;letter-spacing:2px;margin-bottom:15px;opacity:0.5">AXIS 03</p>
-                    <p style="font-size:28px;font-weight:900;margin-bottom:20px">在留外国人</p>
-                    <p class="t-muted" style="font-size:18px;line-height:1.6">日本での生活体験<br>に基づく検証</p>
+                <div class="card" style="padding:40px 25px;text-align:center;border-left:6px solid var(--gray)">
+                    <div style="width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,0.1);border:3px solid #444;margin:0 auto 15px;display:flex;align-items:center;justify-content:center">
+                        <span style="font-size:24px">🗣️</span>
+                    </div>
+                    <p class="t-en" style="font-size:16px;letter-spacing:2px;margin-bottom:10px;opacity:0.5">AXIS 03</p>
+                    <p style="font-size:26px;font-weight:900;margin-bottom:15px">在留外国人</p>
+                    <p class="t-muted" style="font-size:17px;line-height:1.6">日本での生活体験<br>に基づく検証</p>
                 </div>
             </div>
+            <p style="margin-top:30px;font-size:20px;color:var(--gray)">→ 3つの視点が重なるところに、<span class="t-primary" style="font-weight:700">「刺さる戦略」</span>が生まれる</p>
         </div>
         <div class="footer">
             <span>10 / 3-AXIS ANALYSIS</span>
@@ -747,7 +798,7 @@
                 <div class="card" style="padding:30px;border-left:6px solid var(--primary)">
                     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:15px">
                         <span style="background:var(--light-gray);color:white;font-size:14px;padding:6px 14px;border-radius:4px">メーカー</span>
-                        <span class="t-primary t-en" style="font-size:28px;font-weight:900">売上10倍↑</span>
+                        <span class="t-primary t-en" style="font-size:28px;font-weight:900;display:flex;align-items:center;gap:8px">📈 売上10倍</span>
                     </div>
                     <p class="t-md" style="font-size:24px;margin-bottom:12px">インフルエンサー施策</p>
                     <p class="t-sm t-muted" style="font-size:16px;line-height:1.6">中国・韓国向けインフルエンサーを起用したライブコマース施策。リアルタイムの商品紹介で購買意欲を喚起。</p>
@@ -756,7 +807,7 @@
                 <div class="card" style="padding:30px;border-left:6px solid var(--primary)">
                     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:15px">
                         <span style="background:var(--light-gray);color:white;font-size:14px;padding:6px 14px;border-radius:4px">製造小売業（SPA）</span>
-                        <span class="t-primary t-en" style="font-size:28px;font-weight:900">売上3倍↑</span>
+                        <span class="t-primary t-en" style="font-size:28px;font-weight:900;display:flex;align-items:center;gap:8px">📈 売上3倍</span>
                     </div>
                     <p class="t-md" style="font-size:24px;margin-bottom:12px">クーポン施策</p>
                     <p class="t-sm t-muted" style="font-size:16px;line-height:1.6">JAPANKURU掲載クーポンで免税＋割引特典を外国人旅行者に提供。来店・購買への直接導線を構築。</p>
@@ -765,7 +816,7 @@
                 <div class="card" style="padding:30px;border-left:6px solid var(--gray)">
                     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:15px">
                         <span style="background:var(--light-gray);color:white;font-size:14px;padding:6px 14px;border-radius:4px">交通・鉄道</span>
-                        <span class="t-primary t-en" style="font-size:28px;font-weight:900">PV 5倍↑</span>
+                        <span class="t-primary t-en" style="font-size:28px;font-weight:900;display:flex;align-items:center;gap:8px">📈 PV 5倍</span>
                     </div>
                     <p class="t-md" style="font-size:24px;margin-bottom:12px">海外旅行博出展</p>
                     <p class="t-sm t-muted" style="font-size:16px;line-height:1.6">海外現地の旅行博にて専用ブースを出展。クーポン配布とSNS連動でチケット販売増を達成。</p>
@@ -774,7 +825,7 @@
                 <div class="card" style="padding:30px;border-left:6px solid var(--gray)">
                     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:15px">
                         <span style="background:var(--primary);color:white;font-size:14px;padding:6px 14px;border-radius:4px">小売</span>
-                        <span class="t-primary t-en" style="font-size:28px;font-weight:900">売上2倍↑</span>
+                        <span class="t-primary t-en" style="font-size:28px;font-weight:900;display:flex;align-items:center;gap:8px">📈 売上2倍</span>
                     </div>
                     <p class="t-md" style="font-size:24px;margin-bottom:12px">海外インフルエンサー招聘</p>
                     <p class="t-sm t-muted" style="font-size:16px;line-height:1.6">海外インフルエンサーを日本に招聘し、店舗での購入体験をSNSでリアルタイム配信。</p>
@@ -804,7 +855,7 @@
                 <div class="card" style="padding:30px;border-left:6px solid var(--primary)">
                     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:15px">
                         <span style="background:var(--primary);color:white;font-size:14px;padding:6px 14px;border-radius:4px">飲食</span>
-                        <span class="t-primary t-en" style="font-size:28px;font-weight:900">来店2倍↑</span>
+                        <span class="t-primary t-en" style="font-size:28px;font-weight:900;display:flex;align-items:center;gap:8px">📈 来店2倍</span>
                     </div>
                     <p class="t-md" style="font-size:24px;margin-bottom:12px">レビュー施策・集客支援</p>
                     <p class="t-sm t-muted" style="font-size:16px;line-height:1.6">korekoko在留外国人コミュニティによる飲食店体験レビュー施策。Google Maps・SNS口コミで外国人来店数を大幅増加。</p>
@@ -813,7 +864,7 @@
                 <div class="card" style="padding:30px;border-left:6px solid var(--primary)">
                     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:15px">
                         <span style="background:var(--primary);color:white;font-size:14px;padding:6px 14px;border-radius:4px">宿泊施設</span>
-                        <span class="t-primary t-en" style="font-size:22px;font-weight:900">OTA初の動画</span>
+                        <span class="t-primary t-en" style="font-size:22px;font-weight:900;display:flex;align-items:center;gap:8px">🎬 OTA初の動画</span>
                     </div>
                     <p class="t-md" style="font-size:24px;margin-bottom:12px">動画制作・活用</p>
                     <p class="t-sm t-muted" style="font-size:16px;line-height:1.6">ホテル館内と周辺観光スポットを紹介する多言語動画を制作。OTA（旅行予約サイト）に掲載し、施設の魅力を視覚的に訴求。</p>
@@ -822,7 +873,7 @@
                 <div class="card" style="padding:30px;border-left:6px solid var(--gray)">
                     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:15px">
                         <span style="background:var(--light-gray);color:white;font-size:14px;padding:6px 14px;border-radius:4px">メーカー</span>
-                        <span class="t-primary t-en" style="font-size:22px;font-weight:900">データ活用</span>
+                        <span class="t-primary t-en" style="font-size:22px;font-weight:900;display:flex;align-items:center;gap:8px">📊 データ活用</span>
                     </div>
                     <p class="t-md" style="font-size:24px;margin-bottom:12px">在留外国人 座談会・セミナー</p>
                     <p class="t-sm t-muted" style="font-size:16px;line-height:1.6">在留外国人コミュニティを対象に商品体験セミナーを開催。参加者のリアルな感想をマーケティングデータとして活用。</p>
@@ -831,7 +882,7 @@
                 <div class="card" style="padding:30px;border-left:6px solid var(--gray)">
                     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:15px">
                         <span style="background:var(--primary);color:white;font-size:14px;padding:6px 14px;border-radius:4px">アパレル</span>
-                        <span class="t-primary t-en" style="font-size:28px;font-weight:900">売上2倍↑</span>
+                        <span class="t-primary t-en" style="font-size:28px;font-weight:900;display:flex;align-items:center;gap:8px">📈 売上2倍</span>
                     </div>
                     <p class="t-md" style="font-size:24px;margin-bottom:12px">クロスメディア施策</p>
                     <p class="t-sm t-muted" style="font-size:16px;line-height:1.6">多言語メディア記事・インフルエンサー動画・店頭POPを連携したクロスメディア施策。特定シーズンの外国人購買を集中促進。</p>
@@ -854,9 +905,21 @@
         </div>
         <div class="anim-fade" style="position:relative;z-index:5;text-align:center">
             <h2 class="t-xl">直接つながる、<span class="t-primary">13カ国</span>。</h2>
-            <p class="t-en" style="font-size:22px;margin:30px 0;letter-spacing:3px;color:var(--white)">
-                US / KR / CN / TW / HK / TH / VN / MY / SG / ID / PH / FR / AU
-            </p>
+            <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:30px auto;max-width:900px">
+                <span style="background:rgba(255,255,255,0.06);padding:10px 18px;border-radius:8px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:24px">🇺🇸</span>US</span>
+                <span style="background:rgba(255,255,255,0.06);padding:10px 18px;border-radius:8px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:24px">🇰🇷</span>KR</span>
+                <span style="background:rgba(255,255,255,0.06);padding:10px 18px;border-radius:8px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:24px">🇨🇳</span>CN</span>
+                <span style="background:rgba(255,255,255,0.06);padding:10px 18px;border-radius:8px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:24px">🇹🇼</span>TW</span>
+                <span style="background:rgba(255,255,255,0.06);padding:10px 18px;border-radius:8px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:24px">🇭🇰</span>HK</span>
+                <span style="background:rgba(255,255,255,0.06);padding:10px 18px;border-radius:8px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:24px">🇹🇭</span>TH</span>
+                <span style="background:rgba(255,255,255,0.06);padding:10px 18px;border-radius:8px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:24px">🇻🇳</span>VN</span>
+                <span style="background:rgba(255,255,255,0.06);padding:10px 18px;border-radius:8px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:24px">🇲🇾</span>MY</span>
+                <span style="background:rgba(255,255,255,0.06);padding:10px 18px;border-radius:8px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:24px">🇸🇬</span>SG</span>
+                <span style="background:rgba(255,255,255,0.06);padding:10px 18px;border-radius:8px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:24px">🇮🇩</span>ID</span>
+                <span style="background:rgba(255,255,255,0.06);padding:10px 18px;border-radius:8px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:24px">🇵🇭</span>PH</span>
+                <span style="background:rgba(255,255,255,0.06);padding:10px 18px;border-radius:8px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:24px">🇫🇷</span>FR</span>
+                <span style="background:rgba(255,255,255,0.06);padding:10px 18px;border-radius:8px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:24px">🇦🇺</span>AU</span>
+            </div>
             <p class="t-md" style="font-weight:400;color:#aaa;margin-bottom:40px">中継ぎなし。情報もコストも最適化。</p>
             <div style="width:60px;height:2px;background:#C41E3A;margin:0 auto 40px"></div>
             <h2 style="font-size:32px;font-weight:900;line-height:1.4">
@@ -897,7 +960,7 @@
             </div>
             <!-- QR코드 영역 -->
             <div style="text-align:center;margin-left:60px">
-                <div style="width:160px;height:160px;background:white;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px">
+                <div style="width:160px;height:160px;background:white;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;animation:qr-pulse 2s ease-in-out infinite;box-shadow:0 0 0 0 rgba(255,255,255,0.4)">
                     <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://www.gldaily.com/services/seminars/" alt="QR" style="width:140px;height:140px">
                 </div>
                 <p style="font-size:14px;color:white;opacity:0.9">セミナー情報はこちら</p>
@@ -949,7 +1012,7 @@
             </div>
             <!-- 右: QR -->
             <div style="text-align:center">
-                <div style="width:160px;height:160px;background:white;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px">
+                <div style="width:160px;height:160px;background:white;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;animation:qr-pulse 2s ease-in-out infinite;box-shadow:0 0 0 0 rgba(196,30,58,0.4)">
                     <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://www.gldaily.com" alt="QR" style="width:140px;height:140px">
                 </div>
                 <p style="font-size:12px;color:#888">無料購読はこちら</p>
@@ -1066,7 +1129,8 @@
     document.addEventListener('keydown', e => {
         if(e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
         if(e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
-        if(e.key === 't' || e.key === 'T') { toggleScript(); }
+        if(e.key === 't' || e.key === 'T' || e.code === 'KeyT') { e.preventDefault(); toggleScript(); }
+        if(e.key === 'Escape') { if(scriptVisible) toggleScript(); }
     });
 
     function fit() {
