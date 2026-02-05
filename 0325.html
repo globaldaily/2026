@@ -10,36 +10,41 @@
   <style>
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
     :root{--bg:#FAF8F5;--white:#FFF;--ink:#1A1A1A;--sub:#5A5A5A;--muted:#9A9A9A;--line:#EBE7E2;--line-light:#F3F0EB;--beauty:#C4466A;--beauty-soft:#FBF0F3;--beauty-border:#F0CDD6;--food:#2E7A68;--food-soft:#EDF7F3;--food-border:#BDE0D5;--accent-warm:#D4A853;--radius:20px;--radius-sm:12px;--max:1080px;--font-jp:'Noto Sans JP',sans-serif;--font-display:'Playfair Display',serif}
-    body{font-family:var(--font-jp);background:var(--bg);color:var(--ink);line-height:1.75;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
-    a{text-decoration:none;color:inherit}
+    body{font-family:var(--font-jp);background:var(--bg);color:var(--ink);line-height:1.75;-webkit-font-smoothing:antialiased;scroll-behavior:smooth;-webkit-tap-highlight-color:transparent}
+    a{text-decoration:none;color:inherit;transition:opacity .2s}
+    a:focus-visible{outline:2px solid var(--beauty);outline-offset:2px;border-radius:4px}
+    button:focus-visible{outline:2px solid var(--beauty);outline-offset:2px}
     .kr-deco{position:absolute;pointer-events:none;user-select:none;z-index:0}
-    .hero{padding:48px 32px 0;position:relative;overflow:hidden}
-    .hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 70% 55% at 65% 25%,rgba(196,70,106,.07) 0%,transparent 60%),radial-gradient(ellipse 55% 45% at 25% 75%,rgba(46,122,104,.05) 0%,transparent 55%),radial-gradient(ellipse 35% 35% at 50% 50%,rgba(212,168,83,.04) 0%,transparent 50%)}
-    .hero-inner{max-width:var(--max);margin:0 auto;position:relative;z-index:1}
-    .hero-grid{display:grid;grid-template-columns:1fr 380px;gap:48px;align-items:start;padding-bottom:72px}
-    .hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:800;letter-spacing:3px;color:var(--muted);margin-bottom:24px}
-    .hero-eyebrow .line{width:28px;height:1.5px;background:linear-gradient(90deg,#C8102E,#003478);border-radius:2px}
-    .hero h1{font-size:clamp(28px,4.2vw,44px);font-weight:900;line-height:1.3;letter-spacing:-1px;margin-bottom:28px}
+    .hero{padding:0;position:relative;overflow:hidden}
+    .hero-bg{position:absolute;inset:0;z-index:0}
+    .hero-bg-img{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=1600&q=80') center center/cover no-repeat}
+    .hero-bg-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(250,248,245,.97) 0%,rgba(250,248,245,.92) 40%,rgba(250,248,245,.85) 100%)}
+    .hero-inner{max-width:var(--max);margin:0 auto;position:relative;z-index:1;padding:56px 32px 72px}
+    .hero-flag{position:absolute;top:32px;right:32px;width:64px;height:auto;opacity:.7;z-index:2}
+    .hero-grid{display:grid;grid-template-columns:1fr 380px;gap:56px;align-items:start}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:800;letter-spacing:3px;color:#C8102E;margin-bottom:28px}
+    .hero-eyebrow .line{width:32px;height:2px;background:linear-gradient(90deg,#C8102E,#003478);border-radius:2px}
+    .hero h1{font-size:clamp(30px,4.5vw,48px);font-weight:900;line-height:1.25;letter-spacing:-1.5px;margin-bottom:32px}
     .hero h1 .em{background:linear-gradient(135deg,var(--beauty) 0%,#A04A6E 50%,var(--food) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-    .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;background:var(--white);border:1px solid var(--line);border-radius:var(--radius-sm);margin-bottom:32px;overflow:hidden}
-    .hero-stat{padding:20px 18px;text-align:center;border-right:1px solid var(--line-light)}
+    .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;background:var(--white);border:1px solid var(--line);border-radius:var(--radius-sm);margin-bottom:36px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.04)}
+    .hero-stat{padding:22px 20px;text-align:center;border-right:1px solid var(--line-light)}
     .hero-stat:last-child{border-right:none}
-    .hero-stat .num{font-size:22px;font-weight:900;letter-spacing:-1px;font-family:var(--font-display)}
+    .hero-stat .num{font-size:26px;font-weight:900;letter-spacing:-1px;font-family:var(--font-display)}
     .hero-stat .num.c-red{color:#C8102E}
     .hero-stat .num.c-blue{color:#003478}
     .hero-stat .num.c-warm{color:#8B6914}
-    .hero-stat .lbl{font-size:11px;font-weight:600;color:var(--muted);margin-top:2px;line-height:1.4}
-    .hero-lead{font-size:15px;color:var(--sub);line-height:1.95;margin-bottom:32px;max-width:560px}
+    .hero-stat .lbl{font-size:12px;font-weight:600;color:var(--sub);margin-top:4px;line-height:1.5}
+    .hero-lead{font-size:16px;color:var(--sub);line-height:2;margin-bottom:36px;max-width:580px}
     .hero-lead strong{color:var(--ink);font-weight:700}
-    .hero-audience{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    .audience-card{border:1px solid var(--line);border-radius:var(--radius-sm);padding:16px 18px;background:var(--white);transition:all .3s}
-    .audience-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.05)}
-    .audience-label{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:1px;margin-bottom:8px}
-    .audience-label .dot{width:6px;height:6px;border-radius:50%}
+    .hero-audience{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .audience-card{border:1px solid var(--line);border-radius:var(--radius-sm);padding:20px 22px;background:var(--white);transition:all .3s;box-shadow:0 2px 12px rgba(0,0,0,.03)}
+    .audience-card:hover{box-shadow:0 6px 24px rgba(0,0,0,.08);transform:translateY(-2px)}
+    .audience-label{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:1px;margin-bottom:10px}
+    .audience-label .dot{width:8px;height:8px;border-radius:50%}
     .audience-card.type-a .audience-label .dot{background:var(--beauty)}
     .audience-card.type-b .audience-label .dot{background:var(--food)}
-    .audience-card .audience-title{font-size:14px;font-weight:800;margin-bottom:4px;color:var(--ink)}
-    .audience-card .audience-desc{font-size:13px;color:var(--sub);line-height:1.6}
+    .audience-card .audience-title{font-size:15px;font-weight:800;margin-bottom:6px;color:var(--ink)}
+    .audience-card .audience-desc{font-size:14px;color:var(--sub);line-height:1.7}
     .info-card{background:rgba(255,255,255,.8);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.85);border-radius:var(--radius);padding:28px;box-shadow:0 6px 36px rgba(0,0,0,.05)}
     .info-card .card-label{font-size:11px;font-weight:800;letter-spacing:2.5px;color:var(--muted);margin-bottom:20px}
     .info-rows{display:flex;flex-direction:column}
@@ -54,20 +59,20 @@
     .benefit-item{font-size:14px;font-weight:500;color:var(--sub);padding:9px 14px;background:rgba(250,248,245,.8);border-radius:var(--radius-sm);display:flex;align-items:center;gap:8px}
     .benefit-item::before{content:'';width:5px;height:5px;border-radius:50%;flex-shrink:0;background:var(--accent-warm)}
     .info-cta{margin-top:18px;display:flex;flex-direction:column;gap:8px}
-    .btn-primary{display:block;text-align:center;background:var(--ink);color:#fff;padding:15px;border-radius:14px;font-size:15px;font-weight:700;transition:all .25s}
-    .btn-primary:hover{opacity:.88;transform:translateY(-1px)}
+    .btn-primary{display:block;text-align:center;background:linear-gradient(135deg,#1A1A1A 0%,#333 100%);color:#fff;padding:17px;border-radius:14px;font-size:16px;font-weight:700;transition:all .3s;box-shadow:0 4px 16px rgba(0,0,0,.15)}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.25)}
     .btn-outline{display:block;text-align:center;background:rgba(255,255,255,.6);color:var(--ink);padding:13px;border-radius:14px;font-size:14px;font-weight:600;border:1.5px solid var(--line);transition:all .2s}
     .btn-outline:hover{border-color:var(--ink)}
     .btn-gcal{display:flex;align-items:center;justify-content:center;gap:6px;text-align:center;background:rgba(255,255,255,.6);color:var(--sub);padding:11px;border-radius:14px;font-size:13px;font-weight:600;border:1.5px solid var(--line);transition:all .2s}
     .btn-gcal:hover{border-color:#4285f4;color:#4285f4}
     .btn-gcal svg{width:16px;height:16px}
     .divider{max-width:var(--max);margin:0 auto;height:1px;background:var(--line)}
-    section.sec-wrap{padding:80px 32px}
+    section.sec-wrap{padding:88px 32px}
     .sec{max-width:var(--max);margin:0 auto}
-    .sec-head{margin-bottom:40px}
-    .sec-label{font-size:11px;font-weight:800;letter-spacing:3px;color:var(--muted);margin-bottom:14px}
-    .sec h2{font-size:clamp(24px,3.2vw,34px);font-weight:800;letter-spacing:-.5px;line-height:1.4;margin-bottom:12px}
-    .sec-desc{font-size:16px;color:var(--sub);line-height:1.85;max-width:620px}
+    .sec-head{margin-bottom:48px}
+    .sec-label{font-size:13px;font-weight:800;letter-spacing:3px;color:#C8102E;margin-bottom:16px}
+    .sec h2{font-size:clamp(28px,3.8vw,42px);font-weight:900;letter-spacing:-.5px;line-height:1.3;margin-bottom:16px;color:#1A1A1A}
+    .sec-desc{font-size:17px;color:var(--sub);line-height:1.9;max-width:640px}
     .contents-section{background:var(--white);position:relative;overflow:hidden}
     .content-block{margin-bottom:24px}.content-block:last-child{margin-bottom:0}
     .content-card{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:all .3s;background:var(--white)}
@@ -76,17 +81,17 @@
     .beauty-card .card-accent{background:linear-gradient(90deg,var(--beauty),#D88DA0,var(--accent-warm))}
     .food-card .card-accent{background:linear-gradient(90deg,var(--food),#6DBBA8,var(--accent-warm))}
     .card-inner{display:grid;grid-template-columns:1fr 360px;min-height:0}
-    .card-text{padding:28px;display:flex;flex-direction:column;justify-content:center}
-    .card-text .card-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
-    .card-text .card-head h3{font-size:20px;font-weight:800;letter-spacing:-.3px}
-    .category-badge{font-size:12px;font-weight:700;padding:5px 13px;border-radius:999px;flex-shrink:0}
+    .card-text{padding:32px;display:flex;flex-direction:column;justify-content:center}
+    .card-text .card-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+    .card-text .card-head h3{font-size:22px;font-weight:800;letter-spacing:-.3px}
+    .category-badge{font-size:12px;font-weight:700;padding:6px 14px;border-radius:999px;flex-shrink:0}
     .category-badge.b{background:var(--beauty-soft);color:var(--beauty);border:1px solid var(--beauty-border)}
     .category-badge.f{background:var(--food-soft);color:var(--food);border:1px solid var(--food-border)}
-    .card-keywords{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
-    .kw{font-size:13px;font-weight:600;color:var(--sub);padding:5px 11px;border-radius:8px;background:var(--bg)}
-    .card-list{list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
-    .card-list li{font-size:15px;color:var(--sub);line-height:1.7;padding-left:16px;position:relative}
-    .card-list li::before{content:'';position:absolute;left:0;top:11px;width:5px;height:5px;border-radius:50%}
+    .card-keywords{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+    .kw{font-size:14px;font-weight:600;color:var(--sub);padding:6px 14px;border-radius:8px;background:var(--bg)}
+    .card-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+    .card-list li{font-size:15px;color:var(--sub);line-height:1.75;padding-left:18px;position:relative}
+    .card-list li::before{content:'';position:absolute;left:0;top:11px;width:6px;height:6px;border-radius:50%}
     .beauty-card .card-list li::before{background:var(--beauty)}
     .food-card .card-list li::before{background:var(--food)}
     .kr-trend-strip{display:flex;flex-wrap:wrap;gap:6px}
@@ -113,34 +118,34 @@
     .reels-nudge{font-size:11px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:6px}
     .reels-nudge::before,.reels-nudge::after{content:'';width:10px;height:1px;background:var(--line)}
     .speakers-section{background:var(--bg);position:relative;overflow:hidden}
-    .speakers-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-    .speaker-card{border-radius:var(--radius);overflow:hidden;transition:all .35s;position:relative}
-    .speaker-card:hover{box-shadow:0 12px 40px rgba(0,0,0,.15);transform:translateY(-3px)}
+    .speakers-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+    .speaker-card{border-radius:16px;overflow:hidden;transition:all .35s;background:#fff;border:1px solid var(--line)}
+    .speaker-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.12)}
     .speaker-photo-wrap{position:relative;width:100%;aspect-ratio:3/4;overflow:hidden}
     .speaker-photo-wrap img{width:100%;height:100%;object-fit:cover;display:block}
-    .speaker-card.b .speaker-photo-wrap img{object-position:center 15%}
-    .speaker-card.f .speaker-photo-wrap img{object-position:right 30%}
-    .speaker-photo-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.03) 25%,rgba(0,0,0,.35) 50%,rgba(0,0,0,.82) 75%,rgba(0,0,0,.95) 100%);pointer-events:none}
-    .speaker-overlay{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:0 28px 32px;color:#fff}
-    .speaker-top-tags{position:absolute;top:16px;left:16px;z-index:3;display:flex;gap:6px;flex-wrap:wrap}
-    .st-tag{font-size:11px;font-weight:700;padding:4px 12px;border-radius:999px;backdrop-filter:blur(8px)}
-    .st-tag.beauty-tag{background:rgba(196,70,106,.85);color:#fff}
-    .st-tag.food-tag{background:rgba(46,122,104,.85);color:#fff}
-    .st-tag.gen-tag{background:rgba(255,255,255,.85);color:var(--ink);border:1px solid rgba(255,255,255,.5)}
-    .speaker-name{font-size:22px;font-weight:800;margin-bottom:6px;letter-spacing:-.3px}
-    .speaker-role{font-size:11px;opacity:.6;font-weight:500;margin-bottom:10px;letter-spacing:.2px;line-height:1.5}
-    .speaker-desc{font-size:13px;opacity:.85;line-height:1.8}
+    .speaker-card.b .speaker-photo-wrap img{object-position:center 20%}
+    .speaker-card.f .speaker-photo-wrap img{object-position:center top}
+    .speaker-photo-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1) 0%,rgba(0,0,0,.2) 30%,rgba(0,0,0,.6) 60%,rgba(0,0,0,.92) 85%,rgba(0,0,0,.98) 100%);pointer-events:none}
+    .speaker-overlay{position:absolute;bottom:0;left:0;right:0;z-index:5;padding:24px;color:#fff}
+    .speaker-top-tags{position:absolute;top:14px;left:14px;z-index:10;display:flex;gap:6px;flex-wrap:wrap}
+    .st-tag{font-size:10px;font-weight:700;padding:5px 12px;border-radius:6px;backdrop-filter:blur(8px)}
+    .st-tag.beauty-tag{background:rgba(196,70,106,.9);color:#fff}
+    .st-tag.food-tag{background:rgba(46,122,104,.9);color:#fff}
+    .st-tag.gen-tag{background:rgba(255,255,255,.9);color:var(--ink)}
+    .speaker-name{font-size:20px;font-weight:800;margin-bottom:6px;letter-spacing:-.3px}
+    .speaker-role{font-size:11px;opacity:.7;font-weight:500;margin-bottom:12px;line-height:1.5}
+    .speaker-desc{font-size:13px;opacity:.9;line-height:1.85}
     .program-section{background:var(--white);position:relative;overflow:hidden}
     .timeline{display:flex;flex-direction:column}
-    .tl-item{display:grid;grid-template-columns:140px 1fr;gap:24px;padding:20px 0;border-bottom:1px solid var(--line-light);position:relative}
+    .tl-item{display:grid;grid-template-columns:150px 1fr;gap:28px;padding:24px 0;border-bottom:1px solid var(--line-light);position:relative}
     .tl-item:last-child{border:none}
-    .tl-item::before{content:'';position:absolute;left:152px;top:0;bottom:0;width:1px;background:var(--line-light)}
-    .tl-time{font-size:15px;font-weight:700;font-variant-numeric:tabular-nums}
-    .tl-speaker{font-size:13px;color:var(--muted);font-weight:500;margin-top:3px}
-    .tl-content h3{font-size:17px;font-weight:700;margin-bottom:5px;display:flex;align-items:center;gap:10px}
-    .tl-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+    .tl-item::before{content:'';position:absolute;left:166px;top:0;bottom:0;width:1px;background:var(--line-light)}
+    .tl-time{font-size:16px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ink)}
+    .tl-speaker{font-size:13px;color:var(--beauty);font-weight:600;margin-top:4px}
+    .tl-content h3{font-size:18px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:10px;color:var(--ink)}
+    .tl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
     .tl-dot.b{background:var(--beauty)}.tl-dot.f{background:var(--food)}.tl-dot.v{background:var(--ink)}
-    .tl-content p{font-size:15px;color:var(--sub);line-height:1.75}
+    .tl-content p{font-size:15px;color:var(--sub);line-height:1.85}
     .keywords-section{background:var(--bg);position:relative;overflow:hidden}
     .keywords-flow{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
     .keyword-chip{padding:10px 20px;border-radius:999px;font-size:14px;font-weight:600;border:1.5px solid;transition:all .3s;cursor:default}
@@ -154,8 +159,8 @@
     .cta-section .sec{position:relative;z-index:1}
     .cta-section h2{color:#fff;font-size:28px;margin-bottom:12px;font-weight:800}
     .cta-section p{color:rgba(255,255,255,.55);font-size:16px;line-height:1.85;margin-bottom:32px}
-    .cta-btn{display:inline-block;background:#fff;color:var(--ink);padding:17px 52px;border-radius:14px;font-size:16px;font-weight:700;transition:all .25s}
-    .cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+    .cta-btn{display:inline-block;background:linear-gradient(135deg,#fff 0%,#f8f8f8 100%);color:var(--ink);padding:20px 56px;border-radius:16px;font-size:17px;font-weight:700;transition:all .3s;box-shadow:0 6px 24px rgba(0,0,0,.2)}
+    .cta-btn:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,0,0,.35)}
     .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);backdrop-filter:blur(8px);z-index:999;align-items:center;justify-content:center;padding:20px}
     .modal.active{display:flex}
     .modal-box{background:var(--white);border-radius:var(--radius);padding:36px;max-width:440px;width:100%;position:relative;animation:modalIn .3s ease}
@@ -176,8 +181,9 @@
     .footer-inner{max-width:var(--max);margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;font-size:13px;color:var(--muted)}
     .footer-inner .co{font-weight:700;color:var(--ink);margin-bottom:4px}
     .footer-right{text-align:right}
-    @media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:32px}.speakers-grid{grid-template-columns:1fr}.card-inner{grid-template-columns:1fr}.reels-panel{border-left:none;border-top:1px solid var(--line-light);padding:20px}.tl-item{grid-template-columns:1fr;gap:4px}.tl-item::before{display:none}section.sec-wrap{padding:64px 20px}.hero{padding-left:20px;padding-right:20px}.hero-audience{grid-template-columns:1fr}}
-    @media(max-width:540px){.footer-inner{flex-direction:column;gap:14px}.footer-right{text-align:left}.keyword-chip{font-size:13px;padding:8px 15px}.reel{width:88px;height:156px;border-radius:12px}.hero-stats{grid-template-columns:1fr}.hero-stat{border-right:none;border-bottom:1px solid var(--line-light)}.hero-stat:last-child{border-bottom:none}}
+    @media(max-width:960px){.hero-grid{grid-template-columns:1fr;gap:40px}.hero-inner{padding:48px 24px 64px}.hero-flag{width:52px;top:24px;right:24px}}
+    @media(max-width:860px){.speakers-grid{grid-template-columns:1fr;max-width:480px;margin:0 auto}.card-inner{grid-template-columns:1fr}.reels-panel{border-left:none;border-top:1px solid var(--line-light);padding:24px}.tl-item{grid-template-columns:1fr;gap:6px}.tl-item::before{display:none}section.sec-wrap{padding:64px 24px}.hero-audience{grid-template-columns:1fr;gap:12px}}
+    @media(max-width:540px){.hero-inner{padding:40px 20px 56px}.hero h1{font-size:28px}.hero-stat .num{font-size:20px}.hero-lead{font-size:15px;line-height:1.85}.footer-inner{flex-direction:column;gap:14px}.footer-right{text-align:left}.keyword-chip{font-size:13px;padding:8px 15px}.reel{width:88px;height:156px;border-radius:12px}.hero-stats{grid-template-columns:1fr}.hero-stat{border-right:none;border-bottom:1px solid var(--line-light);padding:18px 16px}.hero-stat:last-child{border-bottom:none}.btn-primary{padding:18px;font-size:16px}.audience-card{padding:18px 20px}.sec h2{font-size:24px}.speaker-overlay{padding:0 20px 24px}.speaker-name{font-size:19px}.speaker-desc{font-size:12px;line-height:1.75}.card-text{padding:24px}.card-text .card-head h3{font-size:19px}.tl-time{font-size:14px}.tl-content h3{font-size:16px}.tl-content p{font-size:14px}}
     .fade-up{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
     .fade-up.visible{opacity:1;transform:translateY(0)}
   </style>
@@ -195,16 +201,16 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg"></div>
-  <svg class="kr-deco" style="width:140px;height:140px;top:-10px;right:80px;opacity:.5;transform:rotate(-15deg)"><use href="#ico-taegeuk" style="color:#C8102E"/></svg>
-  <svg class="kr-deco" style="width:70px;height:70px;bottom:120px;left:20px;opacity:.4;transform:rotate(20deg)"><use href="#ico-mugunghwa" style="color:#C8102E"/></svg>
-  <svg class="kr-deco" style="width:50px;height:42px;top:35%;right:38%;opacity:.35;transform:rotate(-5deg)"><use href="#ico-trigram" style="color:#003478"/></svg>
-  <svg class="kr-deco" style="width:90px;height:45px;bottom:60px;right:44%;opacity:.3"><use href="#ico-cloud" style="color:#003478"/></svg>
-
-  <div class="hero-inner"><div class="hero-grid">
+  <div class="hero-bg">
+    <div class="hero-bg-img"></div>
+    <div class="hero-bg-overlay"></div>
+  </div>
+  <div class="hero-inner">
+    <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Flag_of_South_Korea.svg/320px-Flag_of_South_Korea.svg.png" alt="태극기" class="hero-flag">
+    <div class="hero-grid">
     <div>
       <div class="hero-eyebrow"><span class="line"></span>SEMINAR 2026</div>
-      <h1>韓国トレンドセミナー<br><span class="em">Beauty・Inner Care</span><br><span class="em">食品・菓子</span></h1>
+      <h1>韓国トレンドセミナー<br><span class="em">ビューティー・インナーケア／食品・菓子</span></h1>
 
       <div class="hero-stats">
         <div class="hero-stat"><div class="num c-red">約946万人</div><div class="lbl">2025年 訪日韓国人<br>（国別1位・過去最高）</div></div>
@@ -213,7 +219,7 @@
       </div>
 
       <p class="hero-lead">
-        訪日外国人の4人に1人が韓国人。<strong>飲食費比率27%は全国籍中で最高水準</strong>、菓子購入率も突出しています。一方、1人あたり消費額は約11万円と短期滞在ゆえに低め — だからこそ<strong>「何を・なぜ選ぶか」</strong>の理解が売場づくりの鍵になります。<br>
+        2025年、訪日韓国人観光客の4人に1人が日本を訪問。<strong>飲食費比率27%は全国籍中で最高水準</strong>、菓子購入率も突出しています。1人あたり消費額は約11万円と短期滞在ゆえに低め — だからこそ<strong>「何を・なぜ選ぶか」</strong>の理解が売場づくりの鍵になります。<br>
         本セミナーでは、韓国Z世代が自国で選んでいるビューティ・食品トレンドを分析し、<strong>訪日韓国人プロモーションへのヒント</strong>をセットで整理します。
       </p>
 
@@ -242,7 +248,7 @@
       <div class="info-benefits">
         <div class="bl">参加特典</div>
         <div class="benefit-items">
-          <div class="benefit-item">業界別 2026 TOP10 トレンド要約（1枚）</div>
+          <div class="benefit-item">業界別 2026 TOP7 トレンド要約（1枚）</div>
           <div class="benefit-item">表現NGチェック（業界別10項目）</div>
         </div>
       </div>
@@ -276,17 +282,17 @@
 
     <div class="content-block fade-up"><div class="content-card beauty-card"><div class="card-accent"></div><div class="card-inner">
       <div class="card-text">
-        <div class="card-head"><h3>Beauty・Inner Care</h3><span class="category-badge b">TOP10 + 活用</span></div>
+        <div class="card-head"><h3>ビューティー・インナーケア</h3><span class="category-badge b">TOP7 + 活用</span></div>
         <div class="card-keywords"><span class="kw">選ばれる基準の更新</span><span class="kw">根拠の見せ方</span><span class="kw">比較・検証の壁</span></div>
-        <ul class="card-list"><li>2026トレンドTOP10（背景・特徴・注目ポイント）</li><li>韓国で今ヒットしている理由と消費者心理</li><li>表現NG（10）と代替メッセージの型</li></ul>
+        <ul class="card-list"><li>2026トレンドTOP7（背景・特徴・注目ポイント）</li><li>韓国で今ヒットしている理由と消費者心理</li><li>表現NG（10）と代替メッセージの型</li></ul>
         <div class="kr-trend-strip"><span class="kr-t">スキンテレクチュアル</span><span class="kr-t">ハイパー感覚ケア</span><span class="kr-t">クラウドスキン</span><span class="kr-t">セラムファンデ</span><span class="kr-t">HOCI鎮静</span></div>
       </div>
       <div class="reels-panel">
         <div class="reels-panel-label">INSTAGRAM REELS</div>
         <div class="reels-row">
-          <div class="reel"><img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&q=80" alt=""><div class="reel-play"></div><div class="reel-cap"><span class="rc-tag">スキンケア</span><div class="rc-title">スキンケアルーティン</div></div></div>
-          <div class="reel"><img src="https://images.unsplash.com/photo-1612817288484-6f916006741a?w=400&q=80" alt=""><div class="reel-play"></div><div class="reel-cap"><span class="rc-tag">インナービューティ</span><div class="rc-title">インナービューティ</div></div></div>
-          <div class="reel"><img src="https://images.unsplash.com/photo-1570197571499-166b36435e9f?w=400&q=80" alt=""><div class="reel-play"></div><div class="reel-cap"><span class="rc-tag">比較検証</span><div class="rc-title">ダーマコスメ比較</div></div></div>
+          <div class="reel"><img loading="lazy" src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&q=80" alt=""><div class="reel-play"></div><div class="reel-cap"><span class="rc-tag">スキンケア</span><div class="rc-title">スキンケアルーティン</div></div></div>
+          <div class="reel"><img loading="lazy" src="https://images.unsplash.com/photo-1612817288484-6f916006741a?w=400&q=80" alt=""><div class="reel-play"></div><div class="reel-cap"><span class="rc-tag">インナービューティ</span><div class="rc-title">インナービューティ</div></div></div>
+          <div class="reel"><img loading="lazy" src="https://images.unsplash.com/photo-1570197571499-166b36435e9f?w=400&q=80" alt=""><div class="reel-play"></div><div class="reel-cap"><span class="rc-tag">比較検証</span><div class="rc-title">ダーマコスメ比較</div></div></div>
         </div>
         <div class="reels-nudge">セミナーで詳しく</div>
       </div>
@@ -302,9 +308,9 @@
       <div class="reels-panel">
         <div class="reels-panel-label">INSTAGRAM REELS</div>
         <div class="reels-row">
-          <div class="reel"><img src="https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?w=400&q=80" alt=""><div class="reel-play"></div><div class="reel-cap"><span class="rc-tag">コンビニ食べ歩き</span><div class="rc-title">コンビニ食べ方アレンジ</div></div></div>
-          <div class="reel"><img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=400&q=80" alt=""><div class="reel-play"></div><div class="reel-cap"><span class="rc-tag">お菓子ハック</span><div class="rc-title">食感追求・お菓子ハック</div></div></div>
-          <div class="reel"><img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&q=80" alt=""><div class="reel-play"></div><div class="reel-cap"><span class="rc-tag">もちもちクッキー</span><div class="rc-title">もっちりクッキー</div></div></div>
+          <div class="reel"><img loading="lazy" src="https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?w=400&q=80" alt=""><div class="reel-play"></div><div class="reel-cap"><span class="rc-tag">コンビニ食べ歩き</span><div class="rc-title">コンビニ食べ方アレンジ</div></div></div>
+          <div class="reel"><img loading="lazy" src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=400&q=80" alt=""><div class="reel-play"></div><div class="reel-cap"><span class="rc-tag">お菓子ハック</span><div class="rc-title">食感追求・お菓子ハック</div></div></div>
+          <div class="reel"><img loading="lazy" src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&q=80" alt=""><div class="reel-play"></div><div class="reel-cap"><span class="rc-tag">もちもちクッキー</span><div class="rc-title">もっちりクッキー</div></div></div>
         </div>
         <div class="reels-nudge">セミナーで詳しく</div>
       </div>
@@ -328,21 +334,21 @@
     <div class="speakers-grid fade-up">
       <div class="speaker-card b">
         <div class="speaker-photo-wrap">
-          <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2024/03/HEEWON_CC05_mono-scaled.jpg" alt="金希願">
-          <div class="speaker-top-tags"><span class="st-tag beauty-tag">Beauty・Inner Care</span><span class="st-tag gen-tag">Gen Z</span></div>
+          <img loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2024/03/HEEWON_CC05_mono-scaled.jpg" alt="金希願">
+          <div class="speaker-top-tags"><span class="st-tag beauty-tag">ビューティー</span><span class="st-tag gen-tag">Gen Z</span></div>
           <div class="speaker-overlay">
             <div class="speaker-name">金希願（キム・ヒウォン）</div>
             <div class="speaker-role">多言語発信メディア JAPANKURU 韓国マーケット担当</div>
-            <p class="speaker-desc">韓国・ソウル出身。多言語発信メディア「JapanKuru」にて韓国マーケットを担当し、コンテンツの企画・制作からSNSマーケティングまで幅広く手がける。特にInstagram Reelsを中心としたショート動画では数百万回再生の実績を持つ。韓国と日本両国の文化的背景への深い理解と、SNSトレンドを即座に形にする実行力を強みとする実践型クリエイター／マーケター。</p>
+            <p class="speaker-desc">多言語発信メディア「JapanKuru」にて韓国マーケットを担当し、コンテンツの企画・制作からSNSマーケティングまで幅広く手がける。特にInstagram Reelsを中心としたショート動画では数百万回再生の実績を持つ。韓国と日本両国の文化的背景への深い理解と、SNSトレンドを即座に形にする実行力を強みとする実践型クリエイター／マーケター。</p>
           </div>
         </div>
       </div>
       <div class="speaker-card f">
         <div class="speaker-photo-wrap">
-          <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/02/Image_20260205175731.jpg" alt="元正壬">
+          <img loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/02/Image_20260205175731-1.jpg" alt="元正壬">
           <div class="speaker-top-tags"><span class="st-tag food-tag">食品・菓子</span><span class="st-tag gen-tag">Gen Z</span></div>
           <div class="speaker-overlay">
-            <div class="speaker-name">元正壬（ヒョン・ジョンイム）</div>
+            <div class="speaker-name">元正壬（ウォン・ジョンイム）</div>
             <div class="speaker-role">韓国市場特化型グローバルマーケター／リサーチ主導のコンテンツストラテジスト</div>
             <p class="speaker-desc">韓国市場に特化したグローバルマーケターとして、日本を拠点に活動。リサーチを軸とした戦略設計とデータドリブンなコンテンツ企画を得意とする。韓国語・日本語に加え中国語も対応可能なマルチリンガル。「なぜこのコンテンツが成果を出すのか」を構造的に分析し、再現性の高いアプローチで実際の成果へとつなげるマーケター。</p>
           </div>
@@ -361,11 +367,11 @@
   <svg class="kr-deco" style="width:90px;height:45px;top:30%;left:60%;opacity:.2"><use href="#ico-cloud" style="color:#003478"/></svg>
 
   <div class="sec" style="position:relative;z-index:1">
-    <div class="sec-head fade-up"><div class="sec-label">PROGRAM</div><h2>タイムスケジュール</h2><p class="sec-desc">情報量は担保しつつ、読みやすさ優先で要点のみ掲載します。</p></div>
+    <div class="sec-head fade-up"><div class="sec-label">PROGRAM</div><h2>タイムスケジュール</h2></div>
     <div class="timeline fade-up">
       <div class="tl-item"><div><div class="tl-time">15:00 – 15:10</div></div><div class="tl-content"><h3><span class="tl-dot v"></span>オープニング／本日のポイント整理</h3><p>本イベントの全体像と、本日持ち帰っていただきたい視点・考え方を共有します。</p></div></div>
       <div class="tl-item"><div><div class="tl-time">15:10 – 15:20</div></div><div class="tl-content"><h3><span class="tl-dot v"></span>市場データサマリー</h3><p>最新の市場データをもとに、今押さえるべきトレンドの全体像とビジネスにおける重要な示唆（So What）を分かりやすく整理します。</p></div></div>
-      <div class="tl-item"><div><div class="tl-time">15:20 – 16:10</div><div class="tl-speaker">金希願</div></div><div class="tl-content"><h3><span class="tl-dot b"></span>Beauty・Inner Care トレンド</h3><p>韓国・日本市場を中心に、Beauty／インナーケア領域の最新トレンドを紹介。注目されているキーワードや消費者動向、実際の活用ポイントを解説します。</p></div></div>
+      <div class="tl-item"><div><div class="tl-time">15:20 – 16:10</div><div class="tl-speaker">金希願</div></div><div class="tl-content"><h3><span class="tl-dot b"></span>ビューティー・インナーケア トレンド</h3><p>韓国・日本市場を中心に、Beauty／インナーケア領域の最新トレンドを紹介。注目されているキーワードや消費者動向、実際の活用ポイントを解説します。</p></div></div>
       <div class="tl-item"><div><div class="tl-time">16:10 – 17:00</div><div class="tl-speaker">元正壬</div></div><div class="tl-content"><h3><span class="tl-dot f"></span>食品・菓子トレンド</h3><p>味・食感、健康志向、季節性といった切り口から、食品・菓子分野のトレンドを分析。SNSで話題になった事例も交えながら、今後のヒントを共有します。</p></div></div>
       <div class="tl-item"><div><div class="tl-time">17:00 – 17:15</div></div><div class="tl-content"><h3><span class="tl-dot v"></span>実践パート：トレンドを"売れる形"につなげる視点</h3><p>トレンドをどのように商品・コンテンツ・施策へ落とし込むか。韓国市場の事例をもとに、リサーチから制作・発信までの考え方を紹介します。</p></div></div>
       <div class="tl-item"><div><div class="tl-time">17:15 – 17:30</div><div class="tl-speaker">全員</div></div><div class="tl-content"><h3><span class="tl-dot v"></span>Q&A</h3><p>業界・テーマ別の質問にお答えします。</p></div></div>
