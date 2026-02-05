@@ -4,864 +4,449 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>2026年 韓国トレンドセミナー | GLOBAL DAILY</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-
   <style>
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--bg:#FAF8F5;--white:#FFF;--ink:#1A1A1A;--sub:#5A5A5A;--muted:#9A9A9A;--line:#EBE7E2;--line-light:#F3F0EB;--beauty:#C4466A;--beauty-soft:#FBF0F3;--beauty-border:#F0CDD6;--food:#2E7A68;--food-soft:#EDF7F3;--food-border:#BDE0D5;--accent-warm:#D4A853;--radius:20px;--radius-sm:12px;--max:1080px;--font-jp:'Noto Sans JP',sans-serif;--font-display:'Playfair Display',serif}
+    body{font-family:var(--font-jp);background:var(--bg);color:var(--ink);line-height:1.75;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+    a{text-decoration:none;color:inherit}
+    .kr-deco{position:absolute;pointer-events:none;user-select:none;z-index:0}
 
-    :root {
-      --bg: #FAF8F5;
-      --white: #FFFFFF;
-      --ink: #1A1A1A;
-      --sub: #5A5A5A;
-      --muted: #9A9A9A;
-      --line: #EBE7E2;
-      --line-light: #F3F0EB;
-      --beauty: #C4466A;
-      --beauty-soft: #FBF0F3;
-      --beauty-border: #F0CDD6;
-      --food: #2E7A68;
-      --food-soft: #EDF7F3;
-      --food-border: #BDE0D5;
-      --accent-warm: #D4A853;
-      --radius: 20px;
-      --radius-sm: 12px;
-      --max: 1080px;
-      --font-jp: 'Noto Sans JP', sans-serif;
-      --font-display: 'Playfair Display', serif;
-      /* real flag image from wikimedia commons (public domain) */
-      --flag-url: url("https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Flag_of_South_Korea.svg/800px-Flag_of_South_Korea.svg.png");
-    }
+    /* HERO */
+    .hero{padding:40px 32px 0;position:relative;overflow:hidden}
+    .hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 70% 55% at 65% 25%,rgba(196,70,106,.07) 0%,transparent 60%),radial-gradient(ellipse 55% 45% at 25% 75%,rgba(46,122,104,.05) 0%,transparent 55%),radial-gradient(ellipse 35% 35% at 50% 50%,rgba(212,168,83,.04) 0%,transparent 50%)}
+    .hero-inner{max-width:var(--max);margin:0 auto;position:relative;z-index:1}
+    .hero-grid{display:grid;grid-template-columns:1fr 380px;gap:48px;align-items:start;padding-bottom:64px}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:800;letter-spacing:3px;color:var(--muted);margin-bottom:20px}
+    .hero-eyebrow .line{width:28px;height:1.5px;background:linear-gradient(90deg,#C8102E,#003478);border-radius:2px}
+    .hero h1{font-size:clamp(28px,4.2vw,44px);font-weight:900;line-height:1.3;letter-spacing:-1px;margin-bottom:20px}
+    .hero h1 .em{background:linear-gradient(135deg,var(--beauty) 0%,#A04A6E 50%,var(--food) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
-    body {
-      font-family: var(--font-jp);
-      background: var(--bg);
-      color: var(--ink);
-      line-height: 1.75;
-      -webkit-font-smoothing: antialiased;
-      scroll-behavior: smooth;
-    }
-    a { text-decoration: none; color: inherit; }
+    .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;background:var(--white);border:1px solid var(--line);border-radius:var(--radius-sm);margin-bottom:24px;overflow:hidden}
+    .hero-stat{padding:16px 18px;text-align:center;border-right:1px solid var(--line-light)}
+    .hero-stat:last-child{border-right:none}
+    .hero-stat .num{font-size:22px;font-weight:900;letter-spacing:-1px;font-family:var(--font-display)}
+    .hero-stat .num.c-red{color:#C8102E}
+    .hero-stat .num.c-blue{color:#003478}
+    .hero-stat .num.c-warm{color:#8B6914}
+    .hero-stat .lbl{font-size:11px;font-weight:600;color:var(--muted);margin-top:2px;line-height:1.4}
 
-    /* ─── Scattered flag backgrounds ─── */
-    .flag-bg {
-      position: absolute; pointer-events: none; user-select: none;
-      background-image: var(--flag-url);
-      background-size: contain;
-      background-repeat: no-repeat;
-      z-index: 0;
-    }
+    .hero-lead{font-size:15px;color:var(--sub);line-height:1.9;margin-bottom:24px;max-width:560px}
+    .hero-lead strong{color:var(--ink);font-weight:700}
 
-    /* ─── Floating Korean keywords ─── */
-    .kr-float {
-      position: absolute; pointer-events: none; user-select: none;
-      font-size: 11px; font-weight: 700; letter-spacing: 1px;
-      opacity: 0; animation: krDrift 14s ease-in-out infinite;
-      white-space: nowrap; z-index: 0;
-    }
-    @keyframes krDrift {
-      0%   { opacity: 0; transform: translateY(6px) rotate(-1.5deg); }
-      12%  { opacity: .1; }
-      50%  { opacity: .1; transform: translateY(-3px) rotate(.5deg); }
-      88%  { opacity: .1; }
-      100% { opacity: 0; transform: translateY(6px) rotate(-1.5deg); }
-    }
-
-    /* ─── Hangul watermark ─── */
-    .hangul-wm {
-      position: absolute; pointer-events: none; user-select: none;
-      font-size: 200px; font-weight: 900; line-height: 1;
-      opacity: .016; color: var(--ink);
-      letter-spacing: -8px; z-index: 0;
-    }
-
-    /* ─── Hero ─── */
-    .hero {
-      padding: 40px 32px 0;
-      position: relative; overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute; inset: 0; z-index: 0;
-      background:
-        radial-gradient(ellipse 70% 55% at 65% 25%, rgba(196,70,106,.07) 0%, transparent 60%),
-        radial-gradient(ellipse 55% 45% at 25% 75%, rgba(46,122,104,.05) 0%, transparent 55%),
-        radial-gradient(ellipse 35% 35% at 50% 50%, rgba(212,168,83,.04) 0%, transparent 50%);
-    }
-    .hero-inner {
-      max-width: var(--max); margin: 0 auto;
-      position: relative; z-index: 1;
-    }
-    .hero-grid {
-      display: grid; grid-template-columns: 1fr 380px; gap: 48px;
-      align-items: start; padding-bottom: 80px;
-    }
-    .hero-eyebrow {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-size: 12px; font-weight: 800; letter-spacing: 3px;
-      color: var(--muted); margin-bottom: 24px;
-    }
-    .hero-eyebrow .line {
-      width: 28px; height: 1.5px;
-      background: linear-gradient(90deg, #C8102E, #003478);
-      border-radius: 2px;
-    }
-    .hero h1 {
-      font-size: clamp(30px, 4.5vw, 48px);
-      font-weight: 900; line-height: 1.3;
-      letter-spacing: -1px; margin-bottom: 24px;
-    }
-    .hero h1 .em {
-      background: linear-gradient(135deg, var(--beauty) 0%, #A04A6E 50%, var(--food) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero-sub {
-      font-size: 16px; color: var(--sub);
-      line-height: 1.9; max-width: 540px;
-      margin-bottom: 32px;
-    }
-    .hero-audience { display: flex; flex-direction: column; gap: 14px; }
-    .audience-item { display: flex; gap: 14px; align-items: flex-start; }
-    .audience-item .marker {
-      flex-shrink: 0; width: 36px; height: 36px; border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 14px; font-weight: 800; color: var(--ink);
-      font-family: var(--font-display);
-      background: var(--white); border: 1px solid var(--line);
-    }
-    .audience-item .desc {
-      font-size: 15px; color: var(--sub); line-height: 1.7; padding-top: 6px;
-    }
-    .audience-item .desc strong {
-      display: block; font-weight: 700; color: var(--ink); font-size: 14px; margin-bottom: 2px;
-    }
+    .hero-audience{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .audience-card{border:1px solid var(--line);border-radius:var(--radius-sm);padding:16px 18px;background:var(--white);transition:all .3s}
+    .audience-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.05)}
+    .audience-label{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:1px;margin-bottom:8px}
+    .audience-label .dot{width:6px;height:6px;border-radius:50%}
+    .audience-card.type-a .audience-label .dot{background:var(--beauty)}
+    .audience-card.type-b .audience-label .dot{background:var(--food)}
+    .audience-card .audience-title{font-size:14px;font-weight:800;margin-bottom:4px;color:var(--ink)}
+    .audience-card .audience-desc{font-size:13px;color:var(--sub);line-height:1.6}
 
     /* Info Card */
-    .info-card {
-      background: rgba(255,255,255,.8);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,.85);
-      border-radius: var(--radius); padding: 28px;
-      box-shadow: 0 6px 36px rgba(0,0,0,.05);
-    }
-    .info-card .card-label {
-      font-size: 11px; font-weight: 800; letter-spacing: 2.5px;
-      color: var(--muted); margin-bottom: 20px;
-    }
-    .info-rows { display: flex; flex-direction: column; }
-    .info-row {
-      display: flex; justify-content: space-between; align-items: baseline;
-      padding: 11px 0; border-bottom: 1px solid var(--line-light);
-    }
-    .info-row:last-child { border: none; }
-    .info-row dt { font-size: 13px; font-weight: 600; color: var(--muted); }
-    .info-row dd { font-size: 15px; font-weight: 700; text-align: right; }
-    .info-row dd .free { color: var(--beauty); font-weight: 800; }
-    .info-benefits { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--line); }
-    .info-benefits .bl { font-size: 11px; font-weight: 700; color: var(--muted); letter-spacing: 1.5px; margin-bottom: 10px; }
-    .benefit-items { display: flex; flex-direction: column; gap: 5px; }
-    .benefit-item {
-      font-size: 14px; font-weight: 500; color: var(--sub);
-      padding: 9px 14px; background: rgba(250,248,245,.8); border-radius: var(--radius-sm);
-      display: flex; align-items: center; gap: 8px;
-    }
-    .benefit-item::before { content: ''; width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; background: var(--accent-warm); }
-    .info-cta { margin-top: 18px; display: flex; flex-direction: column; gap: 8px; }
-    .btn-primary {
-      display: block; text-align: center; background: var(--ink); color: #fff;
-      padding: 15px; border-radius: 14px; font-size: 15px; font-weight: 700; transition: all .25s;
-    }
-    .btn-primary:hover { opacity: .88; transform: translateY(-1px); }
-    .btn-outline {
-      display: block; text-align: center; background: rgba(255,255,255,.6); color: var(--ink);
-      padding: 13px; border-radius: 14px; font-size: 14px; font-weight: 600;
-      border: 1.5px solid var(--line); transition: all .2s;
-    }
-    .btn-outline:hover { border-color: var(--ink); }
+    .info-card{background:rgba(255,255,255,.8);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.85);border-radius:var(--radius);padding:28px;box-shadow:0 6px 36px rgba(0,0,0,.05)}
+    .info-card .card-label{font-size:11px;font-weight:800;letter-spacing:2.5px;color:var(--muted);margin-bottom:20px}
+    .info-rows{display:flex;flex-direction:column}
+    .info-row{display:flex;justify-content:space-between;align-items:baseline;padding:11px 0;border-bottom:1px solid var(--line-light)}
+    .info-row:last-child{border:none}
+    .info-row dt{font-size:13px;font-weight:600;color:var(--muted)}
+    .info-row dd{font-size:15px;font-weight:700;text-align:right}
+    .info-row dd .free{color:var(--beauty);font-weight:800}
+    .info-benefits{margin-top:18px;padding-top:18px;border-top:1px solid var(--line)}
+    .info-benefits .bl{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:1.5px;margin-bottom:10px}
+    .benefit-items{display:flex;flex-direction:column;gap:5px}
+    .benefit-item{font-size:14px;font-weight:500;color:var(--sub);padding:9px 14px;background:rgba(250,248,245,.8);border-radius:var(--radius-sm);display:flex;align-items:center;gap:8px}
+    .benefit-item::before{content:'';width:5px;height:5px;border-radius:50%;flex-shrink:0;background:var(--accent-warm)}
+    .info-cta{margin-top:18px;display:flex;flex-direction:column;gap:8px}
+    .btn-primary{display:block;text-align:center;background:var(--ink);color:#fff;padding:15px;border-radius:14px;font-size:15px;font-weight:700;transition:all .25s}
+    .btn-primary:hover{opacity:.88;transform:translateY(-1px)}
+    .btn-outline{display:block;text-align:center;background:rgba(255,255,255,.6);color:var(--ink);padding:13px;border-radius:14px;font-size:14px;font-weight:600;border:1.5px solid var(--line);transition:all .2s}
+    .btn-outline:hover{border-color:var(--ink)}
+    .btn-gcal{display:flex;align-items:center;justify-content:center;gap:6px;text-align:center;background:rgba(255,255,255,.6);color:var(--sub);padding:11px;border-radius:14px;font-size:13px;font-weight:600;border:1.5px solid var(--line);transition:all .2s}
+    .btn-gcal:hover{border-color:#4285f4;color:#4285f4}
+    .btn-gcal svg{width:16px;height:16px}
 
-    /* Divider */
-    .divider { max-width: var(--max); margin: 0 auto; height: 1px; background: var(--line); }
+    .divider{max-width:var(--max);margin:0 auto;height:1px;background:var(--line)}
+    section.sec-wrap{padding:80px 32px}
+    .sec{max-width:var(--max);margin:0 auto}
+    .sec-head{margin-bottom:40px}
+    .sec-label{font-size:11px;font-weight:800;letter-spacing:3px;color:var(--muted);margin-bottom:14px}
+    .sec h2{font-size:clamp(24px,3.2vw,34px);font-weight:800;letter-spacing:-.5px;line-height:1.4;margin-bottom:12px}
+    .sec-desc{font-size:16px;color:var(--sub);line-height:1.85;max-width:620px}
 
-    /* Section common */
-    section.sec-wrap { padding: 80px 32px; }
-    .sec { max-width: var(--max); margin: 0 auto; }
-    .sec-head { margin-bottom: 40px; }
-    .sec-label { font-size: 11px; font-weight: 800; letter-spacing: 3px; color: var(--muted); margin-bottom: 14px; }
-    .sec h2 { font-size: clamp(24px, 3.2vw, 34px); font-weight: 800; letter-spacing: -.5px; line-height: 1.4; margin-bottom: 12px; }
-    .sec-desc { font-size: 16px; color: var(--sub); line-height: 1.85; max-width: 620px; }
+    /* CONTENTS */
+    .contents-section{background:var(--white);position:relative;overflow:hidden}
+    .content-block{margin-bottom:24px}.content-block:last-child{margin-bottom:0}
+    .content-card{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:all .3s;background:var(--white)}
+    .content-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.05)}
+    .content-card .card-accent{height:3px}
+    .beauty-card .card-accent{background:linear-gradient(90deg,var(--beauty),#D88DA0,var(--accent-warm))}
+    .food-card .card-accent{background:linear-gradient(90deg,var(--food),#6DBBA8,var(--accent-warm))}
+    .card-inner{display:grid;grid-template-columns:1fr 360px;min-height:0}
+    .card-text{padding:28px;display:flex;flex-direction:column;justify-content:center}
+    .card-text .card-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+    .card-text .card-head h3{font-size:20px;font-weight:800;letter-spacing:-.3px}
+    .category-badge{font-size:12px;font-weight:700;padding:5px 13px;border-radius:999px;flex-shrink:0}
+    .category-badge.b{background:var(--beauty-soft);color:var(--beauty);border:1px solid var(--beauty-border)}
+    .category-badge.f{background:var(--food-soft);color:var(--food);border:1px solid var(--food-border)}
+    .card-keywords{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+    .kw{font-size:13px;font-weight:600;color:var(--sub);padding:5px 11px;border-radius:8px;background:var(--bg)}
+    .card-list{list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+    .card-list li{font-size:15px;color:var(--sub);line-height:1.7;padding-left:16px;position:relative}
+    .card-list li::before{content:'';position:absolute;left:0;top:11px;width:5px;height:5px;border-radius:50%}
+    .beauty-card .card-list li::before{background:var(--beauty)}
+    .food-card .card-list li::before{background:var(--food)}
+    .kr-trend-strip{display:flex;flex-wrap:wrap;gap:5px}
+    .kr-t{font-size:11px;font-weight:600;padding:3px 9px;border-radius:6px;border:1px solid;opacity:.5;transition:opacity .3s}
+    .kr-t:hover{opacity:.85}
+    .beauty-card .kr-t{background:rgba(196,70,106,.03);border-color:rgba(196,70,106,.12);color:var(--beauty)}
+    .food-card .kr-t{background:rgba(46,122,104,.03);border-color:rgba(46,122,104,.1);color:var(--food)}
 
-    /* ═══ CONTENTS — horizontal card: text left + reels right ═══ */
-    .contents-section { background: var(--white); position: relative; overflow: hidden; }
-    .content-block { margin-bottom: 24px; }
-    .content-block:last-child { margin-bottom: 0; }
-    .content-card {
-      border: 1px solid var(--line); border-radius: var(--radius);
-      overflow: hidden; transition: all .3s; background: var(--white);
-    }
-    .content-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.05); }
-    .content-card .card-accent { height: 3px; }
-    .beauty-card .card-accent { background: linear-gradient(90deg, var(--beauty), #D88DA0, var(--accent-warm)); }
-    .food-card .card-accent { background: linear-gradient(90deg, var(--food), #6DBBA8, var(--accent-warm)); }
+    .reels-panel{border-left:1px solid var(--line-light);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px 20px;position:relative;overflow:hidden}
+    .beauty-card .reels-panel{background:linear-gradient(135deg,#FFF5F7 0%,#FBF0F3 50%,rgba(212,168,83,.03) 100%)}
+    .food-card .reels-panel{background:linear-gradient(135deg,#F4FBF8 0%,#EDF7F3 50%,rgba(212,168,83,.03) 100%)}
+    .reels-panel-label{font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--muted)}
+    .reels-row{display:flex;gap:10px;align-items:flex-end}
+    .reel{width:100px;height:178px;border-radius:14px;overflow:hidden;position:relative;background:#E8E4DF;flex-shrink:0;cursor:default;transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s;box-shadow:0 3px 14px rgba(0,0,0,.1)}
+    .reel:nth-child(2){transform:translateY(-8px)}
+    .reel:hover{transform:translateY(-5px) scale(1.03);box-shadow:0 8px 24px rgba(0,0,0,.16)}
+    .reel:nth-child(2):hover{transform:translateY(-14px) scale(1.03)}
+    .reel img{width:100%;height:100%;object-fit:cover;display:block}
+    .reel::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.02) 0%,transparent 30%,rgba(0,0,0,.5) 100%);pointer-events:none;border-radius:14px}
+    .reel-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.25);backdrop-filter:blur(5px);z-index:2;pointer-events:none}
+    .reel-play::after{content:'';position:absolute;top:50%;left:53%;transform:translate(-50%,-50%);width:0;height:0;border-left:9px solid rgba(255,255,255,.92);border-top:5.5px solid transparent;border-bottom:5.5px solid transparent}
+    .reel-cap{position:absolute;bottom:8px;left:8px;right:8px;z-index:2}
+    .reel-cap .rc-tag{display:inline-block;font-size:8px;font-weight:800;letter-spacing:.4px;padding:2px 6px;border-radius:3px;background:rgba(255,255,255,.2);backdrop-filter:blur(3px);color:rgba(255,255,255,.9);margin-bottom:3px}
+    .reel-cap .rc-title{font-size:10px;font-weight:700;color:#fff;line-height:1.3;text-shadow:0 1px 3px rgba(0,0,0,.3)}
+    .reels-nudge{font-size:11px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:6px}
+    .reels-nudge::before,.reels-nudge::after{content:'';width:10px;height:1px;background:var(--line)}
 
-    .card-inner { display: grid; grid-template-columns: 1fr 360px; min-height: 0; }
-    .card-text { padding: 28px 28px 28px 28px; display: flex; flex-direction: column; justify-content: center; }
-    .card-text .card-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
-    .card-text .card-head h3 { font-size: 20px; font-weight: 800; letter-spacing: -.3px; }
-    .category-badge { font-size: 12px; font-weight: 700; padding: 5px 13px; border-radius: 999px; flex-shrink: 0; }
-    .category-badge.b { background: var(--beauty-soft); color: var(--beauty); border: 1px solid var(--beauty-border); }
-    .category-badge.f { background: var(--food-soft); color: var(--food); border: 1px solid var(--food-border); }
-    .card-keywords { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
-    .kw { font-size: 13px; font-weight: 600; color: var(--sub); padding: 5px 11px; border-radius: 8px; background: var(--bg); }
-    .card-list { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
-    .card-list li { font-size: 15px; color: var(--sub); line-height: 1.7; padding-left: 16px; position: relative; }
-    .card-list li::before { content: ''; position: absolute; left: 0; top: 11px; width: 5px; height: 5px; border-radius: 50%; }
-    .beauty-card .card-list li::before { background: var(--beauty); }
-    .food-card .card-list li::before { background: var(--food); }
-    /* Korean trend micro tags inside text area */
-    .kr-trend-strip { display: flex; flex-wrap: wrap; gap: 5px; }
-    .kr-t {
-      font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 6px; border: 1px solid;
-      opacity: .5; transition: opacity .3s;
-    }
-    .kr-t:hover { opacity: .85; }
-    .beauty-card .kr-t { background: rgba(196,70,106,.03); border-color: rgba(196,70,106,.12); color: var(--beauty); }
-    .food-card .kr-t { background: rgba(46,122,104,.03); border-color: rgba(46,122,104,.1); color: var(--food); }
+    /* SPEAKERS */
+    .speakers-section{background:var(--bg);position:relative;overflow:hidden}
+    .speakers-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .speaker-card{border-radius:var(--radius);overflow:hidden;transition:all .35s;position:relative;display:flex;flex-direction:column}
+    .speaker-card:hover{box-shadow:0 12px 40px rgba(0,0,0,.12);transform:translateY(-3px)}
+    .speaker-photo-wrap{position:relative;width:100%;aspect-ratio:3/4;overflow:hidden}
+    .speaker-photo-wrap img{width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block}
+    .speaker-top-tags{position:absolute;top:16px;left:16px;z-index:3;display:flex;gap:6px;flex-wrap:wrap}
+    .st-tag{font-size:12px;font-weight:700;padding:5px 14px;border-radius:999px;backdrop-filter:blur(8px)}
+    .st-tag.beauty-tag{background:rgba(196,70,106,.85);color:#fff}
+    .st-tag.food-tag{background:rgba(46,122,104,.85);color:#fff}
+    .st-tag.gen-tag{background:rgba(255,255,255,.85);color:var(--ink);border:1px solid rgba(255,255,255,.5)}
+    .speaker-body-below{padding:24px 24px 28px;flex:1}
+    .speaker-card.b .speaker-body-below{background:linear-gradient(180deg,rgba(30,10,18,.92) 0%,rgba(30,10,18,.97) 100%);color:#fff}
+    .speaker-card.f .speaker-body-below{background:linear-gradient(180deg,rgba(10,28,22,.92) 0%,rgba(10,28,22,.97) 100%);color:#fff}
+    .speaker-name{font-size:22px;font-weight:800;margin-bottom:6px;letter-spacing:-.3px}
+    .speaker-role{font-size:12px;opacity:.5;font-weight:500;margin-bottom:10px;letter-spacing:.5px}
+    .speaker-desc{font-size:14px;opacity:.75;line-height:1.85}
+    .speaker-photo-wrap.placeholder{background:linear-gradient(135deg,var(--food-soft) 0%,#F4FBF8 50%,rgba(212,168,83,.06) 100%);display:flex;align-items:center;justify-content:center}
+    .speaker-photo-wrap.placeholder .ph-inner{display:flex;flex-direction:column;align-items:center;gap:8px;opacity:.5}
+    .speaker-photo-wrap.placeholder .ph-inner svg{width:48px;height:48px;color:var(--muted)}
+    .speaker-photo-wrap.placeholder .ph-inner span{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted)}
 
-    /* Reels panel — right side, fills height */
-    .reels-panel {
-      border-left: 1px solid var(--line-light);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 14px;
-      padding: 24px 20px;
-      position: relative; overflow: hidden;
-    }
-    .beauty-card .reels-panel { background: linear-gradient(135deg, #FFF5F7 0%, #FBF0F3 50%, rgba(212,168,83,.03) 100%); }
-    .food-card .reels-panel { background: linear-gradient(135deg, #F4FBF8 0%, #EDF7F3 50%, rgba(212,168,83,.03) 100%); }
-    .reels-panel-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: var(--muted); }
-    .reels-row { display: flex; gap: 10px; align-items: flex-end; }
+    /* PROGRAM */
+    .program-section{background:var(--white);position:relative;overflow:hidden}
+    .timeline{display:flex;flex-direction:column}
+    .tl-item{display:grid;grid-template-columns:140px 1fr;gap:24px;padding:20px 0;border-bottom:1px solid var(--line-light);position:relative}
+    .tl-item:last-child{border:none}
+    .tl-item::before{content:'';position:absolute;left:152px;top:0;bottom:0;width:1px;background:var(--line-light)}
+    .tl-time{font-size:15px;font-weight:700;font-variant-numeric:tabular-nums}
+    .tl-speaker{font-size:13px;color:var(--muted);font-weight:500;margin-top:3px}
+    .tl-content h3{font-size:17px;font-weight:700;margin-bottom:5px;display:flex;align-items:center;gap:10px}
+    .tl-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+    .tl-dot.b{background:var(--beauty)}.tl-dot.f{background:var(--food)}.tl-dot.v{background:var(--ink)}
+    .tl-content p{font-size:15px;color:var(--sub);line-height:1.75}
 
-    .reel {
-      width: 100px; height: 178px; border-radius: 14px;
-      overflow: hidden; position: relative; background: #E8E4DF;
-      flex-shrink: 0; cursor: default;
-      transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s;
-      box-shadow: 0 3px 14px rgba(0,0,0,.1);
-    }
-    .reel:nth-child(2) { transform: translateY(-8px); }
-    .reel:hover { transform: translateY(-5px) scale(1.03); box-shadow: 0 8px 24px rgba(0,0,0,.16); }
-    .reel:nth-child(2):hover { transform: translateY(-14px) scale(1.03); }
-    .reel img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .reel::after {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,.02) 0%, transparent 30%, rgba(0,0,0,.5) 100%);
-      pointer-events: none; border-radius: 14px;
-    }
-    .reel-play {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      width: 30px; height: 30px; border-radius: 50%;
-      background: rgba(255,255,255,.25); backdrop-filter: blur(5px);
-      z-index: 2; pointer-events: none;
-    }
-    .reel-play::after {
-      content: ''; position: absolute; top: 50%; left: 53%; transform: translate(-50%, -50%);
-      width: 0; height: 0;
-      border-left: 9px solid rgba(255,255,255,.92);
-      border-top: 5.5px solid transparent; border-bottom: 5.5px solid transparent;
-    }
-    .reel-cap {
-      position: absolute; bottom: 8px; left: 8px; right: 8px; z-index: 2;
-    }
-    .reel-cap .rc-tag {
-      display: inline-block; font-size: 8px; font-weight: 800; letter-spacing: .4px;
-      padding: 2px 6px; border-radius: 3px;
-      background: rgba(255,255,255,.2); backdrop-filter: blur(3px);
-      color: rgba(255,255,255,.9); margin-bottom: 3px;
-    }
-    .reel-cap .rc-title { font-size: 10px; font-weight: 700; color: #fff; line-height: 1.3; text-shadow: 0 1px 3px rgba(0,0,0,.3); }
+    /* KEYWORDS */
+    .keywords-section{background:var(--bg);position:relative;overflow:hidden}
+    .keywords-flow{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+    .keyword-chip{padding:10px 20px;border-radius:999px;font-size:14px;font-weight:600;border:1.5px solid;transition:all .3s;cursor:default}
+    .keyword-chip:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.06)}
+    .keyword-chip.c-beauty{background:rgba(196,70,106,.06);border-color:rgba(196,70,106,.2);color:var(--beauty)}
+    .keyword-chip.c-food{background:rgba(46,122,104,.05);border-color:rgba(46,122,104,.15);color:var(--food)}
+    .keyword-chip.c-warm{background:rgba(212,168,83,.08);border-color:rgba(212,168,83,.2);color:#8B6914}
+    .keyword-chip.c-neutral{background:rgba(26,26,26,.04);border-color:rgba(26,26,26,.12);color:var(--sub)}
 
-    .reels-nudge {
-      font-size: 11px; font-weight: 600; color: var(--muted);
-      display: flex; align-items: center; gap: 6px;
-    }
-    .reels-nudge::before, .reels-nudge::after { content: ''; width: 10px; height: 1px; background: var(--line); }
+    /* CTA */
+    .cta-section{background:var(--ink);color:#fff;text-align:center;padding:80px 32px;position:relative;overflow:hidden}
+    .cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 50% at 30% 50%,rgba(196,70,106,.1) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 70% 50%,rgba(46,122,104,.08) 0%,transparent 55%)}
+    .cta-section .sec{position:relative;z-index:1}
+    .cta-section h2{color:#fff;font-size:28px;margin-bottom:12px;font-weight:800}
+    .cta-section p{color:rgba(255,255,255,.55);font-size:16px;line-height:1.85;margin-bottom:32px}
+    .cta-btn{display:inline-block;background:#fff;color:var(--ink);padding:17px 52px;border-radius:14px;font-size:16px;font-weight:700;transition:all .25s}
+    .cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
 
-    /* ═══ Speakers — portrait photo cards ═══ */
-    .speakers-section { background: var(--bg); position: relative; overflow: hidden; }
-    .speakers-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .speaker-card {
-      border-radius: var(--radius); overflow: hidden; transition: all .35s;
-      position: relative; min-height: 480px;
-      display: flex; flex-direction: column; justify-content: flex-end;
-    }
-    .speaker-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,.12); transform: translateY(-3px); }
-    .speaker-photo {
-      position: absolute; inset: 0; z-index: 0;
-    }
-    .speaker-photo img {
-      width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block;
-    }
-    /* Gradient overlay bottom */
-    .speaker-photo::after {
-      content: ''; position: absolute; inset: 0;
-      z-index: 1;
-    }
-    .speaker-card.b .speaker-photo::after {
-      background: linear-gradient(
-        180deg,
-        transparent 0%,
-        transparent 25%,
-        rgba(30,10,18,.15) 45%,
-        rgba(30,10,18,.65) 70%,
-        rgba(30,10,18,.92) 100%
-      );
-    }
-    .speaker-card.f .speaker-photo::after {
-      background: linear-gradient(
-        180deg,
-        transparent 0%,
-        transparent 25%,
-        rgba(10,28,22,.15) 45%,
-        rgba(10,28,22,.65) 70%,
-        rgba(10,28,22,.92) 100%
-      );
-    }
-    .speaker-body {
-      position: relative; z-index: 2;
-      padding: 28px 28px 32px;
-      color: #fff;
-    }
-    .speaker-tags { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
-    .s-tag {
-      font-size: 12px; font-weight: 600; padding: 4px 11px; border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.25); background: rgba(255,255,255,.1);
-      backdrop-filter: blur(4px); color: rgba(255,255,255,.9);
-    }
-    .speaker-name { font-size: 22px; font-weight: 800; margin-bottom: 8px; letter-spacing: -.3px; }
-    .speaker-desc { font-size: 14px; color: rgba(255,255,255,.75); line-height: 1.8; }
-    /* placeholder photo state */
-    .speaker-photo.placeholder {
-      background: linear-gradient(135deg, var(--food-soft) 0%, #F4FBF8 50%, rgba(212,168,83,.06) 100%);
-      display: flex; align-items: center; justify-content: center;
-    }
-    .speaker-photo.placeholder .ph-inner {
-      display: flex; flex-direction: column; align-items: center; gap: 8px;
-      opacity: .5;
-    }
-    .speaker-photo.placeholder .ph-inner svg { width: 48px; height: 48px; color: var(--muted); }
-    .speaker-photo.placeholder .ph-inner span { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--muted); }
-    .speaker-card.f .speaker-photo.placeholder::after {
-      background: linear-gradient(
-        180deg,
-        transparent 0%,
-        transparent 25%,
-        rgba(237,247,243,.3) 45%,
-        rgba(46,122,104,.4) 70%,
-        rgba(10,28,22,.92) 100%
-      );
-    }
+    /* MODAL */
+    .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);backdrop-filter:blur(8px);z-index:999;align-items:center;justify-content:center;padding:20px}
+    .modal.active{display:flex}
+    .modal-box{background:var(--white);border-radius:var(--radius);padding:36px;max-width:440px;width:100%;position:relative;animation:modalIn .3s ease}
+    @keyframes modalIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    .modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:8px;background:var(--bg);border:none;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:.2s}
+    .modal-close:hover{background:var(--line);color:var(--ink)}
+    .modal-box h3{font-size:20px;font-weight:800;margin-bottom:6px}
+    .modal-sub{font-size:14px;color:var(--muted);margin-bottom:20px}
+    .modal-box form{display:flex;flex-direction:column;gap:10px}
+    .modal-box input,.modal-box select{padding:15px 16px;border:1.5px solid var(--line);border-radius:var(--radius-sm);font-size:15px;font-family:inherit;transition:border-color .2s;background:var(--white);color:var(--ink);appearance:none;-webkit-appearance:none}
+    .modal-box select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239A9A9A' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:40px;cursor:pointer}
+    .modal-box input:focus,.modal-box select:focus{outline:none;border-color:var(--beauty)}
+    .modal-box input::placeholder{color:var(--muted)}
+    .modal-box select:invalid{color:var(--muted)}
+    .modal-submit{padding:15px;background:var(--ink);color:#fff;border:none;border-radius:var(--radius-sm);font-size:15px;font-weight:700;cursor:pointer;transition:opacity .2s;font-family:inherit}
+    .modal-submit:hover{opacity:.85}
 
-    /* ═══ Program ═══ */
-    .program-section { background: var(--white); position: relative; overflow: hidden; }
-    .timeline { display: flex; flex-direction: column; }
-    .tl-item {
-      display: grid; grid-template-columns: 140px 1fr; gap: 24px;
-      padding: 20px 0; border-bottom: 1px solid var(--line-light); position: relative;
-    }
-    .tl-item:last-child { border: none; }
-    .tl-item::before { content: ''; position: absolute; left: 152px; top: 0; bottom: 0; width: 1px; background: var(--line-light); }
-    .tl-time { font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums; }
-    .tl-speaker { font-size: 13px; color: var(--muted); font-weight: 500; margin-top: 3px; }
-    .tl-content h3 { font-size: 17px; font-weight: 700; margin-bottom: 5px; display: flex; align-items: center; gap: 10px; }
-    .tl-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-    .tl-dot.b { background: var(--beauty); }
-    .tl-dot.f { background: var(--food); }
-    .tl-dot.v { background: var(--ink); }
-    .tl-content p { font-size: 15px; color: var(--sub); line-height: 1.75; }
+    footer{padding:36px 32px;border-top:1px solid var(--line)}
+    .footer-inner{max-width:var(--max);margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;font-size:13px;color:var(--muted)}
+    .footer-inner .co{font-weight:700;color:var(--ink);margin-bottom:4px}
+    .footer-right{text-align:right}
 
-    /* ═══ Keywords ═══ */
-    .keywords-section { background: var(--bg); position: relative; overflow: hidden; }
-    .keywords-flow { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
-    .keyword-chip {
-      padding: 10px 20px; border-radius: 999px; font-size: 14px; font-weight: 600;
-      border: 1.5px solid; transition: all .3s; cursor: default;
-    }
-    .keyword-chip:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,.06); }
-    .keyword-chip.c-beauty { background: rgba(196,70,106,.06); border-color: rgba(196,70,106,.2); color: var(--beauty); }
-    .keyword-chip.c-food { background: rgba(46,122,104,.05); border-color: rgba(46,122,104,.15); color: var(--food); }
-    .keyword-chip.c-warm { background: rgba(212,168,83,.08); border-color: rgba(212,168,83,.2); color: #8B6914; }
-    .keyword-chip.c-neutral { background: rgba(26,26,26,.04); border-color: rgba(26,26,26,.12); color: var(--sub); }
+    @media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:32px}.speakers-grid{grid-template-columns:1fr}.card-inner{grid-template-columns:1fr}.reels-panel{border-left:none;border-top:1px solid var(--line-light);padding:20px}.tl-item{grid-template-columns:1fr;gap:4px}.tl-item::before{display:none}section.sec-wrap{padding:64px 20px}.hero{padding-left:20px;padding-right:20px}.hero-audience{grid-template-columns:1fr}}
+    @media(max-width:540px){.footer-inner{flex-direction:column;gap:14px}.footer-right{text-align:left}.keyword-chip{font-size:13px;padding:8px 15px}.reel{width:88px;height:156px;border-radius:12px}.hero-stats{grid-template-columns:1fr}.hero-stat{border-right:none;border-bottom:1px solid var(--line-light)}.hero-stat:last-child{border-bottom:none}}
 
-    /* ═══ CTA ═══ */
-    .cta-section {
-      background: var(--ink); color: #fff; text-align: center; padding: 80px 32px;
-      position: relative; overflow: hidden;
-    }
-    .cta-section::before {
-      content: ''; position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 50% 50% at 30% 50%, rgba(196,70,106,.1) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 40% at 70% 50%, rgba(46,122,104,.08) 0%, transparent 55%);
-    }
-    .cta-section .sec { position: relative; z-index: 1; }
-    .cta-section h2 { color: #fff; font-size: 28px; margin-bottom: 12px; font-weight: 800; }
-    .cta-section p { color: rgba(255,255,255,.55); font-size: 16px; line-height: 1.85; margin-bottom: 32px; }
-    .cta-btn {
-      display: inline-block; background: #fff; color: var(--ink);
-      padding: 17px 52px; border-radius: 14px; font-size: 16px; font-weight: 700; transition: all .25s;
-    }
-    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.3); }
-
-    /* ═══ Modal ═══ */
-    .modal {
-      display: none; position: fixed; inset: 0;
-      background: rgba(0,0,0,.45); backdrop-filter: blur(8px);
-      z-index: 999; align-items: center; justify-content: center; padding: 20px;
-    }
-    .modal.active { display: flex; }
-    .modal-box {
-      background: var(--white); border-radius: var(--radius);
-      padding: 36px; max-width: 440px; width: 100%; position: relative;
-      animation: modalIn .3s ease;
-    }
-    @keyframes modalIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-    .modal-close {
-      position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; border-radius: 8px;
-      background: var(--bg); border: none; font-size: 18px; cursor: pointer;
-      display: flex; align-items: center; justify-content: center; color: var(--muted); transition: .2s;
-    }
-    .modal-close:hover { background: var(--line); color: var(--ink); }
-    .modal-box h3 { font-size: 20px; font-weight: 800; margin-bottom: 6px; }
-    .modal-sub { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
-    .modal-box form { display: flex; flex-direction: column; gap: 10px; }
-    .modal-box input, .modal-box select {
-      padding: 15px 16px; border: 1.5px solid var(--line); border-radius: var(--radius-sm);
-      font-size: 15px; font-family: inherit; transition: border-color .2s;
-      background: var(--white); color: var(--ink); appearance: none; -webkit-appearance: none;
-    }
-    .modal-box select {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239A9A9A' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-      background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; cursor: pointer;
-    }
-    .modal-box input:focus, .modal-box select:focus { outline: none; border-color: var(--beauty); }
-    .modal-box input::placeholder { color: var(--muted); }
-    .modal-box select:invalid { color: var(--muted); }
-    .modal-submit {
-      padding: 15px; background: var(--ink); color: #fff; border: none; border-radius: var(--radius-sm);
-      font-size: 15px; font-weight: 700; cursor: pointer; transition: opacity .2s; font-family: inherit;
-    }
-    .modal-submit:hover { opacity: .85; }
-
-    /* ═══ Footer ═══ */
-    footer { padding: 36px 32px; border-top: 1px solid var(--line); }
-    .footer-inner {
-      max-width: var(--max); margin: 0 auto;
-      display: flex; justify-content: space-between; align-items: flex-start;
-      font-size: 13px; color: var(--muted);
-    }
-    .footer-inner .co { font-weight: 700; color: var(--ink); margin-bottom: 4px; }
-    .footer-right { text-align: right; }
-
-    /* ═══ Responsive ═══ */
-    @media (max-width: 860px) {
-      .hero-grid { grid-template-columns: 1fr; gap: 32px; }
-      .speakers-grid { grid-template-columns: 1fr; }
-      .speaker-card { min-height: 420px; }
-      .card-inner { grid-template-columns: 1fr; }
-      .reels-panel { border-left: none; border-top: 1px solid var(--line-light); padding: 20px; }
-      .reels-row { overflow-x: auto; padding-bottom: 2px; }
-      .tl-item { grid-template-columns: 1fr; gap: 4px; }
-      .tl-item::before { display: none; }
-      section.sec-wrap { padding: 64px 20px; }
-      .hero { padding-left: 20px; padding-right: 20px; }
-    }
-    @media (max-width: 540px) {
-      .footer-inner { flex-direction: column; gap: 14px; }
-      .footer-right { text-align: left; }
-      .keywords-flow { gap: 7px; }
-      .keyword-chip { font-size: 13px; padding: 8px 15px; }
-      .reel { width: 88px; height: 156px; border-radius: 12px; }
-      .reel-play { width: 26px; height: 26px; }
-      .speaker-card { min-height: 380px; }
-      .hangul-wm { font-size: 120px; }
-    }
-
-    /* ═══ Fade-in ═══ */
-    .fade-up { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+    .fade-up.visible{opacity:1;transform:translateY(0)}
   </style>
 </head>
-
 <body>
 
-<!-- ═══════════════ HERO ═══════════════ -->
+<svg style="position:absolute;width:0;height:0;" aria-hidden="true"><defs>
+  <symbol id="ico-taegeuk" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="none" stroke="currentColor" stroke-width=".8" opacity=".3"/><path d="M50 2 A48 48 0 0 1 50 98 A24 24 0 0 1 50 50 A24 24 0 0 0 50 2Z" fill="currentColor" opacity=".12"/><path d="M50 98 A48 48 0 0 1 50 2 A24 24 0 0 1 50 50 A24 24 0 0 0 50 98Z" fill="currentColor" opacity=".06"/><circle cx="50" cy="26" r="7" fill="currentColor" opacity=".1"/><circle cx="50" cy="74" r="7" fill="currentColor" opacity=".05"/></symbol>
+  <symbol id="ico-mugunghwa" viewBox="0 0 100 100"><g opacity=".15"><ellipse cx="50" cy="22" rx="14" ry="22" fill="currentColor" opacity=".7"/><ellipse cx="50" cy="22" rx="14" ry="22" fill="currentColor" opacity=".6" transform="rotate(72 50 50)"/><ellipse cx="50" cy="22" rx="14" ry="22" fill="currentColor" opacity=".5" transform="rotate(144 50 50)"/><ellipse cx="50" cy="22" rx="14" ry="22" fill="currentColor" opacity=".6" transform="rotate(216 50 50)"/><ellipse cx="50" cy="22" rx="14" ry="22" fill="currentColor" opacity=".7" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="8" fill="currentColor" opacity=".9"/></g></symbol>
+  <symbol id="ico-trigram" viewBox="0 0 60 50"><g opacity=".12"><rect x="0" y="0" width="60" height="6" rx="1" fill="currentColor"/><rect x="0" y="16" width="26" height="6" rx="1" fill="currentColor"/><rect x="34" y="16" width="26" height="6" rx="1" fill="currentColor"/><rect x="0" y="32" width="60" height="6" rx="1" fill="currentColor"/></g></symbol>
+  <symbol id="ico-cloud" viewBox="0 0 120 60"><g opacity=".08"><path d="M20 45 Q5 45 8 35 Q2 28 12 24 Q10 12 25 14 Q28 4 40 10 Q48 2 58 8 Q65 3 72 10 Q85 5 88 18 Q100 15 98 28 Q108 32 100 40 Q105 50 90 48 Q85 55 72 48 Q60 56 48 48 Q35 54 25 48Z" fill="currentColor"/></g></symbol>
+  <symbol id="ico-changsal" viewBox="0 0 80 80"><g opacity=".08" fill="none" stroke="currentColor" stroke-width="1"><rect x="4" y="4" width="72" height="72" rx="2"/><line x1="4" y1="28" x2="76" y2="28"/><line x1="4" y1="52" x2="76" y2="52"/><line x1="28" y1="4" x2="28" y2="76"/><line x1="52" y1="4" x2="52" y2="76"/><circle cx="16" cy="16" r="4"/><circle cx="40" cy="40" r="4"/><circle cx="64" cy="64" r="4"/></g></symbol>
+  <symbol id="ico-lotus" viewBox="0 0 80 80"><g opacity=".1"><path d="M40 10 Q55 30 40 50 Q25 30 40 10Z" fill="currentColor" opacity=".6"/><path d="M40 10 Q55 30 40 50 Q25 30 40 10Z" fill="currentColor" opacity=".5" transform="rotate(60 40 40)"/><path d="M40 10 Q55 30 40 50 Q25 30 40 10Z" fill="currentColor" opacity=".4" transform="rotate(120 40 40)"/><path d="M40 10 Q55 30 40 50 Q25 30 40 10Z" fill="currentColor" opacity=".5" transform="rotate(180 40 40)"/><path d="M40 10 Q55 30 40 50 Q25 30 40 10Z" fill="currentColor" opacity=".6" transform="rotate(240 40 40)"/><path d="M40 10 Q55 30 40 50 Q25 30 40 10Z" fill="currentColor" opacity=".5" transform="rotate(300 40 40)"/></g></symbol>
+</defs></svg>
+
+<!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
+  <svg class="kr-deco" style="width:140px;height:140px;top:-10px;right:80px;opacity:.5;transform:rotate(-15deg)"><use href="#ico-taegeuk" style="color:#C8102E"/></svg>
+  <svg class="kr-deco" style="width:70px;height:70px;bottom:120px;left:20px;opacity:.4;transform:rotate(20deg)"><use href="#ico-mugunghwa" style="color:#C8102E"/></svg>
+  <svg class="kr-deco" style="width:50px;height:42px;top:35%;right:38%;opacity:.35;transform:rotate(-5deg)"><use href="#ico-trigram" style="color:#003478"/></svg>
+  <svg class="kr-deco" style="width:90px;height:45px;bottom:60px;right:44%;opacity:.3"><use href="#ico-cloud" style="color:#003478"/></svg>
 
-  <!-- Scattered real flag images (subtle, rotated, faded) -->
-  <div class="flag-bg" style="width:200px; height:133px; top:-20px; right:60px; opacity:.04; transform:rotate(-12deg);"></div>
-  <div class="flag-bg" style="width:120px; height:80px; bottom:80px; left:-20px; opacity:.035; transform:rotate(8deg);"></div>
+  <div class="hero-inner"><div class="hero-grid">
+    <div>
+      <div class="hero-eyebrow"><span class="line"></span>SEMINAR 2026</div>
+      <h1>韓国トレンドセミナー<br><span class="em">Beauty・Inner Care</span><br><span class="em">食品・菓子</span></h1>
 
-  <!-- Floating Korean trend words -->
-  <span class="kr-float" style="top:15%; left:4%; color:#C8102E; animation-delay:0s;">스킨텔렉추얼</span>
-  <span class="kr-float" style="top:42%; right:6%; color:#003478; animation-delay:3.5s;">고기능 미니멀리즘</span>
-  <span class="kr-float" style="bottom:22%; left:12%; color:var(--beauty); animation-delay:7s;">글라스 스킨</span>
-
-  <div class="hero-inner">
-    <div class="hero-grid">
-      <div>
-        <div class="hero-eyebrow"><span class="line"></span>SEMINAR 2026</div>
-        <h1>韓国トレンドセミナー<br><span class="em">Beauty・Inner Care</span><br><span class="em">食品・菓子</span></h1>
-        <p class="hero-sub">
-          Z世代起点で広がる「いまの基準」を、2つの業界から読み解きます。<br>
-          "最新"の紹介ではなく、自社の施策にすぐ落とし込める形で要点を整理します。
-        </p>
-        <div class="hero-audience">
-          <div class="audience-item">
-            <div class="marker">A</div>
-            <div class="desc"><strong>マーケ・ブランド向け</strong>韓国で「選ばれる理由」を、表現・根拠の作り方まで整理</div>
-          </div>
-          <div class="audience-item">
-            <div class="marker">B</div>
-            <div class="desc"><strong>営業・流通向け</strong>量販店・ドラッグストア・空港で「指名買い」が起きる条件を整理</div>
-          </div>
-        </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="num c-red">1,000万人超</div><div class="lbl">2025年 訪日韓国人<br>（国別1位・過去最高）</div></div>
+        <div class="hero-stat"><div class="num c-blue">約1兆円</div><div class="lbl">年間旅行消費額<br>（国別3位）</div></div>
+        <div class="hero-stat"><div class="num c-warm">83.5%</div><div class="lbl">菓子類 購入率<br>（全国籍中トップ水準）</div></div>
       </div>
-      <div class="info-card">
-        <div class="card-label">EVENT DETAILS</div>
-        <dl class="info-rows">
-          <div class="info-row"><dt>日時</dt><dd>2026年3月15日（金）13:00–15:30</dd></div>
-          <div class="info-row"><dt>会場</dt><dd>東京本社（上野）/ オンライン同時</dd></div>
-          <div class="info-row"><dt>定員</dt><dd>20社限定</dd></div>
-          <div class="info-row"><dt>参加費</dt><dd><span class="free">無料</span></dd></div>
-        </dl>
-        <div class="info-benefits">
-          <div class="bl">参加特典</div>
-          <div class="benefit-items">
-            <div class="benefit-item">業界別 2026 TOP10 トレンド要約（1枚）</div>
-            <div class="benefit-item">表現NGチェック（業界別10項目）</div>
-          </div>
+
+      <p class="hero-lead">
+        訪日外国人の4人に1人が韓国人。<strong>飲食費比率27%は全国籍中で最高水準</strong>、菓子購入率も突出しています。一方、1人あたり消費額は約11万円と短期滞在ゆえに低め — だからこそ<strong>「何を・なぜ選ぶか」</strong>の理解が売場づくりの鍵になります。<br>
+        本セミナーでは、韓国Z世代が自国で選んでいるビューティ・食品トレンドを分析し、<strong>訪日韓国人プロモーションへのヒント</strong>をセットで整理します。
+      </p>
+
+      <div class="hero-audience">
+        <div class="audience-card type-a">
+          <div class="audience-label"><span class="dot"></span>SESSION A — Beauty</div>
+          <div class="audience-title">マーケ・ブランド担当者向け</div>
+          <div class="audience-desc">韓国で「選ばれる理由」を、表現・根拠の作り方まで整理。ドラッグストア・空港免税の棚で指名買いされる条件を解説。</div>
         </div>
-        <div class="info-cta">
-          <a href="#" class="btn-primary" onclick="openModal(event)">今すぐ申し込む</a>
-          <a href="#program" class="btn-outline">プログラムを見る</a>
+        <div class="audience-card type-b">
+          <div class="audience-label"><span class="dot"></span>SESSION B — 食品・菓子</div>
+          <div class="audience-title">商品企画・営業・流通担当者向け</div>
+          <div class="audience-desc">「味と食感」「健康と季節性」の2軸でトレンドの変遷と不変条件を分析。コンビニ・量販店で「次に選ばれる」要素を整理。</div>
         </div>
       </div>
     </div>
-  </div>
+
+    <div class="info-card">
+      <div class="card-label">EVENT DETAILS</div>
+      <dl class="info-rows">
+        <div class="info-row"><dt>日時</dt><dd>2026年3月25日（水）15:00〜</dd></div>
+        <div class="info-row"><dt>会場</dt><dd>東京本社（上野）<br><span style="font-size:12px;font-weight:500;color:var(--muted)">オフライン開催</span></dd></div>
+        <div class="info-row"><dt>定員</dt><dd>20社限定（先着順）</dd></div>
+        <div class="info-row"><dt>参加費</dt><dd><span class="free">無料</span></dd></div>
+      </dl>
+      <div class="info-benefits">
+        <div class="bl">参加特典</div>
+        <div class="benefit-items">
+          <div class="benefit-item">業界別 2026 TOP10 トレンド要約（1枚）</div>
+          <div class="benefit-item">表現NGチェック（業界別10項目）</div>
+        </div>
+      </div>
+      <div class="info-cta">
+        <a href="#" class="btn-primary" onclick="openModal(event)">今すぐ申し込む（先着20社）</a>
+        <a href="#program" class="btn-outline">プログラムを見る</a>
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=2026+%E9%9F%93%E5%9B%BD%E3%83%88%E3%83%AC%E3%83%B3%E3%83%89%E3%82%BB%E3%83%9F%E3%83%8A%E3%83%BC&dates=20260325T060000Z/20260325T083000Z&details=%E9%9F%93%E5%9B%BD%E3%83%88%E3%83%AC%E3%83%B3%E3%83%89%E3%82%BB%E3%83%9F%E3%83%8A%E3%83%BC+Beauty%E3%83%BB%E9%A3%9F%E5%93%81%0A%E4%B8%BB%E5%82%AC%EF%BC%9A%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%E3%82%B0%E3%83%AD%E3%83%BC%E3%83%90%E3%83%AB%E3%83%BB%E3%83%87%E3%82%A4%E3%83%AA%E3%83%BC&location=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%8F%B0%E6%9D%B1%E5%8C%BA%E6%9D%B1%E4%B8%8A%E9%87%8E4-8-1+TIX+Tower+13%E9%9A%8E" class="btn-gcal" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Google カレンダーに追加
+        </a>
+      </div>
+    </div>
+  </div></div>
 </section>
 
 <div class="divider"></div>
 
-<!-- ═══════════════ CONTENTS ═══════════════ -->
+<!-- CONTENTS -->
 <section class="sec-wrap contents-section">
-  <div class="hangul-wm" style="top:-40px; right:-50px; transform:rotate(-6deg);">뷰티</div>
-  <div class="hangul-wm" style="bottom:-30px; left:-70px; transform:rotate(4deg);">맛</div>
+  <svg class="kr-deco" style="width:100px;height:100px;top:30px;left:-15px;opacity:.4;transform:rotate(12deg)"><use href="#ico-mugunghwa" style="color:#C4466A"/></svg>
+  <svg class="kr-deco" style="width:65px;height:65px;top:20%;right:30px;opacity:.35;transform:rotate(-8deg)"><use href="#ico-changsal" style="color:#2E7A68"/></svg>
+  <svg class="kr-deco" style="width:80px;height:80px;bottom:80px;right:-10px;opacity:.3;transform:rotate(25deg)"><use href="#ico-lotus" style="color:#D4A853"/></svg>
+  <svg class="kr-deco" style="width:55px;height:55px;bottom:40%;left:25px;opacity:.3;transform:rotate(-18deg)"><use href="#ico-taegeuk" style="color:#003478"/></svg>
 
-  <!-- Scattered flags -->
-  <div class="flag-bg" style="width:160px; height:107px; top:40px; left:-30px; opacity:.03; transform:rotate(15deg);"></div>
-  <div class="flag-bg" style="width:100px; height:67px; bottom:100px; right:20px; opacity:.025; transform:rotate(-20deg);"></div>
-
-  <span class="kr-float" style="top:8%; right:10%; color:var(--beauty); animation-delay:2s;">더마코스메</span>
-  <span class="kr-float" style="bottom:12%; left:6%; color:var(--food); animation-delay:5.5s;">감각적 식감</span>
-
-  <div class="sec" style="position:relative; z-index:1;">
+  <div class="sec" style="position:relative;z-index:1">
     <div class="sec-head fade-up">
       <div class="sec-label">SEMINAR CONTENTS</div>
       <h2>韓国トレンドの背景と、日本での実践ヒントをセットでお届けします</h2>
       <p class="sec-desc">「何が流行っているか」だけでなく「なぜ流行るのか」まで掘り下げ、日本のビジネスでどう活かせるかをセットで整理します。</p>
     </div>
 
-    <!-- Beauty Card — horizontal -->
-    <div class="content-block fade-up">
-      <div class="content-card beauty-card">
-        <div class="card-accent"></div>
-        <div class="card-inner">
-          <div class="card-text">
-            <div class="card-head">
-              <h3>Beauty・Inner Care</h3>
-              <span class="category-badge b">TOP10 + 活用</span>
-            </div>
-            <div class="card-keywords">
-              <span class="kw">選ばれる基準の更新</span>
-              <span class="kw">根拠の見せ方</span>
-              <span class="kw">比較・検証の壁</span>
-            </div>
-            <ul class="card-list">
-              <li>2026トレンドTOP10（背景・特徴・注目ポイント）</li>
-              <li>韓国で今ヒットしている理由と消費者心理</li>
-              <li>表現NG（10）と代替メッセージの型</li>
-            </ul>
-            <div class="kr-trend-strip">
-              <span class="kr-t">스킨텔렉추얼</span>
-              <span class="kr-t">하이퍼 감각 케어</span>
-              <span class="kr-t">클라우드 스킨</span>
-              <span class="kr-t">세럼 파운데이션</span>
-              <span class="kr-t">HOCI 진정</span>
-            </div>
-          </div>
-          <div class="reels-panel">
-            <div class="reels-panel-label">INSTAGRAM REELS</div>
-            <div class="reels-row">
-              <div class="reel">
-                <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&q=80" alt="">
-                <div class="reel-play"></div>
-                <div class="reel-cap"><span class="rc-tag">스킨케어</span><div class="rc-title">スキンケアルーティン</div></div>
-              </div>
-              <div class="reel">
-                <img src="https://images.unsplash.com/photo-1612817288484-6f916006741a?w=400&q=80" alt="">
-                <div class="reel-play"></div>
-                <div class="reel-cap"><span class="rc-tag">이너뷰티</span><div class="rc-title">インナービューティ</div></div>
-              </div>
-              <div class="reel">
-                <img src="https://images.unsplash.com/photo-1570197571499-166b36435e9f?w=400&q=80" alt="">
-                <div class="reel-play"></div>
-                <div class="reel-cap"><span class="rc-tag">비교검증</span><div class="rc-title">ダーマコスメ比較</div></div>
-              </div>
-            </div>
-            <div class="reels-nudge">セミナーで詳しく</div>
-          </div>
-        </div>
+    <div class="content-block fade-up"><div class="content-card beauty-card"><div class="card-accent"></div><div class="card-inner">
+      <div class="card-text">
+        <div class="card-head"><h3>Beauty・Inner Care</h3><span class="category-badge b">TOP10 + 活用</span></div>
+        <div class="card-keywords"><span class="kw">選ばれる基準の更新</span><span class="kw">根拠の見せ方</span><span class="kw">比較・検証の壁</span></div>
+        <ul class="card-list"><li>2026トレンドTOP10（背景・特徴・注目ポイント）</li><li>韓国で今ヒットしている理由と消費者心理</li><li>表現NG（10）と代替メッセージの型</li></ul>
+        <div class="kr-trend-strip"><span class="kr-t">스킨텔렉추얼</span><span class="kr-t">하이퍼 감각 케어</span><span class="kr-t">클라우드 스킨</span><span class="kr-t">세럼 파운데이션</span><span class="kr-t">HOCI 진정</span></div>
       </div>
-    </div>
-
-    <!-- Food Card — horizontal -->
-    <div class="content-block fade-up">
-      <div class="content-card food-card">
-        <div class="card-accent"></div>
-        <div class="card-inner">
-          <div class="card-text">
-            <div class="card-head">
-              <h3>食品・菓子</h3>
-              <span class="category-badge f">変遷 × 定番</span>
-            </div>
-            <div class="card-keywords">
-              <span class="kw">味と食感（オト）</span>
-              <span class="kw">健康と季節性（シュン）</span>
-            </div>
-            <ul class="card-list">
-              <li>トレンド変遷（数年の流れ）と不変条件</li>
-              <li>2つの軸から導く「次に選ばれる」要素の見立て</li>
-              <li>日本で買われる食品・菓子の共通点</li>
-            </ul>
-            <div class="kr-trend-strip">
-              <span class="kr-t">감각적 식감</span>
-              <span class="kr-t">혼웰식</span>
-              <span class="kr-t">슬로우 번 매운맛</span>
-              <span class="kr-t">한정판 지명구매</span>
-              <span class="kr-t">감칠맛 우마미</span>
-            </div>
-          </div>
-          <div class="reels-panel">
-            <div class="reels-panel-label">INSTAGRAM REELS</div>
-            <div class="reels-row">
-              <div class="reel">
-                <img src="https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?w=400&q=80" alt="">
-                <div class="reel-play"></div>
-                <div class="reel-cap"><span class="rc-tag">편의점 먹방</span><div class="rc-title">コンビニ食べ方アレンジ</div></div>
-              </div>
-              <div class="reel">
-                <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=400&q=80" alt="">
-                <div class="reel-play"></div>
-                <div class="reel-cap"><span class="rc-tag">과자 해킹</span><div class="rc-title">食感追求・お菓子ハック</div></div>
-              </div>
-              <div class="reel">
-                <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&q=80" alt="">
-                <div class="reel-play"></div>
-                <div class="reel-cap"><span class="rc-tag">쫀득 쿠키</span><div class="rc-title">もっちりクッキー</div></div>
-              </div>
-            </div>
-            <div class="reels-nudge">セミナーで詳しく</div>
-          </div>
+      <div class="reels-panel">
+        <div class="reels-panel-label">INSTAGRAM REELS</div>
+        <div class="reels-row">
+          <div class="reel"><img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&q=80" alt=""><div class="reel-play"></div><div class="reel-cap"><span class="rc-tag">스킨케어</span><div class="rc-title">スキンケアルーティン</div></div></div>
+          <div class="reel"><img src="https://images.unsplash.com/photo-1612817288484-6f916006741a?w=400&q=80" alt=""><div class="reel-play"></div><div class="reel-cap"><span class="rc-tag">이너뷰티</span><div class="rc-title">インナービューティ</div></div></div>
+          <div class="reel"><img src="https://images.unsplash.com/photo-1570197571499-166b36435e9f?w=400&q=80" alt=""><div class="reel-play"></div><div class="reel-cap"><span class="rc-tag">비교검증</span><div class="rc-title">ダーマコスメ比較</div></div></div>
         </div>
+        <div class="reels-nudge">セミナーで詳しく</div>
       </div>
-    </div>
+    </div></div></div>
 
+    <div class="content-block fade-up"><div class="content-card food-card"><div class="card-accent"></div><div class="card-inner">
+      <div class="card-text">
+        <div class="card-head"><h3>食品・菓子</h3><span class="category-badge f">変遷 × 定番</span></div>
+        <div class="card-keywords"><span class="kw">味と食感（オト）</span><span class="kw">健康と季節性（シュン）</span></div>
+        <ul class="card-list"><li>トレンド変遷（数年の流れ）と不変条件</li><li>2つの軸から導く「次に選ばれる」要素の見立て</li><li>日本で買われる食品・菓子の共通点</li></ul>
+        <div class="kr-trend-strip"><span class="kr-t">감각적 식감</span><span class="kr-t">혼웰식</span><span class="kr-t">슬로우 번 매운맛</span><span class="kr-t">한정판 지명구매</span><span class="kr-t">감칠맛 우마미</span></div>
+      </div>
+      <div class="reels-panel">
+        <div class="reels-panel-label">INSTAGRAM REELS</div>
+        <div class="reels-row">
+          <div class="reel"><img src="https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?w=400&q=80" alt=""><div class="reel-play"></div><div class="reel-cap"><span class="rc-tag">편의점 먹방</span><div class="rc-title">コンビニ食べ方アレンジ</div></div></div>
+          <div class="reel"><img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=400&q=80" alt=""><div class="reel-play"></div><div class="reel-cap"><span class="rc-tag">과자 해킹</span><div class="rc-title">食感追求・お菓子ハック</div></div></div>
+          <div class="reel"><img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&q=80" alt=""><div class="reel-play"></div><div class="reel-cap"><span class="rc-tag">쫀득 쿠키</span><div class="rc-title">もっちりクッキー</div></div></div>
+        </div>
+        <div class="reels-nudge">セミナーで詳しく</div>
+      </div>
+    </div></div></div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- ═══════════════ SPEAKERS ═══════════════ -->
+<!-- SPEAKERS -->
 <section class="sec-wrap speakers-section">
-  <div class="flag-bg" style="width:140px; height:93px; top:30px; right:-20px; opacity:.03; transform:rotate(-10deg);"></div>
-  <span class="kr-float" style="top:20%; left:3%; color:var(--muted); animation-delay:4s;">Z세대 마케터</span>
+  <svg class="kr-deco" style="width:110px;height:110px;top:20px;right:-15px;opacity:.35;transform:rotate(-10deg)"><use href="#ico-taegeuk" style="color:#C8102E"/></svg>
+  <svg class="kr-deco" style="width:60px;height:60px;bottom:60px;left:30px;opacity:.3;transform:rotate(15deg)"><use href="#ico-mugunghwa" style="color:#D4A853"/></svg>
 
-  <div class="sec" style="position:relative; z-index:1;">
+  <div class="sec" style="position:relative;z-index:1">
     <div class="sec-head fade-up">
       <div class="sec-label">SPEAKERS</div>
       <h2>登壇者（韓国出身 Gen Z マーケター）</h2>
       <p class="sec-desc">消費者トークではなく、韓国向け施策を日常業務として運用している立場でお話しします。</p>
     </div>
     <div class="speakers-grid fade-up">
-
-      <!-- ヒウォン — portrait photo card -->
       <div class="speaker-card b">
-        <div class="speaker-photo">
+        <div class="speaker-photo-wrap">
           <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2024/03/HEEWON_CC05_mono-scaled.jpg" alt="金希願">
+          <div class="speaker-top-tags"><span class="st-tag beauty-tag">Beauty・Inner Care</span><span class="st-tag gen-tag">Gen Z</span></div>
         </div>
-        <div class="speaker-body">
-          <div class="speaker-tags"><span class="s-tag">Beauty・Inner Care</span><span class="s-tag">Gen Z</span></div>
+        <div class="speaker-body-below">
           <div class="speaker-name">金希願（キム・ヒウォン）</div>
-          <p class="speaker-desc">2026の基準がどこで更新されているかを、商品・表現・比較行動の3点で整理します。</p>
+          <div class="speaker-role">GLOBAL DAILY Inc. / Korean Marketing Team</div>
+          <p class="speaker-desc">2026の基準がどこで更新されているかを、商品・表現・比較行動の3点で整理します。韓国Z世代のリアルな消費行動に基づき、日本市場で再現性のある施策に落とし込みます。</p>
         </div>
       </div>
-
-      <!-- ジョンイム — placeholder (写真URL未定) -->
       <div class="speaker-card f">
-        <div class="speaker-photo placeholder">
-          <div class="ph-inner">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            <span>PHOTO</span>
-          </div>
+        <div class="speaker-photo-wrap placeholder">
+          <div class="ph-inner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>PHOTO</span></div>
+          <div class="speaker-top-tags"><span class="st-tag food-tag">食品・菓子</span><span class="st-tag gen-tag">Gen Z</span></div>
         </div>
-        <div class="speaker-body">
-          <div class="speaker-tags"><span class="s-tag">食品・菓子</span><span class="s-tag">Gen Z</span></div>
+        <div class="speaker-body-below">
           <div class="speaker-name">元正壬（ヒョン・ジョンイム）</div>
-          <p class="speaker-desc">変遷と定番条件を並べ、次に伸びる要素の見立てまで落とし込みます。</p>
+          <div class="speaker-role">GLOBAL DAILY Inc. / Korean Marketing Team</div>
+          <p class="speaker-desc">変遷と定番条件を並べ、次に伸びる要素の見立てまで落とし込みます。韓国の食トレンドがSNSを通じてどう拡散し、日本の店頭で「指名買い」につながるかを整理します。</p>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- ═══════════════ PROGRAM ═══════════════ -->
+<!-- PROGRAM -->
 <section class="sec-wrap program-section" id="program">
-  <div class="hangul-wm" style="top:0; left:-40px; transform:rotate(-3deg); font-size:150px;">일정</div>
-  <div class="flag-bg" style="width:90px; height:60px; bottom:40px; right:60px; opacity:.025; transform:rotate(18deg);"></div>
+  <svg class="kr-deco" style="width:75px;height:75px;top:15px;left:-10px;opacity:.3;transform:rotate(-5deg)"><use href="#ico-changsal" style="color:#1A1A1A"/></svg>
+  <svg class="kr-deco" style="width:80px;height:80px;bottom:30px;right:40px;opacity:.25;transform:rotate(18deg)"><use href="#ico-lotus" style="color:#C4466A"/></svg>
+  <svg class="kr-deco" style="width:90px;height:45px;top:30%;left:60%;opacity:.2"><use href="#ico-cloud" style="color:#003478"/></svg>
 
-  <div class="sec" style="position:relative; z-index:1;">
-    <div class="sec-head fade-up">
-      <div class="sec-label">PROGRAM</div>
-      <h2>タイムスケジュール</h2>
-      <p class="sec-desc">情報量は担保しつつ、読みやすさ優先で要点のみ掲載します。</p>
-    </div>
+  <div class="sec" style="position:relative;z-index:1">
+    <div class="sec-head fade-up"><div class="sec-label">PROGRAM</div><h2>タイムスケジュール</h2><p class="sec-desc">情報量は担保しつつ、読みやすさ優先で要点のみ掲載します。</p></div>
     <div class="timeline fade-up">
-      <div class="tl-item">
-        <div><div class="tl-time">13:00 – 13:10</div></div>
-        <div class="tl-content"><h3><span class="tl-dot v"></span>オープニング / 本日の持ち帰り</h3><p>業界別TOP10・役割分担マップ・表現NGチェックの3点を前提として共有します。</p></div>
-      </div>
-      <div class="tl-item">
-        <div><div class="tl-time">13:10 – 13:20</div></div>
-        <div class="tl-content"><h3><span class="tl-dot v"></span>市場データ（要点）</h3><p>規模確認と "So what" を1枚で整理。</p></div>
-      </div>
-      <div class="tl-item">
-        <div><div class="tl-time">13:20 – 14:10</div><div class="tl-speaker">金希願</div></div>
-        <div class="tl-content"><h3><span class="tl-dot b"></span>Beauty・Inner Care</h3><p>トレンドTOP10 / 使い方 / 注意点 — 社内共有できる粒度で整理します。</p></div>
-      </div>
-      <div class="tl-item">
-        <div><div class="tl-time">14:10 – 15:00</div><div class="tl-speaker">元正壬</div></div>
-        <div class="tl-content"><h3><span class="tl-dot f"></span>食品・菓子</h3><p>味と食感 / 健康と季節性 — 2つの軸でトレンドを分析。Instagramバイラル事例も交えて整理します。</p></div>
-      </div>
-      <div class="tl-item">
-        <div><div class="tl-time">15:00 – 15:15</div></div>
-        <div class="tl-content"><h3><span class="tl-dot v"></span>実務パート — トレンドを「売れる状態」につなげるために</h3><p>話題化 → 検索導線 → 口コミ蓄積を"役割"でつなぐ考え方と、韓国向け調査・制作・発信の一気通貫支援について共有します。</p></div>
-      </div>
-      <div class="tl-item">
-        <div><div class="tl-time">15:15 – 15:30</div><div class="tl-speaker">全員</div></div>
-        <div class="tl-content"><h3><span class="tl-dot v"></span>Q&A</h3><p>業界別の質問に回答します。</p></div>
-      </div>
+      <div class="tl-item"><div><div class="tl-time">15:00 – 15:10</div></div><div class="tl-content"><h3><span class="tl-dot v"></span>オープニング / 本日の持ち帰り</h3><p>業界別TOP10・役割分担マップ・表現NGチェックの3点を前提として共有します。</p></div></div>
+      <div class="tl-item"><div><div class="tl-time">15:10 – 15:20</div></div><div class="tl-content"><h3><span class="tl-dot v"></span>市場データ（要点）</h3><p>規模確認と "So what" を1枚で整理。</p></div></div>
+      <div class="tl-item"><div><div class="tl-time">15:20 – 16:10</div><div class="tl-speaker">金希願</div></div><div class="tl-content"><h3><span class="tl-dot b"></span>Beauty・Inner Care</h3><p>トレンドTOP10 / 使い方 / 注意点 — 社内共有できる粒度で整理します。</p></div></div>
+      <div class="tl-item"><div><div class="tl-time">16:10 – 17:00</div><div class="tl-speaker">元正壬</div></div><div class="tl-content"><h3><span class="tl-dot f"></span>食品・菓子</h3><p>味と食感 / 健康と季節性 — 2つの軸でトレンドを分析。Instagramバイラル事例も交えて整理します。</p></div></div>
+      <div class="tl-item"><div><div class="tl-time">17:00 – 17:15</div></div><div class="tl-content"><h3><span class="tl-dot v"></span>実務パート — トレンドを「売れる状態」につなげるために</h3><p>話題化 → 検索導線 → 口コミ蓄積を"役割"でつなぐ考え方と、韓国向け調査・制作・発信の一気通貫支援について共有します。</p></div></div>
+      <div class="tl-item"><div><div class="tl-time">17:15 – 17:30</div><div class="tl-speaker">全員</div></div><div class="tl-content"><h3><span class="tl-dot v"></span>Q&A</h3><p>業界別の質問に回答します。</p></div></div>
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- ═══════════════ KEYWORDS ═══════════════ -->
+<!-- KEYWORDS -->
 <section class="sec-wrap keywords-section">
-  <div class="flag-bg" style="width:110px; height:73px; top:20px; left:8%; opacity:.03; transform:rotate(12deg);"></div>
-  <span class="kr-float" style="bottom:18%; right:5%; color:var(--accent-warm); animation-delay:2s;">트렌드 키워드</span>
+  <svg class="kr-deco" style="width:90px;height:90px;top:10px;left:8%;opacity:.3;transform:rotate(12deg)"><use href="#ico-mugunghwa" style="color:#C8102E"/></svg>
+  <svg class="kr-deco" style="width:55px;height:55px;bottom:20px;right:10%;opacity:.25;transform:rotate(-20deg)"><use href="#ico-taegeuk" style="color:#D4A853"/></svg>
 
-  <div class="sec" style="position:relative; z-index:1;">
-    <div class="sec-head fade-up" style="text-align:center;">
-      <div class="sec-label">SEMINAR KEYWORDS</div>
-      <h2>セミナーで扱うキーワード</h2>
-      <p class="sec-desc" style="margin:0 auto;">本セミナーの軸となるテーマを一覧で確認。</p>
-    </div>
+  <div class="sec" style="position:relative;z-index:1">
+    <div class="sec-head fade-up" style="text-align:center"><div class="sec-label">SEMINAR KEYWORDS</div><h2>セミナーで扱うキーワード</h2><p class="sec-desc" style="margin:0 auto">本セミナーの軸となるテーマを一覧で確認。</p></div>
     <div class="keywords-flow fade-up">
-      <span class="keyword-chip c-beauty">高機能ミニマリズム</span>
-      <span class="keyword-chip c-food">味と食感</span>
-      <span class="keyword-chip c-beauty">低刺激フォーミュラ</span>
-      <span class="keyword-chip c-food">健康と季節性</span>
-      <span class="keyword-chip c-warm">信頼型フォーミュラ</span>
-      <span class="keyword-chip c-beauty">インナービューティ</span>
-      <span class="keyword-chip c-food">限定品の指名買い</span>
-      <span class="keyword-chip c-neutral">比較・検証行動</span>
-      <span class="keyword-chip c-beauty">ダーマコスメ</span>
-      <span class="keyword-chip c-food">SNSバイラル × 売場設計</span>
-      <span class="keyword-chip c-beauty">スキンテレクチュアル</span>
-      <span class="keyword-chip c-food">感覚的食感</span>
-      <span class="keyword-chip c-warm">クラウドスキン</span>
-      <span class="keyword-chip c-neutral">ハイパーセンソリー</span>
+      <span class="keyword-chip c-beauty">高機能ミニマリズム</span><span class="keyword-chip c-food">味と食感</span><span class="keyword-chip c-beauty">低刺激フォーミュラ</span><span class="keyword-chip c-food">健康と季節性</span><span class="keyword-chip c-warm">信頼型フォーミュラ</span><span class="keyword-chip c-beauty">インナービューティ</span><span class="keyword-chip c-food">限定品の指名買い</span><span class="keyword-chip c-neutral">比較・検証行動</span><span class="keyword-chip c-beauty">ダーマコスメ</span><span class="keyword-chip c-food">SNSバイラル × 売場設計</span><span class="keyword-chip c-beauty">スキンテレクチュアル</span><span class="keyword-chip c-food">感覚的食感</span><span class="keyword-chip c-warm">クラウドスキン</span><span class="keyword-chip c-neutral">ハイパーセンソリー</span>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ CTA ═══════════════ -->
+<!-- CTA -->
 <section class="cta-section">
-  <div class="sec">
-    <h2>お申込み</h2>
-    <p>定員20社に達し次第、締切となります。<br>会場参加をご希望の場合はお早めにお申込みください。</p>
-    <a href="#" class="cta-btn" onclick="openModal(event)">今すぐ申し込む</a>
-  </div>
+  <svg class="kr-deco" style="width:120px;height:120px;top:-20px;left:10%;opacity:.15;transform:rotate(-8deg)"><use href="#ico-taegeuk" style="color:#fff"/></svg>
+  <svg class="kr-deco" style="width:80px;height:80px;bottom:-10px;right:12%;opacity:.12;transform:rotate(15deg)"><use href="#ico-mugunghwa" style="color:#fff"/></svg>
+  <div class="sec"><h2>お申込み</h2><p>先着20社で締切となります。お早めにお申込みください。</p><a href="#" class="cta-btn" onclick="openModal(event)">今すぐ申し込む</a></div>
 </section>
 
-<!-- ═══════════════ Footer ═══════════════ -->
-<footer>
-  <div class="footer-inner">
-    <div><div class="co">株式会社グローバル・デイリー</div><div>〒110-0015 東京都台東区東上野4-8-1 TIX Tower 13階</div></div>
-    <div class="footer-right"><div>seminar@globaldaily.co.jp</div><div>03-6860-7011</div></div>
-  </div>
-</footer>
+<footer><div class="footer-inner"><div><div class="co">株式会社グローバル・デイリー</div><div>〒110-0015 東京都台東区東上野4-8-1 TIX Tower 13階</div></div><div class="footer-right"><div>seminar@globaldaily.co.jp</div><div>03-6860-7011</div></div></div></footer>
 
-<!-- ═══════════════ Modal ═══════════════ -->
-<div class="modal" id="modal">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal()">×</button>
-    <h3>セミナー申込み</h3>
-    <p class="modal-sub">2026年3月15日（金）13:00–15:30</p>
-    <form onsubmit="return submitForm(event)">
-      <input type="text" placeholder="会社名" required>
-      <input type="text" placeholder="部署名">
-      <input type="text" placeholder="お名前" required>
-      <input type="email" placeholder="メールアドレス" required>
-      <input type="tel" placeholder="電話番号">
-      <select required>
-        <option value="" disabled selected>このセミナーを何で知りましたか？</option>
-        <option value="press">プレスリリース</option>
-        <option value="kaigi">カイギフォーラム（2/17）</option>
-        <option value="sns">弊社公式SNS</option>
-        <option value="mail">メールマガジン</option>
-        <option value="sales">弊社営業担当</option>
-        <option value="referral">知人・紹介</option>
-        <option value="other">その他</option>
-      </select>
-      <button type="submit" class="modal-submit">申し込む</button>
-    </form>
-  </div>
-</div>
+<!-- Modal -->
+<div class="modal" id="modal"><div class="modal-box">
+  <button class="modal-close" onclick="closeModal()">×</button>
+  <h3>セミナー申込み</h3>
+  <p class="modal-sub">2026年3月25日（水）15:00〜 ｜ 東京本社（上野）</p>
+  <form onsubmit="return submitForm(event)">
+    <input type="text" placeholder="会社名" required>
+    <input type="text" placeholder="部署名">
+    <input type="text" placeholder="お名前" required>
+    <input type="email" placeholder="メールアドレス" required>
+    <input type="tel" placeholder="電話番号">
+    <select required><option value="" disabled selected>このセミナーを何で知りましたか？</option><option value="press">プレスリリース</option><option value="kaigi">カイギフォーラム（2/17）</option><option value="sns">弊社公式SNS</option><option value="mail">メールマガジン</option><option value="sales">弊社営業担当</option><option value="referral">知人・紹介</option><option value="other">その他</option></select>
+    <button type="submit" class="modal-submit">申し込む</button>
+  </form>
+</div></div>
 
 <script>
-  function openModal(e){ if(e)e.preventDefault(); document.getElementById('modal').classList.add('active'); }
-  function closeModal(){ document.getElementById('modal').classList.remove('active'); }
-  function submitForm(e){ e.preventDefault(); alert('お申込みありがとうございます。担当者より折り返しご連絡いたします。'); closeModal(); return false; }
-  document.getElementById('modal').addEventListener('click',function(e){ if(e.target===this)closeModal(); });
-
-  const obs=new IntersectionObserver(es=>{ es.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} }); },{threshold:.15});
-  document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
-
-  document.querySelectorAll('.kr-float').forEach(el=>{
-    const b=parseFloat(el.style.animationDelay)||0;
-    el.style.animationDelay=(b+Math.random()*2)+'s';
-    el.style.animationDuration=(11+Math.random()*5)+'s';
-  });
+function openModal(e){if(e)e.preventDefault();document.getElementById('modal').classList.add('active')}
+function closeModal(){document.getElementById('modal').classList.remove('active')}
+function submitForm(e){e.preventDefault();alert('お申込みありがとうございます。担当者より折り返しご連絡いたします。');closeModal();return false}
+document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal()});
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.15});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
 </script>
-
 </body>
 </html>
