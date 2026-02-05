@@ -114,22 +114,22 @@
     .reels-nudge::before,.reels-nudge::after{content:'';width:10px;height:1px;background:var(--line)}
     .speakers-section{background:var(--bg);position:relative;overflow:hidden}
     .speakers-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-    .speaker-card{border-radius:var(--radius);overflow:hidden;transition:all .35s;position:relative;display:flex;flex-direction:column}
-    .speaker-card:hover{box-shadow:0 12px 40px rgba(0,0,0,.12);transform:translateY(-3px)}
-    .speaker-photo-wrap{position:relative;width:100%;aspect-ratio:6/5;overflow:hidden}
-    .speaker-photo-wrap img{width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block}
-    .speaker-photo-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15) 0%,rgba(0,0,0,.3) 50%,rgba(0,0,0,.55) 100%);pointer-events:none}
+    .speaker-card{border-radius:var(--radius);overflow:hidden;transition:all .35s;position:relative}
+    .speaker-card:hover{box-shadow:0 12px 40px rgba(0,0,0,.15);transform:translateY(-3px)}
+    .speaker-photo-wrap{position:relative;width:100%;aspect-ratio:3/4;overflow:hidden}
+    .speaker-photo-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+    .speaker-card.b .speaker-photo-wrap img{object-position:center 15%}
+    .speaker-card.f .speaker-photo-wrap img{object-position:right 30%}
+    .speaker-photo-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.03) 25%,rgba(0,0,0,.35) 50%,rgba(0,0,0,.82) 75%,rgba(0,0,0,.95) 100%);pointer-events:none}
+    .speaker-overlay{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:0 28px 32px;color:#fff}
     .speaker-top-tags{position:absolute;top:16px;left:16px;z-index:3;display:flex;gap:6px;flex-wrap:wrap}
     .st-tag{font-size:11px;font-weight:700;padding:4px 12px;border-radius:999px;backdrop-filter:blur(8px)}
     .st-tag.beauty-tag{background:rgba(196,70,106,.85);color:#fff}
     .st-tag.food-tag{background:rgba(46,122,104,.85);color:#fff}
     .st-tag.gen-tag{background:rgba(255,255,255,.85);color:var(--ink);border:1px solid rgba(255,255,255,.5)}
-    .speaker-body{padding:24px 24px 28px;flex:1;color:#fff}
-    .speaker-card.b .speaker-body{background:linear-gradient(135deg,rgba(30,10,18,.94) 0%,rgba(45,15,28,.97) 100%)}
-    .speaker-card.f .speaker-body{background:linear-gradient(135deg,rgba(10,28,22,.94) 0%,rgba(14,40,32,.97) 100%)}
-    .speaker-name{font-size:20px;font-weight:800;margin-bottom:5px;letter-spacing:-.3px}
-    .speaker-role{font-size:11px;opacity:.55;font-weight:500;margin-bottom:12px;letter-spacing:.2px;line-height:1.5}
-    .speaker-desc{font-size:13px;opacity:.8;line-height:1.85}
+    .speaker-name{font-size:22px;font-weight:800;margin-bottom:6px;letter-spacing:-.3px}
+    .speaker-role{font-size:11px;opacity:.6;font-weight:500;margin-bottom:10px;letter-spacing:.2px;line-height:1.5}
+    .speaker-desc{font-size:13px;opacity:.85;line-height:1.8}
     .program-section{background:var(--white);position:relative;overflow:hidden}
     .timeline{display:flex;flex-direction:column}
     .tl-item{display:grid;grid-template-columns:140px 1fr;gap:24px;padding:20px 0;border-bottom:1px solid var(--line-light);position:relative}
@@ -330,22 +330,22 @@
         <div class="speaker-photo-wrap">
           <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2024/03/HEEWON_CC05_mono-scaled.jpg" alt="金希願">
           <div class="speaker-top-tags"><span class="st-tag beauty-tag">Beauty・Inner Care</span><span class="st-tag gen-tag">Gen Z</span></div>
-        </div>
-        <div class="speaker-body">
-          <div class="speaker-name">金希願（キム・ヒウォン）</div>
-          <div class="speaker-role">多言語発信メディア JAPANKURU 韓国マーケット担当</div>
-          <p class="speaker-desc">韓国・ソウル出身。多言語発信メディア「JapanKuru」にて韓国マーケットを担当し、コンテンツの企画・制作からSNSマーケティングまで幅広く手がける。特にInstagram Reelsを中心としたショート動画では数百万回再生の実績を持つ。韓国と日本両国の文化的背景への深い理解と、SNSトレンドを即座に形にする実行力を強みとする実践型クリエイター／マーケター。</p>
+          <div class="speaker-overlay">
+            <div class="speaker-name">金希願（キム・ヒウォン）</div>
+            <div class="speaker-role">多言語発信メディア JAPANKURU 韓国マーケット担当</div>
+            <p class="speaker-desc">韓国・ソウル出身。多言語発信メディア「JapanKuru」にて韓国マーケットを担当し、コンテンツの企画・制作からSNSマーケティングまで幅広く手がける。特にInstagram Reelsを中心としたショート動画では数百万回再生の実績を持つ。韓国と日本両国の文化的背景への深い理解と、SNSトレンドを即座に形にする実行力を強みとする実践型クリエイター／マーケター。</p>
+          </div>
         </div>
       </div>
       <div class="speaker-card f">
         <div class="speaker-photo-wrap">
           <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/02/Image_20260205175731.jpg" alt="元正壬">
           <div class="speaker-top-tags"><span class="st-tag food-tag">食品・菓子</span><span class="st-tag gen-tag">Gen Z</span></div>
-        </div>
-        <div class="speaker-body">
-          <div class="speaker-name">元正壬（ヒョン・ジョンイム）</div>
-          <div class="speaker-role">韓国市場特化型グローバルマーケター／リサーチ主導のコンテンツストラテジスト</div>
-          <p class="speaker-desc">韓国市場に特化したグローバルマーケターとして、日本を拠点に活動。リサーチを軸とした戦略設計とデータドリブンなコンテンツ企画を得意とする。韓国語・日本語に加え中国語も対応可能なマルチリンガル。「なぜこのコンテンツが成果を出すのか」を構造的に分析し、再現性の高いアプローチで実際の成果へとつなげるマーケター。</p>
+          <div class="speaker-overlay">
+            <div class="speaker-name">元正壬（ヒョン・ジョンイム）</div>
+            <div class="speaker-role">韓国市場特化型グローバルマーケター／リサーチ主導のコンテンツストラテジスト</div>
+            <p class="speaker-desc">韓国市場に特化したグローバルマーケターとして、日本を拠点に活動。リサーチを軸とした戦略設計とデータドリブンなコンテンツ企画を得意とする。韓国語・日本語に加え中国語も対応可能なマルチリンガル。「なぜこのコンテンツが成果を出すのか」を構造的に分析し、再現性の高いアプローチで実際の成果へとつなげるマーケター。</p>
+          </div>
         </div>
       </div>
     </div>
