@@ -29,12 +29,13 @@
     .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;background:var(--white);border:1px solid var(--line);border-radius:var(--radius-sm);margin-bottom:36px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.04)}
     .hero-stat{padding:22px 20px;text-align:center;border-right:1px solid var(--line-light)}
     .hero-stat:last-child{border-right:none}
-    .hero-stat .num{font-size:28px;font-weight:900;letter-spacing:-1px;font-family:var(--font-display)}
+    .hero-stat .num{font-size:32px;font-weight:900;letter-spacing:-1px;font-family:var(--font-display)}
+    .hero-stat .num .unit{font-size:14px;font-weight:700;margin-left:2px;letter-spacing:0}
     .hero-stat .num.c-red{color:#C8102E}
     .hero-stat .num.c-blue{color:#003478}
     .hero-stat .num.c-warm{color:#8B6914}
     .hero-stat .lbl{font-size:12px;font-weight:600;color:var(--sub);margin-top:4px;line-height:1.5}
-    .hero-lead{font-size:16px;color:var(--sub);line-height:2;margin-bottom:36px;max-width:580px}
+    .hero-lead{font-size:16px;color:var(--sub);line-height:2;margin-bottom:44px;max-width:580px}
     .hero-lead strong{color:var(--ink);font-weight:700}
     .stats-footnote{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;font-size:11px;color:var(--muted);margin-bottom:28px;padding:10px 16px;background:rgba(255,255,255,.6);border-radius:8px}
     .fn-item{display:inline-flex;align-items:center;gap:4px}
@@ -115,7 +116,7 @@
     .food-card .reels-panel{background:linear-gradient(135deg,#F4FBF8 0%,#EDF7F3 50%,rgba(212,168,83,.03) 100%)}
     .reels-panel-label{font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--muted)}
     .reels-row{display:flex;gap:10px;align-items:flex-end}
-    .reel{width:100px;height:178px;border-radius:14px;overflow:hidden;position:relative;background:#E8E4DF;flex-shrink:0;cursor:default;transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s;box-shadow:0 3px 14px rgba(0,0,0,.1)}
+    .reel{width:100px;height:178px;border-radius:14px;overflow:hidden;position:relative;background:#E8E4DF;flex-shrink:0;cursor:default;transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s;box-shadow:0 3px 14px rgba(0,0,0,.1);border:1px solid rgba(0,0,0,.06)}
     .reel:nth-child(2){transform:translateY(-8px)}
     .reel:hover{transform:translateY(-5px) scale(1.03);box-shadow:0 8px 24px rgba(0,0,0,.16)}
     .reel:nth-child(2):hover{transform:translateY(-14px) scale(1.03)}
@@ -163,6 +164,12 @@
     .tl-content p{font-size:15px;color:var(--sub);line-height:1.85}
     .keywords-section{background:var(--bg);position:relative;overflow:hidden}
     .keywords-flow{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+    .access-section{background:var(--bg);padding:60px 32px}
+    .access-info{margin-top:28px}
+    .access-address{font-size:16px;font-weight:600;color:var(--ink);margin-bottom:8px}
+    .access-station{font-size:14px;color:var(--sub);margin-bottom:20px}
+    .access-map-btn{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:var(--beauty);padding:12px 24px;border:1.5px solid var(--beauty);border-radius:30px;transition:all .2s}
+    .access-map-btn:hover{background:var(--beauty);color:#fff}
     .keyword-chip{padding:10px 20px;border-radius:999px;font-size:14px;font-weight:600;border:1.5px solid;transition:all .3s;cursor:default}
     .keyword-chip:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.06)}
     .keyword-chip.c-beauty{background:rgba(196,70,106,.06);border-color:rgba(196,70,106,.2);color:var(--beauty)}
@@ -180,7 +187,7 @@
     .modal.active{display:flex}
     .modal-box{background:var(--white);border-radius:var(--radius);padding:32px;max-width:480px;width:100%;position:relative;animation:modalIn .3s ease;max-height:90vh;overflow-y:auto}
     @keyframes modalIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-    .modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:8px;background:var(--bg);border:none;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:.2s}
+    .modal-close{position:absolute;top:16px;right:16px;width:44px;height:44px;border-radius:10px;background:var(--bg);border:none;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:.2s}
     .modal-close:hover{background:var(--line);color:var(--ink)}
     .modal-box h3{font-size:20px;font-weight:800;margin-bottom:6px}
     .modal-sub{font-size:14px;color:var(--muted);margin-bottom:20px}
@@ -191,7 +198,7 @@
     .modal-box input:focus,.modal-box select:focus,.modal-box textarea:focus{outline:none;border-color:var(--beauty)}
     .modal-box input::placeholder,.modal-box textarea::placeholder{color:var(--muted)}
     .modal-box select:invalid{color:var(--muted)}
-    .form-section{background:var(--bg);border-radius:var(--radius-sm);padding:16px;display:flex;flex-direction:column;gap:10px}
+    .form-section{background:var(--bg);border-radius:var(--radius-sm);padding:16px;display:flex;flex-direction:column;gap:10px;border:1px solid var(--line-light);box-shadow:0 2px 8px rgba(0,0,0,.02)}
     .form-section-label{font-size:13px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:6px;margin-bottom:4px}
     .form-icon{font-size:14px}
     .form-label{font-size:13px;color:var(--sub);margin-bottom:-4px}
@@ -236,9 +243,9 @@
       <h1>韓国トレンドセミナー<br><span class="em">ビューティー・インナーケア／食品・菓子</span></h1>
 
       <div class="hero-stats">
-        <div class="hero-stat"><div class="num c-red">約942万人</div><div class="lbl">2025年 訪日韓国人<br>（国別1位・過去最高）</div></div>
-        <div class="hero-stat"><div class="num c-blue">9,864億円</div><div class="lbl">年間旅行消費額<br>（国別4位・前年比+2.7%）</div></div>
-        <div class="hero-stat"><div class="num c-warm">81.3%</div><div class="lbl">菓子類 購入率<br>（全国籍トップ水準）</div></div>
+        <div class="hero-stat"><div class="num c-red">942<span class="unit">万人</span></div><div class="lbl">2025年 訪日韓国人<br>（国別1位・過去最高）</div></div>
+        <div class="hero-stat"><div class="num c-blue">9,864<span class="unit">億円</span></div><div class="lbl">年間旅行消費額<br>（国別4位・前年比+2.7%）</div></div>
+        <div class="hero-stat"><div class="num c-warm">81.3<span class="unit">%</span></div><div class="lbl">菓子類 購入率<br>（全国籍トップ水準）</div></div>
       </div>
       <div class="stats-footnote">
         <span class="fn-item"><span class="fn-label">菓子類</span> 韓国81.3% vs 全国籍72.6%<span class="fn-diff plus">+8.7%p</span></span>
@@ -406,6 +413,18 @@
     <div class="keywords-flow fade-up">
       <span class="keyword-chip c-beauty">高機能ミニマリズム</span><span class="keyword-chip c-food">味と食感</span><span class="keyword-chip c-beauty">低刺激フォーミュラ</span><span class="keyword-chip c-food">健康と季節性</span><span class="keyword-chip c-warm">信頼型フォーミュラ</span><span class="keyword-chip c-beauty">インナービューティ</span><span class="keyword-chip c-food">限定品の指名買い</span><span class="keyword-chip c-neutral">比較・検証行動</span><span class="keyword-chip c-beauty">ダーマコスメ</span><span class="keyword-chip c-food">SNSバイラル × 売場設計</span><span class="keyword-chip c-beauty">スキンテレクチュアル</span><span class="keyword-chip c-food">感覚的食感</span><span class="keyword-chip c-warm">クラウドスキン</span><span class="keyword-chip c-neutral">ハイパーセンソリー</span>
     </div>
+</div>
+</section>
+
+<!-- ACCESS -->
+<section class="sec-wrap access-section">
+  <div class="sec" style="text-align:center">
+    <div class="sec-head fade-up"><div class="sec-label">ACCESS</div><h2>会場アクセス</h2></div>
+    <div class="access-info fade-up">
+      <p class="access-address">〒110-0015 東京都台東区東上野4-8-1 TIXTOWER UENO 13階</p>
+      <p class="access-station">JR上野駅 入谷口より徒歩3分 ／ 東京メトロ 上野駅 1番出口より徒歩5分</p>
+      <a href="https://maps.google.com/?q=TIXTOWER+UENO" target="_blank" class="access-map-btn">📍 Google Mapで見る</a>
+    </div>
   </div>
 </section>
 
@@ -448,8 +467,6 @@
       <textarea placeholder="ご質問・ご要望（任意）" rows="3"></textarea>
     </div>
     <button type="submit" class="modal-submit">申し込む</button>
-  </form>
-</div></div>
   </form>
 </div></div>
 
