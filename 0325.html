@@ -36,6 +36,14 @@
     .hero-stat .lbl{font-size:12px;font-weight:600;color:var(--sub);margin-top:4px;line-height:1.5}
     .hero-lead{font-size:16px;color:var(--sub);line-height:2;margin-bottom:36px;max-width:580px}
     .hero-lead strong{color:var(--ink);font-weight:700}
+    .stats-footnote{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;font-size:11px;color:var(--muted);margin-bottom:28px;padding:10px 16px;background:rgba(255,255,255,.6);border-radius:8px}
+    .fn-item{display:inline-flex;align-items:center;gap:4px}
+    .fn-label{font-weight:600;color:var(--sub)}
+    .fn-diff{font-size:10px;font-weight:700;padding:1px 5px;border-radius:3px;margin-left:2px}
+    .fn-diff.plus{background:rgba(46,122,104,.12);color:var(--food)}
+    .fn-diff.minus{background:rgba(196,70,106,.12);color:var(--beauty)}
+    .fn-divider{color:var(--line);font-weight:300}
+    .stats-source{font-size:10px;color:var(--muted);text-align:center;margin-bottom:24px;opacity:.7}
     .hero-audience{display:grid;grid-template-columns:1fr 1fr;gap:16px}
     .audience-card{border:1px solid var(--line);border-radius:var(--radius-sm);padding:20px 22px;background:var(--white);transition:all .3s;box-shadow:0 2px 12px rgba(0,0,0,.03)}
     .audience-card:hover{box-shadow:0 6px 24px rgba(0,0,0,.08);transform:translateY(-2px)}
@@ -72,7 +80,7 @@
     .sec-head{margin-bottom:48px}
     .sec-label{font-size:13px;font-weight:800;letter-spacing:3px;color:#C8102E;margin-bottom:16px}
     .sec h2{font-size:clamp(28px,3.8vw,42px);font-weight:900;letter-spacing:-.5px;line-height:1.3;margin-bottom:16px;color:#1A1A1A}
-    .sec-desc{font-size:17px;color:var(--sub);line-height:1.9;max-width:640px}
+    .sec-desc{font-size:17px;color:var(--sub);line-height:1.9}
     .contents-section{background:var(--white);position:relative;overflow:hidden}
     .content-block{margin-bottom:24px}.content-block:last-child{margin-bottom:0}
     .content-card{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:all .3s;background:var(--white)}
@@ -213,28 +221,20 @@
       <h1>韓国トレンドセミナー<br><span class="em">ビューティー・インナーケア／食品・菓子</span></h1>
 
       <div class="hero-stats">
-        <div class="hero-stat"><div class="num c-red">約946万人</div><div class="lbl">2025年 訪日韓国人<br>（国別1位・過去最高）</div></div>
+        <div class="hero-stat"><div class="num c-red">約942万人</div><div class="lbl">2025年 訪日韓国人<br>（国別1位・過去最高）</div></div>
         <div class="hero-stat"><div class="num c-blue">9,864億円</div><div class="lbl">年間旅行消費額<br>（国別4位・前年比+2.7%）</div></div>
-        <div class="hero-stat"><div class="num c-warm">83.5%</div><div class="lbl">菓子類 購入率<br>（全国籍中トップ水準）</div></div>
+        <div class="hero-stat"><div class="num c-warm">81.3%</div><div class="lbl">菓子類 購入率<br>（全国籍トップ水準）</div></div>
       </div>
+      <div class="stats-footnote">
+        <span class="fn-item"><span class="fn-label">菓子類</span> 韓国81.3% vs 全国籍72.6%<span class="fn-diff plus">+8.7%p</span></span>
+        <span class="fn-divider">│</span>
+        <span class="fn-item"><span class="fn-label">化粧品</span> 韓国28.2% vs 全国籍34.7%<span class="fn-diff minus">-6.5%p</span></span>
+      </div>
+      <div class="stats-source">出典：観光庁「インバウンド消費動向調査」2025年10-12月期（1次速報）国籍・地域別 費目別購入率</div>
 
       <p class="hero-lead">
-        2025年、訪日韓国人観光客の4人に1人が日本を訪問。<strong>飲食費比率27%は全国籍中で最高水準</strong>、菓子購入率も突出しています。1人あたり消費額は約11万円と短期滞在ゆえに低め — だからこそ<strong>「何を・なぜ選ぶか」</strong>の理解が売場づくりの鍵になります。<br>
-        本セミナーでは、韓国Z世代が自国で選んでいるビューティ・食品トレンドを分析し、<strong>訪日韓国人プロモーションへのヒント</strong>をセットで整理します。
+        2025年、訪日韓国人は<strong>942万人で国別1位</strong>。菓子類の購入率は81.3%と全国籍でトップ水準を誇ります。一方、化粧品購入率は28.2%と平均以下ながら、<strong>K-Beautyトレンドが日本市場に与える影響力</strong>は年々拡大中。「買う人」だけでなく「トレンドを作る人」としての韓国Z世代 — <strong>その攻略法を知れば、両業種で大きなポテンシャル</strong>が見えてきます。
       </p>
-
-      <div class="hero-audience">
-        <div class="audience-card type-a">
-          <div class="audience-label"><span class="dot"></span>SESSION A — Beauty</div>
-          <div class="audience-title">マーケ・ブランド担当者向け</div>
-          <div class="audience-desc">韓国で「選ばれる理由」を、表現・根拠の作り方まで整理。ドラッグストア・空港免税の棚で指名買いされる条件を解説。</div>
-        </div>
-        <div class="audience-card type-b">
-          <div class="audience-label"><span class="dot"></span>SESSION B — 食品・菓子</div>
-          <div class="audience-title">商品企画・営業・流通担当者向け</div>
-          <div class="audience-desc">「味と食感」「健康と季節性」の2軸でトレンドの変遷と不変条件を分析。コンビニ・量販店で「次に選ばれる」要素を整理。</div>
-        </div>
-      </div>
     </div>
 
     <div class="info-card">
@@ -276,8 +276,8 @@
   <div class="sec" style="position:relative;z-index:1">
     <div class="sec-head fade-up">
       <div class="sec-label">SEMINAR CONTENTS</div>
-      <h2>韓国トレンドの背景と、日本での実践ヒントをセットでお届けします</h2>
-      <p class="sec-desc">「何が流行っているか」だけでなく「なぜ流行るのか」まで掘り下げ、日本のビジネスでどう活かせるかをセットで整理します。</p>
+      <h2>データから見えた「2つの攻略ポイント」</h2>
+      <p class="sec-desc">化粧品購入率は28.2%と全国籍平均を下回りますが、K-Beautyトレンドの影響力は年々拡大中 —<strong>「伸びしろ」</strong>があります。一方、菓子類は81.3%と圧倒的な購入率を誇り、<strong>「指名買い」</strong>を獲得するチャンス。この2つの視点から、韓国Z世代のトレンドと攻略法を整理します。</p>
     </div>
 
     <div class="content-block fade-up"><div class="content-card beauty-card"><div class="card-accent"></div><div class="card-inner">
