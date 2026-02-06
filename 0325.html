@@ -82,6 +82,7 @@
     .sec-label{font-size:13px;font-weight:800;letter-spacing:3px;color:#C8102E;margin-bottom:16px}
     .sec h2{font-size:clamp(28px,3.8vw,42px);font-weight:900;letter-spacing:-.5px;line-height:1.3;margin-bottom:16px;color:#1A1A1A}
     .sec-desc{font-size:17px;color:var(--sub);line-height:1.9}
+    .gen-z-note{font-size:13px;color:var(--muted);margin-top:8px}
     .contents-section{background:var(--white);position:relative;overflow:hidden}
     .content-block{margin-bottom:24px}.content-block:last-child{margin-bottom:0}
     .content-card{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:all .3s;background:var(--white)}
@@ -177,18 +178,26 @@
     .cta-btn:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,0,0,.35)}
     .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);backdrop-filter:blur(8px);z-index:999;align-items:center;justify-content:center;padding:20px}
     .modal.active{display:flex}
-    .modal-box{background:var(--white);border-radius:var(--radius);padding:36px;max-width:440px;width:100%;position:relative;animation:modalIn .3s ease}
+    .modal-box{background:var(--white);border-radius:var(--radius);padding:32px;max-width:480px;width:100%;position:relative;animation:modalIn .3s ease;max-height:90vh;overflow-y:auto}
     @keyframes modalIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
     .modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:8px;background:var(--bg);border:none;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:.2s}
     .modal-close:hover{background:var(--line);color:var(--ink)}
     .modal-box h3{font-size:20px;font-weight:800;margin-bottom:6px}
     .modal-sub{font-size:14px;color:var(--muted);margin-bottom:20px}
-    .modal-box form{display:flex;flex-direction:column;gap:10px}
-    .modal-box input,.modal-box select{padding:15px 16px;border:1.5px solid var(--line);border-radius:var(--radius-sm);font-size:15px;font-family:inherit;transition:border-color .2s;background:var(--white);color:var(--ink);appearance:none;-webkit-appearance:none}
+    .modal-box form{display:flex;flex-direction:column;gap:16px}
+    .modal-box input,.modal-box select,.modal-box textarea{padding:15px 16px;border:1.5px solid var(--line);border-radius:var(--radius-sm);font-size:15px;font-family:inherit;transition:border-color .2s;background:var(--white);color:var(--ink);appearance:none;-webkit-appearance:none;width:100%;box-sizing:border-box}
+    .modal-box textarea{resize:vertical;min-height:70px;line-height:1.5}
     .modal-box select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239A9A9A' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:40px;cursor:pointer}
-    .modal-box input:focus,.modal-box select:focus{outline:none;border-color:var(--beauty)}
-    .modal-box input::placeholder{color:var(--muted)}
+    .modal-box input:focus,.modal-box select:focus,.modal-box textarea:focus{outline:none;border-color:var(--beauty)}
+    .modal-box input::placeholder,.modal-box textarea::placeholder{color:var(--muted)}
     .modal-box select:invalid{color:var(--muted)}
+    .form-section{background:var(--bg);border-radius:var(--radius-sm);padding:16px;display:flex;flex-direction:column;gap:10px}
+    .form-section-label{font-size:13px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:6px;margin-bottom:4px}
+    .form-icon{font-size:14px}
+    .form-label{font-size:13px;color:var(--sub);margin-bottom:-4px}
+    .form-checkbox-group{display:flex;gap:16px;flex-wrap:wrap}
+    .form-checkbox{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--ink);cursor:pointer}
+    .form-checkbox input[type="checkbox"]{width:18px;height:18px;accent-color:var(--beauty);cursor:pointer}
     .modal-submit{padding:15px;background:var(--ink);color:#fff;border:none;border-radius:var(--radius-sm);font-size:15px;font-weight:700;cursor:pointer;transition:opacity .2s;font-family:inherit}
     .modal-submit:hover{opacity:.85}
     footer{padding:36px 32px;border-top:1px solid var(--line)}
@@ -334,7 +343,7 @@
   <div class="sec" style="position:relative;z-index:1">
     <div class="sec-head fade-up">
       <div class="sec-label">SPEAKERS</div>
-      <h2>登壇者（韓国出身 Gen Z マーケター）</h2>
+      <h2>登壇者（韓国出身 Z世代マーケター）</h2><p class="gen-z-note">※Z世代＝1990年代後半〜2010年代生まれ。デジタルネイティブとして注目される世代</p>
       <p class="sec-desc">消費者トークではなく、韓国向け施策を日常業務として運用している立場でお話しします。</p>
     </div>
     <div class="speakers-grid fade-up">
@@ -415,13 +424,32 @@
   <h3>セミナー申込み</h3>
   <p class="modal-sub">2026年3月25日（水）15:00〜 ｜ 東京本社（上野）</p>
   <form onsubmit="return submitForm(event)">
-    <input type="text" placeholder="会社名" required>
-    <input type="text" placeholder="部署名">
-    <input type="text" placeholder="お名前" required>
-    <input type="email" placeholder="メールアドレス" required>
-    <input type="tel" placeholder="電話番号">
-    <select required><option value="" disabled selected>このセミナーを何で知りましたか？</option><option value="press">プレスリリース</option><option value="kaigi">カイギフォーラム（2/17）</option><option value="sns">弊社公式SNS</option><option value="mail">メールマガジン</option><option value="sales">弊社営業担当</option><option value="referral">知人・紹介</option><option value="other">その他</option></select>
+    <div class="form-section">
+      <div class="form-section-label"><span class="form-icon">🏢</span>会社情報</div>
+      <input type="text" placeholder="会社名" required>
+      <input type="text" placeholder="部署名">
+      <select required><option value="" disabled selected>業種を選択してください</option><option value="cosmetics">化粧品・美容</option><option value="food">食品・菓子</option><option value="retail">小売・流通</option><option value="ad">広告・マーケティング</option><option value="media">メディア・出版</option><option value="other">その他</option></select>
+    </div>
+    <div class="form-section">
+      <div class="form-section-label"><span class="form-icon">👤</span>参加者情報</div>
+      <input type="text" placeholder="お名前" required>
+      <input type="email" placeholder="メールアドレス" required>
+      <input type="tel" placeholder="電話番号">
+      <select required><option value="" disabled selected>参加人数</option><option value="1">1名</option><option value="2">2名</option><option value="3">3名以上</option></select>
+    </div>
+    <div class="form-section">
+      <div class="form-section-label"><span class="form-icon">📋</span>その他</div>
+      <div class="form-label">関心のあるセッション</div>
+      <div class="form-checkbox-group">
+        <label class="form-checkbox"><input type="checkbox" name="session" value="beauty"><span>ビューティー・インナーケア</span></label>
+        <label class="form-checkbox"><input type="checkbox" name="session" value="food"><span>食品・菓子</span></label>
+      </div>
+      <select required><option value="" disabled selected>このセミナーを何で知りましたか？</option><option value="press">プレスリリース</option><option value="kaigi">カイギフォーラム（2/17）</option><option value="sns">弊社公式SNS</option><option value="mail">メールマガジン</option><option value="sales">弊社営業担当</option><option value="referral">知人・紹介</option><option value="other">その他</option></select>
+      <textarea placeholder="ご質問・ご要望（任意）" rows="3"></textarea>
+    </div>
     <button type="submit" class="modal-submit">申し込む</button>
+  </form>
+</div></div>
   </form>
 </div></div>
 
