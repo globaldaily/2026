@@ -10,7 +10,7 @@
   <style>
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
     :root{--bg:#FAF8F5;--white:#FFF;--ink:#1A1A1A;--sub:#5A5A5A;--muted:#9A9A9A;--line:#EBE7E2;--line-light:#F3F0EB;--beauty:#C4466A;--beauty-soft:#FBF0F3;--beauty-border:#F0CDD6;--food:#2E7A68;--food-soft:#EDF7F3;--food-border:#BDE0D5;--accent-warm:#D4A853;--radius:20px;--radius-sm:12px;--max:1080px;--font-jp:'Noto Sans JP',sans-serif;--font-display:'Playfair Display',serif}
-    body{font-family:var(--font-jp);background:var(--bg);color:var(--ink);line-height:1.75;-webkit-font-smoothing:antialiased;scroll-behavior:smooth;-webkit-tap-highlight-color:transparent}
+    body{font-family:var(--font-jp);background:var(--bg);color:var(--ink);font-size:17px;line-height:1.8;-webkit-font-smoothing:antialiased;scroll-behavior:smooth;-webkit-tap-highlight-color:transparent}
     a{text-decoration:none;color:inherit;transition:opacity .2s}
     a:focus-visible{outline:2px solid var(--beauty);outline-offset:2px;border-radius:4px}
     button:focus-visible{outline:2px solid var(--beauty);outline-offset:2px}
@@ -18,18 +18,18 @@
     .hero{padding:0;position:relative;overflow:hidden}
     .hero-bg{position:absolute;inset:0;z-index:0}
     .hero-bg-img{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=1600&q=80') center center/cover no-repeat}
-    .hero-bg-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(250,248,245,.97) 0%,rgba(250,248,245,.92) 40%,rgba(250,248,245,.85) 100%)}
+    .hero-bg-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(250,248,245,.98) 0%,rgba(250,248,245,.94) 50%,rgba(250,248,245,.88) 100%)}
     .hero-inner{max-width:var(--max);margin:0 auto;position:relative;z-index:1;padding:56px 32px 72px}
     .hero-flag{position:absolute;top:32px;right:32px;width:64px;height:auto;opacity:.7;z-index:2}
     .hero-grid{display:grid;grid-template-columns:1fr 380px;gap:56px;align-items:start}
     .hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:800;letter-spacing:3px;color:#C8102E;margin-bottom:28px}
     .hero-eyebrow .line{width:32px;height:2px;background:linear-gradient(90deg,#C8102E,#003478);border-radius:2px}
-    .hero h1{font-size:clamp(30px,4.5vw,48px);font-weight:900;line-height:1.25;letter-spacing:-1.5px;margin-bottom:32px}
+    .hero h1{font-size:clamp(32px,5vw,52px);font-weight:900;line-height:1.25;letter-spacing:-1.5px;margin-bottom:32px}
     .hero h1 .em{background:linear-gradient(135deg,var(--beauty) 0%,#A04A6E 50%,var(--food) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
     .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;background:var(--white);border:1px solid var(--line);border-radius:var(--radius-sm);margin-bottom:36px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.04)}
     .hero-stat{padding:22px 20px;text-align:center;border-right:1px solid var(--line-light)}
     .hero-stat:last-child{border-right:none}
-    .hero-stat .num{font-size:26px;font-weight:900;letter-spacing:-1px;font-family:var(--font-display)}
+    .hero-stat .num{font-size:28px;font-weight:900;letter-spacing:-1px;font-family:var(--font-display)}
     .hero-stat .num.c-red{color:#C8102E}
     .hero-stat .num.c-blue{color:#003478}
     .hero-stat .num.c-warm{color:#8B6914}
@@ -43,8 +43,8 @@
     .fn-diff.plus{background:rgba(46,122,104,.12);color:var(--food)}
     .fn-diff.minus{background:rgba(196,70,106,.12);color:var(--beauty)}
     .fn-divider{color:var(--line);font-weight:300}
-    .stats-source{font-size:10px;color:var(--muted);text-align:center;margin-bottom:24px;opacity:.7}
-    .note-small{display:block;font-size:11px;color:var(--muted);margin-top:8px;font-weight:400}
+    .stats-source{font-size:11px;color:#888;text-align:center;margin-bottom:24px}
+    .note-small{display:block;font-size:12px;color:#777;margin-top:12px;font-weight:400;line-height:1.5}
     .hero-audience{display:grid;grid-template-columns:1fr 1fr;gap:16px}
     .audience-card{border:1px solid var(--line);border-radius:var(--radius-sm);padding:20px 22px;background:var(--white);transition:all .3s;box-shadow:0 2px 12px rgba(0,0,0,.03)}
     .audience-card:hover{box-shadow:0 6px 24px rgba(0,0,0,.08);transform:translateY(-2px)}
@@ -65,10 +65,10 @@
     .info-benefits{margin-top:18px;padding-top:18px;border-top:1px solid var(--line)}
     .info-benefits .bl{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:1.5px;margin-bottom:10px}
     .benefit-items{display:flex;flex-direction:column;gap:5px}
-    .benefit-item{font-size:14px;font-weight:500;color:var(--sub);padding:9px 14px;background:rgba(250,248,245,.8);border-radius:var(--radius-sm);display:flex;align-items:center;gap:8px}
-    .benefit-item::before{content:'';width:5px;height:5px;border-radius:50%;flex-shrink:0;background:var(--accent-warm)}
+    .benefit-item{font-size:14px;font-weight:600;color:var(--ink);padding:10px 14px;background:rgba(250,248,245,.9);border-radius:var(--radius-sm);display:flex;align-items:center;gap:10px;border:1px solid var(--line-light)}
+    .benefit-icon{width:18px;height:18px;flex-shrink:0;color:var(--food)}
     .info-cta{margin-top:18px;display:flex;flex-direction:column;gap:8px}
-    .btn-primary{display:block;text-align:center;background:linear-gradient(135deg,#1A1A1A 0%,#333 100%);color:#fff;padding:17px;border-radius:14px;font-size:16px;font-weight:700;transition:all .3s;box-shadow:0 4px 16px rgba(0,0,0,.15)}
+    .btn-primary{display:block;text-align:center;background:linear-gradient(135deg,#1A1A1A 0%,#333 100%);color:#fff;padding:18px;border-radius:14px;font-size:16px;font-weight:700;transition:all .3s;box-shadow:0 4px 20px rgba(0,0,0,.18)}
     .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.25)}
     .btn-outline{display:block;text-align:center;background:rgba(255,255,255,.6);color:var(--ink);padding:13px;border-radius:14px;font-size:14px;font-weight:600;border:1.5px solid var(--line);transition:all .2s}
     .btn-outline:hover{border-color:var(--ink)}
@@ -103,6 +103,7 @@
     .card-list li::before{content:'';position:absolute;left:0;top:11px;width:6px;height:6px;border-radius:50%}
     .beauty-card .card-list li::before{background:var(--beauty)}
     .food-card .card-list li::before{background:var(--food)}
+    .card-teaser{font-size:15px;color:var(--sub);line-height:1.8;margin-bottom:18px}
     .kr-trend-strip{display:flex;flex-wrap:wrap;gap:6px}
     .kr-t{font-size:13px;font-weight:700;padding:6px 14px;border-radius:8px;border:1.5px solid;transition:all .3s;cursor:default}
     .kr-t:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.08)}
@@ -151,7 +152,11 @@
     .tl-item::before{content:'';position:absolute;left:166px;top:0;bottom:0;width:1px;background:var(--line-light)}
     .tl-time{font-size:16px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ink)}
     .tl-speaker{font-size:13px;color:var(--beauty);font-weight:600;margin-top:4px}
-    .tl-content h3{font-size:18px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:10px;color:var(--ink)}
+    .tl-content h3{font-size:18px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:10px;color:var(--ink);flex-wrap:wrap}
+    .tl-parts{margin:12px 0 0 0;padding:0;list-style:none}
+    .tl-parts li{font-size:14px;color:var(--sub);line-height:1.7;padding-left:16px;position:relative;margin-bottom:4px}
+    .tl-parts li::before{content:'–';position:absolute;left:0;color:var(--muted)}
+    .tl-note{font-size:13px;color:var(--food);margin-top:12px;font-weight:500}
     .tl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
     .tl-dot.b{background:var(--beauty)}.tl-dot.f{background:var(--food)}.tl-dot.v{background:var(--ink)}
     .tl-content p{font-size:15px;color:var(--sub);line-height:1.85}
@@ -192,7 +197,7 @@
     .footer-right{text-align:right}
     @media(max-width:960px){.hero-grid{grid-template-columns:1fr;gap:40px}.hero-inner{padding:48px 24px 64px}.hero-flag{width:52px;top:24px;right:24px}}
     @media(max-width:860px){.speakers-grid{grid-template-columns:1fr;max-width:480px;margin:0 auto}.card-inner{grid-template-columns:1fr}.reels-panel{border-left:none;border-top:1px solid var(--line-light);padding:24px}.tl-item{grid-template-columns:1fr;gap:6px}.tl-item::before{display:none}section.sec-wrap{padding:64px 24px}.hero-audience{grid-template-columns:1fr;gap:12px}}
-    @media(max-width:540px){.hero-inner{padding:40px 20px 56px}.hero h1{font-size:28px}.hero-stat .num{font-size:20px}.hero-lead{font-size:15px;line-height:1.85}.footer-inner{flex-direction:column;gap:14px}.footer-right{text-align:left}.keyword-chip{font-size:13px;padding:8px 15px}.reel{width:88px;height:156px;border-radius:12px}.hero-stats{grid-template-columns:1fr}.hero-stat{border-right:none;border-bottom:1px solid var(--line-light);padding:18px 16px}.hero-stat:last-child{border-bottom:none}.btn-primary{padding:18px;font-size:16px}.audience-card{padding:18px 20px}.sec h2{font-size:24px}.speaker-overlay{padding:0 20px 24px}.speaker-name{font-size:19px}.speaker-desc{font-size:12px;line-height:1.75}.card-text{padding:24px}.card-text .card-head h3{font-size:19px}.tl-time{font-size:14px}.tl-content h3{font-size:16px}.tl-content p{font-size:14px}}
+    @media(max-width:540px){body{font-size:16px}.hero-inner{padding:40px 20px 56px}.hero h1{font-size:30px;line-height:1.3}.hero-stat .num{font-size:22px}.hero-lead{font-size:15px;line-height:1.85}.sec-desc{font-size:15px}.footer-inner{flex-direction:column;gap:14px}.footer-right{text-align:left}.keyword-chip{font-size:13px;padding:8px 15px}.reel{width:88px;height:156px;border-radius:12px}.hero-stats{grid-template-columns:1fr}.hero-stat{border-right:none;border-bottom:1px solid var(--line-light);padding:18px 16px}.hero-stat:last-child{border-bottom:none}.btn-primary{padding:18px;font-size:16px}.audience-card{padding:18px 20px}.sec h2{font-size:24px}.speaker-overlay{padding:0 20px 24px}.speaker-name{font-size:19px}.speaker-desc{font-size:12px;line-height:1.75}.card-text{padding:24px}.card-text .card-head h3{font-size:20px}.tl-time{font-size:14px}.tl-content h3{font-size:16px}.tl-content p{font-size:15px}}
     .fade-up{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
     .fade-up.visible{opacity:1;transform:translateY(0)}
   </style>
@@ -249,8 +254,8 @@
       <div class="info-benefits">
         <div class="bl">参加特典</div>
         <div class="benefit-items">
-          <div class="benefit-item">業界別 2026 TOP7 トレンド要約（1枚）</div>
-          <div class="benefit-item">表現NGチェック（業界別10項目）</div>
+          <div class="benefit-item"><svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>業界別 2026 TOP7 トレンド要約（1枚）</div>
+          <div class="benefit-item"><svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>表現NGチェック（業界別10項目）</div>
         </div>
       </div>
       <div class="info-cta">
@@ -278,14 +283,14 @@
     <div class="sec-head fade-up">
       <div class="sec-label">SEMINAR CONTENTS</div>
       <h2>データから見えた「2つの攻略ポイント」</h2>
-      <p class="sec-desc">化粧品購入率は28.2%と全国籍平均を下回りますが、K-Beautyは世界市場で年10%以上成長中、米国・日本で輸入1位を獲得するなどグローバルトレンドを牽引しています。その発信源である韓国Z世代が「なぜ選ぶのか」を知れば<strong>「伸びしろ」</strong>が見えてきます。一方、菓子類は81.3%と圧倒的な購入率を誇り、<strong>「指名買い」</strong>を獲得するチャンス。この2つの視点から攻略法を整理します。<span class="note-small">*K-Beauty市場：2025年154億ドル→2032年306億ドル予測（CAGR 10.3%）</span></p>
+      <p class="sec-desc">化粧品購入率は28.2%と全国籍平均を下回りますが、K-Beautyは世界市場で年10%以上成長中、米国・日本で輸入1位を獲得するなどグローバルトレンドを牽引しています。その発信源である韓国Z世代が「なぜ選ぶのか」を知れば<strong>「伸びしろ」</strong>が見えてきます。一方、菓子類は81.3%と圧倒的な購入率を誇り、<strong>「指名買い」</strong>を獲得するチャンス。この2つの視点から攻略法を整理します。<span class="note-small">*K-Beauty市場：2025年154億ドル→2032年306億ドル予測（CAGR 10.3%） 出典：Persistence Market Research</span></p>
     </div>
 
     <div class="content-block fade-up"><div class="content-card beauty-card"><div class="card-accent"></div><div class="card-inner">
       <div class="card-text">
-        <div class="card-head"><h3>ビューティー・インナーケア</h3><span class="category-badge b">TOP7 + 活用</span></div>
+        <div class="card-head"><h3>ビューティー・インナーケア</h3><span class="category-badge b">TOP7 + 実践</span></div>
         <div class="card-keywords"><span class="kw">選ばれる基準の更新</span><span class="kw">根拠の見せ方</span><span class="kw">比較・検証の壁</span></div>
-        <ul class="card-list"><li>2026トレンドTOP7（背景・特徴・注目ポイント）</li><li>韓国で今ヒットしている理由と消費者心理</li><li>表現NG（10）と代替メッセージの型</li></ul>
+        <p class="card-teaser">韓国Z世代が「なぜそれを選ぶのか」— その理由を知れば、日本市場での訴求ポイントが見えてきます。</p>
         <div class="kr-trend-strip"><span class="kr-t">スキンテレクチュアル</span><span class="kr-t">ハイパー感覚ケア</span><span class="kr-t">クラウドスキン</span><span class="kr-t">セラムファンデ</span><span class="kr-t">HOCI鎮静</span></div>
       </div>
       <div class="reels-panel">
@@ -301,9 +306,9 @@
 
     <div class="content-block fade-up"><div class="content-card food-card"><div class="card-accent"></div><div class="card-inner">
       <div class="card-text">
-        <div class="card-head"><h3>食品・菓子</h3><span class="category-badge f">変遷 × 定番</span></div>
+        <div class="card-head"><h3>食品・菓子</h3><span class="category-badge f">トレンド + 実践</span></div>
         <div class="card-keywords"><span class="kw">味と食感（オト）</span><span class="kw">健康と季節性（シュン）</span></div>
-        <ul class="card-list"><li>トレンド変遷（数年の流れ）と不変条件</li><li>2つの軸から導く「次に選ばれる」要素の見立て</li><li>日本で買われる食品・菓子の共通点</li></ul>
+        <p class="card-teaser">購入率81%の「指名買い」はどう生まれるのか — SNSで話題になる条件と、選ばれ続ける理由を整理します。</p>
         <div class="kr-trend-strip"><span class="kr-t">感覚的食感</span><span class="kr-t">ホンウェル食</span><span class="kr-t">スローバーン辛味</span><span class="kr-t">限定品指名買い</span><span class="kr-t">旨味カムチルマッ</span></div>
       </div>
       <div class="reels-panel">
@@ -372,10 +377,10 @@
     <div class="timeline fade-up">
       <div class="tl-item"><div><div class="tl-time">15:00 – 15:10</div></div><div class="tl-content"><h3><span class="tl-dot v"></span>オープニング／本日のポイント整理</h3><p>本イベントの全体像と、本日持ち帰っていただきたい視点・考え方を共有します。</p></div></div>
       <div class="tl-item"><div><div class="tl-time">15:10 – 15:20</div></div><div class="tl-content"><h3><span class="tl-dot v"></span>市場データサマリー</h3><p>最新の市場データをもとに、今押さえるべきトレンドの全体像とビジネスにおける重要な示唆（So What）を分かりやすく整理します。</p></div></div>
-      <div class="tl-item"><div><div class="tl-time">15:20 – 16:10</div><div class="tl-speaker">金希願</div></div><div class="tl-content"><h3><span class="tl-dot b"></span>ビューティー・インナーケア トレンド</h3><p>韓国・日本市場を中心に、Beauty／インナーケア領域の最新トレンドを紹介。注目されているキーワードや消費者動向、実際の活用ポイントを解説します。</p></div></div>
-      <div class="tl-item"><div><div class="tl-time">16:10 – 17:00</div><div class="tl-speaker">元正壬</div></div><div class="tl-content"><h3><span class="tl-dot f"></span>食品・菓子トレンド</h3><p>味・食感、健康志向、季節性といった切り口から、食品・菓子分野のトレンドを分析。SNSで話題になった事例も交えながら、今後のヒントを共有します。</p></div></div>
-      <div class="tl-item"><div><div class="tl-time">17:00 – 17:15</div></div><div class="tl-content"><h3><span class="tl-dot v"></span>実践パート：トレンドを"売れる形"につなげる視点</h3><p>トレンドをどのように商品・コンテンツ・施策へ落とし込むか。韓国市場の事例をもとに、リサーチから制作・発信までの考え方を紹介します。</p></div></div>
-      <div class="tl-item"><div><div class="tl-time">17:15 – 17:30</div><div class="tl-speaker">全員</div></div><div class="tl-content"><h3><span class="tl-dot v"></span>Q&A</h3><p>業界・テーマ別の質問にお答えします。</p></div></div>
+      <div class="tl-item"><div><div class="tl-time">15:20 – 16:15</div><div class="tl-speaker">金希願</div></div><div class="tl-content"><h3><span class="tl-dot b"></span>ビューティー・インナーケア</h3><ul class="tl-parts"><li>2026 トレンドTOP7 — 背景・特徴・注目ポイント</li><li>韓国で今ヒットしている理由と消費者心理</li><li>表現NG（10）と代替メッセージの型</li><li>実践：トレンドを商品・施策に落とし込む視点</li></ul></div></div>
+      <div class="tl-item"><div><div class="tl-time">16:15 – 17:10</div><div class="tl-speaker">元正壬</div></div><div class="tl-content"><h3><span class="tl-dot f"></span>食品・菓子</h3><ul class="tl-parts"><li>トレンド変遷（数年の流れ）と不変の条件</li><li>2つの軸から導く「次に選ばれる」要素</li><li>日本で買われる食品・菓子の共通点</li><li>実践：リサーチから制作・発信までの考え方</li></ul><p class="tl-note">※ 韓国で話題のスナック菓子をご用意しています</p></div></div>
+      <div class="tl-item"><div><div class="tl-time">17:10 – 17:25</div><div class="tl-speaker">全員</div></div><div class="tl-content"><h3><span class="tl-dot v"></span>Q&A</h3><p>業界・テーマ別の質問にお答えします。セッション中に気になった点もお気軽にどうぞ。</p></div></div>
+      <div class="tl-item"><div><div class="tl-time">17:25 – 17:30</div></div><div class="tl-content"><h3><span class="tl-dot v"></span>クロージング</h3><p>本日のまとめと、参加特典のお渡し・今後のご案内。</p></div></div>
     </div>
   </div>
 </section>
