@@ -312,6 +312,90 @@
     .slide.active .anim-lift{animation:cardLift .5s cubic-bezier(0.16,1,0.3,1) both}
     @keyframes cardLift{from{opacity:0;transform:translateY(30px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
 
+    /* SVG Donut chart animation */
+    .donut-ring{
+        fill:none;
+        stroke:var(--light-gray);
+        stroke-width:14;
+    }
+    .donut-fill{
+        fill:none;
+        stroke:var(--primary);
+        stroke-width:14;
+        stroke-linecap:round;
+        stroke-dasharray:0 314;
+        transition:stroke-dasharray 0s;
+    }
+    .slide.active .donut-fill{
+        animation:donutFill 1.8s cubic-bezier(0.4,0,0.2,1) .4s both;
+    }
+    @keyframes donutFill{
+        from{stroke-dasharray:0 314}
+        to{stroke-dasharray:307.72 314}
+    }
+
+    /* Typing cursor */
+    .typing-cursor{
+        display:inline-block;
+        width:3px;
+        height:1em;
+        background:var(--primary);
+        margin-left:4px;
+        vertical-align:text-bottom;
+        animation:cursorBlink .7s step-end infinite;
+    }
+    @keyframes cursorBlink{0%,100%{opacity:1}50%{opacity:0}}
+
+    /* Card flash - red warning */
+    .slide.active .anim-flash-red{animation:flashRed 1s ease .3s both}
+    @keyframes flashRed{
+        0%{background:rgba(196,30,58,0.3);box-shadow:0 0 30px rgba(196,30,58,0.4)}
+        40%{background:rgba(196,30,58,0.08);box-shadow:none}
+        100%{background:var(--card);box-shadow:none}
+    }
+    /* Card glow - green/white success */
+    .slide.active .anim-glow-border{animation:glowBorder 1.5s ease .5s both}
+    @keyframes glowBorder{
+        0%{border-color:rgba(196,30,58,0.2)}
+        30%{border-color:rgba(196,30,58,0.8);box-shadow:0 0 20px rgba(196,30,58,0.3)}
+        100%{border-color:rgba(196,30,58,0.5);box-shadow:0 0 8px rgba(196,30,58,0.15)}
+    }
+
+    /* Country badge pop-in */
+    .slide.active .cpop-1{animation:countryPop .4s cubic-bezier(0.34,1.56,0.64,1) .1s both}
+    .slide.active .cpop-2{animation:countryPop .4s cubic-bezier(0.34,1.56,0.64,1) .2s both}
+    .slide.active .cpop-3{animation:countryPop .4s cubic-bezier(0.34,1.56,0.64,1) .3s both}
+    .slide.active .cpop-4{animation:countryPop .4s cubic-bezier(0.34,1.56,0.64,1) .4s both}
+    .slide.active .cpop-5{animation:countryPop .4s cubic-bezier(0.34,1.56,0.64,1) .5s both}
+    .slide.active .cpop-6{animation:countryPop .4s cubic-bezier(0.34,1.56,0.64,1) .6s both}
+    .slide.active .cpop-7{animation:countryPop .4s cubic-bezier(0.34,1.56,0.64,1) .7s both}
+    .slide.active .cpop-8{animation:countryPop .4s cubic-bezier(0.34,1.56,0.64,1) .8s both}
+    .slide.active .cpop-9{animation:countryPop .4s cubic-bezier(0.34,1.56,0.64,1) .9s both}
+    @keyframes countryPop{from{opacity:0;transform:scale(0)}to{opacity:1;transform:scale(1)}}
+
+    /* Progress bar */
+    .progress-track{
+        height:12px;
+        background:var(--light-gray);
+        border-radius:6px;
+        overflow:hidden;
+        position:relative;
+    }
+    .progress-bar{
+        height:100%;
+        background:linear-gradient(90deg, var(--primary), #e85d75);
+        border-radius:6px;
+        width:0;
+    }
+    .slide.active .progress-bar{
+        animation:progressGrow 1.2s cubic-bezier(0.4,0,0.2,1) .5s both;
+    }
+    .slide.active .progress-bar-target{
+        animation:progressGrowTarget 1.2s cubic-bezier(0.4,0,0.2,1) .8s both;
+    }
+    @keyframes progressGrow{from{width:0}to{width:63%}}
+    @keyframes progressGrowTarget{from{width:0}to{width:100%}}
+
     /* Venn diagram */
     .venn-container{
         position:relative;
@@ -472,8 +556,8 @@
         <div style="position:relative;z-index:2">
             <p class="t-en t-primary stg-1" style="font-size:16px;letter-spacing:8px;margin-bottom:20px">SINCE 2008</p>
             <h1 class="t-huge stg-2">
-                インバウンドの答えは<br>
-                <span class="t-primary">「現地」にある。</span>
+                <span id="typing-target"></span><span class="typing-cursor" id="typing-cursor"></span><br>
+                <span class="t-primary" id="typing-target2" style="opacity:0"></span>
             </h1>
             <p class="stg-3" style="font-size:26px;opacity:0.7;margin-top:25px;max-width:800px">
                 現地メディアと18年歩んで見つけた、メーカーのための勝てる戦略
@@ -620,8 +704,14 @@
         <div style="text-align:center">
             <p class="stg-1" style="font-size:26px;opacity:0.6">この18年間、メーカー様に選ばれ続けた結果</p>
             <div class="stg-2" style="display:flex;align-items:center;justify-content:center;gap:60px;margin:50px 0">
-                <div class="stat-ring" style="width:260px;height:260px">
-                    <span class="t-en t-primary anim-glow" style="font-size:72px">98<span style="font-size:36px">%</span></span>
+                <div style="position:relative;width:260px;height:260px">
+                    <svg viewBox="0 0 120 120" style="width:260px;height:260px;transform:rotate(-90deg)">
+                        <circle class="donut-ring" cx="60" cy="60" r="50"/>
+                        <circle class="donut-fill" cx="60" cy="60" r="50"/>
+                    </svg>
+                    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
+                        <span class="t-en t-primary anim-glow" style="font-size:72px" data-countup="98" data-suffix="%">0%</span>
+                    </div>
                 </div>
                 <div style="text-align:left">
                     <p class="t-lg">圧倒的な</p>
@@ -679,7 +769,7 @@
             <div class="anim-scale" style="margin-bottom:10px">
                 <p style="font-size:13px;color:#888;letter-spacing:2px;margin-bottom:4px">旅行消費額</p>
                 <p class="anim-glow" style="font-size:130px;font-weight:900;line-height:1;letter-spacing:-4px">
-                    <span class="t-primary">9.5</span><span style="font-size:40px;font-weight:400;color:#aaa;margin-left:6px">兆円</span>
+                    <span class="t-primary" data-countup="9.5" data-suffix="" data-decimals="1" data-speed="fast" style="font-family:'Montserrat',sans-serif">0</span><span style="font-size:40px;font-weight:400;color:#aaa;margin-left:6px">兆円</span>
                 </p>
                 <div style="display:flex;justify-content:center;gap:16px;margin-top:8px">
                     <span style="background:#C41E3A;color:white;font-size:16px;font-weight:900;padding:6px 16px;border-radius:6px">前年比 +17%</span>
@@ -687,26 +777,40 @@
                 </div>
             </div>
 
-            <!-- Sub stat: visitors -->
-            <div class="stg-3" style="display:flex;gap:50px;align-items:center;margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.06)">
-                <div style="text-align:center">
-                    <p style="font-size:12px;color:#666;margin-bottom:4px">訪日外国人数（2025年）</p>
-                    <p style="font-size:44px;font-weight:900;color:white;letter-spacing:-1px">4,268<span style="font-size:18px;font-weight:400;color:#888;margin-left:4px">万人</span>
-                        <span style="font-size:24px;color:#C41E3A;font-weight:900;margin-left:8px">↑</span>
-                    </p>
+            <!-- Sub stat: visitors + progress bars -->
+            <div class="stg-3" style="display:flex;gap:40px;align-items:flex-start;margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.06);width:100%;max-width:900px">
+                <div style="flex:1">
+                    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+                        <span style="font-size:12px;color:#888">訪日外国人数</span>
+                        <span style="font-size:11px;color:#C41E3A;font-weight:700">2025年実績</span>
+                    </div>
+                    <div class="progress-track" style="margin-bottom:8px">
+                        <div class="progress-bar" style="--target-width:71%"></div>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;align-items:baseline">
+                        <span style="font-size:32px;font-weight:900;color:white" data-countup="4268" data-suffix="万人" data-speed="fast">0万人</span>
+                        <span style="font-size:12px;color:#555">目標 6,000万人</span>
+                    </div>
                 </div>
-                <div style="width:1px;height:50px;background:rgba(255,255,255,0.08)"></div>
-                <!-- 2030 target -->
-                <div style="text-align:left">
-                    <p style="font-size:11px;color:#C41E3A;font-weight:700;letter-spacing:2px;margin-bottom:6px">観光庁 2030年目標</p>
-                    <p style="font-size:20px;font-weight:700;color:white">6,000<span style="font-size:12px;font-weight:400;color:#888">万人</span>
-                        <span style="color:#333;margin:0 8px">/</span>
-                        20<span style="font-size:12px;font-weight:400;color:#888">兆円</span>
-                    </p>
+                <div style="width:1px;height:70px;background:rgba(255,255,255,0.08);flex-shrink:0;margin-top:10px"></div>
+                <div style="flex:1">
+                    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+                        <span style="font-size:12px;color:#888">旅行消費額</span>
+                        <span style="font-size:11px;color:#C41E3A;font-weight:700">2025年実績</span>
+                    </div>
+                    <div class="progress-track" style="margin-bottom:8px">
+                        <div class="progress-bar" style="--target-width:47.5%"></div>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;align-items:baseline">
+                        <span style="font-size:32px;font-weight:900;color:white" data-countup="9.5" data-suffix="兆円" data-speed="fast" data-decimals="1">0兆円</span>
+                        <span style="font-size:12px;color:#555">目標 20兆円</span>
+                    </div>
                 </div>
             </div>
-
-            <p class="stg-4" style="font-size:10px;color:#444;margin-top:16px">出典：日本政府観光局（JNTO）/ 観光庁</p>
+            <p class="stg-4" style="display:flex;gap:16px;align-items:center;margin-top:10px">
+                <span style="font-size:11px;color:#C41E3A;font-weight:700;letter-spacing:2px">観光庁 2030年目標</span>
+                <span style="font-size:10px;color:#444">出典：日本政府観光局（JNTO）/ 観光庁</span>
+            </p>
         </div>
 
         <div class="footer">
@@ -745,7 +849,7 @@
         <div>
             <h2 class="t-lg stg-1">インバウンド施策、<span class="t-primary">ここが分かれ道。</span></h2>
             <div class="grid" style="margin-top:40px">
-                <div class="card stg-2" style="opacity:0.9;position:relative">
+                <div class="card stg-2 anim-flash-red" style="opacity:0.9;position:relative">
                     <div style="position:absolute;top:-20px;left:-20px;width:56px;height:56px;background:#333;border-radius:50%;display:flex;align-items:center;justify-content:center">
                         <span style="font-size:32px;color:#888">&#10005;</span>
                     </div>
@@ -758,7 +862,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="card stg-3" style="background:rgba(196,30,58,0.08);border:2px solid var(--primary);position:relative">
+                <div class="card stg-3 anim-glow-border" style="background:rgba(196,30,58,0.08);border:2px solid var(--primary);position:relative">
                     <div style="position:absolute;top:-20px;left:-20px;width:56px;height:56px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center">
                         <span style="font-size:28px;color:white;font-weight:900">&#9678;</span>
                     </div>
@@ -1198,19 +1302,19 @@
         <div style="position:relative;z-index:5;text-align:center">
             <h2 class="t-xl stg-1">直接つながる、<span class="t-primary">13カ国</span>。</h2>
             <div class="stg-2" style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:30px auto;max-width:950px">
-                <span style="background:rgba(196,30,58,0.15);border:1px solid rgba(196,30,58,0.3);padding:10px 18px;border-radius:6px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:22px">🇺🇸</span><span class="t-en" style="font-weight:700">US</span></span>
-                <span style="background:rgba(196,30,58,0.15);border:1px solid rgba(196,30,58,0.3);padding:10px 18px;border-radius:6px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:22px">🇰🇷</span><span class="t-en" style="font-weight:700">KR</span></span>
-                <span style="background:rgba(196,30,58,0.15);border:1px solid rgba(196,30,58,0.3);padding:10px 18px;border-radius:6px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:22px">🇨🇳</span><span class="t-en" style="font-weight:700">CN</span></span>
-                <span style="background:rgba(196,30,58,0.15);border:1px solid rgba(196,30,58,0.3);padding:10px 18px;border-radius:6px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:22px">🇹🇼</span><span class="t-en" style="font-weight:700">TW</span></span>
-                <span style="background:rgba(196,30,58,0.15);border:1px solid rgba(196,30,58,0.3);padding:10px 18px;border-radius:6px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:22px">🇭🇰</span><span class="t-en" style="font-weight:700">HK</span></span>
-                <span style="background:rgba(196,30,58,0.15);border:1px solid rgba(196,30,58,0.3);padding:10px 18px;border-radius:6px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:22px">🇹🇭</span><span class="t-en" style="font-weight:700">TH</span></span>
-                <span style="background:rgba(196,30,58,0.15);border:1px solid rgba(196,30,58,0.3);padding:10px 18px;border-radius:6px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:22px">🇻🇳</span><span class="t-en" style="font-weight:700">VN</span></span>
-                <span style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);padding:10px 18px;border-radius:6px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:22px">🇲🇾</span><span class="t-en" style="font-weight:700;color:#888">MY</span></span>
-                <span style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);padding:10px 18px;border-radius:6px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:22px">🇸🇬</span><span class="t-en" style="font-weight:700;color:#888">SG</span></span>
-                <span style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);padding:10px 18px;border-radius:6px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:22px">🇮🇩</span><span class="t-en" style="font-weight:700;color:#888">ID</span></span>
-                <span style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);padding:10px 18px;border-radius:6px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:22px">🇵🇭</span><span class="t-en" style="font-weight:700;color:#888">PH</span></span>
-                <span style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);padding:10px 18px;border-radius:6px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:22px">🇫🇷</span><span class="t-en" style="font-weight:700;color:#888">FR</span></span>
-                <span style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);padding:10px 18px;border-radius:6px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:22px">🇬🇧</span><span class="t-en" style="font-weight:700;color:#888">UK</span></span>
+                <span class="cpop-1" style="background:rgba(196,30,58,0.15);border:1px solid rgba(196,30,58,0.3);padding:10px 18px;border-radius:6px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:22px">🇺🇸</span><span class="t-en" style="font-weight:700">US</span></span>
+                <span class="cpop-2" style="background:rgba(196,30,58,0.15);border:1px solid rgba(196,30,58,0.3);padding:10px 18px;border-radius:6px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:22px">🇰🇷</span><span class="t-en" style="font-weight:700">KR</span></span>
+                <span class="cpop-3" style="background:rgba(196,30,58,0.15);border:1px solid rgba(196,30,58,0.3);padding:10px 18px;border-radius:6px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:22px">🇨🇳</span><span class="t-en" style="font-weight:700">CN</span></span>
+                <span class="cpop-3" style="background:rgba(196,30,58,0.15);border:1px solid rgba(196,30,58,0.3);padding:10px 18px;border-radius:6px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:22px">🇹🇼</span><span class="t-en" style="font-weight:700">TW</span></span>
+                <span class="cpop-4" style="background:rgba(196,30,58,0.15);border:1px solid rgba(196,30,58,0.3);padding:10px 18px;border-radius:6px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:22px">🇭🇰</span><span class="t-en" style="font-weight:700">HK</span></span>
+                <span class="cpop-4" style="background:rgba(196,30,58,0.15);border:1px solid rgba(196,30,58,0.3);padding:10px 18px;border-radius:6px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:22px">🇹🇭</span><span class="t-en" style="font-weight:700">TH</span></span>
+                <span class="cpop-5" style="background:rgba(196,30,58,0.15);border:1px solid rgba(196,30,58,0.3);padding:10px 18px;border-radius:6px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:22px">🇻🇳</span><span class="t-en" style="font-weight:700">VN</span></span>
+                <span class="cpop-5" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);padding:10px 18px;border-radius:6px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:22px">🇲🇾</span><span class="t-en" style="font-weight:700;color:#888">MY</span></span>
+                <span class="cpop-6" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);padding:10px 18px;border-radius:6px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:22px">🇸🇬</span><span class="t-en" style="font-weight:700;color:#888">SG</span></span>
+                <span class="cpop-6" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);padding:10px 18px;border-radius:6px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:22px">🇮🇩</span><span class="t-en" style="font-weight:700;color:#888">ID</span></span>
+                <span class="cpop-7" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);padding:10px 18px;border-radius:6px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:22px">🇵🇭</span><span class="t-en" style="font-weight:700;color:#888">PH</span></span>
+                <span class="cpop-8" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);padding:10px 18px;border-radius:6px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:22px">🇫🇷</span><span class="t-en" style="font-weight:700;color:#888">FR</span></span>
+                <span class="cpop-9" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);padding:10px 18px;border-radius:6px;font-size:18px;display:flex;align-items:center;gap:8px"><span style="font-size:22px">🇬🇧</span><span class="t-en" style="font-weight:700;color:#888">UK</span></span>
             </div>
             <p class="t-md stg-3" style="font-weight:400;color:#aaa;margin-bottom:40px">中継ぎなし。情報もコストも最適化。</p>
             <div style="width:60px;height:2px;background:#C41E3A;margin:0 auto 40px"></div>
@@ -1454,15 +1558,6 @@
         }
     }
 
-    function update(n) {
-        slides[cur].classList.remove('active');
-        cur = (n + total) % total;
-        slides[cur].classList.add('active');
-        info.textContent = (cur + 1) + ' / ' + total;
-        updateScript();
-        updateMapActive();
-    }
-
     function next() { update(cur + 1); }
     function prev() { update(cur - 1); }
 
@@ -1543,6 +1638,114 @@
             s.appendChild(wm);
         });
     })();
+
+    // ===== TYPING EFFECT for S1 title =====
+    (function(){
+        var line1 = 'インバウンドの答えは';
+        var line2 = '「現地」にある。';
+        var target1 = document.getElementById('typing-target');
+        var target2 = document.getElementById('typing-target2');
+        var cursor = document.getElementById('typing-cursor');
+        var i = 0, phase = 1;
+        var speed = 80;
+        
+        function type(){
+            if(phase === 1){
+                if(i < line1.length){
+                    target1.textContent += line1[i];
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    i = 0;
+                    phase = 2;
+                    setTimeout(type, 200);
+                }
+            } else if(phase === 2){
+                target2.style.opacity = '1';
+                if(i < line2.length){
+                    target2.textContent += line2[i];
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    // Done - hide cursor after a moment
+                    setTimeout(function(){ cursor.style.display = 'none'; }, 1500);
+                }
+            }
+        }
+        setTimeout(type, 800);
+    })();
+
+    // ===== COUNT-UP ANIMATION =====
+    var countUpObserver = new MutationObserver(function(mutations){
+        mutations.forEach(function(m){
+            if(m.target.classList && m.target.classList.contains('active')){
+                runCountUps(m.target);
+            }
+        });
+    });
+    document.querySelectorAll('.slide').forEach(function(s){
+        countUpObserver.observe(s, {attributes:true, attributeFilter:['class']});
+    });
+
+    function runCountUps(slide){
+        var els = slide.querySelectorAll('[data-countup]');
+        els.forEach(function(el){
+            if(el.dataset.counted) return;
+            el.dataset.counted = '1';
+            var target = parseFloat(el.dataset.countup);
+            var suffix = el.dataset.suffix || '';
+            var decimals = parseInt(el.dataset.decimals) || 0;
+            var duration = el.dataset.speed === 'fast' ? 1200 : 1800;
+            var start = performance.now();
+            
+            function step(now){
+                var progress = Math.min((now - start) / duration, 1);
+                // Ease out cubic
+                var eased = 1 - Math.pow(1 - progress, 3);
+                var current = target * eased;
+                if(decimals > 0){
+                    el.textContent = current.toFixed(decimals) + suffix;
+                } else {
+                    el.textContent = Math.round(current).toLocaleString() + suffix;
+                }
+                if(progress < 1) requestAnimationFrame(step);
+            }
+            setTimeout(function(){ requestAnimationFrame(step); }, 500);
+        });
+
+        // Progress bars with custom widths
+        var bars = slide.querySelectorAll('.progress-bar');
+        bars.forEach(function(bar){
+            var w = bar.style.getPropertyValue('--target-width');
+            if(w){
+                bar.style.animation = 'none';
+                bar.offsetHeight; // reflow
+                bar.style.transition = 'width 1.2s cubic-bezier(0.4,0,0.2,1) 0.5s';
+                bar.style.width = w;
+            }
+        });
+    }
+
+    // Run for initial slide
+    runCountUps(document.querySelector('.slide.active'));
+
+    // Reset countups when leaving slide - redefine update
+    function update(n){
+        var prevSlide = slides[cur];
+        prevSlide.querySelectorAll('[data-countup]').forEach(function(el){ 
+            delete el.dataset.counted; 
+        });
+        prevSlide.querySelectorAll('.progress-bar').forEach(function(bar){
+            bar.style.transition = 'none';
+            bar.style.width = '0';
+        });
+        slides[cur].classList.remove('active');
+        cur = (n + total) % total;
+        slides[cur].classList.add('active');
+        info.textContent = (cur + 1) + ' / ' + total;
+        updateScript();
+        updateMapActive();
+    }
 </script>
 
 </body>
