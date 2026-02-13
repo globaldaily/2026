@@ -27,7 +27,7 @@
     .t-sm{font-size:24px;font-weight:400}
     .t-primary{color:var(--primary)}
     .t-en{font-family:'Montserrat','Inter',sans-serif;font-weight:900;letter-spacing:-0.02em}
-    .t-muted{opacity:0.6}
+    .t-muted{opacity:0.7}
     .accent-line{width:100px;height:8px;background:var(--primary);margin:25px 0}
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;width:100%}
     .card{background:var(--card);padding:35px;border-radius:12px}
@@ -283,6 +283,32 @@
         50%{background:rgba(196,30,58,0.35);box-shadow:0 0 16px 4px rgba(196,30,58,0.25)}
     }
     .biz-tag-highlight{animation:tagPulse 2s ease-in-out 1.5s 3 both}
+
+    /* === SLIDE 5: 98% extra impact === */
+    .slide.active .num-98-glow{animation:num98Boom 1s cubic-bezier(.16,1,.3,1) 2.8s both}
+    @keyframes num98Boom{
+        0%{text-shadow:0 0 20px rgba(196,30,58,0.2)}
+        40%{text-shadow:0 0 80px rgba(196,30,58,0.9),0 0 160px rgba(196,30,58,0.4),0 0 240px rgba(196,30,58,0.15);transform:scale(1.04)}
+        100%{text-shadow:0 0 30px rgba(196,30,58,0.3);transform:scale(1)}
+    }
+
+    /* === SLIDE 7→8: Red afterglow === */
+    @keyframes redAfterGlow{
+        0%{box-shadow:inset 0 0 200px 60px rgba(196,30,58,0.3)}
+        100%{box-shadow:inset 0 0 0 0 rgba(196,30,58,0)}
+    }
+    .slide-after-red{animation:redAfterGlow .8s ease both}
+
+    /* === Emoji flag visibility on projector === */
+    .slide .cpop-1 span[style*="gap:8px"],
+    .slide .cpop-2 span[style*="gap:8px"],
+    .slide .cpop-3 span[style*="gap:8px"],
+    .slide .cpop-4 span[style*="gap:8px"],
+    .slide .cpop-5 span[style*="gap:8px"],
+    .slide .cpop-6 span[style*="gap:8px"],
+    .slide .cpop-7 span[style*="gap:8px"],
+    .slide .cpop-8 span[style*="gap:8px"],
+    .slide .cpop-9 span[style*="gap:8px"]{font-size:18px}
 </style>
 </head>
 
@@ -426,7 +452,7 @@
             <div class="stg-2" style="display:flex;align-items:center;justify-content:center;gap:60px;margin:50px 0">
                 <div style="position:relative;width:260px;height:260px">
                     <svg viewBox="0 0 120 120" style="width:260px;height:260px;transform:rotate(-90deg)"><circle class="donut-ring" cx="60" cy="60" r="50"/><circle class="donut-fill" cx="60" cy="60" r="50"/></svg>
-                    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><span class="t-en t-primary anim-glow" style="font-size:72px" data-countup="98" data-suffix="%">0%</span></div>
+                    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><span class="t-en t-primary anim-glow num-98-glow" style="font-size:72px" data-countup="98" data-suffix="%">0%</span></div>
                 </div>
                 <div style="text-align:left"><p style="font-size:40px;font-weight:400;color:#888">圧倒的な</p><p class="t-xl t-primary" style="font-weight:900">売上リピート率</p></div>
             </div>
@@ -593,12 +619,12 @@
             <p class="t-en t-primary stg-1" style="font-size:14px;letter-spacing:4px;margin-bottom:8px">6 RESEARCH METHODS</p>
             <h2 class="stg-2" style="font-size:44px;font-weight:900;margin-bottom:36px"><span class="t-primary">6つの調査・分析</span>で、感覚を排除する。</h2>
             <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:30px">
-                <div class="stg-2" style="background:rgba(196,30,58,0.12);border:1px solid rgba(196,30,58,0.3);border-radius:10px;padding:26px 16px;text-align:center"><p style="font-size:26px;font-weight:900;margin-bottom:8px">ボリューム観測</p><p style="font-size:16px;color:#999;line-height:1.5">SNS投稿数の月次・年次<br>トレンドを可視化</p></div>
-                <div class="stg-3" style="background:rgba(196,30,58,0.12);border:1px solid rgba(196,30,58,0.3);border-radius:10px;padding:26px 16px;text-align:center"><p style="font-size:26px;font-weight:900;margin-bottom:8px">口コミ分析</p><p style="font-size:16px;color:#999;line-height:1.5">ポジ・ネガ分類<br>生の声キャプチャ＆翻訳</p></div>
-                <div class="stg-4" style="background:rgba(196,30,58,0.12);border:1px solid rgba(196,30,58,0.3);border-radius:10px;padding:26px 16px;text-align:center"><p style="font-size:26px;font-weight:900;margin-bottom:8px">市場トレンド</p><p style="font-size:16px;color:#999;line-height:1.5">現地市場規模・注目カテゴリ<br>シーズン需要分析</p></div>
-                <div class="stg-3" style="background:rgba(255,255,255,0.04);border:1px solid var(--light-gray);border-radius:10px;padding:26px 16px;text-align:center"><p style="font-size:26px;font-weight:900;margin-bottom:8px">PR・競合分析</p><p style="font-size:16px;color:#999;line-height:1.5">競合のエンゲージメント<br>コンテンツ戦略を解析</p></div>
-                <div class="stg-4" style="background:rgba(255,255,255,0.04);border:1px solid var(--light-gray);border-radius:10px;padding:26px 16px;text-align:center"><p style="font-size:26px;font-weight:900;margin-bottom:8px">追跡調査</p><p style="font-size:16px;color:#999;line-height:1.5">施策前後の効果検証<br>検索順位・声量変化</p></div>
-                <div class="stg-5" style="background:rgba(255,255,255,0.04);border:1px solid var(--light-gray);border-radius:10px;padding:26px 16px;text-align:center"><p style="font-size:26px;font-weight:900;margin-bottom:8px">インタビュー</p><p style="font-size:16px;color:#999;line-height:1.5">在留外国人座談会で<br>リアルな声を直接収集</p></div>
+                <div class="stg-2" style="background:rgba(196,30,58,0.12);border:1px solid rgba(196,30,58,0.3);border-radius:10px;padding:26px 16px;text-align:center"><p style="font-size:26px;font-weight:900;margin-bottom:8px">ボリューム観測</p><p style="font-size:16px;color:#aaa;line-height:1.5">SNS投稿数の月次・年次<br>トレンドを可視化</p></div>
+                <div class="stg-3" style="background:rgba(196,30,58,0.12);border:1px solid rgba(196,30,58,0.3);border-radius:10px;padding:26px 16px;text-align:center"><p style="font-size:26px;font-weight:900;margin-bottom:8px">口コミ分析</p><p style="font-size:16px;color:#aaa;line-height:1.5">ポジ・ネガ分類<br>生の声キャプチャ＆翻訳</p></div>
+                <div class="stg-4" style="background:rgba(196,30,58,0.12);border:1px solid rgba(196,30,58,0.3);border-radius:10px;padding:26px 16px;text-align:center"><p style="font-size:26px;font-weight:900;margin-bottom:8px">市場トレンド</p><p style="font-size:16px;color:#aaa;line-height:1.5">現地市場規模・注目カテゴリ<br>シーズン需要分析</p></div>
+                <div class="stg-3" style="background:rgba(255,255,255,0.04);border:1px solid var(--light-gray);border-radius:10px;padding:26px 16px;text-align:center"><p style="font-size:26px;font-weight:900;margin-bottom:8px">PR・競合分析</p><p style="font-size:16px;color:#aaa;line-height:1.5">競合のエンゲージメント<br>コンテンツ戦略を解析</p></div>
+                <div class="stg-4" style="background:rgba(255,255,255,0.04);border:1px solid var(--light-gray);border-radius:10px;padding:26px 16px;text-align:center"><p style="font-size:26px;font-weight:900;margin-bottom:8px">追跡調査</p><p style="font-size:16px;color:#aaa;line-height:1.5">施策前後の効果検証<br>検索順位・声量変化</p></div>
+                <div class="stg-5" style="background:rgba(255,255,255,0.04);border:1px solid var(--light-gray);border-radius:10px;padding:26px 16px;text-align:center"><p style="font-size:26px;font-weight:900;margin-bottom:8px">インタビュー</p><p style="font-size:16px;color:#aaa;line-height:1.5">在留外国人座談会で<br>リアルな声を直接収集</p></div>
             </div>
             <div class="stg-6" style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap">
                 <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap"><span style="font-size:15px">🇨🇳</span><span style="background:rgba(196,30,58,0.15);border:1px solid rgba(196,30,58,0.3);border-radius:20px;padding:5px 12px;font-size:12px;color:#eee;font-weight:700">RED（小紅書）</span><span style="background:rgba(255,255,255,0.06);border:1px solid var(--light-gray);border-radius:20px;padding:5px 12px;font-size:12px;color:#bbb">Weibo</span><span style="background:rgba(255,255,255,0.06);border:1px solid var(--light-gray);border-radius:20px;padding:5px 12px;font-size:12px;color:#bbb">WeChat</span><span style="background:rgba(255,255,255,0.06);border:1px solid var(--light-gray);border-radius:20px;padding:5px 12px;font-size:12px;color:#bbb">Douyin</span><span style="background:rgba(255,255,255,0.06);border:1px solid var(--light-gray);border-radius:20px;padding:5px 12px;font-size:12px;color:#bbb">Baidu</span></div>
@@ -690,13 +716,13 @@
     <div class="slide" style="padding:50px 80px">
         <div style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1920') center/cover no-repeat;opacity:0.14;pointer-events:none"></div>
         <div class="header"><img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2025/07/GLD_type02_white_1178_785-2-1.png" alt="GLOBAL DAILY" class="logo"><div style="text-align:center"><span style="font-size:42px;font-weight:900">事例</span><span class="t-muted" style="font-size:20px;margin-left:10px">1 / 2</span></div><span class="header-label">CASE STUDIES</span></div>
-        <div class="anim-fade" style="margin-top:80px;position:relative;z-index:2">
-            <p style="font-size:20px;font-weight:700;margin-bottom:30px">民間企業 <span class="t-muted t-en" style="font-weight:400;font-size:14px;margin-left:8px">PRIVATE SECTOR</span></p>
+        <div style="margin-top:80px;position:relative;z-index:2">
+            <p class="stg-1" style="font-size:20px;font-weight:700;margin-bottom:30px">民間企業 <span class="t-muted t-en" style="font-weight:400;font-size:14px;margin-left:8px">PRIVATE SECTOR</span></p>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:30px">
-                <div class="card" style="padding:30px;border-left:6px solid var(--primary)"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:15px"><span style="background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.3);color:#93bbfd;font-size:14px;padding:6px 14px;border-radius:4px">メーカー</span><span style="display:flex;align-items:center;gap:6px"><span class="t-en" style="font-size:14px;color:#666;font-weight:700">×10</span><span class="t-primary t-en anim-pop" style="font-size:28px;font-weight:900">売上UP</span></span></div><p class="t-md" style="font-size:24px;margin-bottom:12px">インフルエンサー施策</p><p class="t-sm t-muted" style="font-size:16px;line-height:1.6">中国・韓国向けインフルエンサーを起用したライブコマース施策。リアルタイムの商品紹介で購買意欲を喚起。</p></div>
-                <div class="card" style="padding:30px;border-left:6px solid var(--primary)"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:15px"><span style="background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.3);color:#c4a5f7;font-size:14px;padding:6px 14px;border-radius:4px">製造小売業（SPA）</span><span style="display:flex;align-items:center;gap:6px"><span class="t-en" style="font-size:14px;color:#666;font-weight:700">×3</span><span class="t-primary t-en anim-pop" style="font-size:28px;font-weight:900">売上UP</span></span></div><p class="t-md" style="font-size:24px;margin-bottom:12px">クーポン施策</p><p class="t-sm t-muted" style="font-size:16px;line-height:1.6">JAPANKURU掲載クーポンで免税＋割引特典を外国人旅行者に提供。来店・購買への直接導線を構築。</p></div>
-                <div class="card" style="padding:30px;border-left:6px solid var(--gray)"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:15px"><span style="background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.25);color:#86d9a0;font-size:14px;padding:6px 14px;border-radius:4px">交通・鉄道</span><span style="display:flex;align-items:center;gap:6px"><span class="t-en" style="font-size:14px;color:#666;font-weight:700">×5</span><span class="t-primary t-en anim-pop" style="font-size:28px;font-weight:900">PV UP</span></span></div><p class="t-md" style="font-size:24px;margin-bottom:12px">海外旅行博出展</p><p class="t-sm t-muted" style="font-size:16px;line-height:1.6">海外現地の旅行博にて専用ブースを出展。クーポン配布とSNS連動でチケット販売増を達成。</p></div>
-                <div class="card" style="padding:30px;border-left:6px solid var(--gray)"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:15px"><span style="background:rgba(251,191,36,0.15);border:1px solid rgba(251,191,36,0.3);color:#fcd477;font-size:14px;padding:6px 14px;border-radius:4px">小売</span><span style="display:flex;align-items:center;gap:6px"><span class="t-en" style="font-size:14px;color:#666;font-weight:700">×2</span><span class="t-primary t-en anim-pop" style="font-size:28px;font-weight:900">売上UP</span></span></div><p class="t-md" style="font-size:24px;margin-bottom:12px">海外インフルエンサー招聘</p><p class="t-sm t-muted" style="font-size:16px;line-height:1.6">海外インフルエンサーを日本に招聘し、店舗での購入体験をSNSでリアルタイム配信。</p></div>
+                <div class="card stg-2 anim-lift" style="padding:30px;border-left:6px solid var(--primary)"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:15px"><span style="background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.3);color:#93bbfd;font-size:14px;padding:6px 14px;border-radius:4px">メーカー</span><span style="display:flex;align-items:center;gap:6px"><span class="t-en" style="font-size:14px;color:#666;font-weight:700">×10</span><span class="t-primary t-en anim-pop" style="font-size:28px;font-weight:900">売上UP</span></span></div><p class="t-md" style="font-size:24px;margin-bottom:12px">インフルエンサー施策</p><p class="t-sm t-muted" style="font-size:16px;line-height:1.6">中国・韓国向けインフルエンサーを起用したライブコマース施策。リアルタイムの商品紹介で購買意欲を喚起。</p></div>
+                <div class="card stg-3 anim-lift" style="padding:30px;border-left:6px solid var(--primary)"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:15px"><span style="background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.3);color:#c4a5f7;font-size:14px;padding:6px 14px;border-radius:4px">製造小売業（SPA）</span><span style="display:flex;align-items:center;gap:6px"><span class="t-en" style="font-size:14px;color:#666;font-weight:700">×3</span><span class="t-primary t-en anim-pop" style="font-size:28px;font-weight:900">売上UP</span></span></div><p class="t-md" style="font-size:24px;margin-bottom:12px">クーポン施策</p><p class="t-sm t-muted" style="font-size:16px;line-height:1.6">JAPANKURU掲載クーポンで免税＋割引特典を外国人旅行者に提供。来店・購買への直接導線を構築。</p></div>
+                <div class="card stg-4 anim-lift" style="padding:30px;border-left:6px solid var(--gray)"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:15px"><span style="background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.25);color:#86d9a0;font-size:14px;padding:6px 14px;border-radius:4px">交通・鉄道</span><span style="display:flex;align-items:center;gap:6px"><span class="t-en" style="font-size:14px;color:#666;font-weight:700">×5</span><span class="t-primary t-en anim-pop" style="font-size:28px;font-weight:900">PV UP</span></span></div><p class="t-md" style="font-size:24px;margin-bottom:12px">海外旅行博出展</p><p class="t-sm t-muted" style="font-size:16px;line-height:1.6">海外現地の旅行博にて専用ブースを出展。クーポン配布とSNS連動でチケット販売増を達成。</p></div>
+                <div class="card stg-5 anim-lift" style="padding:30px;border-left:6px solid var(--gray)"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:15px"><span style="background:rgba(251,191,36,0.15);border:1px solid rgba(251,191,36,0.3);color:#fcd477;font-size:14px;padding:6px 14px;border-radius:4px">小売</span><span style="display:flex;align-items:center;gap:6px"><span class="t-en" style="font-size:14px;color:#666;font-weight:700">×2</span><span class="t-primary t-en anim-pop" style="font-size:28px;font-weight:900">売上UP</span></span></div><p class="t-md" style="font-size:24px;margin-bottom:12px">海外インフルエンサー招聘</p><p class="t-sm t-muted" style="font-size:16px;line-height:1.6">海外インフルエンサーを日本に招聘し、店舗での購入体験をSNSでリアルタイム配信。</p></div>
             </div>
         </div>
         <div class="footer"><span>16 / CASE STUDIES</span><span class="page-num">17</span></div>
@@ -706,13 +732,13 @@
     <div class="slide" style="padding:50px 80px">
         <div style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920') center/cover no-repeat;opacity:0.14;pointer-events:none"></div>
         <div class="header"><img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2025/07/GLD_type02_white_1178_785-2-1.png" alt="GLOBAL DAILY" class="logo"><div style="text-align:center"><span style="font-size:42px;font-weight:900">事例</span><span class="t-muted" style="font-size:20px;margin-left:10px">2 / 2</span></div><span class="header-label">CASE STUDIES</span></div>
-        <div class="anim-fade" style="margin-top:80px;position:relative;z-index:2">
-            <p style="font-size:20px;font-weight:700;margin-bottom:30px">民間企業 <span class="t-muted t-en" style="font-weight:400;font-size:14px;margin-left:8px">PRIVATE SECTOR</span></p>
+        <div style="margin-top:80px;position:relative;z-index:2">
+            <p class="stg-1" style="font-size:20px;font-weight:700;margin-bottom:30px">民間企業 <span class="t-muted t-en" style="font-weight:400;font-size:14px;margin-left:8px">PRIVATE SECTOR</span></p>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:30px">
-                <div class="card" style="padding:30px;border-left:6px solid var(--primary)"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:15px"><span style="background:rgba(249,115,22,0.15);border:1px solid rgba(249,115,22,0.3);color:#fbb677;font-size:14px;padding:6px 14px;border-radius:4px">飲食</span><span style="display:flex;align-items:center;gap:6px"><span class="t-en" style="font-size:14px;color:#666;font-weight:700">×2</span><span class="t-primary t-en anim-pop" style="font-size:28px;font-weight:900">来店UP</span></span></div><p class="t-md" style="font-size:24px;margin-bottom:12px">レビュー施策・集客支援</p><p class="t-sm t-muted" style="font-size:16px;line-height:1.6">korekoko在留外国人コミュニティによる飲食店体験レビュー施策。Google Maps・SNS口コミで外国人来店数を大幅増加。</p></div>
-                <div class="card" style="padding:30px;border-left:6px solid var(--primary)"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:15px"><span style="background:rgba(14,165,233,0.15);border:1px solid rgba(14,165,233,0.3);color:#7dd3f8;font-size:14px;padding:6px 14px;border-radius:4px">宿泊施設</span><span class="t-primary t-en anim-pop" style="font-size:24px;font-weight:900">OTA初動画</span></div><p class="t-md" style="font-size:24px;margin-bottom:12px">動画制作・活用</p><p class="t-sm t-muted" style="font-size:16px;line-height:1.6">ホテル館内と周辺観光スポットを紹介する多言語動画を制作。OTA（旅行予約サイト）に掲載し、施設の魅力を視覚的に訴求。</p></div>
-                <div class="card" style="padding:30px;border-left:6px solid var(--gray)"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:15px"><span style="background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.3);color:#93bbfd;font-size:14px;padding:6px 14px;border-radius:4px">メーカー</span><span class="t-primary t-en anim-pop" style="font-size:24px;font-weight:900">DATA活用</span></div><p class="t-md" style="font-size:24px;margin-bottom:12px">在留外国人 座談会・セミナー</p><p class="t-sm t-muted" style="font-size:16px;line-height:1.6">在留外国人コミュニティを対象に商品体験セミナーを開催。参加者のリアルな感想をマーケティングデータとして活用。</p></div>
-                <div class="card" style="padding:30px;border-left:6px solid var(--gray)"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:15px"><span style="background:rgba(236,72,153,0.15);border:1px solid rgba(236,72,153,0.3);color:#f5a0cc;font-size:14px;padding:6px 14px;border-radius:4px">アパレル</span><span style="display:flex;align-items:center;gap:6px"><span class="t-en" style="font-size:14px;color:#666;font-weight:700">×2</span><span class="t-primary t-en anim-pop" style="font-size:28px;font-weight:900">売上UP</span></span></div><p class="t-md" style="font-size:24px;margin-bottom:12px">クロスメディア施策</p><p class="t-sm t-muted" style="font-size:16px;line-height:1.6">多言語メディア記事・インフルエンサー動画・店頭POPを連携したクロスメディア施策。特定シーズンの外国人購買を集中促進。</p></div>
+                <div class="card stg-2 anim-lift" style="padding:30px;border-left:6px solid var(--primary)"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:15px"><span style="background:rgba(249,115,22,0.15);border:1px solid rgba(249,115,22,0.3);color:#fbb677;font-size:14px;padding:6px 14px;border-radius:4px">飲食</span><span style="display:flex;align-items:center;gap:6px"><span class="t-en" style="font-size:14px;color:#666;font-weight:700">×2</span><span class="t-primary t-en anim-pop" style="font-size:28px;font-weight:900">来店UP</span></span></div><p class="t-md" style="font-size:24px;margin-bottom:12px">レビュー施策・集客支援</p><p class="t-sm t-muted" style="font-size:16px;line-height:1.6">korekoko在留外国人コミュニティによる飲食店体験レビュー施策。Google Maps・SNS口コミで外国人来店数を大幅増加。</p></div>
+                <div class="card stg-3 anim-lift" style="padding:30px;border-left:6px solid var(--primary)"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:15px"><span style="background:rgba(14,165,233,0.15);border:1px solid rgba(14,165,233,0.3);color:#7dd3f8;font-size:14px;padding:6px 14px;border-radius:4px">宿泊施設</span><span class="t-primary t-en anim-pop" style="font-size:24px;font-weight:900">OTA初動画</span></div><p class="t-md" style="font-size:24px;margin-bottom:12px">動画制作・活用</p><p class="t-sm t-muted" style="font-size:16px;line-height:1.6">ホテル館内と周辺観光スポットを紹介する多言語動画を制作。OTA（旅行予約サイト）に掲載し、施設の魅力を視覚的に訴求。</p></div>
+                <div class="card stg-4 anim-lift" style="padding:30px;border-left:6px solid var(--gray)"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:15px"><span style="background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.3);color:#93bbfd;font-size:14px;padding:6px 14px;border-radius:4px">メーカー</span><span class="t-primary t-en anim-pop" style="font-size:24px;font-weight:900">DATA活用</span></div><p class="t-md" style="font-size:24px;margin-bottom:12px">在留外国人 座談会・セミナー</p><p class="t-sm t-muted" style="font-size:16px;line-height:1.6">在留外国人コミュニティを対象に商品体験セミナーを開催。参加者のリアルな感想をマーケティングデータとして活用。</p></div>
+                <div class="card stg-5 anim-lift" style="padding:30px;border-left:6px solid var(--gray)"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:15px"><span style="background:rgba(236,72,153,0.15);border:1px solid rgba(236,72,153,0.3);color:#f5a0cc;font-size:14px;padding:6px 14px;border-radius:4px">アパレル</span><span style="display:flex;align-items:center;gap:6px"><span class="t-en" style="font-size:14px;color:#666;font-weight:700">×2</span><span class="t-primary t-en anim-pop" style="font-size:28px;font-weight:900">売上UP</span></span></div><p class="t-md" style="font-size:24px;margin-bottom:12px">クロスメディア施策</p><p class="t-sm t-muted" style="font-size:16px;line-height:1.6">多言語メディア記事・インフルエンサー動画・店頭POPを連携したクロスメディア施策。特定シーズンの外国人購買を集中促進。</p></div>
             </div>
         </div>
         <div class="footer"><span>17 / CASE STUDIES</span><span class="page-num">18</span></div>
@@ -1063,6 +1089,11 @@
 
         cur = n;
         slides[cur].classList.add('active');
+        /* Red afterglow: if previous slide was red (index 6 or 19) */
+        if((n === 7 || n === 20) && prevSlide.classList.contains('slide-red')){
+            slides[cur].classList.add('slide-after-red');
+            setTimeout(function(){ slides[cur].classList.remove('slide-after-red'); }, 900);
+        }
         info.textContent = (cur + 1) + ' / ' + total;
         updateScript();
         updateProgress();
