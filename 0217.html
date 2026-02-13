@@ -243,6 +243,21 @@
     .t-primary{text-shadow:0 0 20px rgba(196,30,58,0.2)}
     .t-sm{line-height:1.5}
     .card{box-shadow:0 2px 12px rgba(0,0,0,0.3)}
+
+    /* === STAGGERED SHIMMER for multi-card slides === */
+    .slide.active .stg-1 .card::after,.slide.active .card.stg-1::after{animation-delay:0.8s}
+    .slide.active .stg-2 .card::after,.slide.active .card.stg-2::after{animation-delay:1.0s}
+    .slide.active .stg-3 .card::after,.slide.active .card.stg-3::after{animation-delay:1.2s}
+    .slide.active .stg-4 .card::after,.slide.active .card.stg-4::after{animation-delay:1.4s}
+    .slide.active .stg-5 .card::after,.slide.active .card.stg-5::after{animation-delay:1.6s}
+    .slide.active .stg-6 .card::after,.slide.active .card.stg-6::after{animation-delay:1.8s}
+
+    /* === VIGNETTE PULSE on slide entry === */
+    .slide.active::before{animation:none}
+    @keyframes vignettePulse{0%{box-shadow:inset 0 0 120px 40px rgba(0,0,0,0.6)}40%{box-shadow:inset 0 0 80px 20px rgba(0,0,0,0.2)}100%{box-shadow:inset 0 0 60px 10px rgba(0,0,0,0)}}
+
+    /* === SMOOTHER spotlight for red slides === */
+    .spotlight-sweep{mix-blend-mode:soft-light}
 </style>
 </head>
 
@@ -410,9 +425,9 @@
             </div>
             <div class="stg-3" style="width:100%;max-width:900px;margin-top:20px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.06)">
                 <div style="display:flex;gap:40px;align-items:flex-start">
-                    <div style="flex:1"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px"><span style="font-size:12px;color:#888">訪日外国人数</span><span style="font-size:11px;color:#C41E3A;font-weight:700">2025年実績</span></div><div class="progress-track" style="margin-bottom:8px;position:relative"><div class="progress-bar" style="--target-width:71%"></div><div style="position:absolute;right:0;top:-18px;font-size:10px;color:#555">2030</div></div><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:32px;font-weight:900;color:white" data-countup="4268" data-suffix="万人" data-speed="fast">0万人</span><span style="font-size:12px;color:#555">→ 6,000万人</span></div></div>
+                    <div style="flex:1"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px"><span style="font-size:12px;color:#888">訪日外国人数</span><span style="font-size:11px;color:#C41E3A;font-weight:700">2025年実績</span></div><div class="progress-track" style="margin-bottom:8px;position:relative"><div class="progress-bar" style="--target-width:71%"></div><div style="position:absolute;right:0;top:-18px;font-size:10px;color:#888">2030</div></div><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:32px;font-weight:900;color:white" data-countup="4268" data-suffix="万人" data-speed="fast">0万人</span><span style="font-size:12px;color:#777">→ 6,000万人</span></div></div>
                     <div style="width:1px;height:70px;background:rgba(255,255,255,0.08);flex-shrink:0;margin-top:10px"></div>
-                    <div style="flex:1"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px"><span style="font-size:12px;color:#888">旅行消費額</span><span style="font-size:11px;color:#C41E3A;font-weight:700">2025年実績</span></div><div class="progress-track" style="margin-bottom:8px;position:relative"><div class="progress-bar" style="--target-width:47.5%"></div><div style="position:absolute;right:0;top:-18px;font-size:10px;color:#555">2030</div></div><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:32px;font-weight:900;color:white" data-countup="9.5" data-suffix="兆円" data-speed="fast" data-decimals="1">0兆円</span><span style="font-size:12px;color:#555">→ 20兆円</span></div></div>
+                    <div style="flex:1"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px"><span style="font-size:12px;color:#888">旅行消費額</span><span style="font-size:11px;color:#C41E3A;font-weight:700">2025年実績</span></div><div class="progress-track" style="margin-bottom:8px;position:relative"><div class="progress-bar" style="--target-width:47.5%"></div><div style="position:absolute;right:0;top:-18px;font-size:10px;color:#888">2030</div></div><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:32px;font-weight:900;color:white" data-countup="9.5" data-suffix="兆円" data-speed="fast" data-decimals="1">0兆円</span><span style="font-size:12px;color:#777">→ 20兆円</span></div></div>
                 </div>
                 <div class="stg-4" style="text-align:center;margin-top:14px;padding:10px 0;border-top:1px solid rgba(255,255,255,0.04)">
                     <p style="font-size:28px;font-weight:900;color:white;letter-spacing:2px">まだ、<span class="t-primary" style="font-size:36px">半分</span>。<span style="font-size:16px;font-weight:400;color:#666;margin-left:12px">― 成長余地は、あと倍以上。</span></p>
@@ -637,16 +652,17 @@
         </div>
         
         <div class="header"><img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2025/07/GLD_type02_white_1178_785-2-1.png" alt="GLOBAL DAILY" class="logo"><span class="header-label">OUR POSITION</span></div>
-        <div class="anim-scale" style="text-align:center;position:relative;z-index:2">
-            <h2 style="font-size:58px;line-height:1.3"><span style="font-weight:400;color:#aaa">貴社の</span><span class="t-primary" style="font-weight:900;font-size:72px">「現地パートナー」</span><span style="font-weight:400;color:#aaa">として。</span></h2>
-            <p style="margin-top:40px;font-size:28px;font-weight:400;color:#666">直接、世界と繋ぎます。</p>
+        <div style="text-align:center;position:relative;z-index:2">
+            <h2 class="stg-1" style="font-size:58px;line-height:1.3"><span style="font-weight:400;color:#aaa">貴社の</span><span class="t-primary anim-glow" style="font-weight:900;font-size:72px">「現地パートナー」</span><span style="font-weight:400;color:#aaa">として。</span></h2>
+            <div class="stg-2 anim-line" style="width:100px;height:4px;background:var(--primary);margin:30px auto"></div>
+            <p class="stg-3" style="margin-top:20px;font-size:28px;font-weight:400;color:#888">直接、世界と繋ぎます。</p>
         </div>
         <div class="footer"><span>15 / OUR POSITION</span><span class="page-num">16</span></div>
     </div>
 
     <!-- ===== SLIDE 17: CASE 1/2 ===== -->
     <div class="slide" style="padding:50px 80px">
-        <div style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1920') center/cover no-repeat;opacity:0.10;pointer-events:none"></div>
+        <div style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1920') center/cover no-repeat;opacity:0.14;pointer-events:none"></div>
         <div class="header"><img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2025/07/GLD_type02_white_1178_785-2-1.png" alt="GLOBAL DAILY" class="logo"><div style="text-align:center"><span style="font-size:42px;font-weight:900">事例</span><span class="t-muted" style="font-size:20px;margin-left:10px">1 / 2</span></div><span class="header-label">CASE STUDIES</span></div>
         <div class="anim-fade" style="margin-top:80px;position:relative;z-index:2">
             <p style="font-size:20px;font-weight:700;margin-bottom:30px">民間企業 <span class="t-muted t-en" style="font-weight:400;font-size:14px;margin-left:8px">PRIVATE SECTOR</span></p>
@@ -662,7 +678,7 @@
 
     <!-- ===== SLIDE 18: CASE 2/2 ===== -->
     <div class="slide" style="padding:50px 80px">
-        <div style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920') center/cover no-repeat;opacity:0.10;pointer-events:none"></div>
+        <div style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920') center/cover no-repeat;opacity:0.14;pointer-events:none"></div>
         <div class="header"><img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2025/07/GLD_type02_white_1178_785-2-1.png" alt="GLOBAL DAILY" class="logo"><div style="text-align:center"><span style="font-size:42px;font-weight:900">事例</span><span class="t-muted" style="font-size:20px;margin-left:10px">2 / 2</span></div><span class="header-label">CASE STUDIES</span></div>
         <div class="anim-fade" style="margin-top:80px;position:relative;z-index:2">
             <p style="font-size:20px;font-weight:700;margin-bottom:30px">民間企業 <span class="t-muted t-en" style="font-weight:400;font-size:14px;margin-left:8px">PRIVATE SECTOR</span></p>
@@ -761,8 +777,8 @@
                             <p style="font-size:16px;color:white;font-weight:700">3/25（火）韓国トレンドセミナー</p>
                         </div>
                         <div style="margin-top:auto;display:flex;align-items:center;gap:14px">
-                            <div style="width:80px;height:80px;background:white;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0"><img src="https://api.qrserver.com/v1/create-qr-code/?size=68x68&data=https://www.gldaily.com/services/seminars/" alt="QR" style="width:68px;height:68px"></div>
-                            <p style="font-size:12px;color:rgba(255,255,255,0.45);line-height:1.5">セミナー詳細・<br>お申し込みはこちら</p>
+                            <div style="width:100px;height:100px;background:white;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0"><img src="https://api.qrserver.com/v1/create-qr-code/?size=88x88&data=https://www.gldaily.com/services/seminars/" alt="QR" style="width:88px;height:88px"></div>
+                            <p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.5;font-weight:500">セミナー詳細・<br>お申し込みはこちら</p>
                         </div>
                     </div>
                     <!-- Newsletter -->
@@ -774,15 +790,15 @@
                         </div>
                         <p style="font-size:19px;color:white;font-weight:700;line-height:1.6;margin-bottom:12px"><span style="color:rgba(255,255,255,0.95)">9カ国</span>のマーケターが<br>海外トレンドを<span style="border-bottom:1px solid rgba(255,255,255,0.2)">週2回、無料配信</span></p>
                         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px">
-                            <span style="background:rgba(255,255,255,0.08);padding:5px 11px;border-radius:4px;font-size:12px;color:rgba(255,255,255,0.55)">韓国</span>
-                            <span style="background:rgba(255,255,255,0.08);padding:5px 11px;border-radius:4px;font-size:12px;color:rgba(255,255,255,0.55)">中国</span>
-                            <span style="background:rgba(255,255,255,0.08);padding:5px 11px;border-radius:4px;font-size:12px;color:rgba(255,255,255,0.55)">台湾</span>
-                            <span style="background:rgba(255,255,255,0.08);padding:5px 11px;border-radius:4px;font-size:12px;color:rgba(255,255,255,0.55)">英語圏</span>
-                            <span style="background:rgba(255,255,255,0.08);padding:5px 11px;border-radius:4px;font-size:12px;color:rgba(255,255,255,0.55)">ASEAN</span>
+                            <span style="background:rgba(255,255,255,0.08);padding:5px 11px;border-radius:4px;font-size:12px;color:rgba(255,255,255,0.7)">韓国</span>
+                            <span style="background:rgba(255,255,255,0.08);padding:5px 11px;border-radius:4px;font-size:12px;color:rgba(255,255,255,0.7)">中国</span>
+                            <span style="background:rgba(255,255,255,0.08);padding:5px 11px;border-radius:4px;font-size:12px;color:rgba(255,255,255,0.7)">台湾</span>
+                            <span style="background:rgba(255,255,255,0.08);padding:5px 11px;border-radius:4px;font-size:12px;color:rgba(255,255,255,0.7)">英語圏</span>
+                            <span style="background:rgba(255,255,255,0.08);padding:5px 11px;border-radius:4px;font-size:12px;color:rgba(255,255,255,0.7)">ASEAN</span>
                         </div>
                         <div style="margin-top:auto;display:flex;align-items:center;gap:14px">
-                            <div style="width:80px;height:80px;background:white;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0"><img src="https://api.qrserver.com/v1/create-qr-code/?size=68x68&data=https://www.gldaily.com/services/news-letter/" alt="QR" style="width:68px;height:68px"></div>
-                            <p style="font-size:12px;color:rgba(255,255,255,0.45);line-height:1.5">無料購読の<br>お申し込みはこちら</p>
+                            <div style="width:100px;height:100px;background:white;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0"><img src="https://api.qrserver.com/v1/create-qr-code/?size=88x88&data=https://www.gldaily.com/services/news-letter/" alt="QR" style="width:88px;height:88px"></div>
+                            <p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.5;font-weight:500">無料購読の<br>お申し込みはこちら</p>
                         </div>
                     </div>
                 </div>
@@ -810,14 +826,14 @@
         </div>
         <div style="position:absolute;inset:0;background:url('https://www.gldaily.com/gld-kanri/wp-content/uploads/2023/06/366810856_658725399620646_7959243527269898492_n.jpeg') center/cover no-repeat;opacity:0.25;pointer-events:none"></div>
         <div class="header"><img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2025/07/GLD_type02_white_1178_785-2-1.png" alt="GLOBAL DAILY" class="logo"></div>
-        <div class="anim-scale" style="text-align:center;position:relative;z-index:2">
-            <h2 style="font-size:56px;font-weight:900;line-height:1.3;margin-bottom:30px">世界を、もっと身近に。</h2>
+        <div style="text-align:center;position:relative;z-index:2">
+            <h2 class="stg-1 anim-glow" style="font-size:56px;font-weight:900;line-height:1.3;margin-bottom:30px">世界を、もっと身近に。</h2>
             <div style="width:80px;height:4px;background:var(--primary);margin:0 auto 40px"></div>
-            <p class="t-en" style="font-size:36px;font-weight:900;color:white;margin-bottom:8px">www.gldaily.com</p>
-            <p style="font-size:20px;color:var(--gray);margin-bottom:40px">株式会社グローバル・デイリー　荒井 良治</p>
+            <p class="t-en stg-2" style="font-size:36px;font-weight:900;color:white;margin-bottom:8px">www.gldaily.com</p>
+            <p class="stg-3" style="font-size:20px;color:var(--gray);margin-bottom:40px">株式会社グローバル・デイリー　荒井 良治</p>
             <div style="display:flex;justify-content:center;gap:40px;align-items:center">
-                <div style="position:relative"><div style="position:absolute;inset:-15px;border:2px solid rgba(196,30,58,0.3);border-radius:18px;animation:qrRipple 2s ease-out infinite"></div><div style="position:absolute;inset:-15px;border:2px solid rgba(196,30,58,0.3);border-radius:18px;animation:qrRipple 2s ease-out .7s infinite"></div><div style="width:120px;height:120px;background:white;border-radius:12px;display:flex;align-items:center;justify-content:center;position:relative;z-index:1"><img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://www.gldaily.com" alt="QR" style="width:100px;height:100px"></div><div style="position:absolute;top:-30px;left:50%;transform:translateX(-50%);animation:bounceArrow 1.5s ease-in-out infinite;color:var(--primary);font-size:18px">▼</div></div>
-                <div style="text-align:left"><p style="font-size:14px;color:#888;margin-bottom:8px">お気軽にご相談ください</p><p style="font-size:18px;color:white;font-weight:700"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3f565159507f58535b5e565346115c5052">[email&#160;protected]</a></p></div>
+                <div style="position:relative"><div style="position:absolute;inset:-15px;border:2px solid rgba(196,30,58,0.3);border-radius:18px;animation:qrRipple 2s ease-out infinite"></div><div style="position:absolute;inset:-15px;border:2px solid rgba(196,30,58,0.3);border-radius:18px;animation:qrRipple 2s ease-out .7s infinite"></div><div style="width:120px;height:120px;background:white;border-radius:12px;display:flex;align-items:center;justify-content:center;position:relative;z-index:1"><img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.gldaily.com" alt="QR" style="width:108px;height:108px"></div><div style="position:absolute;top:-30px;left:50%;transform:translateX(-50%);animation:bounceArrow 1.5s ease-in-out infinite;color:var(--primary);font-size:18px">▼</div></div>
+                <div style="text-align:left"><p style="font-size:14px;color:#888;margin-bottom:8px">お気軽にご相談ください</p><p style="font-size:18px;color:white;font-weight:700"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3f565159507f58535b5e565346115c5052">info@gldaily.com</a></p></div>
             </div>
         </div>
         <div class="footer"><span>20 / FINAL</span><span class="page-num">21</span></div>
@@ -907,6 +923,8 @@
     document.addEventListener('keydown', function(e) {
         if(e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
         if(e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+        if(e.key === 'Home') { e.preventDefault(); update(0); }
+        if(e.key === 'End') { e.preventDefault(); update(total - 1); }
     });
 
     function fit() {
@@ -1000,8 +1018,10 @@
     }
 
     /* === UPDATE (with exit animation) === */
+    var transitioning = false;
     function update(n){
-        if(n < 0 || n >= total || n === cur) return;
+        if(n < 0 || n >= total || n === cur || transitioning) return;
+        transitioning = true;
         var prevSlide = slides[cur];
         prevSlide.querySelectorAll('[data-countup]').forEach(function(el){ delete el.dataset.counted; });
         prevSlide.querySelectorAll('.progress-bar').forEach(function(bar){ bar.style.transition = 'none'; bar.style.width = '0'; });
@@ -1012,6 +1032,7 @@
 
         setTimeout(function(){
             prevSlide.classList.remove('exit-left');
+            transitioning = false;
         }, 550);
 
         cur = n;
