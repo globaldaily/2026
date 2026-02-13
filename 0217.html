@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GLOBAL DAILY PITCH 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Montserrat:wght@700;900&family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
     *{margin:0;padding:0;box-sizing:border-box}
     :root{
@@ -16,7 +16,7 @@
         --gray:#777;
         --light-gray:#383838;
     }
-    body{background:#000;color:var(--white);font-family:'Noto Sans JP',sans-serif;overflow:hidden;width:100vw;height:100vh;display:flex;align-items:center;justify-content:center}
+    body{background:#000;color:var(--white);font-family:'Noto Sans JP','Inter',sans-serif;overflow:hidden;width:100vw;height:100vh;display:flex;align-items:center;justify-content:center}
     .presentation{width:1280px;height:720px;position:relative;background:var(--bg);overflow:hidden}
     .slide{width:1280px;height:720px;background:var(--bg);position:absolute;opacity:0;visibility:hidden;transition:opacity .6s cubic-bezier(.4,0,.2,1),transform .6s cubic-bezier(.4,0,.2,1),filter .6s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;padding:100px 80px 60px;justify-content:center;transform:scale(0.96);filter:blur(4px)}
     .slide.active{opacity:1;visibility:visible;transform:scale(1);filter:blur(0)}
@@ -26,7 +26,7 @@
     .t-md{font-size:32px;font-weight:700}
     .t-sm{font-size:24px;font-weight:400}
     .t-primary{color:var(--primary)}
-    .t-en{font-family:'Montserrat',sans-serif;font-weight:900}
+    .t-en{font-family:'Montserrat','Inter',sans-serif;font-weight:900;letter-spacing:-0.02em}
     .t-muted{opacity:0.6}
     .accent-line{width:100px;height:8px;background:var(--primary);margin:25px 0}
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;width:100%}
@@ -258,6 +258,31 @@
 
     /* === SMOOTHER spotlight for red slides === */
     .spotlight-sweep{mix-blend-mode:soft-light}
+
+    /* === SLIDE 1 GRAND ENTRANCE === */
+    .s1-curtain{position:absolute;inset:0;background:#000;z-index:100;pointer-events:none;animation:curtainLift 1s ease 2s both}
+    @keyframes curtainLift{0%{opacity:1}100%{opacity:0}}
+
+    .slide.active .s1-logo{opacity:0;animation:s1FadeIn .8s ease 0.8s both}
+    .slide.active .s1-since{opacity:0;animation:s1FadeIn .6s ease 1.8s both}
+    .slide.active .s1-title{opacity:0;animation:s1FadeIn .5s ease 2.4s both}
+    .slide.active .s1-sub{opacity:0;animation:s1SlideUp .7s cubic-bezier(.16,1,.3,1) 5.5s both}
+    .slide.active .s1-line-wrap{opacity:0;animation:s1SlideUp .5s cubic-bezier(.16,1,.3,1) 5.8s both}
+    .slide.active .s1-name{opacity:0;animation:s1SlideUp .6s cubic-bezier(.16,1,.3,1) 6.2s both}
+
+    @keyframes s1FadeIn{from{opacity:0;filter:blur(8px)}to{opacity:1;filter:blur(0)}}
+    @keyframes s1SlideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+    .slide.active .s1-line-inner{animation:s1LineGrow .8s cubic-bezier(.4,0,.2,1) 6s both}
+    .slide.active .s1-line-glow{animation:s1LineGrow .8s cubic-bezier(.4,0,.2,1) 6s both}
+    @keyframes s1LineGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+    /* === SLIDE 3: Business tag highlight === */
+    @keyframes tagPulse{
+        0%,100%{background:rgba(196,30,58,0.2);box-shadow:0 0 0 0 rgba(196,30,58,0)}
+        50%{background:rgba(196,30,58,0.35);box-shadow:0 0 16px 4px rgba(196,30,58,0.25)}
+    }
+    .biz-tag-highlight{animation:tagPulse 2s ease-in-out 1.5s 3 both}
 </style>
 </head>
 
@@ -273,23 +298,24 @@
         <div class="bg-pattern"></div>
         <div style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=1920') center/cover no-repeat;opacity:0.18;pointer-events:none"></div>
         <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,10,10,0.95) 0%,rgba(10,10,10,0.7) 100%);pointer-events:none"></div>
+        <div class="s1-curtain"></div>
         <div class="header">
-            <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2025/07/GLD_type02_white_1178_785-2-1.png" alt="GLOBAL DAILY" class="logo">
+            <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2025/07/GLD_type02_white_1178_785-2-1.png" alt="GLOBAL DAILY" class="logo s1-logo">
         </div>
         <div style="position:relative;z-index:2">
-            <p class="t-en t-primary stg-1" style="font-size:16px;letter-spacing:8px;margin-bottom:20px">SINCE 2008</p>
-            <h1 class="t-huge stg-2">
+            <p class="t-en t-primary s1-since" style="font-size:16px;letter-spacing:8px;margin-bottom:20px">SINCE 2008</p>
+            <h1 class="t-huge s1-title">
                 <span id="typing-target"></span><span class="typing-cursor" id="typing-cursor"></span><br>
                 <span class="t-primary" id="typing-target2" style="opacity:0"></span>
             </h1>
-            <p class="stg-3" style="font-size:24px;opacity:0.7;margin-top:25px;white-space:nowrap">
+            <p class="s1-sub" style="font-size:24px;opacity:0.7;margin-top:25px;white-space:nowrap">
                 現地メディアと18年歩んで見つけた、メーカーが現地で選ばれる仕組み
             </p>
-            <div class="stg-4" style="position:relative;width:120px;height:3px;margin:25px 0;overflow:visible">
+            <div class="s1-line-wrap" style="position:relative;width:120px;height:3px;margin:25px 0;overflow:visible">
                 <div class="s1-line-inner" style="position:absolute;inset:0;background:var(--primary);border-radius:2px;transform-origin:left;transform:scaleX(0)"></div>
                 <div class="s1-line-glow" style="position:absolute;inset:-1px;background:var(--primary);border-radius:2px;transform-origin:left;transform:scaleX(0);filter:blur(3px);opacity:0.5"></div>
             </div>
-            <p class="t-md stg-5" style="font-weight:400">株式会社グローバル・デイリー　荒井 良治</p>
+            <p class="t-md s1-name" style="font-weight:400">株式会社グローバル・デイリー　荒井 良治</p>
         </div>
         <div class="footer">
             <span class="t-en">GLOBAL DAILY CO., LTD.</span>
@@ -339,7 +365,7 @@
                     <div class="card stg-6 anim-lift" style="padding:20px;text-align:center"><p style="font-size:12px;opacity:0.5">全国拠点</p><p style="margin-top:8px"><span class="t-en" style="font-size:46px">30</span><span style="font-size:18px;font-weight:700">カ所+</span></p></div>
                 </div>
                 <div class="stg-7" style="margin-top:24px;display:flex;gap:10px;flex-wrap:nowrap;align-items:center">
-                    <span style="background:rgba(196,30,58,0.2);border:1px solid rgba(196,30,58,0.4);border-radius:6px;padding:6px 14px;font-size:14px;color:#eee;font-weight:700">グローバル広告</span>
+                    <span class="biz-tag-highlight" style="background:rgba(196,30,58,0.2);border:1px solid rgba(196,30,58,0.4);border-radius:6px;padding:6px 14px;font-size:14px;color:#fff;font-weight:700">グローバル広告</span>
                     <span style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:6px 12px;font-size:13px;color:#888">総合広告</span>
                     <span style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:6px 12px;font-size:13px;color:#888">人材</span>
                     <span style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:6px 12px;font-size:13px;color:#888">観光</span>
@@ -347,7 +373,7 @@
                     <span style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:6px 12px;font-size:13px;color:#888">社会貢献</span>
                     <span style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:6px 12px;font-size:13px;color:#888">農業</span>
                 </div>
-                <p class="stg-8" style="margin-top:12px;font-size:14px;color:#666">その中で<span class="t-primary" style="font-weight:700">インバウンド広告</span>を専門に担うのがグローバル・デイリーです。</p>
+                <p class="stg-8" style="margin-top:12px;font-size:14px;color:#666">その中で<span class="t-primary" style="font-weight:700;text-shadow:0 0 12px rgba(196,30,58,0.4)">インバウンド広告</span>を専門に担うのがグローバル・デイリーです。</p>
             </div>
             <div class="stg-3" style="position:relative;width:480px;height:480px;flex-shrink:0;">
                 
@@ -833,7 +859,7 @@
             <p class="stg-3" style="font-size:20px;color:var(--gray);margin-bottom:40px">株式会社グローバル・デイリー　荒井 良治</p>
             <div style="display:flex;justify-content:center;gap:40px;align-items:center">
                 <div style="position:relative"><div style="position:absolute;inset:-15px;border:2px solid rgba(196,30,58,0.3);border-radius:18px;animation:qrRipple 2s ease-out infinite"></div><div style="position:absolute;inset:-15px;border:2px solid rgba(196,30,58,0.3);border-radius:18px;animation:qrRipple 2s ease-out .7s infinite"></div><div style="width:120px;height:120px;background:white;border-radius:12px;display:flex;align-items:center;justify-content:center;position:relative;z-index:1"><img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.gldaily.com" alt="QR" style="width:108px;height:108px"></div><div style="position:absolute;top:-30px;left:50%;transform:translateX(-50%);animation:bounceArrow 1.5s ease-in-out infinite;color:var(--primary);font-size:18px">▼</div></div>
-                <div style="text-align:left"><p style="font-size:14px;color:#888;margin-bottom:8px">お気軽にご相談ください</p><p style="font-size:18px;color:white;font-weight:700"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3f565159507f58535b5e565346115c5052">info@gldaily.com</a></p></div>
+                <div style="text-align:left"><p style="font-size:14px;color:#888;margin-bottom:8px">お気軽にご相談ください</p><p style="font-size:18px;color:white;font-weight:700">info@gldaily.com</p></div>
             </div>
         </div>
         <div class="footer"><span>20 / FINAL</span><span class="page-num">21</span></div>
@@ -844,7 +870,7 @@
 
 <div class="nav">
     <button class="nav-btn" onclick="prev()">&#9664;</button>
-    <div id="slide-info">1 / 21</div>
+    <div id="slide-info" style="font-family:'Montserrat','Inter',sans-serif;font-weight:700;font-size:13px;letter-spacing:1px;color:#999">1 / 21</div>
     <button class="nav-btn" onclick="next()">&#9654;</button>
     <button class="nav-btn" id="mapBtn" onclick="toggleMap()" style="margin-left:10px;font-size:11px;padding:6px 14px;letter-spacing:1px">MAP</button>
     <button class="nav-btn" id="scriptBtn" onclick="toggleScript()" style="font-size:11px;padding:6px 14px;letter-spacing:1px">台本ON</button>
@@ -971,7 +997,7 @@
                 else { setTimeout(function(){ cursor.style.display = 'none'; }, 1500); }
             }
         }
-        setTimeout(type, 800);
+        setTimeout(type, 3000);
     })();
 
     /* === CountUp observer === */
