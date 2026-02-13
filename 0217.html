@@ -11,10 +11,10 @@
         --primary:#C41E3A;
         --primary-dark:#8B1425;
         --bg:#0A0A0A;
-        --card:#141414;
+        --card:#181818;
         --white:#fff;
-        --gray:#666;
-        --light-gray:#333;
+        --gray:#777;
+        --light-gray:#383838;
     }
     body{background:#000;color:var(--white);font-family:'Noto Sans JP',sans-serif;overflow:hidden;width:100vw;height:100vh;display:flex;align-items:center;justify-content:center}
     .presentation{width:1280px;height:720px;position:relative;background:var(--bg);overflow:hidden}
@@ -35,7 +35,7 @@
     .header{position:absolute;top:24px;left:80px;right:80px;display:flex;justify-content:space-between;align-items:flex-start;z-index:10}
     .logo{height:120px;opacity:0.9}
     .header-label{font-family:'Montserrat';font-size:11px;color:var(--gray);letter-spacing:3px;font-weight:700;margin-top:8px}
-    .footer{position:absolute;bottom:30px;left:80px;right:80px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--light-gray);padding-top:15px;font-size:13px;color:var(--gray)}
+    .footer{position:absolute;bottom:22px;left:80px;right:80px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--light-gray);padding-top:10px;font-size:12px;color:var(--gray)}
     .page-num{font-family:'Montserrat';font-weight:900;font-size:16px;color:var(--primary)}
     .bg-gradient{position:absolute;width:600px;height:600px;border-radius:50%;filter:blur(120px);opacity:0.15;pointer-events:none}
     .bg-gradient.top-right{top:-200px;right:-150px;background:var(--primary)}
@@ -117,8 +117,9 @@
     .venn-circle.c3{bottom:0;right:10px;background:rgba(255,255,255,0.05);border:2px solid rgba(255,255,255,0.12)}
     .venn-circle.c3 .venn-label{margin-bottom:-30px}
     .venn-center{position:absolute;top:48%;left:50%;transform:translate(-50%,-45%);width:120px;height:120px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;box-shadow:0 0 50px rgba(196,30,58,0.6);z-index:5;animation:pulse-ring 2s ease-in-out infinite}
-    .nav{position:fixed;bottom:25px;left:50%;transform:translateX(-50%);background:rgba(20,20,20,.95);padding:12px 30px;border-radius:50px;display:flex;gap:25px;z-index:1000;border:1px solid rgba(255,255,255,0.1);align-items:center;backdrop-filter:blur(10px)}
-    .nav-btn{background:none;border:none;color:#fff;font-size:18px;cursor:pointer;padding:5px 12px;opacity:0.7;transition:opacity .2s}
+    .nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.85);padding:5px 20px;border-radius:20px 20px 0 0;display:flex;gap:16px;z-index:1000;border:1px solid rgba(255,255,255,0.04);border-bottom:none;align-items:center;backdrop-filter:blur(10px);opacity:0;transition:opacity .4s}
+    .nav:hover{opacity:0.9}
+    .nav-btn{background:none;border:none;color:#fff;font-size:15px;cursor:pointer;padding:4px 10px;opacity:0.7;transition:opacity .2s}
     .nav-btn:hover{opacity:1}
     #slide-info{font-family:'Montserrat';font-weight:900;font-size:16px;min-width:80px;text-align:center;color:var(--gray)}
     .slide-map{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(12,12,12,0.97);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:16px 12px;z-index:999;backdrop-filter:blur(12px);display:none;max-height:70vh;overflow-y:auto;width:340px;box-shadow:0 -10px 40px rgba(0,0,0,0.5)}
@@ -210,10 +211,10 @@
     @keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(250%)}}
 
     /* === PROGRESS BAR (bottom) === */
-    .slide-progress{position:fixed;bottom:0;left:0;height:3px;background:linear-gradient(90deg,#C41E3A,#ff4060,#C41E3A);z-index:10000;transition:width .4s cubic-bezier(.4,0,.2,1);box-shadow:0 0 12px rgba(196,30,58,0.5),0 0 4px rgba(196,30,58,0.8)}
+    .slide-progress{position:fixed;bottom:0;left:0;height:4px;background:linear-gradient(90deg,#C41E3A,#ff4060,#C41E3A);z-index:10000;transition:width .4s cubic-bezier(.4,0,.2,1);box-shadow:0 0 12px rgba(196,30,58,0.5),0 0 4px rgba(196,30,58,0.8)}
 
     /* === PARTICLE CANVAS === */
-    #particleCanvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.5}
+    #particleCanvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.35}
 
     /* === SCAN LINE === */
     .scan-line{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(196,30,58,0.4),rgba(255,255,255,0.15),rgba(196,30,58,0.4),transparent);z-index:50;pointer-events:none;opacity:0;transform:translateY(-10px)}
@@ -236,6 +237,12 @@
 
     #mapBtn,#scriptBtn{display:none!important}
     .slide-map,#scriptPanel{display:none!important}
+
+    /* === PROJECTOR READABILITY === */
+    .t-huge,.t-xl,.t-lg{text-shadow:0 1px 3px rgba(0,0,0,0.5)}
+    .t-primary{text-shadow:0 0 20px rgba(196,30,58,0.2)}
+    .t-sm{line-height:1.5}
+    .card{box-shadow:0 2px 12px rgba(0,0,0,0.3)}
 </style>
 </head>
 
@@ -401,19 +408,19 @@
                 <p class="anim-glow" style="font-size:130px;font-weight:900;line-height:1;letter-spacing:-4px"><span class="t-primary" data-countup="9.5" data-suffix="" data-decimals="1" data-speed="fast" style="font-family:'Montserrat',sans-serif">0</span><span style="font-size:40px;font-weight:400;color:#aaa;margin-left:6px">兆円</span></p>
                 <div style="display:flex;justify-content:center;gap:16px;margin-top:8px"><span style="background:#C41E3A;color:white;font-size:16px;font-weight:900;padding:6px 16px;border-radius:6px">前年比 +17%</span><span style="font-size:13px;color:#666;align-self:center">2025年（過去最高）</span></div>
             </div>
-            <div class="stg-3" style="width:100%;max-width:900px;margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.06)">
+            <div class="stg-3" style="width:100%;max-width:900px;margin-top:20px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.06)">
                 <div style="display:flex;gap:40px;align-items:flex-start">
                     <div style="flex:1"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px"><span style="font-size:12px;color:#888">訪日外国人数</span><span style="font-size:11px;color:#C41E3A;font-weight:700">2025年実績</span></div><div class="progress-track" style="margin-bottom:8px;position:relative"><div class="progress-bar" style="--target-width:71%"></div><div style="position:absolute;right:0;top:-18px;font-size:10px;color:#555">2030</div></div><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:32px;font-weight:900;color:white" data-countup="4268" data-suffix="万人" data-speed="fast">0万人</span><span style="font-size:12px;color:#555">→ 6,000万人</span></div></div>
                     <div style="width:1px;height:70px;background:rgba(255,255,255,0.08);flex-shrink:0;margin-top:10px"></div>
                     <div style="flex:1"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px"><span style="font-size:12px;color:#888">旅行消費額</span><span style="font-size:11px;color:#C41E3A;font-weight:700">2025年実績</span></div><div class="progress-track" style="margin-bottom:8px;position:relative"><div class="progress-bar" style="--target-width:47.5%"></div><div style="position:absolute;right:0;top:-18px;font-size:10px;color:#555">2030</div></div><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:32px;font-weight:900;color:white" data-countup="9.5" data-suffix="兆円" data-speed="fast" data-decimals="1">0兆円</span><span style="font-size:12px;color:#555">→ 20兆円</span></div></div>
                 </div>
-                <div class="stg-4" style="text-align:center;margin-top:20px;padding:14px 0;border-top:1px solid rgba(255,255,255,0.04)">
+                <div class="stg-4" style="text-align:center;margin-top:14px;padding:10px 0;border-top:1px solid rgba(255,255,255,0.04)">
                     <p style="font-size:28px;font-weight:900;color:white;letter-spacing:2px">まだ、<span class="t-primary" style="font-size:36px">半分</span>。<span style="font-size:16px;font-weight:400;color:#666;margin-left:12px">― 成長余地は、あと倍以上。</span></p>
                     <p class="stg-5" style="font-size:16px;font-weight:400;color:#888;margin-top:12px">― しかし、18年間多くの企業様とお付き合いする中で、共通して感じることがあります。</p>
                     <p class="stg-6" style="font-size:22px;font-weight:700;color:white;margin-top:8px;letter-spacing:1px">売上の数字だけでは、<span class="t-primary">見えていないもの</span>がある。</p>
                 </div>
             </div>
-            <p class="stg-5" style="display:flex;gap:16px;align-items:center;margin-top:6px"><span style="font-size:11px;color:#C41E3A;font-weight:700;letter-spacing:2px">観光庁 2030年目標</span><span style="font-size:10px;color:#444">出典：日本政府観光局（JNTO）/ 観光庁</span></p>
+            <p class="stg-5" style="display:flex;gap:16px;align-items:center;margin-top:2px"><span style="font-size:11px;color:#C41E3A;font-weight:700;letter-spacing:2px">観光庁 2030年目標</span><span style="font-size:10px;color:#555">出典：JNTO / 観光庁</span></p>
         </div>
         <div class="footer"><span>05 / MARKET TREND</span><span class="page-num">06</span></div>
     </div>
@@ -1093,6 +1100,15 @@
 
     update(0);
     updateProgress();
+
+    /* Brief nav hint on load, then hide */
+    (function(){
+        var nav = document.querySelector('.nav');
+        if(nav){
+            nav.style.opacity = '0.6';
+            setTimeout(function(){ nav.style.opacity = ''; }, 2500);
+        }
+    })();
 </script>
 
 </body>
