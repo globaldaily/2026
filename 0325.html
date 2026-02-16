@@ -9,86 +9,126 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-    :root{--bg:#FAF8F5;--white:#FFF;--ink:#1A1A1A;--sub:#5A5A5A;--muted:#9A9A9A;--line:#EBE7E2;--line-light:#F3F0EB;--beauty:#C4466A;--beauty-soft:#FBF0F3;--beauty-border:#F0CDD6;--food:#2E7A68;--food-soft:#EDF7F3;--food-border:#BDE0D5;--accent-warm:#D4A853;--radius:20px;--radius-sm:12px;--max:1080px;--font-jp:'Noto Sans JP',sans-serif;--font-display:'Playfair Display',serif}
-    body{font-family:var(--font-jp);background:var(--bg);color:var(--ink);font-size:17px;line-height:1.8;-webkit-font-smoothing:antialiased;scroll-behavior:smooth;-webkit-tap-highlight-color:transparent}
+    :root{
+      --bg:#FAF8F5;--white:#FFF;--ink:#1A1A1A;--sub:#5A5A5A;--muted:#9A9A9A;
+      --line:#EBE7E2;--line-light:#F3F0EB;
+      --beauty:#C4466A;--beauty-soft:#FBF0F3;--beauty-border:#F0CDD6;
+      --food:#2E7A68;--food-soft:#EDF7F3;--food-border:#BDE0D5;
+      --accent-warm:#D4A853;
+      --taegeuk-red:#C8102E;--taegeuk-blue:#003478;
+      --radius:20px;--radius-sm:12px;--max:1080px;
+      --font-jp:'Noto Sans JP',sans-serif;--font-display:'Playfair Display',serif
+    }
+    body{font-family:var(--font-jp);background:var(--bg);color:var(--ink);font-size:18px;line-height:1.8;-webkit-font-smoothing:antialiased;scroll-behavior:smooth;-webkit-tap-highlight-color:transparent}
     a{text-decoration:none;color:inherit;transition:opacity .2s}
     a:focus-visible{outline:2px solid var(--beauty);outline-offset:2px;border-radius:4px}
     button:focus-visible{outline:2px solid var(--beauty);outline-offset:2px}
-    .kr-deco{position:absolute;pointer-events:none;user-select:none;z-index:0}
-    .hero{padding:0;position:relative;overflow:hidden}
+
+    /* ===== HERO ===== */
+    .hero{padding:0;position:relative;overflow:hidden;min-height:auto}
     .hero-bg{position:absolute;inset:0;z-index:0}
-    .hero-bg-img{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=1600&q=80') center center/cover no-repeat}
-    .hero-bg-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(250,248,245,.98) 0%,rgba(250,248,245,.94) 50%,rgba(250,248,245,.88) 100%)}
-    .hero-inner{max-width:var(--max);margin:0 auto;position:relative;z-index:1;padding:56px 32px 72px}
-    .hero-flag{position:absolute;top:32px;right:32px;width:64px;height:auto;opacity:.7;z-index:2}
-    .hero-grid{display:grid;grid-template-columns:1fr 380px;gap:56px;align-items:start}
-    .hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:800;letter-spacing:3px;color:#C8102E;margin-bottom:28px}
-    .hero-eyebrow .line{width:32px;height:2px;background:linear-gradient(90deg,#C8102E,#003478);border-radius:2px}
-    .hero h1{font-size:clamp(32px,5vw,52px);font-weight:900;line-height:1.25;letter-spacing:-1.5px;margin-bottom:32px}
+    .hero-bg-base{position:absolute;inset:0;background:var(--bg)}
+    
+    /* 배경에 녹아드는 세로 스크롤 이미지 - 좌측 */
+    .hero-photo-scroll{position:absolute;left:0;top:0;width:220px;height:200%;z-index:1;display:flex;flex-direction:column;gap:12px;animation:bgScroll 30s linear infinite;opacity:.45}
+    .hero-photo-scroll .photo{width:180px;height:260px;border-radius:16px;overflow:hidden;flex-shrink:0;margin-left:20px}
+    .hero-photo-scroll .photo img{width:100%;height:100%;object-fit:cover}
+    @keyframes bgScroll{0%{transform:translateY(0)}100%{transform:translateY(-50%)}}
+    
+    /* 배경에 녹아드는 세로 스크롤 이미지 - 우측 */
+    .hero-photo-scroll-right{position:absolute;right:0;top:-20%;width:200px;height:200%;z-index:1;display:flex;flex-direction:column;gap:12px;animation:bgScrollReverse 35s linear infinite;opacity:.4}
+    .hero-photo-scroll-right .photo{width:160px;height:220px;border-radius:16px;overflow:hidden;flex-shrink:0;margin-left:20px}
+    .hero-photo-scroll-right .photo img{width:100%;height:100%;object-fit:cover}
+    @keyframes bgScrollReverse{0%{transform:translateY(-50%)}100%{transform:translateY(0)}}
+    
+    .hero-bg-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(250,248,245,.3) 0%,rgba(250,248,245,.92) 18%,rgba(250,248,245,.98) 50%,rgba(250,248,245,.92) 82%,rgba(250,248,245,.3) 100%);z-index:2}
+    
+    .hero-inner{max-width:var(--max);margin:0 auto;position:relative;z-index:5;padding:64px 32px 80px}
+    .hero-flag{position:absolute;top:28px;right:28px;width:64px;height:auto;opacity:.75;z-index:10;filter:drop-shadow(0 2px 8px rgba(0,0,0,.08))}
+    .hero-grid{display:grid;grid-template-columns:1fr 420px;gap:48px;align-items:start}
+    
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:12px;font-size:12px;font-weight:800;letter-spacing:4px;color:var(--taegeuk-red);margin-bottom:24px;text-transform:uppercase}
+    .hero-eyebrow .line{width:40px;height:3px;background:linear-gradient(90deg,var(--taegeuk-red),var(--taegeuk-blue));border-radius:2px}
+    
+    .hero h1{font-size:clamp(34px,5vw,52px);font-weight:900;line-height:1.2;letter-spacing:-1.5px;margin-bottom:20px}
     .hero h1 .em{background:linear-gradient(135deg,var(--beauty) 0%,#A04A6E 50%,var(--food) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-    .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;background:var(--white);border:1px solid var(--line);border-radius:var(--radius-sm);margin-bottom:36px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.04)}
-    .hero-stat{padding:22px 20px;text-align:center;border-right:1px solid var(--line-light)}
+    
+    /* 타겟 원라인 배지 */
+    .target-badge{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,rgba(200,16,46,.06),rgba(0,52,120,.06));border:1.5px solid rgba(200,16,46,.15);border-radius:var(--radius-sm);padding:12px 18px;margin-bottom:28px}
+    .target-badge .label{font-size:11px;font-weight:800;letter-spacing:1px;color:var(--taegeuk-red);background:rgba(200,16,46,.1);padding:4px 10px;border-radius:6px}
+    .target-badge .text{font-size:14px;font-weight:600;color:var(--ink)}
+
+    .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;background:var(--white);border:1.5px solid var(--line);border-radius:var(--radius);margin-bottom:28px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.05)}
+    .hero-stat{padding:28px 20px;text-align:center;border-right:1px solid var(--line-light);position:relative;overflow:hidden}
     .hero-stat:last-child{border-right:none}
-    .hero-stat .num{font-size:32px;font-weight:900;letter-spacing:-1px;font-family:var(--font-display)}
-    .hero-stat .num .unit{font-size:14px;font-weight:700;margin-left:2px;letter-spacing:0}
-    .hero-stat .num.c-red{color:#C8102E}
-    .hero-stat .num.c-blue{color:#003478}
+    .hero-stat::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+    .hero-stat:nth-child(1)::before{background:var(--taegeuk-red)}
+    .hero-stat:nth-child(2)::before{background:var(--taegeuk-blue)}
+    .hero-stat:nth-child(3)::before{background:var(--accent-warm)}
+    .hero-stat .num{font-size:40px;font-weight:900;letter-spacing:-1.5px;font-family:var(--font-display)}
+    .hero-stat .num .unit{font-size:17px;font-weight:700;margin-left:2px;letter-spacing:0}
+    .hero-stat .num.c-red{color:var(--taegeuk-red)}
+    .hero-stat .num.c-blue{color:var(--taegeuk-blue)}
     .hero-stat .num.c-warm{color:#8B6914}
-    .hero-stat .lbl{font-size:12px;font-weight:600;color:var(--sub);margin-top:4px;line-height:1.5}
-    .hero-lead{font-size:16px;color:var(--sub);line-height:2;margin-bottom:44px;max-width:580px}
-    .hero-lead strong{color:var(--ink);font-weight:700}
-    .stats-footnote{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;font-size:11px;color:var(--muted);margin-bottom:28px;padding:10px 16px;background:rgba(255,255,255,.6);border-radius:8px}
+    .hero-stat .lbl{font-size:12px;font-weight:600;color:var(--sub);margin-top:8px;line-height:1.5}
+    
+    .stats-footnote{display:flex;align-items:center;justify-content:flex-start;flex-wrap:wrap;gap:8px;font-size:11px;color:var(--muted);margin-bottom:16px;padding:8px 14px;background:rgba(255,255,255,.5);border-radius:8px;border:1px solid var(--line-light)}
     .fn-item{display:inline-flex;align-items:center;gap:4px}
     .fn-label{font-weight:600;color:var(--sub)}
     .fn-diff{font-size:10px;font-weight:700;padding:1px 5px;border-radius:3px;margin-left:2px}
     .fn-diff.plus{background:rgba(46,122,104,.12);color:var(--food)}
     .fn-diff.minus{background:rgba(196,70,106,.12);color:var(--beauty)}
     .fn-divider{color:var(--line);font-weight:300}
-    .stats-source{font-size:11px;color:#888;text-align:center;margin-bottom:24px}
-    .note-small{display:block;font-size:12px;color:#777;margin-top:12px;font-weight:400;line-height:1.5}
-    .hero-audience{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-    .audience-card{border:1px solid var(--line);border-radius:var(--radius-sm);padding:20px 22px;background:var(--white);transition:all .3s;box-shadow:0 2px 12px rgba(0,0,0,.03)}
-    .audience-card:hover{box-shadow:0 6px 24px rgba(0,0,0,.08);transform:translateY(-2px)}
-    .audience-label{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:1px;margin-bottom:10px}
-    .audience-label .dot{width:8px;height:8px;border-radius:50%}
-    .audience-card.type-a .audience-label .dot{background:var(--beauty)}
-    .audience-card.type-b .audience-label .dot{background:var(--food)}
-    .audience-card .audience-title{font-size:15px;font-weight:800;margin-bottom:6px;color:var(--ink)}
-    .audience-card .audience-desc{font-size:14px;color:var(--sub);line-height:1.7}
-    .info-card{background:rgba(255,255,255,.8);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.85);border-radius:var(--radius);padding:28px;box-shadow:0 6px 36px rgba(0,0,0,.05)}
-    .info-card .card-label{font-size:11px;font-weight:800;letter-spacing:2.5px;color:var(--muted);margin-bottom:20px}
+    .stats-source{font-size:10px;color:#999;text-align:left;margin-bottom:20px}
+    
+    .hero-lead{font-size:16px;color:var(--sub);line-height:2;margin-bottom:0;max-width:580px}
+    .hero-lead strong{color:var(--ink);font-weight:700}
+    .note-small{display:block;font-size:12px;color:#888;margin-top:12px;font-weight:400;line-height:1.6}
+
+    /* 정보 카드 */
+    .info-card{background:var(--white);border:1.5px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:0 8px 32px rgba(0,0,0,.06);position:relative;overflow:hidden}
+    .info-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--taegeuk-red),var(--beauty),var(--food),var(--taegeuk-blue))}
+    .info-card .card-label{font-size:11px;font-weight:800;letter-spacing:2.5px;color:var(--muted);margin-bottom:18px;margin-top:6px}
     .info-rows{display:flex;flex-direction:column}
-    .info-row{display:flex;justify-content:space-between;align-items:baseline;padding:11px 0;border-bottom:1px solid var(--line-light)}
+    .info-row{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--line-light)}
     .info-row:last-child{border:none}
     .info-row dt{font-size:13px;font-weight:600;color:var(--muted)}
     .info-row dd{font-size:15px;font-weight:700;text-align:right}
-    .info-row dd .free{color:var(--beauty);font-weight:800}
+    .info-row dd .free{color:var(--beauty);font-weight:800;font-size:17px}
+    
+    /* 참가 특전 */
     .info-benefits{margin-top:18px;padding-top:18px;border-top:1px solid var(--line)}
-    .info-benefits .bl{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:1.5px;margin-bottom:10px}
-    .benefit-items{display:flex;flex-direction:column;gap:5px}
-    .benefit-item{font-size:14px;font-weight:600;color:var(--ink);padding:10px 14px;background:rgba(250,248,245,.9);border-radius:var(--radius-sm);display:flex;align-items:center;gap:10px;border:1px solid var(--line-light)}
-    .benefit-icon{width:18px;height:18px;flex-shrink:0;color:var(--food)}
+    .info-benefits .bl{font-size:12px;font-weight:800;color:var(--ink);letter-spacing:.5px;margin-bottom:12px}
+    .benefit-items{display:flex;flex-direction:column;gap:6px}
+    .benefit-item{font-size:13px;font-weight:600;color:var(--ink);padding:12px 14px;background:linear-gradient(135deg,rgba(46,122,104,.04),rgba(196,70,106,.03));border-radius:var(--radius-sm);display:flex;align-items:flex-start;gap:10px;border:1px solid var(--line-light)}
+    .benefit-item .num{width:20px;height:20px;background:var(--ink);color:#fff;border-radius:50%;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .benefit-item .txt{line-height:1.5}
+    .benefit-item .txt .sub{display:block;font-size:11px;color:var(--muted);font-weight:500;margin-top:2px}
+    
     .info-cta{margin-top:18px;display:flex;flex-direction:column;gap:8px}
-    .btn-primary{display:block;text-align:center;background:linear-gradient(135deg,#1A1A1A 0%,#333 100%);color:#fff;padding:18px;border-radius:14px;font-size:16px;font-weight:700;transition:all .3s;box-shadow:0 4px 20px rgba(0,0,0,.18)}
-    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.25)}
-    .btn-outline{display:block;text-align:center;background:rgba(255,255,255,.6);color:var(--ink);padding:13px;border-radius:14px;font-size:14px;font-weight:600;border:1.5px solid var(--line);transition:all .2s}
+    .btn-primary{display:block;text-align:center;background:linear-gradient(135deg,var(--taegeuk-red) 0%,#A8102E 100%);color:#fff;padding:17px;border-radius:14px;font-size:15px;font-weight:700;transition:all .3s;box-shadow:0 6px 20px rgba(200,16,46,.28)}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(200,16,46,.38)}
+    .btn-outline{display:block;text-align:center;background:rgba(255,255,255,.6);color:var(--ink);padding:12px;border-radius:14px;font-size:14px;font-weight:600;border:1.5px solid var(--line);transition:all .2s}
     .btn-outline:hover{border-color:var(--ink)}
-    .btn-gcal{display:flex;align-items:center;justify-content:center;gap:6px;text-align:center;background:rgba(255,255,255,.6);color:var(--sub);padding:11px;border-radius:14px;font-size:13px;font-weight:600;border:1.5px solid var(--line);transition:all .2s}
+    .btn-gcal{display:flex;align-items:center;justify-content:center;gap:6px;text-align:center;background:rgba(255,255,255,.6);color:var(--sub);padding:10px;border-radius:14px;font-size:13px;font-weight:600;border:1.5px solid var(--line);transition:all .2s}
     .btn-gcal:hover{border-color:#4285f4;color:#4285f4}
-    .btn-gcal svg{width:16px;height:16px}
+    .btn-gcal svg{width:15px;height:15px}
+
     .divider{max-width:var(--max);margin:0 auto;height:1px;background:var(--line)}
-    section.sec-wrap{padding:88px 32px}
+    section.sec-wrap{padding:88px 32px;position:relative;overflow:hidden}
     .sec{max-width:var(--max);margin:0 auto}
     .sec-head{margin-bottom:48px}
-    .sec-label{font-size:13px;font-weight:800;letter-spacing:3px;color:#C8102E;margin-bottom:16px}
+    .sec-label{font-size:13px;font-weight:800;letter-spacing:3px;color:var(--taegeuk-red);margin-bottom:16px}
     .sec h2{font-size:clamp(28px,3.8vw,42px);font-weight:900;letter-spacing:-.5px;line-height:1.3;margin-bottom:16px;color:#1A1A1A}
     .sec-desc{font-size:17px;color:var(--sub);line-height:1.9}
     .gen-z-note{font-size:13px;color:var(--muted);margin-top:8px}
-    .contents-section{background:var(--white);position:relative;overflow:hidden}
+
+    /* ===== CONTENTS ===== */
+    .contents-section{background:var(--white)}
     .content-block{margin-bottom:24px}.content-block:last-child{margin-bottom:0}
     .content-card{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:all .3s;background:var(--white)}
     .content-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.05)}
-    .content-card .card-accent{height:3px}
+    .content-card .card-accent{height:4px}
     .beauty-card .card-accent{background:linear-gradient(90deg,var(--beauty),#D88DA0,var(--accent-warm))}
     .food-card .card-accent{background:linear-gradient(90deg,var(--food),#6DBBA8,var(--accent-warm))}
     .card-inner{display:grid;grid-template-columns:1fr 360px;min-height:0}
@@ -98,38 +138,48 @@
     .category-badge{font-size:12px;font-weight:700;padding:6px 14px;border-radius:999px;flex-shrink:0}
     .category-badge.b{background:var(--beauty-soft);color:var(--beauty);border:1px solid var(--beauty-border)}
     .category-badge.f{background:var(--food-soft);color:var(--food);border:1px solid var(--food-border)}
-    .card-keywords{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+    .card-keywords{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
     .kw{font-size:14px;font-weight:600;color:var(--sub);padding:6px 14px;border-radius:8px;background:var(--bg)}
-    .card-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
-    .card-list li{font-size:15px;color:var(--sub);line-height:1.75;padding-left:18px;position:relative}
-    .card-list li::before{content:'';position:absolute;left:0;top:11px;width:6px;height:6px;border-radius:50%}
-    .beauty-card .card-list li::before{background:var(--beauty)}
-    .food-card .card-list li::before{background:var(--food)}
-    .card-teaser{font-size:15px;color:var(--sub);line-height:1.8;margin-bottom:18px}
+    .card-desc{font-size:15px;color:var(--sub);line-height:1.8;margin-bottom:18px}
+    
+    /* So What + Action */
+    .insight-box{background:linear-gradient(135deg,rgba(26,26,26,.03),rgba(26,26,26,.01));border:1px solid var(--line);border-radius:var(--radius-sm);padding:16px 18px;margin-bottom:18px}
+    .insight-row{display:flex;gap:10px;margin-bottom:8px}
+    .insight-row:last-child{margin-bottom:0}
+    .insight-row .tag{font-size:10px;font-weight:800;letter-spacing:.5px;padding:4px 8px;border-radius:4px;flex-shrink:0;margin-top:2px}
+    .insight-row .tag.so-what{background:rgba(196,70,106,.12);color:var(--beauty)}
+    .insight-row .tag.action{background:rgba(46,122,104,.12);color:var(--food)}
+    .insight-row .txt{font-size:14px;color:var(--ink);line-height:1.6;font-weight:500}
+    .food-card .insight-row .tag.so-what{background:rgba(46,122,104,.12);color:var(--food)}
+    
     .kr-trend-strip{display:flex;flex-wrap:wrap;gap:6px}
     .kr-t{font-size:13px;font-weight:700;padding:6px 14px;border-radius:8px;border:1.5px solid;transition:all .3s;cursor:default}
     .kr-t:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.08)}
     .beauty-card .kr-t{background:rgba(196,70,106,.08);border-color:rgba(196,70,106,.25);color:var(--beauty)}
     .food-card .kr-t{background:rgba(46,122,104,.08);border-color:rgba(46,122,104,.22);color:var(--food)}
-    .reels-panel{border-left:1px solid var(--line-light);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px 20px;position:relative;overflow:hidden}
+    
+    .reels-panel{border-left:1px solid var(--line-light);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:28px 20px;position:relative;overflow:hidden;min-width:340px;flex-shrink:0}
     .beauty-card .reels-panel{background:linear-gradient(135deg,#FFF5F7 0%,#FBF0F3 50%,rgba(212,168,83,.03) 100%)}
     .food-card .reels-panel{background:linear-gradient(135deg,#F4FBF8 0%,#EDF7F3 50%,rgba(212,168,83,.03) 100%)}
     .reels-panel-label{font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--muted)}
-    .reels-row{display:flex;gap:10px;align-items:flex-end}
-    .reel{width:100px;height:178px;border-radius:14px;overflow:hidden;position:relative;background:#E8E4DF;flex-shrink:0;cursor:default;transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s;box-shadow:0 3px 14px rgba(0,0,0,.1);border:1px solid rgba(0,0,0,.06)}
-    .reel:nth-child(2){transform:translateY(-8px)}
-    .reel:hover{transform:translateY(-5px) scale(1.03);box-shadow:0 8px 24px rgba(0,0,0,.16)}
-    .reel:nth-child(2):hover{transform:translateY(-14px) scale(1.03)}
+    .reels-row{display:flex;gap:16px;align-items:flex-end}
+    .reel{width:150px;height:267px;border-radius:18px;overflow:hidden;position:relative;background:#E8E4DF;flex-shrink:0;cursor:pointer;transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s;box-shadow:0 6px 20px rgba(0,0,0,.14);border:1px solid rgba(0,0,0,.06)}
+    .reel:nth-child(2){transform:translateY(-12px)}
+    .reel:hover{transform:translateY(-8px) scale(1.04);box-shadow:0 14px 36px rgba(0,0,0,.2)}
+    .reel:nth-child(2):hover{transform:translateY(-20px) scale(1.04)}
+    a.reel{text-decoration:none}
     .reel img{width:100%;height:100%;object-fit:cover;display:block}
-    .reel::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.02) 0%,transparent 30%,rgba(0,0,0,.5) 100%);pointer-events:none;border-radius:14px}
-    .reel-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.25);backdrop-filter:blur(5px);z-index:2;pointer-events:none}
-    .reel-play::after{content:'';position:absolute;top:50%;left:53%;transform:translate(-50%,-50%);width:0;height:0;border-left:9px solid rgba(255,255,255,.92);border-top:5.5px solid transparent;border-bottom:5.5px solid transparent}
-    .reel-cap{position:absolute;bottom:8px;left:8px;right:8px;z-index:2}
-    .reel-cap .rc-tag{display:inline-block;font-size:8px;font-weight:800;letter-spacing:.4px;padding:2px 6px;border-radius:3px;background:rgba(255,255,255,.2);backdrop-filter:blur(3px);color:rgba(255,255,255,.9);margin-bottom:3px}
-    .reel-cap .rc-title{font-size:10px;font-weight:700;color:#fff;line-height:1.3;text-shadow:0 1px 3px rgba(0,0,0,.3)}
+    .reel::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.02) 0%,transparent 25%,rgba(0,0,0,.6) 100%);pointer-events:none;border-radius:18px}
+    .reel-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.3);backdrop-filter:blur(6px);z-index:2;pointer-events:none}
+    .reel-play::after{content:'';position:absolute;top:50%;left:53%;transform:translate(-50%,-50%);width:0;height:0;border-left:12px solid rgba(255,255,255,.95);border-top:7px solid transparent;border-bottom:7px solid transparent}
+    .reel-cap{position:absolute;bottom:14px;left:12px;right:12px;z-index:2}
+    .reel-cap .rc-tag{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.4px;padding:4px 10px;border-radius:5px;background:rgba(255,255,255,.25);backdrop-filter:blur(3px);color:rgba(255,255,255,.95);margin-bottom:5px}
+    .reel-cap .rc-title{font-size:13px;font-weight:700;color:#fff;line-height:1.4;text-shadow:0 1px 4px rgba(0,0,0,.4)}
     .reels-nudge{font-size:11px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:6px}
     .reels-nudge::before,.reels-nudge::after{content:'';width:10px;height:1px;background:var(--line)}
-    .speakers-section{background:var(--bg);position:relative;overflow:hidden}
+
+    /* ===== SPEAKERS ===== */
+    .speakers-section{background:var(--bg)}
     .speakers-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
     .speaker-card{border-radius:16px;overflow:hidden;transition:all .35s;background:#fff;border:1px solid var(--line)}
     .speaker-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.12)}
@@ -147,7 +197,9 @@
     .speaker-name{font-size:20px;font-weight:800;margin-bottom:6px;letter-spacing:-.3px}
     .speaker-role{font-size:11px;opacity:.7;font-weight:500;margin-bottom:12px;line-height:1.5}
     .speaker-desc{font-size:13px;opacity:.9;line-height:1.85}
-    .program-section{background:var(--white);position:relative;overflow:hidden}
+
+    /* ===== PROGRAM ===== */
+    .program-section{background:var(--white)}
     .timeline{display:flex;flex-direction:column}
     .tl-item{display:grid;grid-template-columns:150px 1fr;gap:28px;padding:24px 0;border-bottom:1px solid var(--line-light);position:relative}
     .tl-item:last-child{border:none}
@@ -162,30 +214,53 @@
     .tl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
     .tl-dot.b{background:var(--beauty)}.tl-dot.f{background:var(--food)}.tl-dot.v{background:var(--ink)}
     .tl-content p{font-size:15px;color:var(--sub);line-height:1.85}
-    .keywords-section{background:var(--bg);position:relative;overflow:hidden}
+
+    /* ===== KEYWORDS ===== */
+    .keywords-section{background:var(--bg)}
     .keywords-flow{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-    .access-section{background:var(--bg);padding:60px 32px}
-    .access-info{margin-top:28px}
-    .access-address{font-size:16px;font-weight:600;color:var(--ink);margin-bottom:8px}
-    .access-station{font-size:14px;color:var(--sub);margin-bottom:20px}
-    .access-map-btn{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:var(--beauty);padding:12px 24px;border:1.5px solid var(--beauty);border-radius:30px;transition:all .2s}
-    .access-map-btn:hover{background:var(--beauty);color:#fff}
     .keyword-chip{padding:10px 20px;border-radius:999px;font-size:14px;font-weight:600;border:1.5px solid;transition:all .3s;cursor:default}
     .keyword-chip:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.06)}
     .keyword-chip.c-beauty{background:rgba(196,70,106,.06);border-color:rgba(196,70,106,.2);color:var(--beauty)}
     .keyword-chip.c-food{background:rgba(46,122,104,.05);border-color:rgba(46,122,104,.15);color:var(--food)}
     .keyword-chip.c-warm{background:rgba(212,168,83,.08);border-color:rgba(212,168,83,.2);color:#8B6914}
     .keyword-chip.c-neutral{background:rgba(26,26,26,.04);border-color:rgba(26,26,26,.12);color:var(--sub)}
-    .cta-section{background:var(--ink);color:#fff;text-align:center;padding:80px 32px;position:relative;overflow:hidden}
-    .cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 50% at 30% 50%,rgba(196,70,106,.1) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 70% 50%,rgba(46,122,104,.08) 0%,transparent 55%)}
+
+    /* ===== QUIZ ===== */
+    .quiz-section{background:var(--bg)}
+    .quiz-list{display:flex;flex-direction:column;gap:16px;max-width:800px;margin:0 auto}
+    .quiz-item{background:var(--white);border:1.5px solid var(--line);border-radius:var(--radius);padding:24px 28px;display:flex;gap:20px;align-items:flex-start;transition:all .3s}
+    .quiz-item:hover{box-shadow:0 6px 24px rgba(0,0,0,.06);transform:translateY(-2px)}
+    .quiz-num{font-size:14px;font-weight:800;color:var(--white);background:linear-gradient(135deg,var(--taegeuk-red),var(--beauty));padding:8px 14px;border-radius:8px;flex-shrink:0;letter-spacing:.5px}
+    .quiz-text{font-size:16px;color:var(--ink);line-height:1.8;padding-top:4px}
+    .quiz-blank{display:inline-block;min-width:100px;border-bottom:2px dashed var(--beauty);color:var(--beauty);font-weight:700;text-align:center;margin:0 4px;padding:0 8px}
+    .quiz-cta{text-align:center;margin-top:40px}
+    .quiz-cta-text{font-size:15px;font-weight:700;color:var(--sub);background:linear-gradient(135deg,rgba(200,16,46,.08),rgba(46,122,104,.08));padding:16px 32px;border-radius:999px;display:inline-block}
+
+    /* ===== ACCESS ===== */
+    .access-section{background:var(--bg);padding:60px 32px}
+    .access-info{margin-top:28px}
+    .access-address{font-size:16px;font-weight:600;color:var(--ink);margin-bottom:8px}
+    .access-station{font-size:14px;color:var(--sub);margin-bottom:20px}
+    .access-map-btn{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:var(--beauty);padding:12px 24px;border:1.5px solid var(--beauty);border-radius:30px;transition:all .2s}
+    .access-map-btn:hover{background:var(--beauty);color:#fff}
+
+    /* ===== CTA ===== */
+    .cta-section{background:linear-gradient(135deg,#1A1A1A 0%,#2A2A2A 100%);color:#fff;text-align:center;padding:80px 32px;position:relative;overflow:hidden}
+    .cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 30% 50%,rgba(200,16,46,.12) 0%,transparent 60%),radial-gradient(ellipse 50% 50% at 70% 50%,rgba(0,52,120,.1) 0%,transparent 55%)}
     .cta-section .sec{position:relative;z-index:1}
     .cta-section h2{color:#fff;font-size:28px;margin-bottom:12px;font-weight:800}
-    .cta-section p{color:rgba(255,255,255,.55);font-size:16px;line-height:1.85;margin-bottom:32px}
-    .cta-btn{display:inline-block;background:linear-gradient(135deg,#fff 0%,#f8f8f8 100%);color:var(--ink);padding:20px 56px;border-radius:16px;font-size:17px;font-weight:700;transition:all .3s;box-shadow:0 6px 24px rgba(0,0,0,.2)}
-    .cta-btn:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,0,0,.35)}
+    .cta-section p{color:rgba(255,255,255,.6);font-size:16px;line-height:1.85;margin-bottom:32px}
+    .cta-btn{display:inline-block;background:linear-gradient(135deg,var(--taegeuk-red) 0%,#A8102E 100%);color:#fff;padding:20px 56px;border-radius:16px;font-size:17px;font-weight:700;transition:all .3s;box-shadow:0 8px 32px rgba(200,16,46,.4)}
+    .cta-btn:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(200,16,46,.5)}
+    
+    /* CTA 태극기 배경 */
+    .cta-flag{position:absolute;pointer-events:none;user-select:none;opacity:.04}
+    .cta-flag img{width:100%;height:100%;object-fit:contain}
+
+    /* ===== MODAL ===== */
     .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);backdrop-filter:blur(8px);z-index:999;align-items:center;justify-content:center;padding:20px}
     .modal.active{display:flex}
-    .modal-box{background:var(--white);border-radius:var(--radius);padding:32px;max-width:480px;width:100%;position:relative;animation:modalIn .3s ease;max-height:90vh;overflow-y:auto}
+    .modal-box{background:var(--white);border-radius:var(--radius);padding:32px;max-width:520px;width:100%;position:relative;animation:modalIn .3s ease;max-height:90vh;overflow-y:auto}
     @keyframes modalIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
     .modal-close{position:absolute;top:16px;right:16px;width:44px;height:44px;border-radius:10px;background:var(--bg);border:none;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:.2s}
     .modal-close:hover{background:var(--line);color:var(--ink)}
@@ -198,49 +273,129 @@
     .modal-box input:focus,.modal-box select:focus,.modal-box textarea:focus{outline:none;border-color:var(--beauty)}
     .modal-box input::placeholder,.modal-box textarea::placeholder{color:var(--muted)}
     .modal-box select:invalid{color:var(--muted)}
-    .form-section{background:var(--bg);border-radius:var(--radius-sm);padding:16px;display:flex;flex-direction:column;gap:10px;border:1px solid var(--line-light);box-shadow:0 2px 8px rgba(0,0,0,.02)}
-    .form-section-label{font-size:13px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:6px;margin-bottom:4px}
-    .form-icon{font-size:14px}
+    .form-section{background:var(--bg);border-radius:var(--radius-sm);padding:16px;display:flex;flex-direction:column;gap:10px;border:1px solid var(--line-light)}
+    .form-section-label{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px}
     .form-label{font-size:13px;color:var(--sub);margin-bottom:-4px}
     .form-checkbox-group{display:flex;gap:16px;flex-wrap:wrap}
     .form-checkbox{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--ink);cursor:pointer}
     .form-checkbox input[type="checkbox"]{width:18px;height:18px;accent-color:var(--beauty);cursor:pointer}
-    .modal-submit{padding:15px;background:var(--ink);color:#fff;border:none;border-radius:var(--radius-sm);font-size:15px;font-weight:700;cursor:pointer;transition:opacity .2s;font-family:inherit}
-    .modal-submit:hover{opacity:.85}
+    
+    /* 동의 체크박스 */
+    .consent-section{background:rgba(200,16,46,.02);border:1px solid rgba(200,16,46,.12);border-radius:var(--radius-sm);padding:16px}
+    .consent-section .form-section-label{color:var(--taegeuk-red)}
+    .consent-item{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--ink);margin-bottom:8px}
+    .consent-item:last-child{margin-bottom:0}
+    .consent-item input[type="checkbox"]{width:18px;height:18px;accent-color:var(--taegeuk-red);cursor:pointer;flex-shrink:0;margin-top:2px}
+    .consent-item label{cursor:pointer;line-height:1.5}
+    .consent-item label .required{color:var(--taegeuk-red);font-weight:700;font-size:11px}
+    .consent-item label .optional{color:var(--muted);font-size:11px}
+    .consent-item label a{color:var(--beauty);text-decoration:underline}
+    
+    .modal-submit{padding:16px;background:linear-gradient(135deg,var(--taegeuk-red) 0%,#A8102E 100%);color:#fff;border:none;border-radius:var(--radius-sm);font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;font-family:inherit;box-shadow:0 4px 16px rgba(200,16,46,.25)}
+    .modal-submit:hover{opacity:.9;transform:translateY(-1px)}
+
+    /* ===== FOOTER ===== */
     footer{padding:36px 32px;border-top:1px solid var(--line)}
     .footer-inner{max-width:var(--max);margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;font-size:13px;color:var(--muted)}
     .footer-inner .co{font-weight:700;color:var(--ink);margin-bottom:4px}
     .footer-right{text-align:right}
-    @media(max-width:960px){.hero-grid{grid-template-columns:1fr;gap:40px}.hero-inner{padding:48px 24px 64px}.hero-flag{width:52px;top:24px;right:24px}}
-    @media(max-width:860px){.speakers-grid{grid-template-columns:1fr;max-width:480px;margin:0 auto}.card-inner{grid-template-columns:1fr}.reels-panel{border-left:none;border-top:1px solid var(--line-light);padding:24px}.tl-item{grid-template-columns:1fr;gap:6px}.tl-item::before{display:none}section.sec-wrap{padding:64px 24px}.hero-audience{grid-template-columns:1fr;gap:12px}}
-    @media(max-width:540px){body{font-size:16px}.hero-inner{padding:40px 20px 56px}.hero h1{font-size:30px;line-height:1.3}.hero-stat .num{font-size:22px}.hero-lead{font-size:15px;line-height:1.85}.sec-desc{font-size:15px}.footer-inner{flex-direction:column;gap:14px}.footer-right{text-align:left}.keyword-chip{font-size:13px;padding:8px 15px}.reel{width:88px;height:156px;border-radius:12px}.hero-stats{grid-template-columns:1fr}.hero-stat{border-right:none;border-bottom:1px solid var(--line-light);padding:18px 16px}.hero-stat:last-child{border-bottom:none}.btn-primary{padding:18px;font-size:16px}.audience-card{padding:18px 20px}.sec h2{font-size:24px}.speaker-overlay{padding:0 20px 24px}.speaker-name{font-size:19px}.speaker-desc{font-size:12px;line-height:1.75}.card-text{padding:24px}.card-text .card-head h3{font-size:20px}.tl-time{font-size:14px}.tl-content h3{font-size:16px}.tl-content p{font-size:15px}}
+
+    /* ===== ANIMATIONS ===== */
     .fade-up{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
     .fade-up.visible{opacity:1;transform:translateY(0)}
+
+    /* ===== RESPONSIVE ===== */
+    @media(max-width:960px){
+      .hero-photo-scroll,.hero-photo-scroll-right{display:none}
+      .hero-inner{padding:56px 24px 72px}
+      .hero-grid{grid-template-columns:1fr;gap:40px}
+      .hero-flag{width:52px;top:24px;right:24px}
+    }
+    @media(max-width:860px){
+      .speakers-grid{grid-template-columns:1fr;max-width:480px;margin:0 auto}
+      .card-inner{grid-template-columns:1fr}
+      .reels-panel{border-left:none;border-top:1px solid var(--line-light);padding:24px}
+      .tl-item{grid-template-columns:1fr;gap:6px}
+      .tl-item::before{display:none}
+      section.sec-wrap{padding:64px 24px}
+    }
+    @media(max-width:540px){
+      body{font-size:16px}
+      .hero-inner{padding:40px 20px 56px}
+      .hero h1{font-size:26px;line-height:1.3}
+      .hero-stat .num{font-size:26px}
+      .hero-lead{font-size:14px;line-height:1.85}
+      .target-badge{flex-direction:column;align-items:flex-start;gap:6px}
+      .target-badge .text{font-size:13px}
+      .sec-desc{font-size:15px}
+      .footer-inner{flex-direction:column;gap:14px}
+      .footer-right{text-align:left}
+      .keyword-chip{font-size:13px;padding:8px 15px}
+      .reel{width:84px;height:150px;border-radius:12px}
+      .hero-stats{grid-template-columns:1fr}
+      .hero-stat{border-right:none;border-bottom:1px solid var(--line-light);padding:18px 16px}
+      .hero-stat:last-child{border-bottom:none}
+      .btn-primary{padding:16px;font-size:15px}
+      .sec h2{font-size:24px}
+      .speaker-overlay{padding:0 20px 24px}
+      .speaker-name{font-size:19px}
+      .speaker-desc{font-size:12px;line-height:1.75}
+      .card-text{padding:24px}
+      .card-text .card-head h3{font-size:20px}
+      .tl-time{font-size:14px}
+      .tl-content h3{font-size:16px}
+      .tl-content p{font-size:15px}
+      .insight-box{padding:14px}
+      .insight-row .txt{font-size:13px}
+    }
   </style>
 </head>
 <body>
 
-<svg style="position:absolute;width:0;height:0;" aria-hidden="true"><defs>
-  <symbol id="ico-taegeuk" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="none" stroke="currentColor" stroke-width=".8" opacity=".3"/><path d="M50 2 A48 48 0 0 1 50 98 A24 24 0 0 1 50 50 A24 24 0 0 0 50 2Z" fill="currentColor" opacity=".12"/><path d="M50 98 A48 48 0 0 1 50 2 A24 24 0 0 1 50 50 A24 24 0 0 0 50 98Z" fill="currentColor" opacity=".06"/><circle cx="50" cy="26" r="7" fill="currentColor" opacity=".1"/><circle cx="50" cy="74" r="7" fill="currentColor" opacity=".05"/></symbol>
-  <symbol id="ico-mugunghwa" viewBox="0 0 100 100"><g opacity=".15"><ellipse cx="50" cy="22" rx="14" ry="22" fill="currentColor" opacity=".7"/><ellipse cx="50" cy="22" rx="14" ry="22" fill="currentColor" opacity=".6" transform="rotate(72 50 50)"/><ellipse cx="50" cy="22" rx="14" ry="22" fill="currentColor" opacity=".5" transform="rotate(144 50 50)"/><ellipse cx="50" cy="22" rx="14" ry="22" fill="currentColor" opacity=".6" transform="rotate(216 50 50)"/><ellipse cx="50" cy="22" rx="14" ry="22" fill="currentColor" opacity=".7" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="8" fill="currentColor" opacity=".9"/></g></symbol>
-  <symbol id="ico-trigram" viewBox="0 0 60 50"><g opacity=".12"><rect x="0" y="0" width="60" height="6" rx="1" fill="currentColor"/><rect x="0" y="16" width="26" height="6" rx="1" fill="currentColor"/><rect x="34" y="16" width="26" height="6" rx="1" fill="currentColor"/><rect x="0" y="32" width="60" height="6" rx="1" fill="currentColor"/></g></symbol>
-  <symbol id="ico-cloud" viewBox="0 0 120 60"><g opacity=".08"><path d="M20 45 Q5 45 8 35 Q2 28 12 24 Q10 12 25 14 Q28 4 40 10 Q48 2 58 8 Q65 3 72 10 Q85 5 88 18 Q100 15 98 28 Q108 32 100 40 Q105 50 90 48 Q85 55 72 48 Q60 56 48 48 Q35 54 25 48Z" fill="currentColor"/></g></symbol>
-  <symbol id="ico-changsal" viewBox="0 0 80 80"><g opacity=".08" fill="none" stroke="currentColor" stroke-width="1"><rect x="4" y="4" width="72" height="72" rx="2"/><line x1="4" y1="28" x2="76" y2="28"/><line x1="4" y1="52" x2="76" y2="52"/><line x1="28" y1="4" x2="28" y2="76"/><line x1="52" y1="4" x2="52" y2="76"/><circle cx="16" cy="16" r="4"/><circle cx="40" cy="40" r="4"/><circle cx="64" cy="64" r="4"/></g></symbol>
-  <symbol id="ico-lotus" viewBox="0 0 80 80"><g opacity=".1"><path d="M40 10 Q55 30 40 50 Q25 30 40 10Z" fill="currentColor" opacity=".6"/><path d="M40 10 Q55 30 40 50 Q25 30 40 10Z" fill="currentColor" opacity=".5" transform="rotate(60 40 40)"/><path d="M40 10 Q55 30 40 50 Q25 30 40 10Z" fill="currentColor" opacity=".4" transform="rotate(120 40 40)"/><path d="M40 10 Q55 30 40 50 Q25 30 40 10Z" fill="currentColor" opacity=".5" transform="rotate(180 40 40)"/><path d="M40 10 Q55 30 40 50 Q25 30 40 10Z" fill="currentColor" opacity=".6" transform="rotate(240 40 40)"/><path d="M40 10 Q55 30 40 50 Q25 30 40 10Z" fill="currentColor" opacity=".5" transform="rotate(300 40 40)"/></g></symbol>
-</defs></svg>
-
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg">
-    <div class="hero-bg-img"></div>
+    <div class="hero-bg-base"></div>
+    
+    <!-- 배경에 녹아드는 세로 스크롤 - 좌측 -->
+    <div class="hero-photo-scroll">
+      <div class="photo"><img loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/02/スクリーンショット-2026-02-16-8.50.01.png" alt=""></div>
+      <div class="photo"><img loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/02/スクリーンショット-2026-02-16-8.50.37.png" alt=""></div>
+      <div class="photo"><img loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/02/スクリーンショット-2026-02-16-8.51.21.png" alt=""></div>
+      <div class="photo"><img loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/02/スクリーンショット-2026-02-16-8.53.31.png" alt=""></div>
+      <div class="photo"><img loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/02/スクリーンショット-2026-02-16-8.50.01.png" alt=""></div>
+      <div class="photo"><img loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/02/スクリーンショット-2026-02-16-8.50.37.png" alt=""></div>
+      <div class="photo"><img loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/02/スクリーンショット-2026-02-16-8.51.21.png" alt=""></div>
+      <div class="photo"><img loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/02/スクリーンショット-2026-02-16-8.53.31.png" alt=""></div>
+    </div>
+    
+    <!-- 배경에 녹아드는 세로 스크롤 - 우측 -->
+    <div class="hero-photo-scroll-right">
+      <div class="photo"><img loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/02/スクリーンショット-2026-02-16-8.50.16.png" alt=""></div>
+      <div class="photo"><img loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/02/スクリーンショット-2026-02-16-8.51.00.png" alt=""></div>
+      <div class="photo"><img loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/02/スクリーンショット-2026-02-16-8.51.39.png" alt=""></div>
+      <div class="photo"><img loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/02/スクリーンショット-2026-02-16-8.54.18.png" alt=""></div>
+      <div class="photo"><img loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/02/スクリーンショット-2026-02-16-8.55.11.png" alt=""></div>
+      <div class="photo"><img loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/02/スクリーンショット-2026-02-16-8.50.16.png" alt=""></div>
+      <div class="photo"><img loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/02/スクリーンショット-2026-02-16-8.51.00.png" alt=""></div>
+      <div class="photo"><img loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/02/スクリーンショット-2026-02-16-8.51.39.png" alt=""></div>
+    </div>
+    
     <div class="hero-bg-overlay"></div>
   </div>
+  
   <div class="hero-inner">
+    <!-- 히어로 태극기 (처음) -->
     <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Flag_of_South_Korea.svg/320px-Flag_of_South_Korea.svg.png" alt="태극기" class="hero-flag">
     <div class="hero-grid">
     <div>
       <div class="hero-eyebrow"><span class="line"></span>SEMINAR 2026</div>
       <h1>韓国トレンドセミナー<br><span class="em">ビューティー・インナーケア／食品・菓子</span></h1>
+      
+      <div class="target-badge">
+        <span class="label">対象</span>
+        <span class="text">食品・菓子／化粧品メーカー、流通・小売、マーケ・販促ご担当者様</span>
+      </div>
 
       <div class="hero-stats">
         <div class="hero-stat"><div class="num c-red">942<span class="unit">万人</span></div><div class="lbl">2025年 訪日韓国人<br>（国別1位・過去最高）</div></div>
@@ -255,7 +410,7 @@
       <div class="stats-source">出典：観光庁「インバウンド消費動向調査」2025年10-12月期（1次速報）国籍・地域別 費目別購入率</div>
 
       <p class="hero-lead">
-        2025年、訪日韓国人は<strong>942万人で国別1位</strong>。菓子類の購入率は81.3%と圧倒的ですが、化粧品は28.2%と、実はまだ<strong>選ばれる余白</strong>が大きく残されています。カギを握るのは、訪日客の最多層である20代<strong>の探究心</strong>。彼女たちはSNSを駆使し、単なる有名ブランドではなく「自分の感性に刺さる根拠」を探しています。この若年層の行動原理を知ることが、両業種の爆発的なシェア拡大に直結します。<span class="note-small">※年代データは観光庁 2024年年次報告書より</span>
+        2025年、訪日韓国人は<strong>942万人で国別1位</strong>を記録。菓子類の購入率は81.3%と全国籍でトップ水準を誇ります。一方、化粧品購入率は28.2%と平均以下ながら、訪日韓国人は<strong>20代が最多でSNSで話題の店舗や商品を巡る傾向が強い</strong>。<br><br>この若年層が「何を選ぶか」「なぜ選ぶか」を知ることが、両業種の攻略につながります。本セミナーでは、韓国Z世代のリアルな消費行動とSNSトレンドを、現場で実践するマーケターが解説します。<span class="note-small">※年代データは観光庁 2024年年次報告書より</span>
       </p>
     </div>
 
@@ -267,13 +422,21 @@
         <div class="info-row"><dt>定員</dt><dd>20社限定（先着順）</dd></div>
         <div class="info-row"><dt>参加費</dt><dd><span class="free">無料</span></dd></div>
       </dl>
+      
       <div class="info-benefits">
-        <div class="bl">参加特典</div>
+        <div class="bl">持ち帰り資料</div>
         <div class="benefit-items">
-          <div class="benefit-item"><svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>業界別 2026 TOP7 トレンド要約（1枚）</div>
-          <div class="benefit-item"><svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>表現NGチェック（業界別10項目）</div>
+          <div class="benefit-item">
+            <span class="num">1</span>
+            <span class="txt">ビューティー向け SNS表現おすすめ10選<span class="sub">韓国Z世代に響く訴求フレーズ集</span></span>
+          </div>
+          <div class="benefit-item">
+            <span class="num">2</span>
+            <span class="txt">食品・菓子向け SNS表現おすすめ10選<span class="sub">バズを生む言葉選びのコツ</span></span>
+          </div>
         </div>
       </div>
+      
       <div class="info-cta">
         <a href="#" class="btn-primary" onclick="openModal(event)">今すぐ申し込む（先着20社）</a>
         <a href="#program" class="btn-outline">プログラムを見る</a>
@@ -290,12 +453,7 @@
 
 <!-- CONTENTS -->
 <section class="sec-wrap contents-section">
-  <svg class="kr-deco" style="width:100px;height:100px;top:30px;left:-15px;opacity:.4;transform:rotate(12deg)"><use href="#ico-mugunghwa" style="color:#C4466A"/></svg>
-  <svg class="kr-deco" style="width:65px;height:65px;top:20%;right:30px;opacity:.35;transform:rotate(-8deg)"><use href="#ico-changsal" style="color:#2E7A68"/></svg>
-  <svg class="kr-deco" style="width:80px;height:80px;bottom:80px;right:-10px;opacity:.3;transform:rotate(25deg)"><use href="#ico-lotus" style="color:#D4A853"/></svg>
-  <svg class="kr-deco" style="width:55px;height:55px;bottom:40%;left:25px;opacity:.3;transform:rotate(-18deg)"><use href="#ico-taegeuk" style="color:#003478"/></svg>
-
-  <div class="sec" style="position:relative;z-index:1">
+  <div class="sec">
     <div class="sec-head fade-up">
       <div class="sec-label">SEMINAR CONTENTS</div>
       <h2>データから見えた「2つの攻略ポイント」</h2>
@@ -306,15 +464,16 @@
       <div class="card-text">
         <div class="card-head"><h3>ビューティー・インナーケア</h3><span class="category-badge b">TOP7 + 実践</span></div>
         <div class="card-keywords"><span class="kw">選ばれる基準の更新</span><span class="kw">根拠の見せ方</span><span class="kw">比較・検証の壁</span></div>
-        <p class="card-teaser">韓国Z世代が「なぜそれを選ぶのか」— その理由を知れば、日本市場での訴求ポイントが見えてきます。</p>
-        <div class="kr-trend-strip"><span class="kr-t">スキンテレクチュアル</span><span class="kr-t">ハイパー感覚ケア</span><span class="kr-t">クラウドスキン</span><span class="kr-t">セラムファンデ</span><span class="kr-t">HOCI鎮静</span></div>
+        
+        <p class="card-desc">韓国Z世代が「なぜそれを選ぶのか」— その理由を知れば、日本市場での訴求ポイントが見えてきます。</p>
+        
+        <div class="kr-trend-strip"><span class="kr-t">高機能ミニマルビューティー</span><span class="kr-t">ハイパー高感度機能</span><span class="kr-t">合理的ラグジュアリー消費</span><span class="kr-t">AI時代の人間的感性</span><span class="kr-t">ありのままの美学</span><span class="kr-t">レトログラム</span><span class="kr-t">休息の美学</span></div>
       </div>
       <div class="reels-panel">
         <div class="reels-panel-label">INSTAGRAM REELS</div>
         <div class="reels-row">
-          <div class="reel"><img loading="lazy" src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&q=80" alt=""><div class="reel-play"></div><div class="reel-cap"><span class="rc-tag">スキンケア</span><div class="rc-title">スキンケアルーティン</div></div></div>
-          <div class="reel"><img loading="lazy" src="https://images.unsplash.com/photo-1612817288484-6f916006741a?w=400&q=80" alt=""><div class="reel-play"></div><div class="reel-cap"><span class="rc-tag">インナービューティ</span><div class="rc-title">インナービューティ</div></div></div>
-          <div class="reel"><img loading="lazy" src="https://images.unsplash.com/photo-1570197571499-166b36435e9f?w=400&q=80" alt=""><div class="reel-play"></div><div class="reel-cap"><span class="rc-tag">比較検証</span><div class="rc-title">ダーマコスメ比較</div></div></div>
+          <a href="https://www.instagram.com/reel/DN2kSVx5JA9/" target="_blank" rel="noopener" class="reel"><img loading="lazy" src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&q=80" alt=""><div class="reel-play"></div><div class="reel-cap"><span class="rc-tag">高機能ケア</span><div class="rc-title">高機能マスクパック</div></div></a>
+          <a href="https://www.instagram.com/p/DTppNzLEuu6/" target="_blank" rel="noopener" class="reel"><img loading="lazy" src="https://images.unsplash.com/photo-1612817288484-6f916006741a?w=400&q=80" alt=""><div class="reel-play"></div><div class="reel-cap"><span class="rc-tag">K-Beauty</span><div class="rc-title">韓国コスメ紹介</div></div></a>
         </div>
         <div class="reels-nudge">セミナーで詳しく</div>
       </div>
@@ -324,15 +483,24 @@
       <div class="card-text">
         <div class="card-head"><h3>食品・菓子</h3><span class="category-badge f">トレンド + 実践</span></div>
         <div class="card-keywords"><span class="kw">味と食感（オト）</span><span class="kw">健康と季節性（シュン）</span></div>
-        <p class="card-teaser">購入率81%の「指名買い」はどう生まれるのか — SNSで話題になる条件と、選ばれ続ける理由を整理します。</p>
-        <div class="kr-trend-strip"><span class="kr-t">感覚的食感</span><span class="kr-t">ホンウェル食</span><span class="kr-t">スローバーン辛味</span><span class="kr-t">限定品指名買い</span><span class="kr-t">旨味カムチルマッ</span></div>
+        
+        <p class="card-desc">購入率81%の「指名買い」はどう生まれるのか — SNSで話題になる条件と、選ばれ続ける理由を整理します。</p>
+        
+        <div class="kr-trend-strip"><span class="kr-t">#罪悪感ゼロ</span><span class="kr-t">#季節コア</span><span class="kr-t">#価値外食</span><span class="kr-t">#経験を贈る</span><span class="kr-t">#Healthy Pleasure</span></div>
       </div>
       <div class="reels-panel">
         <div class="reels-panel-label">INSTAGRAM REELS</div>
         <div class="reels-row">
-          <div class="reel"><img loading="lazy" src="https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?w=400&q=80" alt=""><div class="reel-play"></div><div class="reel-cap"><span class="rc-tag">コンビニ食べ歩き</span><div class="rc-title">コンビニ食べ方アレンジ</div></div></div>
-          <div class="reel"><img loading="lazy" src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=400&q=80" alt=""><div class="reel-play"></div><div class="reel-cap"><span class="rc-tag">お菓子ハック</span><div class="rc-title">食感追求・お菓子ハック</div></div></div>
-          <div class="reel"><img loading="lazy" src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&q=80" alt=""><div class="reel-play"></div><div class="reel-cap"><span class="rc-tag">もちもちクッキー</span><div class="rc-title">もっちりクッキー</div></div></div>
+          <a href="https://www.instagram.com/reel/DR8nA2UgYkt/" target="_blank" rel="noopener" class="reel">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?w=400&q=80" alt="">
+            <div class="reel-play"></div>
+            <div class="reel-cap"><span class="rc-tag">韓国グルメ</span><div class="rc-title">話題の韓国グルメ</div></div>
+          </a>
+          <a href="https://www.instagram.com/reel/DUrLOrRE55M/" target="_blank" rel="noopener" class="reel">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&q=80" alt="">
+            <div class="reel-play"></div>
+            <div class="reel-cap"><span class="rc-tag">スイーツ</span><div class="rc-title">人気スイーツ紹介</div></div>
+          </a>
         </div>
         <div class="reels-nudge">セミナーで詳しく</div>
       </div>
@@ -344,10 +512,7 @@
 
 <!-- SPEAKERS -->
 <section class="sec-wrap speakers-section">
-  <svg class="kr-deco" style="width:110px;height:110px;top:20px;right:-15px;opacity:.35;transform:rotate(-10deg)"><use href="#ico-taegeuk" style="color:#C8102E"/></svg>
-  <svg class="kr-deco" style="width:60px;height:60px;bottom:60px;left:30px;opacity:.3;transform:rotate(15deg)"><use href="#ico-mugunghwa" style="color:#D4A853"/></svg>
-
-  <div class="sec" style="position:relative;z-index:1">
+  <div class="sec">
     <div class="sec-head fade-up">
       <div class="sec-label">SPEAKERS</div>
       <h2>登壇者（韓国出身 Z世代マーケター）</h2><p class="gen-z-note">※Z世代＝1990年代後半〜2010年代生まれ。デジタルネイティブとして注目される世代</p>
@@ -384,11 +549,7 @@
 
 <!-- PROGRAM -->
 <section class="sec-wrap program-section" id="program">
-  <svg class="kr-deco" style="width:75px;height:75px;top:15px;left:-10px;opacity:.3;transform:rotate(-5deg)"><use href="#ico-changsal" style="color:#1A1A1A"/></svg>
-  <svg class="kr-deco" style="width:80px;height:80px;bottom:30px;right:40px;opacity:.25;transform:rotate(18deg)"><use href="#ico-lotus" style="color:#C4466A"/></svg>
-  <svg class="kr-deco" style="width:90px;height:45px;top:30%;left:60%;opacity:.2"><use href="#ico-cloud" style="color:#003478"/></svg>
-
-  <div class="sec" style="position:relative;z-index:1">
+  <div class="sec">
     <div class="sec-head fade-up"><div class="sec-label">PROGRAM</div><h2>タイムスケジュール</h2></div>
     <div class="timeline fade-up">
       <div class="tl-item"><div><div class="tl-time">15:00 – 15:10</div></div><div class="tl-content"><h3><span class="tl-dot v"></span>オープニング／本日のポイント整理</h3><p>本イベントの全体像と、本日持ち帰っていただきたい視点・考え方を共有します。</p></div></div>
@@ -403,17 +564,36 @@
 
 <div class="divider"></div>
 
-<!-- KEYWORDS -->
-<section class="sec-wrap keywords-section">
-  <svg class="kr-deco" style="width:90px;height:90px;top:10px;left:8%;opacity:.3;transform:rotate(12deg)"><use href="#ico-mugunghwa" style="color:#C8102E"/></svg>
-  <svg class="kr-deco" style="width:55px;height:55px;bottom:20px;right:10%;opacity:.25;transform:rotate(-20deg)"><use href="#ico-taegeuk" style="color:#D4A853"/></svg>
-
-  <div class="sec" style="position:relative;z-index:1">
-    <div class="sec-head fade-up" style="text-align:center"><div class="sec-label">SEMINAR KEYWORDS</div><h2>セミナーで扱うキーワード</h2><p class="sec-desc" style="margin:0 auto">本セミナーの軸となるテーマを一覧で確認。</p></div>
-    <div class="keywords-flow fade-up">
-      <span class="keyword-chip c-beauty">高機能ミニマリズム</span><span class="keyword-chip c-food">味と食感</span><span class="keyword-chip c-beauty">低刺激フォーミュラ</span><span class="keyword-chip c-food">健康と季節性</span><span class="keyword-chip c-warm">信頼型フォーミュラ</span><span class="keyword-chip c-beauty">インナービューティ</span><span class="keyword-chip c-food">限定品の指名買い</span><span class="keyword-chip c-neutral">比較・検証行動</span><span class="keyword-chip c-beauty">ダーマコスメ</span><span class="keyword-chip c-food">SNSバイラル × 売場設計</span><span class="keyword-chip c-beauty">スキンテレクチュアル</span><span class="keyword-chip c-food">感覚的食感</span><span class="keyword-chip c-warm">クラウドスキン</span><span class="keyword-chip c-neutral">ハイパーセンソリー</span>
+<!-- QUIZ -->
+<section class="sec-wrap quiz-section">
+  <div class="sec">
+    <div class="sec-head fade-up" style="text-align:center"><div class="sec-label">TREND QUIZ</div><h2>2026年、韓国トレンドをどこまで知っていますか？</h2><p class="sec-desc" style="margin:0 auto">セミナーで答え合わせ — 今の韓国市場を読み解くヒントをクイズ形式でご紹介します。</p></div>
+    <div class="quiz-list fade-up">
+      <div class="quiz-item">
+        <div class="quiz-num">Q1</div>
+        <div class="quiz-text">2026年の冬、韓国の食品業界で最も多く登録された新製品は、チョコでもチーズでもなく <span class="quiz-blank">[        ]</span> 味である。</div>
+      </div>
+      <div class="quiz-item">
+        <div class="quiz-num">Q2</div>
+        <div class="quiz-text">今、コンビニで買ったゼリーをすぐに食べずに、家の <span class="quiz-blank">[        ]</span> に入れるのが流行っている。</div>
+      </div>
+      <div class="quiz-item">
+        <div class="quiz-num">Q3</div>
+        <div class="quiz-text">ドバイもっちりクッキーやタンフル、冷凍ゼリーがヒットした共通の理由は、味ではなく <span class="quiz-blank">[        ]</span> にある。</div>
+      </div>
+      <div class="quiz-item">
+        <div class="quiz-num">Q4</div>
+        <div class="quiz-text">「国民食」といえばチキンだが、2026年の旧正月連休の夜（20時〜23時）、ついにチキンの検索数を抜いたのは <span class="quiz-blank">[        ]</span> だ。</div>
+      </div>
+      <div class="quiz-item">
+        <div class="quiz-num">Q5</div>
+        <div class="quiz-text">今年の旧正月はバレンタインデーと近いため、コーヒーなどの「飲み物」よりも、<span class="quiz-blank">[        ]</span> のような「ギフト型デザート」の注文が激増する。</div>
+      </div>
     </div>
-</div>
+    <div class="quiz-cta fade-up">
+      <p class="quiz-cta-text">答えはセミナーで発表します</p>
+    </div>
+  </div>
 </section>
 
 <!-- ACCESS -->
@@ -423,15 +603,15 @@
     <div class="access-info fade-up">
       <p class="access-address">〒110-0015 東京都台東区東上野4-8-1 TIXTOWER UENO 13階</p>
       <p class="access-station">JR上野駅 入谷口より徒歩3分 ／ 東京メトロ 上野駅 1番出口より徒歩5分</p>
-      <a href="https://maps.google.com/?q=TIXTOWER+UENO" target="_blank" class="access-map-btn">📍 Google Mapで見る</a>
+      <a href="https://maps.google.com/?q=TIXTOWER+UENO" target="_blank" class="access-map-btn">Google Mapで見る</a>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
+<!-- CTA (마지막 태극기) -->
 <section class="cta-section">
-  <svg class="kr-deco" style="width:120px;height:120px;top:-20px;left:10%;opacity:.15;transform:rotate(-8deg)"><use href="#ico-taegeuk" style="color:#fff"/></svg>
-  <svg class="kr-deco" style="width:80px;height:80px;bottom:-10px;right:12%;opacity:.12;transform:rotate(15deg)"><use href="#ico-mugunghwa" style="color:#fff"/></svg>
+  <div class="cta-flag" style="width:320px;height:213px;top:-40px;left:5%;transform:rotate(-10deg)"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Flag_of_South_Korea.svg/320px-Flag_of_South_Korea.svg.png" alt=""></div>
+  <div class="cta-flag" style="width:280px;height:187px;bottom:-30px;right:8%;transform:rotate(8deg)"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Flag_of_South_Korea.svg/320px-Flag_of_South_Korea.svg.png" alt=""></div>
   <div class="sec"><h2>お申込み</h2><p>先着20社で締切となります。お早めにお申込みください。</p><a href="#" class="cta-btn" onclick="openModal(event)">今すぐ申し込む</a></div>
 </section>
 
@@ -442,22 +622,22 @@
   <button class="modal-close" onclick="closeModal()">×</button>
   <h3>セミナー申込み</h3>
   <p class="modal-sub">2026年3月25日（水）15:00〜 ｜ 東京本社（上野）</p>
-  <form onsubmit="return submitForm(event)">
+  <form id="seminarForm" onsubmit="return submitForm(event)">
     <div class="form-section">
-      <div class="form-section-label"><span class="form-icon">🏢</span>会社情報</div>
+      <div class="form-section-label">会社情報</div>
       <input type="text" placeholder="会社名" required>
       <input type="text" placeholder="部署名">
       <select required><option value="" disabled selected>業種を選択してください</option><option value="cosmetics">化粧品・美容</option><option value="food">食品・菓子</option><option value="retail">小売・流通</option><option value="ad">広告・マーケティング</option><option value="media">メディア・出版</option><option value="other">その他</option></select>
     </div>
     <div class="form-section">
-      <div class="form-section-label"><span class="form-icon">👤</span>参加者情報</div>
+      <div class="form-section-label">参加者情報</div>
       <input type="text" placeholder="お名前" required>
       <input type="email" placeholder="メールアドレス" required>
       <input type="tel" placeholder="電話番号">
       <select required><option value="" disabled selected>参加人数</option><option value="1">1名</option><option value="2">2名</option><option value="3">3名以上</option></select>
     </div>
     <div class="form-section">
-      <div class="form-section-label"><span class="form-icon">📋</span>その他</div>
+      <div class="form-section-label">その他</div>
       <div class="form-label">関心のあるセッション</div>
       <div class="form-checkbox-group">
         <label class="form-checkbox"><input type="checkbox" name="session" value="beauty"><span>ビューティー・インナーケア</span></label>
@@ -466,6 +646,23 @@
       <select required><option value="" disabled selected>このセミナーを何で知りましたか？</option><option value="press">プレスリリース</option><option value="kaigi">カイギフォーラム（2/17）</option><option value="sns">弊社公式SNS</option><option value="mail">メールマガジン</option><option value="sales">弊社営業担当</option><option value="referral">知人・紹介</option><option value="other">その他</option></select>
       <textarea placeholder="ご質問・ご要望（任意）" rows="3"></textarea>
     </div>
+    
+    <div class="form-section consent-section">
+      <div class="form-section-label">同意事項</div>
+      <div class="consent-item">
+        <input type="checkbox" id="privacy-consent" name="privacy-consent" required>
+        <label for="privacy-consent"><a href="#" target="_blank">個人情報の取り扱い（プライバシーポリシー）</a>に同意します <span class="required">必須</span></label>
+      </div>
+      <div class="consent-item">
+        <input type="checkbox" id="event-rule-consent" name="event-rule-consent" required>
+        <label for="event-rule-consent">当日の運営方針（撮影可否・資料配布条件等）を確認しました <span class="required">必須</span></label>
+      </div>
+      <div class="consent-item">
+        <input type="checkbox" id="newsletter-consent" name="newsletter-consent">
+        <label for="newsletter-consent">GLOBAL DAILYからの関連セミナー/レポート案内を受け取る <span class="optional">任意</span></label>
+      </div>
+    </div>
+    
     <button type="submit" class="modal-submit">申し込む</button>
   </form>
 </div></div>
@@ -473,8 +670,20 @@
 <script>
 function openModal(e){if(e)e.preventDefault();document.getElementById('modal').classList.add('active')}
 function closeModal(){document.getElementById('modal').classList.remove('active')}
-function submitForm(e){e.preventDefault();alert('お申込みありがとうございます。担当者より折り返しご連絡いたします。');closeModal();return false}
+function submitForm(e){
+  e.preventDefault();
+  const privacyChecked = document.getElementById('privacy-consent').checked;
+  const eventRuleChecked = document.getElementById('event-rule-consent').checked;
+  if(!privacyChecked || !eventRuleChecked){
+    alert('必須の同意事項にチェックを入れてください。');
+    return false;
+  }
+  alert('お申込みありがとうございます。担当者より折り返しご連絡いたします。');
+  closeModal();
+  return false;
+}
 document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal()});
+
 const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.15});
 document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
 </script>
