@@ -285,6 +285,47 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;
 
 /* ── .tl flex fix ── */
 .tl { display: flex; gap: 10px; width: 100%; }
+
+/* ── CENTER: all grid/card containers auto-centered ── */
+.g2, .g3, .g4, .g5, .g6,
+.steps, .flow, .pie-wrap, .donut-wrap,
+.timeline, .tl, .story-card,
+.rank-list, .bar-row,
+.hl-box, .card {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── anim: center its children when they have max-width ── */
+.anim {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── but grids/full-width items inside anim still stretch ── */
+.anim > .g2,
+.anim > .g3,
+.anim > .g4,
+.anim > .g5,
+.anim > .g6,
+.anim > .steps,
+.anim > .flow,
+.anim > .timeline,
+.anim > .tl,
+.anim > .rank-list {
+  align-self: stretch;
+  width: 100%;
+}
+
+/* ── tag, h1, p: already inline/block center, just ensure ── */
+.anim > .tag { align-self: center; }
+.anim > .h1  { align-self: stretch; text-align: center; }
+.anim > .p   { align-self: center; text-align: center; }
+
+/* ── split layout: left-align text inside ── */
+.split .tl { text-align: left; }
+.split h3, .split .h3, .split .step-h { text-align: left; }
 </style>
 </head>
 <body>
