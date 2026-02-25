@@ -326,6 +326,72 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;
 /* ── split layout: left-align text inside ── */
 .split .tl { text-align: left; }
 .split h3, .split .h3, .split .step-h { text-align: left; }
+
+/* ── missing variables ── */
+:root { --sur2: rgba(255,255,255,.10); --surface-2: rgba(255,255,255,.05); }
+
+/* ── transform-origin ── */
+.deck { transform-origin: center center; }
+
+/* ── hero overlay ── */
+.hero-ov { position:absolute; inset:0; z-index:1;
+  background:linear-gradient(135deg,rgba(8,8,16,.92),rgba(8,8,22,.80)); }
+
+/* ── pie fixed size ── */
+.pie { width:220px; height:220px; border-radius:50%; }
+.donut { width:180px; height:180px; }
+
+/* ── .tl flex ── */
+.tl { display:flex; gap:10px; width:100%; }
+
+/* ── CENTER: anim as flex column, centers children ── */
+.anim {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+/* grids/wide items inside anim: full width */
+.anim > .g2, .anim > .g3, .anim > .g4, .anim > .g5, .anim > .g6,
+.anim > .steps, .anim > .flow, .anim > .timeline, .anim > .tl,
+.anim > .rank-list, .anim > [style*="display:grid"],
+.anim > .grow-row {
+  align-self: stretch;
+  width: 100%;
+}
+
+/* ── GROW ROW / CARD (成長ロードマップ) ── */
+.grow-row {
+  display: flex !important;
+  gap: 12px;
+  width: 100%;
+  margin: 0 auto;
+}
+.grow-card {
+  flex: 1;
+  background: var(--sur);
+  border: 1px solid var(--bd);
+  border-top: 3px solid var(--ac);
+  border-radius: 12px;
+  padding: 14px 12px;
+  text-align: left;
+}
+.grow-yr {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .65rem; color: var(--ac); font-weight: 700;
+  margin-bottom: 6px; letter-spacing: .06em;
+}
+.grow-ttl { font-size: .9rem; font-weight: 700; margin-bottom: 8px; }
+.grow-list { list-style: none; margin-bottom: 10px; }
+.grow-list li { font-size: .74rem; color: var(--mu); padding: 2px 0;
+  border-bottom: 1px solid rgba(255,255,255,.04); }
+.grow-list li::before { content: '✓ '; color: var(--ac); font-weight: 700; }
+.grow-badge { display: inline-block;
+  background: linear-gradient(135deg,var(--red),#ff8e8e);
+  color: #fff; padding: 4px 10px; border-radius: 8px;
+  font-size: .67rem; font-weight: 700; }
 </style>
 </head>
 <body>
@@ -712,7 +778,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;
     <div class="anim"><h1 class="h1">国によって、使うSNSは全然違う</h1></div>
     <div class="anim"><p class="p" style="text-align:center;margin:0 auto 14px;">「SNSで調べる」は共通でも、プラットフォームは国ごとに全く異なる。<strong style="color:var(--tx);">これが私たちの主戦場。</strong></p></div>
     <div class="anim" style="width:100%;max-width:980px;">
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;width:100%;">
         <!-- 中国 -->
         <div class="card" style="border-top:3px solid var(--red);padding:14px 12px;">
           <div style="font-size:1.4rem;margin-bottom:6px;">🇨🇳</div>
@@ -1577,7 +1643,16 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;
       <div class="anim">
         <div style="display:flex;gap:14px;justify-content:center;margin-top:28px;flex-wrap:wrap;">
           <div class="card" style="text-align:center;padding:14px 22px;border-color:rgba(91,141,255,.35);min-width:140px;"><div style="font-size:.72rem;color:var(--mu2);margin-bottom:4px;">会社サイト</div><div style="font-weight:700;color:var(--ac);">gldaily.com</div></div>
-          <div class="card" style="text-align:center;padding:14px 22px;border-color:rgba(61,214,140,.35);min-width:140px;"><div style="font-size:.72rem;color:var(--mu2);margin-bottom:4px;">自社メディア</div><div style="font-weight:700;color:var(--grn);">JAPANKURU</div></div>
+          <div class="card" style="text-align:left;padding:14px 20px;border-color:rgba(61,214,140,.35);min-width:200px;max-width:240px;">
+            <div style="font-size:.62rem;color:var(--mu2);margin-bottom:6px;letter-spacing:.08em;text-transform:uppercase;">自社メディア</div>
+            <div style="font-weight:700;color:var(--grn);font-size:1rem;margin-bottom:4px;">🌏 JAPANKURU</div>
+            <div style="font-size:.72rem;color:var(--mu);line-height:1.5;">日本の魅力を7言語で世界へ発信<br><span style="color:var(--ac);">140万+フォロワー</span> · <span style="color:var(--ac);">200万PV/月</span></div>
+          </div>
+          <div class="card" style="text-align:left;padding:14px 20px;border-color:rgba(61,232,245,.35);min-width:200px;max-width:240px;">
+            <div style="font-size:.62rem;color:var(--mu2);margin-bottom:6px;letter-spacing:.08em;text-transform:uppercase;">在留外国人コミュニティ</div>
+            <div style="font-weight:700;color:var(--cy);font-size:1rem;margin-bottom:4px;">💬 korekoko</div>
+            <div style="font-size:.72rem;color:var(--mu);line-height:1.5;">日本在住外国人のリアルな声を活用<br><span style="color:var(--cy);">8カ国</span> · <span style="color:var(--cy);">ネットワーク320万人</span></div>
+          </div>
           <div class="card" style="text-align:center;padding:14px 22px;border-color:rgba(245,200,66,.35);min-width:140px;"><div style="font-size:.72rem;color:var(--mu2);margin-bottom:4px;">質問大歓迎</div><div style="font-weight:700;color:var(--gld);">なんでも聞いて！</div></div>
         </div>
       </div>
