@@ -18261,6 +18261,22 @@ if(navEl)navEl.appendChild(lightBtn);
 
 // === LOADING DISMISS ===
 window.addEventListener('load',()=>{
+  // ── URL ?lang= 파라미터로 초기 언어 설정 ──
+  (function(){
+    const params = new URLSearchParams(window.location.search);
+    const langParam = params.get('lang');
+    const validLangs = ['en','zh','tw','ko','th','id'];
+    if(langParam && validLangs.includes(langParam)){
+      switchLang(langParam, true);
+    }
+    // 뒤로가기/앞으로가기 시 언어 동기화
+    window.addEventListener('popstate', function(e){
+      const p = new URLSearchParams(window.location.search);
+      const l = p.get('lang') || 'ja';
+      switchLang(l, true);
+    });
+  })();
+
   setTimeout(()=>{
     const lo=document.getElementById('loader');
     if(lo){lo.style.opacity='0';lo.style.pointerEvents='none';setTimeout(()=>{lo.style.display='none'},600)}
@@ -18289,9 +18305,20 @@ document.addEventListener('click', function(e){
 });
 
 // 언어 전환 메인 함수
-function switchLang(lang){
+function switchLang(lang, noHistory){
   currentLang = lang;
-  
+
+  // ── URL 업데이트 (pushState — 페이지 리로드 없음) ──
+  if(!noHistory){
+    const url = new URL(window.location.href);
+    if(lang === 'ja'){
+      url.searchParams.delete('lang');
+    } else {
+      url.searchParams.set('lang', lang);
+    }
+    history.pushState({lang: lang}, '', url.toString());
+  }
+
   // 버튼 라벨 업데이트
   const labels = {ja:'JA', en:'EN', zh:'ZH', tw:'TW', ko:'KO', th:'TH', id:'ID'};
   document.getElementById('langLabel').textContent = labels[lang] || lang.toUpperCase();
