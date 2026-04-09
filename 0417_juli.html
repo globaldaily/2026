@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>じゅり 基調講義 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#06090F;--navy2:#0C1220;--navy3:#141E34;--navy4:#1A2840;
+  --gold:#C8960C;--goldB:#E8B020;--goldPale:#F5E6B0;
+  --white:#F6F4EF;--smoke:#8A9AAA;--dim:#4A5A6A;
+  --red:#CC4444;--green:#3A8A4A;
+  --s04c:#1E4A7A;--s05c:#2A5A3A;--s06c:#5A3A8A;
+  --s07c:#8A5A1A;--s08c:#1A5A5A;--s09c:#7A2A2A;
+}
+html,body{width:100%;height:100%;background:#000;overflow:hidden;font-family:'Noto Sans JP',sans-serif;}
+#stage{width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;}
+.deck{position:relative;width:min(100vw,177.78vh);height:min(100vh,56.25vw);overflow:hidden;}
+.slide{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .45s ease,transform .45s ease;transform:translateY(14px);z-index:0;}
+.slide.active{opacity:1;pointer-events:all;transform:translateY(0);z-index:2;}
+.slide.exit{opacity:0;transform:translateY(-10px);transition:opacity .28s ease,transform .28s ease;z-index:1;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideR{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:translateX(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.slide.active .a1{animation:fadeUp .55s ease .05s both}
+.slide.active .a2{animation:fadeUp .55s ease .15s both}
+.slide.active .a3{animation:fadeUp .55s ease .25s both}
+.slide.active .a4{animation:fadeUp .55s ease .35s both}
+.slide.active .a5{animation:fadeUp .55s ease .45s both}
+.slide.active .a6{animation:fadeUp .55s ease .55s both}
+.slide.active .aR1{animation:slideR .55s ease .05s both}
+.slide.active .aR2{animation:slideR .55s ease .15s both}
+.slide.active .aR3{animation:slideR .55s ease .25s both}
+.slide.active .aF{animation:fadeIn .8s ease .1s both}
+
+/* ─── プログレス＆カウンター ─── */
+#prog{position:fixed;bottom:0;left:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--goldB));transition:width .5s;z-index:999;}
+#counter{position:fixed;bottom:13px;right:52px;font-family:'DM Sans',sans-serif;font-size:11px;color:rgba(255,255,255,.28);z-index:999;letter-spacing:.1em;}
+
+/* ─── ナビゲーションボタン ─── */
+#nav-btn{
+  position:fixed;bottom:8px;right:16px;
+  width:28px;height:28px;background:rgba(200,150,12,.15);border:1px solid rgba(200,150,12,.35);
+  border-radius:4px;cursor:pointer;z-index:1000;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  transition:background .2s;
+}
+#nav-btn:hover{background:rgba(200,150,12,.28);}
+#nav-btn span{display:block;width:14px;height:1.5px;background:var(--gold);}
+
+/* ─── ナビオーバーレイ ─── */
+#nav-overlay{
+  position:fixed;inset:0;background:rgba(6,9,15,.96);z-index:2000;
+  display:none;flex-direction:column;align-items:center;justify-content:center;gap:clamp(6px,1vw,10px);
+  padding:20px;
+}
+#nav-overlay.open{display:flex;}
+#nav-close{
+  position:absolute;top:16px;right:20px;
+  font-family:'DM Sans',sans-serif;font-size:13px;color:var(--smoke);cursor:pointer;letter-spacing:.1em;
+  background:none;border:none;
+}
+#nav-overlay .nav-title{font-family:'DM Sans',sans-serif;font-size:10px;color:var(--gold);letter-spacing:.4em;text-transform:uppercase;margin-bottom:8px;}
+#nav-overlay .nav-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:clamp(6px,.9vw,10px);
+  width:min(92vw,900px);
+}
+.nav-item{
+  padding:clamp(8px,1.2vw,14px) clamp(8px,1.2vw,12px);
+  background:var(--navy3);border:1px solid rgba(200,150,12,.2);
+  cursor:pointer;transition:background .18s,border-color .18s;
+  display:flex;flex-direction:column;gap:3px;
+}
+.nav-item:hover{background:var(--navy4);border-color:var(--gold);}
+.nav-item .ni-num{font-family:'DM Sans',sans-serif;font-size:9px;color:var(--gold);letter-spacing:.2em;}
+.nav-item .ni-title{font-size:clamp(11px,1.3vw,14px);color:var(--white);line-height:1.3;font-weight:700;}
+
+/* ─── 共通ヘッダー ─── */
+.hd{
+  background:var(--navy2);height:clamp(40px,6.8%,56px);
+  display:flex;align-items:center;padding:0 4%;
+  border-bottom:3px solid var(--gold);flex-shrink:0;
+}
+.hd .ht{font-size:clamp(13px,1.8vw,22px);color:var(--white);font-weight:700;}
+.hd .htag{margin-left:auto;font-family:'DM Sans',sans-serif;font-size:clamp(8px,.85vw,11px);color:var(--gold);letter-spacing:.3em;text-transform:uppercase;}
+
+/* ══════════════════════════════
+   S01 ブリッジ
+══════════════════════════════ */
+#s01{background:var(--navy2);display:flex;flex-direction:column;}
+#s01 .wrap{flex:1;display:flex;flex-direction:column;justify-content:center;padding:4% 5%;gap:clamp(14px,2vw,24px);}
+#s01 .nums{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.4vw,18px);}
+#s01 .nc{background:var(--navy3);border:1px solid rgba(200,150,12,.3);padding:clamp(16px,2.4vw,30px) clamp(14px,2vw,22px);}
+#s01 .n{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,8vw,100px);color:var(--gold);line-height:1;}
+#s01 .nl{font-size:clamp(12px,1.5vw,18px);color:var(--smoke);margin-top:4px;}
+#s01 .bridge{border-left:3px solid var(--gold);padding:clamp(14px,2vw,22px) clamp(18px,2.4vw,26px);background:rgba(200,150,12,.05);}
+#s01 .bm{font-size:clamp(17px,2.4vw,30px);color:var(--white);font-weight:700;margin-bottom:8px;}
+#s01 .bs{font-size:clamp(13px,1.7vw,21px);color:var(--smoke);line-height:1.6;}
+
+/* ══════════════════════════════
+   S02 花（1枚のみ）
+══════════════════════════════ */
+#s02{background:#0C0A06;display:flex;flex-direction:column;}
+#s02 .photo{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1490750967868-88df5691cc9e?w=1600&q=85') center/cover no-repeat;filter:saturate(.7) brightness(.5);}
+#s02 .veil{position:absolute;inset:0;background:linear-gradient(110deg,rgba(6,9,15,.92) 42%,rgba(6,9,15,.3) 100%);}
+#s02 .cnt{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;justify-content:center;padding:5% 6%;}
+#s02 .tag{font-family:'DM Sans',sans-serif;font-size:clamp(9px,.9vw,11px);color:var(--gold);letter-spacing:.45em;text-transform:uppercase;margin-bottom:clamp(14px,2vw,20px);}
+#s02 .copy{font-size:clamp(30px,5.5vw,70px);color:var(--white);font-weight:900;line-height:1.15;margin-bottom:clamp(14px,2vw,20px);}
+#s02 .copy em{font-style:normal;color:var(--goldPale);}
+#s02 .rule{width:52px;height:2px;background:var(--gold);margin-bottom:clamp(14px,2vw,20px);}
+#s02 .desc{font-size:clamp(15px,2vw,25px);color:rgba(138,154,170,.85);line-height:1.8;max-width:60%;}
+
+/* ══════════════════════════════
+   S03 根とは何か
+══════════════════════════════ */
+#s03{background:var(--navy);display:flex;flex-direction:column;}
+#s03 .body{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,1.8vw,20px);padding:3% 4%;}
+#s03 .col{display:flex;flex-direction:column;gap:clamp(8px,1.1vw,12px);}
+#s03 .ch{padding-bottom:clamp(8px,1.2vw,12px);border-bottom:2px solid;font-family:'DM Sans',sans-serif;font-size:clamp(9px,.9vw,11px);letter-spacing:.35em;text-transform:uppercase;}
+#s03 .col.bad .ch{border-color:var(--red);color:var(--red);}
+#s03 .col.good .ch{border-color:var(--green);color:var(--green);}
+#s03 .item{display:flex;align-items:flex-start;gap:10px;padding:clamp(10px,1.5vw,18px);background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);}
+#s03 .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:.6em;}
+#s03 .col.bad .dot{background:rgba(204,68,68,.55);}
+#s03 .col.good .dot{background:var(--green);}
+#s03 .it{font-size:clamp(15px,2vw,25px);line-height:1.5;}
+#s03 .col.bad .it{color:var(--smoke);}
+#s03 .col.good .it{color:var(--white);}
+
+/* ══════════════════════════════
+   S03b シミュレーション ブリッジ
+══════════════════════════════ */
+#s03b{background:var(--navy3);display:flex;flex-direction:column;}
+#s03b .body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:4% 5%;gap:clamp(16px,2.4vw,26px);}
+#s03b .case-box{background:rgba(200,150,12,.07);border:1px solid rgba(200,150,12,.3);padding:clamp(16px,2.2vw,26px) clamp(18px,2.6vw,30px);display:flex;gap:clamp(16px,2.4vw,26px);align-items:flex-start;}
+#s03b .cl{font-family:'DM Sans',sans-serif;font-size:clamp(9px,.9vw,11px);letter-spacing:.35em;text-transform:uppercase;color:var(--gold);flex-shrink:0;padding-top:4px;}
+#s03b .cd{font-size:clamp(16px,2.2vw,28px);color:var(--white);font-weight:700;line-height:1.4;}
+#s03b .cd span{font-size:clamp(13px,1.6vw,20px);color:var(--smoke);font-weight:400;display:block;margin-top:4px;line-height:1.6;}
+#s03b .intro{font-size:clamp(14px,1.9vw,24px);color:var(--smoke);line-height:1.7;}
+#s03b .intro em{color:var(--goldPale);font-style:normal;font-weight:700;}
+
+/* ══════════════════════════════
+   S04〜S09 部門別 — 2分割レイアウト
+   左：before（暗い）/ 右：after（明るい）
+══════════════════════════════ */
+.sc{display:flex;flex-direction:column;}
+/* アクセントバー */
+.sc .acc{height:clamp(7px,.8vw,10px);flex-shrink:0;}
+/* 部門ヘッダー */
+.sc .dept-hd{
+  display:flex;align-items:center;gap:clamp(10px,1.4vw,16px);
+  padding:clamp(10px,1.5vw,18px) clamp(16px,2.5%,32px);
+  background:var(--navy2);flex-shrink:0;
+}
+.sc .dept-name{
+  font-family:'DM Sans',sans-serif;
+  font-size:clamp(12px,1.5vw,19px);
+  letter-spacing:.25em;text-transform:uppercase;color:var(--white);font-weight:600;
+}
+.sc .sim-badge{
+  font-family:'DM Sans',sans-serif;font-size:clamp(9px,.9vw,11px);
+  letter-spacing:.2em;text-transform:uppercase;
+  padding:3px 10px;border:1px solid rgba(200,150,12,.5);
+  color:var(--gold);background:rgba(200,150,12,.1);
+}
+/* Before行 — コンパクト */
+.sc .bef-row{
+  display:flex;align-items:stretch;flex-shrink:0;
+  border-bottom:1px solid rgba(0,0,0,.08);
+}
+.sc .bef-tag{
+  writing-mode:vertical-rl;text-orientation:mixed;
+  font-family:'DM Sans',sans-serif;font-size:clamp(8px,.75vw,10px);
+  letter-spacing:.3em;text-transform:uppercase;
+  color:var(--smoke);background:var(--navy3);
+  padding:clamp(8px,1.2vw,14px) clamp(6px,.9vw,10px);
+  flex-shrink:0;
+}
+.sc .bef-text{
+  font-size:clamp(13px,1.55vw,19px);color:#888;line-height:1.6;
+  padding:clamp(10px,1.5vw,18px) clamp(14px,2%,24px);
+}
+/* After エリア — メイン */
+.sc .aft-area{
+  flex:1;display:flex;flex-direction:column;
+  min-height:0;
+}
+.sc .aft-tag{
+  font-family:'DM Sans',sans-serif;font-size:clamp(9px,.85vw,11px);
+  letter-spacing:.3em;text-transform:uppercase;
+  padding:clamp(8px,1.2vw,14px) clamp(16px,2.5%,28px) 0;
+  flex-shrink:0;
+}
+.sc .aft-text{
+  font-size:clamp(18px,2.4vw,30px);
+  font-weight:700;line-height:1.65;
+  padding:clamp(8px,1.2vw,14px) clamp(16px,2.5%,28px);
+}
+/* 結果バー */
+.sc .res{
+  padding:clamp(10px,1.3vw,16px) clamp(16px,2.5%,28px);
+  background:var(--navy);border-left:4px solid var(--gold);
+  flex-shrink:0;
+}
+.sc .res-t{font-size:clamp(12px,1.45vw,18px);color:var(--smoke);}
+.sc .res-t strong{color:var(--goldPale);}
+/* パンチライン */
+.sc .punch{
+  display:flex;align-items:center;gap:10px;
+  padding:clamp(10px,1.3vw,16px) clamp(16px,2.5%,28px);
+  flex-shrink:0;border-top:1px solid rgba(0,0,0,.1);
+}
+.sc .parr{font-family:'Bebas Neue',sans-serif;font-size:clamp(20px,2.8vw,36px);}
+.sc .pt{font-size:clamp(14px,1.8vw,23px);font-weight:700;}
+.sc .pt em{font-style:normal;}
+
+#s04{background:#EFF4FA;} #s04 .acc{background:var(--s04c);} #s04 .after-label{color:var(--s04c);} #s04 .punch{color:var(--s04c);} #s04 .punch .arr{color:var(--s04c);} #s04 .punch .pt em{color:var(--s04c);}
+#s05{background:#F0F7F2;} #s05 .acc{background:var(--s05c);} #s05 .after-label{color:var(--s05c);} #s05 .punch{color:var(--s05c);} #s05 .punch .arr{color:var(--s05c);} #s05 .punch .pt em{color:var(--s05c);}
+#s06{background:#F4F0FA;} #s06 .acc{background:var(--s06c);} #s06 .after-label{color:var(--s06c);} #s06 .punch{color:var(--s06c);} #s06 .punch .arr{color:var(--s06c);} #s06 .punch .pt em{color:var(--s06c);}
+#s07{background:#FAF4EC;} #s07 .acc{background:var(--s07c);} #s07 .after-label{color:var(--s07c);} #s07 .punch{color:var(--s07c);} #s07 .punch .arr{color:var(--s07c);} #s07 .punch .pt em{color:var(--s07c);}
+#s08{background:#EFF6F6;} #s08 .acc{background:var(--s08c);} #s08 .after-label{color:var(--s08c);} #s08 .punch{color:var(--s08c);} #s08 .punch .arr{color:var(--s08c);} #s08 .punch .pt em{color:var(--s08c);}
+#s09{background:#FAF0F0;} #s09 .acc{background:var(--s09c);} #s09 .after-label{color:var(--s09c);} #s09 .punch{color:var(--s09c);} #s09 .punch .arr{color:var(--s09c);} #s09 .punch .pt em{color:var(--s09c);}
+
+/* ══════════════════════════════
+   S10 コミュニケーション（新規）
+══════════════════════════════ */
+#s10{background:var(--white);display:flex;flex-direction:column;}
+#s10 .body{flex:1;display:flex;flex-direction:column;padding:3% 4%;gap:clamp(12px,1.8vw,20px);}
+#s10 .lead{font-size:clamp(18px,2.8vw,36px);color:var(--navy);font-weight:900;line-height:1.3;}
+#s10 .lead em{font-style:normal;color:var(--gold);}
+#s10 .mc-box{display:grid;grid-template-columns:auto 1fr;gap:clamp(12px,1.8vw,20px);background:var(--navy);padding:clamp(14px,2vw,22px) clamp(16px,2.2vw,24px);}
+#s10 .mc-label{font-family:'DM Sans',sans-serif;font-size:clamp(9px,.85vw,11px);letter-spacing:.3em;text-transform:uppercase;color:var(--gold);writing-mode:vertical-rl;text-orientation:mixed;padding:4px 0;}
+#s10 .mc-content{display:flex;flex-direction:column;gap:clamp(8px,1.2vw,14px);}
+#s10 .mc-step{display:flex;align-items:flex-start;gap:10px;}
+#s10 .mc-num{font-family:'Bebas Neue',sans-serif;font-size:clamp(22px,3vw,38px);color:var(--gold);line-height:1;flex-shrink:0;width:clamp(22px,3vw,38px);}
+#s10 .mc-text{font-size:clamp(13px,1.7vw,21px);color:var(--white);line-height:1.6;}
+#s10 .mc-text em{font-style:normal;color:var(--goldPale);font-weight:700;}
+#s10 .rules{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,1.2vw,14px);}
+#s10 .rule-card{padding:clamp(12px,1.6vw,18px);border-top:3px solid var(--gold);background:var(--navy);}
+#s10 .rule-num{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,4vw,52px);color:var(--gold);line-height:1;}
+#s10 .rule-title{font-size:clamp(14px,1.8vw,22px);color:var(--white);font-weight:700;margin-bottom:4px;}
+#s10 .rule-desc{font-size:clamp(11px,1.3vw,16px);color:var(--smoke);line-height:1.5;}
+
+/* ══════════════════════════════
+   S11 「あの人に頼みたい」
+══════════════════════════════ */
+#s11{background:var(--navy2);display:flex;flex-direction:column;}
+#s11 .body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:4% 5%;gap:clamp(16px,2.4vw,26px);}
+#s11 .moment{font-size:clamp(22px,3.5vw,46px);color:var(--white);font-weight:700;line-height:1.35;}
+#s11 .moment em{font-style:normal;color:var(--goldPale);}
+#s11 .rule{width:52px;height:2px;background:var(--gold);}
+#s11 .insight{padding:clamp(16px,2.2vw,24px) clamp(18px,2.5vw,28px);border-left:3px solid var(--gold);background:rgba(200,150,12,.06);}
+#s11 .it{font-size:clamp(15px,2vw,25px);color:var(--smoke);line-height:1.75;}
+#s11 .it strong{color:var(--goldPale);}
+
+/* ══════════════════════════════
+   S11b タイミング
+══════════════════════════════ */
+#s11b{background:var(--navy);display:flex;flex-direction:column;}
+#s11b .body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:4% 5%;gap:clamp(16px,2.4vw,26px);}
+#s11b .big{font-size:clamp(28px,5vw,64px);color:var(--white);font-weight:900;line-height:1.2;}
+#s11b .big em{font-style:normal;color:var(--goldPale);}
+#s11b .insight{padding:clamp(16px,2.2vw,24px) clamp(18px,2.5vw,28px);border-left:3px solid var(--gold);background:rgba(200,150,12,.06);}
+#s11b .it{font-size:clamp(15px,2vw,25px);color:var(--smoke);line-height:1.75;}
+#s11b .it strong{color:var(--goldPale);}
+
+/* ══════════════════════════════
+   S12 循環
+══════════════════════════════ */
+#s12{background:var(--navy);display:flex;flex-direction:column;}
+#s12 .body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:3.5% 4.5%;gap:clamp(18px,2.8vw,30px);}
+#s12 .loop{display:flex;align-items:center;gap:clamp(6px,.9vw,10px);}
+#s12 .node{flex:1;text-align:center;}
+#s12 .nb{border:1.5px solid;padding:clamp(10px,1.5vw,18px) 4px;margin-bottom:6px;}
+#s12 .node:nth-child(1) .nb{border-color:var(--gold);background:rgba(200,150,12,.09);}
+#s12 .node:nth-child(3) .nb{border-color:#5A8ABA;background:rgba(90,138,186,.09);}
+#s12 .node:nth-child(5) .nb{border-color:#5A9A6A;background:rgba(90,154,106,.09);}
+#s12 .node:nth-child(7) .nb{border-color:var(--goldB);background:rgba(200,150,12,.14);}
+#s12 .nl{font-size:clamp(14px,1.8vw,23px);font-weight:700;line-height:1.3;}
+#s12 .node:nth-child(1) .nl{color:var(--gold);}
+#s12 .node:nth-child(3) .nl{color:#8AB8DA;}
+#s12 .node:nth-child(5) .nl{color:#8AC89A;}
+#s12 .node:nth-child(7) .nl{color:var(--goldB);}
+#s12 .ns{font-size:clamp(9px,1vw,13px);color:var(--smoke);font-family:'DM Sans',sans-serif;}
+#s12 .arr{font-size:clamp(20px,2.8vw,36px);color:var(--dim);flex-shrink:0;}
+#s12 .pl{padding:clamp(14px,2vw,22px) clamp(18px,2.5vw,26px);border-top:1px solid rgba(255,255,255,.1);font-size:clamp(16px,2.2vw,28px);color:var(--white);font-weight:700;line-height:1.5;}
+#s12 .pl em{font-style:normal;color:var(--goldPale);}
+
+/* ══════════════════════════════
+   S13 今日一つだけ
+══════════════════════════════ */
+#s13{background:var(--white);display:flex;flex-direction:column;}
+#s13 .body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:3.5% 4.5%;gap:clamp(14px,2vw,22px);}
+#s13 .main{font-size:clamp(22px,3.6vw,46px);color:var(--navy);font-weight:900;line-height:1.25;}
+#s13 .main em{font-style:normal;color:var(--gold);}
+#s13 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.4vw,18px);}
+#s13 .card{padding:clamp(14px,2vw,24px);border-top:3px solid;}
+#s13 .c1{background:#F4F1EC;border-color:#C8C0B0;}
+#s13 .c2{background:var(--navy);border-color:var(--gold);}
+#s13 .c3{background:var(--navy3);border-color:var(--goldB);}
+#s13 .cl{font-family:'DM Sans',sans-serif;font-size:clamp(8px,.85vw,10px);letter-spacing:.3em;text-transform:uppercase;margin-bottom:8px;}
+#s13 .c1 .cl{color:#A8A098;} #s13 .c2 .cl{color:var(--gold);} #s13 .c3 .cl{color:var(--goldB);}
+#s13 .ct{font-size:clamp(14px,1.8vw,22px);line-height:1.6;font-weight:700;}
+#s13 .c1 .ct{color:#909090;} #s13 .c2 .ct{color:var(--white);} #s13 .c3 .ct{color:var(--goldPale);}
+#s13 .footer{padding:clamp(11px,1.5vw,18px) clamp(14px,2vw,22px);background:var(--navy);text-align:center;font-size:clamp(13px,1.7vw,22px);color:var(--gold);font-weight:700;}
+</style>
+</head>
+<body>
+<div id="stage">
+<div class="deck" id="deck">
+
+<!-- S01 ブリッジ -->
+<div class="slide active" id="s01">
+  <div class="wrap">
+    <div class="nums">
+      <div class="nc aR1"><div class="n">12.9億</div><div class="nl">2025年 GLD売上</div></div>
+      <div class="nc aR2"><div class="n">100億</div><div class="nl">2034年の目標</div></div>
+      <div class="nc aR3"><div class="n">53人</div><div class="nl">今日ここにいる全員</div></div>
+    </div>
+    <div class="bridge a4">
+      <div class="bm">今朝の数字、まだ覚えていますか。</div>
+      <div class="bs">あの数字を現実にする話を、この30分でします。難しくない——あなたの仕事の話だから。</div>
+    </div>
+  </div>
+</div>
+
+<!-- S02 花 -->
+<div class="slide" id="s02">
+  <div class="photo"></div><div class="veil"></div>
+  <div class="cnt">
+    <div class="tag a1">問題を提起する</div>
+    <div class="copy a2">綺麗だ。<br>でも、<em>明日には枯れる。</em></div>
+    <div class="rule a3"></div>
+    <div class="desc a4">実力のない華やかさは、長続きしません。<br>根がなければ、水が来なくなったとき、終わる。<br>この30分は「根の張り方」の話です。</div>
+  </div>
+</div>
+
+<!-- S03 根とは何か -->
+<div class="slide" id="s03">
+  <div class="hd a1"><span class="ht">根とは何か</span><span class="htag">Experience</span></div>
+  <div class="body">
+    <div class="col bad a2">
+      <div class="ch">消えていく経験</div>
+      <div class="item"><div class="dot"></div><div class="it">言われたことをこなす</div></div>
+      <div class="item"><div class="dot"></div><div class="it">確認してから動く</div></div>
+      <div class="item"><div class="dot"></div><div class="it">誰でも同じようにできる</div></div>
+      <div class="item"><div class="dot"></div><div class="it">依頼が来てから始める</div></div>
+    </div>
+    <div class="col good a3">
+      <div class="ch">根になる経験</div>
+      <div class="item"><div class="dot"></div><div class="it">頼まれていないのに動く</div></div>
+      <div class="item"><div class="dot"></div><div class="it">「なぜそうしたか」を語れる</div></div>
+      <div class="item"><div class="dot"></div><div class="it">あなたにしかできない、になる</div></div>
+      <div class="item"><div class="dot"></div><div class="it">来る前に先手を打っている</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- S03b シミュレーション ブリッジ -->
+<div class="slide" id="s03b">
+  <div class="hd a1"><span class="ht">一つのケースで考えてみましょう</span><span class="htag">Simulation</span></div>
+  <div class="body">
+    <div class="case-box a2">
+      <div class="cl">Case</div>
+      <div class="cd">大手医薬品メーカー・A社
+        <span>売上300億円規模。インバウンドプロモーションへの初回提案機会。<br>GLDとしてはじめてのコンタクトから、受注・実行まで。</span>
+      </div>
+    </div>
+    <div class="intro a3">各部門が「<em>一歩だけ早く動いた場合</em>」、何が変わるかを見てみましょう。<br>これは「こうしなければならない」という話ではなく——<br>こういう動きができる人が、どんなキャリアを積んでいくかという話です。</div>
+  </div>
+</div>
+
+<!-- S04 営業 -->
+<div class="slide sc" id="s04" style="background:#EFF4FA;">
+  <div class="acc"></div>
+  <div class="dept-hd a1">
+    <span class="dept-name">Sales — 営業</span>
+    <span class="sim-badge">A社 シミュレーション</span>
+  </div>
+  <div class="bef-row a2">
+    <div class="bef-tag">受け身でいると</div>
+    <div class="bef-text">A社担当者の名前と役職だけ調べて、アポイントを取る。提案当日、初めて業界情報を確認する。</div>
+  </div>
+  <div class="aft-area">
+    <div class="aft-tag a3" style="color:var(--s04c);">一歩踏み出すと</div>
+    <div class="aft-text a3" style="color:var(--navy);">アポイントの3日前、A社の最新IR・競合動向を読み込んでおく。初回面談で「御社の海外比率、昨年から8%上がってますね」と一言。担当者の表情が変わる。</div>
+  </div>
+  <div class="res a4"><div class="res-t">積み重なると：「A社担当」から <strong>「医薬品業界のスペシャリスト」</strong> に変わっていきます。</div></div>
+  <div class="punch a5" style="color:var(--s04c);"><span class="parr" style="color:var(--s04c);">→</span><span class="pt">「<em>この人、ちゃんと調べてきた</em>」——その印象が、提案の勝率を変えます。</span></div>
+</div>
+
+<!-- S05 マーケティング -->
+<div class="slide sc" id="s05" style="background:#F0F7F2;">
+  <div class="acc"></div>
+  <div class="dept-hd a1">
+    <span class="dept-name">Marketing</span>
+    <span class="sim-badge">A社 シミュレーション</span>
+  </div>
+  <div class="bef-row a2">
+    <div class="bef-tag">受け身でいると</div>
+    <div class="bef-text">営業から「A社向けにデータください」と言われてから動き始める。3日後に汎用資料を送る。</div>
+  </div>
+  <div class="aft-area">
+    <div class="aft-tag a3" style="color:var(--s05c);">一歩踏み出すと</div>
+    <div class="aft-text a3" style="color:var(--navy);">A社へのアポが入った時点で動く。医薬品×インバウンドの最新トレンド、競合他社のメディア配分データをまとめ、提案2日前に営業へ渡す。</div>
+  </div>
+  <div class="res a4"><div class="res-t">積み重なると：「データを出す人」から <strong>「戦略を作る人」</strong> に変わっていきます。</div></div>
+  <div class="punch a5" style="color:var(--s05c);"><span class="parr" style="color:var(--s05c);">→</span><span class="pt">「<em>こんなデータまで持ってるの？</em>」——それが、次の案件の第一声になります。</span></div>
+</div>
+
+<!-- S06 Media -->
+<div class="slide sc" id="s06" style="background:#F4F0FA;">
+  <div class="acc"></div>
+  <div class="dept-hd a1">
+    <span class="dept-name">Media — JAPANKURU</span>
+    <span class="sim-badge">A社 シミュレーション</span>
+  </div>
+  <div class="bef-row a2">
+    <div class="bef-tag">受け身でいると</div>
+    <div class="bef-text">案件受注後にコンテンツを考え始める。「どんな商品ですか？」から始まる。</div>
+  </div>
+  <div class="aft-area">
+    <div class="aft-tag a3" style="color:var(--s06c);">一歩踏み出すと</div>
+    <div class="aft-text a3" style="color:var(--navy);">A社の商品カテゴリに近い過去記事のPVと反応率を事前にまとめておく。「同ジャンルでこの実績があります」を提案の場で数字として示せる状態にしておく。</div>
+  </div>
+  <div class="res a4"><div class="res-t">積み重なると：コンテンツ担当から <strong>「メディア戦略を語れる人」</strong> に変わっていきます。</div></div>
+  <div class="punch a5" style="color:var(--s06c);"><span class="parr" style="color:var(--s06c);">→</span><span class="pt">142万フォロワーは、数字として語れる人が使ったとき、はじめて武器になります。</span></div>
+</div>
+
+<!-- S07 SPC -->
+<div class="slide sc" id="s07" style="background:#FAF4EC;">
+  <div class="acc"></div>
+  <div class="dept-hd a1">
+    <span class="dept-name">SPC — プロジェクト管理</span>
+    <span class="sim-badge">A社 シミュレーション</span>
+  </div>
+  <div class="bef-row a2">
+    <div class="bef-tag">受け身でいると</div>
+    <div class="bef-text">受注後に進行スケジュールを作り始める。課題が出たタイミングでクライアントに報告する。</div>
+  </div>
+  <div class="aft-area">
+    <div class="aft-tag a3" style="color:var(--s07c);">一歩踏み出すと</div>
+    <div class="aft-text a3" style="color:var(--navy);">ヒアリング段階で「3カ国同時展開の場合、翻訳フェーズで2週間のバッファが必要です」と事前に伝える。クライアントが「プロに頼んだ」と感じるのは、完成物ではなくこの一言。</div>
+  </div>
+  <div class="res a4"><div class="res-t">積み重なると：進行管理から <strong>「プロジェクト設計ができる人」</strong> に変わっていきます。</div></div>
+  <div class="punch a5" style="color:var(--s07c);"><span class="parr" style="color:var(--s07c);">→</span><span class="pt">「<em>問題が起きる前に言ってくれる人</em>」——その評価は、何年経っても消えません。</span></div>
+</div>
+
+<!-- S08 PR -->
+<div class="slide sc" id="s08" style="background:#EFF6F6;">
+  <div class="acc"></div>
+  <div class="dept-hd a1">
+    <span class="dept-name">PR — 広報</span>
+    <span class="sim-badge">A社 シミュレーション</span>
+  </div>
+  <div class="bef-row a2">
+    <div class="bef-tag">受け身でいると</div>
+    <div class="bef-text">A社案件が完了してからプレスリリースを出す。出して終わり。</div>
+  </div>
+  <div class="aft-area">
+    <div class="aft-tag a3" style="color:var(--s08c);">一歩踏み出すと</div>
+    <div class="aft-text a3" style="color:var(--navy);">A社との商談が始まった段階で、業界メディア担当記者に「GLDが医薬品インバウンドで面白い動きをしています」と一言入れておく。A社担当者がGLDを調べたとき、実績記事が出てくる状態を作る。</div>
+  </div>
+  <div class="res a4"><div class="res-t">積み重なると：広報担当から <strong>「GLDのブランドを設計できる人」</strong> に変わっていきます。</div></div>
+  <div class="punch a5" style="color:var(--s08c);"><span class="parr" style="color:var(--s08c);">→</span><span class="pt">「<em>知っている会社</em>」への提案は、ゼロからのスタートではありません。</span></div>
+</div>
+
+<!-- S09 経理 -->
+<div class="slide sc" id="s09" style="background:#FAF0F0;">
+  <div class="acc"></div>
+  <div class="dept-hd a1">
+    <span class="dept-name">Finance — 経理</span>
+    <span class="sim-badge">A社 シミュレーション</span>
+  </div>
+  <div class="bef-row a2">
+    <div class="bef-tag">受け身でいると</div>
+    <div class="bef-text">受注後に予算管理・精算を始める。利益率は案件が終わってから確認する。</div>
+  </div>
+  <div class="aft-area">
+    <div class="aft-tag a3" style="color:var(--s09c);">一歩踏み出すと</div>
+    <div class="aft-text a3" style="color:var(--navy);">A社の提案段階で「同規模案件の原価構成と利益率シミュレーション」を営業に渡しておく。「この条件だと利益率が15%を割ります」を受注前に言える人が組織にいると、営業の提案精度が上がる。</div>
+  </div>
+  <div class="res a4"><div class="res-t">積み重なると：経理処理から <strong>「経営判断をサポートできる人」</strong> に変わっていきます。</div></div>
+  <div class="punch a5" style="color:var(--s09c);"><span class="parr" style="color:var(--s09c);">→</span><span class="pt">数字の精度は、<em>信頼の精度</em>。</span></div>
+</div>
+
+<!-- S10 コミュニケーション（新規） -->
+<div class="slide" id="s10">
+  <div class="hd a1"><span class="ht">伝わらないのは、内容のせいじゃない</span><span class="htag">Communication</span></div>
+  <div class="body">
+    <div class="lead a2">相手が<em>頭を使わなくていい</em>ように、伝える。</div>
+    <div class="mc-box a3">
+      <div class="mc-label">マクドナルドの例</div>
+      <div class="mc-content">
+        <div class="mc-step">
+          <div class="mc-num">1</div>
+          <div class="mc-text">「注文が多いので、<em>ゆっくり話します</em>。」——まず相手の心を開く</div>
+        </div>
+        <div class="mc-step">
+          <div class="mc-num">2</div>
+          <div class="mc-text">「<em>セット</em>から。次に<em>単品</em>。最後に<em>オプション</em>です。」——範疇化して順番を宣言する</div>
+        </div>
+        <div class="mc-step">
+          <div class="mc-num">3</div>
+          <div class="mc-text">一文一情報。短く切る。——相手の脳への<em>負荷を最小化</em>する</div>
+        </div>
+      </div>
+    </div>
+    <div class="rules a4">
+      <div class="rule-card">
+        <div class="rule-num">01</div>
+        <div class="rule-title">範疇化</div>
+        <div class="rule-desc">「まずAの話、次にBの話」と先に構造を宣言する</div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-num">02</div>
+        <div class="rule-title">単文</div>
+        <div class="rule-desc">一文に情報は一つ。長い文は切る。</div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-num">03</div>
+        <div class="rule-title">相手への配慮</div>
+        <div class="rule-desc">「わかりやすく話す」ではなく「相手が考えなくていい状態を作る」</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S11 「あの人に頼みたい」 -->
+<div class="slide" id="s11">
+  <div class="hd a1"><span class="ht">「あの人に、また頼みたい。」</span><span class="htag">Value</span></div>
+  <div class="body">
+    <div class="moment a2">誰かがあなたを<em>「指名」</em>した瞬間。<br>それは評価でも褒め言葉でもない。<br>あなたという人間への、<em>市場の答え。</em></div>
+    <div class="rule a3"></div>
+    <div class="insight a4">
+      <div class="it">期待をこなした人は、次も「また同じ人で」と言われる。<br>期待を<strong>超えた</strong>人は、次に「あの人じゃないと」と言われる。<br>その差は、小さな先手の積み重ね。</div>
+    </div>
+  </div>
+</div>
+
+<!-- S11b タイミング -->
+<div class="slide" id="s11b">
+  <div class="hd a1"><span class="ht">なぜ動けないのか</span><span class="htag">Insight</span></div>
+  <div class="body">
+    <div class="big a2">問題は、やる気じゃない。<br><em>タイミングだ。</em></div>
+    <div class="insight a3">
+      <div class="it">頑張っていない人はいない。<br>ただ、<strong>依頼が来てから動く人と、来る前に動く人</strong>では、<br>積み重なった3年後がまったく違う。</div>
+    </div>
+  </div>
+</div>
+
+<!-- S12 循環 -->
+<div class="slide" id="s12">
+  <div class="hd a1"><span class="ht">なぜ、あなたの動きが会社の数字に繋がるのか</span><span class="htag">Cycle</span></div>
+  <div class="body">
+    <div class="loop a2">
+      <div class="node"><div class="nb"><div class="nl">あなたが<br>強くなる</div></div><div class="ns">先手・実力・信頼</div></div>
+      <div class="arr">→</div>
+      <div class="node"><div class="nb"><div class="nl">GLDが<br>強くなる</div></div><div class="ns">組織力・提案力</div></div>
+      <div class="arr">→</div>
+      <div class="node"><div class="nb"><div class="nl">売上・価値が<br>上がる</div></div><div class="ns">市場評価・収益</div></div>
+      <div class="arr">→</div>
+      <div class="node"><div class="nb"><div class="nl">あなたに<br>返ってくる</div></div><div class="ns">機会・成長・報酬</div></div>
+    </div>
+    <div class="pl a4">プロが集まった組織だけが、<em>この循環を本物にできます。</em></div>
+  </div>
+</div>
+
+<!-- S13 今日一つだけ -->
+<div class="slide" id="s13">
+  <div class="hd a1"><span class="ht">今日、一つだけ変える</span><span class="htag">Action</span></div>
+  <div class="body">
+    <div class="main a2">大きく変えなくていい。<br><em>一つだけ、先手に変える。</em></div>
+    <div class="cards a3">
+      <div class="card c1"><div class="cl">これまで</div><div class="ct">依頼が来てから動く</div></div>
+      <div class="card c2"><div class="cl">明日から</div><div class="ct">「来るかもしれない」<br>一つ前のタイミングで動く</div></div>
+      <div class="card c3"><div class="cl">積み重なると</div><div class="ct">「あの人に頼みたい」が<br>あなたの肩書きになる</div></div>
+    </div>
+    <div class="footer a4">数字を取りにいくのは、営業だ。　その一手を強くするのが、全員だ。</div>
+  </div>
+</div>
+
+</div><!-- /deck -->
+</div><!-- /stage -->
+
+<!-- ナビゲーションUI -->
+<div id="prog" style="width:6.67%"></div>
+<div id="counter">1 / 15</div>
+<button id="nav-btn" onclick="toggleNav()"><span></span><span></span><span></span></button>
+
+<div id="nav-overlay">
+  <button id="nav-close" onclick="toggleNav()">✕ 閉じる</button>
+  <div class="nav-title">目次 — スライドジャンプ</div>
+  <div class="nav-grid" id="nav-grid"></div>
+</div>
+
+<script>
+const SLIDES=[
+  {id:'s01',title:'今朝の数字'},
+  {id:'s02',title:'綺麗だ。でも、明日には枯れる。'},
+  {id:'s03',title:'根とは何か'},
+  {id:'s03b',title:'シミュレーション：A社'},
+  {id:'s04',title:'Sales — 営業'},
+  {id:'s05',title:'Marketing'},
+  {id:'s06',title:'Media — JAPANKURU'},
+  {id:'s07',title:'SPC — プロジェクト管理'},
+  {id:'s08',title:'PR — 広報'},
+  {id:'s09',title:'Finance — 経理'},
+  {id:'s10',title:'伝わらないのは内容のせいじゃない'},
+  {id:'s11',title:'「あの人に、また頼みたい。」'},
+  {id:'s11b',title:'問題は、やる気じゃない。タイミングだ。'},
+  {id:'s12',title:'なぜあなたの動きが数字に繋がるのか'},
+  {id:'s13',title:'今日、一つだけ変える'},
+];
+
+const slides=Array.from(document.querySelectorAll('.deck .slide'));
+const total=slides.length;
+let cur=0,anim=false;
+
+// 目次生成
+const grid=document.getElementById('nav-grid');
+SLIDES.forEach((s,i)=>{
+  const el=document.createElement('div');
+  el.className='nav-item';
+  el.innerHTML=`<div class="ni-num">${String(i+1).padStart(2,'0')}</div><div class="ni-title">${s.title}</div>`;
+  el.onclick=()=>{toggleNav();goTo(i);};
+  grid.appendChild(el);
+});
+
+function goTo(i){
+  if(anim||i<0||i>=total)return;
+  anim=true;
+  slides[cur].classList.add('exit');slides[cur].classList.remove('active');
+  setTimeout(()=>{
+    slides[cur].classList.remove('exit');cur=i;slides[cur].classList.add('active');
+    document.getElementById('counter').textContent=`${cur+1} / ${total}`;
+    document.getElementById('prog').style.width=`${((cur+1)/total)*100}%`;
+    setTimeout(()=>{anim=false;},600);
+  },300);
+}
+function toggleNav(){
+  document.getElementById('nav-overlay').classList.toggle('open');
+}
+const next=()=>goTo(cur+1),prev=()=>goTo(cur-1);
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&document.getElementById('nav-overlay').classList.contains('open')){toggleNav();return;}
+  if(['ArrowRight','ArrowDown',' '].includes(e.key)){e.preventDefault();next();}
+  if(['ArrowLeft','ArrowUp'].includes(e.key)){e.preventDefault();prev();}
+});
+document.getElementById('deck').addEventListener('click',e=>{
+  if(document.getElementById('nav-overlay').classList.contains('open'))return;
+  (e.clientX/window.innerWidth>.3)?next():prev();
+});
+let tx=0;
+document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
+document.addEventListener('touchend',e=>{
+  const d=e.changedTouches[0].clientX-tx;
+  if(Math.abs(d)>40){d<0?next():prev();}
+},{passive:true});
+</script>
+</body>
+</html>
