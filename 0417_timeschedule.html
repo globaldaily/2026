@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4/14 全社研修 タイムスケジュール</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans JP',sans-serif;background:#F6F4EF;color:#0C1220;padding:32px 24px;}
+.wrap{max-width:900px;margin:0 auto;}
+h1{font-size:18px;font-weight:700;color:#06090F;margin-bottom:4px;letter-spacing:.05em;}
+.sub{font-size:12px;color:#8A9AAA;margin-bottom:24px;font-family:'DM Sans',sans-serif;letter-spacing:.05em;}
+
+table{width:100%;border-collapse:collapse;background:#fff;box-shadow:0 2px 16px rgba(0,0,0,.08);}
+th{background:#06090F;color:#F6F4EF;font-size:11px;font-family:'DM Sans',sans-serif;letter-spacing:.2em;text-transform:uppercase;padding:10px 14px;text-align:left;font-weight:500;}
+td{padding:12px 14px;font-size:13px;vertical-align:middle;border-bottom:1px solid #EDE8DF;line-height:1.55;}
+tr:last-child td{border-bottom:none;}
+
+.time{font-family:'DM Sans',sans-serif;font-weight:600;font-size:13px;white-space:nowrap;width:90px;}
+.dur{font-family:'DM Sans',sans-serif;font-size:11px;color:#8A9AAA;white-space:nowrap;width:52px;text-align:center;}
+.content{font-weight:700;font-size:14px;}
+.detail{font-size:12px;color:#4A5A6A;margin-top:3px;font-weight:400;}
+.owner{font-size:11px;font-family:'DM Sans',sans-serif;white-space:nowrap;width:150px;}
+
+/* ブロック色分け */
+.blk-open td{background:#F0F4F8;}
+.blk-am1 td{background:#FFF;}
+.blk-disc td{background:#FAFAF8;}
+.blk-lunch td{background:#F5F0E8;}
+.blk-juri td{background:#06090F;color:#F6F4EF;}
+.blk-juri td .detail{color:#8A9AAA;}
+.blk-juri td .owner{color:#C8960C;}
+.blk-gw1 td{background:#EFF6F2;}
+.blk-gw2 td{background:#F0F4FA;}
+.blk-decl td{background:#FAF8F0;}
+.blk-close td{background:#F0F4F8;}
+
+/* 区切り行 */
+.section-hd td{background:#C8960C;color:#fff;font-size:11px;font-family:'DM Sans',sans-serif;letter-spacing:.3em;text-transform:uppercase;padding:6px 14px;font-weight:600;}
+
+/* バッジ */
+.badge{display:inline-block;font-size:10px;font-family:'DM Sans',sans-serif;padding:2px 8px;border-radius:2px;margin-left:6px;font-weight:500;vertical-align:middle;}
+.b-juri{background:rgba(200,150,12,.12);color:#8A6000;border:1px solid rgba(200,150,12,.3);}
+.b-ishi{background:rgba(42,90,58,.1);color:#1A5A2A;border:1px solid rgba(42,90,58,.25);}
+.b-arai{background:rgba(30,74,122,.1);color:#0A3A6A;border:1px solid rgba(30,74,122,.25);}
+.b-both{background:rgba(90,58,138,.08);color:#3A1A6A;border:1px solid rgba(90,58,138,.2);}
+
+@media print{body{padding:16px;background:#fff;}table{box-shadow:none;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>2026年春季全社研修　タイムスケジュール</h1>
+  <div class="sub">2026年4月14日（火）　参加者53名　会場：___________</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>時間</th>
+        <th style="width:52px;">時間</th>
+        <th>内容</th>
+        <th>担当</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- 午前 -->
+      <tr class="section-hd"><td colspan="4">午　前</td></tr>
+
+      <tr class="blk-open">
+        <td class="time">08:45</td>
+        <td class="dur">15分</td>
+        <td><div class="content">開場・受付</div></td>
+        <td class="owner"><span class="badge b-juri">じゅり</span></td>
+      </tr>
+
+      <tr class="blk-open">
+        <td class="time">09:00</td>
+        <td class="dur">30分</td>
+        <td>
+          <div class="content">チェックイン</div>
+          <div class="detail">無作為に選ばれた10名が、他部門の良いところを発表（1人約3分）</div>
+        </td>
+        <td class="owner"><span class="badge b-juri">じゅりMC</span></td>
+      </tr>
+
+      <tr class="blk-am1">
+        <td class="time">09:30</td>
+        <td class="dur">45分</td>
+        <td>
+          <div class="content">基調講演　中長期計画書発表</div>
+          <div class="detail">経営理念・現在地・100億円へのロードマップ</div>
+        </td>
+        <td class="owner"><span class="badge b-arai">荒井社長</span></td>
+      </tr>
+
+      <tr class="blk-disc">
+        <td class="time">10:15</td>
+        <td class="dur">30分</td>
+        <td>
+          <div class="content">グループ討議①　部門シャッフル</div>
+          <div class="detail">①不明点の洗い出し 15分　②荒井社長への質疑応答 15分</div>
+        </td>
+        <td class="owner"><span class="badge b-ishi">石原先生F</span><span class="badge b-juri">じゅりMC</span></td>
+      </tr>
+
+      <tr class="blk-disc">
+        <td class="time">10:45</td>
+        <td class="dur">75分</td>
+        <td>
+          <div class="content">グループ討議②　部門別</div>
+          <div class="detail">①自部門から他部門への期待 ②自部門から他部門への貢献を検討・発表<br>討議 30分　→　各部門発表（3〜4分）30分　→　質疑 15分</div>
+        </td>
+        <td class="owner"><span class="badge b-ishi">石原先生F</span><span class="badge b-juri">じゅりMC</span></td>
+      </tr>
+
+      <tr class="blk-disc">
+        <td class="time">12:00</td>
+        <td class="dur">30分</td>
+        <td>
+          <div class="content">グループ討議③　部門別</div>
+          <div class="detail">他部門からの期待・貢献を自部門に落とし込み 15分　→　各部門1分発表 15分</div>
+        </td>
+        <td class="owner"><span class="badge b-ishi">石原先生F</span><span class="badge b-juri">じゅりMC</span></td>
+      </tr>
+
+      <!-- 昼食 -->
+      <tr class="section-hd"><td colspan="4">昼　食</td></tr>
+
+      <tr class="blk-lunch">
+        <td class="time">12:30</td>
+        <td class="dur">60分</td>
+        <td><div class="content">昼食休憩</div></td>
+        <td class="owner">—</td>
+      </tr>
+
+      <!-- 午後 -->
+      <tr class="section-hd"><td colspan="4">午　後</td></tr>
+
+      <tr class="blk-juri">
+        <td class="time">13:30</td>
+        <td class="dur">30分</td>
+        <td>
+          <div class="content">基調講義</div>
+          <div class="detail">先手を打つこと・伝わる伝え方 → 自分の価値・会社の価値へ</div>
+        </td>
+        <td class="owner"><span class="badge b-juri">じゅり</span></td>
+      </tr>
+
+      <tr class="blk-gw1">
+        <td class="time">14:00</td>
+        <td class="dur">60分</td>
+        <td>
+          <div class="content">グループワーク①　部門別</div>
+          <div class="detail">既存ドメイン・メディア・企業への攻め方作戦<br>討議 40分　→　各部門発表 20分</div>
+        </td>
+        <td class="owner"><span class="badge b-ishi">石原先生F</span><span class="badge b-juri">じゅりMC</span></td>
+      </tr>
+
+      <tr class="blk-gw2">
+        <td class="time">15:00</td>
+        <td class="dur">60分</td>
+        <td>
+          <div class="content">グループワーク②　部門シャッフル</div>
+          <div class="detail">空白市場・アタックしたい企業のブレインストーミング<br>ブレスト 40分　→　チーム発表・ディスカッション 20分</div>
+        </td>
+        <td class="owner"><span class="badge b-ishi">石原先生F</span><span class="badge b-juri">じゅりMC</span></td>
+      </tr>
+
+      <tr class="blk-decl">
+        <td class="time">16:00</td>
+        <td class="dur">30分</td>
+        <td>
+          <div class="content">個人アクションプラン宣言</div>
+          <div class="detail">カード記入 15分　→　全員が一言ずつ声に出して宣言 15分</div>
+        </td>
+        <td class="owner"><span class="badge b-ishi">石原先生F</span><span class="badge b-juri">じゅりMC</span></td>
+      </tr>
+
+      <tr class="blk-close">
+        <td class="time">16:30</td>
+        <td class="dur">30分</td>
+        <td>
+          <div class="content">クロージング</div>
+          <div class="detail">全体振り返り・まとめ　→　荒井社長 締めの言葉</div>
+        </td>
+        <td class="owner"><span class="badge b-juri">じゅりMC</span><span class="badge b-arai">荒井社長</span></td>
+      </tr>
+
+      <tr class="blk-close">
+        <td class="time">17:00</td>
+        <td class="dur">—</td>
+        <td><div class="content">終了</div></td>
+        <td class="owner">—</td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;">
+    <span style="font-size:11px;font-family:'DM Sans',sans-serif;color:#8A9AAA;">凡例：</span>
+    <span class="badge b-juri" style="font-size:11px;">じゅり</span>
+    <span style="font-size:11px;color:#4A5A6A;">司会・進行・基調講義</span>
+    <span class="badge b-ishi" style="font-size:11px;">石原先生F</span>
+    <span style="font-size:11px;color:#4A5A6A;">討議・GWファシリテーション</span>
+    <span class="badge b-arai" style="font-size:11px;">荒井社長</span>
+    <span style="font-size:11px;color:#4A5A6A;">基調講演・クロージング</span>
+  </div>
+
+  <div style="margin-top:12px;background:#FFF8E8;border-left:3px solid #C8960C;padding:10px 14px;font-size:12px;color:#4A5A6A;line-height:1.7;">
+    <strong style="color:#8A6000;">事前課題（4/11までに全社員へ送付）</strong><br>
+    テーマ：「他部門への期待と貢献」<br>
+    ①自部門から他部門へ期待すること　②自部門から他部門へ貢献できること　を考えてきてください。
+  </div>
+</div>
+</body>
+</html>
