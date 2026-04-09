@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GLD 全社研修 2026 — 進行マスター</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&family=DM+Sans:wght@400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#06090F;--navy2:#0C1220;--navy3:#141E34;--navy4:#1A2840;
+  --gold:#C8960C;--goldB:#E8B020;--goldPale:#F5E6B0;
+  --white:#F6F4EF;--smoke:#8A9AAA;--dim:#4A5A6A;
+  --red:#CC4444;--green:#2A7A3A;--blue:#1E4A7A;
+}
+html,body{width:100%;height:100%;background:#000;overflow:hidden;
+  font-family:'Noto Sans JP',sans-serif;}
+#wrap{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#000;}
+#stage{position:relative;background:var(--navy);overflow:hidden;}
+.slide{position:absolute;inset:0;opacity:0;pointer-events:none;
+  display:flex;flex-direction:column;
+  transition:opacity .45s ease,transform .45s ease;
+  transform:translateY(12px);z-index:0;}
+.slide.active{opacity:1;pointer-events:all;transform:translateY(0);z-index:2;}
+.slide.exit{opacity:0;transform:translateY(-8px);z-index:1;}
+
+/* アニメーション */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideR{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:translateX(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.slide.active .a1{animation:fadeUp .6s ease .06s both}
+.slide.active .a2{animation:fadeUp .6s ease .16s both}
+.slide.active .a3{animation:fadeUp .6s ease .26s both}
+.slide.active .a4{animation:fadeUp .6s ease .36s both}
+.slide.active .a5{animation:fadeUp .6s ease .46s both}
+.slide.active .a6{animation:fadeUp .6s ease .56s both}
+.slide.active .aR1{animation:slideR .6s ease .06s both}
+.slide.active .aR2{animation:slideR .6s ease .18s both}
+.slide.active .aR3{animation:slideR .6s ease .30s both}
+.slide.active .aF{animation:fadeIn .8s ease .1s both}
+
+/* プログレス */
+#prog{position:fixed;bottom:0;left:0;height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--goldB));
+  transition:width .5s;z-index:999;}
+#counter{position:fixed;bottom:12px;right:52px;
+  font-family:'DM Sans',sans-serif;font-size:11px;
+  color:rgba(255,255,255,.25);z-index:999;letter-spacing:.1em;}
+#nav-btn{position:fixed;bottom:6px;right:14px;width:30px;height:30px;
+  background:rgba(200,150,12,.12);border:1px solid rgba(200,150,12,.3);
+  border-radius:3px;cursor:pointer;z-index:1000;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;}
+#nav-btn span{display:block;width:14px;height:1.5px;background:var(--gold);}
+#nav-overlay{position:fixed;inset:0;background:rgba(6,9,15,.96);z-index:2000;
+  display:none;flex-direction:column;align-items:center;justify-content:center;
+  gap:8px;padding:20px;}
+#nav-overlay.open{display:flex;}
+#nav-close{position:absolute;top:14px;right:18px;background:none;border:none;
+  font-family:'DM Sans',sans-serif;font-size:13px;color:var(--smoke);cursor:pointer;}
+.nav-ttl{font-family:'DM Sans',sans-serif;font-size:10px;color:var(--gold);
+  letter-spacing:.4em;text-transform:uppercase;margin-bottom:8px;}
+#nav-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:min(92vw,820px);}
+.ni{padding:10px 12px;background:var(--navy3);border:1px solid rgba(200,150,12,.18);
+  cursor:pointer;transition:background .18s;}
+.ni:hover{background:var(--navy4);border-color:var(--gold);}
+.ni-n{font-family:'DM Sans',sans-serif;font-size:9px;color:var(--gold);letter-spacing:.2em;}
+.ni-t{font-size:clamp(10px,1.2vw,13px);color:var(--white);font-weight:700;margin-top:2px;line-height:1.3;}
+
+/* ─── 共通パーツ ─── */
+.hd{background:var(--navy2);height:clamp(44px,7%,60px);
+  display:flex;align-items:center;padding:0 4.5%;
+  border-bottom:3px solid var(--gold);flex-shrink:0;}
+.hd .ht{font-size:clamp(16px,2.1vw,26px);color:var(--white);font-weight:700;}
+.hd .htag{margin-left:auto;font-family:'DM Sans',sans-serif;
+  font-size:clamp(9px,.9vw,12px);color:var(--gold);
+  letter-spacing:.3em;text-transform:uppercase;}
+.body{flex:1;display:flex;flex-direction:column;padding:3.5% 4.5%;}
+
+/* ══════════════════════════
+   S01 タイトル
+══════════════════════════ */
+#s01{background:var(--navy);}
+#s01 .rp{position:absolute;right:0;top:0;bottom:0;width:28%;
+  background:var(--navy3);border-left:3px solid var(--gold);}
+#s01 .rp-gld{position:absolute;right:0;top:0;bottom:0;width:28%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;}
+#s01 .rp-gld .big{font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(60px,10vw,128px);color:var(--gold);
+  opacity:.12;line-height:1;letter-spacing:.05em;text-align:center;}
+#s01 .rp-gld .yr{font-family:'DM Sans',sans-serif;
+  font-size:clamp(12px,1.6vw,20px);color:var(--smoke);
+  letter-spacing:.4em;}
+#s01 .left{position:absolute;left:0;top:0;bottom:0;width:72%;
+  display:flex;flex-direction:column;justify-content:center;padding:6% 7%;}
+#s01 .el{font-family:'DM Sans',sans-serif;font-size:clamp(9px,.9vw,12px);
+  color:var(--gold);letter-spacing:.5em;text-transform:uppercase;margin-bottom:3%;}
+#s01 .ttl{font-size:clamp(28px,4.8vw,62px);color:var(--white);font-weight:900;
+  line-height:1.12;margin-bottom:2.5%;}
+#s01 .ttl em{font-style:normal;color:var(--gold);}
+#s01 .sub{font-size:clamp(14px,1.7vw,22px);color:var(--smoke);margin-bottom:5%;}
+#s01 .vl{width:48px;height:2px;background:var(--gold);margin-bottom:3%;}
+#s01 .meta{display:flex;gap:24px;flex-wrap:wrap;}
+#s01 .mi .ml{font-family:'DM Sans',sans-serif;font-size:clamp(8px,.8vw,10px);
+  color:var(--smoke);letter-spacing:.25em;text-transform:uppercase;display:block;margin-bottom:3px;}
+#s01 .mi .mv{font-size:clamp(13px,1.5vw,18px);color:var(--white);font-weight:700;}
+
+/* ══════════════════════════
+   S02 タイムスケジュール
+══════════════════════════ */
+#s02{background:var(--white);}
+#s02c{background:var(--white);}
+#s02 .hd{background:var(--navy2);}
+#s02c .hd{background:var(--navy2);}
+#s02 .body{padding:2.5% 3.5%;gap:0;overflow:hidden;}
+#s02c .body{padding:2.5% 3.5%;gap:0;overflow:hidden;}
+#s02 table{width:100%;border-collapse:collapse;}
+#s02c table{width:100%;border-collapse:collapse;}
+#s02 thead th,#s02c thead th{background:var(--navy);color:var(--gold);
+  font-family:'DM Sans',sans-serif;font-size:clamp(9px,.9vw,11px);
+  letter-spacing:.25em;text-transform:uppercase;
+  padding:clamp(7px,1.1vw,12px) clamp(8px,1.2vw,14px);text-align:left;}
+#s02 tbody tr,#s02c tbody tr{border-bottom:1px solid #EDE8DF;}
+#s02 tbody tr:last-child,#s02c tbody tr:last-child{border-bottom:none;}
+#s02 td,#s02c td{padding:clamp(7px,1.1vw,11px) clamp(8px,1.2vw,14px);
+  vertical-align:middle;font-size:clamp(12px,1.4vw,17px);}
+#s02 .time,#s02c .time{font-family:'DM Sans',sans-serif;font-weight:600;
+  white-space:nowrap;width:72px;font-size:clamp(12px,1.4vw,17px);}
+#s02 .dur,#s02c .dur{font-family:'DM Sans',sans-serif;font-size:clamp(10px,1.1vw,13px);
+  color:var(--smoke);text-align:center;width:44px;}
+#s02 .ct,#s02c .ct{font-weight:700;color:var(--navy);}
+#s02 .ct .detail,#s02c .ct .detail{font-weight:400;font-size:.88em;color:var(--dim);margin-top:2px;}
+#s02 .own,#s02c .own{width:130px;}
+.badge{display:inline-block;font-family:'DM Sans',sans-serif;
+  font-size:clamp(8px,.8vw,10px);padding:3px 10px;border-radius:2px;
+  font-weight:700;letter-spacing:.05em;}
+.bj{background:rgba(200,150,12,.22);color:#F0C840;border:1px solid rgba(200,150,12,.6);}
+.bi{background:rgba(42,122,58,.2);color:#6ACA7A;border:1px solid rgba(42,180,58,.5);}
+.ba{background:rgba(30,74,122,.2);color:#7AAADA;border:1px solid rgba(30,100,180,.5);}
+.bl{background:rgba(255,255,255,.08);color:#AAA;border:1px solid rgba(255,255,255,.2);}
+/* 行の色 */
+.r-am{background:#FAFAFA;}
+.r-disc{background:#F8FAF8;}
+.r-lunch{background:#FFF8EC;}
+.r-juri{background:#06090F;} .r-juri td{color:#F6F4EF;}
+.r-juri .ct{color:var(--gold);}
+.r-juri .detail{color:var(--smoke) !important;}
+.r-gw{background:#F0F6FA;}
+.r-act{background:#FBF8EE;}
+.r-cl{background:#F0F4F8;}
+
+/* ══════════════════════════
+   S03 チェックイン
+══════════════════════════ */
+#s03{background:var(--white);}
+#s03 .hd{background:var(--navy2);}
+#s03 .body{justify-content:center;gap:clamp(12px,2vw,22px);}
+#s03 .timebadge{font-family:'DM Sans',sans-serif;
+  font-size:clamp(11px,1.3vw,17px);color:var(--gold);font-weight:600;
+  letter-spacing:.1em;}
+#s03 .main{font-size:clamp(20px,3.2vw,42px);color:var(--navy);font-weight:900;
+  line-height:1.25;}
+#s03 .rule{width:50px;height:2px;background:var(--gold);}
+#s03 .items{display:flex;flex-direction:column;gap:clamp(8px,1.2vw,14px);}
+#s03 .item{display:flex;align-items:flex-start;gap:12px;
+  padding:clamp(10px,1.5vw,18px);background:#FAFAFA;
+  border-left:3px solid var(--gold);}
+#s03 .item-t{font-size:clamp(14px,1.8vw,22px);color:var(--navy);
+  font-weight:700;line-height:1.5;}
+#s03 .item-t span{font-weight:400;color:var(--dim);font-size:.88em;}
+
+/* ══════════════════════════
+   S04 → 荒井社長 SWITCH
+══════════════════════════ */
+#s04{background:var(--navy3);}
+#s04 .body{align-items:center;justify-content:center;gap:clamp(14px,2.2vw,26px);}
+#s04 .sw-label{font-family:'DM Sans',sans-serif;
+  font-size:clamp(9px,.9vw,12px);color:var(--gold);
+  letter-spacing:.45em;text-transform:uppercase;}
+#s04 .sw-main{font-size:clamp(26px,4.5vw,58px);color:var(--white);
+  font-weight:900;line-height:1.15;text-align:center;}
+#s04 .sw-main em{font-style:normal;color:var(--gold);}
+#s04 .sw-box{background:var(--navy4);border:2px solid var(--gold);
+  padding:clamp(14px,2.2vw,24px) clamp(20px,3vw,36px);text-align:center;}
+#s04 .sw-box-t{font-size:clamp(14px,1.8vw,22px);color:var(--white);
+  font-weight:700;margin-bottom:6px;}
+#s04 .sw-box-s{font-size:clamp(12px,1.5vw,18px);color:var(--smoke);}
+#s04 .sw-time{font-family:'DM Sans',sans-serif;
+  font-size:clamp(14px,1.8vw,22px);color:var(--gold);font-weight:600;}
+#s04 .sw-hint{font-family:'DM Sans',sans-serif;
+  font-size:clamp(11px,1.3vw,16px);color:var(--smoke);}
+
+/* ══════════════════════════
+   S05〜S07 討議
+══════════════════════════ */
+.disc-slide{background:var(--white);}
+.disc-slide .hd{background:var(--navy2);}
+.disc-slide .body{justify-content:center;gap:clamp(10px,1.5vw,18px);}
+.disc-slide .timebadge{font-family:'DM Sans',sans-serif;
+  font-size:clamp(11px,1.4vw,18px);color:var(--gold);font-weight:600;}
+.disc-slide .disc-main{font-size:clamp(20px,3vw,38px);color:var(--navy);
+  font-weight:900;line-height:1.2;}
+.disc-slide .theme-row{display:flex;flex-direction:column;gap:clamp(8px,1.2vw,14px);}
+.disc-slide .theme-item{display:flex;align-items:flex-start;gap:12px;
+  padding:clamp(10px,1.5vw,18px);background:#FAFAFA;
+  border-left:3px solid var(--gold);}
+.disc-slide .ti-label{font-family:'DM Sans',sans-serif;
+  font-size:clamp(8px,.85vw,11px);letter-spacing:.3em;
+  text-transform:uppercase;color:var(--gold);flex-shrink:0;
+  margin-top:3px;min-width:clamp(28px,3.5vw,46px);}
+.disc-slide .ti-text{font-size:clamp(14px,1.8vw,23px);
+  color:var(--navy);font-weight:700;line-height:1.5;}
+.disc-slide .note{font-size:clamp(12px,1.5vw,18px);color:var(--dim);
+  line-height:1.7;}
+.disc-slide .own-badge{display:flex;gap:8px;align-items:center;
+  padding:clamp(8px,1.2vw,14px) clamp(10px,1.5vw,18px);
+  background:var(--navy);align-self:flex-start;}
+.disc-slide .own-badge .ot{font-size:clamp(12px,1.4vw,17px);
+  color:var(--smoke);}
+
+/* ══════════════════════════
+   S08 昼食
+══════════════════════════ */
+#s08{background:var(--navy);}
+#s08 .body{align-items:center;justify-content:center;gap:clamp(14px,2vw,24px);}
+#s08 .lt{font-size:clamp(28px,5vw,64px);color:var(--white);font-weight:900;
+  text-align:center;line-height:1.15;}
+#s08 .lt em{font-style:normal;color:var(--gold);}
+#s08 .ltime{font-family:'DM Sans',sans-serif;
+  font-size:clamp(14px,1.8vw,24px);color:var(--smoke);text-align:center;}
+#s08 .lnote{font-size:clamp(13px,1.6vw,20px);color:var(--dim);text-align:center;}
+
+/* ══════════════════════════
+   S09 → じゅり SWITCH
+══════════════════════════ */
+#s09{background:var(--navy);}
+#s09 .body{align-items:center;justify-content:center;gap:clamp(14px,2.2vw,26px);}
+#s09 .sw-label{font-family:'DM Sans',sans-serif;
+  font-size:clamp(9px,.9vw,12px);color:var(--gold);
+  letter-spacing:.45em;text-transform:uppercase;}
+#s09 .sw-main{font-size:clamp(26px,4.5vw,58px);color:var(--white);
+  font-weight:900;line-height:1.15;text-align:center;}
+#s09 .sw-main em{font-style:normal;color:var(--gold);}
+#s09 .sw-box{background:rgba(200,150,12,.07);border:2px solid var(--gold);
+  padding:clamp(14px,2.2vw,24px) clamp(20px,3vw,36px);text-align:center;
+  max-width:70%;}
+#s09 .sw-box-t{font-size:clamp(14px,1.8vw,22px);color:var(--white);
+  font-weight:700;margin-bottom:6px;}
+#s09 .sw-box-s{font-size:clamp(12px,1.5vw,18px);color:var(--smoke);}
+#s09 .sw-btn{font-family:'DM Sans',sans-serif;
+  font-size:clamp(11px,1.3vw,16px);color:var(--smoke);}
+#s09 .open-btn{
+  display:inline-block;
+  background:var(--gold);color:var(--navy);
+  font-family:'DM Sans',sans-serif;font-size:clamp(12px,1.5vw,18px);
+  font-weight:700;padding:clamp(10px,1.5vw,16px) clamp(20px,3vw,36px);
+  cursor:pointer;border:none;letter-spacing:.05em;
+  transition:background .2s;
+}
+#s09 .open-btn:hover{background:var(--goldB);}
+
+/* ══════════════════════════
+   S10〜S11 GW
+══════════════════════════ */
+.gw-slide{background:var(--white);}
+.gw-slide .hd{background:var(--navy2);}
+.gw-slide .body{justify-content:center;gap:clamp(10px,1.5vw,18px);}
+.gw-slide .timebadge{font-family:'DM Sans',sans-serif;
+  font-size:clamp(11px,1.4vw,18px);color:var(--gold);font-weight:600;}
+.gw-slide .gw-main{font-size:clamp(20px,3vw,38px);color:var(--navy);
+  font-weight:900;line-height:1.2;}
+.gw-slide .steps{display:grid;grid-template-columns:repeat(3,1fr);
+  gap:clamp(8px,1.2vw,16px);}
+.gw-slide .step{padding:clamp(12px,1.8vw,20px);display:flex;flex-direction:column;gap:6px;}
+.gw-slide .step:nth-child(1){background:var(--navy);border-top:3px solid var(--gold);}
+.gw-slide .step:nth-child(2){background:var(--navy3);border-top:3px solid var(--goldB);}
+.gw-slide .step:nth-child(3){background:var(--navy4);border-top:3px solid var(--smoke);}
+.gw-slide .step-n{font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(26px,4vw,52px);color:var(--gold);line-height:1;}
+.gw-slide .step:nth-child(2) .step-n{color:var(--goldB);}
+.gw-slide .step-t{font-size:clamp(14px,1.8vw,22px);color:var(--white);
+  font-weight:700;}
+.gw-slide .step-d{font-size:clamp(11px,1.3vw,16px);color:var(--smoke);
+  line-height:1.6;}
+.gw-slide .note{font-size:clamp(12px,1.5vw,18px);color:var(--dim);}
+.gw-slide .own-badge{display:flex;gap:8px;align-items:center;
+  padding:clamp(8px,1.2vw,14px) clamp(10px,1.5vw,18px);
+  background:var(--navy);align-self:flex-start;}
+.gw-slide .own-badge .ot{font-size:clamp(12px,1.4vw,17px);color:var(--smoke);}
+
+/* ══════════════════════════
+   S12 個人宣言
+══════════════════════════ */
+#s12{background:var(--white);}
+#s12 .hd{background:var(--navy2);}
+#s12 .body{justify-content:center;gap:clamp(12px,1.8vw,22px);}
+#s12 .timebadge{font-family:'DM Sans',sans-serif;
+  font-size:clamp(11px,1.4vw,18px);color:var(--gold);font-weight:600;}
+#s12 .main{font-size:clamp(22px,3.5vw,44px);color:var(--navy);
+  font-weight:900;line-height:1.2;}
+#s12 .main em{font-style:normal;color:var(--gold);}
+#s12 .cards{display:grid;grid-template-columns:repeat(3,1fr);
+  gap:clamp(8px,1.2vw,16px);}
+#s12 .card{padding:clamp(14px,2vw,22px);border-top:3px solid;}
+#s12 .c1{background:#F4F0E8;border-color:#C8B888;}
+#s12 .c2{background:var(--navy);border-color:var(--gold);}
+#s12 .c3{background:var(--navy3);border-color:var(--goldB);}
+#s12 .cl{font-family:'DM Sans',sans-serif;font-size:clamp(8px,.85vw,11px);
+  letter-spacing:.3em;text-transform:uppercase;margin-bottom:8px;}
+#s12 .c1 .cl{color:#A8A088;}
+#s12 .c2 .cl{color:var(--gold);}
+#s12 .c3 .cl{color:var(--goldB);}
+#s12 .ct{font-size:clamp(14px,1.8vw,23px);font-weight:700;line-height:1.55;}
+#s12 .c1 .ct{color:#888;}
+#s12 .c2 .ct{color:var(--white);}
+#s12 .c3 .ct{color:var(--goldPale);}
+#s12 .note{font-size:clamp(13px,1.6vw,20px);color:var(--dim);line-height:1.65;}
+#s12 .own-badge{display:flex;gap:8px;align-items:center;
+  padding:clamp(8px,1.2vw,14px) clamp(10px,1.5vw,18px);
+  background:var(--navy);align-self:flex-start;}
+#s12 .own-badge .ot{font-size:clamp(12px,1.4vw,17px);color:var(--smoke);}
+
+/* ══════════════════════════
+   S13 クロージング
+══════════════════════════ */
+#s13{background:var(--navy);}
+#s13 .body{align-items:center;justify-content:center;gap:clamp(14px,2.2vw,26px);}
+#s13 .cl-t{font-size:clamp(26px,4.5vw,58px);color:var(--white);font-weight:900;
+  text-align:center;line-height:1.2;}
+#s13 .cl-t em{font-style:normal;color:var(--gold);}
+#s13 .cl-rule{width:60px;height:2px;background:var(--gold);}
+#s13 .cl-sub{font-size:clamp(14px,1.9vw,24px);color:var(--smoke);
+  text-align:center;line-height:1.7;max-width:75%;}
+#s13 .cl-gld{font-family:'DM Sans',sans-serif;
+  font-size:clamp(10px,1.1vw,14px);color:rgba(200,150,12,.4);
+  letter-spacing:.4em;text-transform:uppercase;text-align:center;}
+</style>
+</head>
+<body>
+<div id="wrap"><div id="stage" id="stage">
+
+<!-- S01 タイトル -->
+<div class="slide active" id="s01">
+  <div class="rp"></div>
+  <div class="rp-gld">
+    <div class="big">GLD<br>2026</div>
+    <div class="yr">SPRING</div>
+  </div>
+  <div class="left">
+    <div class="el a1">2026 Spring — All Hands Training</div>
+    <div class="ttl a2">グローバル・デイリー<br><em>全社研修 2026</em></div>
+    <div class="sub a3">全社員対象　オフライン集合研修</div>
+    <div class="vl a4"></div>
+    <div class="meta a5">
+      <div class="mi"><span class="ml">Date</span><span class="mv">2026年4月17日（金）</span></div>
+      <div class="mi"><span class="ml">Time</span><span class="mv">09:00 — 17:00</span></div>
+      <div class="mi"><span class="ml">Participants</span><span class="mv">全社員 53名</span></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- S01b 本研修の目的・目標 -->
+<div class="slide" id="s01b">
+  <div class="hd a1"><span class="ht">本研修の目的と目標</span><span class="htag">Purpose</span></div>
+  <div class="body" style="justify-content:center;gap:clamp(14px,2.2vw,26px);">
+
+    <!-- 目的 -->
+    <div class="a2" style="display:flex;flex-direction:column;gap:clamp(8px,1.2vw,14px);">
+      <div style="font-family:'DM Sans',sans-serif;font-size:clamp(9px,.9vw,11px);
+        letter-spacing:.35em;text-transform:uppercase;color:var(--gold);">Purpose — 目的</div>
+      <div style="background:var(--navy3);border-left:4px solid var(--gold);
+        padding:clamp(14px,2vw,22px) clamp(16px,2.4vw,26px);">
+        <div style="font-size:clamp(16px,2.2vw,28px);color:var(--white);font-weight:700;line-height:1.5;">
+          「なぜ、企業は成長しなければならないか」を<br>
+          <span style="color:var(--goldPale);">自分ごととして腑に落とす。</span>
+        </div>
+        <div style="font-size:clamp(12px,1.5vw,18px);color:var(--smoke);margin-top:8px;line-height:1.7;">
+          目の前の目標をクリアすること、実力を磨くこと——<br>
+          それが会社の成長と自分のキャリアに直結していることを理解する。
+        </div>
+      </div>
+    </div>
+
+    <!-- 矢印 -->
+    <div class="a3" style="text-align:center;font-family:'DM Sans',sans-serif;
+      font-size:clamp(18px,2.8vw,36px);color:var(--gold);">↓</div>
+
+    <!-- 目標 -->
+    <div class="a4" style="display:flex;flex-direction:column;gap:clamp(8px,1.2vw,14px);">
+      <div style="font-family:'DM Sans',sans-serif;font-size:clamp(9px,.9vw,11px);
+        letter-spacing:.35em;text-transform:uppercase;color:var(--goldB);">Goal — 研修終了後の状態</div>
+      <div style="background:rgba(200,150,12,.08);border:1.5px solid rgba(200,150,12,.4);
+        padding:clamp(14px,2vw,22px) clamp(16px,2.4vw,26px);">
+        <div style="font-size:clamp(16px,2.2vw,28px);color:var(--white);font-weight:700;line-height:1.5;">
+          中長期計画書を理解した上で、<br>
+          <span style="color:var(--goldPale);">自分が何をするかを言えている。</span>
+        </div>
+        <div style="font-size:clamp(12px,1.5vw,18px);color:var(--smoke);margin-top:8px;line-height:1.7;">
+          自部門および個人として、どう動けばよいか——<br>
+          「なんとなくわかった」ではなく、<strong style="color:var(--white);">具体的なアクションプランを持って帰る。</strong>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- S02 タイムスケジュール（午前） -->
+<div class="slide" id="s02">
+  <div class="hd a1"><span class="ht">本日のタイムスケジュール</span><span class="htag">午前 — AM</span></div>
+  <div class="body">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:72px;">時間</th>
+          <th style="width:44px;">時間</th>
+          <th>内容</th>
+          <th style="width:130px;">担当</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="r-am"><td class="time">09:00</td><td class="dur">30分</td><td class="ct">チェックイン<div class="detail">他部門の良いところ発表（無作為10名）</div></td><td class="own"><span class="badge bj">MC</span></td></tr>
+        <tr class="r-am"><td class="time">09:30</td><td class="dur">45分</td><td class="ct">基調講演　中長期計画書<div class="detail">経営理念・現在地・100億円ロードマップ</div></td><td class="own"><span class="badge ba">荒井社長</span></td></tr>
+        <tr class="r-disc"><td class="time">10:15</td><td class="dur">30分</td><td class="ct">グループ討議①　シャッフル<div class="detail">不明点洗い出し → 荒井社長への質疑</div></td><td class="own"><span class="badge bi">石原先生F</span></td></tr>
+        <tr class="r-disc"><td class="time">10:45</td><td class="dur">75分</td><td class="ct">グループ討議②　部門別<div class="detail">他部門への期待と貢献を検討・発表</div></td><td class="own"><span class="badge bi">石原先生F</span></td></tr>
+        <tr class="r-disc"><td class="time">12:00</td><td class="dur">30分</td><td class="ct">グループ討議③　部門別<div class="detail">フィードバックを自部門アクションへ落とし込み</div></td><td class="own"><span class="badge bi">石原先生F</span></td></tr>
+        <tr class="r-lunch"><td class="time">12:30</td><td class="dur">60分</td><td class="ct" style="font-weight:900;font-size:clamp(14px,1.8vw,22px);">昼食休憩</td><td class="own"><span class="badge bl">—</span></td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:10px;display:flex;align-items:center;gap:10px;">
+      <span style="font-size:clamp(11px,1.2vw,14px);color:var(--dim);">★ 事前課題：「他部門への期待と貢献」を考えてくること</span>
+      <span style="margin-left:auto;font-family:'DM Sans',sans-serif;font-size:clamp(11px,1.3vw,16px);color:var(--gold);font-weight:600;">午後 → 次のページ</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- S02b 本研修の目的 -->
+<div class="slide" id="s02c">
+  <div class="hd a1"><span class="ht">本日のタイムスケジュール</span><span class="htag">午後 — PM</span></div>
+  <div class="body">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:72px;">時間</th>
+          <th style="width:44px;">時間</th>
+          <th>内容</th>
+          <th style="width:130px;">担当</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="r-juri"><td class="time">13:30</td><td class="dur">30分</td><td class="ct">基調講義<div class="detail" style="color:var(--smoke);">先手を打つ × 伝わる伝え方 → 自分の価値へ</div></td><td class="own"><span class="badge bj">MC</span></td></tr>
+        <tr class="r-gw"><td class="time">14:00</td><td class="dur">60分</td><td class="ct">GW①　既存ドメイン攻め方　部門別<div class="detail">討議40分 → 各部門発表20分</div></td><td class="own"><span class="badge bi">石原先生F</span></td></tr>
+        <tr class="r-gw"><td class="time">15:00</td><td class="dur">60分</td><td class="ct">GW②　空白市場ブレスト　シャッフル<div class="detail">ブレスト40分 → チーム発表20分</div></td><td class="own"><span class="badge bi">石原先生F</span></td></tr>
+        <tr class="r-act"><td class="time">16:00</td><td class="dur">30分</td><td class="ct">個人アクションプラン宣言<div class="detail">カード記入15分 → 全員が声に出して宣言15分</div></td><td class="own"><span class="badge bi">石原先生F</span></td></tr>
+        <tr class="r-cl"><td class="time">16:30</td><td class="dur">30分</td><td class="ct">クロージング</td><td class="own"><span class="badge bj">MC</span></td></tr>
+        <tr style="background:#0C1A0C;"><td class="time" style="color:var(--goldB);font-weight:700;">17:00</td><td class="dur" style="color:var(--goldB);">—</td><td class="ct" style="font-size:clamp(15px,1.9vw,24px);font-weight:900;color:var(--goldPale);">終了　→　会食場所へ移動してください 🍻</td><td class="own"></td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:10px;font-size:clamp(11px,1.2vw,14px);color:var(--dim);">
+      ★ アクションプランカードは自分で持ち帰り、明日の現場に持ち込んでください。
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="s02b">
+  <div class="hd a1"><span class="ht">本研修の目的</span><span class="htag">Purpose</span></div>
+  <div class="body" style="justify-content:center;gap:clamp(14px,2.2vw,26px);">
+
+    <!-- 目的 -->
+    <div class="a2" style="display:flex;flex-direction:column;gap:clamp(8px,1.2vw,14px);">
+      <div style="font-family:'DM Sans',sans-serif;font-size:clamp(9px,.9vw,11px);color:var(--gold);letter-spacing:.35em;text-transform:uppercase;">Purpose — 目的</div>
+      <div style="padding:clamp(14px,2vw,22px) clamp(16px,2.4vw,26px);background:var(--navy2);border-left:4px solid var(--gold);">
+        <div style="font-size:clamp(16px,2.2vw,28px);color:var(--white);font-weight:700;line-height:1.55;">
+          「なぜ、企業は成長しなければならないか」を<br>
+          <span style="color:var(--goldPale);">理解し、腹落ちして、目の前の目標をクリアし実力を磨く。</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 成功指標 -->
+    <div class="a3" style="display:flex;flex-direction:column;gap:clamp(8px,1.2vw,14px);">
+      <div style="font-family:'DM Sans',sans-serif;font-size:clamp(9px,.9vw,11px);color:var(--smoke);letter-spacing:.35em;text-transform:uppercase;">Goal — 研修終了後の状態</div>
+      <div style="padding:clamp(14px,2vw,22px) clamp(16px,2.4vw,26px);background:var(--navy3);border-left:4px solid var(--smoke);">
+        <div style="font-size:clamp(16px,2.2vw,28px);color:var(--white);font-weight:700;line-height:1.55;">
+          中長期計画書を理解し、<br>
+          <span style="color:var(--goldPale);">自部門および個人がどう行動すればよいか、<br>具体的なアクションプランを持って帰る。</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 一言 -->
+    <div class="a4" style="padding:clamp(12px,1.8vw,20px) clamp(14px,2vw,22px);background:rgba(200,150,12,.05);border:1px solid rgba(200,150,12,.2);">
+      <div style="font-size:clamp(13px,1.7vw,21px);color:var(--smoke);line-height:1.75;">
+        「会社のために動け」ではありません。<br>
+        今日ここで腑に落としたことが、<strong style="color:var(--white);">あなた自身の実力になる</strong>——その積み重ねが、グローバル・デイリーを本当に強くします。
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- S02c 午後スケジュール -->
+<div class="slide" id="s03">
+  <div class="hd a1"><span class="ht">チェックイン</span><span class="htag">09:00 — 09:30</span></div>
+  <div class="body">
+    <div class="timebadge a2">30分</div>
+    <div class="main a2">他部門の良いところを、<br>声に出してみましょう。</div>
+    <div class="rule a3"></div>
+    <div class="items a3">
+      <div class="item">
+        <div class="item-t">無作為に選ばれた10名が、他部門の社員3名のいいところを発表します。<span>（1人 約3分）</span></div>
+      </div>
+      <div class="item">
+        <div class="item-t">正解はありません。一緒に働いてきた「あの人のここがいい」を、言葉にしましょう。</div>
+      </div>
+    </div>
+    <div class="own-badge a4">
+      <span class="badge bj" style="font-size:13px;">じゅりMC</span>
+      <span class="ot">進行・タイムキープ</span>
+    </div>
+  </div>
+</div>
+
+<!-- S04 → 荒井社長 スライドへ切り替え -->
+<div class="slide" id="s04">
+  <div class="body">
+    <div class="sw-label a1">Next — 基調講演</div>
+    <div class="sw-main a2">荒井社長の<br><em>スライドへ切り替えてください</em></div>
+    <div class="sw-box a3">
+      <div class="sw-box-t">中長期計画書　発表</div>
+      <div class="sw-box-s">グローバル・デイリー　荒井 良治</div>
+    </div>
+    <div class="sw-time a4">09:30 — 10:15　　45分</div>
+    <div class="sw-hint a5">※ 終了後、このスライドに戻ってグループ討議①に移ります</div>
+  </div>
+</div>
+
+<!-- S05 討議① -->
+<div class="slide disc-slide" id="s05">
+  <div class="hd a1"><span class="ht">グループ討議①　部門シャッフル</span><span class="htag">10:15 — 10:45</span></div>
+  <div class="body">
+    <div class="timebadge a2">30分</div>
+    <div class="disc-main a2">講演を聴いて——<br>わからなかったことを出しましょう。</div>
+    <div class="theme-row a3">
+      <div class="theme-item">
+        <div class="ti-label">① 15分</div>
+        <div class="ti-text">各グループで「不明点・疑問に思ったこと」を出し合い、代表質問を1つに絞る</div>
+      </div>
+      <div class="theme-item">
+        <div class="ti-label">② 15分</div>
+        <div class="ti-text">各グループの代表質問を発表 → 荒井社長がリアルタイムで回答</div>
+      </div>
+    </div>
+    <div class="own-badge a4">
+      <span class="badge bi" style="font-size:13px;">石原先生F</span>
+      <span class="badge bj" style="font-size:13px;">じゅりMC</span>
+    </div>
+  </div>
+</div>
+
+<!-- S06 討議② -->
+<div class="slide disc-slide" id="s06">
+  <div class="hd a1"><span class="ht">グループ討議②　部門別</span><span class="htag">10:45 — 12:00</span></div>
+  <div class="body">
+    <div class="timebadge a2">75分（討議30分 ＋ 発表30分 ＋ 質疑15分）</div>
+    <div class="disc-main a2">★ 事前課題をベースに話し合ってください。</div>
+    <div class="theme-row a3">
+      <div class="theme-item">
+        <div class="ti-label">テーマ①</div>
+        <div class="ti-text">自部門から他部門へ、どんなことを期待していますか？</div>
+      </div>
+      <div class="theme-item">
+        <div class="ti-label">テーマ②</div>
+        <div class="ti-text">自部門から他部門へ、どんな貢献ができますか？</div>
+      </div>
+      <div class="theme-item">
+        <div class="ti-label">発表</div>
+        <div class="ti-text">各部門3〜4分で全体発表。「具体的な行動」で話す。</div>
+      </div>
+    </div>
+    <div class="own-badge a4">
+      <span class="badge bi" style="font-size:13px;">石原先生F</span>
+      <span class="badge bj" style="font-size:13px;">じゅりMC</span>
+    </div>
+  </div>
+</div>
+
+<!-- S07 討議③ -->
+<div class="slide disc-slide" id="s07">
+  <div class="hd a1"><span class="ht">グループ討議③　部門別</span><span class="htag">12:00 — 12:30</span></div>
+  <div class="body">
+    <div class="timebadge a2">30分（整理15分 ＋ 発表15分）</div>
+    <div class="disc-main a2">他部門からのフィードバックを<br>自部門に落とし込む。</div>
+    <div class="theme-row a3">
+      <div class="theme-item">
+        <div class="ti-label">整理 15分</div>
+        <div class="ti-text">他部門から受けた期待・フィードバックを「できる / 時間がかかる / 難しい」に仕分け、まずやるアクションを1つ決める</div>
+      </div>
+      <div class="theme-item">
+        <div class="ti-label">発表 15分</div>
+        <div class="ti-text">「誰が・何を・いつから変えるか」を1文で発表</div>
+      </div>
+    </div>
+    <div class="own-badge a4">
+      <span class="badge bi" style="font-size:13px;">石原先生F</span>
+      <span class="badge bj" style="font-size:13px;">じゅりMC</span>
+    </div>
+  </div>
+</div>
+
+<!-- S08 昼食 -->
+<div class="slide" id="s08">
+  <div class="body">
+    <div class="lt a2">昼食休憩<br><em>12:30 — 13:30</em></div>
+    <div class="ltime a3">60分</div>
+    <div class="lnote a4">午後は 13:30 から基調講義です。時間通りに着席してください。</div>
+  </div>
+</div>
+
+<!-- S09 → じゅり スライドへ切り替え -->
+<div class="slide" id="s09">
+  <div class="body">
+    <div class="sw-label a1">Next — 基調講義</div>
+    <div class="sw-main a2">じゅりさんの<br><em>スライドへ切り替えてください</em></div>
+    <div class="sw-box a3">
+      <div class="sw-box-t">先手を打つ × 伝わる伝え方</div>
+      <div class="sw-box-s">自分の価値・会社の価値へ</div>
+    </div>
+    <button class="open-btn a4" onclick="window.open('juri_keynote_2026.html','_blank')">
+      ▶　じゅりスライドを開く
+    </button>
+    <div class="sw-btn a5">13:30 — 14:00　　30分　　終了後こちらに戻ってください</div>
+  </div>
+</div>
+
+<!-- S10 GW① -->
+<div class="slide gw-slide" id="s10">
+  <div class="hd a1"><span class="ht">グループワーク①　部門別</span><span class="htag">14:00 — 15:00</span></div>
+  <div class="body">
+    <div class="timebadge a2">60分（討議40分 ＋ 発表20分）</div>
+    <div class="gw-main a2">既存ドメイン・メディア・企業への<br>攻め方を作戦として組み立てる。</div>
+    <div class="steps a3">
+      <div class="step">
+        <div class="step-n">01</div>
+        <div class="step-t">重点ターゲットを決める</div>
+        <div class="step-d">今期の重点クライアント・媒体・市場を具体的に1〜3つ選ぶ</div>
+      </div>
+      <div class="step">
+        <div class="step-n">02</div>
+        <div class="step-t">先手の動きを設計する</div>
+        <div class="step-d">「来週月曜にできること」を各部門から1つ以上出す</div>
+      </div>
+      <div class="step">
+        <div class="step-n">03</div>
+        <div class="step-t">発表する</div>
+        <div class="step-d">「誰が・何を・いつまでに」で各部門3分発表</div>
+      </div>
+    </div>
+    <div class="own-badge a4">
+      <span class="badge bi" style="font-size:13px;">石原先生F</span>
+      <span class="badge bj" style="font-size:13px;">じゅりMC</span>
+    </div>
+  </div>
+</div>
+
+<!-- S11 GW② -->
+<div class="slide gw-slide" id="s11">
+  <div class="hd a1"><span class="ht">グループワーク②　部門シャッフル</span><span class="htag">15:00 — 16:00</span></div>
+  <div class="body">
+    <div class="timebadge a2">60分（ブレスト40分 ＋ 発表20分）</div>
+    <div class="gw-main a2">GLDがまだ攻めていない市場を探す。<br>否定なし・量優先。</div>
+    <div class="steps a3">
+      <div class="step">
+        <div class="step-n">01</div>
+        <div class="step-t">空白市場を出す</div>
+        <div class="step-d">まだGLDが取れていない業種・国・客層・チャネルを付箋に出しまくる</div>
+      </div>
+      <div class="step">
+        <div class="step-n">02</div>
+        <div class="step-t">絞り込む</div>
+        <div class="step-d">「面白い」で選ぶ。現実性は今日は問わない。アタックしたい企業名まで落とす</div>
+      </div>
+      <div class="step">
+        <div class="step-n">03</div>
+        <div class="step-t">発表・ディスカッション</div>
+        <div class="step-d">チーム別5分発表。ここで出たアイデアを次の半期戦略に使います。</div>
+      </div>
+    </div>
+    <div class="own-badge a4">
+      <span class="badge bi" style="font-size:13px;">石原先生F</span>
+      <span class="badge bj" style="font-size:13px;">じゅりMC</span>
+    </div>
+  </div>
+</div>
+
+<!-- S12 個人宣言 -->
+<div class="slide" id="s12">
+  <div class="hd a1"><span class="ht">個人アクションプラン宣言</span><span class="htag">16:00 — 16:30</span></div>
+  <div class="body">
+    <div class="timebadge a2">30分</div>
+    <div class="main a2">大きくなくていい。<br>一つだけ、<em>声に出してください。</em></div>
+    <div class="cards a3">
+      <div class="card c1">
+        <div class="cl">カードに書く</div>
+        <div class="ct">今日刺さったこと<br>明日から変えること（具体的に）<br>3ヶ月後の動き</div>
+      </div>
+      <div class="card c2">
+        <div class="cl">全員が声に出す</div>
+        <div class="ct">「私は◯◯をします」の形で一言ずつ。全員が言い終わったら拍手で受け取る。</div>
+      </div>
+      <div class="card c3">
+        <div class="cl">カードは自分で持ち帰る</div>
+        <div class="ct">提出しない。自分の手元に置いて、明日の現場に持ち込む。</div>
+      </div>
+    </div>
+    <div class="own-badge a4">
+      <span class="badge bi" style="font-size:13px;">石原先生F</span>
+      <span class="badge bj" style="font-size:13px;">じゅりMC</span>
+    </div>
+  </div>
+</div>
+
+<!-- S13 クロージング -->
+<div class="slide" id="s13">
+  <div class="body">
+    <div class="cl-t a2">数字を取りにいくのは、営業だ。<br><em>その一手を強くするのが、全員だ。</em></div>
+    <div class="cl-rule a3"></div>
+    <div class="cl-sub a4">
+      今日積み上げたものを、明日の現場に持ち込んでください。<br>
+      それが積み重なったとき、グローバル・デイリーは本当に強くなります。
+    </div>
+    <div class="cl-gld a5">Global Daily Co., Ltd. — 2026</div>
+  </div>
+</div>
+
+</div></div>
+
+<!-- ナビ -->
+<div id="prog" style="width:6.25%"></div>
+<div id="counter">1 / 16</div>
+<button id="nav-btn" onclick="toggleNav()"><span></span><span></span><span></span></button>
+
+<div id="nav-overlay">
+  <button id="nav-close" onclick="toggleNav()">✕ 閉じる</button>
+  <div class="nav-ttl">目次</div>
+  <div id="nav-grid"></div>
+</div>
+
+<script>
+const MENU=[
+  {id:'s01',t:'タイトル'},
+  {id:'s01b',t:'本研修の目的と目標'},
+  {id:'s02',t:'タイムスケジュール'},
+  {id:'s02b',t:'本研修の目的'},
+  {id:'s02c',t:'タイムスケジュール（午後）'},
+  {id:'s03',t:'チェックイン 09:00'},
+  {id:'s04',t:'→ 荒井社長スライドへ'},
+  {id:'s05',t:'討議① シャッフル'},
+  {id:'s06',t:'討議② 部門別'},
+  {id:'s07',t:'討議③ 部門別'},
+  {id:'s08',t:'昼食休憩 12:30'},
+  {id:'s09',t:'→ じゅりスライドへ'},
+  {id:'s10',t:'GW① 既存ドメイン'},
+  {id:'s11',t:'GW② 空白市場'},
+  {id:'s12',t:'個人アクション宣言'},
+  {id:'s13',t:'クロージング'},
+];
+
+const slides=Array.from(document.querySelectorAll('.slide'));
+const total=slides.length;
+let cur=0,anim=false;
+
+// 目次生成
+const grid=document.getElementById('nav-grid');
+MENU.forEach((m,i)=>{
+  const el=document.createElement('div');
+  el.className='ni';
+  el.innerHTML=`<div class="ni-n">${String(i+1).padStart(2,'0')}</div><div class="ni-t">${m.t}</div>`;
+  el.onclick=()=>{toggleNav();goTo(i);};
+  grid.appendChild(el);
+});
+
+function resize(){
+  const stage=document.getElementById('stage');
+  const vw=window.innerWidth, vh=window.innerHeight;
+  const r=16/9;
+  let w,h;
+  if(vw/vh>r){h=vh;w=h*r;}else{w=vw;h=w/r;}
+  stage.style.width=w+'px';stage.style.height=h+'px';
+  stage.style.fontSize=(w/1280*16)+'px';
+}
+
+function goTo(i){
+  if(anim||i<0||i>=total)return;
+  anim=true;
+  slides[cur].classList.add('exit');slides[cur].classList.remove('active');
+  setTimeout(()=>{
+    slides[cur].classList.remove('exit');cur=i;slides[cur].classList.add('active');
+    document.getElementById('counter').textContent=`${cur+1} / ${total}`;
+    document.getElementById('prog').style.width=`${((cur+1)/total)*100}%`;
+    setTimeout(()=>{anim=false;},600);
+  },300);
+}
+function toggleNav(){
+  document.getElementById('nav-overlay').classList.toggle('open');
+}
+const next=()=>goTo(cur+1),prev=()=>goTo(cur-1);
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&document.getElementById('nav-overlay').classList.contains('open')){toggleNav();return;}
+  if(['ArrowRight','ArrowDown',' '].includes(e.key)){e.preventDefault();next();}
+  if(['ArrowLeft','ArrowUp'].includes(e.key)){e.preventDefault();prev();}
+});
+document.getElementById('stage').addEventListener('click',e=>{
+  if(document.getElementById('nav-overlay').classList.contains('open'))return;
+  (e.clientX/window.innerWidth>.3)?next():prev();
+});
+let tx=0;
+document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
+document.addEventListener('touchend',e=>{
+  const d=e.changedTouches[0].clientX-tx;
+  if(Math.abs(d)>40){d<0?next():prev();}
+},{passive:true});
+window.addEventListener('resize',resize);
+resize();
+</script>
+</body>
+</html>
