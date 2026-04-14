@@ -32,7 +32,8 @@ html,body{width:100%;height:100%;background:#000;overflow:hidden;font-family:'No
 
 /* ── SLIDES BASE ── */
 .slide{
-  position:absolute;inset:0;
+  position:absolute;
+  inset:clamp(8px,1.4vh,16px) clamp(10px,1.6vw,18px);
   opacity:0;pointer-events:none;
   display:flex;flex-direction:column;
   transition:opacity .5s cubic-bezier(.4,0,.2,1),transform .5s cubic-bezier(.4,0,.2,1);
@@ -1072,7 +1073,7 @@ html,body{width:100%;height:100%;background:#000;overflow:hidden;font-family:'No
           <div class="ish-org-dot"></div>
           <div>
             <div class="ish-org-name">株式会社ヴェレ</div>
-            <div class="ish-org-pos">取締役</div>
+            <div class="ish-org-pos">常務取締役　研修事業室長　／　研修講師</div>
           </div>
         </div>
         <div class="ish-org-item">
