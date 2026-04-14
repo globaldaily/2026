@@ -205,7 +205,7 @@ html,body{width:100%;height:100%;background:#000;overflow:hidden;font-family:'No
 }
 .s-chapter .ch-bg{position:absolute;inset:0;}
 .s-chapter .ch-vline{position:absolute;left:clamp(32px,5%,72px);top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--gold) 60%,transparent);}
-.s-chapter .ch-content{position:relative;z-index:2;padding:clamp(24px,4%,56px) clamp(24px,4%,56px) clamp(24px,4%,56px) clamp(60px,8%,104px);flex:1;display:flex;flex-direction:column;justify-content:center;}
+.s-chapter .ch-content{position:relative;z-index:2;padding:clamp(28px,4.5vh,64px) clamp(24px,4%,56px) clamp(28px,4.5vh,64px) clamp(64px,9%,112px);flex:1;display:flex;flex-direction:column;justify-content:center;}
 .s-chapter .ch-act{font-family:'DM Sans',sans-serif;font-size:clamp(9px,1vw,12px);color:var(--gold);letter-spacing:.35em;text-transform:uppercase;margin-bottom:clamp(10px,1.5vw,18px);}
 .s-chapter .ch-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,6.5vw,84px);color:var(--white);line-height:1.0;margin-bottom:clamp(14px,2vw,24px);letter-spacing:.01em;}
 .s-chapter .ch-divider{width:48px;height:2px;background:var(--gold);margin-bottom:clamp(14px,2vw,24px);}
@@ -772,15 +772,16 @@ html,body{width:100%;height:100%;background:#000;overflow:hidden;font-family:'No
 /* ════════════════════════════════════════════
    공통 헤더 바 + 배지
 ════════════════════════════════════════════ */
-.hd{background:var(--ink2);height:clamp(44px,7%,60px);
-  display:flex;align-items:center;padding:0 4.5%;
+.hd{background:var(--ink2);
+  display:flex;align-items:center;
+  padding:clamp(10px,1.6vh,18px) clamp(20px,4.5%,56px);
   border-bottom:3px solid var(--gold);flex-shrink:0;}
 .hd .ht{font-size:clamp(16px,2.1vw,26px);color:var(--white);font-weight:700;}
 .hd .htag{margin-left:auto;font-family:'DM Sans',sans-serif;
   font-size:clamp(9px,.9vw,12px);color:var(--gold);
   letter-spacing:.3em;text-transform:uppercase;
   padding-right:clamp(80px,12vw,160px);}
-.s-body{flex:1;display:flex;flex-direction:column;padding:3.5% 4.5%;}
+.s-body{flex:1;display:flex;flex-direction:column;padding:clamp(16px,3vh,40px) clamp(20px,4.5%,56px);}
 .badge2{display:inline-block;font-family:'DM Sans',sans-serif;
   font-size:clamp(8px,.8vw,11px);padding:3px 10px;border-radius:2px;
   font-weight:700;letter-spacing:.05em;}
@@ -887,7 +888,7 @@ html,body{width:100%;height:100%;background:#000;overflow:hidden;font-family:'No
 ════════════════════════════════════════════ */
 .gdo-slide{background:#06090F;overflow:hidden;}
 .gdo-slide .gdo-inner{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;padding:0;min-height:0;}
-.gdo-slide .gdo-head{padding:clamp(10px,1.5%,18px) clamp(24px,3.5%,52px);border-bottom:1px solid rgba(200,150,12,.2);font-family:'DM Sans',sans-serif;font-size:clamp(9px,1vw,12px);color:var(--gold);letter-spacing:.4em;text-transform:uppercase;}
+.gdo-slide .gdo-head{padding:clamp(12px,2vh,22px) clamp(24px,3.5%,52px);border-bottom:1px solid rgba(200,150,12,.2);font-family:'DM Sans',sans-serif;font-size:clamp(9px,1vw,12px);color:var(--gold);letter-spacing:.4em;text-transform:uppercase;}
 .gdo-slide .gdo-grid{flex:1;display:flex;min-height:0;}
 .gdo-slide .gdo-col{flex:1;display:flex;flex-direction:column;padding:clamp(14px,2.2vw,32px) clamp(16px,2.5vw,36px);border-right:1px solid rgba(200,150,12,.1);position:relative;overflow:hidden;}
 .gdo-slide .gdo-col:last-child{border-right:none;}
