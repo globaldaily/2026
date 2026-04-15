@@ -77,14 +77,13 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
   opacity:0;
   animation:fadeUp .5s ease forwards;
 }
-.sim-row:nth-child(2){animation-delay:.08s;}
-.sim-row:nth-child(3){animation-delay:.28s;}
-.sim-row:nth-child(4){animation-delay:.48s;}
-.sim-row:nth-child(5){animation-delay:.68s;}
-.sim-row:nth-child(6){animation-delay:.88s;}
-.sim-row:nth-child(7){animation-delay:1.08s;}
-.sim-row:nth-child(8){animation-delay:1.28s;}
-.sim-row:nth-child(9){animation-delay:1.48s;}
+.sim-row:nth-child(2){animation-delay:.1s;}
+.sim-row:nth-child(3){animation-delay:.35s;}
+.sim-row:nth-child(4){animation-delay:.6s;}
+.sim-row:nth-child(5){animation-delay:.85s;}
+.sim-row:nth-child(6){animation-delay:1.1s;}
+.sim-row:nth-child(7){animation-delay:1.35s;}
+.sim-row:nth-child(8){animation-delay:1.6s;}
 /* 하이라이트 마커 */
 .marker {
   background:linear-gradient(transparent 55%, rgba(200,150,12,.45) 55%);
@@ -94,20 +93,18 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
   background:linear-gradient(transparent 55%, rgba(255,80,80,.35) 55%);
   padding:0 4px;
 }
-/* 結果ライン */
-.bi.result{margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.1);}
-.bi.result .marker{font-weight:700;}
+/* 結果スライド */
+.bi.good .marker{font-weight:700;}
 /* サブ項目 */
-.bi.sub{padding-left:50px;color:rgba(255,255,255,.7);}
+.bi.sub{padding-left:50px;color:rgba(255,255,255,.72);}
 .bi.sub::before{width:8px;height:8px;top:.65em;left:26px;background:rgba(255,255,255,.18);}
-.bi.bad.sub::before{background:rgba(255,107,107,.35);}
 .bi.good.sub::before{background:rgba(94,205,130,.35);}
 /* SPC核心 */
-.bi.core{margin-top:12px;padding:12px 22px;background:rgba(200,150,12,.08);border:1px solid rgba(200,150,12,.22);border-radius:8px;font-weight:700;color:#E8B020;}
+.bi.core{margin-top:16px;padding:14px 24px;background:rgba(200,150,12,.08);border:1px solid rgba(200,150,12,.25);border-radius:8px;font-weight:700;color:#E8B020;text-align:center;}
 .bi.core::before{display:none;}
 /* 営業クライマックス部門グリッド */
-.dept-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 28px;margin:6px 0 4px 26px;}
-.dept-bullet{color:rgba(255,255,255,.72);line-height:1.55;padding-left:18px;position:relative;}
+.dept-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 32px;margin:10px 0 4px 26px;}
+.dept-bullet{color:rgba(255,255,255,.72);line-height:1.55;padding-left:20px;position:relative;}
 .dept-bullet::before{content:"";position:absolute;left:0;top:.55em;width:8px;height:8px;border-radius:50%;background:rgba(94,205,130,.4);}
 
 /* 좌우 화살표 네비게이션 */
@@ -216,22 +213,22 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
       <div class="toc-label">先手を打つ</div>
       <div class="toc-sub">A社シミュレーション 7部門</div>
     </div>
-    <div class="toc-btn" onclick="goTo(25)">
+    <div class="toc-btn" onclick="goTo(32)">
       <div class="toc-num">PART 02</div>
       <div class="toc-label">伝わる伝え方</div>
       <div class="toc-sub">構造と順番が理解を作る</div>
     </div>
-    <div class="toc-btn" onclick="goTo(37)">
+    <div class="toc-btn" onclick="goTo(44)">
       <div class="toc-num">PART 03</div>
       <div class="toc-label">自分の価値へ</div>
       <div class="toc-sub">指名 · タイミング · サイクル</div>
     </div>
-    <div class="toc-btn" onclick="goTo(40)">
+    <div class="toc-btn" onclick="goTo(47)">
       <div class="toc-num">— KEY</div>
       <div class="toc-label">問題は、やる気じゃない。</div>
       <div class="toc-sub">タイミングだ。</div>
     </div>
-    <div class="toc-btn" onclick="goTo(45)">
+    <div class="toc-btn" onclick="goTo(51)">
       <div class="toc-num">— END</div>
       <div class="toc-label">クロージング</div>
       <div class="toc-sub">今日、一つだけ先手を打つ。</div>
@@ -429,66 +426,88 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
   </div>
 </div>
 
-<!-- 01 PR BAD -->
+<!-- ── 01 広報 ── -->
+
 <div class="slide" id="sim01b">
   <div class="bg bg-dark"></div>
   <div class="c">
     <div class="dept"><div class="di">PR</div><div><div class="dn">広報</div><div class="ds">A社 シミュレーション</div></div></div>
     <div class="box bad" style="width:100%;">
       <div class="bh bad">受け身でいると</div>
-      <div class="bi bad sim-row" style="font-size:40px;">PRは自分のペースで動く。</div>
-      <div class="bi bad sim-row" style="font-size:40px;">営業がいつA社に向かうか、知らない。</div>
+      <div class="bi bad sim-row" style="font-size:42px;">PRは自分のペースで動く。</div>
+      <div class="bi bad sim-row" style="font-size:42px;">営業がいつA社に向かうか、知らない。</div>
     </div>
   </div>
 </div>
 
-<!-- 01 PR GOOD -->
-<div class="slide" id="sim01g">
+<div class="slide" id="sim01a">
   <div class="bg bg-dark"></div>
   <div class="c">
     <div class="dept"><div class="di">PR</div><div><div class="dn">広報</div><div class="ds">A社 シミュレーション</div></div></div>
     <div class="box good" style="width:100%;">
       <div class="bh good">先手を打つと</div>
-      <div class="bi good sim-row" style="font-size:34px;">営業のスケジュールを把握し、訪問前に合わせて動く。</div>
-      <div class="bi good sim-row sub" style="font-size:34px;">関連実績をサイトに掲載し、「検索したら出てくる」状態を作る</div>
-      <div class="bi good sim-row sub" style="font-size:34px;">PR TIMESで業界露出を作っておく</div>
-      <div class="bi good sim-row sub" style="font-size:34px;">A社がGLDを検索したとき、「知っている会社」として出てくる状態を先に作る</div>
-      <div class="bi good sim-row result" style="font-size:34px;"><span class="marker">営業が扉を叩く前に、PRがすでに扉を開けている。</span></div>
+      <div class="bi good sim-row" style="font-size:38px;">営業のスケジュールを把握し、訪問前に合わせて動く。</div>
+      <div class="bi good sim-row sub" style="font-size:38px;">関連実績をサイトに掲載し、「検索したら出てくる」状態を作る</div>
+      <div class="bi good sim-row sub" style="font-size:38px;">PR TIMESで業界露出を作っておく</div>
+      <div class="bi good sim-row sub" style="font-size:38px;">A社がGLDを検索したとき、「知っている会社」として出てくる状態を先に作る</div>
     </div>
   </div>
 </div>
 
-<!-- 02 JAPANKURU BAD -->
+<div class="slide" id="sim01r">
+  <div class="bg bg-dark"></div>
+  <div class="c">
+    <div class="dept"><div class="di">PR</div><div><div class="dn">広報</div><div class="ds">A社 シミュレーション</div></div></div>
+    <div class="box good" style="width:100%;text-align:center;padding:56px 52px;">
+      <div class="bh good" style="font-size:36px;margin-bottom:36px;">結果</div>
+      <div class="bi good sim-row" style="font-size:50px;"><span class="marker">営業が扉を叩く前に、PRがすでに扉を開けている。</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 02 JAPANKURU ── -->
+
 <div class="slide" id="sim02b">
   <div class="bg bg-dark"></div>
   <div class="c">
     <div class="dept"><div class="di">J</div><div><div class="dn">JAPANKURU</div><div class="ds">A社 シミュレーション</div></div></div>
     <div class="box bad" style="width:100%;">
       <div class="bh bad">受け身でいると</div>
-      <div class="bi bad sim-row" style="font-size:40px;">依頼されたコンテンツを、仕様通りに制作・公開する。</div>
-      <div class="bi bad sim-row" style="font-size:40px;">数字は出ても、それはメディアの力。自分たちの力ではない。</div>
+      <div class="bi bad sim-row" style="font-size:42px;">依頼されたコンテンツを、仕様通りに制作・公開する。</div>
+      <div class="bi bad sim-row" style="font-size:42px;">数字は出ても、それはメディアの力。自分たちの力ではない。</div>
     </div>
   </div>
 </div>
 
-<!-- 02 JAPANKURU GOOD -->
-<div class="slide" id="sim02g">
+<div class="slide" id="sim02a">
   <div class="bg bg-dark"></div>
   <div class="c">
     <div class="dept"><div class="di">J</div><div><div class="dn">JAPANKURU</div><div class="ds">A社 シミュレーション</div></div></div>
     <div class="box good" style="width:100%;">
       <div class="bh good">先手を打つと</div>
-      <div class="bi good sim-row" style="font-size:34px;">A社の案件を、クリエイティブで「当てにいく」仕事として受け取る。</div>
-      <div class="bi good sim-row sub" style="font-size:34px;">製品の訴求軸を自ら設計し、訪日外国人が反応する切り口に昇華させる</div>
-      <div class="bi good sim-row sub" style="font-size:34px;">バイラル・拡散を狙った構成・タイトル・ビジュアルで攻める</div>
-      <div class="bi good sim-row sub" style="font-size:34px;">その結果生まれた数字と反応が、自分たちの実績として蓄積される</div>
-      <div class="bi good sim-row result" style="font-size:34px;"><span class="marker">「記事を作る人」から、クライアントの価値を市場に届ける、真の広告クリエイティブプロデューサーへ。</span></div>
-      <div class="bi good sim-row result" style="font-size:34px;;color:rgba(232,176,32,.8);">その実績が、GLDの提案力そのものになる。</div>
+      <div class="bi good sim-row" style="font-size:38px;">A社の案件を、クリエイティブで「当てにいく」仕事として受け取る。</div>
+      <div class="bi good sim-row sub" style="font-size:38px;">製品の訴求軸を自ら設計し、訪日外国人が反応する切り口に昇華させる</div>
+      <div class="bi good sim-row sub" style="font-size:38px;">バイラル・拡散を狙った構成・タイトル・ビジュアルで攻める</div>
+      <div class="bi good sim-row sub" style="font-size:38px;">その結果生まれた数字と反応が、自分たちの実績として蓄積される</div>
     </div>
   </div>
 </div>
 
-<!-- 03 MEDIA MGMT BAD -->
+<div class="slide" id="sim02r">
+  <div class="bg bg-dark"></div>
+  <div class="c">
+    <div class="dept"><div class="di">J</div><div><div class="dn">JAPANKURU</div><div class="ds">A社 シミュレーション</div></div></div>
+    <div class="box good" style="width:100%;text-align:center;padding:56px 52px;">
+      <div class="bh good" style="font-size:36px;margin-bottom:36px;">結果</div>
+      <div class="bi good sim-row" style="font-size:44px;"><span class="marker">「記事を作る人」から、</span></div>
+      <div class="bi good sim-row" style="font-size:44px;margin-top:0;"><span class="marker">クライアントの価値を市場に届ける、真の広告クリエイティブプロデューサーへ。</span></div>
+      <div class="bi good sim-row" style="font-size:38px;margin-top:24px;color:rgba(232,176,32,.85);font-weight:700;">その実績が、GLDの提案力そのものになる。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 03 メディア管理 ── -->
+
 <div class="slide" id="sim03b">
   <div class="bg bg-dark"></div>
   <div class="c">
@@ -501,14 +520,13 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
     </div>
     <div class="box bad" style="width:100%;">
       <div class="bh bad">受け身でいると</div>
-      <div class="bi bad sim-row" style="font-size:40px;">各国のメディア・インフルエンサーネットワークを持っている。</div>
-      <div class="bi bad sim-row" style="font-size:40px;">そのパワーが動き出すのは、依頼が来てから。</div>
+      <div class="bi bad sim-row" style="font-size:42px;">各国のメディア・インフルエンサーネットワークを持っている。</div>
+      <div class="bi bad sim-row" style="font-size:42px;">そのパワーが動き出すのは、依頼が来てから。</div>
     </div>
   </div>
 </div>
 
-<!-- 03 MEDIA MGMT GOOD -->
-<div class="slide" id="sim03g">
+<div class="slide" id="sim03a">
   <div class="bg bg-dark"></div>
   <div class="c">
     <div class="dept">
@@ -520,126 +538,177 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
     </div>
     <div class="box good" style="width:100%;">
       <div class="bh good">先手を打つと</div>
-      <div class="bi good sim-row" style="font-size:34px;">営業のA社アポ通知を見た瞬間、動き始める。</div>
-      <div class="bi good sim-row sub" style="font-size:34px;">社内で唯一、複数国のメディア・インフルエンサーを直接管理しているチームとして、A社製品と親和性の高い組み合わせを事前に設計する</div>
-      <div class="bi good sim-row sub" style="font-size:34px;">オウンドメディアのリソースと掛け合わせ、他社には真似できないクロスメディアパッケージを提案書に組み込む</div>
-      <div class="bi good sim-row result" style="font-size:34px;"><span class="marker">単体の媒体提案から、GLDにしか作れない統合展開を設計する、メディアストラテジストへ。</span></div>
+      <div class="bi good sim-row" style="font-size:36px;">営業のA社アポ通知を見た瞬間、動き始める。</div>
+      <div class="bi good sim-row sub" style="font-size:36px;">社内で唯一、複数国のメディア・インフルエンサーを直接管理しているチームとして、A社製品と親和性の高い組み合わせを事前に設計する</div>
+      <div class="bi good sim-row sub" style="font-size:36px;">オウンドメディアのリソースと掛け合わせ、他社には真似できないクロスメディアパッケージを提案書に組み込む</div>
     </div>
   </div>
 </div>
 
-<!-- 04 MKT BAD -->
+<div class="slide" id="sim03r">
+  <div class="bg bg-dark"></div>
+  <div class="c">
+    <div class="dept">
+      <div class="di" style="font-size:20px;">M2</div>
+      <div>
+        <div class="dn">メディア管理</div>
+        <div class="ds">海外メディア・インフルエンサー　／　A社 シミュレーション</div>
+      </div>
+    </div>
+    <div class="box good" style="width:100%;text-align:center;padding:56px 52px;">
+      <div class="bh good" style="font-size:36px;margin-bottom:36px;">結果</div>
+      <div class="bi good sim-row" style="font-size:46px;"><span class="marker">単体の媒体提案から、</span></div>
+      <div class="bi good sim-row" style="font-size:46px;margin-top:0;"><span class="marker">GLDにしか作れない統合展開を設計する、メディアストラテジストへ。</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 04 営業企画 ── -->
+
 <div class="slide" id="sim04b">
   <div class="bg bg-dark"></div>
   <div class="c">
     <div class="dept"><div class="di">M</div><div><div class="dn">営業企画（マーケ）</div><div class="ds">A社 シミュレーション</div></div></div>
     <div class="box bad" style="width:100%;">
       <div class="bh bad">受け身でいると</div>
-      <div class="bi bad sim-row" style="font-size:40px;">営業がヒアリングしてきた内容をベースに、企画書を作る。</div>
-      <div class="bi bad sim-row" style="font-size:40px;">動くのは、常に営業の後。</div>
+      <div class="bi bad sim-row" style="font-size:42px;">営業がヒアリングしてきた内容をベースに、企画書を作る。</div>
+      <div class="bi bad sim-row" style="font-size:42px;">動くのは、常に営業の後。</div>
     </div>
   </div>
 </div>
 
-<!-- 04 MKT GOOD -->
-<div class="slide" id="sim04g">
+<div class="slide" id="sim04a">
   <div class="bg bg-dark"></div>
   <div class="c">
     <div class="dept"><div class="di">M</div><div><div class="dn">営業企画（マーケ）</div><div class="ds">A社 シミュレーション</div></div></div>
     <div class="box good" style="width:100%;">
       <div class="bh good">先手を打つと</div>
-      <div class="bi good sim-row" style="font-size:34px;">A社の業界・市場・競合を自ら先に読む。</div>
-      <div class="bi good sim-row sub" style="font-size:34px;">AIやリサーチツールを駆使し、A社がまだ気づいていない課題を企画に落とし込む</div>
-      <div class="bi good sim-row sub" style="font-size:34px;">営業が訪問する前に「こういう提案ができます」を先に設計しておく</div>
-      <div class="bi good sim-row sub" style="font-size:34px;">市場を読んで企画を先に作り、営業を動かす</div>
-      <div class="bi good sim-row result" style="font-size:34px;"><span class="marker">「営業のサポート役」から、市場を先読みし、提案そのものをデザインする企画プロデューサーへ。</span></div>
+      <div class="bi good sim-row" style="font-size:38px;">A社の業界・市場・競合を自ら先に読む。</div>
+      <div class="bi good sim-row sub" style="font-size:38px;">AIやリサーチツールを駆使し、A社がまだ気づいていない課題を企画に落とし込む</div>
+      <div class="bi good sim-row sub" style="font-size:38px;">営業が訪問する前に「こういう提案ができます」を先に設計しておく</div>
+      <div class="bi good sim-row sub" style="font-size:38px;">市場を読んで企画を先に作り、営業を動かす</div>
     </div>
   </div>
 </div>
 
-<!-- 05 SPC BAD -->
+<div class="slide" id="sim04r">
+  <div class="bg bg-dark"></div>
+  <div class="c">
+    <div class="dept"><div class="di">M</div><div><div class="dn">営業企画（マーケ）</div><div class="ds">A社 シミュレーション</div></div></div>
+    <div class="box good" style="width:100%;text-align:center;padding:56px 52px;">
+      <div class="bh good" style="font-size:36px;margin-bottom:36px;">結果</div>
+      <div class="bi good sim-row" style="font-size:46px;"><span class="marker">「営業のサポート役」から、</span></div>
+      <div class="bi good sim-row" style="font-size:46px;margin-top:0;"><span class="marker">市場を先読みし、提案そのものをデザインする企画プロデューサーへ。</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 05 SPC ── -->
+
 <div class="slide" id="sim05b">
   <div class="bg bg-dark"></div>
   <div class="c">
     <div class="dept"><div class="di">P</div><div><div class="dn">SPC</div><div class="ds">A社 シミュレーション</div></div></div>
     <div class="box bad" style="width:100%;">
       <div class="bh bad">受け身でいると</div>
-      <div class="bi bad sim-row" style="font-size:40px;">A社とのやり取りをこなす。</div>
-      <div class="bi bad sim-row" style="font-size:40px;">案件を滞りなく進めることがゴール。</div>
-      <div class="bi bad sim-row" style="font-size:40px;">A社のことは、営業が知っていればいい。</div>
+      <div class="bi bad sim-row" style="font-size:42px;">A社とのやり取りをこなす。</div>
+      <div class="bi bad sim-row" style="font-size:42px;">案件を滞りなく進めることがゴール。</div>
+      <div class="bi bad sim-row" style="font-size:42px;">A社のことは、営業が知っていればいい。</div>
     </div>
   </div>
 </div>
 
-<!-- 05 SPC GOOD -->
-<div class="slide" id="sim05g">
+<div class="slide" id="sim05a">
   <div class="bg bg-dark"></div>
   <div class="c">
     <div class="dept"><div class="di">P</div><div><div class="dn">SPC</div><div class="ds">A社 シミュレーション</div></div></div>
     <div class="box good" style="width:100%;">
       <div class="bh good">先手を打つと</div>
-      <div class="bi good sim-row" style="font-size:30px;">A社担当者と最も多く接触しているのは、実はSPCだ。</div>
-      <div class="bi good sim-row sub" style="font-size:30px;">進行中のやり取りの中で、A社の本音・不満・期待を拾う</div>
-      <div class="bi good sim-row sub" style="font-size:30px;">営業も気づいていないニーズを、企画・営業に繋げる</div>
-      <div class="bi good sim-row sub" style="font-size:30px;">同時に、進行業務をパターン化・自動化・仕組み化する</div>
-      <div class="bi good sim-row sub" style="font-size:30px;">生まれた時間で、案件の可能性を広げる動きにシフトする</div>
-      <div class="bi good sim-row result" style="font-size:30px;"><span class="marker">「案件を進める人」から、A社を一番深く知るインサイド情報源であり、営業のパフォーマンスを最大化するコーディネーターへ。</span></div>
-      <div class="bi good sim-row core" style="font-size:30px;">「A社と一番多く話しているのは、営業ではなくSPCだ。」</div>
+      <div class="bi good sim-row" style="font-size:36px;">A社担当者と最も多く接触しているのは、実はSPCだ。</div>
+      <div class="bi good sim-row sub" style="font-size:36px;">進行中のやり取りの中で、A社の本音・不満・期待を拾う</div>
+      <div class="bi good sim-row sub" style="font-size:36px;">営業も気づいていないニーズを、企画・営業に繋げる</div>
+      <div class="bi good sim-row sub" style="font-size:36px;">同時に、進行業務をパターン化・自動化・仕組み化する</div>
+      <div class="bi good sim-row sub" style="font-size:36px;">生まれた時間で、案件の可能性を広げる動きにシフトする</div>
     </div>
   </div>
 </div>
 
-<!-- 06 FINANCE BAD -->
+<div class="slide" id="sim05r">
+  <div class="bg bg-dark"></div>
+  <div class="c">
+    <div class="dept"><div class="di">P</div><div><div class="dn">SPC</div><div class="ds">A社 シミュレーション</div></div></div>
+    <div class="box good" style="width:100%;text-align:center;padding:56px 52px;">
+      <div class="bh good" style="font-size:36px;margin-bottom:36px;">結果</div>
+      <div class="bi good sim-row" style="font-size:42px;"><span class="marker">「案件を進める人」から、</span></div>
+      <div class="bi good sim-row" style="font-size:42px;margin-top:0;"><span class="marker">A社を一番深く知るインサイド情報源であり、</span></div>
+      <div class="bi good sim-row" style="font-size:42px;margin-top:0;"><span class="marker">営業のパフォーマンスを最大化するコーディネーターへ。</span></div>
+      <div class="bi good sim-row core" style="font-size:40px;margin-top:20px;">「A社と一番多く話しているのは、営業ではなくSPCだ。」</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 06 経理・管理 ── -->
+
 <div class="slide" id="sim06b">
   <div class="bg bg-dark"></div>
   <div class="c">
     <div class="dept"><div class="di">経</div><div><div class="dn">経理・管理</div><div class="ds">A社 シミュレーション</div></div></div>
     <div class="box bad" style="width:100%;">
       <div class="bh bad">受け身でいると</div>
-      <div class="bi bad sim-row" style="font-size:40px;">請求・入金・経費処理を正確にこなす。</div>
-      <div class="bi bad sim-row" style="font-size:40px;">数字やお金の話は、経理の中だけで完結している。</div>
+      <div class="bi bad sim-row" style="font-size:42px;">請求・入金・経費処理を正確にこなす。</div>
+      <div class="bi bad sim-row" style="font-size:42px;">数字やお金の話は、経理の中だけで完結している。</div>
     </div>
   </div>
 </div>
 
-<!-- 06 FINANCE GOOD -->
-<div class="slide" id="sim06g">
+<div class="slide" id="sim06a">
   <div class="bg bg-dark"></div>
   <div class="c">
     <div class="dept"><div class="di">経</div><div><div class="dn">経理・管理</div><div class="ds">A社 シミュレーション</div></div></div>
     <div class="box good" style="width:100%;">
       <div class="bh good">先手を打つと</div>
-      <div class="bi good sim-row" style="font-size:34px;">営業がA社との商談で「お金の話」に詰まらないよう、事前に備える。</div>
-      <div class="bi good sim-row sub" style="font-size:34px;">契約・請求・税務に関する基礎知識を社内で共有・教育しておく</div>
-      <div class="bi good sim-row sub" style="font-size:34px;">よくある質問・懸念点をパターン化し、営業がスラスラ答えられる仕組みを作る</div>
-      <div class="bi good sim-row sub" style="font-size:34px;">請求・経費フローを体系化し、案件が動いたら迷わず処理できる状態を整えておく</div>
-      <div class="bi good sim-row result" style="font-size:34px;"><span class="marker">「社内の管理部門」から、営業の商談を後方から支える、数字のインフラへ。</span></div>
+      <div class="bi good sim-row" style="font-size:36px;">営業がA社との商談で「お金の話」に詰まらないよう、事前に備える。</div>
+      <div class="bi good sim-row sub" style="font-size:36px;">契約・請求・税務に関する基礎知識を社内で共有・教育しておく</div>
+      <div class="bi good sim-row sub" style="font-size:36px;">よくある質問・懸念点をパターン化し、営業がスラスラ答えられる仕組みを作る</div>
+      <div class="bi good sim-row sub" style="font-size:36px;">請求・経費フローを体系化し、案件が動いたら迷わず処理できる状態を整えておく</div>
     </div>
   </div>
 </div>
 
-<!-- 07 SALES BAD — CLIMAX -->
+<div class="slide" id="sim06r">
+  <div class="bg bg-dark"></div>
+  <div class="c">
+    <div class="dept"><div class="di">経</div><div><div class="dn">経理・管理</div><div class="ds">A社 シミュレーション</div></div></div>
+    <div class="box good" style="width:100%;text-align:center;padding:56px 52px;">
+      <div class="bh good" style="font-size:36px;margin-bottom:36px;">結果</div>
+      <div class="bi good sim-row" style="font-size:48px;"><span class="marker">「社内の管理部門」から、</span></div>
+      <div class="bi good sim-row" style="font-size:48px;margin-top:0;"><span class="marker">営業の商談を後方から支える、数字のインフラへ。</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 07 営業 — CLIMAX ── -->
+
 <div class="slide" id="sim07b">
   <div class="bg bg-dark"></div>
   <div class="c">
     <div class="dept"><div class="di">営</div><div><div class="dn">Sales — 営業</div><div class="ds">A社 シミュレーション</div></div></div>
     <div class="box bad" style="width:100%;">
       <div class="bh bad">受け身でいると</div>
-      <div class="bi bad sim-row" style="font-size:40px;">営業が一人でA社に向き合う。</div>
-      <div class="bi bad sim-row" style="font-size:40px;">資料も、データも、実績証明も——全部、自分で抱えていく。</div>
+      <div class="bi bad sim-row" style="font-size:42px;">営業が一人でA社に向き合う。</div>
+      <div class="bi bad sim-row" style="font-size:42px;">資料も、データも、実績証明も——全部、自分で抱えていく。</div>
     </div>
   </div>
 </div>
 
-<!-- 07 SALES GOOD — CLIMAX -->
-<div class="slide" id="sim07g">
+<div class="slide" id="sim07a">
   <div class="bg bg-dark"></div>
   <div class="c">
     <div class="dept"><div class="di">営</div><div><div class="dn">Sales — 営業</div><div class="ds">A社 シミュレーション</div></div></div>
     <div class="box good" style="width:100%;">
       <div class="bh good">先手を打つと</div>
-      <div class="bi good sim-row" style="font-size:28px;">営業が扉を叩くとき、組織がすでに動いている。</div>
-      <div class="dept-grid sim-row" style="font-size:28px;;opacity:0;animation:fadeUp .5s ease forwards;">
+      <div class="bi good sim-row" style="font-size:38px;">営業が扉を叩くとき、組織がすでに動いている。</div>
+      <div class="dept-grid sim-row" style="font-size:32px;opacity:0;animation:fadeUp .5s ease forwards;">
         <div class="dept-bullet">広報がA社にGLDを知らせている</div>
         <div class="dept-bullet">JAPANKURUが証拠コンテンツを作っている</div>
         <div class="dept-bullet">メディア管理がパッケージを用意している</div>
@@ -647,9 +716,19 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
         <div class="dept-bullet">営業企画が企画書を先に設計している</div>
         <div class="dept-bullet">経理が数字の話を整えている</div>
       </div>
-      <div class="bi good sim-row" style="font-size:28px;;margin-top:16px;">営業は「提案しに来た人」ではなく、</div>
-      <div class="bi good sim-row" style="font-size:28px;"><span class="marker">「すでに動いている組織の顔」として座れる。</span></div>
-      <div class="bi good sim-row result" style="font-size:28px;"><span class="marker">「また来た営業」から、「この会社と組みたい」へ。</span></div>
+      <div class="bi good sim-row" style="font-size:38px;margin-top:20px;">営業は「提案しに来た人」ではなく、</div>
+      <div class="bi good sim-row" style="font-size:38px;"><span class="marker">「すでに動いている組織の顔」として座れる。</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="sim07r">
+  <div class="bg bg-dark"></div>
+  <div class="c">
+    <div class="dept"><div class="di">営</div><div><div class="dn">Sales — 営業</div><div class="ds">A社 シミュレーション</div></div></div>
+    <div class="box good" style="width:100%;text-align:center;padding:56px 52px;">
+      <div class="bh good" style="font-size:36px;margin-bottom:36px;">結果</div>
+      <div class="bi good sim-row" style="font-size:54px;"><span class="marker">「また来た営業」から、「この会社と組みたい」へ。</span></div>
     </div>
   </div>
 </div>
