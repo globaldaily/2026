@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>그룹토의② 부문별</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial Black', 'Hiragino Sans', sans-serif;
+            color: #000;
+            font-size: 16px;
+            font-weight: 900;
+            background: #f0f0f0;
+            padding: 10px;
+            margin: 0;
+        }
+        
+        .container {
+            max-width: 95vw;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 15px;
+            min-height: 95vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background: #2e7d32;
+            color: white;
+            border-radius: 8px;
+        }
+        
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo {
+            background: #fff;
+            color: #2e7d32;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: 900;
+        }
+        
+        .company-name {
+            font-size: 24px;
+            font-weight: 900;
+        }
+        
+        .session-info {
+            text-align: right;
+        }
+        
+        .session-title {
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 5px;
+        }
+        
+        .session-time {
+            font-size: 20px;
+            background: #fff;
+            color: #2e7d32;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 900;
+        }
+        
+        .description {
+            background: #e8f5e8;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 8px solid #2e7d32;
+            font-size: 18px;
+            font-weight: 700;
+            color: #000;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 18px;
+            font-weight: 900;
+            flex: 1;
+        }
+        
+        th {
+            background: #2e7d32;
+            color: white;
+            padding: 15px 10px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 900;
+            border: 2px solid #000;
+        }
+        
+        td {
+            padding: 15px 8px;
+            text-align: center;
+            border: 2px solid #000;
+            font-size: 22px;
+            font-weight: 900;
+            background: #f5f5f5;
+        }
+        
+        .dept-header {
+            background: #4caf50 !important;
+            color: white !important;
+            font-size: 28px;
+            font-weight: 900;
+        }
+        
+        .member-name {
+            background: #fff !important;
+            color: #000;
+            font-weight: 900;
+            font-size: 24px;
+        }
+        
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 700;
+            color: #666;
+        }
+        
+        /* 프린트용 스타일 */
+        @page {
+            size: A4 landscape;
+            margin: 10mm;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+            }
+            .container {
+                max-width: none;
+                margin: 0;
+                box-shadow: none;
+                border-radius: 0;
+                padding: 10px;
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
+            .header {
+                margin-bottom: 12px;
+                padding: 10px 15px;
+                flex-shrink: 0;
+            }
+            .session-title {
+                font-size: 24px;
+            }
+            .session-time {
+                font-size: 16px;
+                padding: 4px 12px;
+            }
+            .description {
+                padding: 10px 15px;
+                margin-bottom: 12px;
+                font-size: 15px;
+                flex-shrink: 0;
+            }
+            table {
+                flex: 1;
+                font-size: 15px;
+            }
+            th {
+                padding: 8px 6px;
+                font-size: 16px;
+            }
+            td {
+                padding: 8px 4px;
+                font-size: 16px;
+            }
+            .dept-header {
+                font-size: 20px;
+            }
+            .member-name {
+                font-size: 17px;
+                font-weight: 900;
+            }
+            .footer {
+                margin-top: 8px;
+                font-size: 12px;
+                flex-shrink: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-area">
+                <div class="logo">GLD</div>
+                <div>
+                    <div class="company-name">GLOBAL DAILY</div>
+                    <div style="font-size: 16px;">2026年度 春季全社員研修</div>
+                </div>
+            </div>
+            <div class="session-info">
+                <div class="session-title">グループ討議② 部門別</div>
+                <div class="session-time">10:45 — 12:00</div>
+            </div>
+        </div>
+        
+        <div class="description">
+            同じ部門同士でチーム編成 → 他部門への期待と貢献を検討・発表 → フィードバックを自部門アクションへ落とし込み
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 15%;">部門</th>
+                    <th style="width: 17%;">メンバー1</th>
+                    <th style="width: 17%;">メンバー2</th>
+                    <th style="width: 17%;">メンバー3</th>
+                    <th style="width: 17%;">メンバー4</th>
+                    <th style="width: 17%;">メンバー5/6</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="dept-header">営業①</td>
+                    <td class="member-name">井出</td>
+                    <td class="member-name">田中</td>
+                    <td class="member-name">ナヒョン</td>
+                    <td class="member-name">吉田</td>
+                    <td class="member-name">小野</td>
+                </tr>
+                <tr>
+                    <td class="dept-header">営業②</td>
+                    <td class="member-name">田邉</td>
+                    <td class="member-name">丸山(里)</td>
+                    <td class="member-name">竹田</td>
+                    <td class="member-name">三浦</td>
+                    <td class="member-name">丸山(千)</td>
+                </tr>
+                <tr>
+                    <td class="dept-header">営業③</td>
+                    <td class="member-name">菅野</td>
+                    <td class="member-name">石井</td>
+                    <td class="member-name">笹本</td>
+                    <td class="member-name">須田</td>
+                    <td class="member-name">下尾</td>
+                </tr>
+                <tr>
+                    <td class="dept-header">営業④</td>
+                    <td class="member-name">鷲巣</td>
+                    <td class="member-name">王</td>
+                    <td class="member-name">佐飛</td>
+                    <td class="member-name">佐久間</td>
+                    <td class="member-name">小林</td>
+                </tr>
+                <tr>
+                    <td class="dept-header">営업⑤</td>
+                    <td class="member-name">田村</td>
+                    <td class="member-name">福井</td>
+                    <td class="member-name">武田</td>
+                    <td class="member-name">渡貫</td>
+                    <td class="member-name">谷本</td>
+                </tr>
+                <tr>
+                    <td class="dept-header">経理・SPC</td>
+                    <td class="member-name">大河原</td>
+                    <td class="member-name">鳥巣</td>
+                    <td class="member-name">大久保</td>
+                    <td class="member-name">久米</td>
+                    <td class="member-name">本橋</td>
+                </tr>
+                <tr>
+                    <td class="dept-header">マーケ</td>
+                    <td class="member-name">小池</td>
+                    <td class="member-name">元</td>
+                    <td class="member-name">リコ</td>
+                    <td class="member-name">エリー</td>
+                    <td class="member-name">洪</td>
+                </tr>
+                <tr>
+                    <td class="dept-header">JK</td>
+                    <td class="member-name">ソフィア</td>
+                    <td class="member-name">ヒウォン</td>
+                    <td class="member-name">サリター</td>
+                    <td class="member-name">曾</td>
+                    <td class="member-name">藤田</td>
+                </tr>
+                <tr>
+                    <td class="dept-header">メディア①</td>
+                    <td class="member-name">ナオミ</td>
+                    <td class="member-name">高</td>
+                    <td class="member-name">ウイルケン</td>
+                    <td class="member-name">黄</td>
+                    <td class="member-name">山中・YUNA</td>
+                </tr>
+                <tr>
+                    <td class="dept-header">メディア②</td>
+                    <td class="member-name">白</td>
+                    <td class="member-name">ジョン</td>
+                    <td class="member-name">ケンケン</td>
+                    <td class="member-name">ヒジン</td>
+                    <td class="member-name">—</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="footer">
+            Global Daily Co., Ltd. — 2026年度春季全社員研修
+        </div>
+    </div>
+</body>
+</html>
