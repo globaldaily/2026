@@ -1706,118 +1706,110 @@ resize();
 </button>
  
 <!-- ============================================================
-  GLD 0417.html — 統合パッチ v3
-  既存パッチを全部削除してこれ1つだけ </body> 直前に貼る
+  GLD 0417.html — 統合パッチ v4
+  </body> 直前に貼り付け
+  ※ 古い id="gld-timer" のブロックは先に削除してください
 ============================================================ -->
 
 <style>
-/* ━ A. カラー変数 ━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ━ A. カラー変数 ━ */
 :root{--dim:#9AAFC4 !important;--smoke:#C8D8E8 !important;}
 
-/* ━ B. ロゴ 2倍 ━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ━ B. ロゴ 2倍 ━ */
 #gld-logo-wrap img{height:clamp(72px,11vh,120px) !important;}
 
-/* ━ C. スライドカウンターを左下へ移動（toc-btn と重ならない） ━ */
+/* ━ C. スライドカウンターを左下へ（toc-btn と重ならない） ━ */
 #counter{
-  left:20px !important;
-  right:auto !important;
+  left:20px !important; right:auto !important;
   bottom:14px !important;
   font-size:max(14px,1.1vw) !important;
   color:rgba(255,255,255,.55) !important;
 }
-/* プログレスバー少し太く */
 #prog-bar{height:5px !important;}
 
-/* ━ D. ヘッダーバー ━━━━━━━━━━━━━━━━━━━━━━ */
+/* ━ D. ヘッダーバー ━ */
 .hd .ht  {font-size:max(20px,2.4vw) !important;}
 .hd .htag{font-size:max(14px,1.2vw) !important;color:#F5C842 !important;font-weight:700 !important;}
 
-/* ━ E. セクション転換スライド ━━━━━━━━━━━━━━━━ */
+/* ━ E. セクション転換 ━ */
 .s-chapter .ch-act{font-size:max(14px,1.2vw) !important;letter-spacing:.35em !important;color:#F5C842 !important;}
 .s-chapter .ch-sub{font-size:max(18px,2vw) !important;line-height:1.8 !important;color:rgba(246,244,239,.75) !important;}
 
-/* ━ F. 討議概要スライド ━━━━━━━━━━━━━━━━━━━━ */
+/* ━ F. 討議概要 ━ */
 .gdo-slide .gdo-head{font-size:max(14px,1.2vw) !important;}
 .gdo-slide .gdo-tag {font-size:max(14px,1.3vw) !important;color:rgba(200,150,12,.85) !important;}
 .gdo-slide .gdo-desc{font-size:max(15px,1.6vw) !important;color:rgba(246,244,239,.78) !important;line-height:1.8 !important;}
 .gdo-slide .gdo-foot{font-size:max(14px,1.4vw) !important;}
 
-/* ━ G. 討議スライド ━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ━ G. 討議スライド ━ */
 .disc-slide .timebadge{font-size:max(16px,1.7vw) !important;color:#F5C842 !important;}
 .disc-slide .disc-main{font-size:max(28px,3.5vw) !important;line-height:1.3 !important;}
 .disc-slide .ti-label {font-size:max(13px,1.1vw) !important;color:#F5C842 !important;}
 .disc-slide .ti-text  {font-size:max(16px,2vw) !important;line-height:1.75 !important;color:rgba(246,244,239,.9) !important;}
 
-/* ━ H. GWスライド ━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ━ H. GWスライド ━ */
 .gw-slide2 .timebadge{font-size:max(16px,1.7vw) !important;color:#F5C842 !important;}
 .gw-slide2 .gw-main  {font-size:max(26px,3.2vw) !important;line-height:1.3 !important;}
 .gw-slide2 .step-t   {font-size:max(18px,2vw) !important;}
 .gw-slide2 .step-d   {font-size:max(14px,1.5vw) !important;line-height:1.8 !important;color:#C8D8E8 !important;}
 
-/* ━ I. バッジ・石原先生・AP ━━━━━━━━━━━━━━━━━ */
+/* ━ I. バッジ・AP ━ */
 .badge2{font-size:max(13px,1.1vw) !important;padding:5px 14px !important;}
 .own-row .ot{font-size:max(14px,1.4vw) !important;}
 #s_ishihara .ish-org-name{font-size:max(18px,2.4vw) !important;}
 #s_ishihara .ish-org-pos {font-size:max(14px,1.6vw) !important;color:rgba(200,150,12,.75) !important;}
-#s31 .ap-q-text   {font-size:max(26px,3.8vw) !important;}
-#s31 .ap-q-label  {font-size:max(14px,1.6vw) !important;}
-#s31 .ap-qr-hint  {font-size:max(14px,1.5vw) !important;}
+#s31 .ap-q-text      {font-size:max(26px,3.8vw) !important;}
+#s31 .ap-q-label     {font-size:max(14px,1.6vw) !important;}
+#s31 .ap-qr-hint     {font-size:max(14px,1.5vw) !important;}
 #s31 .ap-declare-text{font-size:max(18px,2.6vw) !important;}
 
-/* ━ J. line-height 全体 ━━━━━━━━━━━━━━━━━━━━ */
+/* ━ J. line-height ━ */
 .s-body,.s-body *{line-height:1.85;}
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   K. タイマー — コンパクト右サイド配置
-   ・幅160px固定でタイトルを隠さない
-   ・時刻表示64px
-   ・toc-btnの上（bottom:130px）
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   K. タイマー — 右下フロート、幅240px
+   タイトル行を隠さない位置
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 #gld-tmr{
   position:fixed;
-  bottom:130px;
-  right:0;          /* 画面右端に張り付く */
+  right:20px;
+  bottom:170px;   /* toc-btn より上 */
   z-index:9999;
   font-family:'DM Sans','Meiryo',sans-serif;
 }
-
-/* ⏱ FABボタン */
 #tmr-fab{
   display:block;
-  width:52px;
-  background:#C9A84C;
+  background:rgba(201,168,76,.9);
   color:#0D1B2A;
   border:none;
-  border-radius:8px 0 0 8px;  /* 右端だから左だけ丸め */
-  padding:12px 6px;
-  font-size:11px;
+  border-radius:50px;
+  padding:10px 18px;
+  font-size:13px;
   font-weight:700;
   cursor:pointer;
-  box-shadow:-3px 3px 16px rgba(0,0,0,.5);
-  text-align:center;
-  line-height:1.3;
-  letter-spacing:.05em;
+  box-shadow:0 4px 20px rgba(0,0,0,.55);
+  white-space:nowrap;
 }
+#tmr-fab:hover{background:#C9A84C;}
 
-/* タイマーパネル（FABの上に展開） */
+/* パネル：上に展開 */
 #tmr-panel{
   display:none;
   position:absolute;
-  bottom:60px;  /* FABの上 */
+  bottom:52px;
   right:0;
-  width:168px;
+  width:240px;
   background:#0D1B2A;
   border:2px solid #C9A84C;
-  border-right:none;
-  border-radius:12px 0 0 12px;
-  padding:14px 12px 12px;
-  box-shadow:-6px 4px 32px rgba(0,0,0,.7);
+  border-radius:14px;
+  padding:16px 16px 14px;
+  box-shadow:0 8px 40px rgba(0,0,0,.75);
 }
 #tmr-panel.open{display:block;}
 
-/* 時刻表示 64px */
+/* 時刻 — 72px で見やすく */
 #tmr-disp{
-  font-size:64px;
+  font-size:72px;
   font-weight:900;
   color:#fff;
   text-align:center;
@@ -1830,49 +1822,33 @@ resize();
 #tmr-disp.danger{color:#E85050;animation:tmr-blink .6s step-end infinite;}
 @keyframes tmr-blink{50%{opacity:.25;}}
 
-/* ラベル */
-#tmr-lbl{
-  font-size:10px;
-  color:#8B95A1;
-  text-align:center;
-  margin-bottom:8px;
-  line-height:1.3;
-}
+#tmr-lbl{text-align:center;font-size:11px;color:#8B95A1;margin-bottom:9px;}
 
-/* コントロールボタン */
-.tmr-ctrl{display:flex;gap:4px;margin-bottom:10px;}
-.tmr-ctrl button{
-  flex:1;padding:7px 0;
-  border:none;border-radius:6px;
-  font-size:12px;font-weight:700;cursor:pointer;
-}
+.tmr-ctrl{display:flex;gap:5px;margin-bottom:11px;}
+.tmr-ctrl button{flex:1;padding:9px 0;border:none;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;}
 #tmr-play{background:#C9A84C;color:#0D1B2A;}
 #tmr-stop{background:#2A3A50;color:#90C8F0;}
 #tmr-rst {background:#1A2C42;color:#8B95A1;}
 
-/* プリセットボタン */
-#tmr-presets{display:flex;flex-direction:column;gap:4px;max-height:180px;overflow-y:auto;}
+#tmr-presets{display:flex;flex-wrap:wrap;gap:5px;}
 #tmr-presets button{
-  width:100%;padding:5px 6px;
-  border:1px solid #2A3A50;border-radius:4px;
-  background:#141E30;color:#8B95A1;font-size:10px;cursor:pointer;
-  text-align:left;
+  padding:5px 9px;
+  border:1px solid #2A3A50;border-radius:20px;
+  background:#141E30;color:#8B95A1;font-size:11px;cursor:pointer;
 }
 #tmr-presets button:hover,
 #tmr-presets button.on{border-color:#C9A84C;color:#F5C842;background:#1A2C42;}
 
-/* プログレスバー */
-#tmr-bar-bg{height:3px;background:#1E3050;border-radius:2px;margin-top:10px;}
+#tmr-bar-bg{height:4px;background:#1E3050;border-radius:2px;margin-top:12px;}
 #tmr-bar   {height:100%;background:#C9A84C;border-radius:2px;width:100%;transition:width .5s linear;}
 </style>
 
-<!-- タイマーHTML -->
 <div id="gld-tmr">
   <div id="tmr-panel">
-    <div id="tmr-lbl">— タイマー —</div>
+    <div id="tmr-lbl">タイマー</div>
     <div id="tmr-disp">--:--</div>
     <div class="tmr-ctrl">
-      <button id="tmr-play">▶</button>
+      <button id="tmr-play">▶ スタート</button>
       <button id="tmr-stop">⏸</button>
       <button id="tmr-rst">↺</button>
     </div>
@@ -1891,61 +1867,56 @@ resize();
     </div>
     <div id="tmr-bar-bg"><div id="tmr-bar"></div></div>
   </div>
-  <button id="tmr-fab">⏱<br>タイマー</button>
+  <button id="tmr-fab">⏱ タイマー</button>
 </div>
 
 <script>
-/* ── タイマー スクリプト（ID衝突なし・1回だけ実行） ── */
 (function(){
-  if(window._tmrInit) return; // 重複防止
-  window._tmrInit = true;
+  if(window._gldTmr) return;
+  window._gldTmr = true;
 
   var TOT=0, REM=0, IV=null;
   var disp = document.getElementById('tmr-disp');
   var lbl  = document.getElementById('tmr-lbl');
   var bar  = document.getElementById('tmr-bar');
   var panel= document.getElementById('tmr-panel');
-
-  if(!disp){ return; } // 要素なければ終了
+  if(!disp) return;
 
   function fmt(s){
     return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
   }
   function render(){
-    if(TOT===0){ disp.textContent='--:--'; bar.style.width='100%'; return; }
-    disp.textContent = fmt(REM);
-    bar.style.width  = (TOT>0 ? (REM/TOT*100) : 0)+'%';
+    if(TOT===0){disp.textContent='--:--';bar.style.width='100%';return;}
+    disp.textContent=fmt(REM);
+    bar.style.width=(REM/TOT*100)+'%';
     disp.classList.remove('warn','danger');
     bar.style.background='#C9A84C';
-    if(REM<=30 && REM>0){ disp.classList.add('danger'); bar.style.background='#E85050'; }
-    else if(REM<=60)    { disp.classList.add('warn');   bar.style.background='#F0A050'; }
+    if(REM<=30&&REM>0){disp.classList.add('danger');bar.style.background='#E85050';}
+    else if(REM<=60) {disp.classList.add('warn');bar.style.background='#F0A050';}
   }
-  function stop(){ clearInterval(IV); IV=null; }
+  function stop(){clearInterval(IV);IV=null;}
 
   document.getElementById('tmr-play').onclick=function(){
-    if(IV || TOT===0) return;
-    if(REM===0) REM=TOT;
-    IV=setInterval(function(){
-      if(REM<=0){ stop(); render(); } else { REM--; render(); }
-    },1000);
+    if(IV||TOT===0)return;
+    if(REM===0)REM=TOT;
+    IV=setInterval(function(){if(REM<=0){stop();render();}else{REM--;render();}},1000);
   };
-  document.getElementById('tmr-stop').onclick = stop;
-  document.getElementById('tmr-rst').onclick  = function(){ stop(); REM=TOT; render(); };
-  document.getElementById('tmr-fab').onclick  = function(){
-    panel.classList.toggle('open');
-  };
-  document.querySelectorAll('#tmr-presets button').forEach(function(btn){
-    btn.onclick=function(){
+  document.getElementById('tmr-stop').onclick=stop;
+  document.getElementById('tmr-rst').onclick=function(){stop();REM=TOT;render();};
+  document.getElementById('tmr-fab').onclick=function(){panel.classList.toggle('open');};
+  document.querySelectorAll('#tmr-presets button').forEach(function(b){
+    b.onclick=function(){
       stop();
-      document.querySelectorAll('#tmr-presets button').forEach(function(b){ b.classList.remove('on'); });
+      document.querySelectorAll('#tmr-presets button').forEach(function(x){x.classList.remove('on');});
       this.classList.add('on');
-      TOT = REM = parseInt(this.dataset.s);
-      lbl.textContent = this.dataset.l;
+      TOT=REM=parseInt(this.dataset.s);
+      lbl.textContent=this.dataset.l;
       render();
     };
   });
   render();
 })();
 </script>
+   
 </body>
 </html>
