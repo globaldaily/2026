@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>グループ配置案内</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial Black', 'Hiragino Sans', sans-serif;
+            background: #000;
+            color: #fff;
+            overflow: hidden;
+        }
+        
+        .slide {
+            position: absolute;
+            inset: 0;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 40px 80px 40px;
+            background: linear-gradient(135deg, #1a237e, #3949ab);
+        }
+        
+        .slide.active {
+            display: flex;
+        }
+        
+        .slide-title {
+            font-size: clamp(28px, 5vw, 60px);
+            font-weight: 900;
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .seating-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            gap: 25px 35px;
+            max-width: 800px;
+            width: 100%;
+            height: 50vh;
+            margin-bottom: 30px;
+        }
+        
+        .table {
+            background: rgba(255,255,255,0.9);
+            color: #000;
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            border: 3px solid #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .table-number {
+            font-size: clamp(32px, 4vw, 52px);
+            font-weight: 900;
+            margin-bottom: 8px;
+            color: #1a237e;
+        }
+        
+        .table-label {
+            font-size: clamp(12px, 1.8vw, 20px);
+            font-weight: 700;
+            color: #666;
+        }
+        
+        .instruction {
+            font-size: clamp(16px, 2.5vw, 28px);
+            font-weight: 700;
+            text-align: center;
+            background: rgba(255,255,255,0.1);
+            padding: 12px 25px;
+            border-radius: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            max-width: 90%;
+        }
+        
+        .nav-hint {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            font-size: 16px;
+            opacity: 0.7;
+        }
+        
+        /* 부문별용 색상 */
+        .slide.dept {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+        }
+        .slide.dept .table-number {
+            color: #2e7d32;
+        }
+        
+        /* 신규시장용 색상 */
+        .slide.newmarket {
+            background: linear-gradient(135deg, #7b1fa2, #9c27b0);
+        }
+        .slide.newmarket .table-number {
+            color: #7b1fa2;
+        }
+    </style>
+</head>
+<body>
+
+<!-- グループ討議① 部門シャッフル -->
+<div class="slide active" id="slide1">
+    <div class="slide-title">グループ討議① 部門シャッフル<br>座席案内</div>
+    <div class="seating-grid">
+        <div class="table">
+            <div class="table-number">①</div>
+            <div class="table-label">グループ</div>
+        </div>
+        <div class="table">
+            <div class="table-number">②</div>
+            <div class="table-label">グループ</div>
+        </div>
+        <div class="table">
+            <div class="table-number">③</div>
+            <div class="table-label">グループ</div>
+        </div>
+        <div class="table">
+            <div class="table-number">④</div>
+            <div class="table-label">グループ</div>
+        </div>
+        <div class="table">
+            <div class="table-number">⑤</div>
+            <div class="table-label">グループ</div>
+        </div>
+        <div class="table">
+            <div class="table-number">⑥</div>
+            <div class="table-label">グループ</div>
+        </div>
+        <div class="table">
+            <div class="table-number">⑦</div>
+            <div class="table-label">グループ</div>
+        </div>
+        <div class="table">
+            <div class="table-number">⑧</div>
+            <div class="table-label">グループ</div>
+        </div>
+        <div class="table">
+            <div class="table-number">⑨</div>
+            <div class="table-label">グループ</div>
+        </div>
+        <div class="table">
+            <div class="table-number">⑩</div>
+            <div class="table-label">グループ</div>
+        </div>
+    </div>
+    <div class="instruction">各グループの番号をご確認の上、該当するテーブルにお座りください</div>
+</div>
+
+<!-- グループ討議② 部門別 -->
+<div class="slide dept" id="slide2">
+    <div class="slide-title">グループ討議② 部門別<br>座席案内</div>
+    <div class="seating-grid">
+        <div class="table">
+            <div class="table-number">営業①</div>
+            <div class="table-label">部門</div>
+        </div>
+        <div class="table">
+            <div class="table-number">営業②</div>
+            <div class="table-label">部門</div>
+        </div>
+        <div class="table">
+            <div class="table-number">営業③</div>
+            <div class="table-label">部門</div>
+        </div>
+        <div class="table">
+            <div class="table-number">営業④</div>
+            <div class="table-label">部門</div>
+        </div>
+        <div class="table">
+            <div class="table-number">営業⑤</div>
+            <div class="table-label">部門</div>
+        </div>
+        <div class="table">
+            <div class="table-number">経理<br>SPC</div>
+            <div class="table-label">部門</div>
+        </div>
+        <div class="table">
+            <div class="table-number">マーケ</div>
+            <div class="table-label">部門</div>
+        </div>
+        <div class="table">
+            <div class="table-number">JK</div>
+            <div class="table-label">部門</div>
+        </div>
+        <div class="table">
+            <div class="table-number">メディア①</div>
+            <div class="table-label">部門</div>
+        </div>
+        <div class="table">
+            <div class="table-number">メディア②</div>
+            <div class="table-label">部門</div>
+        </div>
+    </div>
+    <div class="instruction">所属部門のテーブルにお座りください</div>
+</div>
+
+<!-- グループワーク② 新規市場 -->
+<div class="slide newmarket" id="slide3">
+    <div class="slide-title">グループワーク② 新規市場<br>座席案内</div>
+    <div class="seating-grid">
+        <div class="table">
+            <div class="table-number">①</div>
+            <div class="table-label">グループ</div>
+        </div>
+        <div class="table">
+            <div class="table-number">②</div>
+            <div class="table-label">グループ</div>
+        </div>
+        <div class="table">
+            <div class="table-number">③</div>
+            <div class="table-label">グループ</div>
+        </div>
+        <div class="table">
+            <div class="table-number">④</div>
+            <div class="table-label">グループ</div>
+        </div>
+        <div class="table">
+            <div class="table-number">⑤</div>
+            <div class="table-label">グループ</div>
+        </div>
+        <div class="table">
+            <div class="table-number">⑥</div>
+            <div class="table-label">グループ</div>
+        </div>
+        <div class="table">
+            <div class="table-number">⑦</div>
+            <div class="table-label">グループ</div>
+        </div>
+        <div class="table">
+            <div class="table-number">⑧</div>
+            <div class="table-label">グループ</div>
+        </div>
+        <div class="table">
+            <div class="table-number">⑨</div>
+            <div class="table-label">グループ</div>
+        </div>
+        <div class="table">
+            <div class="table-number">⑩</div>
+            <div class="table-label">グループ</div>
+        </div>
+    </div>
+    <div class="instruction">新しいグループ編成です。番号をご確認ください</div>
+</div>
+
+<div class="nav-hint">← → キーで切り替え</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+let current = 0;
+
+function showSlide(n) {
+    slides.forEach(s => s.classList.remove('active'));
+    slides[n].classList.add('active');
+}
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' && current < slides.length - 1) {
+        current++;
+        showSlide(current);
+    } else if (e.key === 'ArrowLeft' && current > 0) {
+        current--;
+        showSlide(current);
+    }
+});
+
+document.addEventListener('click', e => {
+    if (e.clientX > window.innerWidth / 2 && current < slides.length - 1) {
+        current++;
+        showSlide(current);
+    } else if (e.clientX <= window.innerWidth / 2 && current > 0) {
+        current--;
+        showSlide(current);
+    }
+});
+</script>
+
+</body>
+</html>
