@@ -108,6 +108,46 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
 .dept-bullet{color:rgba(255,255,255,.72);line-height:1.55;padding-left:20px;position:relative;}
 .dept-bullet::before{content:"";position:absolute;left:0;top:.55em;width:8px;height:8px;border-radius:50%;background:rgba(94,205,130,.4);}
 
+/* 結果マーカー強調 */
+@keyframes resultGlow{
+  0%,100%{text-shadow:0 0 0 transparent;}
+  50%{text-shadow:0 0 20px rgba(200,150,12,.3);}
+}
+.bi.good .marker{animation:resultGlow 2.5s ease infinite 1s;}
+/* シミュレーション進行ドット */
+.sim-progress{
+  position:absolute;top:28px;left:50%;transform:translateX(-50%);
+  display:flex;gap:12px;z-index:10;
+}
+.sim-dot{
+  width:12px;height:12px;border-radius:50%;
+  background:rgba(255,255,255,.12);
+  transition:all .3s ease;
+}
+.sim-dot.on{
+  background:#E8B020;
+  box-shadow:0 0 8px rgba(232,176,32,.4);
+}
+.sim-dot.done{
+  background:rgba(232,176,32,.35);
+}
+.sim-dept-label{
+  position:absolute;top:46px;left:50%;transform:translateX(-50%);
+  font-size:16px;color:rgba(232,176,32,.5);letter-spacing:4px;
+  white-space:nowrap;
+}
+/* 結果スライド背景グロウ */
+.result-glow{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 50% at center, rgba(200,150,12,.06) 0%, transparent 70%);
+  z-index:1;
+  pointer-events:none;
+}
+/* 営業クライマックスブリッジ */
+.climax-bridge{
+  font-size:72px;font-weight:900;color:rgba(255,255,255,.15);
+  letter-spacing:8px;text-align:center;line-height:1.3;
+}
 /* 좌우 화살표 네비게이션 */
 .nav-arrow{
   position:fixed;top:50%;transform:translateY(-50%);
@@ -150,6 +190,24 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
 /* PROG + NAV */
 .prog{position:absolute;top:0;left:0;height:5px;background:#C8960C;transition:width .4s;z-index:99;}
 .ctr{position:absolute;bottom:26px;right:46px;font-size:20px;color:rgba(255,255,255,.18);z-index:99;}
+.timer{position:absolute;bottom:26px;left:46px;font-size:28px;color:rgba(255,255,255,.22);z-index:99;cursor:pointer;font-family:monospace;letter-spacing:1px;user-select:none;transition:color .3s;}
+.timer:hover{color:rgba(255,255,255,.4);}
+.timer.running{color:rgba(94,205,130,.4);}
+.timer.warning{color:rgba(232,176,32,.55);}
+.timer.danger{color:rgba(255,107,107,.55);}
+.pace{position:absolute;bottom:58px;left:46px;font-size:18px;color:rgba(255,255,255,.3);z-index:99;font-family:monospace;opacity:0;transition:opacity .5s;}
+.pace.show{opacity:1;}
+.pace.on-track{color:rgba(94,205,130,.5);}
+.pace.behind{color:rgba(232,176,32,.5);}
+.pace.over{color:rgba(255,107,107,.5);}
+/* Tキーフラッシュ */
+.timer-flash{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  z-index:300;text-align:center;pointer-events:none;
+  opacity:0;transition:opacity .3s;}
+.timer-flash.show{opacity:1;}
+.timer-flash .tf-time{font-size:120px;font-weight:900;font-family:monospace;color:rgba(255,255,255,.7);}
+.timer-flash .tf-pace{font-size:36px;margin-top:12px;}
+.timer-flash .tf-bg{position:absolute;inset:-40px -80px;background:rgba(0,0,0,.75);border-radius:24px;z-index:-1;}
 .nav{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:99;}
 .dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.18);cursor:pointer;transition:.2s;}
 .dot.on{background:#C8960C;transform:scale(1.4);}
@@ -209,27 +267,27 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
       <div class="toc-label">根の話</div>
       <div class="toc-sub">消えていく経験 vs 根になる経験</div>
     </div>
-    <div class="toc-btn" onclick="goTo(7)">
+    <div class="toc-btn" onclick="goTo(8)">
       <div class="toc-num">PART 01</div>
       <div class="toc-label">先手を打つ</div>
       <div class="toc-sub">A社シミュレーション 7部門</div>
     </div>
-    <div class="toc-btn" onclick="goTo(32)">
+    <div class="toc-btn" onclick="goTo(34)">
       <div class="toc-num">PART 02</div>
       <div class="toc-label">伝わる伝え方</div>
       <div class="toc-sub">構造と順番が理解を作る</div>
     </div>
-    <div class="toc-btn" onclick="goTo(44)">
+    <div class="toc-btn" onclick="goTo(47)">
       <div class="toc-num">PART 03</div>
       <div class="toc-label">自分の価値へ</div>
       <div class="toc-sub">指名 · タイミング · サイクル</div>
     </div>
-    <div class="toc-btn" onclick="goTo(47)">
+    <div class="toc-btn" onclick="goTo(50)">
       <div class="toc-num">— KEY</div>
       <div class="toc-label">問題は、やる気じゃない。</div>
       <div class="toc-sub">タイミングだ。</div>
     </div>
-    <div class="toc-btn" onclick="goTo(51)">
+    <div class="toc-btn" onclick="goTo(55)">
       <div class="toc-num">— END</div>
       <div class="toc-label">クロージング</div>
       <div class="toc-sub">今日、一つだけ先手を打つ。</div>
@@ -352,54 +410,97 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
     </div>
     <div style="display:grid;grid-template-columns:1fr 60px 1fr;gap:0;align-items:start;width:100%;">
 
-      <!-- BAD: 뿌리 없이 공중에 떠있는 꽃 -->
-      <div class="box bad" style="padding:44px 48px;">
-        <div class="bh bad" style="margin-bottom:28px;">消えていく行動</div>
-        <div class="bi bad sim-row" style="font-size:38px;margin-bottom:16px;">言われてから動く</div>
-        <div class="bi bad sim-row" style="font-size:38px;margin-bottom:28px;">誰でも同じようにできる</div>
-        <svg viewBox="0 0 300 120" width="100%" style="margin-top:8px;">
-          <!-- 공중에 떠있는 꽃 (잘린 줄기) -->
-          <line x1="150" y1="115" x2="150" y2="65" stroke="#FF6B6B" stroke-width="3"/>
-          <!-- 잘린 표시 -->
-          <line x1="135" y1="115" x2="165" y2="115" stroke="#FF6B6B" stroke-width="3"/>
-          <!-- 꽃잎 화려하게 -->
-          <circle cx="150" cy="48" r="18" fill="rgba(255,107,107,.25)" stroke="#FF6B6B" stroke-width="2"/>
-          <circle cx="130" cy="42" r="12" fill="rgba(255,107,107,.2)" stroke="#FF6B6B" stroke-width="1.5"/>
-          <circle cx="170" cy="42" r="12" fill="rgba(255,107,107,.2)" stroke="#FF6B6B" stroke-width="1.5"/>
-          <circle cx="150" cy="28" r="12" fill="rgba(255,107,107,.2)" stroke="#FF6B6B" stroke-width="1.5"/>
-          <circle cx="150" cy="48" r="7" fill="rgba(255,107,107,.5)"/>
-          <!-- 뿌리 없음 표시 -->
-          <text x="150" y="108" text-anchor="middle" font-size="19" fill="rgba(255,107,107,.65)" font-family="sans-serif">根がない——いつか枯れる</text>
+      <!-- BAD: 뿌리 없는 화려한 꽃 -->
+      <div class="box bad" style="padding:40px 44px;text-align:center;">
+        <div class="bh bad" style="margin-bottom:20px;">消えていく行動</div>
+        <svg viewBox="0 0 240 200" width="240" style="display:block;margin:0 auto 20px;">
+          <!-- 화려한 꽃잎들 (공중에 떠있음) -->
+          <circle cx="120" cy="52" r="22" fill="rgba(255,107,107,.2)" stroke="#FF6B6B" stroke-width="2"/>
+          <circle cx="96" cy="40" r="16" fill="rgba(255,107,107,.18)" stroke="#FF6B6B" stroke-width="1.5"/>
+          <circle cx="144" cy="40" r="16" fill="rgba(255,107,107,.18)" stroke="#FF6B6B" stroke-width="1.5"/>
+          <circle cx="104" cy="64" r="14" fill="rgba(255,107,107,.15)" stroke="#FF6B6B" stroke-width="1.5"/>
+          <circle cx="136" cy="64" r="14" fill="rgba(255,107,107,.15)" stroke="#FF6B6B" stroke-width="1.5"/>
+          <circle cx="120" cy="30" r="14" fill="rgba(255,107,107,.18)" stroke="#FF6B6B" stroke-width="1.5"/>
+          <circle cx="120" cy="52" r="9" fill="rgba(255,107,107,.45)"/>
+          <!-- 짧은 줄기 (잘린 상태) -->
+          <line x1="120" y1="74" x2="120" y2="110" stroke="#FF6B6B" stroke-width="2.5"/>
+          <!-- 잘린 표시 (지그재그) -->
+          <polyline points="110,110 115,105 120,112 125,105 130,110" fill="none" stroke="#FF6B6B" stroke-width="2" stroke-linecap="round"/>
+          <!-- 뿌리 없음 = 빈 공간, 점선으로 "없음" 표현 -->
+          <line x1="120" y1="118" x2="120" y2="170" stroke="rgba(255,107,107,.2)" stroke-width="1.5" stroke-dasharray="4,6"/>
+          <text x="120" y="190" text-anchor="middle" font-size="16" fill="rgba(255,107,107,.5)" font-family="sans-serif">根がない</text>
         </svg>
+        <div class="bi bad" style="font-size:34px;margin-bottom:10px;">言われてから動く</div>
+        <div class="bi bad" style="font-size:34px;margin-bottom:10px;">誰でも同じようにできる</div>
+        <div style="margin-top:16px;padding:10px 16px;background:rgba(255,60,60,.08);border-radius:8px;">
+          <span style="font-size:28px;color:rgba(255,107,107,.8);font-weight:700;">いつか枯れる。</span>
+        </div>
       </div>
 
       <!-- 중앙 -->
-      <div style="display:flex;align-items:center;justify-content:center;padding-top:120px;font-size:44px;color:rgba(200,150,12,.35);">vs</div>
+      <div style="display:flex;align-items:center;justify-content:center;padding-top:160px;font-size:44px;color:rgba(200,150,12,.35);">vs</div>
 
-      <!-- GOOD: 뿌리 깊은 꽃 -->
-      <div class="box good" style="padding:44px 48px;">
-        <div class="bh good" style="margin-bottom:28px;">根になる行動</div>
-        <div class="bi good sim-row" style="font-size:38px;margin-bottom:16px;">来る前に動いている</div>
-        <div class="bi good sim-row" style="font-size:38px;margin-bottom:28px;">あなたにしかできない、になる</div>
-        <svg viewBox="0 0 300 120" width="100%" style="margin-top:8px;">
+      <!-- GOOD: 소박한 꽃 + 깊은 뿌리 -->
+      <div class="box good" style="padding:40px 44px;text-align:center;">
+        <div class="bh good" style="margin-bottom:20px;">根になる行動</div>
+        <svg viewBox="0 0 240 200" width="240" style="display:block;margin:0 auto 20px;">
+          <!-- 소박한 작은 꽃 -->
+          <circle cx="120" cy="28" r="12" fill="rgba(94,205,130,.3)" stroke="#5ECD82" stroke-width="2"/>
+          <circle cx="120" cy="28" r="5" fill="rgba(94,205,130,.6)"/>
           <!-- 줄기 -->
-          <line x1="150" y1="65" x2="150" y2="20" stroke="#5ECD82" stroke-width="3"/>
-          <!-- 꽃 소박하게 -->
-          <circle cx="150" cy="14" r="10" fill="rgba(94,205,130,.4)" stroke="#5ECD82" stroke-width="2"/>
-          <circle cx="150" cy="14" r="5" fill="rgba(94,205,130,.7)"/>
-          <!-- 뿌리 깊고 풍성하게 -->
-          <line x1="150" y1="65" x2="150" y2="95" stroke="#5ECD82" stroke-width="3.5"/>
-          <line x1="150" y1="72" x2="108" y2="95" stroke="#5ECD82" stroke-width="2.5"/>
-          <line x1="150" y1="72" x2="192" y2="95" stroke="#5ECD82" stroke-width="2.5"/>
-          <line x1="150" y1="82" x2="122" y2="110" stroke="#5ECD82" stroke-width="2"/>
-          <line x1="150" y1="82" x2="178" y2="110" stroke="#5ECD82" stroke-width="2"/>
-          <line x1="108" y1="95" x2="84" y2="115" stroke="#5ECD82" stroke-width="1.5"/>
-          <line x1="192" y1="95" x2="216" y2="115" stroke="#5ECD82" stroke-width="1.5"/>
-          <line x1="150" y1="95" x2="138" y2="118" stroke="#5ECD82" stroke-width="1.5"/>
-          <line x1="150" y1="95" x2="162" y2="118" stroke="#5ECD82" stroke-width="1.5"/>
-          <text x="150" y="108" text-anchor="middle" font-size="19" fill="rgba(94,205,130,.7)" font-family="sans-serif">根が深い——嵐が来ても折れない</text>
+          <line x1="120" y1="40" x2="120" y2="90" stroke="#5ECD82" stroke-width="2.5"/>
+          <!-- 지면선 -->
+          <line x1="50" y1="90" x2="190" y2="90" stroke="rgba(94,205,130,.25)" stroke-width="1"/>
+          <!-- 깊고 풍성한 뿌리 -->
+          <line x1="120" y1="90" x2="120" y2="150" stroke="#5ECD82" stroke-width="3"/>
+          <line x1="120" y1="96" x2="78" y2="130" stroke="#5ECD82" stroke-width="2.5"/>
+          <line x1="120" y1="96" x2="162" y2="130" stroke="#5ECD82" stroke-width="2.5"/>
+          <line x1="120" y1="108" x2="90" y2="150" stroke="#5ECD82" stroke-width="2"/>
+          <line x1="120" y1="108" x2="150" y2="150" stroke="#5ECD82" stroke-width="2"/>
+          <line x1="120" y1="120" x2="68" y2="160" stroke="#5ECD82" stroke-width="1.5"/>
+          <line x1="120" y1="120" x2="172" y2="160" stroke="#5ECD82" stroke-width="1.5"/>
+          <line x1="78" y1="130" x2="55" y2="155" stroke="#5ECD82" stroke-width="1.5"/>
+          <line x1="162" y1="130" x2="185" y2="155" stroke="#5ECD82" stroke-width="1.5"/>
+          <line x1="90" y1="150" x2="72" y2="175" stroke="#5ECD82" stroke-width="1"/>
+          <line x1="150" y1="150" x2="168" y2="175" stroke="#5ECD82" stroke-width="1"/>
+          <line x1="120" y1="150" x2="105" y2="178" stroke="#5ECD82" stroke-width="1"/>
+          <line x1="120" y1="150" x2="135" y2="178" stroke="#5ECD82" stroke-width="1"/>
+          <text x="120" y="196" text-anchor="middle" font-size="16" fill="rgba(94,205,130,.5)" font-family="sans-serif">根が深い</text>
         </svg>
+        <div class="bi good" style="font-size:34px;margin-bottom:10px;">来る前に動いている</div>
+        <div class="bi good" style="font-size:34px;margin-bottom:10px;">あなたにしかできない、になる</div>
+        <div style="margin-top:16px;padding:10px 16px;background:rgba(94,205,130,.08);border-radius:8px;">
+          <span style="font-size:28px;color:rgba(94,205,130,.85);font-weight:700;">嵐が来ても折れない。</span>
+        </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== S04b: なぜこの2つなのか ===== -->
+<div class="slide" id="s04b">
+  <div class="bg bg-dark"></div>
+  <div class="c cc">
+    <div class="ey" style="margin-bottom:44px;">根になる行動には、2つの面がある。</div>
+    <div style="display:grid;grid-template-columns:1fr 40px 1fr;gap:0;align-items:center;width:100%;margin-bottom:52px;">
+      <div style="text-align:center;padding:48px 36px;background:rgba(200,150,12,.08);border:2px solid rgba(200,150,12,.4);border-radius:16px;">
+        <div style="font-size:28px;color:rgba(255,255,255,.4);margin-bottom:16px;letter-spacing:4px;">WHAT</div>
+        <div style="font-size:52px;font-weight:900;color:#E8B020;margin-bottom:14px;">何をやるか</div>
+        <div style="font-size:30px;color:rgba(255,255,255,.6);">＝ 先手を打つ</div>
+      </div>
+      <div style="text-align:center;font-size:40px;color:rgba(200,150,12,.3);">＋</div>
+      <div style="text-align:center;padding:48px 36px;background:rgba(200,150,12,.08);border:2px solid rgba(200,150,12,.4);border-radius:16px;">
+        <div style="font-size:28px;color:rgba(255,255,255,.4);margin-bottom:16px;letter-spacing:4px;">HOW</div>
+        <div style="font-size:52px;font-weight:900;color:#E8B020;margin-bottom:14px;">どう届けるか</div>
+        <div style="font-size:30px;color:rgba(255,255,255,.6);">＝ 伝わる伝え方</div>
+      </div>
+    </div>
+    <div style="padding:28px 48px;background:rgba(255,255,255,.04);border-left:4px solid #C8960C;border-radius:0 12px 12px 0;width:100%;text-align:left;">
+      <span style="font-size:34px;color:rgba(255,255,255,.7);">先手を打っても、伝わらなければ</span>
+      <span style="font-size:34px;font-weight:700;color:#FF6B6B;">　誰も気づかない。</span><br>
+      <span style="font-size:34px;color:rgba(255,255,255,.7);">伝え方がうまくても、受け身なら</span>
+      <span style="font-size:34px;font-weight:700;color:#FF6B6B;">　根にならない。</span><br>
+      <span style="font-size:36px;font-weight:900;color:#E8B020;display:block;margin-top:14px;">両方揃って初めて——「あの人に頼みたい」になる。</span>
     </div>
   </div>
 </div>
@@ -407,7 +508,6 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
 <!-- ===== S05: SECTION 1 ===== -->
 <div class="slide" id="s05">
   <div class="bg bg-dark"></div>
-  <div class="ov ov72"></div>
   <div class="c cc">
     <div class="h3" style="font-size:32px;letter-spacing:8px;color:rgba(255,255,255,.45);margin-bottom:28px;">PART 01</div>
     <div class="h1"><span class="g">先手を打つ</span></div>
@@ -419,7 +519,6 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
 <!-- ===== S06: CASE ===== -->
 <div class="slide" id="s06">
   <div class="bg bg-dark"></div>
-  <div class="ov ov80"></div>
   <div class="c" style="justify-content:center;">
     <div class="badge" style="margin-bottom:44px;">Simulation</div>
     <div class="h1" style="margin-bottom:52px;">一つのケースで考えてみよう。</div>
@@ -431,6 +530,8 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
 
 <div class="slide" id="sim01b">
   <div class="bg bg-dark"></div>
+    <div class="sim-progress"><div class="sim-dot on"></div><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div></div>
+    <div class="sim-dept-label">1 / 7　広報</div>
   <div class="c">
     <div class="dept"><div class="di">PR</div><div><div class="dn">広報</div><div class="ds">A社 シミュレーション</div></div></div>
     <div class="box bad" style="width:100%;">
@@ -443,6 +544,8 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
 
 <div class="slide" id="sim01a">
   <div class="bg bg-dark"></div>
+    <div class="sim-progress"><div class="sim-dot on"></div><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div></div>
+    <div class="sim-dept-label">1 / 7　広報</div>
   <div class="c">
     <div class="dept"><div class="di">PR</div><div><div class="dn">広報</div><div class="ds">A社 シミュレーション</div></div></div>
     <div class="box good" style="width:100%;">
@@ -457,6 +560,9 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
 
 <div class="slide" id="sim01r">
   <div class="bg bg-dark"></div>
+  <div class="result-glow"></div>
+    <div class="sim-progress"><div class="sim-dot on"></div><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div></div>
+    <div class="sim-dept-label">1 / 7　広報</div>
   <div class="c">
     <div class="dept"><div class="di">PR</div><div><div class="dn">広報</div><div class="ds">A社 シミュレーション</div></div></div>
     <div class="box good" style="width:100%;text-align:center;padding:56px 52px;">
@@ -470,6 +576,8 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
 
 <div class="slide" id="sim02b">
   <div class="bg bg-dark"></div>
+    <div class="sim-progress"><div class="sim-dot done"></div><div class="sim-dot on"></div><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div></div>
+    <div class="sim-dept-label">2 / 7　JAPANKURU</div>
   <div class="c">
     <div class="dept"><div class="di">J</div><div><div class="dn">JAPANKURU</div><div class="ds">A社 シミュレーション</div></div></div>
     <div class="box bad" style="width:100%;">
@@ -482,6 +590,8 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
 
 <div class="slide" id="sim02a">
   <div class="bg bg-dark"></div>
+    <div class="sim-progress"><div class="sim-dot done"></div><div class="sim-dot on"></div><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div></div>
+    <div class="sim-dept-label">2 / 7　JAPANKURU</div>
   <div class="c">
     <div class="dept"><div class="di">J</div><div><div class="dn">JAPANKURU</div><div class="ds">A社 シミュレーション</div></div></div>
     <div class="box good" style="width:100%;">
@@ -496,6 +606,9 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
 
 <div class="slide" id="sim02r">
   <div class="bg bg-dark"></div>
+  <div class="result-glow"></div>
+    <div class="sim-progress"><div class="sim-dot done"></div><div class="sim-dot on"></div><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div></div>
+    <div class="sim-dept-label">2 / 7　JAPANKURU</div>
   <div class="c">
     <div class="dept"><div class="di">J</div><div><div class="dn">JAPANKURU</div><div class="ds">A社 シミュレーション</div></div></div>
     <div class="box good" style="width:100%;text-align:center;padding:56px 52px;">
@@ -511,6 +624,8 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
 
 <div class="slide" id="sim03b">
   <div class="bg bg-dark"></div>
+    <div class="sim-progress"><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot on"></div><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div></div>
+    <div class="sim-dept-label">3 / 7　メディア管理</div>
   <div class="c">
     <div class="dept">
       <div class="di" style="font-size:20px;">M2</div>
@@ -529,6 +644,8 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
 
 <div class="slide" id="sim03a">
   <div class="bg bg-dark"></div>
+    <div class="sim-progress"><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot on"></div><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div></div>
+    <div class="sim-dept-label">3 / 7　メディア管理</div>
   <div class="c">
     <div class="dept">
       <div class="di" style="font-size:20px;">M2</div>
@@ -548,6 +665,9 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
 
 <div class="slide" id="sim03r">
   <div class="bg bg-dark"></div>
+  <div class="result-glow"></div>
+    <div class="sim-progress"><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot on"></div><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div></div>
+    <div class="sim-dept-label">3 / 7　メディア管理</div>
   <div class="c">
     <div class="dept">
       <div class="di" style="font-size:20px;">M2</div>
@@ -568,6 +688,8 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
 
 <div class="slide" id="sim04b">
   <div class="bg bg-dark"></div>
+    <div class="sim-progress"><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot on"></div><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div></div>
+    <div class="sim-dept-label">4 / 7　営業企画</div>
   <div class="c">
     <div class="dept"><div class="di">M</div><div><div class="dn">営業企画（マーケ）</div><div class="ds">A社 シミュレーション</div></div></div>
     <div class="box bad" style="width:100%;">
@@ -580,6 +702,8 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
 
 <div class="slide" id="sim04a">
   <div class="bg bg-dark"></div>
+    <div class="sim-progress"><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot on"></div><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div></div>
+    <div class="sim-dept-label">4 / 7　営業企画</div>
   <div class="c">
     <div class="dept"><div class="di">M</div><div><div class="dn">営業企画（マーケ）</div><div class="ds">A社 シミュレーション</div></div></div>
     <div class="box good" style="width:100%;">
@@ -594,6 +718,9 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
 
 <div class="slide" id="sim04r">
   <div class="bg bg-dark"></div>
+  <div class="result-glow"></div>
+    <div class="sim-progress"><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot on"></div><div class="sim-dot"></div><div class="sim-dot"></div><div class="sim-dot"></div></div>
+    <div class="sim-dept-label">4 / 7　営業企画</div>
   <div class="c">
     <div class="dept"><div class="di">M</div><div><div class="dn">営業企画（マーケ）</div><div class="ds">A社 シミュレーション</div></div></div>
     <div class="box good" style="width:100%;text-align:center;padding:56px 52px;">
@@ -608,6 +735,8 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
 
 <div class="slide" id="sim05b">
   <div class="bg bg-dark"></div>
+    <div class="sim-progress"><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot on"></div><div class="sim-dot"></div><div class="sim-dot"></div></div>
+    <div class="sim-dept-label">5 / 7　SPC</div>
   <div class="c">
     <div class="dept"><div class="di">P</div><div><div class="dn">SPC</div><div class="ds">A社 シミュレーション</div></div></div>
     <div class="box bad" style="width:100%;">
@@ -621,6 +750,8 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
 
 <div class="slide" id="sim05a">
   <div class="bg bg-dark"></div>
+    <div class="sim-progress"><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot on"></div><div class="sim-dot"></div><div class="sim-dot"></div></div>
+    <div class="sim-dept-label">5 / 7　SPC</div>
   <div class="c">
     <div class="dept"><div class="di">P</div><div><div class="dn">SPC</div><div class="ds">A社 シミュレーション</div></div></div>
     <div class="box good" style="width:100%;">
@@ -636,6 +767,9 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
 
 <div class="slide" id="sim05r">
   <div class="bg bg-dark"></div>
+  <div class="result-glow"></div>
+    <div class="sim-progress"><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot on"></div><div class="sim-dot"></div><div class="sim-dot"></div></div>
+    <div class="sim-dept-label">5 / 7　SPC</div>
   <div class="c">
     <div class="dept"><div class="di">P</div><div><div class="dn">SPC</div><div class="ds">A社 シミュレーション</div></div></div>
     <div class="box good" style="width:100%;text-align:center;padding:56px 52px;">
@@ -652,6 +786,8 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
 
 <div class="slide" id="sim06b">
   <div class="bg bg-dark"></div>
+    <div class="sim-progress"><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot on"></div><div class="sim-dot"></div></div>
+    <div class="sim-dept-label">6 / 7　経理・管理</div>
   <div class="c">
     <div class="dept"><div class="di">経</div><div><div class="dn">経理・管理</div><div class="ds">A社 シミュレーション</div></div></div>
     <div class="box bad" style="width:100%;">
@@ -664,6 +800,8 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
 
 <div class="slide" id="sim06a">
   <div class="bg bg-dark"></div>
+    <div class="sim-progress"><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot on"></div><div class="sim-dot"></div></div>
+    <div class="sim-dept-label">6 / 7　経理・管理</div>
   <div class="c">
     <div class="dept"><div class="di">経</div><div><div class="dn">経理・管理</div><div class="ds">A社 シミュレーション</div></div></div>
     <div class="box good" style="width:100%;">
@@ -678,6 +816,9 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
 
 <div class="slide" id="sim06r">
   <div class="bg bg-dark"></div>
+  <div class="result-glow"></div>
+    <div class="sim-progress"><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot on"></div><div class="sim-dot"></div></div>
+    <div class="sim-dept-label">6 / 7　経理・管理</div>
   <div class="c">
     <div class="dept"><div class="di">経</div><div><div class="dn">経理・管理</div><div class="ds">A社 シミュレーション</div></div></div>
     <div class="box good" style="width:100%;text-align:center;padding:56px 52px;">
@@ -688,10 +829,26 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
   </div>
 </div>
 
+
+<!-- ── 営業クライマックスへのブリッジ ── -->
+<div class="slide" id="sim07bridge">
+  <div class="bg bg-dark"></div>
+  <div class="c cc">
+    <div style="font-size:32px;color:rgba(255,255,255,.3);letter-spacing:6px;margin-bottom:48px;">6つの部門が、すでに動いた。</div>
+    <div class="dv dvc" style="margin-bottom:48px;"></div>
+    <div style="font-size:68px;font-weight:900;color:rgba(255,255,255,.9);line-height:1.4;text-align:center;">
+      そして——<br>
+      <span class="g">営業が、扉を叩く。</span>
+    </div>
+  </div>
+</div>
+
 <!-- ── 07 営業 — CLIMAX ── -->
 
 <div class="slide" id="sim07b">
   <div class="bg bg-dark"></div>
+    <div class="sim-progress"><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot on"></div></div>
+    <div class="sim-dept-label">7 / 7　営業</div>
   <div class="c">
     <div class="dept"><div class="di">営</div><div><div class="dn">Sales — 営業</div><div class="ds">A社 シミュレーション</div></div></div>
     <div class="box bad" style="width:100%;">
@@ -704,6 +861,8 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
 
 <div class="slide" id="sim07a">
   <div class="bg bg-dark"></div>
+    <div class="sim-progress"><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot on"></div></div>
+    <div class="sim-dept-label">7 / 7　営業</div>
   <div class="c">
     <div class="dept"><div class="di">営</div><div><div class="dn">Sales — 営業</div><div class="ds">A社 シミュレーション</div></div></div>
     <div class="box good" style="width:100%;">
@@ -725,6 +884,9 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
 
 <div class="slide" id="sim07r">
   <div class="bg bg-dark"></div>
+  <div class="result-glow"></div>
+    <div class="sim-progress"><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot done"></div><div class="sim-dot on"></div></div>
+    <div class="sim-dept-label">7 / 7　営業</div>
   <div class="c">
     <div class="dept"><div class="di">営</div><div><div class="dn">Sales — 営業</div><div class="ds">A社 シミュレーション</div></div></div>
     <div class="box good" style="width:100%;text-align:center;padding:56px 52px;">
@@ -747,32 +909,32 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
     <div class="dv dvc" style="margin-bottom:32px;"></div>
     <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:16px;width:100%;">
       <div style="text-align:center;padding:20px 12px;background:rgba(255,255,255,.07);border-radius:12px;border:1px solid rgba(255,255,255,.12);">
-        <div style="font-size:24px;font-weight:900;color:#E8B020;margin-bottom:8px;">営業</div>
-        <div style="font-size:18px;color:rgba(255,255,255,.55);line-height:1.5;">信頼は<br>最初の30秒</div>
-      </div>
-      <div style="text-align:center;padding:20px 12px;background:rgba(255,255,255,.07);border-radius:12px;border:1px solid rgba(255,255,255,.12);">
-        <div style="font-size:22px;font-weight:900;color:#E8B020;margin-bottom:8px;">営業企画</div>
-        <div style="font-size:18px;color:rgba(255,255,255,.55);line-height:1.5;">資料が<br>受注を作る</div>
+        <div style="font-size:22px;font-weight:900;color:#E8B020;margin-bottom:8px;">広報</div>
+        <div style="font-size:17px;color:rgba(255,255,255,.55);line-height:1.5;">扉を叩く前に<br>扉を開ける</div>
       </div>
       <div style="text-align:center;padding:20px 12px;background:rgba(255,255,255,.07);border-radius:12px;border:1px solid rgba(255,255,255,.12);">
         <div style="font-size:22px;font-weight:900;color:#E8B020;margin-bottom:8px;">JAPANKURU</div>
-        <div style="font-size:18px;color:rgba(255,255,255,.55);line-height:1.5;">数字が<br>単価を上げる</div>
+        <div style="font-size:17px;color:rgba(255,255,255,.55);line-height:1.5;">当てにいく<br>クリエイティブ</div>
       </div>
       <div style="text-align:center;padding:20px 12px;background:rgba(255,255,255,.07);border-radius:12px;border:1px solid rgba(255,255,255,.12);">
-        <div style="font-size:24px;font-weight:900;color:#E8B020;margin-bottom:8px;">メディア<br>管理</div>
-        <div style="font-size:18px;color:rgba(255,255,255,.55);line-height:1.5;">拡散が<br>次を呼ぶ</div>
+        <div style="font-size:20px;font-weight:900;color:#E8B020;margin-bottom:8px;">メディア<br>管理</div>
+        <div style="font-size:17px;color:rgba(255,255,255,.55);line-height:1.5;">統合展開を<br>設計する力</div>
+      </div>
+      <div style="text-align:center;padding:20px 12px;background:rgba(255,255,255,.07);border-radius:12px;border:1px solid rgba(255,255,255,.12);">
+        <div style="font-size:22px;font-weight:900;color:#E8B020;margin-bottom:8px;">営業企画</div>
+        <div style="font-size:17px;color:rgba(255,255,255,.55);line-height:1.5;">市場を先読みし<br>企画をデザイン</div>
       </div>
       <div style="text-align:center;padding:20px 12px;background:rgba(255,255,255,.07);border-radius:12px;border:1px solid rgba(255,255,255,.12);">
         <div style="font-size:24px;font-weight:900;color:#E8B020;margin-bottom:8px;">SPC</div>
-        <div style="font-size:18px;color:rgba(255,255,255,.55);line-height:1.5;">先読みが<br>信頼になる</div>
+        <div style="font-size:17px;color:rgba(255,255,255,.55);line-height:1.5;">一番深く知る<br>インサイド情報源</div>
       </div>
       <div style="text-align:center;padding:20px 12px;background:rgba(255,255,255,.07);border-radius:12px;border:1px solid rgba(255,255,255,.12);">
-        <div style="font-size:22px;font-weight:900;color:#E8B020;margin-bottom:8px;">広報</div>
-        <div style="font-size:18px;color:rgba(255,255,255,.55);line-height:1.5;">PRが<br>営業になる</div>
+        <div style="font-size:20px;font-weight:900;color:#E8B020;margin-bottom:8px;">経理・管理</div>
+        <div style="font-size:17px;color:rgba(255,255,255,.55);line-height:1.5;">商談を支える<br>数字のインフラ</div>
       </div>
       <div style="text-align:center;padding:20px 12px;background:rgba(255,255,255,.07);border-radius:12px;border:1px solid rgba(255,255,255,.12);">
-        <div style="font-size:22px;font-weight:900;color:#E8B020;margin-bottom:8px;">経理・管理</div>
-        <div style="font-size:18px;color:rgba(255,255,255,.55);line-height:1.5;">数字が<br>信頼になる</div>
+        <div style="font-size:24px;font-weight:900;color:#E8B020;margin-bottom:8px;">営業</div>
+        <div style="font-size:17px;color:rgba(255,255,255,.55);line-height:1.5;">組織の顔として<br>座れる</div>
       </div>
     </div>
   </div>
@@ -797,7 +959,6 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
 <!-- ===== S19: SECTION 2 ===== -->
 <div class="slide" id="s19">
   <div class="bg bg-dark"></div>
-  <div class="ov ov72"></div>
   <div class="c cc">
     <div class="h3" style="font-size:32px;letter-spacing:8px;color:rgba(255,255,255,.45);margin-bottom:28px;">PART 02</div>
     <div class="h1"><span class="g">伝わる伝え方</span></div>
@@ -1227,6 +1388,37 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
   </div>
 </div>
 
+<!-- ===== S21d_gld: GLDの日常に置き換えると ===== -->
+<div class="slide" id="s21d_gld">
+  <div class="bg bg-dark"></div>
+  <div class="c">
+    <div class="ey" style="margin-bottom:32px;">じゃあ、GLDの日常に置き換えてみよう。</div>
+    <div class="h3" style="margin-bottom:36px;font-size:36px;">営業がA社に<span class="g">JAPANKURUを説明する</span>とき</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:44px;width:100%;">
+      <div>
+        <div class="bh bad" style="margin-bottom:24px;font-size:38px;">並べるだけ</div>
+        <div style="font-size:26px;color:rgba(255,255,255,.6);line-height:1.75;padding:22px 26px;background:rgba(255,60,60,.04);border:1px solid rgba(255,90,90,.18);border-radius:12px;">
+          「多言語でWebサイトを運営していて、<br>各国向けのSNSもやっていて、<br>海外メディアとも提携していて、<br>インフルエンサーで拡散もできて、<br>多言語クリエイターがコンサルもして、<br>お客様のSNS運用代行もできて、<br>LPも作れるし、動画制作・納品もして、<br>ポスターやPOPも作れます。」
+        </div>
+        <div style="margin-top:18px;font-size:30px;color:#FF6B6B;text-align:center;font-weight:700;">→ 「……で、結局何屋さん？」</div>
+      </div>
+      <div>
+        <div class="bh good" style="margin-bottom:24px;font-size:38px;">グルーピング</div>
+        <div style="font-size:28px;color:rgba(255,255,255,.9);line-height:1.75;padding:22px 26px;background:rgba(94,205,130,.04);border:2px solid rgba(94,205,130,.25);border-radius:12px;">
+          「JAPANKURUにできることは<span class="g">3つ</span>です。」<br><br>
+          <span style="color:#E8B020;font-weight:900;">①</span> <span style="font-weight:700;">作れる</span><br>
+          <span style="font-size:24px;color:rgba(255,255,255,.6);padding-left:24px;">記事・動画・LP・POP・SNSコンテンツ</span><br>
+          <span style="color:#E8B020;font-weight:900;">②</span> <span style="font-weight:700;">届けられる</span><br>
+          <span style="font-size:24px;color:rgba(255,255,255,.6);padding-left:24px;">多言語サイト・各国SNS・海外メディア提携・インフルエンサー拡散</span><br>
+          <span style="color:#E8B020;font-weight:900;">③</span> <span style="font-weight:700;">任せられる</span><br>
+          <span style="font-size:24px;color:rgba(255,255,255,.6);padding-left:24px;">SNS運用代行・多言語コンサルティング</span>
+        </div>
+        <div style="margin-top:18px;font-size:30px;color:#5ECD82;text-align:center;font-weight:700;">→ 「作れて、届けて、任せられる。」<span style="color:#E8B020;">　3秒。</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ===== S21e: 배려 결론 ===== -->
 <div class="slide" id="s21e">
   <div class="bg bg-dark"></div>
@@ -1247,7 +1439,6 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
 <!-- ===== S22: SECTION 3 ===== -->
 <div class="slide" id="s22">
   <div class="bg bg-dark"></div>
-  <div class="ov ov65"></div>
   <div class="c cc">
     <div class="h3" style="font-size:32px;letter-spacing:8px;color:rgba(255,255,255,.45);margin-bottom:28px;">PART 03</div>
     <div class="h1"><span class="g">自分の価値へ</span></div>
@@ -1259,7 +1450,6 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
 <!-- ===== S23: VALUE ===== -->
 <div class="slide" id="s23">
   <div class="bg bg-dark"></div>
-  <div class="ov ov65"></div>
   <div class="c cc">
     <div class="ey">Value</div>
     <div class="h1">「あの人に、また<br><span class="g">頼みたい。」</span></div>
@@ -1493,6 +1683,13 @@ html,body{width:100%;height:100%;background:#0a0a0a;font-family:'N',sans-serif;o
 </div>
 
 <div class="ctr" id="ctr"></div>
+<div class="timer" id="timer" onclick="toggleTimer()" ondblclick="resetTimer()" title="クリック: 開始/一時停止　ダブルクリック: リセット">30:00</div>
+<div class="pace" id="pace"></div>
+<div class="timer-flash" id="timerFlash">
+  <div class="tf-bg"></div>
+  <div class="tf-time" id="tfTime">30:00</div>
+  <div class="tf-pace" id="tfPace"></div>
+</div>
 <div class="nav" id="nav"></div>
 </div>
 <script>
@@ -1526,6 +1723,7 @@ slides.forEach((_,i)=>{
 });
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape'){closeToc();return;}
+  if(e.key==='t'||e.key==='T'){flashTimer();return;}
   var s=slides[cur];
   // data-internal 슬라이드: 내부 스텝 처리
   if(s && s.dataset.internal==='1'){
@@ -1631,6 +1829,144 @@ updateArrows();
 function openToc(){document.getElementById('toc').classList.add('show');}
 function closeToc(){document.getElementById('toc').classList.remove('show');}
 function goTo(i){closeToc();go(i);}
+
+// ── 30分タイマー ──
+var timerEl=document.getElementById('timer');
+var paceEl=document.getElementById('pace');
+var timerTotal=30*60;
+var timerLeft=timerTotal;
+var timerInterval=null;
+var timerRunning=false;
+
+// ペースチェックポイント: [slideIndex, targetRemainingSeconds, label]
+var checkpoints=[
+  [0,  1800, 'Opening 3.5分'],
+  [8,  1590, 'PART01 12.5分'],
+  [34,  840, 'PART02 8分'],
+  [47,  360, 'PART03 6分'],
+];
+
+function updateTimerDisplay(){
+  var m=Math.floor(timerLeft/60);
+  var s=timerLeft%60;
+  timerEl.textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+  timerEl.classList.remove('running','warning','danger');
+  if(timerRunning){
+    if(timerLeft<=180) timerEl.classList.add('danger');
+    else if(timerLeft<=600) timerEl.classList.add('warning');
+    else timerEl.classList.add('running');
+  }
+}
+
+function checkPace(slideIdx){
+  if(!timerRunning) return;
+  var cp=null;
+  for(var i=0;i<checkpoints.length;i++){
+    if(checkpoints[i][0]===slideIdx) cp=checkpoints[i];
+  }
+  if(!cp) return;
+  var target=cp[1];
+  var label=cp[2];
+  var diff=timerLeft-target;
+  var dm=Math.floor(Math.abs(diff)/60);
+  var ds=Math.abs(diff)%60;
+  
+  paceEl.classList.remove('on-track','behind','over');
+  if(diff>=0){
+    paceEl.classList.add('on-track');
+    paceEl.textContent='▸ '+label+'　✓ 余裕 '+dm+'分'+ds+'秒';
+  } else if(diff>=-120){
+    paceEl.classList.add('behind');
+    paceEl.textContent='▸ '+label+'　△ '+dm+'分'+ds+'秒 遅れ';
+  } else {
+    paceEl.classList.add('over');
+    paceEl.textContent='▸ '+label+'　✕ '+dm+'分'+ds+'秒 遅れ';
+  }
+  paceEl.classList.add('show');
+  setTimeout(function(){paceEl.classList.remove('show');},4000);
+}
+
+function toggleTimer(){
+  if(timerRunning){
+    clearInterval(timerInterval);
+    timerRunning=false;
+    timerEl.classList.remove('running','warning','danger');
+  } else {
+    timerRunning=true;
+    timerInterval=setInterval(function(){
+      if(timerLeft>0){
+        timerLeft--;
+        updateTimerDisplay();
+      } else {
+        clearInterval(timerInterval);
+        timerRunning=false;
+        timerEl.textContent='00:00';
+        timerEl.classList.remove('running','warning');
+        timerEl.classList.add('danger');
+      }
+    },1000);
+    updateTimerDisplay();
+  }
+}
+
+function resetTimer(){
+  clearInterval(timerInterval);
+  timerRunning=false;
+  timerLeft=timerTotal;
+  updateTimerDisplay();
+  paceEl.classList.remove('show');
+}
+
+// go関数にペースチェックをフック
+var _origGoPace=go;
+go=function(i){
+  _origGoPace(i);
+  checkPace(i);
+};
+
+// Tキーフラッシュ表示
+var flashTimeout=null;
+function flashTimer(){
+  var flash=document.getElementById('timerFlash');
+  var tfTime=document.getElementById('tfTime');
+  var tfPace=document.getElementById('tfPace');
+  
+  // 残り時間
+  var m=Math.floor(timerLeft/60);
+  var s=timerLeft%60;
+  tfTime.textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+  tfTime.style.color=timerLeft<=180?'rgba(255,107,107,.9)':timerLeft<=600?'rgba(232,176,32,.9)':'rgba(255,255,255,.8)';
+  
+  // 現在セクションのペース
+  var paceText='';
+  var paceColor='rgba(255,255,255,.5)';
+  for(var i=checkpoints.length-1;i>=0;i--){
+    if(cur>=checkpoints[i][0]){
+      var target=checkpoints[i][1];
+      var label=checkpoints[i][2];
+      var diff=timerLeft-target;
+      var dm=Math.floor(Math.abs(diff)/60);
+      var ds=Math.abs(diff)%60;
+      if(diff>=0){
+        paceText=label+'　✓ '+dm+'分'+ds+'秒 余裕';
+        paceColor='rgba(94,205,130,.8)';
+      } else if(diff>=-120){
+        paceText=label+'　△ '+dm+'分'+ds+'秒 遅れ';
+        paceColor='rgba(232,176,32,.8)';
+      } else {
+        paceText=label+'　✕ '+dm+'分'+ds+'秒 遅れ';
+        paceColor='rgba(255,107,107,.8)';
+      }
+      break;
+    }
+  }
+  tfPace.textContent=timerRunning?paceText:'タイマー未開始';
+  tfPace.style.color=timerRunning?paceColor:'rgba(255,255,255,.35)';
+  
+  flash.classList.add('show');
+  clearTimeout(flashTimeout);
+  flashTimeout=setTimeout(function(){flash.classList.remove('show');},2500);
+}
 
 
 </script>
