@@ -1799,31 +1799,260 @@ resize();
   render();
 })();
 </script>
-  <style>
+<!-- ============================================================
+  GLD 0417.html — 統合改善パッチ v2
+  既存パッチを全部削除してこれ1つに置き換え
+  </body> の直前に貼り付け
+============================================================ -->
+
+<style>
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  A. カラー変数 上書き（プロジェクター向け）
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 :root {
   --dim:   #9AAFC4 !important;
   --smoke: #C8D8E8 !important;
 }
-.eyebrow, .tag, .label, .ag-time, .ag-sub, .s3-sub, .cr-timeline {
-  font-size: max(13px, 1.1vw) !important;
-}
-.ag-title, .s3-title, .cr-title {
-  font-size: max(17px, 1.5vw) !important;
-}
-.ag-time, .at {
-  font-size: max(14px, 1.3vw) !important;
-  font-weight: 700 !important;
-  color: #F5C842 !important;
-}
-.s3-sub, .ag-sub, .field-area p, .cr-timeline {
-  color: #D0DFF0 !important;
-}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  B. ロゴ 2倍
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 #gld-logo-wrap img {
   height: clamp(72px, 11vh, 120px) !important;
 }
-#hdr-logo img {
-  height: clamp(66px, 12vh, 126px) !important;
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  C. ヘッダーバー（.hd）
+  .htag が 9px → 13px に
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.hd .ht   { font-size: max(20px, 2.4vw) !important; }
+.hd .htag {
+  font-size: max(14px, 1.2vw) !important;
+  color: #F5C842 !important;
+  font-weight: 700 !important;
 }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  D. セクション転換スライド（.s-chapter）
+  eyebrow と sub を大きく
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.s-chapter .ch-act {
+  font-size: max(14px, 1.2vw) !important;
+  letter-spacing: .35em !important;
+  color: #F5C842 !important;
+}
+.s-chapter .ch-sub {
+  font-size: max(18px, 2vw) !important;
+  line-height: 1.8 !important;
+  color: rgba(246,244,239,.75) !important;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  E. グループ討議 概要スライド（.gdo-slide）
+  tag が 10px → 14px / desc が 12px → 15px
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.gdo-slide .gdo-head {
+  font-size: max(14px, 1.2vw) !important;
+}
+.gdo-slide .gdo-tag {
+  font-size: max(14px, 1.3vw) !important;
+  color: rgba(200,150,12,.85) !important;
+}
+.gdo-slide .gdo-desc {
+  font-size: max(15px, 1.6vw) !important;
+  color: rgba(246,244,239,.78) !important;
+  line-height: 1.8 !important;
+}
+.gdo-slide .gdo-foot {
+  font-size: max(14px, 1.4vw) !important;
+}
+.gdo-slide .gdo-time {
+  font-size: max(26px, 4vw) !important;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  F. 討議スライド（.disc-slide）
+  ti-text が 13px → 16px / timebadge 底上げ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.disc-slide .timebadge {
+  font-size: max(16px, 1.7vw) !important;
+  color: #F5C842 !important;
+}
+.disc-slide .disc-main {
+  font-size: max(28px, 3.5vw) !important;
+  line-height: 1.3 !important;
+}
+.disc-slide .ti-label {
+  font-size: max(13px, 1.1vw) !important;
+  color: #F5C842 !important;
+}
+.disc-slide .ti-text {
+  font-size: max(16px, 2vw) !important;
+  line-height: 1.75 !important;
+  color: rgba(246,244,239,.9) !important;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  G. GWスライド（.gw-slide2）
+  step-d が 11px → 14px
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.gw-slide2 .timebadge {
+  font-size: max(16px, 1.7vw) !important;
+  color: #F5C842 !important;
+}
+.gw-slide2 .gw-main {
+  font-size: max(26px, 3.2vw) !important;
+  line-height: 1.3 !important;
+}
+.gw-slide2 .step-t {
+  font-size: max(18px, 2vw) !important;
+}
+.gw-slide2 .step-d {
+  font-size: max(14px, 1.5vw) !important;
+  line-height: 1.8 !important;
+  color: #C8D8E8 !important;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  H. 石原先生ご紹介スライド（#s_ishihara）
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#s_ishihara .ish-role {
+  font-size: max(15px, 1.8vw) !important;
+}
+#s_ishihara .ish-org-name {
+  font-size: max(18px, 2.4vw) !important;
+}
+#s_ishihara .ish-org-pos {
+  font-size: max(14px, 1.6vw) !important;
+  color: rgba(200,150,12,.75) !important;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  I. 個人APスライド（#s31）
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#s31 .ap-q-label   { font-size: max(14px, 1.6vw) !important; }
+#s31 .ap-q-text    { font-size: max(26px, 3.8vw) !important; }
+#s31 .ap-qr-hint   { font-size: max(14px, 1.5vw) !important; }
+#s31 .ap-declare-text { font-size: max(18px, 2.6vw) !important; }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  J. バッジ類（badge2）を大きく
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.badge2 {
+  font-size: max(13px, 1.1vw) !important;
+  padding: 5px 14px !important;
+}
+.own-row .ot {
+  font-size: max(14px, 1.4vw) !important;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  K. スライドカウンター＆プログレスバー
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#counter {
+  font-size: max(15px, 1.2vw) !important;
+  color: rgba(255,255,255,.6) !important;
+}
+#prog-bar {
+  height: 5px !important;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  L. 全体 line-height 広げる
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.s-body, .s-body * {
+  line-height: 1.85;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  M. 目次トグルボタン上のタイマー位置
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#gld-timer{position:fixed;bottom:218px;right:28px;z-index:9999;font-family:'DM Sans','Meiryo',sans-serif;}
+#timer-fab{background:#C9A84C;color:#0D1B2A;border:none;border-radius:50px;padding:12px 20px;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.5);}
+#timer-panel{display:none;background:#0D1B2A;border:2px solid #C9A84C;border-radius:16px;padding:20px 24px 16px;box-shadow:0 8px 40px rgba(0,0,0,.7);min-width:300px;margin-bottom:10px;}
+#timer-panel.show{display:block;}
+#timer-display{font-size:80px;font-weight:900;color:#fff;text-align:center;letter-spacing:-2px;line-height:1;margin:8px 0 16px;font-variant-numeric:tabular-nums;}
+#timer-display.warn{color:#F0A050;}
+#timer-display.danger{color:#E85050;animation:td-blink .6s step-end infinite;}
+@keyframes td-blink{50%{opacity:.3;}}
+#timer-lbl{text-align:center;color:#8B95A1;font-size:12px;margin-bottom:10px;}
+.t-btns{display:flex;gap:8px;margin-bottom:14px;}
+.t-btns button{flex:1;padding:11px;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;}
+#tb-start{background:#C9A84C;color:#0D1B2A;}
+#tb-pause{background:#2A3A50;color:#90C8F0;}
+#tb-reset{background:#1A2C42;color:#8B95A1;}
+.t-presets{display:flex;flex-wrap:wrap;gap:6px;}
+.t-presets button{padding:5px 10px;border:1px solid #2A3A50;border-radius:20px;background:#141E30;color:#8B95A1;font-size:11px;cursor:pointer;}
+.t-presets button:hover,.t-presets button.on{border-color:#C9A84C;color:#F5C842;background:#1A2C42;}
+#t-bar-wrap{height:4px;background:#1E3050;border-radius:2px;margin-top:14px;}
+#t-bar{height:100%;background:#C9A84C;border-radius:2px;width:100%;transition:width .5s linear;}
 </style>
+
+<div id="gld-timer">
+  <div id="timer-panel">
+    <div id="timer-lbl">セクションを選んでください</div>
+    <div id="timer-display">--:--</div>
+    <div class="t-btns">
+      <button id="tb-start">▶ スタート</button>
+      <button id="tb-pause">⏸ 停止</button>
+      <button id="tb-reset">↺ リセット</button>
+    </div>
+    <div class="t-presets">
+      <button data-s="900"  data-l="討議① 前半 15分">討議①前半 15分</button>
+      <button data-s="900"  data-l="討議① 後半 15分">討議①後半 15分</button>
+      <button data-s="1800" data-l="討議② 討議 30分">討議②討議 30分</button>
+      <button data-s="1800" data-l="討議② 発表 30分">討議②発表 30分</button>
+      <button data-s="900"  data-l="討議② 質疑 15分">討議②質疑 15分</button>
+      <button data-s="900"  data-l="討議③ 整理 15分">討議③整理 15分</button>
+      <button data-s="900"  data-l="討議③ 発表 15分">討議③発表 15分</button>
+      <button data-s="2400" data-l="GW① 討議 40分">GW①討議 40分</button>
+      <button data-s="1200" data-l="GW① 発表 20分">GW①発表 20分</button>
+      <button data-s="2400" data-l="GW② ブレスト 40分">GW②ブレスト 40分</button>
+      <button data-s="1200" data-l="GW② 発表 20分">GW②発表 20分</button>
+    </div>
+    <div id="t-bar-wrap"><div id="t-bar"></div></div>
+  </div>
+  <button id="timer-fab">⏱ タイマー</button>
+</div>
+
+<script>
+(function(){
+  var total=0,remain=0,iv=null;
+  var disp=document.getElementById('timer-display');
+  var lbl=document.getElementById('timer-lbl');
+  var bar=document.getElementById('t-bar');
+  var panel=document.getElementById('timer-panel');
+  function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
+  function render(){
+    if(total===0){disp.textContent='--:--';return;}
+    disp.textContent=fmt(remain);
+    bar.style.width=(total>0?(remain/total*100):0)+'%';
+    disp.classList.remove('warn','danger');
+    bar.style.background='#C9A84C';
+    if(remain<=30&&remain>0){disp.classList.add('danger');bar.style.background='#E85050';}
+    else if(remain<=60){disp.classList.add('warn');bar.style.background='#F0A050';}
+  }
+  function stop(){clearInterval(iv);iv=null;}
+  document.getElementById('tb-start').onclick=function(){
+    if(iv||total===0)return;
+    if(remain===0)remain=total;
+    iv=setInterval(function(){if(remain<=0){stop();render();}else{remain--;render();}},1000);
+  };
+  document.getElementById('tb-pause').onclick=stop;
+  document.getElementById('tb-reset').onclick=function(){stop();remain=total;render();};
+  document.getElementById('timer-fab').onclick=function(){panel.classList.toggle('show');};
+  document.querySelectorAll('.t-presets button').forEach(function(btn){
+    btn.onclick=function(){
+      stop();
+      document.querySelectorAll('.t-presets button').forEach(function(b){b.classList.remove('on');});
+      this.classList.add('on');
+      total=remain=parseInt(this.dataset.s);
+      lbl.textContent=this.dataset.l;
+      render();
+    };
+  });
+  render();
+})();
+</script>
 </body>
 </html>
