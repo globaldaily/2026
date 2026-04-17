@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>チェックイン・感謝の共有</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+Antique:wght@300;400;500;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+--bg: #f5f2ec;
+--paper: #fbf9f4;
+--ink: #1a1815;
+--ink-soft: #45403a;
+--ink-mute: #807a71;
+--line: #d8d2c4;
+--line-soft: #e8e3d6;
+--accent: #8b1e1e;
+--accent-soft: #b08562;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+background: var(--bg);
+color: var(--ink);
+font-family: 'Zen Kaku Gothic Antique', 'Hiragino Sans', sans-serif;
+font-weight: 400;
+line-height: 1.75;
+letter-spacing: 0.02em;
+padding: 48px 24px 80px;
+background-image:
+radial-gradient(circle at 20% 10%, rgba(139, 30, 30, 0.015) 0%, transparent 40%),
+radial-gradient(circle at 80% 90%, rgba(176, 133, 98, 0.02) 0%, transparent 40%);
+}
+
+.page {
+max-width: 1080px;
+margin: 0 auto;
+background: var(--paper);
+padding: 72px 72px 80px;
+box-shadow: 0 1px 2px rgba(26,24,21,0.04), 0 12px 40px rgba(26,24,21,0.06);
+position: relative;
+}
+
+.page::before {
+content: "";
+position: absolute;
+inset: 12px;
+border: 1px solid var(--line-soft);
+pointer-events: none;
+}
+
+/* ========== MASTHEAD ========== */
+.masthead {
+display: flex;
+justify-content: space-between;
+align-items: flex-end;
+padding-bottom: 20px;
+border-bottom: 3px double var(--ink);
+margin-bottom: 48px;
+}
+
+.masthead-left {
+font-family: 'EB Garamond', serif;
+font-style: italic;
+font-size: 13px;
+color: var(--ink-mute);
+letter-spacing: 0.08em;
+}
+
+.masthead-left .edition {
+font-style: normal;
+font-weight: 500;
+text-transform: uppercase;
+letter-spacing: 0.18em;
+font-size: 11px;
+color: var(--ink-soft);
+margin-bottom: 4px;
+}
+
+.masthead-right {
+text-align: right;
+font-family: 'EB Garamond', serif;
+font-size: 12px;
+color: var(--ink-mute);
+letter-spacing: 0.1em;
+text-transform: uppercase;
+}
+
+/* ========== TITLE ========== */
+.title-block {
+text-align: center;
+margin-bottom: 64px;
+padding: 0 40px;
+}
+
+.kicker {
+font-family: 'EB Garamond', serif;
+font-style: italic;
+font-size: 14px;
+color: var(--accent);
+letter-spacing: 0.2em;
+text-transform: uppercase;
+margin-bottom: 20px;
+display: inline-block;
+padding: 0 16px;
+position: relative;
+}
+
+.kicker::before, .kicker::after {
+content: "—";
+position: absolute;
+top: 0;
+color: var(--ink-mute);
+}
+.kicker::before { left: -20px; }
+.kicker::after { right: -20px; }
+
+h1 {
+font-family: 'Shippori Mincho B1', serif;
+font-weight: 700;
+font-size: clamp(40px, 5.5vw, 64px);
+line-height: 1.15;
+letter-spacing: 0.04em;
+color: var(--ink);
+margin-bottom: 20px;
+}
+
+.title-sub {
+font-family: 'EB Garamond', serif;
+font-style: italic;
+font-size: 18px;
+color: var(--ink-soft);
+letter-spacing: 0.03em;
+}
+
+.title-rule {
+width: 60px;
+height: 1px;
+background: var(--ink);
+margin: 32px auto 0;
+}
+
+/* ========== LEAD ========== */
+.lead {
+max-width: 680px;
+margin: 0 auto 72px;
+font-size: 15px;
+line-height: 1.9;
+color: var(--ink-soft);
+text-align: justify;
+column-count: 1;
+position: relative;
+padding: 24px 32px;
+border-top: 1px solid var(--line);
+border-bottom: 1px solid var(--line);
+}
+
+.lead::first-letter {
+font-family: 'Shippori Mincho B1', serif;
+font-size: 52px;
+font-weight: 700;
+float: left;
+line-height: 0.9;
+margin: 6px 10px 0 0;
+color: var(--accent);
+}
+
+/* ========== SECTION HEADING ========== */
+.section-head {
+display: flex;
+align-items: baseline;
+gap: 16px;
+margin-bottom: 40px;
+padding-bottom: 14px;
+border-bottom: 1px solid var(--ink);
+}
+
+.section-head h2 {
+font-family: 'Shippori Mincho B1', serif;
+font-weight: 600;
+font-size: 28px;
+letter-spacing: 0.08em;
+color: var(--ink);
+}
+
+.section-head .eyebrow {
+font-family: 'EB Garamond', serif;
+font-style: italic;
+font-size: 13px;
+color: var(--ink-mute);
+letter-spacing: 0.12em;
+margin-left: auto;
+}
+
+/* ========== PRESENTER GRID ========== */
+.presenters {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 0;
+margin-bottom: 80px;
+border-top: 1px solid var(--line);
+border-left: 1px solid var(--line);
+}
+
+.presenter {
+padding: 32px 32px 28px;
+border-right: 1px solid var(--line);
+border-bottom: 1px solid var(--line);
+background: var(--paper);
+position: relative;
+}
+
+.presenter-head {
+display: flex;
+align-items: baseline;
+gap: 14px;
+margin-bottom: 20px;
+padding-bottom: 14px;
+border-bottom: 1px solid var(--line-soft);
+}
+
+.presenter-num {
+font-family: 'EB Garamond', serif;
+font-style: italic;
+font-size: 36px;
+font-weight: 400;
+color: var(--accent);
+line-height: 1;
+letter-spacing: -0.02em;
+}
+
+.presenter-name {
+font-family: 'Shippori Mincho B1', serif;
+font-weight: 600;
+font-size: 20px;
+color: var(--ink);
+letter-spacing: 0.04em;
+}
+
+.presenter-tag {
+margin-left: auto;
+font-family: 'EB Garamond', serif;
+font-style: italic;
+font-size: 11px;
+color: var(--ink-mute);
+letter-spacing: 0.1em;
+text-transform: uppercase;
+}
+
+.thanks-list {
+list-style: none;
+}
+
+.thanks-item {
+padding: 14px 0;
+border-bottom: 1px dashed var(--line-soft);
+}
+
+.thanks-item:last-child { border-bottom: none; }
+
+.recipient {
+font-family: 'Shippori Mincho B1', serif;
+font-weight: 600;
+font-size: 15px;
+color: var(--ink);
+margin-bottom: 4px;
+display: flex;
+align-items: center;
+gap: 8px;
+}
+
+.recipient::before {
+content: "";
+display: inline-block;
+width: 6px;
+height: 6px;
+background: var(--accent);
+transform: rotate(45deg);
+flex-shrink: 0;
+}
+
+.reason {
+font-size: 13px;
+line-height: 1.7;
+color: var(--ink-soft);
+padding-left: 14px;
+}
+
+/* ========== RANKING ========== */
+.ranking-section {
+margin-top: 72px;
+padding: 48px;
+background: var(--ink);
+color: var(--paper);
+position: relative;
+}
+
+.ranking-section::before {
+content: "";
+position: absolute;
+inset: 8px;
+border: 1px solid rgba(251, 249, 244, 0.15);
+pointer-events: none;
+}
+
+.ranking-head {
+text-align: center;
+margin-bottom: 40px;
+}
+
+.ranking-head .kicker {
+color: var(--accent-soft);
+}
+
+.ranking-head .kicker::before,
+.ranking-head .kicker::after {
+color: rgba(251,249,244,0.4);
+}
+
+.ranking-head h2 {
+font-family: 'Shippori Mincho B1', serif;
+font-weight: 600;
+font-size: 32px;
+color: var(--paper);
+letter-spacing: 0.08em;
+margin-top: 12px;
+}
+
+.ranking-head .ranking-sub {
+font-family: 'EB Garamond', serif;
+font-style: italic;
+font-size: 14px;
+color: rgba(251,249,244,0.6);
+margin-top: 8px;
+letter-spacing: 0.05em;
+}
+
+.ranking-list {
+max-width: 720px;
+margin: 0 auto;
+}
+
+.rank-row {
+display: grid;
+grid-template-columns: 80px 1fr auto;
+gap: 24px;
+align-items: center;
+padding: 18px 0;
+border-bottom: 1px solid rgba(251,249,244,0.12);
+}
+
+.rank-row:last-child { border-bottom: none; }
+
+.rank-row.top {
+background: rgba(176, 133, 98, 0.08);
+padding: 22px 16px;
+margin: 0 -16px;
+}
+
+.rank-num {
+font-family: 'EB Garamond', serif;
+font-size: 42px;
+font-style: italic;
+font-weight: 500;
+color: var(--accent-soft);
+line-height: 1;
+text-align: center;
+}
+
+.rank-row.top .rank-num {
+color: #d4a574;
+font-size: 48px;
+}
+
+.rank-name {
+font-family: 'Shippori Mincho B1', serif;
+font-weight: 600;
+font-size: 20px;
+color: var(--paper);
+letter-spacing: 0.05em;
+}
+
+.rank-row.top .rank-name {
+font-size: 22px;
+}
+
+.rank-from {
+font-size: 12px;
+color: rgba(251,249,244,0.55);
+margin-top: 3px;
+letter-spacing: 0.05em;
+font-family: 'EB Garamond', 'Zen Kaku Gothic Antique', sans-serif;
+font-style: italic;
+}
+
+.rank-count {
+text-align: right;
+}
+
+.count-num {
+font-family: 'EB Garamond', serif;
+font-size: 32px;
+font-style: italic;
+font-weight: 500;
+color: var(--paper);
+line-height: 1;
+}
+
+.count-label {
+font-size: 10px;
+color: rgba(251,249,244,0.5);
+letter-spacing: 0.2em;
+text-transform: uppercase;
+margin-top: 4px;
+font-family: 'EB Garamond', serif;
+}
+
+/* ========== CLOSING ========== */
+.closing {
+margin-top: 64px;
+text-align: center;
+padding-top: 32px;
+border-top: 3px double var(--ink);
+}
+
+.closing-mark {
+font-family: 'EB Garamond', serif;
+font-style: italic;
+font-size: 20px;
+color: var(--accent);
+letter-spacing: 0.2em;
+margin-bottom: 8px;
+}
+
+.closing-text {
+font-family: 'Shippori Mincho B1', serif;
+font-size: 14px;
+color: var(--ink-mute);
+letter-spacing: 0.1em;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+body { padding: 20px 12px; }
+.page { padding: 40px 24px; }
+.presenters { grid-template-columns: 1fr; }
+.ranking-section { padding: 32px 20px; }
+.rank-row { grid-template-columns: 56px 1fr auto; gap: 16px; }
+.lead { padding: 20px 12px; }
+}
+
+@media print {
+body { background: white; padding: 0; }
+.page { box-shadow: none; }
+.ranking-section { break-inside: avoid; }
+.presenter { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<article class="page">
+
+<!-- MASTHEAD -->
+<header class="masthead">
+<div class="masthead-left">
+<div class="edition">Internal Memo — No. 01</div>
+<div>Check-In Session</div>
+</div>
+<div class="masthead-right">
+2026 / Global Daily Co., Ltd.
+</div>
+</header>
+
+<!-- TITLE -->
+<div class="title-block">
+<span class="kicker">Gratitude &amp; Acknowledgement</span>
+<h1>感謝を、伝える。</h1>
+<div class="title-sub">Check-in — Eight voices, twenty-four names.</div>
+<div class="title-rule"></div>
+</div>
+
+<!-- LEAD -->
+<p class="lead">
+全8名の発表者が、それぞれ3名ずつに感謝を伝えたチェックインのまとめ。普段なかなか言葉にされない「見えない貢献」や「支えてくれている存在」が、ここに記録されている。営業・メディア・経理・清掃・広報——部署を越えて、誰かが誰かを見ている。その事実を可視化した記録である。
+</p>
+
+<!-- PRESENTERS SECTION -->
+<div class="section-head">
+<h2>発表者と、その言葉</h2>
+<span class="eyebrow">Eight Speakers</span>
+</div>
+
+<div class="presenters">
+
+<!-- 1 -->
+<div class="presenter">
+<div class="presenter-head">
+<span class="presenter-num">01</span>
+<span class="presenter-name">吉田さん</span>
+<span class="presenter-tag">Sales</span>
+</div>
+<ul class="thanks-list">
+<li class="thanks-item">
+<div class="recipient">アンディさん</div>
+<div class="reason">最終面接での採用、入社後も公私で親身に相談に乗ってくれる恩人。Japankuru案件を上半期中に最低3本獲得すると宣言。</div>
+</li>
+<li class="thanks-item">
+<div class="recipient">ワンさん</div>
+<div class="reason">同チームで提案を真剣に一緒に考えてくれる。数字で迷惑をかけた時も、前任者が抜けた時も励まし補ってくれた。</div>
+</li>
+<li class="thanks-item">
+<div class="recipient">笹本さん</div>
+<div class="reason">観察力・提案力において、目指すべき「尊敬する営業スタイル」の持ち主。</div>
+</li>
+</ul>
+</div>
+
+<!-- 2 -->
+<div class="presenter">
+<div class="presenter-head">
+<span class="presenter-num">02</span>
+<span class="presenter-name">田中さん</span>
+<span class="presenter-tag">Sales</span>
+</div>
+<ul class="thanks-list">
+<li class="thanks-item">
+<div class="recipient">ジュリさん（広報）</div>
+<div class="reason">HP基盤整備とPDCAが問い合わせ増と会社の信用度向上に直結。毎日感謝している。</div>
+</li>
+<li class="thanks-item">
+<div class="recipient">山中さん（メディア）</div>
+<div class="reason">仕事が非常に速く、要望以上のことまで汲み取って対応してくれる。</div>
+</li>
+<li class="thanks-item">
+<div class="recipient">ウィルケンさん（メディア）</div>
+<div class="reason">増加中の台湾関連案件で、無理難題にも柔軟かつスピーディに対応してくれている。</div>
+</li>
+</ul>
+</div>
+
+<!-- 3 -->
+<div class="presenter">
+<div class="presenter-head">
+<span class="presenter-num">03</span>
+<span class="presenter-name">谷本さん</span>
+<span class="presenter-tag">Operations</span>
+</div>
+<ul class="thanks-list">
+<li class="thanks-item">
+<div class="recipient">荒井さん</div>
+<div class="reason">会議前の立ち話で自身の名前を出してくれたことが採用のきっかけに。人生の大きな転機を与えてくれた。</div>
+</li>
+<li class="thanks-item">
+<div class="recipient">大坂さん・田辺さん・井出さん</div>
+<div class="reason">「年齢が上だからしっかりしているだろう」と信じて採用・面接してくれた。今後も清掃業務に真摯に取り組むと宣言。</div>
+</li>
+</ul>
+</div>
+
+<!-- 4 -->
+<div class="presenter">
+<div class="presenter-head">
+<span class="presenter-num">04</span>
+<span class="presenter-name">ワンさん</span>
+<span class="presenter-tag">Sales</span>
+</div>
+<ul class="thanks-list">
+<li class="thanks-item">
+<div class="recipient">大河原さん（経理）</div>
+<div class="reason">裏から皆をサポートしてくれているが、感謝を伝える機会が少ないため、この場を借りて。</div>
+</li>
+<li class="thanks-item">
+<div class="recipient">なおみさん</div>
+<div class="reason">直近のミーティングで感情的になった際、後からフォローを入れてくれた。</div>
+</li>
+<li class="thanks-item">
+<div class="recipient">井出さん</div>
+<div class="reason">入社以来同じチームでフォローしてもらっている。相談すれば必ず道筋が見える。</div>
+</li>
+</ul>
+</div>
+
+<!-- 5 -->
+<div class="presenter">
+<div class="presenter-head">
+<span class="presenter-num">05</span>
+<span class="presenter-name">ソフィアさん</span>
+<span class="presenter-tag">Team Lead</span>
+</div>
+<ul class="thanks-list">
+<li class="thanks-item">
+<div class="recipient">自身のチームメンバー</div>
+<div class="reason">リーダー就任数ヶ月の自分を助け、協力してくれていることへの感謝。</div>
+</li>
+<li class="thanks-item">
+<div class="recipient">ジュリさん</div>
+<div class="reason">Japankuru裏側のCMSサポート、HPリニューアルなど、見えにくい部分で多大なサポート。</div>
+</li>
+<li class="thanks-item">
+<div class="recipient">リコーさん／ウィルケンさん</div>
+<div class="reason">何ヶ月もワイガヤに協力してくれた。アラジンの話や英語コミュニケーションも楽しい。</div>
+</li>
+</ul>
+</div>
+
+<!-- 6 -->
+<div class="presenter">
+<div class="presenter-head">
+<span class="presenter-num">06</span>
+<span class="presenter-name">こうさん</span>
+<span class="presenter-tag">Media</span>
+</div>
+<ul class="thanks-list">
+<li class="thanks-item">
+<div class="recipient">久米さん＋大久保さん（SPC部門）</div>
+<div class="reason">仕事の覚えが非常に早く、進行担当案件ではこれまでトラブルが一切ない。</div>
+</li>
+<li class="thanks-item">
+<div class="recipient">ワンさん</div>
+<div class="reason">台湾市場の企画立案・キャスティング（ケビンさん招聘等）で営業とメディアを繋ぎ、今期売上に大きく貢献。</div>
+</li>
+<li class="thanks-item">
+<div class="recipient">井出さん</div>
+<div class="reason">営業トップ層でありながらトラブル時も柔軟に対応。同い年だが学ぶべきところが多い。</div>
+</li>
+</ul>
+</div>
+
+<!-- 7 -->
+<div class="presenter">
+<div class="presenter-head">
+<span class="presenter-num">07</span>
+<span class="presenter-name">小池さん</span>
+<span class="presenter-tag">Sales</span>
+</div>
+<ul class="thanks-list">
+<li class="thanks-item">
+<div class="recipient">下尾さん</div>
+<div class="reason">キデイランド等の案件で「他社ではだめ、自分が入り込んで何とかしたい」という新卒のような情熱が素晴らしい。</div>
+</li>
+<li class="thanks-item">
+<div class="recipient">佐久間さん</div>
+<div class="reason">フィードバック・行動が早く、カールツァイス契約など圧倒的な行動力。</div>
+</li>
+<li class="thanks-item">
+<div class="recipient">はくさん</div>
+<div class="reason">中国市場・RED（小紅書）における戦略とマーケティングの知見が圧倒的。</div>
+</li>
+</ul>
+</div>
+
+<!-- 8 -->
+<div class="presenter">
+<div class="presenter-head">
+<span class="presenter-num">08</span>
+<span class="presenter-name">三浦さん</span>
+<span class="presenter-tag">Sales · 2nd Yr</span>
+</div>
+<ul class="thanks-list">
+<li class="thanks-item">
+<div class="recipient">アンディさん</div>
+<div class="reason">入社時から気にかけてくれている。Japankuru案件の獲得時も柔軟に対応してくれた。</div>
+</li>
+<li class="thanks-item">
+<div class="recipient">ジュリさん</div>
+<div class="reason">JT企画で進行が遅れて迷惑をかけた際、LPやPOPの作成で助けてくれた。</div>
+</li>
+<li class="thanks-item">
+<div class="recipient">大久保さん</div>
+<div class="reason">いるだけで場の空気が良くなるムードメーカー。ランチテーブル文化を復活させてくれた。</div>
+</li>
+</ul>
+</div>
+
+</div>
+
+<!-- RANKING -->
+<section class="ranking-section">
+<div class="ranking-head">
+<span class="kicker">Most Acknowledged</span>
+<h2>最も名前が挙がった人々</h2>
+<div class="ranking-sub">Named across eight presentations</div>
+</div>
+
+<div class="ranking-list">
+
+<div class="rank-row top">
+<div class="rank-num">I</div>
+<div>
+<div class="rank-name">ジュリさん</div>
+<div class="rank-from">from 田中 · ソフィア · 三浦</div>
+</div>
+<div class="rank-count">
+<div class="count-num">3</div>
+<div class="count-label">Mentions</div>
+</div>
+</div>
+
+<div class="rank-row top">
+<div class="rank-num">I</div>
+<div>
+<div class="rank-name">井出さん</div>
+<div class="rank-from">from 谷本 · ワン · こう</div>
+</div>
+<div class="rank-count">
+<div class="count-num">3</div>
+<div class="count-label">Mentions</div>
+</div>
+</div>
+
+<div class="rank-row">
+<div class="rank-num">II</div>
+<div>
+<div class="rank-name">アンディさん</div>
+<div class="rank-from">from 吉田 · 三浦</div>
+</div>
+<div class="rank-count">
+<div class="count-num">2</div>
+<div class="count-label">Mentions</div>
+</div>
+</div>
+
+<div class="rank-row">
+<div class="rank-num">II</div>
+<div>
+<div class="rank-name">ワンさん</div>
+<div class="rank-from">from 吉田 · こう</div>
+</div>
+<div class="rank-count">
+<div class="count-num">2</div>
+<div class="count-label">Mentions</div>
+</div>
+</div>
+
+<div class="rank-row">
+<div class="rank-num">II</div>
+<div>
+<div class="rank-name">ウィルケンさん</div>
+<div class="rank-from">from 田中 · ソフィア</div>
+</div>
+<div class="rank-count">
+<div class="count-num">2</div>
+<div class="count-label">Mentions</div>
+</div>
+</div>
+
+<div class="rank-row">
+<div class="rank-num">II</div>
+<div>
+<div class="rank-name">大久保さん</div>
+<div class="rank-from">from こう · 三浦</div>
+</div>
+<div class="rank-count">
+<div class="count-num">2</div>
+<div class="count-label">Mentions</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- CLOSING -->
+<div class="closing">
+<div class="closing-mark">— 了 —</div>
+<div class="closing-text">Global Daily Co., Ltd. &nbsp;·&nbsp; Internal Record</div>
+</div>
+
+</article>
+
+</body>
+</html>
+
