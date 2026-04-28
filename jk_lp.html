@@ -58,7 +58,7 @@
     fbq('init', 'YOUR_PIXEL_ID');
     fbq('track', 'PageView');
   </script>
-  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/></noscript>
+  <noscript><img loading="lazy" height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/></noscript>
 
   <style>
     :root {
@@ -300,6 +300,189 @@
       font-weight: 500;
     }
     .hero-meta svg { flex-shrink: 0; }
+
+    /* Hero CTA 신뢰 시그널 */
+    .hero-cta-trust {
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .hcc-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 600;
+    }
+    .hcc-item:first-child { color: var(--accent); font-weight: 700; }
+    .hcc-divider { color: var(--line); }
+
+    /* ===== Sticky Bottom CTA (모바일 전용) ===== */
+    .sticky-cta {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 14px 20px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      box-shadow: 0 -4px 20px rgba(11,18,32,.18);
+      transition: background .2s ease;
+    }
+    .sticky-cta:hover { background: #1a3acc; }
+    .sticky-cta-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.3;
+    }
+    .sticky-cta-text strong {
+      font-family: var(--t-display);
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -.01em;
+    }
+    .sticky-cta-text small {
+      font-size: 11px;
+      color: rgba(255,255,255,.85);
+      margin-top: 2px;
+    }
+    .sticky-cta-arrow {
+      font-size: 20px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    @media (max-width: 768px) {
+      .sticky-cta { display: flex; }
+      /* 모바일에서 footer 위에 sticky 공간 확보 */
+      body { padding-bottom: 70px; }
+    }
+
+    /* ===== 課題 체크리스트 섹션 ===== */
+    .challenges-section {
+      padding: 80px 0;
+      background: var(--bg);
+    }
+    .challenges-card {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 48px 48px 40px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 16px 40px rgba(11,18,32,.06);
+    }
+    .challenges-head {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .challenges-head .micro-label {
+      display: inline-block;
+      font-family: var(--t-display);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .challenges-head h2 {
+      margin: 0;
+      font-family: var(--t-display);
+      font-size: clamp(24px, 3vw, 34px);
+      font-weight: 700;
+      line-height: 1.35;
+      letter-spacing: -.03em;
+      color: var(--ink);
+    }
+    .challenges-head h2 em {
+      font-style: normal;
+      color: var(--accent);
+      font-weight: 800;
+    }
+    .challenges-sub {
+      margin: 14px 0 0;
+      font-size: 14px;
+      color: var(--slate);
+      line-height: 1.7;
+    }
+    .challenges-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 32px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px 24px;
+    }
+    .challenges-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      background: var(--bg-soft);
+      border-radius: 10px;
+      transition: background .2s ease, transform .2s ease;
+      cursor: default;
+    }
+    .challenges-list li:hover {
+      background: var(--accent-bg);
+      transform: translateX(2px);
+    }
+    .ch-check {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      display: grid;
+      place-items: center;
+      background: #fff;
+      border: 1.5px solid var(--line);
+      border-radius: 4px;
+      font-size: 14px;
+      color: var(--accent);
+      font-weight: 700;
+      margin-top: 1px;
+      transition: all .2s ease;
+    }
+    .challenges-list li:hover .ch-check {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
+    }
+    .ch-text {
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--ink-2);
+    }
+    .ch-text strong {
+      color: var(--ink);
+      font-weight: 700;
+    }
+    .challenges-cta {
+      display: block;
+      max-width: 320px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      background: var(--ink);
+      color: #fff;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 999px;
+      font-family: var(--t-display);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .02em;
+      transition: background .2s ease, transform .2s ease;
+    }
+    .challenges-cta:hover {
+      background: var(--accent);
+      transform: translateY(-2px);
+    }
 
     /* Hero stats */
     .hero-stats {
@@ -3031,6 +3214,8 @@
       .dist-bignum .unit { font-size: 18px; }
     }
     @media (max-width: 580px) {
+      .challenges-card { padding: 32px 24px; }
+      .challenges-list { grid-template-columns: 1fr; gap: 10px; }
       .container { width: min(100% - 32px, var(--max)); }
       .hero h1 { font-size: 34px; }
       .hero-stats { grid-template-columns: 1fr; }
@@ -3187,7 +3372,7 @@
         <a href="#contact">資料請求</a>
       </nav>
       <a href="#contact" class="btn btn-primary" data-cta="header">
-        無料で相談する
+        資料DL
         <span class="arrow">→</span>
       </a>
     </div>
@@ -3217,12 +3402,19 @@
           </p>
           <div class="hero-ctas">
             <a href="#contact" class="btn btn-primary" data-cta="hero-primary">
-              戦略レポートを無料DL
+              資料を無料DL
               <span class="arrow">→</span>
             </a>
             <a href="https://www.gldaily.com/services/japankuru/" class="btn btn-ghost" data-cta="hero-detail">
               サービス詳細を見る
             </a>
+          </div>
+          <div class="hero-cta-trust">
+            <span class="hcc-item">✓ 1分で完了</span>
+            <span class="hcc-divider">·</span>
+            <span class="hcc-item">PDF即時送付</span>
+            <span class="hcc-divider">·</span>
+            <span class="hcc-item">営業電話なし</span>
           </div>
           <div class="hero-meta">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-12V4l-8-2-8 2v6c0 8 8 12 8 12z"/></svg>
@@ -3362,7 +3554,7 @@
               </div>
 
               <!-- 실제 SNS 캡처 들어올 자리:
-                   <img src="/lp/japankuru-inbound/sns-post.jpg"
+                   <img loading="lazy" src="/lp/japankuru-inbound/sns-post.jpg"
                         alt="JAPANKURU SNS Post" /> -->
             </div>
           </div>
@@ -3722,6 +3914,48 @@
       </div>
     </section>
 
+    <!-- ========== 課題 체크리스트 ========== -->
+    <section class="challenges-section">
+      <div class="container">
+        <div class="challenges-card">
+          <div class="challenges-head">
+            <span class="micro-label">Common Challenges</span>
+            <h2>こんな課題、<em>ありませんか?</em></h2>
+            <p class="challenges-sub">一つでも当てはまれば、JAPANKURUの資料がきっとお役に立てます。</p>
+          </div>
+          <ul class="challenges-list">
+            <li>
+              <span class="ch-check">□</span>
+              <span class="ch-text">多言語SNS運用が手探りで、<strong>成果が出ているのか分からない</strong></span>
+            </li>
+            <li>
+              <span class="ch-check">□</span>
+              <span class="ch-text">翻訳発注しても、<strong>現地で反応がない</strong></span>
+            </li>
+            <li>
+              <span class="ch-check">□</span>
+              <span class="ch-text">インバウンド予算の<strong>効果測定・KPI設計</strong>が難しい</span>
+            </li>
+            <li>
+              <span class="ch-check">□</span>
+              <span class="ch-text">国別の戦略を立てる<strong>ネイティブ人材がいない</strong></span>
+            </li>
+            <li>
+              <span class="ch-check">□</span>
+              <span class="ch-text">単発の施策ばかりで、<strong>ブランド資産として残らない</strong></span>
+            </li>
+            <li>
+              <span class="ch-check">□</span>
+              <span class="ch-text">店頭・EC送客まで<strong>一気通貫で設計</strong>したい</span>
+            </li>
+          </ul>
+          <a href="#contact" class="challenges-cta" data-cta="challenges">
+            → まずは資料で確認する
+          </a>
+        </div>
+      </div>
+    </section>
+
     <!-- ========== Service (Compact) ========== -->
     <section id="service" class="services-section">
       <div class="container">
@@ -3807,14 +4041,14 @@
 
       <!-- 배경 8개국 국기 (가장 뒤, 크고 흐릿하게) -->
       <div class="flag-bg-layer" aria-hidden="true">
-        <span class="flag-bg flag-bg-1"><img src="https://flagcdn.com/w320/kr.png" alt=""/></span>
-        <span class="flag-bg flag-bg-2"><img src="https://flagcdn.com/w320/tw.png" alt=""/></span>
-        <span class="flag-bg flag-bg-3"><img src="https://flagcdn.com/w320/hk.png" alt=""/></span>
-        <span class="flag-bg flag-bg-4"><img src="https://flagcdn.com/w320/cn.png" alt=""/></span>
-        <span class="flag-bg flag-bg-5"><img src="https://flagcdn.com/w320/th.png" alt=""/></span>
-        <span class="flag-bg flag-bg-6"><img src="https://flagcdn.com/w320/vn.png" alt=""/></span>
-        <span class="flag-bg flag-bg-7"><img src="https://flagcdn.com/w320/us.png" alt=""/></span>
-        <span class="flag-bg flag-bg-8"><img src="https://flagcdn.com/w320/jp.png" alt=""/></span>
+        <span class="flag-bg flag-bg-1"><img loading="lazy" src="https://flagcdn.com/w320/kr.png" alt=""/></span>
+        <span class="flag-bg flag-bg-2"><img loading="lazy" src="https://flagcdn.com/w320/tw.png" alt=""/></span>
+        <span class="flag-bg flag-bg-3"><img loading="lazy" src="https://flagcdn.com/w320/hk.png" alt=""/></span>
+        <span class="flag-bg flag-bg-4"><img loading="lazy" src="https://flagcdn.com/w320/cn.png" alt=""/></span>
+        <span class="flag-bg flag-bg-5"><img loading="lazy" src="https://flagcdn.com/w320/th.png" alt=""/></span>
+        <span class="flag-bg flag-bg-6"><img loading="lazy" src="https://flagcdn.com/w320/vn.png" alt=""/></span>
+        <span class="flag-bg flag-bg-7"><img loading="lazy" src="https://flagcdn.com/w320/us.png" alt=""/></span>
+        <span class="flag-bg flag-bg-8"><img loading="lazy" src="https://flagcdn.com/w320/jp.png" alt=""/></span>
       </div>
 
       <!-- 배경 채널 로고 산재 (메인 진하게, 보조 흐릿하게) -->
@@ -4206,7 +4440,7 @@
                   radial-gradient(circle at 30% 30%, rgba(252,165,165,.6), transparent 55%),
                   linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%);">
                   <span class="making-emoji">📷</span>
-                  <!-- <img src="/lp/japankuru-inbound/process/shoot-01.jpg" alt="On-site shoot" /> -->
+                  <!-- <img loading="lazy" src="/lp/japankuru-inbound/process/shoot-01.jpg" alt="On-site shoot" /> -->
                 </div>
                 <div class="making-cap">on-site, Tokyo</div>
               </div>
@@ -4454,7 +4688,7 @@
           </div>
 
           <button type="submit" class="form-submit" data-cta="form-submit">
-            資料を受け取る →
+            無料で資料を受け取る →
           </button>
 
           <p class="form-fineprint">
@@ -4465,6 +4699,15 @@
     </section>
 
   </main>
+
+  <!-- ========== Sticky Bottom CTA (모바일 전용) ========== -->
+  <a href="#contact" class="sticky-cta" data-cta="sticky-mobile">
+    <span class="sticky-cta-text">
+      <strong>無料で資料DL</strong>
+      <small>1分で完了 · 営業電話なし</small>
+    </span>
+    <span class="sticky-cta-arrow">→</span>
+  </a>
 
   <!-- ========== Footer ========== -->
   <footer class="lp-footer">
