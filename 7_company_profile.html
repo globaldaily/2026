@@ -3691,7 +3691,7 @@ HQ & Branches / HOPE Co. / LIBERTY Co.
 <div style="font-size:16px;font-weight:600;margin-bottom:16px">ปีแห่งประสบการณ์</div>
 <div style="width:50px;height:2px;background:#C41E3A;margin-bottom:16px"></div>
 <div style="font-size:14px;color:rgba(255,255,255,.6);line-height:1.8;margin-bottom:14px">ในฐานะบริษัท PR สำหรับนักท่องเที่ยวต่างชาติสู่ญี่ปุ่น<br>ด้วยกลยุทธ์ PR เฉพาะทาง<br>เสนอโปรโมชันที่เหมาะสมที่สุด</div>
-<div style="font-size:20px;font-weight:700;margin-bottom:8px">ในอุตสาหกรรมนักท่องเที่ยวต่างชา</div>
+<div style="font-size:20px;font-weight:700;margin-bottom:8px">ในอุตสาหกรรมนักท่องเที่ยวต่างชาติ</div>
 <div style="font-size:44px;font-weight:900;color:#C41E3A;padding:8px 20px;border:3px solid #C41E3A">「ผู้บุกเบิก」</div>
 <div style="margin-top:18px;font-size:12px;color:rgba(255,255,255,.5)">DAC Group ธุรกิจโฆษณาระดับโลก</div>
 </div>
@@ -16204,6 +16204,20 @@ function switchLang(lang, noHistory){
   // data-i18n 요소 텍스트 교체
   applyTranslations(lang);
 
+  // vertical-text 언어별 업데이트
+  (function(){
+    var vtMap = {
+      'en':  ["Cover", "Contents", "DAC Group", "Companies", "About", "Philosophy", "CEO Message", "Inbound", "Growth", "Why Us", "Strengths", "History 1", "History 2", "Organization", "Service 1", "Service 2", "JAPANKURU", "korekoko", "Cases 1", "Cases 2", "Cases 3", "How To Start", "Partnership", "Contact"],
+      'zh':  ["封面", "目录", "DAC集团", "集团公司", "公司概要", "企业理念", "代表致辞", "入境市场", "业务成长", "为何选择我们", "公司特色", "发展历程 1", "发展历程 2", "组织架构", "服务 1", "服务 2", "JAPANKURU", "korekoko", "案例 1", "案例 2", "案例 3", "合作流程", "合作模式", "联系我们"],
+      'tw':  ["封面", "目錄", "DAC集團", "集團公司", "公司概要", "企業理念", "代表致辭", "入境市場", "業務成長", "為何選擇我們", "公司特色", "發展歷程 1", "發展歷程 2", "組織架構", "服務 1", "服務 2", "JAPANKURU", "korekoko", "案例 1", "案例 2", "案例 3", "合作流程", "合作模式", "聯繫我們"],
+      'ko':  ["표지", "목차", "DAC그룹", "그룹계열사", "회사개요", "기업철학", "대표메시지", "인바운드시장", "사업성장", "선택받는이유", "당사특징", "연혁 1", "연혁 2", "조직", "서비스 1", "서비스 2", "JAPANKURU", "korekoko", "사례 1", "사례 2", "사례 3", "의뢰흐름", "파트너십", "문의"],
+      'th':  ["หน้าปก", "สารบัญ", "DAC Group", "บริษัทในกลุ่ม", "ภาพรวมบริษัท", "ปรัชญาองค์กร", "สารจากผู้บริหาร", "ตลาดอินบาวด์", "การเติบโต", "ทำไมถึงถูกเลือก", "จุดเด่นของเรา", "ประวัติ 1", "ประวัติ 2", "โครงสร้างองค์กร", "บริการ 1", "บริการ 2", "JAPANKURU", "korekoko", "กรณีศึกษา 1", "กรณีศึกษา 2", "กรณีศึกษา 3", "ขั้นตอนการทำงาน", "Partnership", "ติดต่อเรา"]
+    };
+    var jaSlideData = ['表紙', '目次', 'DACグループ', 'グループ会社', '会社概要', 'フィロソフィー', '代表メッセージ', 'インバウンド市場', '事業成長', 'なぜ選ばれるのか', '当社の特徴', '沿革 前半', '沿革 後半', '組織', 'サービス 1', 'サービス 2', 'JAPANKURU', 'korekoko', '事例 1', '事例 2', '事例 3', 'ご依頼の流れ', 'Partnership', 'お問い合わせ'];
+    var vts = document.querySelectorAll('.vertical-text');
+    var texts = (lang === 'ja') ? jaSlideData : (vtMap[lang] || jaSlideData);
+    vts.forEach(function(el, i){ if(texts[i]) el.textContent = texts[i]; });
+  })();
   // 미니맵 텍스트 업데이트
   const mapData = lang === 'zh' ? window.i18n.zh.map : lang === 'tw' ? window.i18n.tw.map : lang === 'ko' ? window.i18n.ko.map : lang === 'th' ? window.i18n.th.map : lang === 'id' ? window.i18n.id.map : lang === 'en' ? window.i18n.en_map : null;
   if(mapData){
