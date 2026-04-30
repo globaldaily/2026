@@ -34,7 +34,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#060810;font-family:
 .footer-left{font-size:12px;color:rgba(255,255,255,.25);letter-spacing:.04em}
 .footer-right{display:flex;align-items:center;gap:16px;height:100%;position:relative}
 .page-num{width:34px;height:34px;background:transparent;border:1px solid rgba(196,30,58,.5);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Montserrat;font-size:14px;font-weight:600;color:rgba(196,30,58,.8)}
-.vertical-text{font-family:Montserrat;font-size:8px;color:rgba(255,255,255,.15);writing-mode:vertical-rl;letter-spacing:.12em;position:absolute;bottom:55px;right:18px;line-height:1}
+.vertical-text{font-family:Montserrat;font-size:9px;color:rgba(255,255,255,.2);writing-mode:horizontal-tb;letter-spacing:.1em;position:absolute;bottom:16px;left:50%;transform:translateX(-50%);line-height:1;white-space:nowrap}
 
 /* TYPOGRAPHY */
 .title-hero{font-size:64px;font-weight:800;line-height:1.2}
@@ -911,17 +911,16 @@ body.light-mode #slide-1 [style*="color: rgba(255,255,255"]{color:rgba(255,255,2
     display: none !important;
   }
   #slide-8 .s8-ceo-tw:not(.body-hidden) {
-    position: absolute !important;
-    top: 70px !important;
-    bottom: 55px !important;
-    left: 0 !important;
-    right: 0 !important;
-    width: 100% !important;
-    height: auto !important;
     display: flex !important;
     flex-direction: row !important;
+    flex: 1 !important;
+    min-height: 0 !important;
+    height: 595px !important;
+    max-height: 595px !important;
+    width: 100% !important;
     align-items: stretch !important;
     padding: 0 !important;
+    position: relative !important;
     z-index: 2;
   }
 
@@ -1026,6 +1025,21 @@ body.light-mode #slide-partner .case-card-hover:hover{background:rgba(0,0,0,.04)
   #slide-8 .body-th:not(.body-hidden) > div:last-child {
     justify-content: center !important;
   }
+
+  /* 공유 버튼 */
+  .share-btn {
+    background: none;
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 6px;
+    color: rgba(255,255,255,.5);
+    font-size: 14px;
+    cursor: pointer;
+    padding: 4px 8px;
+    transition: all .2s;
+    line-height: 1;
+  }
+  .share-btn:hover { background: rgba(255,255,255,.08); color: #fff; border-color: rgba(255,255,255,.3); }
+
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -15687,6 +15701,36 @@ document.addEventListener('keydown',e=>{
   else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prevSlide()}
   else if(e.key==='Home'){e.preventDefault();show(0)}
   else if(e.key==='End'){e.preventDefault();show(total-1)}
+  // 추가 단축키 (입력 중일 때 무시)
+  else if(!e.target.matches('input,textarea,select')){
+    if(e.key==='f'||e.key==='F'){
+      e.preventDefault();
+      if(!document.fullscreenElement) document.documentElement.requestFullscreen().catch(()=>{});
+      else document.exitFullscreen();
+    }
+    else if(e.key==='m'||e.key==='M'){e.preventDefault();toggleMinimap();}
+    else if(e.key==='l'||e.key==='L'){
+      e.preventDefault();
+      var lm=document.querySelector('.lang-menu');
+      if(lm) lm.style.display=lm.style.display==='block'?'none':'block';
+    }
+    else if(e.key==='s'||e.key==='S'){
+      e.preventDefault();
+      var url=location.href.split('?')[0]+'?slide='+(cur+1);
+      navigator.clipboard.writeText(url).then(function(){
+        var toast=document.createElement('div');
+        toast.textContent='🔗 URLをコピーしました';
+        toast.style.cssText='position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(196,30,58,.92);color:#fff;padding:8px 20px;border-radius:20px;font-size:13px;z-index:9999;pointer-events:none;backdrop-filter:blur(8px)';
+        document.body.appendChild(toast);
+        setTimeout(function(){toast.remove();},2000);
+      });
+    }
+    else if(e.key==='Escape'){
+      e.preventDefault();
+      var mm=document.getElementById('minimap');
+      if(mm&&mm.classList.contains('open')) toggleMinimap();
+    }
+  }
 });
 let tx=0;
 document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX});
@@ -16279,6 +16323,38 @@ document.addEventListener('click', function(e){
 // 언어 전환 메인 함수
 
 
+
+// ── 키보드 단축키 도움말 (최초 1회) ──
+(function(){
+  if(sessionStorage.getItem('kbHintShown')) return;
+  sessionStorage.setItem('kbHintShown','1');
+  setTimeout(function(){
+    var hint = document.createElement('div');
+    hint.id = 'kb-hint';
+    hint.innerHTML = [
+      '<div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.12em;margin-bottom:8px">KEYBOARD SHORTCUTS</div>',
+      '<div style="display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:11px;color:rgba(255,255,255,.6)">',
+      '<kbd>←</kbd><span>前のスライド</span>',
+      '<kbd>→</kbd><span>次のスライド</span>',
+      '<kbd>Home</kbd><span>最初のスライド</span>',
+      '<kbd>End</kbd><span>最後のスライド</span>',
+      '<kbd>M</kbd><span>インデックス開閉</span>',
+      '<kbd>L</kbd><span>言語切替メニュー</span>',
+      '<kbd>F</kbd><span>全画面表示</span>',
+      '<kbd>S</kbd><span>このスライドのURLをコピー</span>',
+      '</div>',
+      '<div style="margin-top:8px;font-size:10px;color:rgba(255,255,255,.3);text-align:right">クリックで閉じる</div>'
+    ].join('');
+    hint.style.cssText = 'position:fixed;bottom:80px;right:20px;background:rgba(10,10,20,.92);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:14px 18px;z-index:9999;backdrop-filter:blur(12px);box-shadow:0 8px 32px rgba(0,0,0,.5);cursor:pointer;max-width:280px';
+    hint.querySelector('kbd') && hint.querySelectorAll('kbd').forEach(function(k){
+      k.style.cssText='display:inline-block;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:4px;padding:1px 6px;font-size:10px;font-family:monospace;color:#fff;margin-right:2px';
+    });
+    document.body.appendChild(hint);
+    hint.onclick = function(){ hint.remove(); };
+    setTimeout(function(){ if(hint.parentNode) hint.style.opacity='0'; hint.style.transition='opacity .5s'; setTimeout(function(){hint.remove()},500); }, 6000);
+  }, 2500);
+})();
+
 function switchLang(lang, noHistory){
   currentLang = lang;
 
@@ -16338,6 +16414,7 @@ function switchLang(lang, noHistory){
     var vts = document.querySelectorAll('.vertical-text');
     var texts = (lang === 'ja') ? jaSlideData : (vtMap[lang] || jaSlideData);
     vts.forEach(function(el, i){ if(texts[i]) el.textContent = texts[i]; });
+
   })();
   // 미니맵 텍스트 업데이트
   const mapData = lang === 'zh' ? window.i18n.zh.map : lang === 'tw' ? window.i18n.tw.map : lang === 'ko' ? window.i18n.ko.map : lang === 'th' ? window.i18n.th.map : lang === 'id' ? window.i18n.id.map : lang === 'en' ? window.i18n.en_map : null;
