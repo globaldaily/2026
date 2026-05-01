@@ -1188,6 +1188,11 @@
       object-fit: cover;
       object-position: center 50%;  /* 사진의 어느 부분을 가운데 두느냐 (0% = 위, 100% = 아래) */
       display: block;
+      animation: kenBurnsReach 24s ease-in-out infinite alternate;
+    }
+    @keyframes kenBurnsReach {
+      0%   { transform: scale(1.05) translate(0, 0); }
+      100% { transform: scale(1.14) translate(-2%, -1.5%); }
     }
     .reach-overlay {
       position: absolute;
@@ -1340,10 +1345,20 @@
       object-fit: cover;
       object-position: center 50%;
       display: block;
-      transition: transform 8s ease-out;
+      animation: kenBurnsStripA 20s ease-in-out infinite alternate;
     }
-    .photo-strip:hover img {
-      transform: scale(1.05);
+    /* 두 번째 photo-strip은 반대 방향으로 변주 (단조롭지 않게) */
+    .photo-strip-section:nth-of-type(2) .photo-strip img,
+    .photo-strip-section ~ .photo-strip-section .photo-strip img {
+      animation: kenBurnsStripB 22s ease-in-out infinite alternate;
+    }
+    @keyframes kenBurnsStripA {
+      0%   { transform: scale(1.04) translate(0, 0); }
+      100% { transform: scale(1.1) translate(1.5%, 0); }
+    }
+    @keyframes kenBurnsStripB {
+      0%   { transform: scale(1.04) translate(0, 0); }
+      100% { transform: scale(1.1) translate(-1.5%, 0); }
     }
     .photo-strip-overlay {
       position: absolute;
