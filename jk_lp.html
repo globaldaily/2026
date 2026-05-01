@@ -837,6 +837,12 @@
       height: 100%;
       display: block;
     }
+    .dummy-sns-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
     .dummy-sns-actions {
       display: flex;
       gap: 8px;
@@ -897,6 +903,539 @@
       color: var(--accent);
       font-size: 16px;
       letter-spacing: -.01em;
+    }
+
+    /* ========== USP Section ========== */
+    .usp-section {
+      padding: 100px 0;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+    }
+    .usp-head {
+      max-width: 820px;
+      margin: 0 auto 56px;
+      text-align: center;
+    }
+    .usp-head .micro-label {
+      display: inline-block;
+      font-family: var(--t-display);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+    .usp-head h2 {
+      margin: 0;
+      font-family: var(--t-display);
+      font-size: clamp(28px, 3.8vw, 44px);
+      line-height: 1.3;
+      letter-spacing: -.035em;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .usp-head h2 em {
+      font-style: normal;
+      color: var(--accent);
+      font-weight: 800;
+    }
+    .usp-sub {
+      margin: 24px 0 0;
+      font-size: 15px;
+      color: var(--slate);
+      line-height: 2;
+    }
+    .usp-sub strong { color: var(--ink); font-weight: 700; }
+
+    .usp-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    /* 사진 스택 */
+    .usp-photo-stack {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      max-width: 480px;
+    }
+    .usp-photo-main {
+      position: absolute;
+      inset: 0 60px 60px 0;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 24px 50px rgba(11,18,32,.16);
+    }
+    .usp-photo-main img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .usp-photo-cap {
+      position: absolute;
+      left: 20px;
+      bottom: 20px;
+      background: #fff;
+      border-radius: 14px;
+      padding: 12px 18px;
+      box-shadow: 0 12px 28px rgba(11,18,32,.18);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 2;
+      max-width: 75%;
+    }
+    .usp-pulse {
+      position: relative;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    .usp-pulse::after {
+      content: "";
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      opacity: .3;
+      animation: pulse 2s ease-out infinite;
+    }
+    .usp-cap-text { display: flex; flex-direction: column; line-height: 1.3; }
+    .usp-cap-text strong {
+      font-family: var(--t-display);
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--ink);
+      letter-spacing: -.01em;
+    }
+    .usp-cap-text small {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 500;
+      margin-top: 2px;
+    }
+
+    .usp-photo-sub {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 50%;
+      aspect-ratio: 4 / 3;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(11,18,32,.2);
+      transform: rotate(2deg);
+      transition: transform .3s ease;
+      z-index: 3;
+      border: 6px solid #fff;
+    }
+    .usp-photo-sub:hover { transform: rotate(0deg) scale(1.03); }
+    .usp-photo-sub img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .usp-photo-tape {
+      position: absolute;
+      top: -12px;
+      left: 30%;
+      width: 80px;
+      height: 22px;
+      background: linear-gradient(135deg, rgba(254,243,199,.85), rgba(253,224,71,.6));
+      border-left: 1px dashed rgba(0,0,0,.08);
+      border-right: 1px dashed rgba(0,0,0,.08);
+      box-shadow: 0 2px 6px rgba(0,0,0,.08);
+      transform: rotate(-6deg);
+      z-index: 4;
+    }
+
+    .usp-compare {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .usp-compare-card {
+      padding: 28px 28px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+    .usp-compare-other {
+      background: #fffbf7;
+      border-color: rgba(220, 38, 38, .12);
+      opacity: .85;
+    }
+    .usp-compare-jk {
+      background: linear-gradient(180deg, #fff 0%, var(--accent-bg) 100%);
+      border-color: var(--accent);
+      box-shadow: 0 12px 32px rgba(32,70,255,.08);
+    }
+    .usp-col-label {
+      display: inline-block;
+      font-family: var(--t-display);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+    .usp-compare-other .usp-col-label {
+      color: #b91c1c;
+      background: #fee2e2;
+    }
+    .usp-compare-jk .usp-col-label {
+      color: #fff;
+      background: var(--accent);
+    }
+    .usp-compare-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+    .usp-compare-card li {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--ink-2);
+      padding-left: 18px;
+      position: relative;
+    }
+    .usp-compare-other li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: #b91c1c;
+      opacity: .6;
+    }
+    .usp-compare-jk li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 800;
+    }
+    .usp-compare-jk li strong { color: var(--ink); font-weight: 700; }
+
+    .usp-outro {
+      max-width: 780px;
+      margin: 64px auto 0;
+      padding: 28px 32px;
+      background: var(--ink);
+      color: #fff;
+      border-radius: var(--radius);
+      text-align: center;
+      font-size: 15px;
+      line-height: 1.85;
+    }
+    .usp-outro strong {
+      display: block;
+      font-family: var(--t-display);
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -.015em;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .usp-outro em {
+      font-style: normal;
+      color: #93c5fd;
+      font-weight: 700;
+    }
+
+    @media (max-width: 960px) {
+      .usp-section { padding: 72px 0; }
+      .usp-grid { grid-template-columns: 1fr; gap: 48px; }
+      .usp-photo-stack { margin: 0 auto; }
+    }
+    @media (max-width: 580px) {
+      .usp-section { padding: 56px 0; }
+      .usp-photo-cap { padding: 10px 14px; max-width: 85%; }
+      .usp-compare-card { padding: 22px 22px; }
+      .usp-outro { padding: 22px 24px; font-size: 14px; }
+    }
+
+    /* ========== Reach Section (Full Bleed, Photo as Hero) ========== */
+    /* 줄리: 사진 크기 조정은 .reach-photo의 aspect-ratio 값만 바꾸면 됨
+       - 21/9   = 시네마틱 와이드 (1920px wide → ~820px high) — 임팩트 큼
+       - 24/9   = 좀 더 좁음 (1920px → ~720px)
+       - 30/9   = 컴팩트 widescreen (1920px → ~576px) — 현재값
+       - 36/9   = 매우 좁은 띠 (1920px → ~480px) — 미니멀 */
+    .reach-section {
+      position: relative;
+      background: #0b1220;
+      overflow: hidden;
+      padding: 0;  /* 글로벌 section padding 무효화 — 까만 띠 방지 */
+    }
+    .reach-photo {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 30 / 9;   /* ← 여기 숫자만 바꾸면 사진 높이 조정됨 */
+      overflow: hidden;
+    }
+    .reach-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 50%;  /* 사진의 어느 부분을 가운데 두느냐 (0% = 위, 100% = 아래) */
+      display: block;
+    }
+    .reach-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg,
+          rgba(11,18,32,.15) 0%,
+          rgba(11,18,32,.35) 45%,
+          rgba(11,18,32,.7) 100%),
+        linear-gradient(90deg,
+          rgba(11,18,32,.4) 0%,
+          rgba(11,18,32,.1) 35%,
+          rgba(11,18,32,.1) 65%,
+          rgba(11,18,32,.4) 100%);
+      pointer-events: none;
+    }
+    .reach-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 6%;
+    }
+    .reach-text {
+      text-align: center;
+      color: #fff;
+    }
+    .reach-label {
+      display: inline-block;
+      font-family: var(--t-display);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 20px;
+      padding: 6px 14px;
+      border: 1px solid rgba(255,255,255,.4);
+      border-radius: 999px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background: rgba(11,18,32,.25);
+    }
+    .reach-h {
+      margin: 0;
+      font-family: var(--t-display);
+      font-size: clamp(28px, 4.5vw, 56px);
+      line-height: 1.18;
+      letter-spacing: -.04em;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 4px 32px rgba(11,18,32,.55);
+    }
+    .reach-h em {
+      font-style: normal;
+      color: #fff;
+      position: relative;
+      display: inline-block;
+    }
+    .reach-h em::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0;
+      bottom: -3px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.7) 30%, rgba(255,255,255,.7) 70%, transparent 100%);
+    }
+    .reach-sub {
+      margin: 22px auto 0;
+      max-width: 600px;
+      font-size: 15px;
+      line-height: 1.9;
+      color: rgba(255,255,255,.94);
+      text-shadow: 0 2px 16px rgba(11,18,32,.5);
+    }
+    .reach-sub strong { color: #fff; font-weight: 700; }
+    .reach-tags {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+    }
+    .reach-tag {
+      font-family: var(--t-display);
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+      padding: 7px 14px;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 999px;
+      background: rgba(11,18,32,.3);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: background .2s ease, transform .2s ease;
+    }
+    .reach-tag:hover {
+      background: rgba(11,18,32,.5);
+      transform: translateY(-2px);
+    }
+
+    /* 모바일: 사진은 적당한 비율로 + 텍스트는 사진 아래로 떨어트림 */
+    @media (max-width: 768px) {
+      .reach-photo {
+        aspect-ratio: 4 / 3;  /* 모바일에서는 사진 좀 더 정사각형에 가깝게 */
+      }
+      .reach-content {
+        position: relative;
+        padding: 32px 0 40px;
+        background: var(--ink);
+        align-items: center;
+      }
+      .reach-overlay {
+        background: linear-gradient(180deg, rgba(11,18,32,0) 60%, rgba(11,18,32,.3) 100%);
+      }
+      .reach-h { font-size: 28px; }
+      .reach-sub { font-size: 14px; line-height: 1.8; }
+    }
+    @media (max-width: 580px) {
+      .reach-photo {
+        aspect-ratio: 1 / 1;  /* 작은 모바일에선 정사각형 */
+      }
+      .reach-content { padding: 28px 0 36px; }
+      .reach-h { font-size: 24px; }
+      .reach-sub { font-size: 13px; }
+      .reach-tags { gap: 6px; margin-top: 22px; }
+      .reach-tag { font-size: 11px; padding: 6px 12px; }
+    }
+
+    /* ========== Photo Strip (재사용 가능한 슬림 띠) ========== */
+    /* 줄리: 사진 띠 높이 조정은 .photo-strip의 height 값만 변경하면 됨
+       - height: 240px = 컴팩트한 띠
+       - height: 300px = 현재값, 균형
+       - height: 360px = 임팩트 큰 띠 */
+    .photo-strip-section {
+      padding: 0;  /* 글로벌 section padding 무효화 */
+      background: #0b1220;
+      overflow: hidden;
+    }
+    .photo-strip {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+    }
+    .photo-strip img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 50%;
+      display: block;
+      transition: transform 8s ease-out;
+    }
+    .photo-strip:hover img {
+      transform: scale(1.05);
+    }
+    .photo-strip-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg,
+        rgba(11,18,32,.05) 0%,
+        rgba(11,18,32,.05) 40%,
+        rgba(11,18,32,.55) 100%);
+      pointer-events: none;
+    }
+    .photo-strip-overlay-left {
+      background: linear-gradient(90deg,
+        rgba(11,18,32,.6) 0%,
+        rgba(11,18,32,.1) 60%,
+        rgba(11,18,32,.05) 100%);
+    }
+    .photo-strip-caption {
+      position: absolute;
+      right: 5%;
+      bottom: 24px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      max-width: 360px;
+      text-align: right;
+    }
+    .photo-strip-caption-left {
+      right: auto;
+      left: 5%;
+      align-items: flex-start;
+      text-align: left;
+    }
+    .photo-strip-tag {
+      font-family: var(--t-display);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: #fff;
+      padding: 5px 11px;
+      background: rgba(11,18,32,.45);
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 999px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .photo-strip-handnote {
+      font-family: var(--t-hand);
+      font-size: 28px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.1;
+      text-shadow: 0 2px 16px rgba(11,18,32,.6);
+      letter-spacing: .005em;
+    }
+    .photo-strip-loc {
+      font-family: var(--t-display);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: rgba(255,255,255,.85);
+      text-shadow: 0 2px 12px rgba(11,18,32,.5);
+    }
+
+    @media (max-width: 768px) {
+      .photo-strip { height: 240px; }
+      .photo-strip-caption { max-width: 70%; right: 5%; bottom: 18px; }
+      .photo-strip-caption-left { left: 5%; }
+      .photo-strip-handnote { font-size: 22px; }
+      .photo-strip-tag { font-size: 9px; padding: 4px 10px; }
+      .photo-strip-loc { font-size: 10px; }
+    }
+    @media (max-width: 580px) {
+      .photo-strip { height: 200px; }
+      .photo-strip-overlay {
+        background: linear-gradient(180deg, rgba(11,18,32,0) 0%, rgba(11,18,32,.7) 100%);
+      }
+      .photo-strip-overlay-left {
+        background: linear-gradient(180deg, rgba(11,18,32,0) 0%, rgba(11,18,32,.7) 100%);
+      }
+      .photo-strip-caption,
+      .photo-strip-caption-left {
+        right: 0; left: 0;
+        bottom: 16px;
+        max-width: 100%;
+        align-items: center;
+        text-align: center;
+        padding: 0 16px;
+      }
+      .photo-strip-handnote { font-size: 20px; }
     }
 
     /* ========== Sections ========== */
@@ -3869,16 +4408,16 @@
             訪日インバウンド × コンテンツマーケティング
           </div>
           <h1>
-            訪日前から店頭・ECまで。<br>
-            <em>コンテンツ型</em>で、ブランド資産として残す。
+            1回の取材で、<br>
+            <em>5〜9カ国へ</em>。
           </h1>
           <p class="hero-sub">
-            短期施策と組み合わせる<strong>「資産として残るコンテンツ」</strong>を、<br>
-            私たちは8カ国のネイティブクリエイターと一緒に、企画・取材・制作まで自分たちでやっています。SNS・検索・現地メディアに残り続け、訪日前の認知から店頭・ECでの購買までを一貫したブランドトーンで設計します。
+            翻訳でも、出張取材でもありません。<strong>5〜9人のネイティブクリエイターが同じ現場に集まり、それぞれの視点で、それぞれの母国語で記録</strong>する。<br>
+            韓国人の目線、台湾人の目線、タイ人の目線——同じ"浅草"も、5〜9つの違う物語になります。だから、各国のSNS・検索・現地メディアで「自国の人が書いた」反応を生むのです。
           </p>
           <p class="hero-thesis">
             <span class="hero-thesis-mark">—</span>
-            広告予算の効率は、<strong>コンテンツの質</strong>で決まる。
+            反応するから、<strong>コンテンツ資産として残る</strong>。
           </p>
           <div class="hero-ctas">
             <a href="#contact" class="btn btn-primary" data-cta="hero-primary">
@@ -3929,7 +4468,7 @@
 
             <!-- (A) 영상 사용 시 — autoplay/muted/loop -->
             <video class="hero-media" autoplay muted loop playsinline poster="https://placehold.co/600x750/0b1220/cbd5e1?text=BTS+Video">
-              <source src="https://www.gldaily.com/lp/japankuru-inbound/bts-loop.mp4" type="video/mp4">
+              <source src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2025/09/1221_GLD03.m4v" type="video/mp4">
             </video>
 
             <!-- (B) 정적 이미지 사용 시 — 위 <video> 통째 삭제하고 아래 주석 해제
@@ -4010,19 +4549,8 @@
                   </div>
                 </div>
                 <div class="dummy-sns-img">
-                  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-                    <defs>
-                      <linearGradient id="snsGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#fecaca"/>
-                        <stop offset="50%" stop-color="#fde68a"/>
-                        <stop offset="100%" stop-color="#bfdbfe"/>
-                      </linearGradient>
-                    </defs>
-                    <rect width="100" height="100" fill="url(#snsGrad)"/>
-                    <circle cx="80" cy="20" r="8" fill="#fff" opacity=".7"/>
-                    <path d="M0 70 Q 25 55, 50 65 T 100 60 L 100 100 L 0 100 Z" fill="#0b1220" opacity=".15"/>
-                    <text x="50" y="55" text-anchor="middle" font-family="Caveat, cursive" font-size="13" fill="#0b1220" opacity=".7">浅草</text>
-                  </svg>
+                  <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/03/D4S_5623.jpg"
+                       alt="JAPANKURU 取材コンテンツ" loading="lazy"/>
                 </div>
                 <div class="dummy-sns-actions">
                   <span>♥</span><span>💬</span><span>↗</span>
@@ -4033,8 +4561,8 @@
                 </div>
               </div>
 
-              <!-- 실제 SNS 캡처 들어올 자리:
-                   <img loading="lazy" src="/lp/japankuru-inbound/sns-post.jpg"
+              
+                   <img loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/03/D4S_5623.jpg"
                         alt="JAPANKURU SNS Post" /> -->
             </div>
           </div>
@@ -4047,7 +4575,7 @@
     <div class="trust-strip">
       <div class="container">
         <div class="trust-strip-inner">
-          <span class="trust-strip-label">Trusted by</span>
+          <span class="trust-strip-label">導入実績</span>
           <span class="trust-strip-text">
             <strong>300社+</strong>の自治体・鉄道・商業施設・グローバルブランドが、JAPANKURUを共創パートナーとして採用。
           </span>
@@ -4055,13 +4583,111 @@
       </div>
     </div>
 
+    <!-- ========== USP: 1回の取材で5〜9カ国 ========== -->
+    <section class="usp-section">
+      <div class="container">
+
+        <div class="usp-head">
+          <span class="micro-label">JAPANKURUの取材スタイル</span>
+          <h2>翻訳でも、出張取材でもない。<br>
+            <em>5〜9人のネイティブが、同じ現場で記録する。</em></h2>
+          <p class="usp-sub">
+            他社の多くは、1人のライターが取材し、その後に翻訳して多言語化します。<br>
+            JAPANKURUは、<strong>各国のネイティブクリエイターが同じ現場に集まり、それぞれの母国の読者に"刺さる切り口"を、その場で見つけて、その場で記録</strong>する。<br>
+            14年運営してきた自社メディアの上に、業界でも稀な取材体制を組み合わせています。
+          </p>
+        </div>
+
+        <div class="usp-grid">
+
+          <!-- LEFT: 메이킹 사진 스택 -->
+          <div class="usp-photo-stack">
+            <div class="usp-photo-main">
+              <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/01/shooting.jpg"
+                   alt="ネイティブクリエイターチームが同じ現場で取材" loading="lazy"/>
+              <div class="usp-photo-cap">
+                <span class="usp-pulse"></span>
+                <span class="usp-cap-text">
+                  <strong>同じ現場、5〜9つの視点</strong>
+                  <small>韓国・台湾・タイ・中国・英語圏のネイティブが現地集合</small>
+                </span>
+              </div>
+            </div>
+            <div class="usp-photo-sub">
+              <div class="usp-photo-tape"></div>
+              <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/01/img2019041111112721062100.jpg"
+                   alt="ネイティブクリエイターチーム" loading="lazy"/>
+            </div>
+          </div>
+
+          <!-- RIGHT: 비교 카드 -->
+          <div class="usp-compare">
+            <div class="usp-compare-card usp-compare-other">
+              <span class="usp-col-label">一般的な多言語メディア</span>
+              <ul>
+                <li>1人が取材 → 翻訳で多言語化</li>
+                <li>視点は1つ。複製されるだけ</li>
+                <li>主にサイト掲載中心</li>
+                <li>「翻訳された記事」感が残る</li>
+              </ul>
+            </div>
+            <div class="usp-compare-card usp-compare-jk">
+              <span class="usp-col-label">JAPANKURU</span>
+              <ul>
+                <li><strong>5〜9人のネイティブが同じ現場へ</strong></li>
+                <li>5〜9つの視点・5〜9つの母国語で執筆</li>
+                <li>サイト + 国別SNS・リール最適化</li>
+                <li>各国で「自国の人が書いた」反応</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+        <p class="usp-outro">
+          <strong>1回の現場から、5〜9つの母国語コンテンツが生まれる。</strong>
+          広告終了後もSNSと検索に残り続け、御社のブランドの<em>コンテンツ資産</em>として蓄積されていきます。
+        </p>
+
+      </div>
+    </section>
+
+    <!-- ========== Reach Section — 都市から山岳まで (Full Bleed) ========== -->
+    <section class="reach-section" aria-label="現場へ直接足を運ぶ">
+      <div class="reach-photo">
+        <img class="reach-img" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/04/20250906_113427-scaled.jpg" alt="日本全国の現場で取材するJAPANKURUクリエイター" loading="lazy"/>
+        <div class="reach-overlay" aria-hidden="true"></div>
+        <div class="reach-content">
+          <div class="container reach-text">
+            <span class="reach-label">現場へ、どこでも —</span>
+            <h2 class="reach-h">
+              東京だけじゃない。<br>
+              <em>日本全国、その現場へ。</em>
+            </h2>
+            <p class="reach-sub">
+              都市から山岳・離島・地方の小さな町まで——<br>
+              ネイティブクリエイターが直接足を運び、<strong>その土地の空気と物語を、母国語で記録</strong>します。
+            </p>
+            <div class="reach-tags">
+              <span class="reach-tag">都市部</span>
+              <span class="reach-tag">温泉・旅館</span>
+              <span class="reach-tag">山岳・自然</span>
+              <span class="reach-tag">離島</span>
+              <span class="reach-tag">地方・郷土</span>
+              <span class="reach-tag">食文化の現場</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ========== Markets — 시장 도입 + 5국 인사이트 ========== -->
     <section id="markets" class="markets-section">
       <div class="container">
 
         <!-- Big Statement (시장 도입) -->
         <div class="markets-statement">
-          <span class="label">Market Insight · 2026 Q1 Update</span>
+          <span class="label">市場の今 · 2026 Q1</span>
           <h2 class="markets-statement-h">
             市場は <em>大きく変わった</em>。<br>
             問われるのは「<em>どこに、どう届けるか</em>」。
@@ -4271,8 +4897,7 @@
         <div class="markets-pickup">
           <p class="pickup-hand">
             JAPANKURU が <em>メインで展開中</em> の<br>
-            主要 <span class="pickup-num">5</span> 市場 ——
-            それぞれ <em>勝ち筋がちがう</em>。
+            主要 <span class="pickup-num">5</span> 市場 <br>それぞれ <em>勝ち筋がちがう。</em>
           </p>
           <svg class="pickup-arrow" viewBox="0 0 60 30" fill="none" aria-hidden="true">
             <path d="M5 5 Q 30 25 55 12" stroke="#2046ff" stroke-width="1.5" stroke-linecap="round"/>
@@ -4309,7 +4934,7 @@
             </div>
             <p class="market-insight">トレンド即応型のNaver × Short動画で、出発直前の意思決定に届く。</p>
             <div class="market-creator">
-              <img src="https://placehold.co/56x56/fce7f3/be185d?text=H" alt="Hee Won" loading="lazy"/>
+              <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2024/08/HEEWON_CC05_mono-scaled-1-e1724920330586.jpg" alt="Hee Won" loading="lazy"/>
               <span><small>担当</small><strong>Hee Won</strong></span>
             </div>
           </div>
@@ -4340,8 +4965,8 @@
             </div>
             <p class="market-insight">RED検索 × KOL推奨 × 圈子内評価が、購買決定の3点セット。</p>
             <div class="market-creator">
-              <img src="https://placehold.co/56x56/fee2e2/b91c1c?text=S" alt="Sou" loading="lazy"/>
-              <span><small>担当</small><strong>Sou</strong></span>
+              <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2024/08/IMG_7615.jpg" alt="Lucy" loading="lazy"/>
+              <span><small>担当</small><strong>Lucy</strong></span>
             </div>
           </div>
 
@@ -4371,8 +4996,8 @@
             </div>
             <p class="market-insight">親日リピーター中心。地方・体験コンテンツへの感度が高い情緒型訴求が効く。</p>
             <div class="market-creator">
-              <img src="https://placehold.co/56x56/fef3c7/c2410c?text=L" alt="Lucy" loading="lazy"/>
-              <span><small>担当</small><strong>Lucy &amp; Chia</strong></span>
+              <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2024/08/S__154058811.jpg" alt="Sou" loading="lazy"/>
+              <span><small>担当</small><strong>Sou &amp; Chia</strong></span>
             </div>
           </div>
 
@@ -4402,7 +5027,7 @@
             </div>
             <p class="market-insight">縦動画 × ビジュアル先行。インフルエンサーの推奨が即「行きたい」を生む。</p>
             <div class="market-creator">
-              <img src="https://placehold.co/56x56/fef9c3/a16207?text=S" alt="Sarita" loading="lazy"/>
+              <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2024/08/S__168247310-e1724116965778.jpg" alt="Sarita" loading="lazy"/>
               <span><small>担当</small><strong>Sarita</strong></span>
             </div>
           </div>
@@ -4433,8 +5058,8 @@
             </div>
             <p class="market-insight">SEO記事・歴史文化背景の深い解説で、計画段階の調査行動に応える。</p>
             <div class="market-creator">
-              <img src="https://placehold.co/56x56/dbeafe/1d4ed8?text=E" alt="Editor" loading="lazy"/>
-              <span><small>担当</small><strong>Editor Team</strong></span>
+              <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2024/08/DSC01179-のコピー-scaled.jpg" alt="Andy" loading="lazy"/>
+              <span><small>担当</small><strong>Andy &amp; Sophia</strong></span>
             </div>
           </div>
 
@@ -4445,12 +5070,26 @@
       </div>
     </section>
 
+    <!-- ========== Photo Strip 1: 食文化の現場で (Making) ========== -->
+    <section class="photo-strip-section" aria-label="食文化の現場で取材">
+      <div class="photo-strip">
+        <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/05/MakingPhoto_CC04_0-1-scaled.jpg"
+             alt="信州の囲炉裏で食文化を取材するJAPANKURUチーム" loading="lazy"/>
+        <div class="photo-strip-overlay"></div>
+        <div class="photo-strip-caption">
+          <span class="photo-strip-tag">Making · 食文化</span>
+          <span class="photo-strip-handnote">on-site, with the fire 🔥</span>
+          <span class="photo-strip-loc">信州 · 囲炉裏 ★ by our team</span>
+        </div>
+      </div>
+    </section>
+
     <!-- ========== 課題 체크리스트 ========== -->
     <section class="challenges-section">
       <div class="container">
         <div class="challenges-card">
           <div class="challenges-head">
-            <span class="micro-label">Common Challenges</span>
+            <span class="micro-label">よくあるお悩み</span>
             <h2>こんな課題、<em>ありませんか?</em></h2>
             <p class="challenges-sub">一つでも当てはまれば、JAPANKURUの資料がきっとお役に立てます。</p>
           </div>
@@ -4491,7 +5130,7 @@
     <section id="service" class="services-section">
       <div class="container">
         <div class="section-head center" style="margin-bottom: 40px;">
-          <span class="label">Service</span>
+          <span class="label">提供サービス</span>
           <h2 style="font-size: clamp(24px, 3vw, 36px);">国別の文脈に合わせて、<br><em style="color:var(--accent); font-style:normal;">企画・取材・制作・配信</em>まで、私たちが直接やります。</h2>
         </div>
 
@@ -4613,7 +5252,7 @@
       <div class="container distribution-content">
 
         <div class="dist-hero">
-          <span class="label">Distribution Network</span>
+          <span class="label">配信網について</span>
           <h2><em>8カ国 × 32チャネル</em><br>のオウンドメディアと、<br>18の海外メディア提携。</h2>
           <p class="sub">広告枠を買うだけではなく、私たちが自分で運営するオウンドチャネルと、各国の提携媒体を組み合わせた発信網。「外注広告枠」ではなく、コンテンツが資産として残る配信構造です。</p>
 
@@ -4733,11 +5372,25 @@
       </div>
     </section>
 
+    <!-- ========== Photo Strip 2: 北陸・東尋坊 (Portfolio) ========== -->
+    <section class="photo-strip-section" aria-label="北陸・東尋坊での取材作品">
+      <div class="photo-strip">
+        <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/05/JK_Hokuriku_CC75-scaled.jpg"
+             alt="北陸・東尋坊で撮影されたJAPANKURUの作品" loading="lazy"/>
+        <div class="photo-strip-overlay photo-strip-overlay-left"></div>
+        <div class="photo-strip-caption photo-strip-caption-left">
+          <span class="photo-strip-tag">Portfolio · 自然</span>
+          <span class="photo-strip-handnote">behind every coastline ✦</span>
+          <span class="photo-strip-loc">東尋坊 · 福井 ★ JK Hokuriku</span>
+        </div>
+      </div>
+    </section>
+
     <!-- ========== Why / Thesis + Funnel + Comparison ========== -->
     <section id="why" class="section-blue">
       <div class="container">
         <div class="section-head center">
-          <span class="label">Why JAPANKURU</span>
+          <span class="label">私たちが考えていること</span>
           <h2>広告予算の効率は、<br><em style="color:var(--accent); font-style:normal;">コンテンツの質</em>で決まる。</h2>
           <p>パーフォーマンス広告は「拡散の手段」にすぎません。元となるコンテンツの質こそが、すべての結果を左右します。</p>
           <div class="why-handnote">
@@ -4783,7 +5436,7 @@
 
         <!-- Mini Case — 실적 임팩트 -->
         <div class="mini-case">
-          <div class="mini-case-tag">Case Highlight</div>
+          <div class="mini-case-tag">実績ピックアップ</div>
           <div class="mini-case-stats">
             <div class="mini-case-stat">
               <strong>890<span class="mc-unit">万</span></strong>
@@ -4809,7 +5462,7 @@
 
         <!-- Comparison table -->
         <div class="compare-sub-head">
-          <span class="micro-label">Two Approaches</span>
+          <span class="micro-label">二つの選択肢</span>
           <h3>インフルエンサー施策と <em style="color:var(--accent); font-style:normal;">コンテンツ型施策</em>、<br>それぞれの<em style="color:var(--accent); font-style:normal;">得意分野</em>。</h3>
           <p class="compare-intro">どちらも有効な手法ですが、目的によって最適な選び方が変わります。短期の話題化にはインフルエンサー、中長期のブランド資産化にはコンテンツ型が向いています。</p>
         </div>
@@ -4893,7 +5546,7 @@
     <section id="behind" class="process-section">
       <div class="container">
         <div class="section-head center">
-          <span class="label">How It Works</span>
+          <span class="label">制作の流れ</span>
           <h2>取材から多言語コンテンツ資産まで、<br><em style="color:var(--accent); font-style:normal;">一気通貫の制作プロセス</em>。</h2>
           <p>翻訳発注ではなく、各国のネイティブクリエイターと一緒に、私たちが日本の現場で取材し、そのまま多言語コンテンツとして仕上げる。だから、文脈が崩れない・反応が起きる・検索資産として残ります。</p>
         </div>
@@ -4966,23 +5619,19 @@
             <h3 class="step-title">現地で取材・撮影</h3>
             <p class="step-desc">ネイティブクリエイターが日本の現場へ。商品体験・店舗取材・地域の空気感まで、一次情報として記録します。</p>
             <div class="step-visual step-visual-shoot">
-              <!-- 메이킹 사진 폴라로이드 (TODO: 줄리 — 실제 메이킹 사진으로 교체) -->
               <div class="making-polaroid mp-1" style="--rot: -4deg;">
-                <div class="making-photo" style="background:
-                  radial-gradient(circle at 30% 30%, rgba(252,165,165,.6), transparent 55%),
-                  linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%);">
-                  <span class="making-emoji">📷</span>
-                  <!-- <img loading="lazy" src="/lp/japankuru-inbound/process/shoot-01.jpg" alt="On-site shoot" /> -->
+                <div class="making-photo">
+                  <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/01/shooting.jpg"
+                       alt="現地取材" loading="lazy"/>
                 </div>
-                <div class="making-cap">by Lucy ★ Asakusa</div>
+                <div class="making-cap">on-site shoot</div>
               </div>
               <div class="making-polaroid mp-2" style="--rot: 4deg;">
-                <div class="making-photo" style="background:
-                  radial-gradient(circle at 60% 50%, rgba(167,243,208,.6), transparent 55%),
-                  linear-gradient(135deg, #e0f2fe 0%, #d1fae5 100%);">
-                  <span class="making-emoji">🎬</span>
+                <div class="making-photo">
+                  <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/01/img2019041111112721062100.jpg"
+                       alt="ネイティブクリエイターチーム" loading="lazy"/>
                 </div>
-                <div class="making-cap">by Sou ★ behind</div>
+                <div class="making-cap">native team</div>
               </div>
             </div>
           </div>
@@ -5152,7 +5801,7 @@
         <!-- 편지 -->
         <div class="team-letter">
           <div class="team-letter-photo">
-            <img src="https://placehold.co/120x120/e5e7eb/64748b?text=Andy" alt="編集長 Andy" loading="lazy"/>
+            <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2024/08/DSC01179-のコピー-scaled.jpg" alt="編集長 Andy" loading="lazy"/>
           </div>
           <div class="team-letter-body">
             <div class="team-letter-quote-mark">"</div>
@@ -5173,7 +5822,7 @@
         <!-- 14년 타임라인 -->
         <div class="team-timeline">
           <div class="team-timeline-head">
-            <span class="micro-label">14 Years Journey</span>
+            <span class="micro-label">14年の歩み</span>
             <h3>2012年から、ずっと <em>多言語コンテンツ</em>。</h3>
           </div>
           <div class="timeline-track">
@@ -5236,7 +5885,7 @@
 
         <!-- TODO: 줄리 — 폼 action을 자사 시스템(Contact Form 7 / HubSpot / Zapier 등)에 맞게 교체 -->
         <form class="form-card" action="/lp/japankuru-inbound/submit" method="post" id="lpForm">
-          <span class="form-tag">Free Download</span>
+          <span class="form-tag">資料ダウンロード</span>
           <h3>訪日インバウンド ×<br>多言語コンテンツ戦略レポート<br><span style="font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.04em">— 5市場の消費行動・チャネル設計・実績まで</span></h3>
 
           <div class="form-row">
