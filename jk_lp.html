@@ -34,31 +34,50 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@300;400;500;700;900&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
 
   <!-- ========== Tracking ========== -->
+  <!-- ====== Tracking IDs (실제 광고 돌릴 때 줄리가 교체) ====== -->
+  <script>
+    /* 실제 ID 넣으면 자동으로 활성화. placeholder인 동안은 콘솔 에러 없음. */
+    window.JK_TRACKING = {
+      GA4:        'G-32S9V9V3YF',          /* GA4 - 이미 적용 중 */
+      GOOGLE_ADS: 'AW-XXXXXXXXX',          /* Google Ads — 실제 ID로 교체 (예: AW-1234567890) */
+      META_PIXEL: 'YOUR_PIXEL_ID',         /* Meta Pixel — 실제 ID로 교체 (예: 1234567890123456) */
+      GOOGLE_ADS_CONVERSION: 'AW-XXXXXXXXX/YYYYYY'  /* CV 라벨 - 실제 값으로 교체 */
+    };
+  </script>
+
   <!-- GA4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-32S9V9V3YF"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-32S9V9V3YF');
-    /* Google Ads — replace AW-XXXXXXXXX */
-    gtag('config', 'AW-XXXXXXXXX');
+    gtag('config', window.JK_TRACKING.GA4);
+    /* Google Ads — placeholder 아닐 때만 활성화 */
+    if (window.JK_TRACKING.GOOGLE_ADS && window.JK_TRACKING.GOOGLE_ADS.indexOf('XXXX') === -1) {
+      gtag('config', window.JK_TRACKING.GOOGLE_ADS);
+    }
   </script>
 
-  <!-- Meta Pixel — replace YOUR_PIXEL_ID -->
+  <!-- Meta Pixel — placeholder 아닐 때만 활성화 -->
   <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', 'YOUR_PIXEL_ID');
-    fbq('track', 'PageView');
+    if (window.JK_TRACKING.META_PIXEL && window.JK_TRACKING.META_PIXEL !== 'YOUR_PIXEL_ID') {
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', window.JK_TRACKING.META_PIXEL);
+      fbq('track', 'PageView');
+    }
   </script>
-  <noscript><img loading="lazy" height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/></noscript>
+  <noscript>
+    <!-- Meta Pixel noscript fallback - 실제 ID로 src의 YOUR_PIXEL_ID 교체 후 주석 해제
+    <img loading="lazy" height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/>
+    -->
+  </noscript>
 
   <style>
     :root {
@@ -4495,7 +4514,7 @@
             <div class="tape tape-top-right"></div>
 
             <!-- 일본 도시 실루엣 (장식) -->
-            <svg class="skyline" viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYEnd meet">
+            <svg class="skyline" viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax meet">
               <g fill="#0b1220" opacity=".55">
                 <rect x="10" y="60" width="20" height="60"/>
                 <rect x="35" y="40" width="22" height="80"/>
@@ -6015,10 +6034,13 @@
             'event_category': 'conversion',
             'event_label': 'lp-japankuru-inbound'
           });
-          /* Google Ads conversion — replace AW-XXXXXXXXX/YYYYYY */
-          gtag('event', 'conversion', {
-            'send_to': 'AW-XXXXXXXXX/YYYYYY'
-          });
+          /* Google Ads conversion — placeholder 아닐 때만 발화 */
+          if (window.JK_TRACKING && window.JK_TRACKING.GOOGLE_ADS_CONVERSION
+              && window.JK_TRACKING.GOOGLE_ADS_CONVERSION.indexOf('XXXX') === -1) {
+            gtag('event', 'conversion', {
+              'send_to': window.JK_TRACKING.GOOGLE_ADS_CONVERSION
+            });
+          }
         }
         if (typeof fbq !== 'undefined') {
           fbq('track', 'Lead');
