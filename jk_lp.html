@@ -1219,6 +1219,46 @@
       color: var(--slate);
     }
 
+    /* 담당 크리에이터 미니 라인 */
+    .market-creator {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--line);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .market-creator img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,.1);
+    }
+    .market-creator span {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+      min-width: 0;
+    }
+    .market-creator small {
+      font-family: var(--t-display);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .market-creator strong {
+      font-family: var(--t-display);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -.005em;
+      margin-top: 2px;
+    }
+
     /* Big statement (시장 도입) */
     .markets-statement {
       max-width: 880px;
@@ -1265,28 +1305,37 @@
     .market-donuts {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      margin: 0 auto 64px;
+      gap: 24px;
+      margin: 0 auto 32px;
       max-width: 1100px;
     }
     .market-donut {
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 28px;
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      padding: 36px 32px;
+      gap: 20px;
+      padding: 32px 28px 28px;
       background: #fff;
       border: 1px solid var(--line);
       border-radius: var(--radius-lg);
       transition: border-color .25s ease, box-shadow .25s ease;
+      text-align: center;
     }
     .market-donut:hover {
       border-color: var(--ink);
       box-shadow: 0 16px 36px rgba(11,18,32,.08);
     }
+    /* 타이틀 영역 (상자 중앙 위) */
+    .donut-meta-top {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      width: 100%;
+    }
     .donut-wrap {
       width: 100%;
-      max-width: 280px;
+      max-width: 380px;
       aspect-ratio: 1;
     }
     .donut-svg {
@@ -1296,7 +1345,7 @@
     }
     .donut-num {
       font-family: var(--t-display);
-      font-size: 38px;
+      font-size: 42px;
       font-weight: 800;
       letter-spacing: -.05em;
       fill: var(--ink);
@@ -1316,18 +1365,18 @@
       letter-spacing: .04em;
     }
     .donut-meta {
-      min-width: 0;
+      width: 100%;
     }
     .donut-title {
-      margin: 0 0 4px;
+      margin: 0;
       font-family: var(--t-display);
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 700;
       letter-spacing: -.025em;
       color: var(--ink);
     }
     .donut-sub {
-      margin: 0 0 18px;
+      margin: 0;
       font-size: 12px;
       color: var(--muted);
       letter-spacing: .02em;
@@ -1497,6 +1546,7 @@
       padding: 10px 12px;
       background: var(--bg-soft);
       border-radius: 8px;
+      flex-wrap: wrap;
     }
     .mms-num {
       font-family: var(--t-display);
@@ -1518,6 +1568,94 @@
     .mms-divider {
       color: var(--line);
       font-weight: 400;
+    }
+    /* 시점 라벨 (작은 태그) */
+    .mms-period {
+      margin-left: auto;
+      font-family: var(--t-display);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      color: var(--muted);
+      padding: 3px 7px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .mms-period-best {
+      color: #0891b2;
+      border-color: #0891b2;
+      background: rgba(8,145,178,.06);
+    }
+    .mms-period-warn {
+      color: #dc2626;
+      border-color: #dc2626;
+      background: rgba(220,38,38,.06);
+    }
+
+    /* 2025 통년 회고 라인 */
+    .markets-recap {
+      max-width: 880px;
+      margin: 32px auto 0;
+      padding: 14px 22px;
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--ink-2);
+      border-top: 1px dashed var(--line);
+      border-bottom: 1px dashed var(--line);
+    }
+    .markets-recap-tag {
+      display: inline-block;
+      font-family: var(--t-display);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 3px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+    .markets-recap strong {
+      font-family: var(--t-display);
+      font-weight: 800;
+      color: var(--ink);
+    }
+    .markets-recap-note {
+      display: block;
+      margin-top: 6px;
+      font-size: 11px;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* 출처 (Q1 통합) */
+    .markets-source-q1 {
+      max-width: 720px;
+      margin: 24px auto 8px;
+      padding: 14px 18px;
+      text-align: center;
+      font-size: 11px;
+      line-height: 1.7;
+      color: var(--muted);
+      letter-spacing: .02em;
+      background: var(--bg-soft);
+      border-radius: 8px;
+    }
+    .markets-source-q1 strong {
+      color: var(--ink-2);
+      font-weight: 700;
+    }
+    .markets-source-note {
+      display: block;
+      margin-top: 4px;
+      font-size: 10px;
+      color: var(--muted);
+      opacity: .8;
     }
 
     /* 출처 */
@@ -1957,6 +2095,329 @@
       transform: rotate(-2deg);
     }
 
+
+    /* ========== Meet the Team ========== */
+    .story-section {
+      padding: 80px 0;
+      background: var(--bg-soft);
+    }
+    /* 옛 team-section 호환 (다른 곳에서 안 씀, 안전하게 유지) */
+    .team-section {
+      padding: 100px 0;
+      background: var(--bg-soft);
+    }
+    /* 리더 2명 (큰 카드) */
+    .team-leaders {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      max-width: 880px;
+      margin: 0 auto 56px;
+    }
+    .team-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .team-card:hover {
+      border-color: var(--ink);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 32px rgba(11,18,32,.08);
+    }
+    .team-card-leader {
+      flex-direction: column;
+      gap: 14px;
+    }
+    .team-tag {
+      font-family: var(--t-display);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 999px;
+      align-self: center;
+    }
+    .team-tag-strategy { color: #fff; background: var(--ink); }
+    .team-tag-execution { color: #fff; background: var(--accent); }
+    .team-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: var(--bg-soft);
+      box-shadow: 0 8px 20px rgba(11,18,32,.08);
+      position: relative;
+    }
+    .team-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .team-info { text-align: center; }
+    .team-name {
+      display: block;
+      font-family: var(--t-display);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -.02em;
+    }
+    .team-role {
+      display: block;
+      font-family: var(--t-display);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-top: 4px;
+    }
+    .team-desc {
+      margin: 12px 0 0;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--slate);
+    }
+
+    /* Native Creators 8명 */
+    .team-divider {
+      margin: 0 0 28px;
+      text-align: center;
+      position: relative;
+    }
+    .team-divider::before {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; top: 50%;
+      height: 1px;
+      background: var(--line);
+    }
+    .team-divider span {
+      position: relative;
+      display: inline-block;
+      padding: 0 20px;
+      background: var(--bg-soft);
+      font-family: var(--t-display);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 64px;
+    }
+    .team-grid .team-card { padding: 22px 16px; gap: 10px; }
+    .team-photo-sm {
+      width: 88px;
+      height: 88px;
+    }
+    .team-flag {
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,.18), 0 0 0 2.5px #fff;
+    }
+    .team-flag img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .team-grid .team-name { font-size: 15px; }
+    .team-grid .team-role { font-size: 10px; margin-top: 2px; }
+    .team-desc-sm {
+      margin: 4px 0 0;
+      font-size: 11px;
+      line-height: 1.55;
+      color: var(--slate);
+    }
+
+    /* 編集長 편지 */
+    .team-letter {
+      max-width: 760px;
+      margin: 0 auto 56px;
+      padding: 40px 44px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 32px;
+      align-items: start;
+      box-shadow: 0 16px 40px rgba(11,18,32,.06);
+      position: relative;
+    }
+    .team-letter-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(11,18,32,.1);
+    }
+    .team-letter-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .team-letter-body { position: relative; }
+    .team-letter-quote-mark {
+      position: absolute;
+      top: -28px;
+      left: -8px;
+      font-family: var(--t-display);
+      font-size: 88px;
+      font-weight: 800;
+      color: var(--accent);
+      opacity: .15;
+      line-height: 1;
+      pointer-events: none;
+    }
+    .team-letter-text {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.95;
+      color: var(--ink-2);
+      letter-spacing: .005em;
+      position: relative;
+      z-index: 1;
+    }
+    .team-letter-text strong {
+      color: var(--ink);
+      font-weight: 700;
+    }
+    .team-letter-sign {
+      margin-top: 24px;
+      padding-top: 18px;
+      border-top: 1px dashed var(--line);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+    }
+    .team-letter-sign-name {
+      font-family: var(--t-hand);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .team-letter-sign-role {
+      font-family: var(--t-display);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* 14년 타임라인 */
+    .team-timeline {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .team-timeline-head {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .team-timeline-head .micro-label {
+      display: inline-block;
+      font-family: var(--t-display);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .team-timeline-head h3 {
+      margin: 0;
+      font-family: var(--t-display);
+      font-size: clamp(22px, 2.6vw, 30px);
+      font-weight: 700;
+      letter-spacing: -.025em;
+      color: var(--ink);
+    }
+    .team-timeline-head h3 em {
+      font-style: normal;
+      color: var(--accent);
+      font-weight: 800;
+    }
+    .timeline-track {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      position: relative;
+      padding-top: 32px;
+    }
+    .timeline-track::before {
+      content: "";
+      position: absolute;
+      top: 14px;
+      left: 6%;
+      right: 6%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--line) 0%, var(--accent) 80%, var(--accent) 100%);
+    }
+    .timeline-item {
+      text-align: center;
+      position: relative;
+      padding: 0 8px;
+    }
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      top: -22px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2.5px solid var(--line);
+    }
+    .timeline-item-now::before {
+      border-color: var(--accent);
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(32,70,255,.15);
+    }
+    .timeline-year {
+      display: block;
+      font-family: var(--t-display);
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -.02em;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .timeline-item-now .timeline-year {
+      color: var(--accent);
+    }
+    .timeline-event {
+      margin: 0;
+      font-size: 11px;
+      line-height: 1.55;
+      color: var(--slate);
+    }
+    .timeline-event strong {
+      color: var(--ink);
+      font-weight: 700;
+    }
 
     /* ========== Process — How It Works ========== */
     .process-section {
@@ -2696,6 +3157,10 @@
       font-size: 11px;
       line-height: 1.7;
     }
+    .footnote-light strong {
+      color: var(--ink);
+      font-weight: 700;
+    }
 
     /* ========== Power ========== */
     .power-grid {
@@ -3162,11 +3627,12 @@
       .services-section { padding: 56px 0; }
       .markets-grid { grid-template-columns: repeat(2, 1fr); }
       .markets-section { padding: 72px 0; }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+      .timeline-track { grid-template-columns: repeat(4, 1fr); gap: 28px 16px; }
       /* 큰 도넛 — 태블릿: 1열로 떨어짐 */
       .market-donuts { grid-template-columns: 1fr; gap: 20px; max-width: 540px; }
-      .market-donut { grid-template-columns: 260px 1fr; padding: 28px 24px; gap: 20px; }
-      .donut-wrap { max-width: 260px; }
-      .donut-num { font-size: 32px; }
+      .market-donut { padding: 24px 20px; }
+      .donut-wrap { max-width: 320px; }
       .compare-row { grid-template-columns: 1fr; }
       .compare-cards { grid-template-columns: 1fr; gap: 56px; }
       .compare-vs { top: 50%; left: 50%; }
@@ -3229,16 +3695,30 @@
       .countries-grid { grid-template-columns: 1fr; }
       .markets-grid { grid-template-columns: 1fr; gap: 12px; }
       .markets-section { padding: 56px 0; }
-      /* 큰 도넛 — 모바일: 세로 스택 */
-      .market-donut { grid-template-columns: 1fr; gap: 20px; padding: 24px 20px; text-align: center; }
-      .donut-wrap { max-width: 240px; margin: 0 auto; }
-      .donut-num { font-size: 30px; }
+      /* 큰 도넛 — 모바일: 1열 스택 */
+      .market-donuts { grid-template-columns: 1fr; gap: 16px; }
+      .market-donut { padding: 24px 18px; }
+      .donut-wrap { max-width: 280px; }
+      .donut-num { font-size: 36px; }
       .markets-pickup { margin: 8px auto 32px; }
       .pickup-hand { font-size: 22px; }
       .form-card { padding: 28px 22px; }
       section { padding: 64px 0; }
       /* Process — 모바일 */
       .process-flow { gap: 16px; }
+      /* Team / Letter / Timeline 모바일 */
+      .team-section { padding: 64px 0; }
+      .team-leaders { grid-template-columns: 1fr; gap: 16px; }
+      .team-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+      .team-letter { grid-template-columns: 1fr; gap: 20px; padding: 28px 24px; text-align: center; }
+      .team-letter-photo { margin: 0 auto; width: 96px; height: 96px; }
+      .team-letter-quote-mark { display: none; }
+      .team-letter-sign { align-items: center; }
+      .timeline-track { grid-template-columns: 1fr; gap: 20px; padding-top: 0; }
+      .timeline-track::before { display: none; }
+      .timeline-item { padding: 14px 16px; background: #fff; border-radius: 10px; border-left: 3px solid var(--accent); text-align: left; display: flex; align-items: baseline; gap: 16px; }
+      .timeline-item::before { display: none; }
+      .timeline-year { margin-bottom: 0; flex-shrink: 0; }
       /* mini-case + price-bar 모바일 */
       .mini-case { padding: 24px 20px; }
       .mini-case-stats { gap: 16px; }
@@ -3394,7 +3874,7 @@
           </h1>
           <p class="hero-sub">
             短期施策と組み合わせる<strong>「資産として残るコンテンツ」</strong>を、<br>
-            8カ国のネイティブクリエイターが企画・取材・制作。SNS・検索・現地メディアに残り続け、訪日前の認知から店頭・ECでの購買までを一貫したブランドトーンで設計します。
+            私たちは8カ国のネイティブクリエイターと一緒に、企画・取材・制作まで自分たちでやっています。SNS・検索・現地メディアに残り続け、訪日前の認知から店頭・ECでの購買までを一貫したブランドトーンで設計します。
           </p>
           <p class="hero-thesis">
             <span class="hero-thesis-mark">—</span>
@@ -3581,14 +4061,13 @@
 
         <!-- Big Statement (시장 도입) -->
         <div class="markets-statement">
-          <span class="label">Market Insight</span>
+          <span class="label">Market Insight · 2026 Q1 Update</span>
           <h2 class="markets-statement-h">
-            訪日インバウンド市場は、<br>
-            <em>過去最大フェーズ</em>へ。
+            市場は <em>大きく変わった</em>。<br>
+            問われるのは「<em>どこに、どう届けるか</em>」。
           </h2>
           <p class="markets-statement-sub">
-            問われているのは「参入するか」ではなく、<strong>「どう成果を作るか」</strong>。<br>
-            「アジア」「欧米」と一括りにせず、<strong>国別の文脈に合わせた設計</strong>が必要です。
+            2026年第1四半期、<strong>消費額1位は初めて台湾</strong>に。中国は半減。「アジア」「欧米」と一括りにせず、<strong>国別の文脈に合わせた多角的な設計</strong>が、これまで以上に必要になっています。
           </p>
         </div>
 
@@ -3597,169 +4076,196 @@
 
           <!-- Donut 1: 訪日客数 -->
           <div class="market-donut">
+            <div class="donut-meta-top">
+              <h3 class="donut-title">訪日客数</h3>
+              <p class="donut-sub">2026年 1-3月累計 · 2年連続1,000万人超え</p>
+            </div>
             <div class="donut-wrap">
               <svg viewBox="0 0 280 280" class="donut-svg" aria-hidden="true">
                 <!-- 背景 ring -->
                 <circle cx="140" cy="140" r="80" fill="none" stroke="#e5e7eb" stroke-width="36"/>
-                <!-- 円周 = 2π × 80 = 502.65 -->
-                <!-- KR 22.2% → 111.59 (rose) -->
+                <!-- 円周 = 502.65 / 2026 Q1 訪日客数 비중 -->
+                <!-- KR 27% → 135.72 (emerald) -->
                 <circle cx="140" cy="140" r="80" fill="none" stroke="#10b981" stroke-width="36"
-                        stroke-dasharray="111.59 502.65" stroke-dashoffset="0"
+                        stroke-dasharray="135.72 502.65" stroke-dashoffset="0"
                         transform="rotate(-90 140 140)"/>
-                <!-- CN 21.3% → 107.06 (red) -->
-                <circle cx="140" cy="140" r="80" fill="none" stroke="#dc2626" stroke-width="36"
-                        stroke-dasharray="107.06 502.65" stroke-dashoffset="-111.59"
-                        transform="rotate(-90 140 140)"/>
-                <!-- TW 15.8% → 79.42 (cyan) -->
+                <!-- TW 22% → 110.58 (cyan) -->
                 <circle cx="140" cy="140" r="80" fill="none" stroke="#0891b2" stroke-width="36"
-                        stroke-dasharray="79.42 502.65" stroke-dashoffset="-218.65"
+                        stroke-dasharray="110.58 502.65" stroke-dashoffset="-135.72"
                         transform="rotate(-90 140 140)"/>
-                <!-- US 7.7% → 38.70 (blue) -->
+                <!-- CN 10% → 50.27 (red, 半減으로 작아짐!) -->
+                <circle cx="140" cy="140" r="80" fill="none" stroke="#dc2626" stroke-width="36"
+                        stroke-dasharray="50.27 502.65" stroke-dashoffset="-246.30"
+                        transform="rotate(-90 140 140)"/>
+                <!-- US 10% → 50.27 (blue) -->
                 <circle cx="140" cy="140" r="80" fill="none" stroke="#1d4ed8" stroke-width="36"
-                        stroke-dasharray="38.70 502.65" stroke-dashoffset="-298.07"
+                        stroke-dasharray="50.27 502.65" stroke-dashoffset="-296.57"
                         transform="rotate(-90 140 140)"/>
-                <!-- TH 2.9% → 14.58 (green) -->
+                <!-- HK 6% → 30.16 (amber) -->
                 <circle cx="140" cy="140" r="80" fill="none" stroke="#f59e0b" stroke-width="36"
-                        stroke-dasharray="14.58 502.65" stroke-dashoffset="-336.77"
+                        stroke-dasharray="30.16 502.65" stroke-dashoffset="-346.84"
                         transform="rotate(-90 140 140)"/>
-                <!-- その他 30.1% → 151.30 (slate) -->
+                <!-- その他 25% → 125.66 (slate) -->
                 <circle cx="140" cy="140" r="80" fill="none" stroke="#cbd5e1" stroke-width="36"
-                        stroke-dasharray="151.30 502.65" stroke-dashoffset="-351.35"
+                        stroke-dasharray="125.66 502.65" stroke-dashoffset="-377.00"
                         transform="rotate(-90 140 140)"/>
 
                 <!-- 가운데 텍스트 -->
-                <text x="140" y="132" text-anchor="middle" class="donut-num">4,268</text>
-                <text x="140" y="155" text-anchor="middle" class="donut-num-unit">万人</text>
-                <text x="140" y="174" text-anchor="middle" class="donut-num-yoy">+15.8% YoY</text>
+                <text x="140" y="128" text-anchor="middle" class="donut-num">1,068</text>
+                <text x="140" y="151" text-anchor="middle" class="donut-num-unit">万人</text>
+                <text x="140" y="168" text-anchor="middle" class="donut-num-yoy">2026 Q1 · +1.4%</text>
 
                 <!-- 각 segment 위 라벨 -->
-                <!-- KR: θ=-50°, 위치 (191.4, 79.7) -->
-                <g class="donut-label" transform="translate(191.4, 79.7)">
+                <!-- KR: θ=-41.4°, 위치 (200, 87.1) -->
+                <g class="donut-label" transform="translate(200, 87.1)">
                   <text x="0" y="-2" text-anchor="middle" class="donut-label-name" style="fill:#059669">韓国</text>
-                  <text x="0" y="14" text-anchor="middle" class="donut-label-pct">22.2%</text>
+                  <text x="0" y="14" text-anchor="middle" class="donut-label-pct">~27%</text>
                 </g>
-                <!-- CN: θ=28.26°, 위치 (210.5, 177.9) -->
-                <g class="donut-label" transform="translate(210.5, 177.9)">
-                  <text x="0" y="-2" text-anchor="middle" class="donut-label-name" style="fill:#dc2626">中国</text>
-                  <text x="0" y="14" text-anchor="middle" class="donut-label-pct">21.3%</text>
-                </g>
-                <!-- TW: θ=95.04°, 위치 (132.95, 219.65) -->
-                <g class="donut-label" transform="translate(132.95, 219.65)">
+                <!-- TW: θ=46.8°, 위치 (194.8, 198.3) -->
+                <g class="donut-label" transform="translate(194.8, 198.3)">
                   <text x="0" y="-2" text-anchor="middle" class="donut-label-name" style="fill:#0891b2">台湾</text>
-                  <text x="0" y="14" text-anchor="middle" class="donut-label-pct">15.8%</text>
+                  <text x="0" y="14" text-anchor="middle" class="donut-label-pct">~22%</text>
                 </g>
-                <!-- US: θ=137.34°, 위치 (81.1, 194.16) -->
-                <g class="donut-label" transform="translate(81.1, 194.16)">
+                <!-- CN: θ=104.4°, 위치 (120.1, 217.5) - 中国 半減 강조 -->
+                <g class="donut-label" transform="translate(120.1, 217.5)">
+                  <text x="0" y="-2" text-anchor="middle" class="donut-label-name" style="fill:#dc2626">中国</text>
+                  <text x="0" y="14" text-anchor="middle" class="donut-label-pct">~10%</text>
+                  <text x="0" y="28" text-anchor="middle" class="donut-label-tag" style="fill:#dc2626">半減</text>
+                </g>
+                <!-- US: θ=140.4°, 위치 (78.4, 191) -->
+                <g class="donut-label" transform="translate(78.4, 191)">
                   <text x="0" y="-2" text-anchor="middle" class="donut-label-name" style="fill:#1d4ed8">米国</text>
-                  <text x="0" y="14" text-anchor="middle" class="donut-label-pct">7.7%</text>
+                  <text x="0" y="14" text-anchor="middle" class="donut-label-pct">~10%</text>
                 </g>
-                <!-- TH 작은 segment: θ=156.42°, 외부로 leader line 빼기 -->
-                <!-- 본 위치: (66.69, 171.9), 외부 위치: (40, 200) -->
-                <line x1="66.69" y1="171.9" x2="42" y2="208" stroke="#f59e0b" stroke-width="1.5"/>
-                <g class="donut-label donut-label-outside" transform="translate(36, 218)">
-                  <text x="0" y="-2" text-anchor="middle" class="donut-label-name" style="fill:#d97706">タイ</text>
-                  <text x="0" y="14" text-anchor="middle" class="donut-label-pct">2.9%</text>
+                <!-- HK: θ=169.2°, 위치 (61.4, 154.9) -->
+                <g class="donut-label" transform="translate(61.4, 154.9)">
+                  <text x="0" y="-2" text-anchor="middle" class="donut-label-name" style="fill:#d97706">香港</text>
+                  <text x="0" y="14" text-anchor="middle" class="donut-label-pct">~6%</text>
                 </g>
-                <!-- その他: θ=215.82°, 위치 (75.13, 93.13) -->
-                <g class="donut-label" transform="translate(75.13, 93.13)">
+                <!-- その他: θ=225°, 위치 (83.4, 83.4) -->
+                <g class="donut-label" transform="translate(83.4, 83.4)">
                   <text x="0" y="-4" text-anchor="middle" class="donut-label-name" style="fill:#94a3b8">その他</text>
-                  <text x="0" y="14" text-anchor="middle" class="donut-label-pct donut-label-pct-muted">30.1%</text>
+                  <text x="0" y="14" text-anchor="middle" class="donut-label-pct donut-label-pct-muted">~25%</text>
                 </g>
               </svg>
             </div>
             <div class="donut-meta">
-              <h3 class="donut-title">訪日客数</h3>
-              <p class="donut-sub">2025年 年間 · 初の4,000万人突破</p>
               <p class="donut-takeaway">
                 <span class="donut-takeaway-line">
                   <span class="donut-takeaway-prefix">→</span>
-                  上位5市場で<strong>約70%</strong>を占有
-                </span></p>
+                  <strong>韓国・台湾</strong>で全体の <strong>約半数</strong>。
+                </span>
+                <span class="donut-takeaway-line">
+                  <span class="donut-takeaway-prefix" style="color:#dc2626">⚠</span>
+                  中国は<strong>前年比 -54.6%</strong>(渡航自粛要請の影響)。
+                </span>
+              </p>
             </div>
           </div>
 
           <!-- Donut 2: 消費額 -->
           <div class="market-donut">
+            <div class="donut-meta-top">
+              <h3 class="donut-title">消費額</h3>
+              <p class="donut-sub">2026年 1-3月累計 · Q1として過去最高 2.3兆円</p>
+            </div>
             <div class="donut-wrap">
               <svg viewBox="0 0 280 280" class="donut-svg" aria-hidden="true">
                 <circle cx="140" cy="140" r="80" fill="none" stroke="#e5e7eb" stroke-width="36"/>
-                <!-- CN 21.2% → 106.56 (red) -->
-                <circle cx="140" cy="140" r="80" fill="none" stroke="#dc2626" stroke-width="36"
-                        stroke-dasharray="106.56 502.65" stroke-dashoffset="0"
-                        transform="rotate(-90 140 140)"/>
-                <!-- TW 10.2% → 51.27 (cyan) -->
+                <!-- 2026 Q1 消費額 비중 / 円周 = 502.65 -->
+                <!-- TW 16.6% → 83.44 (cyan) - 처음으로 1위! -->
                 <circle cx="140" cy="140" r="80" fill="none" stroke="#0891b2" stroke-width="36"
-                        stroke-dasharray="51.27 502.65" stroke-dashoffset="-106.56"
+                        stroke-dasharray="83.44 502.65" stroke-dashoffset="0"
                         transform="rotate(-90 140 140)"/>
-                <!-- US 9.7% → 48.76 (blue) -->
-                <circle cx="140" cy="140" r="80" fill="none" stroke="#1d4ed8" stroke-width="36"
-                        stroke-dasharray="48.76 502.65" stroke-dashoffset="-157.83"
-                        transform="rotate(-90 140 140)"/>
-                <!-- KR 9.3% → 46.75 (rose) -->
+                <!-- KR 13.6% → 68.36 (emerald) -->
                 <circle cx="140" cy="140" r="80" fill="none" stroke="#10b981" stroke-width="36"
-                        stroke-dasharray="46.75 502.65" stroke-dashoffset="-206.59"
+                        stroke-dasharray="68.36 502.65" stroke-dashoffset="-83.44"
                         transform="rotate(-90 140 140)"/>
-                <!-- TH 2.7% → 13.57 (green) -->
+                <!-- CN 11.6% → 58.31 (red, 半減) -->
+                <circle cx="140" cy="140" r="80" fill="none" stroke="#dc2626" stroke-width="36"
+                        stroke-dasharray="58.31 502.65" stroke-dashoffset="-151.80"
+                        transform="rotate(-90 140 140)"/>
+                <!-- US 11.1% → 55.79 (blue) -->
+                <circle cx="140" cy="140" r="80" fill="none" stroke="#1d4ed8" stroke-width="36"
+                        stroke-dasharray="55.79 502.65" stroke-dashoffset="-210.11"
+                        transform="rotate(-90 140 140)"/>
+                <!-- HK 6.3% → 31.67 (amber) -->
                 <circle cx="140" cy="140" r="80" fill="none" stroke="#f59e0b" stroke-width="36"
-                        stroke-dasharray="13.57 502.65" stroke-dashoffset="-253.34"
+                        stroke-dasharray="31.67 502.65" stroke-dashoffset="-265.90"
                         transform="rotate(-90 140 140)"/>
-                <!-- その他 46.9% → 235.74 (slate) -->
+                <!-- その他 40.8% → 205.08 (slate) -->
                 <circle cx="140" cy="140" r="80" fill="none" stroke="#cbd5e1" stroke-width="36"
-                        stroke-dasharray="235.74 502.65" stroke-dashoffset="-266.91"
+                        stroke-dasharray="205.08 502.65" stroke-dashoffset="-297.57"
                         transform="rotate(-90 140 140)"/>
 
                 <!-- 가운데 텍스트 -->
-                <text x="140" y="132" text-anchor="middle" class="donut-num">9.4</text>
-                <text x="140" y="155" text-anchor="middle" class="donut-num-unit">兆円</text>
-                <text x="140" y="174" text-anchor="middle" class="donut-num-yoy">+16.4% YoY</text>
+                <text x="140" y="128" text-anchor="middle" class="donut-num">2.3</text>
+                <text x="140" y="151" text-anchor="middle" class="donut-num-unit">兆円</text>
+                <text x="140" y="168" text-anchor="middle" class="donut-num-yoy">2026 Q1 · +2.5%</text>
 
                 <!-- 각 segment 위 라벨 -->
-                <!-- CN: θ=-51.84°, 위치 (189.42, 77.06) — 가장 큰 segment, No.1 강조 -->
-                <g class="donut-label donut-label-no1" transform="translate(189.42, 77.06)">
-                  <text x="0" y="-4" text-anchor="middle" class="donut-label-name donut-label-name-strong" style="fill:#dc2626">中国</text>
-                  <text x="0" y="16" text-anchor="middle" class="donut-label-pct donut-label-pct-strong">21.2%</text>
-                  <text x="0" y="30" text-anchor="middle" class="donut-label-tag">No.1</text>
+                <!-- TW: θ=-60.12°, 위치 (179.83, 56) — 처음 1위! 강조, 가운데 텍스트와 겹침 방지로 위로 -->
+                <g class="donut-label donut-label-no1" transform="translate(179.83, 56)">
+                  <text x="0" y="-4" text-anchor="middle" class="donut-label-name donut-label-name-strong" style="fill:#0891b2">台湾</text>
+                  <text x="0" y="16" text-anchor="middle" class="donut-label-pct donut-label-pct-strong" style="fill:#0891b2">16.6%</text>
+                  <text x="0" y="30" text-anchor="middle" class="donut-label-tag" style="fill:#0891b2">初の No.1</text>
                 </g>
-                <!-- TW: θ=4.68°, 위치 (219.74, 146.53) -->
-                <g class="donut-label" transform="translate(219.74, 146.53)">
-                  <text x="0" y="-2" text-anchor="middle" class="donut-label-name" style="fill:#0891b2">台湾</text>
-                  <text x="0" y="14" text-anchor="middle" class="donut-label-pct">10.2%</text>
-                </g>
-                <!-- US: θ=40.5°, 위치 (200.83, 191.93) -->
-                <g class="donut-label" transform="translate(200.83, 191.93)">
-                  <text x="0" y="-2" text-anchor="middle" class="donut-label-name" style="fill:#1d4ed8">米国</text>
-                  <text x="0" y="14" text-anchor="middle" class="donut-label-pct">9.7%</text>
-                </g>
-                <!-- KR: θ=74.7°, 위치 (161.16, 217.18) -->
-                <g class="donut-label" transform="translate(161.16, 217.18)">
+                <!-- KR: θ=-5.76°, 위치 (219.6, 131.97) -->
+                <g class="donut-label" transform="translate(219.6, 131.97)">
                   <text x="0" y="-2" text-anchor="middle" class="donut-label-name" style="fill:#059669">韓国</text>
-                  <text x="0" y="14" text-anchor="middle" class="donut-label-pct">9.3%</text>
+                  <text x="0" y="14" text-anchor="middle" class="donut-label-pct">13.6%</text>
                 </g>
-                <!-- TH 작은 segment: θ=96.3°, 외부로 leader line -->
-                <line x1="131.21" y1="219.51" x2="118" y2="252" stroke="#f59e0b" stroke-width="1.5"/>
-                <g class="donut-label donut-label-outside" transform="translate(112, 262)">
-                  <text x="0" y="-2" text-anchor="middle" class="donut-label-name" style="fill:#d97706">タイ</text>
-                  <text x="0" y="14" text-anchor="middle" class="donut-label-pct">2.7%</text>
+                <!-- CN: θ=39.6°, 위치 (201.6, 191.0) — 半減 표시 -->
+                <g class="donut-label" transform="translate(201.6, 191.0)">
+                  <text x="0" y="-2" text-anchor="middle" class="donut-label-name" style="fill:#dc2626">中国</text>
+                  <text x="0" y="14" text-anchor="middle" class="donut-label-pct">11.6%</text>
+                  <text x="0" y="28" text-anchor="middle" class="donut-label-tag" style="fill:#dc2626">-50%</text>
                 </g>
-                <!-- その他: θ=185.58°, 위치 (60.21, 132.21) -->
-                <g class="donut-label" transform="translate(60.21, 132.21)">
+                <!-- US: θ=80.46°, 위치 (153.3, 218.9) -->
+                <g class="donut-label" transform="translate(153.3, 218.9)">
+                  <text x="0" y="-2" text-anchor="middle" class="donut-label-name" style="fill:#1d4ed8">米国</text>
+                  <text x="0" y="14" text-anchor="middle" class="donut-label-pct">11.1%</text>
+                </g>
+                <!-- HK: θ=111.78°, 위치 (110.3, 214.3) - 작은 segment, 외부 leader -->
+                <line x1="110.3" y1="214.3" x2="80" y2="252" stroke="#f59e0b" stroke-width="1.5"/>
+                <g class="donut-label donut-label-outside" transform="translate(74, 262)">
+                  <text x="0" y="-2" text-anchor="middle" class="donut-label-name" style="fill:#d97706">香港</text>
+                  <text x="0" y="14" text-anchor="middle" class="donut-label-pct">6.3%</text>
+                </g>
+                <!-- その他: θ=196.56°, 위치 (63.4, 117.1) -->
+                <g class="donut-label" transform="translate(63.4, 117.1)">
                   <text x="0" y="-4" text-anchor="middle" class="donut-label-name" style="fill:#94a3b8">その他</text>
-                  <text x="0" y="14" text-anchor="middle" class="donut-label-pct donut-label-pct-muted">46.9%</text>
+                  <text x="0" y="14" text-anchor="middle" class="donut-label-pct donut-label-pct-muted">40.8%</text>
                 </g>
               </svg>
             </div>
             <div class="donut-meta">
-              <h3 class="donut-title">消費額</h3>
-              <p class="donut-sub">2025年 年間 · 過去最高 9.4兆円</p>
               <p class="donut-takeaway">
                 <span class="donut-takeaway-line">
+                  <span class="donut-takeaway-prefix" style="color:#0891b2">★</span>
+                  <strong>台湾が初めて消費額1位</strong>(3,884億円)。
+                </span>
+                <span class="donut-takeaway-line">
                   <span class="donut-takeaway-prefix">→</span>
-                  上位5市場で<strong>約53%</strong>を占有
-                </span></p>
+                  単一市場依存から<strong>多角化フェーズ</strong>へ。
+                </span>
+              </p>
             </div>
           </div>
 
         </div>
+
+        <!-- 2025 통년 회고 한 줄 -->
+        <p class="markets-recap">
+          <span class="markets-recap-tag">2025年通年</span>
+          訪日客数 <strong>4,268万人</strong>(+15.8%) · 消費額 <strong>9.4兆円</strong>(+16.4%) — どちらも過去最高。<span class="markets-recap-note">通年では中国が消費額No.1(2.0兆円)でしたが、2026年Q1で構図が大きく変わっています。</span>
+        </p>
+
+        <!-- 출처 footnote 옮기기 -->
+        <p class="markets-source-q1">
+          <strong>出典:</strong> JNTO 訪日外客統計・観光庁 インバウンド消費動向調査(2026年1-3月期 1次速報)
+          <span class="markets-source-note">※ 訪日客数の各国比率はJNTO月次データから推計、消費額は観光庁公式構成比</span>
+        </p>
 
         <!-- 도입 라벨 (손글씨 풍, 크게) -->
         <div class="markets-pickup">
@@ -3787,9 +4293,10 @@
               </div>
             </div>
             <div class="market-mini-stat">
-              <span class="mms-num">945<span class="mms-unit">万人</span></span>
+              <span class="mms-num">~284<span class="mms-unit">万人</span></span>
               <span class="mms-divider">·</span>
-              <span class="mms-num">8,767<span class="mms-unit">億円</span></span>
+              <span class="mms-num">3,182<span class="mms-unit">億円</span></span>
+              <span class="mms-period">2026 Q1</span>
             </div>
             <div class="market-trait">
               <span class="trait-label">消費傾向</span>
@@ -3801,6 +4308,10 @@
               <span class="m-ch">Instagram</span>
             </div>
             <p class="market-insight">トレンド即応型のNaver × Short動画で、出発直前の意思決定に届く。</p>
+            <div class="market-creator">
+              <img src="https://placehold.co/56x56/fce7f3/be185d?text=H" alt="Hee Won" loading="lazy"/>
+              <span><small>担当</small><strong>Hee Won</strong></span>
+            </div>
           </div>
 
           <!-- 中国 -->
@@ -3813,9 +4324,10 @@
               </div>
             </div>
             <div class="market-mini-stat">
-              <span class="mms-num">909<span class="mms-unit">万人</span></span>
+              <span class="mms-num">107<span class="mms-unit">万人</span></span>
               <span class="mms-divider">·</span>
-              <span class="mms-num mms-highlight">2.0<span class="mms-unit">兆円</span></span>
+              <span class="mms-num">2,715<span class="mms-unit">億円</span></span>
+              <span class="mms-period mms-period-warn">2026 Q1 · -54%</span>
             </div>
             <div class="market-trait">
               <span class="trait-label">消費傾向</span>
@@ -3827,6 +4339,10 @@
               <span class="m-ch">WeChat</span>
             </div>
             <p class="market-insight">RED検索 × KOL推奨 × 圈子内評価が、購買決定の3点セット。</p>
+            <div class="market-creator">
+              <img src="https://placehold.co/56x56/fee2e2/b91c1c?text=S" alt="Sou" loading="lazy"/>
+              <span><small>担当</small><strong>Sou</strong></span>
+            </div>
           </div>
 
           <!-- 台湾 -->
@@ -3839,9 +4355,10 @@
               </div>
             </div>
             <div class="market-mini-stat">
-              <span class="mms-num">676<span class="mms-unit">万人</span></span>
+              <span class="mms-num">~235<span class="mms-unit">万人</span></span>
               <span class="mms-divider">·</span>
-              <span class="mms-num">9,638<span class="mms-unit">億円</span></span>
+              <span class="mms-num mms-highlight">3,884<span class="mms-unit">億円</span></span>
+              <span class="mms-period mms-period-best">2026 Q1 · 消費額 No.1</span>
             </div>
             <div class="market-trait">
               <span class="trait-label">消費傾向</span>
@@ -3853,6 +4370,10 @@
               <span class="m-ch">YouTube</span>
             </div>
             <p class="market-insight">親日リピーター中心。地方・体験コンテンツへの感度が高い情緒型訴求が効く。</p>
+            <div class="market-creator">
+              <img src="https://placehold.co/56x56/fef3c7/c2410c?text=L" alt="Lucy" loading="lazy"/>
+              <span><small>担当</small><strong>Lucy &amp; Chia</strong></span>
+            </div>
           </div>
 
           <!-- タイ -->
@@ -3865,9 +4386,10 @@
               </div>
             </div>
             <div class="market-mini-stat">
-              <span class="mms-num">123<span class="mms-unit">万人</span></span>
+              <span class="mms-num">~32<span class="mms-unit">万人</span></span>
               <span class="mms-divider">·</span>
-              <span class="mms-num">2,512<span class="mms-unit">億円</span></span>
+              <span class="mms-num">~580<span class="mms-unit">億円</span></span>
+              <span class="mms-period">2026 Q1 · 東南ア最大</span>
             </div>
             <div class="market-trait">
               <span class="trait-label">消費傾向</span>
@@ -3879,6 +4401,10 @@
               <span class="m-ch">TikTok</span>
             </div>
             <p class="market-insight">縦動画 × ビジュアル先行。インフルエンサーの推奨が即「行きたい」を生む。</p>
+            <div class="market-creator">
+              <img src="https://placehold.co/56x56/fef9c3/a16207?text=S" alt="Sarita" loading="lazy"/>
+              <span><small>担当</small><strong>Sarita</strong></span>
+            </div>
           </div>
 
           <!-- 英語圏 -->
@@ -3891,9 +4417,10 @@
               </div>
             </div>
             <div class="market-mini-stat">
-              <span class="mms-num">330<span class="mms-unit">万人</span></span>
+              <span class="mms-num">~107<span class="mms-unit">万人</span></span>
               <span class="mms-divider">·</span>
-              <span class="mms-num">9,139<span class="mms-unit">億円</span></span>
+              <span class="mms-num">2,592<span class="mms-unit">億円</span></span>
+              <span class="mms-period">2026 Q1 · 高単価 40万+</span>
             </div>
             <div class="market-trait">
               <span class="trait-label">消費傾向</span>
@@ -3905,6 +4432,10 @@
               <span class="m-ch">Reddit</span>
             </div>
             <p class="market-insight">SEO記事・歴史文化背景の深い解説で、計画段階の調査行動に応える。</p>
+            <div class="market-creator">
+              <img src="https://placehold.co/56x56/dbeafe/1d4ed8?text=E" alt="Editor" loading="lazy"/>
+              <span><small>担当</small><strong>Editor Team</strong></span>
+            </div>
           </div>
 
         </div>
@@ -3961,7 +4492,7 @@
       <div class="container">
         <div class="section-head center" style="margin-bottom: 40px;">
           <span class="label">Service</span>
-          <h2 style="font-size: clamp(24px, 3vw, 36px);">国別の文脈に合わせて、<br><em style="color:var(--accent); font-style:normal;">企画・取材・制作・配信</em>までワンストップ。</h2>
+          <h2 style="font-size: clamp(24px, 3vw, 36px);">国別の文脈に合わせて、<br><em style="color:var(--accent); font-style:normal;">企画・取材・制作・配信</em>まで、私たちが直接やります。</h2>
         </div>
 
         <div class="services-row">
@@ -4016,7 +4547,7 @@
         </div>
 
         <p class="services-other">
-          <strong>そのほか、翻訳・LP制作・イベント企画・SNS運用代行まで対応可能。</strong><br>
+          <strong>そのほか、翻訳・LP制作・イベント企画・SNS運用代行まで、私たちで対応しています。</strong><br>
           目的・対象国・ご予算に合わせて、必要な施策を組み合わせてご提案します。
           <a href="https://www.gldaily.com/services/japankuru/" data-cta="service-detail">サービス詳細を見る →</a>
         </p>
@@ -4084,7 +4615,7 @@
         <div class="dist-hero">
           <span class="label">Distribution Network</span>
           <h2><em>8カ国 × 32チャネル</em><br>のオウンドメディアと、<br>18の海外メディア提携。</h2>
-          <p class="sub">単発の広告枠買いではなく、自社で運営するオウンドチャネルと、各国の提携媒体を組み合わせた発信網。「外注広告枠」ではなく、コンテンツが資産として残る配信構造です。</p>
+          <p class="sub">広告枠を買うだけではなく、私たちが自分で運営するオウンドチャネルと、各国の提携媒体を組み合わせた発信網。「外注広告枠」ではなく、コンテンツが資産として残る配信構造です。</p>
 
           <div class="dist-bignum-row">
             <span class="dist-bignum">8<span class="unit">カ国</span></span>
@@ -4197,7 +4728,7 @@
           </div>
         </div>
 
-        <p class="footnote-light">※ 上記は主要な自社チャネル・提携媒体の構成を示すもので、最新の媒体別フォロワー数・転載実績は資料にて開示します。</p>
+        <p class="footnote-light">※ これら全チャネルを <strong>8名のネイティブクリエイター</strong> が日本側でリアルタイム運用しています。最新の媒体別フォロワー数・転載実績は資料にて開示します。</p>
 
       </div>
     </section>
@@ -4246,8 +4777,8 @@
 
         <!-- Conclusion -->
         <div class="thesis-conclusion">
-          <strong>だからJAPANKURUは、<br><em>「コンテンツの質」</em>に最もこだわります。</strong>
-          <p>8カ国のネイティブが企画・取材・制作した「反応するコンテンツ」を起点に、配信・拡散の効率まで設計します。</p>
+          <strong>だから私たちは、<br><em>「コンテンツの質」</em>に最もこだわっています。</strong>
+          <p>8カ国のネイティブと一緒に作る「反応するコンテンツ」を起点に、配信・拡散の効率まで私たちが設計します。</p>
         </div>
 
         <!-- Mini Case — 실적 임팩트 -->
@@ -4270,8 +4801,9 @@
             </div>
           </div>
           <p class="mini-case-desc">
-            台湾向けに公開した1コンテンツが、現地コミュニティで自然拡散。<br>
-            <strong>広告予算ゼロで890万リーチ</strong>を達成した事例(2025年)。
+            2025年1月、台湾向けに公開した<strong>「鎌倉の隠れた名店」</strong>記事。<br>
+            撮影は朝6時から、Lucy(台湾担当)が現地の常連客に話を聞きながら3時間。<br>
+            <strong>広告予算ゼロで890万リーチ</strong>、現地コミュニティで自然拡散しました。
           </p>
         </div>
 
@@ -4363,7 +4895,7 @@
         <div class="section-head center">
           <span class="label">How It Works</span>
           <h2>取材から多言語コンテンツ資産まで、<br><em style="color:var(--accent); font-style:normal;">一気通貫の制作プロセス</em>。</h2>
-          <p>翻訳発注ではなく、各国のネイティブクリエイターが日本の現場で取材し、そのまま多言語コンテンツとして仕上げる。だから、文脈が崩れない・反応が起きる・検索資産として残ります。</p>
+          <p>翻訳発注ではなく、各国のネイティブクリエイターと一緒に、私たちが日本の現場で取材し、そのまま多言語コンテンツとして仕上げる。だから、文脈が崩れない・反応が起きる・検索資産として残ります。</p>
         </div>
 
         <!-- Process Flow -->
@@ -4442,7 +4974,7 @@
                   <span class="making-emoji">📷</span>
                   <!-- <img loading="lazy" src="/lp/japankuru-inbound/process/shoot-01.jpg" alt="On-site shoot" /> -->
                 </div>
-                <div class="making-cap">on-site, Tokyo</div>
+                <div class="making-cap">by Lucy ★ Asakusa</div>
               </div>
               <div class="making-polaroid mp-2" style="--rot: 4deg;">
                 <div class="making-photo" style="background:
@@ -4450,7 +4982,7 @@
                   linear-gradient(135deg, #e0f2fe 0%, #d1fae5 100%);">
                   <span class="making-emoji">🎬</span>
                 </div>
-                <div class="making-cap">behind</div>
+                <div class="making-cap">by Sou ★ behind</div>
               </div>
             </div>
           </div>
@@ -4609,6 +5141,72 @@
           </svg>
           <span class="process-outro-text">all crafted by our 8-country native team</span>
         </p>
+
+      </div>
+    </section>
+
+    <!-- ========== 編集長 편지 + 14년 타임라인 (컴팩트) ========== -->
+    <section id="story" class="story-section">
+      <div class="container">
+
+        <!-- 편지 -->
+        <div class="team-letter">
+          <div class="team-letter-photo">
+            <img src="https://placehold.co/120x120/e5e7eb/64748b?text=Andy" alt="編集長 Andy" loading="lazy"/>
+          </div>
+          <div class="team-letter-body">
+            <div class="team-letter-quote-mark">"</div>
+            <p class="team-letter-text">
+              私たちは2012年から、外国人クリエイターと一緒に日本のリアルを発信してきました。
+              <br><br>
+              翻訳ではなく、<strong>同じ街を歩いて、同じものを食べて、それぞれの母国語で記録する</strong>。一見遠回りですが、これが「反応するコンテンツ」の唯一の道だと信じています。
+              <br><br>
+              貴社の商品・地域・サービスを、私たちと一緒に世界へ届けませんか。
+            </p>
+            <div class="team-letter-sign">
+              <span class="team-letter-sign-name">Andy</span>
+              <span class="team-letter-sign-role">JAPANKURU Creative Director</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 14년 타임라인 -->
+        <div class="team-timeline">
+          <div class="team-timeline-head">
+            <span class="micro-label">14 Years Journey</span>
+            <h3>2012年から、ずっと <em>多言語コンテンツ</em>。</h3>
+          </div>
+          <div class="timeline-track">
+            <div class="timeline-item">
+              <span class="timeline-year">2012</span>
+              <p class="timeline-event">韓国語版スタート</p>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-year">2014</span>
+              <p class="timeline-event">繁体字(台湾・香港)版へ拡大</p>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-year">2016</span>
+              <p class="timeline-event">タイ語版・SNS本格運用</p>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-year">2018</span>
+              <p class="timeline-event">英語圏進出・米国市場対応</p>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-year">2020</span>
+              <p class="timeline-event">中国 RED・Weibo 公式運用</p>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-year">2022</span>
+              <p class="timeline-event">ベトナム・インドネシア展開</p>
+            </div>
+            <div class="timeline-item timeline-item-now">
+              <span class="timeline-year">2025</span>
+              <p class="timeline-event"><strong>8言語・142万フォロワー</strong></p>
+            </div>
+          </div>
+        </div>
 
       </div>
     </section>
