@@ -3065,7 +3065,7 @@
     /* 좌측 사진 콜라주 */
     .coverage-photos {
       position: relative;
-      padding-bottom: 80px;
+      padding-bottom: 70px;
     }
     .coverage-photo-main {
       width: 100%;
@@ -3123,16 +3123,17 @@
     }
     .coverage-photo-sub {
       position: absolute;
-      bottom: 0;
-      right: -20px;
+      bottom: -36px;
+      right: -16px;
       z-index: 1;
-      width: 240px;
-      height: 180px;
+      width: 200px;
+      height: 150px;
       border-radius: 14px;
       overflow: hidden;
       transform: rotate(-3deg);
       box-shadow: 0 16px 36px rgba(11,18,32,.16);
       background: var(--bg-soft);
+      border: 4px solid #fff;
     }
     .coverage-photo-sub img {
       width: 100%;
@@ -4774,11 +4775,10 @@
       gap: 14px;
     }
     .footer-logo {
-      height: 56px;
+      height: 26px;
       width: auto;
       display: block;
       opacity: .92;
-      margin: -14px -10px;
     }
     .footer-company {
       margin-top: 20px;
@@ -4894,9 +4894,19 @@
       /* 取材ス타일 모바일 */
       .coverage-section { padding: 64px 0; }
       .coverage-body { grid-template-columns: 1fr; gap: 36px; }
-      .coverage-photos { padding-bottom: 0; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+      .coverage-photos { padding-bottom: 0; display: flex; flex-direction: column; align-items: stretch; gap: 0; }
       .coverage-photo-main { max-width: 100%; }
-      .coverage-photo-cap { z-index: 2; }
+      /* 캡션: 사진 안 absolute → 사진 아래 독립 바로 */
+      .coverage-photo-cap {
+        position: static;
+        margin-top: 14px;
+        left: auto; right: auto; bottom: auto;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        box-shadow: 0 4px 16px rgba(0,0,0,.06);
+      }
+      .coverage-photo-cap strong { font-size: 14px; }
+      .coverage-photo-cap small { font-size: 12px; margin-top: 3px; }
       /* sub 사진: 겹침 해제하고 main 아래 독립 배치 */
       .coverage-photo-sub {
         position: static;
@@ -4905,7 +4915,7 @@
         aspect-ratio: 4/3;
         right: auto;
         transform: rotate(-2deg);
-        margin-top: 8px;
+        margin: 18px auto 0;
       }
       .coverage-conclusion { padding: 24px 24px; }
       /* Team / Letter / Timeline 모바일 */
@@ -6670,7 +6680,7 @@
   <footer class="lp-footer">
     <div class="container footer-inner">
       <div class="footer-brand">
-        <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2025/07/GLD_type02_white_1178_785-2-1.png" alt="株式会社グローバル・デイリー" class="footer-logo"/>
+        <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/05/GLD_type02_white_cropped.png" alt="株式会社グローバル・デイリー" class="footer-logo"/>
       </div>
       <div>
         <a href="https://www.gldaily.com/" target="_blank" rel="noopener">公式サイト</a>
