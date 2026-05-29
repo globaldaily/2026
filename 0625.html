@@ -500,14 +500,14 @@ var info=document.getElementById('slide-info');
 var slideMap=document.getElementById('slideMap');
 var mapBtn=document.getElementById('mapBtn');
 var mapOpen=false;
-function buildMap(){slideMap.innerHTML='';for(var i=0;i<mapTitles.length;i++){if(mapDividers.indexOf(i)!==-1&&i>0){var d=document.createElement('div');d.className='map-div';slideMap.appendChild(d);}var btn=document.createElement('button');btn.className='slide-map-item'+(i===cur?' active':'');btn.innerHTML='<span class="mn">'+String(i+1).padStart(2,'0')+'</span><span>'+mapTitles[i]+'</span>';btn.setAttribute('data-idx',i);btn.onclick=function(){update(parseInt(this.getAttribute('data-idx')));updateMapActive();};slideMap.appendChild(btn);}}
-function updateMapActive(){slideMap.querySelectorAll('.slide-map-item').forEach(function(el,i){el.classList.toggle('active',i===cur);});var a=slideMap.querySelector('.slide-map-item.active');if(a)a.scrollIntoView({block:'nearest',behavior:'smooth'});}
+function buildMap(){if(!slideMap)return;slideMap.innerHTML='';for(var i=0;i<mapTitles.length;i++){if(mapDividers.indexOf(i)!==-1&&i>0){var d=document.createElement('div');d.className='map-div';slideMap.appendChild(d);}var btn=document.createElement('button');btn.className='slide-map-item'+(i===cur?' active':'');btn.innerHTML='<span class="mn">'+String(i+1).padStart(2,'0')+'</span><span>'+mapTitles[i]+'</span>';btn.setAttribute('data-idx',i);btn.onclick=function(){update(parseInt(this.getAttribute('data-idx')));updateMapActive();};slideMap.appendChild(btn);}}
+function updateMapActive(){if(!slideMap)return;slideMap.querySelectorAll('.slide-map-item').forEach(function(el,i){el.classList.toggle('active',i===cur);});var a=slideMap.querySelector('.slide-map-item.active');if(a)a.scrollIntoView({block:'nearest',behavior:'smooth'});}
 function toggleMap(){mapOpen=!mapOpen;slideMap.classList.toggle('open',mapOpen);mapBtn.style.background=mapOpen?'#C41E3A':'transparent';if(mapOpen)buildMap();}
 function next(){update(cur+1);}function prev(){update(cur-1);}
 document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();next();}if(e.key==='ArrowLeft'){e.preventDefault();prev();}if(e.key==='m'||e.key==='M')toggleMap();if(e.key==='Escape'&&mapOpen)toggleMap();});
-function fit(){var s=Math.min(window.innerWidth/1280,window.innerHeight/720);var p=document.querySelector('.presentation');p.style.transform='scale('+s+')';p.style.transformOrigin='center center';}
+function fit(){var s=Math.min(window.innerWidth/1280,window.innerHeight/720);var p=document.querySelector('.presentation');if(!p)return;p.style.transform='scale('+s+')';p.style.transformOrigin='center center';}
 window.addEventListener('resize',fit);fit();
 function update(n){slides[cur].classList.remove('active');cur=(n+total)%total;slides[cur].classList.add('active');info.textContent=(cur+1)+' / '+total;updateMapActive();}
-info.textContent='1 / '+total;buildMap();
+if(slides&&slides.length>0)slides[0].classList.add('active');info.textContent='1 / '+total;buildMap();
 slides.forEach(function(s,i){var n=s.querySelector('.slide-num');if(n)n.textContent=String(i+1).padStart(2,'0')+' / '+total;});
 </script></body></html>
