@@ -364,6 +364,51 @@ body{background:#f0f0f0;color:var(--text);font-family:"Noto Sans JP",sans-serif;
 .slide[data-slide-no="4"] .profile-copy-panel .ryu-logo-mark{width:230px !important;height:92px !important;margin-bottom:28px !important;}
 .slide[data-slide-no="4"] .profile-copy-panel .panel-eyebrow{margin-top:2px !important;}
 
+
+/* Slide 3 line-break polish */
+.slide[data-slide-no="3"] .company-title-fixed{font-size:30px !important;line-height:1.46 !important;letter-spacing:-.045em !important;margin-bottom:24px !important;}
+.slide[data-slide-no="3"] .company-title-fixed span{white-space:nowrap;}
+.slide[data-slide-no="3"] .product-line-fixed{font-size:13.5px !important;line-height:1.9 !important;}
+.slide[data-slide-no="3"] .product-line-fixed .indent{display:inline-block;margin-left:72px;}
+
+
+
+/* ── Slide 7 redesign: meaning-first history map ── */
+.slide[data-slide-no="7"].history-story-slide{
+  padding:76px 88px 48px !important;
+}
+.history-story-slide .deck-kicker{top:24px !important;left:36px !important;}
+.history-story-slide .ryu-history-badge{top:70px !important;right:88px !important;transform:scale(.9);transform-origin:top right;}
+.history-story-slide .history-story-wrap{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;}
+.history-story-slide .history-story-head{margin-top:6px;margin-bottom:18px;max-width:910px;}
+.history-story-slide .history-story-head .eyebrow{font:900 11px Montserrat,sans-serif;letter-spacing:3px;color:var(--red);margin-bottom:10px;}
+.history-story-slide .history-story-head h2{font-size:38px;line-height:1.18;font-weight:900;letter-spacing:-.035em;margin:0 0 10px;}
+.history-story-slide .history-story-head h2 span{color:var(--red)}
+.history-story-slide .history-story-head .sub{font-size:15px;line-height:1.7;color:#555;font-weight:700;}
+.history-story-slide .history-pulse{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px;}
+.history-story-slide .pulse-item{position:relative;background:#fff;border:1px solid #eee;border-left:4px solid var(--red);padding:12px 14px 13px;min-height:82px;box-shadow:0 8px 24px rgba(0,0,0,.035);}
+.history-story-slide .pulse-item .year{font:900 23px Montserrat,sans-serif;color:var(--red);line-height:1;margin-bottom:7px;}
+.history-story-slide .pulse-item p{font-size:12.5px;line-height:1.55;font-weight:900;color:#111;}
+.history-story-slide .pulse-item em{font-style:normal;font-size:10px;font-weight:900;color:#999;letter-spacing:1.5px;position:absolute;right:12px;top:13px;}
+.history-story-slide .history-phases{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:14px;flex:1;min-height:0;}
+.history-story-slide .phase-card{background:#f7f7f7;border-top:5px solid #ddd;padding:20px 20px 18px;display:flex;flex-direction:column;min-height:0;}
+.history-story-slide .phase-card.strong{background:rgba(196,30,58,.055);border-top-color:var(--red);}
+.history-story-slide .phase-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:16px;}
+.history-story-slide .phase-no{font:900 12px Montserrat,sans-serif;letter-spacing:2px;color:#aaa;margin-bottom:5px;}
+.history-story-slide .phase-title{font-size:22px;line-height:1.22;font-weight:900;color:#111;letter-spacing:-.02em;}
+.history-story-slide .phase-years{font:900 22px Montserrat,sans-serif;color:var(--red);white-space:nowrap;line-height:1;}
+.history-story-slide .phase-card:not(.strong) .phase-years{color:#999;}
+.history-story-slide .event-list{display:flex;flex-direction:column;gap:10px;margin-top:auto;}
+.history-story-slide .event{display:grid;grid-template-columns:58px 1fr;gap:12px;align-items:start;padding:10px 0;border-top:1px solid rgba(0,0,0,.075);}
+.history-story-slide .event .y{font:900 14px Montserrat,sans-serif;color:var(--red);line-height:1.2;}
+.history-story-slide .phase-card:not(.strong) .event .y{color:#999;}
+.history-story-slide .event b{display:block;font-size:13.5px;line-height:1.45;color:#111;margin-bottom:2px;}
+.history-story-slide .event span{display:block;font-size:11.5px;line-height:1.5;color:#666;}
+.history-story-slide .history-takeaway{margin-top:14px;background:#111;color:white;padding:13px 18px;display:flex;align-items:center;justify-content:space-between;gap:18px;}
+.history-story-slide .history-takeaway b{font-size:13px;color:#fff;letter-spacing:.04em;}
+.history-story-slide .history-takeaway p{font-size:13px;line-height:1.5;color:rgba(255,255,255,.78);font-weight:700;}
+.history-story-slide .deck-footer{left:88px !important;right:88px !important;bottom:22px !important;}
+
 </style>
 </head>
 <body>
@@ -437,7 +482,7 @@ body{background:#f0f0f0;color:var(--text);font-family:"Noto Sans JP",sans-serif;
 </section>
 <section class="ryu-info-panel">
 <p class="panel-eyebrow">COMPANY SNAPSHOT</p>
-<h3>“のどの専門メーカー”として、<br/>市場と生活者の変化に応えてきた会社。</h3>
+<h3 class="company-title-fixed"><span>“のどの専門メーカー”として、</span><br/><span>市場と生活者の変化に応えてきた会社。</span></h3>
 <div class="stat-grid">
 <div><span>創業</span><strong>1871</strong><em>年</em></div>
 <div><span>売上高</span><strong>279</strong><em>億円</em></div>
@@ -445,8 +490,8 @@ body{background:#f0f0f0;color:var(--text);font-family:"Noto Sans JP",sans-serif;
 <div><span>歴史</span><strong>200+</strong><em>年</em></div>
 </div>
 <div class="product-note">
-<p><b>主な展開</b>　龍角散、龍角散ダイレクト、のどすっきり飴、タブレット、服薬ゼリー等</p>
-<p><b>海外接点</b>　訪日インバウンド、越境EC、現地SNS、一般貿易へ展開</p>
+<p class="product-line-fixed"><b>主な展開</b>　龍角散、龍角散ダイレクト、のどすっきり飴、タブレット、<br/><span class="indent">服薬ゼリー等</span></p>
+<p class="product-line-fixed"><b>海外接点</b>　訪日インバウンド、越境EC、現地SNS、<br/><span class="indent">一般貿易へ展開</span></p>
 </div>
 </section>
 </div>
@@ -541,55 +586,60 @@ body{background:#f0f0f0;color:var(--text);font-family:"Noto Sans JP",sans-serif;
 </div>
 </div>
 <div class="deck-footer"><span>荒井良治プロフィール</span><span class="slide-num"></span></div></div>
-<div class="slide sec-history" data-section="03" data-section-title="HISTORY / CONTEXT" data-slide-no="7" data-title="龍角散×GLD 14年の歩み" style="padding:88px 100px 56px"><div class="deck-kicker"><span>03</span> HISTORY / CONTEXT</div><div class="ryu-history-badge"><span>龍角散</span><em>×</em><span>GLOBAL DAILY</span></div>
-<div style="flex:1;display:flex;flex-direction:column;position:relative;z-index:2;gap:0">
-<!-- HEADER -->
-<div class="s1" style="flex-shrink:0;margin-bottom:18px">
-<span style="font-size:11px;font-weight:700;letter-spacing:3px;color:var(--red);display:block;margin-bottom:8px">グローバル・デイリー × 龍角散　14年の歩み</span>
-<h2 style="font-size:36px;font-weight:900;line-height:1.2">2009年から始まった、<span style="color:var(--red)">インバウンドへの挑戦。</span></h2>
-</div>
-<!-- TIMELINE BAR (上段) -->
-<div class="s2" style="flex-shrink:0;position:relative;padding:10px 0 20px;margin-bottom:16px">
-<div style="position:absolute;top:18px;left:0;right:0;height:2px;background:var(--border)"></div>
-<div style="display:flex;justify-content:space-between;position:relative">
-<div style="display:flex;flex-direction:column;align-items:center;gap:6px"><div style="width:16px;height:16px;border-radius:50%;background:var(--red);z-index:1;box-shadow:0 0 0 4px rgba(196,30,58,0.15)"></div><p style="font-size:14px;font-weight:900;color:var(--red);font-family:Montserrat">2009</p></div><div style="display:flex;flex-direction:column;align-items:center;gap:6px"><div style="width:10px;height:10px;border-radius:50%;background:var(--border);z-index:1;"></div><p style="font-size:12px;font-weight:400;color:var(--muted);font-family:Montserrat">2010</p></div><div style="display:flex;flex-direction:column;align-items:center;gap:6px"><div style="width:16px;height:16px;border-radius:50%;background:var(--red);z-index:1;box-shadow:0 0 0 4px rgba(196,30,58,0.15)"></div><p style="font-size:14px;font-weight:900;color:var(--red);font-family:Montserrat">2014</p></div><div style="display:flex;flex-direction:column;align-items:center;gap:6px"><div style="width:10px;height:10px;border-radius:50%;background:var(--border);z-index:1;"></div><p style="font-size:12px;font-weight:400;color:var(--muted);font-family:Montserrat">2017</p></div><div style="display:flex;flex-direction:column;align-items:center;gap:6px"><div style="width:16px;height:16px;border-radius:50%;background:var(--red);z-index:1;box-shadow:0 0 0 4px rgba(196,30,58,0.15)"></div><p style="font-size:14px;font-weight:900;color:var(--red);font-family:Montserrat">2019</p></div><div style="display:flex;flex-direction:column;align-items:center;gap:6px"><div style="width:10px;height:10px;border-radius:50%;background:var(--border);z-index:1;"></div><p style="font-size:12px;font-weight:400;color:var(--muted);font-family:Montserrat">2020</p></div><div style="display:flex;flex-direction:column;align-items:center;gap:6px"><div style="width:16px;height:16px;border-radius:50%;background:var(--red);z-index:1;box-shadow:0 0 0 4px rgba(196,30,58,0.15)"></div><p style="font-size:14px;font-weight:900;color:var(--red);font-family:Montserrat">2021</p></div><div style="display:flex;flex-direction:column;align-items:center;gap:6px"><div style="width:10px;height:10px;border-radius:50%;background:var(--border);z-index:1;"></div><p style="font-size:12px;font-weight:400;color:var(--muted);font-family:Montserrat">2025</p></div>
-</div>
-</div>
-<!-- 取り組み TILES (下段) - 다른 스타일/폰트/컬러 -->
-<div class="s3" style="flex:1;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr);gap:8px;min-height:0">
-<div style="padding:14px 16px;background:rgba(196,30,58,0.06);border-left:3px solid var(--red);display:flex;flex-direction:column;justify-content:space-between;min-height:0">
-<p style="font-family:Montserrat;font-size:22px;font-weight:900;color:var(--red);line-height:1">2009</p>
-<p style="font-size:13px;color:var(--text);line-height:1.6;font-weight:700;margin-top:6px">家庭薬業界インバウンド共同活動スタート</p>
-</div><div style="padding:14px 16px;background:var(--card);border-left:3px solid var(--border);display:flex;flex-direction:column;justify-content:space-between;min-height:0">
-<p style="font-family:Montserrat;font-size:18px;font-weight:900;color:var(--muted);line-height:1">2010</p>
-<p style="font-size:12px;color:var(--text2);line-height:1.6;font-weight:400;margin-top:6px">暢游日本刊行
-心斎橋・狸小路 店頭POP設置</p>
-</div><div style="padding:14px 16px;background:rgba(196,30,58,0.06);border-left:3px solid var(--red);display:flex;flex-direction:column;justify-content:space-between;min-height:0">
-<p style="font-family:Montserrat;font-size:22px;font-weight:900;color:var(--red);line-height:1">2014</p>
-<p style="font-size:13px;color:var(--text);line-height:1.6;font-weight:700;margin-top:6px">小紅書「神薬」指定
-免税制度スタート・爆買い</p>
-</div><div style="padding:14px 16px;background:var(--card);border-left:3px solid var(--border);display:flex;flex-direction:column;justify-content:space-between;min-height:0">
-<p style="font-family:Montserrat;font-size:18px;font-weight:900;color:var(--muted);line-height:1">2014〜</p>
-<p style="font-size:12px;color:var(--text2);line-height:1.6;font-weight:400;margin-top:6px">越境EC開始
-中国語HP・公式SNS立ち上げ</p>
-</div><div style="padding:14px 16px;background:var(--card);border-left:3px solid var(--border);display:flex;flex-direction:column;justify-content:space-between;min-height:0">
-<p style="font-family:Montserrat;font-size:18px;font-weight:900;color:var(--muted);line-height:1">2017</p>
-<p style="font-size:12px;color:var(--text2);line-height:1.6;font-weight:400;margin-top:6px">中国現地広告展開
-教師向けイベント開始</p>
-</div><div style="padding:14px 16px;background:rgba(196,30,58,0.06);border-left:3px solid var(--red);display:flex;flex-direction:column;justify-content:space-between;min-height:0">
-<p style="font-family:Montserrat;font-size:22px;font-weight:900;color:var(--red);line-height:1">2019</p>
-<p style="font-size:13px;color:var(--text);line-height:1.6;font-weight:700;margin-top:6px">華潤三九医薬
-戦略パートナー提携</p>
-</div><div style="padding:14px 16px;background:var(--card);border-left:3px solid var(--border);display:flex;flex-direction:column;justify-content:space-between;min-height:0">
-<p style="font-family:Montserrat;font-size:18px;font-weight:900;color:var(--muted);line-height:1">2020〜</p>
-<p style="font-size:12px;color:var(--text2);line-height:1.6;font-weight:400;margin-top:6px">コロナ禍を越え
-中国一般貿易本格化</p>
-</div><div style="padding:14px 16px;background:rgba(196,30,58,0.06);border-left:3px solid var(--red);display:flex;flex-direction:column;justify-content:space-between;min-height:0">
-<p style="font-family:Montserrat;font-size:22px;font-weight:900;color:var(--red);line-height:1">2021</p>
-<p style="font-size:13px;color:var(--text);line-height:1.6;font-weight:700;margin-top:6px">旗艦店ライブ出演
-カテゴリーTOP受賞</p>
-</div>
-</div>
+<div class="slide sec-history history-story-slide" data-section="03" data-section-title="HISTORY / CONTEXT" data-slide-no="7" data-title="龍角散×GLD 14年の歩み"><div class="deck-kicker"><span>03</span> HISTORY / CONTEXT</div><div class="ryu-history-badge"><span>龍角散</span><em>×</em><span>GLOBAL DAILY</span></div>
+<div class="history-story-wrap">
+  <div class="history-story-head s1">
+    <p class="eyebrow">グローバル・デイリー × 龍角散　14年の歩み</p>
+    <h2>共同販促から、<span>越境EC・一般貿易・ライブコマース</span>へ。</h2>
+    <p class="sub">2009年のインバウンド施策を起点に、龍角散の中国向けコミュニケーションは段階的に拡張してきた。</p>
+  </div>
+
+  <div class="history-pulse s2">
+    <div class="pulse-item"><em>START</em><div class="year">2009</div><p>家庭薬業界インバウンド<br/>共同活動スタート</p></div>
+    <div class="pulse-item"><em>BOOM</em><div class="year">2014</div><p>小紅書「神薬」指定<br/>免税制度・爆買い</p></div>
+    <div class="pulse-item"><em>PARTNER</em><div class="year">2019</div><p>華潤三九医薬<br/>戦略パートナー提携</p></div>
+    <div class="pulse-item"><em>LIVE</em><div class="year">2021</div><p>旗艦店ライブ出演<br/>カテゴリーTOP受賞</p></div>
+  </div>
+
+  <div class="history-phases s3">
+    <section class="phase-card strong">
+      <div class="phase-top">
+        <div><div class="phase-no">PHASE 01</div><h3 class="phase-title">訪日需要を<br/>つくる</h3></div>
+        <div class="phase-years">2009–2014</div>
+      </div>
+      <div class="event-list">
+        <div class="event"><div class="y">2009</div><div><b>共同活動スタート</b><span>家庭薬業界で訪日需要に対応</span></div></div>
+        <div class="event"><div class="y">2010</div><div><b>店頭接点を整備</b><span>暢游日本刊行、心斎橋・狸小路POP設置</span></div></div>
+        <div class="event"><div class="y">2014</div><div><b>爆買い需要が拡大</b><span>小紅書「神薬」指定、免税制度スタート</span></div></div>
+      </div>
+    </section>
+
+    <section class="phase-card">
+      <div class="phase-top">
+        <div><div class="phase-no">PHASE 02</div><h3 class="phase-title">中国現地で<br/>認知を広げる</h3></div>
+        <div class="phase-years">2014–2019</div>
+      </div>
+      <div class="event-list">
+        <div class="event"><div class="y">2014〜</div><div><b>デジタル接点を拡張</b><span>越境EC、中国語HP、公式SNS立ち上げ</span></div></div>
+        <div class="event"><div class="y">2017</div><div><b>現地コミュニケーション開始</b><span>中国現地広告、教師向けイベント展開</span></div></div>
+        <div class="event"><div class="y">2019</div><div><b>流通パートナー連携</b><span>華潤三九医薬と戦略パートナー提携</span></div></div>
+      </div>
+    </section>
+
+    <section class="phase-card strong">
+      <div class="phase-top">
+        <div><div class="phase-no">PHASE 03</div><h3 class="phase-title">販売チャネルを<br/>定着させる</h3></div>
+        <div class="phase-years">2020–2025</div>
+      </div>
+      <div class="event-list">
+        <div class="event"><div class="y">2020〜</div><div><b>一般貿易へ本格化</b><span>コロナ禍を越え、中国市場で展開継続</span></div></div>
+        <div class="event"><div class="y">2021</div><div><b>ライブコマースで成果</b><span>旗艦店ライブ出演、カテゴリーTOP受賞</span></div></div>
+        <div class="event"><div class="y">2025</div><div><b>次の拡張フェーズへ</b><span>認知・信頼・購買導線をさらに強化</span></div></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="history-takeaway s4"><b>KEY MESSAGE</b><p>龍角散×GLDの歩みは、単発施策ではなく「訪日 → 現地認知 → 購買定着」へ進化した14年のマーケティング実装。</p></div>
 </div>
 <div class="deck-footer"><span>龍角散×GLD 14年の歩み</span><span class="slide-num"></span></div></div>
 <div class="slide sec-history history-detail-clean history-balanced-slide" data-section="03" data-section-title="HISTORY / CONTEXT" data-slide-no="8" data-title="2009 インバウンド施策スタート" style="padding:88px 100px 56px"><div class="deck-kicker"><span>03</span> HISTORY / CONTEXT</div>
@@ -870,28 +920,8 @@ body{background:#f0f0f0;color:var(--text);font-family:"Noto Sans JP",sans-serif;
 </div>
 </div>
 <div class="deck-footer"><span>インバウンドが先、越境は後</span><span class="slide-num"></span></div></div>
-<div class="slide sec-ending" data-section="05" data-section-title="MESSAGE / Q&amp;A" data-slide-no="20" data-title="本日ご参加の皆様へ" style="padding:0"><div class="deck-kicker"><span>05</span> MESSAGE / QA</div>
-<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 140px">
-<div style="position:absolute;top:0;left:0;width:6px;height:100%;background:var(--red)"></div>
-<p class="s1" style="font-size:11px;color:var(--muted);letter-spacing:5px;margin-bottom:28px;font-family:Montserrat;font-weight:700">10:45</p>
-<h2 class="s2" style="font-size:52px;font-weight:900;color:var(--text);line-height:1.3;margin-bottom:28px">
-            本日ご参加の皆様へ、<br/><span style="color:var(--red)">メッセージ。</span>
-</h2>
-<div style="width:40px;height:2px;background:var(--red);margin-bottom:28px"></div>
-<div class="s3" style="display:flex;gap:48px;align-items:flex-start">
-<div style="text-align:center">
-<p style="font-size:12px;color:var(--muted);margin-bottom:8px">株式会社龍角散</p>
-<p style="font-size:20px;font-weight:900">藤井 隆太 氏</p>
-</div>
-<div style="width:1px;height:44px;background:var(--border);margin-top:16px"></div>
-<div style="text-align:center">
-<p style="font-size:12px;color:var(--muted);margin-bottom:8px">株式会社グローバル・デイリー</p>
-<p style="font-size:20px;font-weight:900">荒井 良治</p>
-</div>
-</div>
-</div>
-<div class="deck-footer"><span>本日ご参加の皆様へ</span><span class="slide-num"></span></div></div>
-<div class="slide sec-ending" data-section="05" data-section-title="MESSAGE / Q&amp;A" data-slide-no="21" data-title="Q &amp; A" style="padding:0"><div class="deck-kicker"><span>05</span> MESSAGE / QA</div>
+
+<div class="slide sec-ending" data-section="05" data-section-title="MESSAGE / Q&amp;A" data-slide-no="20" data-title="Q &amp; A" style="padding:0"><div class="deck-kicker"><span>05</span> MESSAGE / QA</div>
 <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 140px">
 <div style="position:absolute;top:0;left:0;width:6px;height:100%;background:var(--red)"></div>
 <p class="s1" style="font-size:11px;color:var(--muted);letter-spacing:6px;margin-bottom:24px;font-family:Montserrat;font-weight:700">SESSION END</p>
@@ -908,7 +938,7 @@ body{background:#f0f0f0;color:var(--text);font-family:"Noto Sans JP",sans-serif;
 <div class="nav">
 <button class="nav-btn" id="prev">←</button>
 <button class="nav-btn" id="mapBtn">MAP</button>
-<span id="slide-info">1 / 21</span>
+<span id="slide-info">1 / 20</span>
 <button class="nav-btn" id="next">→</button>
 </div>
 <div class="slide-map" id="slideMap"></div>
@@ -938,7 +968,9 @@ body{background:#f0f0f0;color:var(--text);font-family:"Noto Sans JP",sans-serif;
       btn.innerHTML = '<span class="mn">' + String(i + 1).padStart(2, '0') + '</span><span>' + t + '</span>';
       btn.addEventListener('click', function(){ update(i); map.classList.remove('open'); });
       map.appendChild(btn);
-      if(i === 1 || i === 4 || i === 6 || i === 17 || i === 19){
+      var thisSection = slides[i] && slides[i].getAttribute('data-section');
+      var nextSection = slides[i + 1] && slides[i + 1].getAttribute('data-section');
+      if(nextSection && thisSection !== nextSection){
         var div = document.createElement('div');
         div.className = 'map-div';
         map.appendChild(div);
