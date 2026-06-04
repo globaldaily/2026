@@ -1067,7 +1067,7 @@ body{background:#f0f0f0;color:var(--text);font-family:"Noto Sans JP",sans-serif;
 .p7-message{display:grid;grid-template-columns:150px 1fr;align-items:center;min-height:54px;background:#171717;color:#fff;border-radius:11px;padding:11px 20px;box-shadow:0 10px 24px rgba(0,0,0,.15);flex-shrink:0;}
 .p7-message b{font:900 14px Montserrat,sans-serif;letter-spacing:2px;color:#fff;}
 .p7-message p{font-size:14.1px;line-height:1.4;font-weight:900;color:rgba(255,255,255,.86);text-align:right;margin:0;word-break:keep-all;}
-.slide[data-slide-no="7"].p7-final-slide .deck-footer{left:82px !important;right:82px !important;bottom:22px !important;z-index:10 !important;}
+
 
 
 /* image placeholders for user-added history visuals */
@@ -1548,12 +1548,6 @@ body{background:#f0f0f0;color:var(--text);font-family:"Noto Sans JP",sans-serif;
   color:rgba(255,255,255,.86) !important;
 }
 
-/* footer lighter */
-.slide[data-slide-no="7"].p7-final-slide .deck-footer,
-.slide[data-slide-no="7"].p7-final-slide .deck-footer span{
-  font-weight:400 !important;
-  color:#b8b8b8 !important;
-}
 
 .slide[data-slide-no="7"].p7-final-slide .slide-num{
   font-weight:700 !important;
@@ -1721,6 +1715,141 @@ body{background:#f0f0f0;color:var(--text);font-family:"Noto Sans JP",sans-serif;
   right:76px!important;
   bottom:24px!important;
 }
+/* === Slide 06: speaker profile tuning === */
+.slide[data-slide-no="6"] .profile-copy-panel{
+  padding:86px 60px 70px !important;
+}
+
+.slide[data-slide-no="6"] .profile-body{
+  font-size:15.5px !important;
+  line-height:1.9 !important;
+}
+
+.slide[data-slide-no="6"] .milestone-row span{
+  font-size:24px !important;
+  font-weight:800 !important;
+}
+
+.slide[data-slide-no="6"] .milestone-row p{
+  font-size:11.5px !important;
+  line-height:1.5 !important;
+}
+
+/* Remove white square before ABOUT RYUKAKUSAN */
+.sec-ryu .deck-kicker span{
+  background:transparent !important;
+  color:rgba(255,255,255,.65) !important;
+  width:auto !important;
+  height:auto !important;
+  padding:0 !important;
+  margin-right:14px !important;
+  display:inline-block !important;
+}
+.gld-brand-lockup{
+  margin-bottom:26px;
+  opacity:.55;
+}
+
+.gld-brand-lockup img{
+  width:170px;
+  height:auto;
+  filter:none !important;
+  opacity:1 !important;
+}
+/* === Slide 05: visible office building background === */
+.slide[data-slide-no="5"].gld-capability-slide{
+  position:relative !important;
+  overflow:hidden !important;
+  background:#fff !important;
+}
+
+/* building image area */
+.slide[data-slide-no="5"].gld-capability-slide::after{
+  content:"" !important;
+  position:absolute !important;
+  top:0 !important;
+  right:0 !important;
+  bottom:0 !important;
+  width:46% !important;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.98) 0%,
+      rgba(255,255,255,.72) 32%,
+      rgba(255,255,255,.40) 100%
+    ),
+    url("https://www.gldaily.com/gld-kanri/wp-content/uploads/2024/07/GLD_HP_office_CC08-1-scaled.jpg") center center / cover no-repeat !important;
+  opacity:.72 !important;
+  z-index:1 !important;
+  pointer-events:none !important;
+}
+
+/* keep slide 05 contents above the background image */
+.slide[data-slide-no="5"].gld-capability-slide .gld-capability-wrap{
+  position:relative !important;
+  z-index:3 !important;
+}
+
+/* restore header/footer absolute positioning */
+.slide[data-slide-no="5"].gld-capability-slide .deck-kicker{
+  position:absolute !important;
+  top:34px !important;
+  left:76px !important;
+  z-index:20 !important;
+}
+
+.slide[data-slide-no="5"].gld-capability-slide .deck-footer{
+  position:absolute !important;
+  left:76px !important;
+  right:76px !important;
+  bottom:24px !important;
+  z-index:20 !important;
+}
+
+/* make right panel readable over the image */
+.slide[data-slide-no="5"].gld-capability-slide .gld-capability-right{
+  position:relative !important;
+  z-index:4 !important;
+  background:rgba(255,255,255,.78) !important;
+  backdrop-filter:blur(2px);
+  border-radius:18px !important;
+  padding:34px 38px !important;
+  border-left:0 !important;
+  box-shadow:0 20px 50px rgba(0,0,0,.055) !important;
+}
+
+/* === Slide 07 footer: restore common deck footer style === */
+.slide[data-slide-no="7"].p7-final-slide .deck-footer{
+  position:absolute !important;
+  left:76px !important;
+  right:76px !important;
+  bottom:24px !important;
+  z-index:20 !important;
+
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+
+  border-top:1px solid rgba(0,0,0,.09) !important;
+  padding-top:12px !important;
+  background:transparent !important;
+
+  font-size:12px !important;
+  color:#999 !important;
+  letter-spacing:.02em !important;
+}
+
+.slide[data-slide-no="7"].p7-final-slide .deck-footer span{
+  font-weight:400 !important;
+  color:#999 !important;
+}
+
+.slide[data-slide-no="7"].p7-final-slide .deck-footer .slide-num{
+  font-family:Montserrat,sans-serif !important;
+  font-weight:900 !important;
+  color:#999 !important;
+  letter-spacing:2px !important;
+}
 </style>
 </head>
 <body>
@@ -1823,9 +1952,18 @@ body{background:#f0f0f0;color:var(--text);font-family:"Noto Sans JP",sans-serif;
 <h3>経営再建から海外展開まで、<br/>“正しい情報を届ける”ことを軸に。</h3>
 <p class="profile-body">1959年東京都生まれ。桐朋学園大学音楽学部卒業後、パリ留学を経てフルーティストとして活動。小林製薬・三菱化成工業を経て1994年龍角散入社、1995年代表取締役就任。<br/><br/>当時経営難だった会社を30年で売上を7倍にし、日本を代表とする医薬品メーカーに成長させる。</p>
 <div class="milestone-row">
-<div><span>1995</span><p>代表取締役社長<br/>就任</p></div>
-<div><span>1998</span><p>世界初の<br/>ゼリー状オブラート</p></div>
-<div><span>2013</span><p>国産生薬栽培<br/>開始</p></div>
+  <div>
+    <span>2008</span>
+    <p>グローバル・デイリー<br/>設立</p>
+  </div>
+  <div>
+    <span>2009</span>
+    <p>龍角散様の<br/>施策支援開始</p>
+  </div>
+  <div>
+    <span>18年</span>
+    <p>インバウンド領域に<br/>特化</p>
+  </div>
 </div>
 <blockquote>
 <p class="quote-label">PHILOSOPHY</p>
@@ -1879,6 +2017,9 @@ body{background:#f0f0f0;color:var(--text);font-family:"Noto Sans JP",sans-serif;
     </div>
 
     <div class="gld-capability-right">
+      <div class="gld-brand-lockup">
+    <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/01/GLD02-2-scaled.png" alt="GLOBAL DAILY">
+  </div>
       <p class="gld-side-label">主な支援領域・お取引先</p>
 
       <div class="gld-client-block active">
@@ -1922,20 +2063,32 @@ body{background:#f0f0f0;color:var(--text);font-family:"Noto Sans JP",sans-serif;
 <!-- RIGHT: profile text, CSS class -->
 <div class="profile-right">
 <p class="p-label s1">PROFILE</p>
-<p class="p-body s2">2008年、グローバル・デイリー設立。インバウンド専門マーケティング会社として訪日・在留外国人向けプロモーションを一筋に担う。<strong style="color:var(--text)">2009年より龍角散様のインバウンド施策をご支援</strong>し、家庭薬業界での共同活動を14年間推進。</p>
+<p class="profile-body">
+  2008年、株式会社グローバル・デイリーを設立。<br/>
+  訪日・在留外国人向けマーケティングを専門に、<br/>
+  医薬品・日用品をはじめとした日本企業の海外生活者接点づくりを支援。<br/>
+  <b>2009年より龍角散様のインバウンド施策に携わり、</b><br/>
+  家庭薬業界での共同活動を継続的に推進。
+</p>
+
 <div class="s3" style="display:flex;gap:10px;margin-top:8px">
-<div style="flex:1;padding:18px;text-align:center;border:1px solid var(--border);border-left:3px solid var(--red)">
-<p style="font-size:12px;color:var(--muted);margin-bottom:6px">創業</p>
-<p style="font-size:36px;font-weight:900;color:var(--red)">2008</p>
-</div>
-<div style="flex:1;padding:18px;text-align:center;border:1px solid var(--border);border-radius:4px">
-<p style="font-size:12px;color:var(--muted);margin-bottom:6px">専業年数</p>
-<p style="font-size:36px;font-weight:900">18年</p>
-</div>
-<div style="flex:1;padding:18px;text-align:center;border:1px solid var(--border);border-radius:4px">
-<p style="font-size:12px;color:var(--muted);margin-bottom:6px">リピート率</p>
-<p style="font-size:36px;font-weight:900">98%</p>
-</div>
+  <div style="flex:1;padding:18px;text-align:center;border:1px solid var(--border);border-left:3px solid var(--red)">
+    <p style="font-size:12px;color:var(--muted);margin-bottom:6px">設立</p>
+    <p style="font-size:30px;font-weight:800;color:var(--red);line-height:1">2008</p>
+    <p style="font-size:11px;color:#555;font-weight:700;margin-top:8px;line-height:1.45">グローバル・デイリー</p>
+  </div>
+
+  <div style="flex:1;padding:18px;text-align:center;border:1px solid var(--border);border-radius:4px">
+    <p style="font-size:12px;color:var(--muted);margin-bottom:6px">支援開始</p>
+    <p style="font-size:30px;font-weight:800;line-height:1">2009</p>
+    <p style="font-size:11px;color:#555;font-weight:700;margin-top:8px;line-height:1.45">龍角散様<br/>施策支援</p>
+  </div>
+
+  <div style="flex:1;padding:18px;text-align:center;border:1px solid var(--border);border-radius:4px">
+    <p style="font-size:12px;color:var(--muted);margin-bottom:6px">専門領域</p>
+    <p style="font-size:26px;font-weight:800;line-height:1">18年</p>
+    <p style="font-size:11px;color:#555;font-weight:700;margin-top:8px;line-height:1.45">インバウンド領域</p>
+  </div>
 </div>
 </div>
 </div>
