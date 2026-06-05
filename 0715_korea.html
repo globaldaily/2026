@@ -25,6 +25,10 @@ h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.32;letter-spacin
 .kick .lbl .en{font-size:10px;color:#b8b3aa;letter-spacing:.12em;display:block;margin-top:2px;font-family:var(--sans);font-weight:700}
 .dark .kick .lbl,.after .kick .lbl,.hero .kick .lbl{color:#b9b9b9;border-color:#3a3a3a}
 .eng{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.24em;color:var(--acc)}
+.kr-flag{display:inline-block;vertical-align:-3px;width:26px;height:auto;margin-right:2px;box-shadow:0 0 0 1px rgba(255,255,255,.12);border-radius:1px}
+.whynow .kr-flag{width:46px;vertical-align:middle;margin-right:14px;box-shadow:0 0 0 1px var(--line)}
+.whynow .flag-row{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.whynow .flag-row .lbl{font-size:13px;font-weight:700;letter-spacing:.06em;color:var(--acc)}
 .eng .dot{display:inline-block;width:7px;height:7px;background:var(--acc);margin-right:10px;vertical-align:1px}
 .kr{color:var(--mut);font-weight:500}
 .hand{font-family:var(--hand);color:var(--acc)}
@@ -136,9 +140,32 @@ section{padding:96px 0;border-bottom:1px solid var(--line)}
 .submit{margin-top:6px;background:var(--acc);color:#fff;border:none;padding:17px 48px;font-size:16px;font-weight:700;cursor:pointer;letter-spacing:.06em;border-radius:2px}
 .submit:hover{background:#b62a16}
 .form-foot{font-size:12px;color:var(--mut);margin-top:16px}
-.foot{background:#0f0f0f;color:#888;padding:46px 0;border:none;text-align:center}
-.foot .logo{color:#fff;font-family:var(--serif);font-weight:700;font-size:17px;letter-spacing:.04em;margin-bottom:10px}
-.foot .copy{font-size:12px}
+.foot{background:#0f0f0f;color:#888;padding:50px 0 40px;border:none;text-align:center}
+.foot .logo{color:#fff;font-family:var(--serif);font-weight:700;font-size:17px;letter-spacing:.04em;margin-bottom:14px}
+.foot .foot-info{font-size:12.5px;line-height:1.9;margin-bottom:18px;color:#a0a0a0}
+.foot .foot-info a{color:#a0a0a0;text-decoration:none;border-bottom:1px solid #444}
+.foot .foot-info a:hover{color:#fff;border-color:#fff}
+.foot .foot-links{font-size:12px;margin-bottom:18px;color:#666}
+.foot .foot-links a{color:#bbb;text-decoration:none;margin:0 4px}
+.foot .foot-links a:hover{color:#fff}
+.foot .foot-links span{color:#444;margin:0 4px}
+.foot .copy{font-size:11px;color:#666}
+
+/* Optional fields toggle */
+.opt-toggle{border:1px dashed var(--line);background:#fafaf7;padding:0;border-radius:2px;margin-top:4px}
+.opt-toggle summary{cursor:pointer;padding:14px 18px;font-size:13.5px;font-weight:700;color:var(--acc);list-style:none;outline:none}
+.opt-toggle summary::-webkit-details-marker{display:none}
+.opt-toggle[open] summary{border-bottom:1px solid var(--line);background:#fff}
+.opt-inner{padding:20px 18px;display:grid;grid-template-columns:1fr 1fr;gap:18px 22px}
+.opt-inner .fg.full{grid-column:1/-1}
+@media(max-width:780px){.opt-inner{grid-template-columns:1fr}}
+
+/* CORE menu card emphasis (slight) */
+.menu .m.core{border-color:var(--acc);background:#1a1414;position:relative}
+.menu .m.core:before{content:"おすすめ";position:absolute;top:-1px;right:-1px;background:var(--acc);color:#fff;font-size:10px;font-weight:700;letter-spacing:.1em;padding:5px 12px;border-radius:0 2px 0 2px}
+/* Scroll progress bar at top */
+.progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--acc);z-index:9999;transition:width .12s linear}
+
 @media(max-width:780px){
   section{padding:64px 0}
   .whynow .grid{grid-template-columns:1fr;gap:24px}
@@ -146,14 +173,23 @@ section{padding:96px 0;border-bottom:1px solid var(--line)}
   .qrow{grid-template-columns:1fr;gap:10px}
   .phase{grid-template-columns:1fr;gap:8px}
   .form-grid{grid-template-columns:1fr}
+  .bignum{font-size:clamp(72px,18vw,110px)!important}
+  .bar-row{grid-template-columns:1fr;gap:6px}
+  .bar-label{text-align:left;font-size:13px}
+  .cta-row{flex-direction:column;align-items:stretch;gap:10px}
+  .cta-row .btn{width:100%;text-align:center}
+  .cta-row .btn-cal{font-size:13px;padding:12px 16px}
+  .kr-flag{width:22px}
+  .whynow .kr-flag{width:38px}
 }
 </style>
 </head>
 <body>
+<div class="progress" id="progress"></div>
 
 <header class="hero">
   <div class="wide">
-    <div class="label fade"><b>■</b>　SEMINAR 2026 ・ 訪日韓国人 × 日本OTC</div>
+    <div class="label fade"><svg class="kr-flag" viewBox="0 0 90 60" xmlns="http://www.w3.org/2000/svg" aria-label="韓国国旗"><rect width="90" height="60" fill="#fff"/><path d="M 45 18 A 12 12 0 0 1 45 42 A 6 6 0 0 1 45 30 A 6 6 0 0 0 45 18 Z" fill="#0047A0"/><path d="M 45 18 A 6 6 0 0 0 45 30 A 6 6 0 0 1 45 42 A 12 12 0 0 0 45 18 Z" fill="#CD2E3A"/><g transform="translate(17 11) rotate(-33.69)" fill="#1a1a1a"><rect x="-4.5" y="-4.25" width="9" height="1.5"/><rect x="-4.5" y="-0.75" width="9" height="1.5"/><rect x="-4.5" y="2.75" width="9" height="1.5"/></g><g transform="translate(73 11) rotate(33.69)" fill="#1a1a1a"><rect x="-4.5" y="-4.25" width="9" height="1.5"/><rect x="-4.5" y="-0.75" width="3" height="1.5"/><rect x="1.5" y="-0.75" width="3" height="1.5"/><rect x="-4.5" y="2.75" width="9" height="1.5"/></g><g transform="translate(17 49) rotate(33.69)" fill="#1a1a1a"><rect x="-4.5" y="-4.25" width="3" height="1.5"/><rect x="1.5" y="-4.25" width="3" height="1.5"/><rect x="-4.5" y="-0.75" width="9" height="1.5"/><rect x="-4.5" y="2.75" width="3" height="1.5"/><rect x="1.5" y="2.75" width="3" height="1.5"/></g><g transform="translate(73 49) rotate(-33.69)" fill="#1a1a1a"><rect x="-4.5" y="-4.25" width="3" height="1.5"/><rect x="1.5" y="-4.25" width="3" height="1.5"/><rect x="-4.5" y="-0.75" width="3" height="1.5"/><rect x="1.5" y="-0.75" width="3" height="1.5"/><rect x="-4.5" y="2.75" width="3" height="1.5"/><rect x="1.5" y="2.75" width="3" height="1.5"/></g></svg>　SEMINAR 2026 ・ 訪日韓国人 × 日本OTC</div>
     <div class="target fade">製薬・OTC、ドラッグストア・小売、健康食品メーカー ご担当者様向け</div>
     <h1 class="fade">データで見る、<br>韓国人が買う<em>日本のOTC</em></h1>
     <div class="sub-kr fade">韓国トレンドの“なぜ”と、日本OTC購買の“いま”。その両方から見えてくるもの　／　데이터로 보는, 한국인이 사는 일본 OTC</div>
@@ -188,6 +224,10 @@ section{padding:96px 0;border-bottom:1px solid var(--line)}
 <section class="whynow">
   <div class="wrap">
     <div class="kick fade"><span class="idx">02</span><span class="lbl">なぜ今、韓国なのか<span class="en">KOREA · NOW</span></span></div>
+    <div class="flag-row fade">
+      <svg class="kr-flag" viewBox="0 0 90 60" xmlns="http://www.w3.org/2000/svg" aria-label="韓国国旗"><rect width="90" height="60" fill="#fff"/><path d="M 45 18 A 12 12 0 0 1 45 42 A 6 6 0 0 1 45 30 A 6 6 0 0 0 45 18 Z" fill="#0047A0"/><path d="M 45 18 A 6 6 0 0 0 45 30 A 6 6 0 0 1 45 42 A 12 12 0 0 0 45 18 Z" fill="#CD2E3A"/><g transform="translate(17 11) rotate(-33.69)" fill="#1a1a1a"><rect x="-4.5" y="-4.25" width="9" height="1.5"/><rect x="-4.5" y="-0.75" width="9" height="1.5"/><rect x="-4.5" y="2.75" width="9" height="1.5"/></g><g transform="translate(73 11) rotate(33.69)" fill="#1a1a1a"><rect x="-4.5" y="-4.25" width="9" height="1.5"/><rect x="-4.5" y="-0.75" width="3" height="1.5"/><rect x="1.5" y="-0.75" width="3" height="1.5"/><rect x="-4.5" y="2.75" width="9" height="1.5"/></g><g transform="translate(17 49) rotate(33.69)" fill="#1a1a1a"><rect x="-4.5" y="-4.25" width="3" height="1.5"/><rect x="1.5" y="-4.25" width="3" height="1.5"/><rect x="-4.5" y="-0.75" width="9" height="1.5"/><rect x="-4.5" y="2.75" width="3" height="1.5"/><rect x="1.5" y="2.75" width="3" height="1.5"/></g><g transform="translate(73 49) rotate(-33.69)" fill="#1a1a1a"><rect x="-4.5" y="-4.25" width="3" height="1.5"/><rect x="1.5" y="-4.25" width="3" height="1.5"/><rect x="-4.5" y="-0.75" width="3" height="1.5"/><rect x="1.5" y="-0.75" width="3" height="1.5"/><rect x="-4.5" y="2.75" width="3" height="1.5"/><rect x="1.5" y="2.75" width="3" height="1.5"/></g></svg>
+      <span class="lbl">大韓民国 ／ Republic of Korea</span>
+    </div>
     <div class="grid" style="margin-top:30px">
       <div class="bignum fade">87.9<small>万人 ／ 2026年4月 訪日韓国人・国別1位</small></div>
       <div class="txt fade">
@@ -323,7 +363,7 @@ section{padding:96px 0;border-bottom:1px solid var(--line)}
         <p>韓国OTCのトレンドは、数か月で入れ替わります。一度きりの資料では追いきれない「旬」を、毎月この形で ―― 競合より先に。</p>
         <p style="font-size:11.5px;color:#7c7c7c;margin-top:14px;letter-spacing:.02em">＊有料サービスとしてのご案内です。価格・購読プランは個別ご相談にて。</p>
       </div>
-      <div class="m fade">
+      <div class="m core fade">
         <div class="k">CORE ・ 形にする</div>
         <h3>韓国語コンテンツ 制作・発信運用</h3>
         <p>御社の製品に合わせた韓国語コンテンツを制作し、JAPANKURU・韓国インフルエンサー等で発信。旅マエの「買うものリスト」に入れにいきます。</p>
@@ -353,13 +393,10 @@ section{padding:96px 0;border-bottom:1px solid var(--line)}
     <div class="kick fade"><span class="idx">08</span><span class="lbl">お申込み<span class="en">APPLICATION</span></span></div>
     <h2 class="fade">先着20社限定 ―― ぜひお越しください</h2>
     <div class="meta fade">2026年7月28日（火）15:00〜 ｜ 東京本社（上野） ｜ 先着20社で締切</div>
-    <form class="form-grid fade" onsubmit="event.preventDefault();alert('※送信処理はWordPress側で接続してください');">
+    <form class="form-grid fade" id="seminar-form" onsubmit="event.preventDefault();document.getElementById('seminar-form').style.display='none';document.getElementById('thanks').style.display='block';document.getElementById('thanks').scrollIntoView({behavior:'smooth',block:'start'});return false">
       <div class="fg"><label>会社名<span class="req">*</span></label><input required></div>
-      <div class="fg"><label>部署名</label><input></div>
       <div class="fg"><label>お名前<span class="req">*</span></label><input required></div>
-      <div class="fg"><label>役職</label><input placeholder="例：マーケティング部 課長"></div>
       <div class="fg"><label>メールアドレス<span class="req">*</span></label><input type="email" required></div>
-      <div class="fg"><label>電話番号</label><input></div>
       <div class="fg"><label>業種<span class="req">*</span></label>
         <select required>
           <option value="">選択してください</option>
@@ -370,37 +407,65 @@ section{padding:96px 0;border-bottom:1px solid var(--line)}
           <option>広告・マーケティング</option>
           <option>その他</option>
         </select></div>
-      <div class="fg"><label>参加人数<span class="req">*</span></label>
-        <select required><option value="">選択してください</option><option>1名</option><option>2名</option><option>3名以上</option></select></div>
-      <div class="fg"><label>このセミナーを何で知りましたか？<span class="req">*</span></label>
-        <select required><option value="">選択してください</option><option>プレスリリース</option><option>弊社公式SNS</option><option>メールマガジン</option><option>弊社営業担当</option><option>知人・紹介</option><option>その他</option></select></div>
       <div class="fg full want">
         <label><input type="checkbox"> 個別相談を希望する（資料・御社向け活用プランのご案内）</label>
         <div class="sub">チェックいただくと、担当より個別にご連絡します。</div>
       </div>
-      <div class="fg full"><label>ご質問・ご要望（任意）</label><textarea rows="3"></textarea></div>
+      <details class="fg full opt-toggle">
+        <summary>＋ 追加情報を入力（任意）</summary>
+        <div class="opt-inner">
+          <div class="fg"><label>部署名</label><input></div>
+          <div class="fg"><label>役職</label><input placeholder="例：マーケティング部 課長"></div>
+          <div class="fg"><label>電話番号</label><input></div>
+          <div class="fg"><label>参加人数</label>
+            <select><option value="">選択してください</option><option>1名</option><option>2名</option><option>3名以上</option></select></div>
+          <div class="fg full"><label>このセミナーを何で知りましたか？</label>
+            <select><option value="">選択してください</option><option>プレスリリース</option><option>弊社公式SNS</option><option>メールマガジン</option><option>弊社営業担当</option><option>知人・紹介</option><option>その他</option></select></div>
+          <div class="fg full"><label>ご質問・ご要望</label><textarea rows="3"></textarea></div>
+        </div>
+      </details>
       <div class="fg full">
         <div class="checks" style="flex-direction:column;gap:8px">
           <label><input type="checkbox"> 会場での撮影・後日の発信掲載に同意する（参加者のお顔は掲載しません。同意いただかない場合もご参加いただけます）</label>
-          <label><input type="checkbox" required> プライバシーポリシーに同意します<span style="color:var(--acc);margin-left:4px">*</span></label>
+          <label><input type="checkbox" required> <a href="/privacy/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">プライバシーポリシー</a>に同意します<span style="color:var(--acc);margin-left:4px">*</span></label>
         </div>
       </div>
       <div class="fg full"><button type="submit" class="submit">この内容で申し込む</button>
       <div class="form-foot">お申込み後、ご入力のメールアドレスに確認メールをお送りします。　<a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%E9%9F%93%E5%9B%BD%E3%82%A4%E3%83%B3%E3%83%90%E3%82%A6%E3%83%B3%E3%83%89OTC%E3%82%BB%E3%83%9F%E3%83%8A%E3%83%BC2026&dates=20260728T060000Z/20260728T083000Z&details=%E8%A8%AA%E6%97%A5%E9%9F%93%E5%9B%BD%E4%BA%BA%E5%90%91%E3%81%91%20%E6%97%A5%E6%9C%ACOTC%E3%83%9E%E3%83%BC%E3%82%B1%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%BB%E3%83%9F%E3%83%8A%E3%83%BC&location=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%8F%B0%E6%9D%B1%E5%8C%BA%E6%9D%B1%E4%B8%8A%E9%87%8E4-8-1%20TIX%20TOWER%20UENO%2013F" target="_blank" rel="noopener" style="color:var(--acc);font-weight:700;text-decoration:none">＋ Googleカレンダーに追加</a></div></div>
     </form>
+
+    <div id="thanks" style="display:none;text-align:center;padding:50px 20px;max-width:680px;margin:0 auto">
+      <div style="font-family:var(--serif);font-size:34px;font-weight:900;color:var(--ink);margin-bottom:14px">お申込みありがとうございます。</div>
+      <p style="font-size:15px;color:#555;line-height:2;margin-bottom:30px">確認メールをお送りしました。担当より順次ご連絡いたします。<br>当日、上野でお会いできるのを楽しみにしております。</p>
+      <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%E9%9F%93%E5%9B%BD%E3%82%A4%E3%83%B3%E3%83%90%E3%82%A6%E3%83%B3%E3%83%89OTC%E3%82%BB%E3%83%9F%E3%83%8A%E3%83%BC2026&dates=20260728T060000Z/20260728T083000Z&location=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%8F%B0%E6%9D%B1%E5%8C%BA%E6%9D%B1%E4%B8%8A%E9%87%8E4-8-1%20TIX%20TOWER%20UENO%2013F" target="_blank" rel="noopener" class="btn btn-primary" style="display:inline-block">＋ Googleカレンダーに登録</a>
+    </div>
   </div>
 </section>
 
 <footer class="foot">
   <div class="wrap">
-    <div class="logo">Global Daily ・ JAPANKURU</div>
-    <div class="copy">© Global Daily Co., Ltd　東京都台東区東上野4-8-1 TIX TOWER UENO　Tel: 03-6860-7011</div>
+    <div class="logo">株式会社グローバル・デイリー</div>
+    <div class="foot-info">
+      〒110-0015　東京都台東区東上野4-8-1 TIX TOWER UENO　／　Tel: <a href="tel:0368607011">03-6860-7011</a>
+    </div>
+    <div class="foot-links">
+      <a href="/company/">会社概要</a>
+      <span>／</span>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <span>／</span>
+      <a href="/tokushoho/">特定商取引法に基づく表記</a>
+    </div>
+    <div class="copy">© Global Daily Co., Ltd.</div>
   </div>
 </footer>
 
 <script>
 const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
 document.querySelectorAll('.fade').forEach((el,i)=>{el.style.transitionDelay=(i%4*0.05)+'s';io.observe(el)});
+
+// Scroll progress bar
+const pb=document.getElementById('progress');
+window.addEventListener('scroll',()=>{const h=document.documentElement;const p=h.scrollTop/(h.scrollHeight-h.clientHeight)*100;pb.style.width=p+'%'},{passive:true});
 </script>
 </body>
 </html>
