@@ -25,23 +25,54 @@ h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.32;letter-spacin
 .kick .lbl .en{font-size:10px;color:#b8b3aa;letter-spacing:.12em;display:block;margin-top:2px;font-family:var(--sans);font-weight:700}
 .dark .kick .lbl,.after .kick .lbl,.hero .kick .lbl{color:#b9b9b9;border-color:#3a3a3a}
 .eng{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.24em;color:var(--acc)}
-.kr-flag{display:inline-block;vertical-align:-3px;width:26px;height:auto;margin-right:2px;box-shadow:0 0 0 1px rgba(255,255,255,.12);border-radius:1px}
-.whynow .kr-flag{width:46px;vertical-align:middle;margin-right:14px;box-shadow:0 0 0 1px var(--line)}
-.whynow .flag-row{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.kr-flag-img{width:74px;height:auto;display:block;box-shadow:0 2px 14px rgba(0,0,0,.08);border:1px solid var(--line);border-radius:1px}
+.whynow .flag-row{display:flex;align-items:center;gap:18px;margin-bottom:20px}
 .whynow .flag-row .lbl{font-size:13px;font-weight:700;letter-spacing:.06em;color:var(--acc)}
+@media(max-width:780px){.kr-flag-img{width:60px}}
 .eng .dot{display:inline-block;width:7px;height:7px;background:var(--acc);margin-right:10px;vertical-align:1px}
 .kr{color:var(--mut);font-weight:500}
 .hand{font-family:var(--hand);color:var(--acc)}
 section{padding:96px 0;border-bottom:1px solid var(--line)}
 .fade{opacity:0;transform:translateY(16px);transition:opacity .8s ease,transform .8s ease}
 .fade.in{opacity:1;transform:none}
-.hero{background:var(--dark);color:#fff;border:none;padding:0;position:relative;overflow:hidden}
+.hero{
+  background:
+    linear-gradient(to right, rgba(15,15,15,0.94) 0%, rgba(15,15,15,0.82) 50%, rgba(15,15,15,0.55) 100%),
+    url('https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/06/DSC00762.jpg') center/cover no-repeat,
+    var(--dark);
+  color:#fff;border:none;padding:0;position:relative;overflow:hidden
+}
 .hero:before{content:"";position:absolute;top:-120px;right:-80px;width:340px;height:340px;border:1px solid #2a2a2a;border-radius:50%}
-.hero:after{content:"";position:absolute;top:-40px;right:40px;width:180px;height:180px;border:1px solid #242424;border-radius:50%}
+.hero:after{content:"";position:absolute;top:-60px;right:60px;width:240px;height:240px;border:1px solid #242424;border-radius:50%;pointer-events:none}
+.hero-flag{position:absolute;top:50px;right:60px;width:170px;height:auto;box-shadow:0 12px 40px rgba(0,0,0,.55);border:1px solid #2a2a2a;z-index:2;border-radius:1px}
+@media(max-width:880px){.hero-flag{width:110px;top:30px;right:24px}.hero:after{width:180px;height:180px;top:-40px;right:30px}}
+@media(max-width:520px){.hero-flag{width:78px;top:20px;right:18px}.hero:after{display:none}}
 .hero .wide{position:relative;z-index:2;padding-top:78px;padding-bottom:80px}
 .hero .label{font-size:11px;letter-spacing:.24em;color:#c9c9c9;font-weight:700;margin-bottom:30px}
 .hero .label b{color:var(--acc)}
 .hero .target{font-size:13.5px;color:#b5b5b5;letter-spacing:.04em;margin-bottom:26px}
+
+/* Target industry chips */
+.targets{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:30px}
+.targets .chip{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.04em;color:#fff;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);padding:7px 13px;border-radius:2px}
+.targets .target-suf{font-size:13px;color:#888;font-weight:500;margin-left:6px}
+@media(max-width:520px){.targets .chip{font-size:11px;padding:6px 10px}.targets .target-suf{font-size:12px;width:100%;margin-left:0;margin-top:4px}}
+
+/* EVENT DETAILS box */
+.event-details{padding:54px 0 30px;background:#fff;border-bottom:1px solid var(--line2)}
+.ed-box{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--line);background:#fff}
+.ed-item{padding:26px 18px;border-right:1px solid var(--line);text-align:center}
+.ed-item:last-child{border-right:none}
+.ed-lbl{font-size:11px;font-weight:700;letter-spacing:.18em;color:var(--mut);margin-bottom:10px}
+.ed-val{font-size:13px;color:#3a3a3a;line-height:1.7}
+.ed-val b{display:block;font-size:17px;color:var(--ink);font-weight:700;letter-spacing:.02em;margin-bottom:3px}
+.ed-val.acc b{color:var(--acc);font-size:20px}
+@media(max-width:780px){.ed-box{grid-template-columns:1fr 1fr}.ed-item{border-right:none;border-bottom:1px solid var(--line)}.ed-item:nth-child(odd){border-right:1px solid var(--line)}.ed-item:last-child{grid-column:1/-1;border-right:none;border-bottom:none}}
+
+/* Source markers ①② */
+.src-mark{font-size:.55em;color:var(--acc);font-weight:700;margin-left:2px;vertical-align:super;line-height:0}
+.src-line{display:flex;gap:8px;align-items:baseline;margin-bottom:5px;font-size:11.5px;color:var(--mut);line-height:1.7}
+.src-num{display:inline-block;flex:0 0 auto;width:18px;text-align:center;color:var(--acc);font-weight:700;font-size:11px}
 .hero h1{font-size:clamp(36px,6vw,68px);font-weight:900;color:#fff;line-height:1.16;margin-bottom:20px}
 .hero h1 em{font-style:normal;color:var(--acc)}
 .hero .sub-kr{font-size:15px;color:#8f8f8f;margin-bottom:38px}
@@ -179,8 +210,6 @@ section{padding:96px 0;border-bottom:1px solid var(--line)}
   .cta-row{flex-direction:column;align-items:stretch;gap:10px}
   .cta-row .btn{width:100%;text-align:center}
   .cta-row .btn-cal{font-size:13px;padding:12px 16px}
-  .kr-flag{width:22px}
-  .whynow .kr-flag{width:38px}
 }
 </style>
 </head>
@@ -188,12 +217,17 @@ section{padding:96px 0;border-bottom:1px solid var(--line)}
 <div class="progress" id="progress"></div>
 
 <header class="hero">
+  <img class="hero-flag" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2023/03/Flag_of_South_Korea.svg.png" alt="韓国国旗">
   <div class="wide">
-    <div class="label fade"><svg class="kr-flag" viewBox="0 0 90 60" xmlns="http://www.w3.org/2000/svg" aria-label="韓国国旗"><rect width="90" height="60" fill="#fff"/><path d="M 45 18 A 12 12 0 0 1 45 42 A 6 6 0 0 1 45 30 A 6 6 0 0 0 45 18 Z" fill="#0047A0"/><path d="M 45 18 A 6 6 0 0 0 45 30 A 6 6 0 0 1 45 42 A 12 12 0 0 0 45 18 Z" fill="#CD2E3A"/><g transform="translate(17 11) rotate(-33.69)" fill="#1a1a1a"><rect x="-4.5" y="-4.25" width="9" height="1.5"/><rect x="-4.5" y="-0.75" width="9" height="1.5"/><rect x="-4.5" y="2.75" width="9" height="1.5"/></g><g transform="translate(73 11) rotate(33.69)" fill="#1a1a1a"><rect x="-4.5" y="-4.25" width="9" height="1.5"/><rect x="-4.5" y="-0.75" width="3" height="1.5"/><rect x="1.5" y="-0.75" width="3" height="1.5"/><rect x="-4.5" y="2.75" width="9" height="1.5"/></g><g transform="translate(17 49) rotate(33.69)" fill="#1a1a1a"><rect x="-4.5" y="-4.25" width="3" height="1.5"/><rect x="1.5" y="-4.25" width="3" height="1.5"/><rect x="-4.5" y="-0.75" width="9" height="1.5"/><rect x="-4.5" y="2.75" width="3" height="1.5"/><rect x="1.5" y="2.75" width="3" height="1.5"/></g><g transform="translate(73 49) rotate(-33.69)" fill="#1a1a1a"><rect x="-4.5" y="-4.25" width="3" height="1.5"/><rect x="1.5" y="-4.25" width="3" height="1.5"/><rect x="-4.5" y="-0.75" width="3" height="1.5"/><rect x="1.5" y="-0.75" width="3" height="1.5"/><rect x="-4.5" y="2.75" width="3" height="1.5"/><rect x="1.5" y="2.75" width="3" height="1.5"/></g></svg>　SEMINAR 2026 ・ 訪日韓国人 × 日本OTC</div>
-    <div class="target fade">製薬・OTC、ドラッグストア・小売、健康食品メーカー ご担当者様向け</div>
+    <div class="label fade"><b>■</b>　SEMINAR 2026 ・ 訪日韓国人 × 日本OTC</div>
+    <div class="targets fade">
+      <span class="chip">製薬・OTC</span>
+      <span class="chip">ドラッグストア・小売</span>
+      <span class="chip">健康食品メーカー</span>
+      <span class="target-suf">ご担当者様向け</span>
+    </div>
     <h1 class="fade">データで見る、<br>韓国人が買う<em>日本のOTC</em></h1>
     <div class="sub-kr fade">韓国トレンドの“なぜ”と、日本OTC購買の“いま”。その両方から見えてくるもの　／　데이터로 보는, 한국인이 사는 일본 OTC</div>
-    <div class="meta fade">2026.7.28（火）15:00〜　／　東京本社（上野）　／　オフライン　／　<b>20社限定</b>　／　参加費 <span class="free">無料</span></div>
     <div class="cta-row fade">
       <a href="#apply" class="btn btn-primary">セミナーに申し込む</a>
       <a href="#contents" class="btn btn-ghost">内容を見る</a>
@@ -201,6 +235,33 @@ section{padding:96px 0;border-bottom:1px solid var(--line)}
     </div>
   </div>
 </header>
+
+<section class="event-details">
+  <div class="wrap">
+    <div class="ed-box fade">
+      <div class="ed-item">
+        <div class="ed-lbl">日時</div>
+        <div class="ed-val"><b>2026.7.28</b>（火）<br>15:00〜17:30</div>
+      </div>
+      <div class="ed-item">
+        <div class="ed-lbl">会場</div>
+        <div class="ed-val"><b>東京本社（上野）</b><br>TIX TOWER UENO 13F</div>
+      </div>
+      <div class="ed-item">
+        <div class="ed-lbl">形式</div>
+        <div class="ed-val"><b>オフライン</b><br>（リアル会場）</div>
+      </div>
+      <div class="ed-item">
+        <div class="ed-lbl">定員</div>
+        <div class="ed-val"><b>20社限定</b><br>（先着順）</div>
+      </div>
+      <div class="ed-item">
+        <div class="ed-lbl">参加費</div>
+        <div class="ed-val acc"><b>無料</b><br>＆事前申込制</div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="mani">
   <div class="wrap">
@@ -225,23 +286,23 @@ section{padding:96px 0;border-bottom:1px solid var(--line)}
   <div class="wrap">
     <div class="kick fade"><span class="idx">02</span><span class="lbl">なぜ今、韓国なのか<span class="en">KOREA · NOW</span></span></div>
     <div class="flag-row fade">
-      <svg class="kr-flag" viewBox="0 0 90 60" xmlns="http://www.w3.org/2000/svg" aria-label="韓国国旗"><rect width="90" height="60" fill="#fff"/><path d="M 45 18 A 12 12 0 0 1 45 42 A 6 6 0 0 1 45 30 A 6 6 0 0 0 45 18 Z" fill="#0047A0"/><path d="M 45 18 A 6 6 0 0 0 45 30 A 6 6 0 0 1 45 42 A 12 12 0 0 0 45 18 Z" fill="#CD2E3A"/><g transform="translate(17 11) rotate(-33.69)" fill="#1a1a1a"><rect x="-4.5" y="-4.25" width="9" height="1.5"/><rect x="-4.5" y="-0.75" width="9" height="1.5"/><rect x="-4.5" y="2.75" width="9" height="1.5"/></g><g transform="translate(73 11) rotate(33.69)" fill="#1a1a1a"><rect x="-4.5" y="-4.25" width="9" height="1.5"/><rect x="-4.5" y="-0.75" width="3" height="1.5"/><rect x="1.5" y="-0.75" width="3" height="1.5"/><rect x="-4.5" y="2.75" width="9" height="1.5"/></g><g transform="translate(17 49) rotate(33.69)" fill="#1a1a1a"><rect x="-4.5" y="-4.25" width="3" height="1.5"/><rect x="1.5" y="-4.25" width="3" height="1.5"/><rect x="-4.5" y="-0.75" width="9" height="1.5"/><rect x="-4.5" y="2.75" width="3" height="1.5"/><rect x="1.5" y="2.75" width="3" height="1.5"/></g><g transform="translate(73 49) rotate(-33.69)" fill="#1a1a1a"><rect x="-4.5" y="-4.25" width="3" height="1.5"/><rect x="1.5" y="-4.25" width="3" height="1.5"/><rect x="-4.5" y="-0.75" width="3" height="1.5"/><rect x="1.5" y="-0.75" width="3" height="1.5"/><rect x="-4.5" y="2.75" width="3" height="1.5"/><rect x="1.5" y="2.75" width="3" height="1.5"/></g></svg>
+      <img class="kr-flag-img" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2023/03/Flag_of_South_Korea.svg.png" alt="韓国国旗">
       <span class="lbl">大韓民国 ／ Republic of Korea</span>
     </div>
     <div class="grid" style="margin-top:30px">
-      <div class="bignum fade">87.9<small>万人 ／ 2026年4月 訪日韓国人・国別1位</small></div>
+      <div class="bignum fade">87.9<small>万人 ／ 2026年4月 訪日韓国人・国別1位<sup class="src-mark">①</sup></small></div>
       <div class="txt fade">
-        <p>2026年4月、訪日客数の<b>全体は前年を下回りました</b>。そのなかで韓国は <b>87.9万人・前年同月比+21.7%</b> ―― 4月として<b>過去最高</b>を更新し、国別1位。<b style="color:var(--acc)">全体が減るなか、韓国だけが伸びている</b>。いま向き合うべき市場である理由です。</p>
+        <p>2026年4月、訪日客数の<b>全体は前年を下回りました</b>。そのなかで韓国は <b>87.9万人・前年同月比+21.7%</b><sup class="src-mark">①</sup> ―― 4月として<b>過去最高</b>を更新し、国別1位。<b style="color:var(--acc)">全体が減るなか、韓国だけが伸びている</b>。いま向き合うべき市場である理由です。</p>
         <div class="figs">
-          <div class="f"><div class="n" style="color:var(--acc)">＋21.7%</div><div class="c">韓国・2026年4月（全体はマイナス）</div></div>
-          <div class="f"><div class="n">過去最高</div><div class="c">4月として・国別1位</div></div>
+          <div class="f"><div class="n" style="color:var(--acc)">＋21.7%</div><div class="c">韓国・2026年4月（全体はマイナス）<sup class="src-mark">①</sup></div></div>
+          <div class="f"><div class="n">過去最高</div><div class="c">4月として・国別1位<sup class="src-mark">①</sup></div></div>
         </div>
       </div>
     </div>
 
     <div class="bars fade">
       <div class="bars-head">そして、その韓国が「日本のOTCを広く買う」</div>
-      <div class="bars-sub">医薬品 購入率 ―― 韓国は全国籍平均を大きく上回る</div>
+      <div class="bars-sub">医薬品 購入率 ―― 韓国は全国籍平均を大きく上回る<sup class="src-mark">②</sup></div>
       <div class="bar-row">
         <div class="bar-label">韓国</div>
         <div class="bar-track"><div class="bar-fill" style="--w:86.5%"><span class="bar-val">34.6%</span></div></div>
@@ -254,7 +315,8 @@ section{padding:96px 0;border-bottom:1px solid var(--line)}
     </div>
 
     <div class="src fade">
-      出典：JNTO「訪日外客数」2026年4月推計値（韓国 87.9万人・前年同月比+21.7%・国別1位）／ 観光庁「インバウンド消費動向調査」2026年1-3月期【1次速報】表2-1（医薬品 購入率：韓国34.6%／全国籍25.5%）。
+      <div class="src-line"><span class="src-num">①</span>JNTO「訪日外客数」2026年4月推計値（韓国 87.9万人・前年同月比+21.7%・国別1位）</div>
+      <div class="src-line"><span class="src-num">②</span>観光庁「インバウンド消費動向調査」2026年1-3月期【1次速報】表2-1（医薬品 購入率：韓国 34.6%／全国籍 25.5%）</div>
     </div>
   </div>
 </section>
