@@ -2248,6 +2248,28 @@ section {
     display: none;
   }
 }
+
+/* Watermark visibility tuning */
+.hero::after {
+  color: rgba(40, 94, 74, .10);
+}
+
+@media (max-width: 900px) {
+  .hero::after {
+    top: 118px;
+    font-size: clamp(54px, 15vw, 96px);
+    color: rgba(40, 94, 74, .07);
+    letter-spacing: .02em;
+  }
+}
+
+@media (max-width: 430px) {
+  .hero::after {
+    top: 126px;
+    font-size: 58px;
+    color: rgba(40, 94, 74, .065);
+  }
+}
 </style>
 
 <div class="progress" id="progress"></div>
