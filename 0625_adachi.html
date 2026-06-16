@@ -3,351 +3,526 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>職業体験 進行スライド</title>
+<title>職業体験 進行スライド ｜ 足立学園中学校 × GLOBAL DAILY</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;800&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --ink:#1d1d1f;
-    --sub:#6e6e73;
-    --line:#d9d6d1;
-    --accent:#c8453c;
-    --paper:#faf8f5;
-  }
+  :root{--ink:#1d1d1f;--sub:#6e6e73;--line:#d9d6d1;--accent:#c8453c;--paper:#faf8f5;
+    --c-red:#d8344a;--c-blue:#2566b0;--c-green:#3fae5a;--c-orange:#e8842b;--stage:1120px;}
   *{box-sizing:border-box;margin:0;padding:0;}
   html,body{height:100%;}
-  body{
-    background:#0e0e0f;
-    font-family:"Noto Sans JP",sans-serif;
-    color:var(--ink);
-    overflow:hidden;
-    -webkit-font-smoothing:antialiased;
-  }
-
-  .slide{
-    position:fixed;inset:0;
-    background:var(--paper);
-    padding:7vh 8vw;
-    display:none;
-    flex-direction:column;
-    justify-content:center;
-  }
+  body{background:#0e0e0f;font-family:"Noto Sans JP",sans-serif;color:var(--ink);overflow:hidden;-webkit-font-smoothing:antialiased;}
+  .slide{position:fixed;inset:0;background:var(--paper);padding:8vh 7vw;display:none;flex-direction:column;justify-content:center;}
   .slide.active{display:flex;}
-
-  .eyebrow{
-    font-size:clamp(11px,1.2vw,15px);
-    letter-spacing:.22em;
-    color:var(--accent);
-    font-weight:700;
-    margin-bottom:2.4vh;
-  }
-  h1{
-    font-family:"Shippori Mincho B1",serif;
-    font-weight:800;
-    font-size:clamp(34px,6.2vw,82px);
-    line-height:1.18;
-    letter-spacing:.01em;
-  }
-  h2{
-    font-family:"Shippori Mincho B1",serif;
-    font-weight:800;
-    font-size:clamp(28px,4.6vw,60px);
-    line-height:1.25;
-  }
-  .lead{
-    font-size:clamp(16px,2.1vw,28px);
-    line-height:1.75;
-    color:var(--ink);
-    margin-top:3vh;
-    max-width:24em;
-  }
+  .stage{width:100%;max-width:min(var(--stage),88vw);margin-inline:auto;position:relative;z-index:1;}
+  .eyebrow{font-size:clamp(11px,1.2vw,15px);letter-spacing:.22em;color:var(--accent);font-weight:700;margin-bottom:2.2vh;}
+  h1{font-family:"Shippori Mincho B1",serif;font-weight:800;font-size:clamp(34px,5.6vw,76px);line-height:1.2;letter-spacing:.01em;}
+  h2{font-family:"Shippori Mincho B1",serif;font-weight:800;font-size:clamp(27px,4.2vw,56px);line-height:1.26;}
+  h2.title-1line{white-space:nowrap;font-size:clamp(22px,3.3vw,46px);}
+  .lead{font-size:clamp(16px,1.9vw,26px);line-height:1.75;margin-top:2.4vh;max-width:34em;}
   .lead.sub{color:var(--sub);}
-  .big{
-    font-size:clamp(30px,5.2vw,68px);
-    font-family:"Shippori Mincho B1",serif;
-    font-weight:800;
-    line-height:1.3;
-  }
+  .big{font-size:clamp(26px,3.9vw,52px);font-family:"Shippori Mincho B1",serif;font-weight:800;line-height:1.34;}
   .accent{color:var(--accent);}
+  ul.points{list-style:none;margin-top:3vh;}
+  ul.points li{font-size:clamp(16px,1.9vw,25px);line-height:1.6;padding-left:1.4em;position:relative;margin-bottom:2vh;}
+  ul.points li:last-child{margin-bottom:0;}
+  ul.points li::before{content:"";position:absolute;left:0;top:.62em;width:.5em;height:.5em;background:var(--accent);border-radius:50%;}
+  ul.points li small{display:block;font-size:.62em;color:var(--sub);margin-top:.3em;font-weight:400;line-height:1.5;}
 
-  /* lists */
-  ul.points{list-style:none;margin-top:3.5vh;}
-  ul.points li{
-    font-size:clamp(16px,2.1vw,27px);
-    line-height:1.6;
-    padding-left:1.4em;
-    position:relative;
-    margin-bottom:2.2vh;
-  }
-  ul.points li::before{
-    content:"";position:absolute;left:0;top:.62em;
-    width:.5em;height:.5em;background:var(--accent);border-radius:50%;
-  }
-  ul.points li small{display:block;font-size:.62em;color:var(--sub);margin-top:.3em;font-weight:400;}
-
-  .three{display:flex;gap:2vw;margin-top:4vh;}
-  .three .card{
-    flex:1;border:1px solid var(--line);border-radius:10px;
-    padding:2.4vh 1.6vw;background:#fff;
-  }
-  .three .card .n{font-family:"Shippori Mincho B1",serif;color:var(--accent);font-size:clamp(20px,2.4vw,30px);}
-  .three .card .t{font-weight:700;font-size:clamp(15px,1.7vw,21px);margin:1vh 0 .6vh;}
-  .three .card .d{font-size:clamp(12px,1.3vw,16px);color:var(--sub);line-height:1.6;}
-
-  /* flow (timetable) */
-  .flow{margin-top:4vh;display:flex;flex-direction:column;gap:2.2vh;max-width:30em;}
-  .flow .row{display:flex;align-items:baseline;gap:1.4vw;}
-  .flow .tm{font-family:"Shippori Mincho B1",serif;color:var(--accent);font-size:clamp(15px,1.7vw,22px);flex:0 0 8.5em;}
-  .flow .ac{font-size:clamp(15px,1.8vw,23px);}
-
-  /* divider slide */
+  .slide.photo{background-size:cover;background-position:center;background-color:#241f1d;}
+  .slide.photo::before{content:"";position:absolute;inset:0;background:linear-gradient(105deg,rgba(20,16,15,.82) 0%,rgba(20,16,15,.5) 55%,rgba(20,16,15,.25) 100%);}
+  .slide.photo h1,.slide.photo h2,.slide.photo .lead{color:#fff;}
+  .slide.photo .eyebrow{color:#ffb4ac;}
   .slide.divider{background:var(--accent);}
-  .slide.divider h1{color:#fff;}
-  .slide.divider .eyebrow{color:rgba(255,255,255,.7);}
-  .slide.divider .lead{color:rgba(255,255,255,.85);}
+  .slide.divider h1{color:#fff;}.slide.divider .eyebrow{color:rgba(255,255,255,.7);}.slide.divider .lead{color:rgba(255,255,255,.92);}
 
-  /* placeholder marks */
-  .ph{
-    color:var(--accent);
-    border-bottom:1.5px dashed var(--accent);
-    font-weight:700;
-    padding:0 .1em;
-  }
-  .ph-box{
-    margin-top:3vh;
-    border:2px dashed var(--accent);
-    border-radius:10px;
-    padding:3.5vh 2vw;
-    color:var(--accent);
-    font-weight:700;
-    font-size:clamp(13px,1.5vw,18px);
-    text-align:center;
-    background:rgba(200,69,60,.04);
-    max-width:34em;
-  }
+  .slide.cover h1{font-size:clamp(40px,6.4vw,90px);}
+  .cover-meta{position:absolute;right:7vw;bottom:7vh;text-align:right;line-height:1.5;z-index:2;}
+  .cover-meta .logo{height:clamp(64px,8vw,120px);margin-bottom:1.8vh;display:inline-block;filter:brightness(0) invert(1);}
+  .cover-meta .cm{font-size:clamp(13px,1.5vw,19px);color:#fff;}
+  .cover-meta .cm.strong{font-family:"Shippori Mincho B1",serif;font-weight:800;font-size:clamp(16px,2vw,26px);margin-top:.4vh;color:#fff;}
+  .cover-meta .cm.sub{font-size:clamp(11px,1.2vw,15px);color:rgba(255,255,255,.75);margin-top:.9vh;}
 
-  /* work slide layout */
-  .work{flex-direction:row;align-items:center;gap:4vw;}
-  .work .left{flex:1.5;}
-  .work .right{flex:1;display:flex;flex-direction:column;align-items:center;gap:2vh;}
-  .sheet-tag{
-    display:inline-block;font-size:clamp(11px,1.2vw,15px);font-weight:700;
-    letter-spacing:.1em;color:#fff;background:var(--ink);
-    padding:.4em .9em;border-radius:5px;margin-bottom:2vh;
-  }
+  .cols{display:flex;align-items:center;gap:4vw;}
+  .cols .main{flex:1.4;min-width:0;}.cols .side{flex:1;display:flex;flex-direction:column;align-items:center;min-width:0;}
+  .cols .side img.fill{width:100%;border-radius:12px;border:1px solid var(--line);object-fit:cover;aspect-ratio:4/3;background:#eee;}
+  .sheet-tag{display:inline-block;font-size:clamp(11px,1.2vw,15px);font-weight:700;letter-spacing:.1em;color:#fff;background:var(--ink);padding:.4em .9em;border-radius:5px;margin-bottom:1.6vh;}
 
-  /* timer */
-  .timer{
-    width:100%;max-width:14em;
-    border:1px solid var(--line);border-radius:14px;background:#fff;
-    padding:2.6vh 1vw;text-align:center;cursor:default;
-  }
-  .timer .cap{font-size:clamp(11px,1.2vw,14px);color:var(--sub);letter-spacing:.1em;}
-  .timer .t-disp{
-    font-family:"Shippori Mincho B1",serif;font-weight:800;
-    font-size:clamp(40px,6vw,76px);line-height:1.1;margin:.6vh 0 1.4vh;
-    font-variant-numeric:tabular-nums;
-  }
-  .timer.running .t-disp{color:var(--accent);}
-  .timer.done .t-disp{color:var(--accent);animation:blink 1s steps(2,start) infinite;}
+  .timer{width:100%;max-width:300px;border:1px solid var(--line);border-radius:16px;background:#fff;padding:3vh 1.4vw;text-align:center;box-shadow:0 6px 24px rgba(0,0,0,.05);}
+  .timer .cap{font-size:clamp(11px,1.2vw,14px);color:var(--sub);letter-spacing:.12em;}
+  .timer .t-disp{font-family:"Shippori Mincho B1",serif;font-weight:800;font-size:clamp(40px,4.6vw,60px);line-height:1.05;margin:.8vh 0 1.6vh;font-variant-numeric:tabular-nums;white-space:nowrap;letter-spacing:.02em;}
+  .timer.running .t-disp{color:var(--accent);}.timer.done .t-disp{color:var(--accent);animation:blink 1s steps(2,start) infinite;}
   @keyframes blink{50%{opacity:.25;}}
   .timer .btns{display:flex;gap:.6em;justify-content:center;}
-  .timer button{
-    font-family:inherit;font-size:clamp(12px,1.3vw,16px);font-weight:700;
-    border:1px solid var(--line);background:#fff;color:var(--ink);
-    padding:.6em 1.2em;border-radius:8px;cursor:pointer;transition:.15s;
-  }
-  .timer button:hover{background:var(--ink);color:#fff;border-color:var(--ink);}
-  .timer .t-toggle{background:var(--accent);color:#fff;border-color:var(--accent);}
-  .timer .t-toggle:hover{filter:brightness(.92);}
+  .timer button{font-family:inherit;font-size:clamp(12px,1.3vw,16px);font-weight:700;border:1px solid var(--line);background:#fff;color:var(--ink);padding:.55em 1.1em;border-radius:8px;cursor:pointer;transition:.15s;}
+  .timer button:hover{background:var(--ink);color:#fff;border-color:var(--ink);}.timer .t-toggle{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .ex-video{width:100%;border-radius:12px;border:1px solid var(--line);background:#000;aspect-ratio:16/9;display:block;}
+  .ex-note{font-size:clamp(10px,1.05vw,13px);color:var(--sub);margin-top:1vh;}
+  .jk-logo{height:clamp(22px,2.6vw,34px);margin-bottom:1.4vh;}
+  .tag-line{font-size:clamp(11px,1.2vw,15px);font-weight:700;letter-spacing:.08em;color:var(--accent);margin-bottom:1vh;}
 
-  /* nav + counter */
-  .nav{position:fixed;bottom:3vh;right:3vw;display:flex;align-items:center;gap:1.2vw;z-index:20;}
-  .nav button{
-    width:clamp(38px,3.4vw,52px);height:clamp(38px,3.4vw,52px);
-    border-radius:50%;border:1px solid var(--line);background:#fff;
-    font-size:clamp(16px,1.8vw,22px);cursor:pointer;color:var(--ink);transition:.15s;
-    display:flex;align-items:center;justify-content:center;
-  }
+  .chips{display:flex;flex-wrap:wrap;gap:.8vw 1vw;margin-top:3.2vh;}
+  .chip{font-size:clamp(14px,1.5vw,19px);font-weight:600;padding:.5em 1em;border:1px solid var(--line);border-radius:999px;background:#fff;}
+  .chip.alt{background:var(--ink);color:#fff;border-color:var(--ink);}
+
+  .creators{display:flex;gap:1.4vw;margin-top:3.6vh;}
+  .creator{flex:1 1 0;min-width:0;text-align:center;}
+  .creator .ph{width:100%;aspect-ratio:1/1;border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:0 6px 20px rgba(0,0,0,.12);background:#eee;}
+  .creator .nm{font-weight:700;font-size:clamp(13px,1.4vw,18px);margin-top:1.2vh;}.creator .fl{font-size:clamp(16px,1.8vw,22px);}.creator .rl{font-size:clamp(10px,1.1vw,13px);color:var(--sub);margin-top:.2vh;}
+
+  .statband{display:flex;gap:2.6vw;margin-top:3vh;}
+  .statband .stat .num{font-family:"Shippori Mincho B1",serif;font-weight:800;font-size:clamp(24px,3.4vw,46px);line-height:1;}
+  .statband .stat:nth-child(1) .num{color:var(--c-red);}.statband .stat:nth-child(2) .num{color:var(--c-blue);}.statband .stat:nth-child(3) .num{color:var(--c-green);}.statband .stat:nth-child(4) .num{color:var(--c-orange);}
+  .statband .stat .cap{font-size:clamp(10px,1.1vw,14px);color:var(--sub);margin-top:.7vh;}
+
+  .flags{display:flex;flex-wrap:wrap;gap:.8vw 1vw;margin-top:3.4vh;}
+  .flag{display:flex;align-items:center;gap:.4em;font-size:clamp(14px,1.5vw,19px);font-weight:500;padding:.45em .9em;border:1px solid var(--line);border-radius:999px;background:#fff;}
+  .flag .em{font-size:1.25em;}
+
+  /* 3-card grid (problems / solutions / generic) */
+  .three{display:flex;gap:1.6vw;margin-top:3.4vh;}
+  .three .card{flex:1 1 0;min-width:0;border:1px solid var(--line);border-radius:12px;padding:2.4vh 1.3vw;background:#fff;}
+  .three .card .n{font-family:"Shippori Mincho B1",serif;color:var(--accent);font-weight:800;font-size:clamp(18px,2.2vw,28px);}
+  .three .card .t{font-weight:700;font-size:clamp(15px,1.7vw,21px);margin:.8vh 0 .5vh;}
+  .three .card .d{font-size:clamp(12px,1.3vw,16px);color:var(--sub);line-height:1.6;}
+  .three.warn .card .n{color:var(--c-orange);}
+  .three.solve .card .n{color:var(--c-green);}
+
+  /* population contrast */
+  .contrast{display:flex;gap:3vw;margin-top:4vh;}
+  .cpanel{flex:1;text-align:center;border:1px solid var(--line);border-radius:14px;padding:3.4vh 1.4vw;background:#fff;}
+  .cpanel .arrow{font-family:"Shippori Mincho B1",serif;font-size:clamp(40px,5.4vw,76px);font-weight:800;line-height:1;}
+  .cpanel.down .arrow{color:var(--c-blue);}
+  .cpanel.up .arrow{color:var(--accent);}
+  .cpanel .lbl{font-family:"Shippori Mincho B1",serif;font-weight:800;font-size:clamp(17px,2.1vw,28px);margin-top:1.2vh;}
+  .cpanel .sub{font-size:clamp(12px,1.3vw,16px);color:var(--sub);margin-top:.9vh;line-height:1.55;}
+
+  /* orientation */
+  .orien{border:1.5px solid var(--ink);border-radius:14px;padding:2.6vh 2vw;background:#fff;width:100%;margin-top:1.4vh;}
+  .orien .oh{display:inline-block;font-size:clamp(11px,1.2vw,14px);font-weight:700;letter-spacing:.1em;color:#fff;background:var(--accent);padding:.3em .8em;border-radius:5px;margin-bottom:1.6vh;}
+  .orien .orow{display:flex;gap:1em;font-size:clamp(14px,1.6vw,21px);margin-bottom:1vh;white-space:nowrap;}
+  .orien .orow:last-child{margin-bottom:0;}
+  .orien .orow .k{flex:0 0 6.5em;color:var(--sub);font-weight:500;}.orien .orow .v{font-weight:600;}.orien .orow .v b{color:var(--accent);}
+  .assign{display:flex;gap:1.2vw;margin-top:3vh;}
+  .assign .ag{flex:1 1 0;min-width:0;border:1px solid var(--line);border-radius:10px;padding:1.8vh 1vw;text-align:center;background:#fff;}
+  .assign .ag .g{font-size:clamp(11px,1.2vw,14px);color:var(--sub);}.assign .ag .c{font-size:clamp(18px,2.1vw,27px);font-weight:700;margin-top:.5vh;}
+
+  /* toc */
+  .toc{display:grid;grid-template-columns:1fr 1fr;gap:1.6vh 3vw;margin-top:3.8vh;}
+  .toc .ti{display:flex;gap:.7em;font-size:clamp(15px,1.8vw,23px);align-items:baseline;}
+  .toc .ti .no{font-family:"Shippori Mincho B1",serif;color:var(--accent);font-weight:800;flex:0 0 1.5em;}
+
+  /* team results */
+  .results{display:flex;gap:1.6vw;margin-top:3vh;}
+  .rcd{flex:1 1 0;min-width:0;border:1px solid var(--line);border-radius:12px;padding:2.2vh 1.2vw;background:#fff;}
+  .rcd .gh{font-weight:700;font-size:clamp(14px,1.5vw,19px);color:var(--accent);}
+  .rcd .rl{font-size:clamp(11px,1.2vw,14px);color:var(--sub);margin-top:1.4vh;}
+  .rcd .rfill{height:1.3em;border-bottom:1px dashed var(--line);margin-top:.3em;}
+
+  /* memorial photos */
+  .photos{display:flex;gap:1.4vw;margin-top:3vh;}
+  .pframe{flex:1 1 0;min-width:0;aspect-ratio:4/3;border:2px dashed var(--accent);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:700;font-size:clamp(12px,1.3vw,16px);background:rgba(200,69,60,.05);text-align:center;}
+  .endmsg{font-size:clamp(16px,1.9vw,25px);line-height:1.7;margin-top:3vh;}
+
+  /* phone mockup */
+  .phone{position:relative;width:clamp(190px,17vw,250px);max-height:64vh;aspect-ratio:9/19;border-radius:30px;border:7px solid #111;background:#000 center/cover;overflow:hidden;box-shadow:0 14px 40px rgba(0,0,0,.22);}
+  .phone::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.4) 0%,transparent 28%,transparent 52%,rgba(0,0,0,.62) 100%);}
+  .phone .sec{position:absolute;top:12px;left:12px;z-index:2;font-size:11px;font-weight:700;color:#fff;background:rgba(0,0,0,.45);padding:.2em .6em;border-radius:999px;}
+  .phone .hook{position:absolute;top:28%;left:14px;right:14px;z-index:2;font-family:"Shippori Mincho B1",serif;font-weight:800;color:#fff;font-size:clamp(20px,2.1vw,30px);line-height:1.25;text-shadow:0 2px 12px rgba(0,0,0,.55);}
+  .phone .ui{position:absolute;right:10px;bottom:52px;z-index:2;display:flex;flex-direction:column;gap:9px;align-items:center;color:#fff;font-size:10px;}
+  .phone .ui .ic{font-size:19px;line-height:1;}
+  .phone .cap2{position:absolute;left:14px;right:46px;bottom:14px;z-index:2;color:#fff;font-size:11px;line-height:1.4;text-shadow:0 1px 6px rgba(0,0,0,.6);}
+  .callout{font-size:clamp(12px,1.3vw,16px);color:var(--accent);font-weight:700;margin-top:2vh;}
+
+  /* roster */
+  .roster{display:grid;grid-template-columns:repeat(5,1fr);gap:1.1vw;margin-top:4vh;}
+  .rcard{border:1px solid var(--line);border-radius:10px;background:#fff;padding:1.8vh .6vw;text-align:center;min-width:0;}
+  .rcard .tag{font-size:clamp(10px,1.05vw,13px);color:var(--accent);font-weight:700;letter-spacing:.05em;}
+  .rcard .nm{font-family:"Shippori Mincho B1",serif;font-weight:800;font-size:clamp(14px,1.55vw,22px);margin-top:.5vh;white-space:nowrap;}
+
+  #brandHead{position:fixed;top:3.4vh;right:7vw;z-index:15;}
+  #brandHead img{height:clamp(34px,4vw,56px);display:block;}
+  #brandFoot{position:fixed;bottom:3.8vh;left:7vw;z-index:15;font-size:clamp(11px,1.2vw,15px);color:var(--sub);letter-spacing:.03em;}
+  body[data-type="cover"] #brandHead,body[data-type="cover"] #brandFoot{display:none;}
+  body[data-type="divider"] #brandHead,body[data-type="photo"] #brandHead{filter:brightness(0) invert(1);}
+  body[data-type="divider"] #brandFoot,body[data-type="photo"] #brandFoot{color:rgba(255,255,255,.85);}
+  .nav{position:fixed;bottom:3.4vh;right:6vw;display:flex;align-items:center;gap:1vw;z-index:20;}
+  .nav .counter{font-size:clamp(12px,1.3vw,16px);color:var(--sub);font-family:"Shippori Mincho B1",serif;margin-right:.4vw;}
+  body[data-type="divider"] .nav .counter,body[data-type="photo"] .nav .counter{color:#fff;}
+  .nav button{width:clamp(38px,3.4vw,52px);height:clamp(38px,3.4vw,52px);border-radius:50%;border:1px solid var(--line);background:#fff;font-size:clamp(16px,1.8vw,22px);cursor:pointer;color:var(--ink);transition:.15s;display:flex;align-items:center;justify-content:center;}
   .nav button:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
-  .counter{
-    position:fixed;bottom:3.4vh;left:3vw;z-index:20;
-    font-size:clamp(12px,1.3vw,16px);color:var(--sub);
-    font-family:"Shippori Mincho B1",serif;
-  }
-  .divider .counter,.divider ~ .counter{color:#fff;}
-
-  .foot-brand{
-    position:absolute;top:7vh;right:8vw;font-size:clamp(11px,1.2vw,15px);color:var(--sub);
-  }
 </style>
 </head>
-<body>
+<body data-type="cover">
 
 <!-- 01 表紙 -->
-<section class="slide">
-  <div class="eyebrow">JOB EXPERIENCE 2026</div>
-  <h1>広告代理店の<br>お仕事 体験</h1>
-  <p class="lead">外国人観光客に、日本の魅力を伝えよう。</p>
-  <div class="ph-box" style="margin-top:5vh;max-width:22em;">【会社ロゴ ／ 会社名 を差し替え】<br>株式会社グローバル・デイリー</div>
-</section>
-
-<!-- 02 今日の流れ -->
-<section class="slide">
-  <div class="eyebrow">SCHEDULE</div>
-  <h2>今日の流れ</h2>
-  <div class="flow">
-    <div class="row"><span class="tm">午前</span><span class="ac">広告のお仕事を知る</span></div>
-    <div class="row"><span class="tm">　</span><span class="ac">→ 逆の立場で考える <small style="color:var(--sub)">（ワーク①）</small></span></div>
-    <div class="row"><span class="tm">昼休憩</span><span class="ac">12:30 – 13:30</span></div>
-    <div class="row"><span class="tm">午後</span><span class="ac">アイデアづくり <small style="color:var(--sub)">（ワーク②）</small></span></div>
-    <div class="row"><span class="tm">　</span><span class="ac">→ グループ発表 → 修了</span></div>
+<section class="slide cover photo" data-type="cover" style="background-image:url('https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/04/AsakusaViewHotel_CC07-scaled.jpg')">
+  <div class="stage">
+    <div class="eyebrow">JOB EXPERIENCE</div>
+    <h1>広告代理店の<br>お仕事 体験</h1>
+    <p class="lead">外国人観光客に、日本の魅力を伝えよう。</p>
+  </div>
+  <div class="cover-meta">
+    <img class="logo" src="https://www.gldaily.com/gld-kanri/wp-content/themes/gldaily/assets/images/logo.png" alt="GLOBAL DAILY">
+    <div class="cm">足立学園中学校 3年生　職業体験受入れ</div>
+    <div class="cm strong">2026.6.25（木）　10:00 – 15:00</div>
+    <div class="cm sub">会場：TIX TOWER UENO（株式会社グローバル・デイリー）</div>
   </div>
 </section>
 
-<!-- 03 ミッション -->
-<section class="slide">
-  <div class="eyebrow">MISSION</div>
-  <h1>君たちは今日、<br><span class="accent">広告代理店の人</span>。</h1>
-  <p class="lead">外国人観光客に向けて、日本の魅力を伝える
-    <b>ショート動画のアイデア</b>を作って、発表する。</p>
+<!-- 02 参加者 -->
+<section class="slide" data-type="content">
+  <div class="stage">
+    <div class="eyebrow">WELCOME ── 本日の参加者</div>
+    <h2>今日は、よろしく！</h2>
+    <p class="lead sub" style="margin-top:1.4vh;">君たち10人が、今日の“広告代理店チーム”。呼ばれたら手をあげて！</p>
+    <div class="roster">
+      <div class="rcard"><div class="tag">A-9</div><div class="nm">大久保　真樹</div></div>
+      <div class="rcard"><div class="tag">A-20</div><div class="nm">鈴木　琉翔</div></div>
+      <div class="rcard"><div class="tag">A-33</div><div class="nm">藤原　駿空</div></div>
+      <div class="rcard"><div class="tag">C-8</div><div class="nm">川内谷　幸太郎</div></div>
+      <div class="rcard"><div class="tag">D-3</div><div class="nm">朝田　康介</div></div>
+      <div class="rcard"><div class="tag">D-21</div><div class="nm">武谷　魁士</div></div>
+      <div class="rcard"><div class="tag">D-27</div><div class="nm">増井　璃人</div></div>
+      <div class="rcard"><div class="tag">D-28</div><div class="nm">松本　龍之介</div></div>
+      <div class="rcard"><div class="tag">F-5</div><div class="nm">伊藤　公彌</div></div>
+      <div class="rcard"><div class="tag">F-29</div><div class="nm">茂木　春樹</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 目次 -->
+<section class="slide" data-type="content">
+  <div class="stage">
+    <div class="eyebrow">CONTENTS</div>
+    <h2>今日の内容</h2>
+    <div class="toc">
+      <div class="ti"><span class="no">①</span>広告代理店って、どんな仕事？</div>
+      <div class="ti"><span class="no">⑤</span>外国人とSNS</div>
+      <div class="ti"><span class="no">②</span>インバウンドって何？なぜ大事？</div>
+      <div class="ti"><span class="no">⑥</span>インバウンドの問題点</div>
+      <div class="ti"><span class="no">③</span>相手の国に合わせて伝える</div>
+      <div class="ti"><span class="no">⑦</span>広告でできる解決策</div>
+      <div class="ti"><span class="no">④</span>うちの“武器”（JAPANKURUなど）</div>
+      <div class="ti"><span class="no">⑧</span>君たちのワーク＆発表</div>
+    </div>
+  </div>
 </section>
 
 <!-- 04 講座① -->
-<section class="slide">
-  <div class="eyebrow">LESSON 01</div>
-  <h2>広告代理店って、<br>どんな仕事？</h2>
-  <p class="big" style="margin-top:3.5vh;">企業の「<span class="accent">伝えたい</span>」を、<br>伝わる形にして、届ける。</p>
-  <p class="lead sub">商品・サービス・観光地を、ポスターや動画やSNSにして世の中へ。</p>
-</section>
-
-<!-- 05 講座② -->
-<section class="slide">
-  <div class="eyebrow">LESSON 02</div>
-  <h2>インバウンドって？</h2>
-  <p class="lead" style="max-width:26em;"><b>インバウンド＝海外から日本に来る旅行者。</b><br>うちは、その人たちに伝えるのが専門の会社。</p>
-  <ul class="points">
-    <li>言葉が違う<small>同じことでも、その国の言葉で伝える</small></li>
-    <li>刺さるポイントが違う<small>日本人には“普通”でも、外国人には新鮮なことがある</small></li>
-  </ul>
-</section>
-
-<!-- 06 講座③ うちのやり方 -->
-<section class="slide">
-  <div class="eyebrow">LESSON 03</div>
-  <h2>うちの会社のやり方</h2>
-  <p class="big" style="margin-top:2.5vh;">「<span class="accent">現地の人</span>が、<span class="accent">現地の言葉</span>で伝える」</p>
-  <div class="three">
-    <div class="card"><div class="n">01</div><div class="t">多国籍インフルエンサー</div><div class="d">各国の発信者（KOL）が、その国の人に向けて発信</div></div>
-    <div class="card"><div class="n">02</div><div class="t">各国のオンラインメディア</div><div class="d">現地で読まれているメディアと連携</div></div>
-    <div class="card"><div class="n">03</div><div class="t">自社メディア JAPANKURU</div><div class="d">フォロワー <span class="ph">【数字を差し替え】</span>／<span class="ph">【◯カ国】</span>で発信</div></div>
-  </div>
-</section>
-
-<!-- 07 講座④ 強み・実例 -->
-<section class="slide">
-  <div class="eyebrow">LESSON 04 ── いちばんの強み</div>
-  <h1>1回の取材で、<br><span class="accent ph">【◯〜◯カ国】</span>へ同時に。</h1>
-  <p class="lead sub">同じ取材を、その国の発信者がその国向けに作るから、まとめて届けられる。</p>
-  <div class="ph-box">【実際のJAPANKURU動画 ／ 各国の投稿例 をここで見せる：要差し替え】</div>
-</section>
-
-<!-- 08 divider -->
-<section class="slide divider">
-  <div class="eyebrow">YOUR TURN</div>
-  <h1>ここからは、<br>君たちの番。</h1>
-  <p class="lead">自分が旅行する時のことを思い出しながら、考えてみよう。</p>
-</section>
-
-<!-- 09 ワーク① -->
-<section class="slide work">
-  <div class="left">
-    <span class="sheet-tag">SHEET 01</span>
-    <div class="eyebrow">WORK 01</div>
-    <h2>逆の立場で考える</h2>
-    <ul class="points" style="margin-top:2.5vh;">
-      <li>自分が旅行前に「調べたこと・ひかれたこと」を書く</li>
-      <li>裏返して ── 外国人は日本の<b>何</b>を探す？</li>
-      <li>グループで〈<b>誰に・何を</b>〉を1つ決める</li>
-    </ul>
-  </div>
-  <div class="right">
-    <div class="timer" data-min="40">
-      <div class="cap">制限時間</div>
-      <div class="t-disp">40:00</div>
-      <div class="btns"><button class="t-toggle">スタート</button><button class="t-reset">↺</button></div>
+<section class="slide" data-type="content">
+  <div class="stage">
+    <div class="eyebrow">LESSON 01</div>
+    <h2>広告代理店って、どんな仕事？</h2>
+    <p class="big" style="margin-top:2.4vh;">お客さん（企業）の「<span class="accent">伝えたい</span>」を聞いて、<br>いちばん合う方法を選んで、つくって届ける。</p>
+    <p class="lead sub" style="margin-top:1.8vh;">決まった形はない。お客さんごとに考える ＝ コンサルみたいな仕事。手段はいろいろ：</p>
+    <div class="chips">
+      <span class="chip">動画</span><span class="chip">SNS</span><span class="chip">インフルエンサー</span>
+      <span class="chip">記事・PR</span><span class="chip">イベント</span><span class="chip alt">自社メディア</span>
     </div>
   </div>
 </section>
 
-<!-- 10 ワーク② -->
-<section class="slide work">
-  <div class="left">
-    <span class="sheet-tag">SHEET 02</span>
-    <div class="eyebrow">WORK 02</div>
-    <h2>広告アイデアづくり</h2>
-    <ul class="points" style="margin-top:2.5vh;">
-      <li>まず<b>キャッチコピー</b>（ひとことで心をつかむ言葉）</li>
-      <li>ショート動画の<b>絵コンテ</b>を4コマで考える</li>
-      <li>どのSNSで出す？（TikTok / Instagram …）</li>
-    </ul>
-  </div>
-  <div class="right">
-    <div class="timer" data-min="50">
-      <div class="cap">めやす</div>
-      <div class="t-disp">50:00</div>
-      <div class="btns"><button class="t-toggle">スタート</button><button class="t-reset">↺</button></div>
+<!-- 05 講座② インバウンド -->
+<section class="slide" data-type="content">
+  <div class="stage">
+    <div class="eyebrow">LESSON 02</div>
+    <h2>インバウンドって？</h2>
+    <p class="lead" style="max-width:36em;"><b>インバウンド＝海外から日本に来る旅行者。</b>　同じ「日本の魅力」でも、相手の国によって、刺さるポイントも言い方も変わる。</p>
+    <div class="flags">
+      <span class="flag"><span class="em">🇰🇷</span>韓国</span><span class="flag"><span class="em">🇹🇼</span>台湾</span>
+      <span class="flag"><span class="em">🇹🇭</span>タイ</span><span class="flag"><span class="em">🇨🇳</span>中国</span>
+      <span class="flag"><span class="em">🇺🇸</span>英語圏</span><span class="flag"><span class="em">🇮🇩</span>インドネシア</span>
+      <span class="flag"><span class="em">🇻🇳</span>ベトナム</span><span class="flag"><span class="em">🇫🇷</span>フランス</span>
     </div>
   </div>
 </section>
 
-<!-- 11 コツ -->
-<section class="slide">
-  <div class="eyebrow">TIPS ── ショート動画のコツ</div>
-  <h2>3つだけ覚えて。</h2>
-  <ul class="points">
-    <li>最初の <span class="accent">1〜2秒</span> が勝負<small>スクロールされる前に「おっ」と思わせる</small></li>
-    <li>短く、わかりやすく<small>言いたいことは1つにしぼる</small></li>
-    <li>「その国の人の目線」で<small>SHEET 01で決めた“相手”を思い出そう</small></li>
-  </ul>
+<!-- 06 人口↓ 旅行者↑ -->
+<section class="slide" data-type="content">
+  <div class="stage">
+    <div class="eyebrow">なぜ大事？ ── 日本の未来</div>
+    <h2>人口は減る。でも、旅行者は増える。</h2>
+    <div class="contrast">
+      <div class="cpanel down"><div class="arrow">↓</div><div class="lbl">日本の人口</div><div class="sub">子どもが減り、高齢化。<br>国内だけのお客さんは減っていく。</div></div>
+      <div class="cpanel up"><div class="arrow">↑</div><div class="lbl">海外からの旅行者</div><div class="sub">年々ふえている。<br>日本の「未来の経済」を支える力。</div></div>
+    </div>
+  </div>
 </section>
 
-<!-- 12 発表のしかた -->
-<section class="slide">
-  <div class="eyebrow">PRESENTATION</div>
-  <h2>発表のしかた</h2>
-  <p class="lead" style="max-width:26em;">1グループ <b>約5分</b>。社員が<b>“クライアント役”</b>で一言コメントします。</p>
-  <ul class="points" style="margin-top:2vh;">
-    <li>誰に／何を／キャッチコピー</li>
-    <li>動画の流れ（絵コンテ）</li>
-    <li>いちばんの“推しポイント”</li>
-  </ul>
+<!-- 07 講座③ creators -->
+<section class="slide" data-type="content">
+  <div class="stage">
+    <div class="eyebrow">LESSON 03 ── プロの腕の見せどころ</div>
+    <h2>相手の国に合わせて、<span class="accent">見せ方を変える</span>。</h2>
+    <p class="lead sub" style="max-width:38em;">例えば「現地の人が、その国の言葉で発信する」という手段。日本に住む各国のクリエイターが活躍中。</p>
+    <div class="creators">
+      <div class="creator"><img class="ph" loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2024/08/IMG_7616.jpg" alt=""><div class="nm">Sophia <span class="fl">🇺🇸</span></div><div class="rl">英語ライター</div></div>
+      <div class="creator"><img class="ph" loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2024/08/HEEWON_CC05_mono-scaled-1-e1724920330586.jpg" alt=""><div class="nm">Hee Won <span class="fl">🇰🇷</span></div><div class="rl">韓国エディター</div></div>
+      <div class="creator"><img class="ph" loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2024/08/S__154058811.jpg" alt=""><div class="nm">Sou <span class="fl">🇹🇼</span></div><div class="rl">台湾ライター</div></div>
+      <div class="creator"><img class="ph" loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2024/08/S__168247310-e1724116965778.jpg" alt=""><div class="nm">Sarita <span class="fl">🇹🇭</span></div><div class="rl">タイクリエイター</div></div>
+      <div class="creator"><img class="ph" loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2024/08/IMG_7615.jpg" alt=""><div class="nm">Lucy <span class="fl">🇨🇳</span></div><div class="rl">中国エディター</div></div>
+    </div>
+  </div>
 </section>
 
-<!-- 13 発表 START -->
-<section class="slide divider">
-  <div class="eyebrow">LET'S PRESENT</div>
-  <h1>発表、<br>スタート！</h1>
+<!-- 08 講座④ JAPANKURU -->
+<section class="slide" data-type="content">
+  <div class="stage">
+    <div class="cols">
+      <div class="main">
+        <div class="tag-line">数ある手段の、ひとつ</div>
+        <div class="eyebrow">LESSON 04 ── 自社メディアの例</div>
+        <h2>JAPANKURU なら、<br>1回の取材で <span class="accent">8カ国</span>へ。</h2>
+        <div class="statband">
+          <div class="stat"><div class="num">140万+</div><div class="cap">オーディエンス</div></div>
+          <div class="stat"><div class="num">8カ国</div><div class="cap">同時配信</div></div>
+          <div class="stat"><div class="num">6,000万+</div><div class="cap">最大リーチ</div></div>
+          <div class="stat"><div class="num">14年</div><div class="cap">運営実績</div></div>
+        </div>
+      </div>
+      <div class="side">
+        <img class="jk-logo" loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2025/02/JAPANKURU_RGB-1.png" alt="JAPANKURU">
+        <video class="ex-video" controls preload="metadata" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/04/output.mp4"></video>
+        <p class="ex-note" style="text-align:center;">▶ クリックで再生（実際の制作動画）／差し替え可</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- 14 まとめ -->
-<section class="slide">
-  <div class="eyebrow">WRAP UP</div>
-  <h2>今日のふりかえり</h2>
-  <p class="big" style="margin-top:3vh;">「<span class="accent">誰に・何を・どう伝えるか</span>」<br>を考えるのが、広告の仕事の入口。</p>
+<!-- 09 外国人とSNS -->
+<section class="slide" data-type="content">
+  <div class="stage">
+    <div class="eyebrow">LESSON 05 ── 外国人とSNS</div>
+    <h2>外国人は、どうやって日本を知る？</h2>
+    <div class="chips">
+      <span class="chip">TikTok</span><span class="chip">Instagram</span><span class="chip">YouTube 旅Vlog</span>
+      <span class="chip">Google Maps クチコミ</span><span class="chip">旅行アプリ</span>
+    </div>
+    <p class="lead sub" style="margin-top:2.6vh;">…君たちと、ほとんど同じ。だから「最初の数秒」と「わかりやすさ」が勝負になる。</p>
+  </div>
 </section>
 
-<!-- 15 修了 -->
-<section class="slide">
-  <div class="eyebrow">THANK YOU</div>
-  <h1>おつかれさま!</h1>
-  <p class="lead">このあと修了証をお渡しします。最後にみんなで記念撮影。</p>
-  <div class="ph-box" style="max-width:22em;">【会社ロゴ ／ 会社名 を差し替え】</div>
+<!-- 10 問題点 -->
+<section class="slide" data-type="content">
+  <div class="stage">
+    <div class="eyebrow">LESSON 06 ── 問題もある</div>
+    <h2>増えすぎると、問題も。</h2>
+    <div class="three warn">
+      <div class="card"><div class="n">01</div><div class="t">混雑しすぎ</div><div class="d">人気の観光地に人が集まりすぎて、交通もパンク</div></div>
+      <div class="card"><div class="n">02</div><div class="t">生活への影響</div><div class="d">地元の人の暮らしに負担がかかる</div></div>
+      <div class="card"><div class="n">03</div><div class="t">マナーのトラブル</div><div class="d">ゴミ・騒音・割り込み など</div></div>
+    </div>
+  </div>
 </section>
 
-<div class="counter" id="counter">1 / 15</div>
+<!-- 11 知らないだけ -->
+<section class="slide" data-type="content">
+  <div class="stage">
+    <div class="eyebrow">LESSON 06</div>
+    <h2 class="title-1line">でも、多くは「悪気」じゃない。</h2>
+    <p class="big" style="margin-top:2.4vh;">ただ、その国の文化やルールを<br><span class="accent">知らないだけ</span>。</p>
+    <p class="lead sub">だから「伝える」ことで変えられる。── ここが広告の出番。</p>
+  </div>
+</section>
+
+<!-- 12 解決策 -->
+<section class="slide" data-type="content">
+  <div class="stage">
+    <div class="eyebrow">LESSON 07 ── 広告でできること</div>
+    <h2>伝え方で、解決に近づける。</h2>
+    <div class="three solve">
+      <div class="card"><div class="n">01</div><div class="t">やさしく伝える</div><div class="d">多言語で「なぜダメか」を動画やイラストで</div></div>
+      <div class="card"><div class="n">02</div><div class="t">地方をPR</div><div class="d">人の流れを分けて、混雑をやわらげる</div></div>
+      <div class="card"><div class="n">03</div><div class="t">旅マエに伝える</div><div class="d">来日前にSNS・動画で知ってもらう</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 divider -->
+<section class="slide photo" data-type="photo" style="background-image:url('https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/01/Yamagata_Story02_Nontext-scaled-1-2048x1366-1.webp')">
+  <div class="stage">
+    <div class="eyebrow">YOUR TURN</div>
+    <h1>ここからは、<br>君たちの番。</h1>
+    <p class="lead">広告代理店として、お客さんの依頼にこたえよう。</p>
+  </div>
+</section>
+
+<!-- 14 オリエン -->
+<section class="slide" data-type="content">
+  <div class="stage">
+    <div class="eyebrow">CLIENT ORIENTATION ── 依頼</div>
+    <h2>クライアントから、依頼が来た！</h2>
+    <div class="orien">
+      <span class="oh">今日のオリエン</span>
+      <div class="orow"><span class="k">ターゲット</span><span class="v"><b>担当する国</b>の、君たちと同じ〜少し上の世代</span></div>
+      <div class="orow"><span class="k">ゴール</span><span class="v">「日本に行きたい！」と思ってもらう</span></div>
+      <div class="orow"><span class="k">アウトプット</span><span class="v">日本の魅力を伝えるショート動画のアイデア</span></div>
+    </div>
+    <div class="assign">
+      <div class="ag"><div class="g">A グループ</div><div class="c">🇹🇼 台湾</div></div>
+      <div class="ag"><div class="g">B グループ</div><div class="c">🇰🇷 韓国</div></div>
+      <div class="ag"><div class="g">C グループ</div><div class="c">🇹🇭 タイ</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 15 ワーク① -->
+<section class="slide" data-type="content">
+  <div class="stage">
+    <div class="cols">
+      <div class="main">
+        <span class="sheet-tag">SHEET 01</span>
+        <div class="eyebrow">WORK 01</div>
+        <h2 class="title-1line">相手の国の人に、なってみる</h2>
+        <ul class="points" style="margin-top:2.2vh;">
+          <li>自分が旅行前に「調べたこと・ひかれたこと」を書く</li>
+          <li><b>担当の国</b>の人の目線で「日本の何を探す？」</li>
+          <li>グループで〈伝える<b>日本の魅力</b>〉を1つ決める</li>
+        </ul>
+      </div>
+      <div class="side">
+        <div class="timer" data-min="40"><div class="cap">制限時間</div><div class="t-disp">40:00</div>
+          <div class="btns"><button class="t-toggle">スタート</button><button class="t-reset">↺</button></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 16 ワーク② -->
+<section class="slide" data-type="content">
+  <div class="stage">
+    <div class="cols">
+      <div class="main">
+        <span class="sheet-tag">SHEET 02</span>
+        <div class="eyebrow">WORK 02</div>
+        <h2 class="title-1line">その国の人に届く、アイデア</h2>
+        <ul class="points" style="margin-top:2.2vh;">
+          <li><b>キャッチコピー</b>（担当国の人に刺さるひとこと）</li>
+          <li>ショート動画の<b>絵コンテ</b>を4コマで</li>
+          <li>どのSNSで出す？（TikTok / Instagram …）</li>
+        </ul>
+      </div>
+      <div class="side">
+        <div class="timer" data-min="50"><div class="cap">めやす</div><div class="t-disp">50:00</div>
+          <div class="btns"><button class="t-toggle">スタート</button><button class="t-reset">↺</button></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 17 コツ -->
+<section class="slide" data-type="content">
+  <div class="stage">
+    <div class="cols">
+      <div class="main">
+        <div class="eyebrow">TIPS ── ショート動画のコツ</div>
+        <h2>3つだけ覚えて。</h2>
+        <ul class="points" style="margin-top:2.4vh;">
+          <li>最初の <span class="accent">1〜2秒</span> が勝負<small>スクロールされる前に「おっ」と思わせる</small></li>
+          <li>短く、わかりやすく<small>言いたいことは1つにしぼる</small></li>
+          <li>「担当の国の人の目線」で<small>その国の人は何にひかれる？を思い出そう</small></li>
+        </ul>
+        <div class="callout">→ この「最初の1枚」を、右みたいに考えてみよう</div>
+      </div>
+      <div class="side">
+        <div class="phone" style="background-image:url('https://www.gldaily.com/gld-kanri/wp-content/uploads/2025/11/Ryokan_CC10-2048x1366-1.webp')">
+          <span class="sec">▶ 0:01</span>
+          <div class="hook">え、これ<br>日本なの！？</div>
+          <div class="ui"><span class="ic">♥</span><span>12.4k</span><span class="ic">💬</span><span>320</span><span class="ic">↗</span></div>
+          <div class="cap2">#日本旅行 #知らなかった #保存して</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 18 発表のしかた -->
+<section class="slide" data-type="content">
+  <div class="stage">
+    <div class="eyebrow">PRESENTATION</div>
+    <h2>発表のしかた</h2>
+    <p class="lead" style="max-width:34em;">1グループ <b>約5分</b>。社員が<b>“クライアント役”</b>で一言コメントします。</p>
+    <ul class="points" style="margin-top:2vh;">
+      <li>担当の国／伝える魅力／キャッチコピー</li>
+      <li>動画の流れ（絵コンテ）</li>
+      <li>なぜ「その国の人」に届くと思う？</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 19 divider 発表 -->
+<section class="slide divider" data-type="divider">
+  <div class="stage"><div class="eyebrow">LET'S PRESENT</div><h1>発表、スタート！</h1></div>
+</section>
+
+<!-- 20 チーム結果まとめ -->
+<section class="slide" data-type="content">
+  <div class="stage">
+    <div class="eyebrow">RESULTS ── 当日記入（レポート用）</div>
+    <h2>今日のチーム、できたもの。</h2>
+    <div class="results">
+      <div class="rcd"><div class="gh">A 🇹🇼 台湾</div><div class="rl">伝える魅力</div><div class="rfill"></div><div class="rl">キャッチコピー</div><div class="rfill"></div></div>
+      <div class="rcd"><div class="gh">B 🇰🇷 韓国</div><div class="rl">伝える魅力</div><div class="rfill"></div><div class="rl">キャッチコピー</div><div class="rfill"></div></div>
+      <div class="rcd"><div class="gh">C 🇹🇭 タイ</div><div class="rl">伝える魅力</div><div class="rfill"></div><div class="rl">キャッチコピー</div><div class="rfill"></div></div>
+    </div>
+    <p class="ex-note" style="margin-top:2vh;">※ 発表内容をここに記入すると、そのままレポートになります。</p>
+  </div>
+</section>
+
+<!-- 21 まとめ -->
+<section class="slide" data-type="content">
+  <div class="stage">
+    <div class="eyebrow">WRAP UP</div>
+    <h2>今日のふりかえり</h2>
+    <ul class="points" style="margin-top:2.6vh;">
+      <li>インバウンド＝日本に来てくれる「世界のお客さま」</li>
+      <li>人口が減っても、インバウンドは増えている</li>
+      <li>広告代理店は、お客さんに合わせて手段を選ぶ「コンサル型」の仕事</li>
+      <li>問題もあるけれど、伝え方しだいで解決に近づける</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 22 メッセージ -->
+<section class="slide" data-type="content">
+  <div class="stage">
+    <div class="eyebrow">MESSAGE</div>
+    <h2>みんなへ。</h2>
+    <p class="big" style="margin-top:2.4vh;">広告は「モノを売る」だけじゃない。<br><span class="accent">人と人、文化と文化をつなぐ</span>仕事。</p>
+    <p class="lead sub">世界は国によって「ふつう」がちがう。ちがいを知ろうとすることが、その第一歩。</p>
+  </div>
+</section>
+
+<!-- 23 修了 -->
+<section class="slide" data-type="content">
+  <div class="stage">
+    <div class="eyebrow">THANK YOU</div>
+    <h1>おつかれさま!</h1>
+    <p class="lead">このあと修了証をお渡しします。最後にみんなで記念撮影。</p>
+  </div>
+</section>
+
+<!-- 24 記念写真 -->
+<section class="slide" data-type="content">
+  <div class="stage">
+    <div class="eyebrow">MEMORY ── 当日写真を差し込み</div>
+    <h2>今日の記念写真。</h2>
+    <div class="photos">
+      <div class="pframe">当日の写真 ①</div>
+      <div class="pframe">当日の写真 ②</div>
+      <div class="pframe">当日の写真 ③</div>
+    </div>
+    <p class="endmsg">みんなで作ったアイデアといっしょに、この一日をおぼえていてくれたらうれしいです。</p>
+  </div>
+</section>
+
+<!-- overlays -->
+<div id="brandHead"><img src="https://www.gldaily.com/gld-kanri/wp-content/themes/gldaily/assets/images/logo.png" alt="GLOBAL DAILY"></div>
+<div id="brandFoot">足立学園中学校 3年生 職業体験 ｜ 2026.6.25（木）</div>
 <div class="nav">
+  <span class="counter" id="counter">1 / 24</span>
   <button id="prev" aria-label="前へ">‹</button>
   <button id="next" aria-label="次へ">›</button>
 </div>
@@ -359,6 +534,7 @@
   function show(n){
     i=Math.max(0,Math.min(slides.length-1,n));
     slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+    document.body.dataset.type=slides[i].dataset.type||'content';
     counter.textContent=(i+1)+' / '+slides.length;
   }
   document.getElementById('prev').onclick=()=>show(i-1);
@@ -367,8 +543,7 @@
     if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();show(i+1);}
     else if(e.key==='ArrowLeft'){e.preventDefault();show(i-1);}
   });
-
-  // timers
+  document.querySelectorAll('img').forEach(im=>im.addEventListener('error',()=>{im.style.visibility='hidden';}));
   document.querySelectorAll('.timer').forEach(t=>{
     const min=+t.dataset.min; let remain=min*60, id=null;
     const disp=t.querySelector('.t-disp');
@@ -376,19 +551,11 @@
     fmt();
     t.querySelector('.t-toggle').addEventListener('click',()=>{
       if(id){clearInterval(id);id=null;t.classList.remove('running');}
-      else{
-        t.classList.remove('done');t.classList.add('running');
-        id=setInterval(()=>{
-          if(remain>0){remain--;fmt();}
-          else{clearInterval(id);id=null;t.classList.remove('running');t.classList.add('done');}
-        },1000);
-      }
+      else{t.classList.remove('done');t.classList.add('running');
+        id=setInterval(()=>{if(remain>0){remain--;fmt();}else{clearInterval(id);id=null;t.classList.remove('running');t.classList.add('done');}},1000);}
     });
-    t.querySelector('.t-reset').addEventListener('click',()=>{
-      clearInterval(id);id=null;remain=min*60;t.classList.remove('running','done');fmt();
-    });
+    t.querySelector('.t-reset').addEventListener('click',()=>{clearInterval(id);id=null;remain=min*60;t.classList.remove('running','done');fmt();});
   });
-
   show(0);
 </script>
 </body>
