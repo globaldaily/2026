@@ -106,17 +106,45 @@
   .orien .orow .k{flex:0 0 6.5em;color:var(--sub);font-weight:500;}.orien .orow .v{font-weight:600;}.orien .orow .v b{color:var(--accent);}
   .assign{display:flex;gap:1.2vw;margin-top:3vh;}
   .assign .ag{flex:1 1 0;min-width:0;border:1px solid var(--line);border-radius:10px;padding:1.8vh 1vw;text-align:center;background:#fff;}
-  .assign .ag .g{font-size:clamp(11px,1.2vw,14px);color:var(--sub);}.assign .ag .c{font-size:clamp(18px,2.1vw,27px);font-weight:700;margin-top:.5vh;}
+  .assign .ag .g{font-size:clamp(11px,1.2vw,14px);color:var(--sub);}.assign .ag .c{font-size:clamp(18px,2.1vw,27px);font-weight:700;margin-top:.5vh;line-height:1.35;}
 
   /* toc */
   .toc{display:grid;grid-template-columns:1fr 1fr;gap:1.6vh 3vw;margin-top:3.8vh;}
-  .toc .ti{display:flex;gap:.7em;font-size:clamp(15px,1.8vw,23px);align-items:baseline;}
-  .toc .ti .no{font-family:"Shippori Mincho B1",serif;color:var(--accent);font-weight:800;flex:0 0 1.5em;}
+  .toc .ti{
+display:flex;
+gap:.7em;
+font-size:clamp(15px,1.8vw,23px);
+line-height:1.35;
+align-items:baseline;
+text-align:left;
+font-family:inherit;
+color:var(--ink);
+background:#fff;
+border:1px solid var(--line);
+border-radius:10px;
+padding:1.2vh 1vw;
+cursor:pointer;
+transition:.15s;
+appearance:none;
+-webkit-appearance:none;
+}
+.toc .ti:hover{
+border-color:var(--accent);
+transform:translateY(-2px);
+box-shadow:0 6px 18px rgba(0,0,0,.08);
+}
+.toc .ti .no{
+font-family:"Shippori Mincho B1",serif;
+color:var(--accent);
+font-weight:800;
+flex:0 0 1.5em;
+}
+
 
   /* team results */
   .results{display:flex;gap:1.6vw;margin-top:3vh;}
   .rcd{flex:1 1 0;min-width:0;border:1px solid var(--line);border-radius:12px;padding:2.2vh 1.2vw;background:#fff;}
-  .rcd .gh{font-weight:700;font-size:clamp(14px,1.5vw,19px);color:var(--accent);}
+  .rcd .gh{font-weight:700;font-size:clamp(14px,1.5vw,19px);color:var(--accent);line-height:1.45;}
   .rcd .rl{font-size:clamp(11px,1.2vw,14px);color:var(--sub);margin-top:1.4vh;}
   .rcd .rfill{height:1.3em;border-bottom:1px dashed var(--line);margin-top:.3em;}
 
@@ -199,15 +227,17 @@
     <div class="eyebrow">CONTENTS</div>
     <h2>今日の内容</h2>
     <div class="toc">
-      <div class="ti"><span class="no">①</span>広告代理店って、どんな仕事？</div>
-      <div class="ti"><span class="no">⑤</span>外国人とSNS</div>
-      <div class="ti"><span class="no">②</span>インバウンドって何？なぜ大事？</div>
-      <div class="ti"><span class="no">⑥</span>インバウンドの問題点</div>
-      <div class="ti"><span class="no">③</span>相手の国に合わせて伝える</div>
-      <div class="ti"><span class="no">⑦</span>広告でできる解決策</div>
-      <div class="ti"><span class="no">④</span>うちの“武器”（JAPANKURUなど）</div>
-      <div class="ti"><span class="no">⑧</span>君たちのワーク＆発表</div>
-    </div>
+  <button type="button" class="ti" data-goto="3"><span class="no">①</span>広告代理店って、どんな仕事？</button>
+  <button type="button" class="ti" data-goto="4"><span class="no">②</span>インバウンドって何？なぜ大事？</button>
+  <button type="button" class="ti" data-goto="6"><span class="no">③</span>相手の国に合わせて伝える</button>
+  <button type="button" class="ti" data-goto="7"><span class="no">④</span>うちの“武器”（JAPANKURUなど）</button>
+  <button type="button" class="ti" data-goto="8"><span class="no">⑤</span>外国人とSNS</button>
+  <button type="button" class="ti" data-goto="9"><span class="no">⑥</span>インバウンドの問題点</button>
+  <button type="button" class="ti" data-goto="11"><span class="no">⑦</span>広告でできる解決策</button>
+  <button type="button" class="ti" data-goto="13"><span class="no">⑧</span>君たちのワーク＆発表</button>
+  <button type="button" class="ti" data-goto="17"><span class="no">⑨</span>発表のしかた</button>
+  <button type="button" class="ti" data-goto="20"><span class="no">⑩</span>まとめ・修了</button>
+</div>
   </div>
 </section>
 
@@ -363,7 +393,7 @@
     </div>
     <div class="assign">
   <div class="ag"><div class="g">A グループ（5名）</div><div class="c">🇺🇸 アメリカ・🇦🇺 オーストラリア</div></div>
-  <div class="ag"><div class="g">B グループ（5名）</div><div class="c">🇲🇾 マレーシア・🇮🇩 インドネシア <br>・🇸🇬 シンガポール</div></div>
+  <div class="ag"><div class="g">B グループ（5名）</div><div class="c">🇲🇾 マレーシア・🇮🇩 インドネシア<br>🇸🇬 シンガポール</div></div>
 </div>
   </div>
 </section>
@@ -518,6 +548,7 @@
 <div id="brandFoot">足立学園中学校 3年生 職業体験 ｜ 2026.6.25（木）</div>
 <div class="nav">
   <span class="counter" id="counter">1 / 24</span>
+  <button id="tocBtn" aria-label="目次へ" title="目次へ">目</button>
   <button id="prev" aria-label="前へ">‹</button>
   <button id="next" aria-label="次へ">›</button>
 </div>
@@ -534,6 +565,13 @@
   }
   document.getElementById('prev').onclick=()=>show(i-1);
   document.getElementById('next').onclick=()=>show(i+1);
+  document.getElementById('tocBtn').onclick=()=>show(2);
+  document.querySelectorAll('[data-goto]').forEach(btn=>{
+btn.addEventListener('click',()=>{
+show(Number(btn.dataset.goto));
+});
+});
+
   document.addEventListener('keydown',e=>{
     if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();show(i+1);}
     else if(e.key==='ArrowLeft'){e.preventDefault();show(i-1);}
