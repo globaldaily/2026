@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>「健栄かばくんをさがせ！」プレゼントキャンペーン</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --aqua:#17A2C6; --aqua-deep:#0C6E89; --ink:#123C4A;
+    --cream:#FBF6E9; --sun:#FFD84D; --sun-soft:#FFF1B8;
+    --coral:#F0593C; --coral-deep:#D8432A;
+    --sky-1:#BDEAF5; --sky-2:#E9F7FB; --line:#CDE6ED;
+    --maru:"Zen Maru Gothic",system-ui,sans-serif;
+    --body:"Noto Sans JP",system-ui,sans-serif;
+    --wrap:960px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--body);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased;background:#fff}
+  .maru{font-family:var(--maru)}
+  .wrap{max-width:var(--wrap);margin:0 auto;width:100%}
+
+  .ph{
+    border:2px dashed var(--aqua);
+    background:repeating-linear-gradient(45deg,#fff,#fff 10px,#F2FAFC 10px,#F2FAFC 20px);
+    border-radius:14px;display:flex;align-items:center;justify-content:center;text-align:center;
+    color:var(--aqua-deep);font-size:12px;font-weight:700;padding:14px;line-height:1.5;
+  }
+  .ph small{display:block;font-weight:500;color:#6f9aa6;margin-top:4px;font-size:10px}
+
+  /* ============ HERO ============ */
+  .hero{background:linear-gradient(180deg,var(--sky-1) 0%,var(--sky-2) 55%,#fff 100%);padding:30px 20px 40px}
+  .hero .wrap{
+    display:grid;gap:22px;
+    grid-template-areas:"text" "visual" "meta";
+  }
+  .hero-text{grid-area:text;text-align:center}
+  .hero-visual{grid-area:visual}
+  .hero-meta{grid-area:meta}
+
+  .brand{font-family:var(--maru);font-weight:700;font-size:14px;letter-spacing:.04em;color:var(--aqua-deep);margin-bottom:4px}
+  .sub{font-size:13px;color:var(--ink);opacity:.82;margin-bottom:16px}
+  h1{font-family:var(--maru);font-weight:900;font-size:clamp(32px,9vw,52px);line-height:1.18;color:var(--ink);text-shadow:0 2px 0 #fff,0 3px 6px rgba(12,110,137,.18)}
+  h1 .pop{color:var(--coral);display:inline-block}
+  .scope{
+    display:inline-flex;align-items:center;gap:8px;margin:16px 0 0;
+    background:var(--sun);color:var(--ink);font-family:var(--maru);font-weight:700;font-size:13px;
+    padding:8px 18px;border-radius:999px;box-shadow:0 3px 0 #E6BE2E;
+  }
+  .scope svg{animation:scan 3.4s ease-in-out infinite}
+  @keyframes scan{0%,100%{transform:translateX(-3px) rotate(-6deg)}50%{transform:translateX(3px) rotate(6deg)}}
+
+  .hero-stage{background:#fff;border-radius:22px;box-shadow:0 12px 34px rgba(12,110,137,.18);padding:18px}
+  .hero-cols{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;align-items:stretch}
+  .hero-cols .mascot{min-height:200px}
+  .hero-cols .mondo{min-height:160px}
+  .float{animation:float 4s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+  .period{background:var(--cream);border-radius:16px;padding:14px 18px;border:1px solid #F0E6C9;margin-bottom:16px}
+  .period-row{display:flex;justify-content:space-between;gap:12px;font-size:13px;padding:7px 0}
+  .period-row+.period-row{border-top:1px dashed #E2D4A8}
+  .period-row .k{font-family:var(--maru);font-weight:700;color:var(--aqua-deep);white-space:nowrap}
+  .period-row .v{text-align:right;font-weight:700}
+  .hero-cta{display:none}
+
+  /* ============ section base ============ */
+  .sec{padding:42px 20px}
+  .sec.alt{background:linear-gradient(180deg,#fff,#EAF7FB)}
+  .sec-title{font-family:var(--maru);font-weight:900;font-size:clamp(24px,5vw,32px);text-align:center;color:var(--ink);margin-bottom:6px}
+  .sec-title .en{display:block;font-size:11px;letter-spacing:.22em;color:var(--aqua);font-weight:700;margin-bottom:4px}
+  .sec-lead{text-align:center;font-size:14px;color:var(--ink);opacity:.85;margin-bottom:22px}
+
+  /* prize */
+  .prize-card{background:linear-gradient(160deg,var(--aqua) 0%,var(--aqua-deep) 100%);border-radius:22px;padding:22px;color:#fff;box-shadow:0 12px 30px rgba(12,110,137,.28)}
+  .prize-inner{display:grid;gap:18px;align-items:center}
+  .prize-visual .ph{background:repeating-linear-gradient(45deg,#ffffff22,#ffffff22 10px,#ffffff11 10px,#ffffff11 20px);border-color:#fff;color:#fff;min-height:170px}
+  .prize-visual .ph small{color:#dff4fa}
+  .prize-body{text-align:center}
+  .prize-tag{display:inline-block;background:var(--sun);color:var(--ink);font-family:var(--maru);font-weight:700;font-size:13px;padding:5px 16px;border-radius:999px;margin-bottom:12px}
+  .prize-note{font-size:12px;opacity:.92;margin-top:10px}
+  .prize-count{font-family:var(--maru);font-weight:700;font-size:15px;margin:10px 0 6px}
+  .prize-count b{font-size:24px;color:var(--sun)}
+  .prize-list{list-style:none;text-align:left;margin:6px 0 0}
+  .prize-list li{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:10px 0;border-top:1px solid #ffffff33;font-size:13px}
+  .prize-list li:first-child{border-top:none}
+  .prize-list b{font-family:var(--maru);background:var(--sun);color:var(--ink);border-radius:6px;padding:3px 9px;font-size:12px;white-space:nowrap;align-self:start}
+  .prize-list span{line-height:1.45}
+  .prize-list em{font-style:normal;font-weight:700;white-space:nowrap;font-size:12px}
+
+  /* products */
+  .target-banner{background:var(--coral);color:#fff;font-family:var(--maru);font-weight:700;text-align:center;padding:11px;border-radius:12px;margin-bottom:20px;font-size:clamp(15px,3.5vw,19px)}
+  .prod-grid{display:grid;grid-template-columns:1fr;gap:14px}
+  .prod{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;display:grid;grid-template-columns:88px 1fr;gap:14px;align-items:center;box-shadow:0 4px 14px rgba(12,110,137,.08)}
+  .prod .ph{min-height:88px}
+  .prod h3{font-family:var(--maru);font-weight:700;font-size:16px;color:var(--ink);margin-bottom:6px}
+  .prod .meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+  .badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:6px}
+  .badge.med{background:#EAF6FA;color:var(--aqua-deep);border:1px solid var(--line)}
+  .badge.vol{background:var(--sun-soft);color:#8a6a00}
+
+  .excl{margin-top:24px;background:#F4F8FA;border-radius:16px;padding:18px;border:1px solid var(--line)}
+  .excl .hd{font-family:var(--maru);font-weight:700;color:var(--coral-deep);text-align:center;font-size:15px;margin-bottom:14px}
+  .excl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .excl-grid .ph{min-height:74px;font-size:11px;padding:8px;filter:grayscale(.2);opacity:.85}
+
+  .notebox{background:var(--sun-soft);border-radius:14px;padding:14px 16px;font-size:12px;color:#6b5500;margin-top:18px}
+  .notebox b{color:var(--coral-deep)}
+
+  /* steps */
+  .steps{display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:8px}
+  .step{background:#fff;border-radius:18px;padding:20px;box-shadow:0 6px 18px rgba(12,110,137,.1);position:relative;overflow:hidden;display:flex;flex-direction:column}
+  .step::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--aqua)}
+  .step-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+  .step-num{flex:none;width:52px;height:52px;border-radius:50%;background:var(--sun);color:var(--ink);font-family:var(--maru);font-weight:700;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;box-shadow:0 3px 0 #E6BE2E}
+  .step-num small{font-size:9px;letter-spacing:.1em}
+  .step-num b{font-size:23px}
+  .step-head h3{font-family:var(--maru);font-weight:700;font-size:17px;color:var(--ink)}
+  .step p{font-size:13px;margin-bottom:12px}
+  .step .ph{min-height:130px;margin-top:auto}
+  .opt{display:inline-block;background:#EAF6FA;color:var(--aqua-deep);font-size:10px;font-weight:700;padding:2px 8px;border-radius:6px;margin-left:4px}
+  .hashtag{display:inline-block;background:var(--ink);color:#fff;font-family:var(--maru);font-weight:700;padding:6px 14px;border-radius:999px;font-size:14px;margin:4px 0}
+  .anyq{background:var(--aqua);color:#fff;font-family:var(--maru);font-weight:700;text-align:center;font-size:clamp(16px,3.6vw,20px);padding:14px;border-radius:14px;box-shadow:0 4px 0 var(--aqua-deep);margin-top:8px}
+
+  /* ============ decorative visuals ============ */
+  body{overflow-x:hidden}
+
+  /* floating bubbles */
+  .bubbles{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+  .bubbles b{position:absolute;display:block;border-radius:50%;background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.85),rgba(255,255,255,.12));box-shadow:inset 0 0 0 1px rgba(255,255,255,.45);animation:bub 7s ease-in-out infinite}
+  @keyframes bub{0%,100%{transform:translateY(10px) scale(1)}50%{transform:translateY(-16px) scale(1.06)}}
+
+  /* section deco scaffolding */
+  .hero{position:relative}
+  .hero .wrap{position:relative;z-index:2}
+  .sec{position:relative;overflow:hidden}
+  .sec .wrap{position:relative;z-index:2}
+
+  /* hero visual doodles */
+  .hero-visual{position:relative;z-index:2}
+  .dood{position:absolute;pointer-events:none}
+  .spark{animation:tw 2.6s ease-in-out infinite}
+  @keyframes tw{0%,100%{opacity:.4;transform:scale(.8)}50%{opacity:1;transform:scale(1.12)}}
+  .bob{animation:bob 3.2s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-7px) rotate(-2deg)}}
+
+  /* section title wavy underline */
+  .sec-title::after{content:"";display:block;width:68px;height:9px;margin:11px auto 0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 68 9'%3E%3Cpath d='M2 5 q8 -6 16 0 t16 0 t16 0 t16 0' fill='none' stroke='%23F0593C' stroke-width='2.8' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat}
+
+  /* prize ribbon + content above bubbles */
+  .prize-card{position:relative;overflow:hidden}
+  .prize-inner{position:relative;z-index:2}
+  .prize-ribbon{position:absolute;top:16px;right:-46px;transform:rotate(45deg);background:var(--coral);color:#fff;font-family:var(--maru);font-weight:700;font-size:11px;padding:6px 48px;box-shadow:0 3px 8px rgba(0,0,0,.22);z-index:3;letter-spacing:.05em}
+
+  /* step connector arrows */
+  .step{position:relative}
+  .step-arrow{position:absolute;z-index:5;width:30px;height:30px;border-radius:50%;background:var(--coral);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 8px rgba(240,89,60,.4);left:50%;bottom:-25px;transform:translateX(-50%) rotate(90deg)}
+  .step-arrow svg{width:13px;height:13px}
+
+  /* hashtag mini flow */
+  .hashflow{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:4px 0 2px}
+  .hashflow .ic{width:38px;height:38px;border-radius:11px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--aqua-deep);box-shadow:0 2px 6px rgba(12,110,137,.1)}
+  .hashflow .arw{color:var(--aqua);font-weight:900;font-size:18px}
+
+  /* CTA pulse */
+  .cta{position:relative;overflow:visible}
+  .cta::after{content:"";position:absolute;inset:0;border-radius:999px;animation:pulse 2.4s ease-out infinite;pointer-events:none}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(240,89,60,.45)}70%{box-shadow:0 0 0 16px rgba(240,89,60,0)}100%{box-shadow:0 0 0 0 rgba(240,89,60,0)}}
+
+  /* wave separator */
+  .wave-sep{display:block;width:100%;height:44px;margin-bottom:-1px}
+
+  /* real kabakun illustrations */
+  .kaba-hero{display:flex;align-items:center;justify-content:center;padding:6px}
+  .kaba-hero img{width:100%;height:auto;max-height:300px;object-fit:contain;display:block}
+  .kaba-hero.img-missing{border:2px dashed var(--aqua);border-radius:14px;min-height:200px;color:var(--aqua-deep);font-size:12px;font-weight:700}
+  .kaba-hero.img-missing::after{content:"健栄かばくん（差し替え）"}
+  .kaba-step{display:flex;align-items:center;justify-content:center;min-height:130px;margin-top:auto}
+  .kaba-step img{max-height:160px;width:auto;display:block}
+  .banner-row{position:relative;margin-top:40px}
+  .kaba-point{position:absolute;right:14px;bottom:100%;width:72px;height:auto;transform:translateY(42%);z-index:3;pointer-events:none;filter:drop-shadow(0 4px 6px rgba(0,0,0,.15))}
+  .kaba-peek{display:none;position:absolute;z-index:1;height:auto;pointer-events:none;filter:drop-shadow(0 6px 10px rgba(0,0,0,.12))}
+  .peek-prize{top:28px;left:30px;width:84px}
+  .peek-entry{top:28px;right:30px;width:92px}
+
+  /* faint dot pattern */
+  .sec.alt::before{content:"";position:absolute;inset:0;z-index:0;background-image:radial-gradient(rgba(23,162,198,.10) 1.5px,transparent 1.5px);background-size:22px 22px;opacity:.6}
+
+  /* rules */
+  details.rules{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  details.rules summary{list-style:none;cursor:pointer;padding:16px 18px;font-family:var(--maru);font-weight:700;color:var(--aqua-deep);display:flex;justify-content:space-between;align-items:center}
+  details.rules summary::-webkit-details-marker{display:none}
+  details.rules summary .plus{font-size:22px;transition:transform .25s}
+  details.rules[open] summary .plus{transform:rotate(45deg)}
+  details.rules .body{padding:0 18px 18px;font-size:12px;color:#456}
+  details.rules .body li{margin:6px 0 6px 18px}
+
+  /* contact */
+  .contact{background:var(--cream);text-align:center;padding:44px 20px}
+  .contact .ttl{font-family:var(--maru);font-weight:900;font-size:clamp(24px,5vw,30px);color:var(--aqua-deep);margin-bottom:16px}
+  .contact .office{font-family:var(--maru);font-weight:700;font-size:15px;margin-bottom:8px}
+  .contact .mail{font-family:var(--maru);font-weight:700;font-size:17px;color:var(--ink);word-break:break-all;margin-bottom:16px}
+  .contact .fine{font-size:12px;color:#789;line-height:1.95}
+
+  /* sticky CTA */
+  .sticky{position:sticky;bottom:0;z-index:30;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(255,255,255,0),#fff 40%)}
+  .sticky .wrap{max-width:520px}
+  .cta{display:block;width:100%;text-align:center;text-decoration:none;background:var(--coral);color:#fff;font-family:var(--maru);font-weight:700;font-size:18px;padding:16px;border-radius:999px;box-shadow:0 5px 0 var(--coral-deep),0 8px 20px rgba(240,89,60,.35);transition:transform .12s,box-shadow .12s}
+  .cta:active{transform:translateY(3px);box-shadow:0 2px 0 var(--coral-deep)}
+  .cta:focus-visible{outline:3px solid var(--aqua-deep);outline-offset:3px}
+
+  .foot{background:var(--aqua-deep);color:#cdeaf2;text-align:center;font-size:11px;padding:20px}
+
+  /* ----- JAPANKURU site chrome ----- */
+  .site-header{position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 1px 8px rgba(12,110,137,.06)}
+  .site-header .bar{max-width:var(--wrap);margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 18px}
+  .jk-logo{display:flex;align-items:center;gap:9px;text-decoration:none}
+  .jk-logo-img{height:28px;width:auto;display:block}
+  .jk-logo-fb{display:flex;align-items:center;gap:9px}
+  .kenei-img{height:30px;width:auto;display:block}
+  .sponsor{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:10px}
+  .sponsor-label{font-size:10px;font-weight:700;color:#789;border:1px solid #cdd;border-radius:5px;padding:2px 7px}
+  .sf-logo-chip{display:inline-block;background:#fff;border-radius:10px;padding:9px 13px;margin-bottom:10px}
+  .sf-logo-chip img{height:28px;width:auto;display:block}
+  .jk-logo .mark{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--coral),#ff8a5c);display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--maru);font-weight:900;font-size:17px;box-shadow:0 2px 6px rgba(240,89,60,.4)}
+  .jk-logo .wordmark{font-family:var(--maru);font-weight:900;font-size:19px;letter-spacing:.02em;color:var(--ink);line-height:1}
+  .jk-logo .ph-note{display:block;font-size:8px;font-weight:500;color:#9bb3bc;letter-spacing:.04em;margin-top:2px}
+  .jk-nav{display:none;align-items:center;gap:20px;font-size:13px;font-weight:700}
+  .jk-nav a{color:var(--ink);text-decoration:none}
+  #prize,#items,#entry,#contact{scroll-margin-top:64px}
+  .jk-right{display:flex;align-items:center;gap:12px}
+  .jk-lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;font-size:11px;font-weight:700}
+  .jk-lang span{padding:5px 9px;color:#789}
+  .jk-lang span.on{background:var(--aqua);color:#fff}
+  .jk-menu{width:26px;height:18px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer}
+  .jk-menu i{height:2.5px;background:var(--ink);border-radius:2px}
+
+  .disclaimer{background:#EAF3F6;color:#5a7e8a;text-align:center;font-size:11px;padding:14px 20px;line-height:1.7}
+  .site-footer{background:#0E2A33;color:#9fc2cd;padding:34px 20px 28px}
+  .site-footer .wrap{display:grid;gap:22px}
+  .sf-brand .mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--coral),#ff8a5c);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-family:var(--maru);font-weight:900;font-size:19px;margin-bottom:10px}
+  .sf-brand .wordmark{font-family:var(--maru);font-weight:900;font-size:20px;color:#fff;letter-spacing:.02em}
+  .sf-brand p{font-size:12px;line-height:1.8;margin-top:8px;max-width:380px}
+  .sf-brand .ph-note{font-size:9px;color:#5e8290;margin-top:6px}
+  .sf-links{display:flex;flex-wrap:wrap;gap:26px}
+  .sf-col h4{font-family:var(--maru);font-weight:700;font-size:12px;color:#cfe6ee;margin-bottom:8px;letter-spacing:.04em}
+  .sf-col a{display:block;color:#9fc2cd;text-decoration:none;font-size:12px;line-height:2;opacity:.85}
+  .sf-copy{border-top:1px solid #1d4451;padding-top:16px;font-size:11px;color:#6e94a1;text-align:center}
+
+  /* ----- Mondo figure placeholder ----- */
+  .mondo-fig{display:block;width:100%;height:auto}
+  .figcard{
+    position:relative;border:2px dashed var(--aqua);border-radius:14px;
+    background:linear-gradient(180deg,#EAF7FB,#fff);
+    display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
+    padding:10px 10px 8px;overflow:hidden;
+  }
+  .figcard .figwrap{width:72%;max-width:180px;margin-top:auto}
+  .figcard .cap{font-size:10px;font-weight:700;color:var(--aqua-deep);text-align:center;margin-top:6px;line-height:1.4}
+  .figcard .cap small{display:block;font-weight:500;color:#7aa0ab;font-size:9px}
+
+  /* ----- navigator band ----- */
+  .navi{
+    display:flex;gap:14px;align-items:center;background:#fff;border:1px solid var(--line);
+    border-radius:18px;padding:16px;margin-bottom:24px;box-shadow:0 6px 18px rgba(12,110,137,.1);
+  }
+  .navi-fig{flex:none;width:84px}
+  .navi-name{font-family:var(--maru);font-weight:700;color:var(--aqua-deep);font-size:15px;margin-bottom:6px}
+  .navi-bubble{position:relative;background:#EAF7FB;border:1px dashed var(--aqua);border-radius:12px;padding:10px 12px;font-size:12px;color:#5a7e8a}
+  .navi-bubble::before{content:"";position:absolute;left:-7px;top:18px;width:12px;height:12px;background:#EAF7FB;border-left:1px dashed var(--aqua);border-bottom:1px dashed var(--aqua);transform:rotate(45deg)}
+  .navi-bubble small{display:block;color:#8aa9b3;font-size:10px;margin-top:5px}
+
+  /* ============ DESKTOP ============ */
+  @media (min-width:768px){
+    .hero{padding:56px 24px 60px}
+    .hero .wrap{
+      grid-template-columns:1.05fr .95fr;
+      grid-template-areas:"text visual" "meta visual";
+      gap:20px 40px;align-items:center;
+    }
+    .hero-text{text-align:left;align-self:end}
+    .hero-meta{align-self:start}
+    .hero-visual{align-self:center}
+    .scope{margin-top:20px}
+    .hero-cols .mascot{min-height:300px}
+    .hero-cols .mondo{min-height:240px}
+    .hero-cta{display:block;margin-top:4px}
+    .hero-cta .cta{box-shadow:0 5px 0 var(--coral-deep),0 10px 24px rgba(240,89,60,.3)}
+
+    .prize-inner{grid-template-columns:1fr 1fr;gap:28px}
+    .prize-body{text-align:left}
+    .prize-visual .ph{min-height:230px}
+
+    .prod-grid{grid-template-columns:repeat(3,1fr);gap:18px}
+    .prod{grid-template-columns:1fr;text-align:center;padding:22px 18px}
+    .prod .ph{min-height:150px}
+    .prod .meta{justify-content:center}
+
+    .steps{grid-template-columns:repeat(3,1fr);gap:18px}
+    .step-arrow{left:auto;right:-24px;bottom:auto;top:50%;transform:translateY(-50%) rotate(0deg)}
+    .kaba-peek{display:block}
+    .excl-grid .ph{min-height:110px}
+    .navi{padding:20px 24px}
+    .navi-fig{width:104px}
+    .navi-name{font-size:17px}
+
+    .jk-nav{display:flex}
+    .jk-menu{display:none}
+    .site-footer .wrap{grid-template-columns:1.4fr 1fr;gap:40px;align-items:start}
+    .site-footer .sf-copy{grid-column:1 / -1}
+
+    /* hide sticky on desktop — hero CTA + flow covers it */
+    .sticky{display:none}
+  }
+  @media (min-width:768px) and (max-width:980px){
+    .hero-cols{grid-template-columns:1fr 1fr}
+  }
+
+  @media (prefers-reduced-motion:reduce){*{animation:none !important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+  <!-- ============ JAPANKURU site header (placeholder) ============ -->
+  <div class="site-header">
+    <div class="bar">
+      <a class="jk-logo" href="#" aria-label="JAPANKURU">
+        <img class="jk-logo-img" src="https://www.japankuru.com/gld-kanri/data/themes/japankuru/assets/images/logo.svg" alt="JAPANKURU"
+             onerror="this.style.display='none';document.getElementById('jkLogoFb').style.display='flex'">
+        <span id="jkLogoFb" class="jk-logo-fb" style="display:none">
+          <span class="mark maru">J</span><span class="wordmark">JAPANKURU</span>
+        </span>
+      </a>
+      <nav class="jk-nav">
+        <a href="#prize">当選賞品</a><a href="#items">対象商品</a><a href="#entry">応募方法</a><a href="#contact">お問い合わせ</a>
+      </nav>
+      <div class="jk-right">
+        <div class="jk-lang"><span class="on">繁中</span><span>日本語</span><span>EN</span></div>
+        <div class="jk-menu" aria-label="メニュー"><i></i><i></i><i></i></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <div class="bubbles" aria-hidden="true">
+      <b style="width:80px;height:80px;left:6%;top:18%;animation-duration:8s"></b>
+      <b style="width:46px;height:46px;left:88%;top:12%;animation-duration:6s;animation-delay:.4s"></b>
+      <b style="width:120px;height:120px;left:78%;top:55%;animation-duration:9s;animation-delay:1s;opacity:.6"></b>
+      <b style="width:30px;height:30px;left:16%;top:62%;animation-duration:5.5s;animation-delay:.8s"></b>
+      <b style="width:60px;height:60px;left:46%;top:80%;animation-duration:7.5s;animation-delay:.2s;opacity:.5"></b>
+    </div>
+    <div class="wrap">
+      <div class="hero-text">
+        <div class="brand">健栄かばくんシリーズ</div>
+        <div class="sub">オリジナルグッズ＆豪華賞品プレゼント</div>
+        <h1>「健栄かばくんを<br><span class="pop">さがせ！</span>」</h1>
+        <span class="scope maru">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="10" cy="10" r="6.5" stroke="currentColor" stroke-width="2.4"/><line x1="15" y1="15" x2="21" y2="21" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/></svg>
+          ドンキ・ドラッグストアでさがそう
+        </span>
+      </div>
+
+      <div class="hero-visual">
+        <svg class="dood bob" style="top:-14px;left:-10px;width:58px;height:58px" viewBox="0 0 60 60" aria-hidden="true"><circle cx="24" cy="24" r="15" fill="#fff" stroke="#F0593C" stroke-width="5"/><line x1="35" y1="35" x2="52" y2="52" stroke="#F0593C" stroke-width="7" stroke-linecap="round"/></svg>
+        <svg class="dood spark" style="top:-8px;right:6%;width:24px;height:24px" viewBox="0 0 26 26" aria-hidden="true"><path d="M13 1 L15 11 L25 13 L15 15 L13 25 L11 15 L1 13 L11 11 Z" fill="#FFD84D"/></svg>
+        <svg class="dood spark" style="bottom:6%;left:-4px;width:18px;height:18px;animation-delay:.7s" viewBox="0 0 26 26" aria-hidden="true"><path d="M13 1 L15 11 L25 13 L15 15 L13 25 L11 15 L1 13 L11 11 Z" fill="#FFD84D"/></svg>
+        <svg class="dood" style="bottom:-10px;right:-6px;width:40px;height:40px" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#17A2C6"/><text x="20" y="27" text-anchor="middle" font-size="22" font-family="Zen Maru Gothic,sans-serif" font-weight="700" fill="#fff">?</text></svg>
+        <div class="hero-stage">
+          <div class="hero-cols">
+            <div class="kaba-hero float mascot">
+              <img src="https://www.kenei-pharm.com/kabakun-series/assets/img/ugai/top/mv_illust.png" alt="健栄かばくん"
+                   onerror="this.style.display='none';this.parentElement.classList.add('img-missing')">
+            </div>
+            <div class="figcard float mondo">
+              <div class="figwrap">
+                <svg class="mondo-fig" viewBox="0 0 180 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="夢多（Mondo）写真プレースホルダー">
+                  <path d="M48 300 V178 q0 -34 42 -34 t42 34 V300 Z" fill="#28485b"/>
+                  <path d="M78 300 V152 q12 -6 24 0 V300 Z" fill="#E84B36"/>
+                  <g stroke="#ffffff44" stroke-width="3"><line x1="48" y1="205" x2="132" y2="205"/><line x1="48" y1="240" x2="132" y2="240"/><line x1="48" y1="275" x2="132" y2="275"/></g>
+                  <path d="M124 168 q26 -10 30 -46" fill="none" stroke="#28485b" stroke-width="22" stroke-linecap="round"/>
+                  <circle cx="156" cy="104" r="19" fill="#fff" stroke="#F0593C" stroke-width="7"/>
+                  <line x1="143" y1="118" x2="128" y2="136" stroke="#F0593C" stroke-width="7" stroke-linecap="round"/>
+                  <path d="M70 150 l20 18 l20 -18 v-10 l-20 10 l-20 -10 Z" fill="#1b3543"/>
+                  <rect x="82" y="120" width="16" height="22" rx="6" fill="#E8B894"/>
+                  <circle cx="90" cy="94" r="30" fill="#F0C9A4"/>
+                  <path d="M60 92 q0 -32 30 -32 t30 32 q-8 -16 -30 -16 t-30 16 Z" fill="#26333a"/>
+                  <g fill="#1f2a30"><rect x="70" y="88" width="17" height="12" rx="5"/><rect x="93" y="88" width="17" height="12" rx="5"/><rect x="86" y="91" width="8" height="4"/></g>
+                  <path d="M82 110 q8 6 16 0" fill="none" stroke="#9b5b3f" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="cap">夢多（Mondo）<small>※実写ビジュアル（PNG等）に差し替え</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-meta">
+        <div class="period">
+          <div class="period-row"><span class="k">応募期間</span><span class="v">2026年8月1日(土)〜9月30日(水)</span></div>
+          <div class="period-row"><span class="k">アップロード有効期間</span><span class="v">2026年9月30日(水) 23:59まで</span></div>
+          <div class="period-row"><span class="k">当選発表</span><span class="v">賞品の発送をもって代えさせていただきます</span></div>
+        </div>
+        <div class="hero-cta"><a class="cta maru" href="#" onclick="return false">いますぐ応募する</a></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ 賞品 ============ -->
+  <section class="sec" id="prize">
+    <img class="kaba-peek peek-prize" src="https://www.kenei-pharm.com/kabakun-series/assets/img/ugai/faq/illust01.png" alt="" aria-hidden="true" onerror="this.remove()">
+    <div class="wrap">
+      <h2 class="sec-title maru"><span class="en">PRIZE</span>当選賞品</h2>
+      <p class="sec-lead">抽選で当たる、ここだけのオリジナルグッズ＆豪華賞品。</p>
+      <div class="prize-card">
+        <span class="prize-ribbon maru">豪華賞品</span>
+        <div class="bubbles" aria-hidden="true">
+          <b style="width:90px;height:90px;left:-3%;top:30%;animation-duration:8s;opacity:.18"></b>
+          <b style="width:50px;height:50px;left:30%;top:8%;animation-duration:6s;animation-delay:.5s;opacity:.16"></b>
+          <b style="width:130px;height:130px;left:70%;top:45%;animation-duration:9s;opacity:.14"></b>
+        </div>
+        <div class="prize-inner">
+          <div class="prize-visual"><div class="ph">当選賞品ビジュアル<br><small>※賞品内容は確定次第、画像・詳細を掲載</small></div></div>
+          <div class="prize-body">
+            <span class="prize-tag maru">アタリ</span>
+            <div class="prize-count maru">抽選で合計 <b>140</b> 名様にプレゼント！</div>
+            <ul class="prize-list">
+              <li><b>A賞</b><span>「健栄かばくん」オリジナルグッズBOX<br>（ぬいぐるみ＋クリアポーチ＋ステッカー）</span><em>10名様</em></li>
+              <li><b>B賞</b><span>かばくんオリジナル クリアポーチ</span><em>30名様</em></li>
+              <li><b>C賞</b><span>選べる電子ギフト 1,000円分</span><em>100名様</em></li>
+            </ul>
+            <p class="prize-note">※画像・賞品名・当選者数はすべてダミーです。確定次第差し替え。デザインはイメージです。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 対象商品 ============ -->
+  <section class="sec" id="items" style="padding-top:0">
+    <div class="wrap">
+      <h2 class="sec-title maru"><span class="en">TARGET ITEMS</span>対象商品</h2>
+      <p class="sec-lead">「健栄かばくんシリーズ」の3商品が対象です。</p>
+      <div class="banner-row">
+        <img class="kaba-point" src="https://www.kenei-pharm.com/kabakun-series/assets/img/top/products_illust01.png" alt="かばくん" onerror="this.remove()">
+        <div class="target-banner maru">この3つのどれかを撮ってね！</div>
+      </div>
+
+      <div class="prod-grid">
+        <div class="prod">
+          <div class="ph">商品写真<br><small>差し替え</small></div>
+          <div>
+            <h3 class="maru">健栄のどスプレー</h3>
+            <div class="meta"><span class="badge med">第3類医薬品</span><span class="badge vol">12ml・25ml・50ml</span></div>
+          </div>
+        </div>
+        <div class="prod">
+          <div class="ph">商品写真<br><small>差し替え</small></div>
+          <div>
+            <h3 class="maru">健栄のどスプレー アズレン</h3>
+            <div class="meta"><span class="badge med">第3類医薬品</span><span class="badge vol">30ml</span></div>
+          </div>
+        </div>
+        <div class="prod">
+          <div class="ph">商品写真<br><small>差し替え</small></div>
+          <div>
+            <h3 class="maru">アズレンEトローチ</h3>
+            <div class="meta"><span class="badge med">第3類医薬品</span><span class="badge vol">24錠入り</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="excl">
+        <div class="hd maru">以下の商品はキャンペーン対象外です</div>
+        <div class="excl-grid">
+          <div class="ph">健栄うがい薬<br>シリーズ</div>
+          <div class="ph">うがい薬<br>アズレンCPC</div>
+          <div class="ph">うがい薬<br>CPC</div>
+        </div>
+      </div>
+
+      <div class="notebox">※対象商品は<b>医薬品</b>です。必ず治療目的でご購入いただき、パッケージ記載の用法・用量・注意事項をご確認のうえご使用ください。応募・賞品目的での過度な購入はご遠慮ください。</div>
+    </div>
+  </section>
+
+  <!-- ============ 応募方法 ============ -->
+  <section class="sec alt" id="entry">
+    <img class="kaba-peek peek-entry" src="https://www.kenei-pharm.com/kabakun-series/assets/img/spray/concept_illust.png" alt="" aria-hidden="true" onerror="this.remove()">
+    <div class="wrap">
+      <h2 class="sec-title maru"><span class="en">HOW TO ENTRY</span>応募方法</h2>
+      <p class="sec-lead">3ステップでかんたん。お一人様何口でも応募できます。</p>
+
+      <div class="navi">
+        <div class="navi-fig">
+          <svg class="mondo-fig" viewBox="0 0 180 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="夢多（Mondo）写真プレースホルダー">
+            <path d="M48 300 V178 q0 -34 42 -34 t42 34 V300 Z" fill="#28485b"/>
+            <path d="M78 300 V152 q12 -6 24 0 V300 Z" fill="#E84B36"/>
+            <g stroke="#ffffff44" stroke-width="3"><line x1="48" y1="205" x2="132" y2="205"/><line x1="48" y1="240" x2="132" y2="240"/><line x1="48" y1="275" x2="132" y2="275"/></g>
+            <path d="M124 168 q26 -10 30 -46" fill="none" stroke="#28485b" stroke-width="22" stroke-linecap="round"/>
+            <circle cx="156" cy="104" r="19" fill="#fff" stroke="#F0593C" stroke-width="7"/>
+            <line x1="143" y1="118" x2="128" y2="136" stroke="#F0593C" stroke-width="7" stroke-linecap="round"/>
+            <path d="M70 150 l20 18 l20 -18 v-10 l-20 10 l-20 -10 Z" fill="#1b3543"/>
+            <rect x="82" y="120" width="16" height="22" rx="6" fill="#E8B894"/>
+            <circle cx="90" cy="94" r="30" fill="#F0C9A4"/>
+            <path d="M60 92 q0 -32 30 -32 t30 32 q-8 -16 -30 -16 t-30 16 Z" fill="#26333a"/>
+            <g fill="#1f2a30"><rect x="70" y="88" width="17" height="12" rx="5"/><rect x="93" y="88" width="17" height="12" rx="5"/><rect x="86" y="91" width="8" height="4"/></g>
+            <path d="M82 110 q8 6 16 0" fill="none" stroke="#9b5b3f" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="navi-body">
+          <div class="navi-name">夢多（Mondo）が案内！</div>
+          <div class="navi-bubble">（コメントは確定・許諾後に挿入）<small>※実在タレントのため、実際の発言・撮影内容に差し替え。実写写真（PNG等）を想定。</small></div>
+        </div>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <span class="step-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div class="step-head"><div class="step-num maru"><small>STEP</small><b>1</b></div><h3 class="maru">さがして、撮る</h3></div>
+          <p>ドン・キホーテやドラッグストアの棚で「健栄かばくんシリーズ」を見つけて撮影。<br>店頭で「健栄かばくん」POPを見つけたら一緒に撮ると◎<span class="opt">任意</span></p>
+          <div class="figcard" style="min-height:150px;margin-top:auto">
+            <div class="figwrap" style="max-width:120px">
+              <svg class="mondo-fig" viewBox="0 0 180 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="夢多（Mondo）が商品をさがして撮影するプレースホルダー">
+                <path d="M48 300 V178 q0 -34 42 -34 t42 34 V300 Z" fill="#28485b"/>
+                <path d="M78 300 V152 q12 -6 24 0 V300 Z" fill="#E84B36"/>
+                <g stroke="#ffffff44" stroke-width="3"><line x1="48" y1="205" x2="132" y2="205"/><line x1="48" y1="240" x2="132" y2="240"/></g>
+                <path d="M124 168 q26 -10 30 -46" fill="none" stroke="#28485b" stroke-width="22" stroke-linecap="round"/>
+                <circle cx="156" cy="104" r="19" fill="#fff" stroke="#F0593C" stroke-width="7"/>
+                <line x1="143" y1="118" x2="128" y2="136" stroke="#F0593C" stroke-width="7" stroke-linecap="round"/>
+                <path d="M70 150 l20 18 l20 -18 v-10 l-20 10 l-20 -10 Z" fill="#1b3543"/>
+                <rect x="82" y="120" width="16" height="22" rx="6" fill="#E8B894"/>
+                <circle cx="90" cy="94" r="30" fill="#F0C9A4"/>
+                <path d="M60 92 q0 -32 30 -32 t30 32 q-8 -16 -30 -16 t-30 16 Z" fill="#26333a"/>
+                <g fill="#1f2a30"><rect x="70" y="88" width="17" height="12" rx="5"/><rect x="93" y="88" width="17" height="12" rx="5"/><rect x="86" y="91" width="8" height="4"/></g>
+                <path d="M82 110 q8 6 16 0" fill="none" stroke="#9b5b3f" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="cap">夢多が商品をさがして撮影<small>※実写に差し替え</small></div>
+          </div>
+        </div>
+
+        <div class="step">
+          <span class="step-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div class="step-head"><div class="step-num maru"><small>STEP</small><b>2</b></div><h3 class="maru">SNSに投稿</h3></div>
+          <p>撮った写真に指定のハッシュタグをつけてSNSにアップ。<br>※1回の応募につきハッシュタグは1つ。複数口は口数分の投稿を。</p>
+          <div class="hashflow" style="margin-top:auto">
+            <span class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="14" rx="3" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="13" r="4" stroke="currentColor" stroke-width="2"/><path d="M8 6l1.5-2h5L16 6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+            <span class="arw">→</span>
+            <span class="hashtag maru">#かばくんをさがせ</span>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-head"><div class="step-num maru"><small>STEP</small><b>3</b></div><h3 class="maru">応募ページで完了</h3></div>
+          <p>キャンペーンサイトの応募ページで必要事項を記入し、ハッシュタグ付き投稿を登録して応募完了！</p>
+          <div class="kaba-step">
+            <img src="https://www.kenei-pharm.com/kabakun-series/assets/img/hand-sanitizer/mv_illust.png" alt="かばくん"
+                 onerror="this.parentElement.outerHTML='&lt;div class=&quot;ph&quot; style=&quot;min-height:130px;margin-top:auto&quot;&gt;応募フォーム入力イメージ&lt;br&gt;&lt;small&gt;差し替え&lt;/small&gt;&lt;/div&gt;'">
+          </div>
+        </div>
+      </div>
+
+      <div class="anyq maru">＼ お一人様 何口でも応募可能！ ／</div>
+      <div class="notebox">※応募には、ドン・キホーテまたはドラッグストアで撮影・購入された対象商品の投稿が必要です。<br>※不正が発覚した場合は、該当応募者のすべての応募を無効とさせていただきます。<br>※店舗によっては「健栄かばくん」POPや対象商品を見つけられない場合があります。POPがなくても<b>対象商品の写真だけで応募できます</b>。</div>
+    </div>
+  </section>
+
+  <!-- ============ 規約 ============ -->
+  <section class="sec" style="padding-bottom:14px">
+    <div class="wrap">
+      <p class="sec-lead maru" style="font-weight:700;color:var(--aqua-deep);margin-bottom:16px">応募規約をご確認のうえ、ご応募ください。</p>
+      <details class="rules">
+        <summary class="maru">応募規約 <span class="plus">＋</span></summary>
+        <div class="body">
+          <ul>
+            <li>本キャンペーンは健栄製薬株式会社（以下「主催者」）が主催します。</li>
+            <li>応募期間：2026年8月1日(土)0:00〜9月30日(水)23:59。期間内にSNSへ投稿・応募ページから登録された応募が有効です。</li>
+            <li>応募資格：日本国内にお住まいで、賞品の受け取りが可能な方。SNSアカウントを公開設定にしている方。</li>
+            <li>対象商品は医薬品です。必ず治療目的でご購入・ご使用いただき、パッケージ記載の用法・用量・注意事項をご確認ください。応募・賞品目的での過度な購入はご遠慮ください。</li>
+            <li>当選賞品・当選者数・抽選方法は確定次第掲載します（現在の記載はダミーです）。</li>
+            <li>当選発表は賞品の発送をもって代えさせていただきます。賞品の発送は2026年11月中旬頃を予定しています。</li>
+            <li>取得した個人情報は賞品発送および本キャンペーン運営の目的にのみ使用します。</li>
+            <li>投稿画像の著作権・肖像権について、第三者の権利を侵害しないようご注意ください。</li>
+            <li>不正・規約違反と判断された応募は、該当者のすべての応募を無効とします。</li>
+            <li>本規約は予告なく変更される場合があります。（※以下、確定した正式規約文面に差し替え）</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <svg class="wave-sep" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 60 L0 34 Q360 4 720 30 T1440 26 L1440 60 Z" fill="#FBF6E9"/></svg>
+  <!-- ============ お問い合わせ ============ -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="ttl maru">お問い合わせ</div>
+      <div class="office maru">「#かばくんをさがせ！」プレゼントキャンペーン事務局</div>
+      <div class="mail maru">info-@kabakunwosagase-cp.jp</div>
+      <div class="fine">
+        受付期間：2026年8月1日(土)〜10月31日(土)<br>
+        対応時間：10:00〜17:00（土・日・祝日を除く平日）<br>
+        ※受信は24時間受け付けておりますが、ご返答にはお時間を頂戴します。
+      </div>
+    </div>
+  </section>
+
+  <!-- campaign disclaimer -->
+  <div class="disclaimer">
+    <div class="sponsor">
+      <span class="sponsor-label">提供</span>
+      <img class="kenei-img" src="https://www.kenei-pharm.com/include/img/logo.webp" alt="健栄製薬"
+           onerror="this.replaceWith(document.createTextNode('健栄製薬株式会社'))">
+    </div>
+    画像・キャラクター・タレント素材はすべて差し替え用プレースホルダーです。
+  </div>
+
+  <!-- ============ JAPANKURU site footer (placeholder) ============ -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="sf-brand">
+        <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2025/09/JAPANKURU_white-2-1.png" alt="JAPANKURU" style="height:34px;width:auto;display:block;margin-bottom:12px"
+             onerror="this.outerHTML='<div class=&quot;wordmark&quot; style=&quot;color:#fff;margin-bottom:12px&quot;>JAPANKURU</div>'">
+        <p>日本の「今」を、世界へ。旅・グルメ・ショッピングの最新情報をお届けする訪日メディア。</p>
+        <div class="ph-note">※紹介文・リンクは差し替え</div>
+      </div>
+      <div class="sf-links">
+        <div class="sf-col">
+          <h4>コンテンツ</h4>
+          <a href="#">特集記事</a><a href="#">グルメ</a><a href="#">ショッピング</a><a href="#">エリアガイド</a>
+        </div>
+        <div class="sf-col">
+          <h4>JAPANKURUについて</h4>
+          <a href="#">運営会社</a><a href="#">お問い合わせ</a><a href="#">利用規約</a><a href="#">プライバシーポリシー</a>
+        </div>
+      </div>
+      <div class="sf-copy">© JAPANKURU（差し替え）　All Rights Reserved.</div>
+    </div>
+  </footer>
+
+  <!-- sticky CTA (mobile only) -->
+  <div class="sticky"><div class="wrap"><a class="cta maru" href="#" onclick="return false">いますぐ応募する</a></div></div>
+
+</body>
+</html>
