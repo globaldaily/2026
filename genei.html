@@ -235,8 +235,16 @@
   .jk-lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;font-size:11px;font-weight:700}
   .jk-lang span{padding:5px 9px;color:#789}
   .jk-lang span.on{background:var(--aqua);color:#fff}
-  .jk-menu{width:26px;height:18px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer}
-  .jk-menu i{height:2.5px;background:var(--ink);border-radius:2px}
+  .jk-menu{width:26px;height:18px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;background:none;border:0;padding:0}
+  .jk-menu i{height:2.5px;width:100%;background:var(--ink);border-radius:2px;transition:transform .25s,opacity .2s}
+  .jk-menu.open i:nth-child(1){transform:translateY(7.75px) rotate(45deg)}
+  .jk-menu.open i:nth-child(2){opacity:0}
+  .jk-menu.open i:nth-child(3){transform:translateY(-7.75px) rotate(-45deg)}
+  .jk-drawer{display:none;border-top:1px solid var(--line);background:#fff}
+  .jk-drawer.open{display:block}
+  .jk-drawer a{display:block;padding:15px 22px;font-family:var(--maru);font-weight:700;color:var(--ink);text-decoration:none;border-bottom:1px solid #EAF3F6}
+  .jk-drawer a:last-child{border-bottom:0}
+  .jk-drawer a:active{background:#EAF7FB}
 
   .disclaimer{background:#EAF3F6;color:#5a7e8a;text-align:center;font-size:11px;padding:14px 20px;line-height:1.7}
   .site-footer{background:#0E2A33;color:#9fc2cd;padding:34px 20px 28px}
@@ -309,6 +317,7 @@
 
     .jk-nav{display:flex}
     .jk-menu{display:none}
+    .jk-drawer{display:none !important}
     .site-footer .wrap{grid-template-columns:1.4fr 1fr;gap:40px;align-items:start}
     .site-footer .sf-copy{grid-column:1 / -1}
 
@@ -339,10 +348,29 @@
       </nav>
       <div class="jk-right">
         <div class="jk-lang"><span class="on">繁中</span><span>日本語</span><span>EN</span></div>
-        <div class="jk-menu" aria-label="メニュー"><i></i><i></i><i></i></div>
+        <button class="jk-menu" id="jkMenuBtn" aria-label="メニュー" aria-expanded="false" aria-controls="jkDrawer"><i></i><i></i><i></i></button>
       </div>
     </div>
+    <nav class="jk-drawer" id="jkDrawer">
+      <a href="#prize">当選賞品</a><a href="#items">対象商品</a><a href="#entry">応募方法</a><a href="#contact">お問い合わせ</a>
+    </nav>
   </div>
+
+  <script>
+    (function(){
+      var btn=document.getElementById('jkMenuBtn'), dr=document.getElementById('jkDrawer');
+      function close(){btn.classList.remove('open');dr.classList.remove('open');btn.setAttribute('aria-expanded','false');}
+      btn.addEventListener('click',function(e){
+        e.stopPropagation();
+        var open=dr.classList.toggle('open');
+        btn.classList.toggle('open',open);
+        btn.setAttribute('aria-expanded',open?'true':'false');
+      });
+      dr.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close);});
+      document.addEventListener('click',function(e){ if(!dr.contains(e.target)&&!btn.contains(e.target)) close(); });
+    })();
+  </script>
+
 
   <!-- ============ HERO ============ -->
   <header class="hero">
