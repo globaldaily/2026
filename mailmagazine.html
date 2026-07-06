@@ -63,13 +63,15 @@
 <body>
 <div class="wrap">
   <header>
-    <h1>📧 海外情報ニュース メルマガ作成ツール <span style="font-size:12px;opacity:.6;">v3</span></h1>
-    <p>スプレッドシートから取り込み → プレビュー確認 → Sansan貼付。空のブロックは自動で非表示。</p>
+    <h1>📧 海外情報ニュース メルマガ作成ツール <span style="font-size:12px;opacity:.6;">v4</span></h1>
+    <p>スプレッドシートから取り込み → メールHTML / HPアーカイブHTML / リマインド文を自動生成。</p>
   </header>
 
   <div class="top-action-bar">
     <button class="btn btn-preview" onclick="render()">🔄 プレビュー更新</button>
     <button class="btn btn-copy" onclick="copyHTML()">📋 HTMLをコピー（Sansanに貼付）</button>
+    <button class="btn btn-import" onclick="copyArchiveHTML()">🌐 HPアーカイブHTMLをコピー</button>
+    <button class="btn btn-ghost" onclick="copyReminderText()">📣 未完了リマインド文をコピー</button>
     <button class="btn btn-reset" onclick="clearSavedDraft()">🧹 新しい号を作成</button>
     <span class="autosave-status"></span>
   </div>
@@ -142,6 +144,8 @@
   <div class="action-bar">
     <button class="btn btn-preview" onclick="render()">🔄 プレビュー更新</button>
     <button class="btn btn-copy" onclick="copyHTML()">📋 HTMLをコピー（Sansanに貼付）</button>
+    <button class="btn btn-import" onclick="copyArchiveHTML()">🌐 HPアーカイブHTMLをコピー</button>
+    <button class="btn btn-ghost" onclick="copyReminderText()">📣 未完了リマインド文をコピー</button>
     <button class="btn btn-reset" onclick="clearSavedDraft()">🧹 新しい号を作成</button>
     <span class="autosave-status"></span>
   </div>
@@ -379,12 +383,21 @@ function newsHTML(n){const url=n.url.trim()||'#';
   const textBlock=`${srcTag(n.srcType)}${(n.srcType==='現地メディア'&&n.kaisetsu)?kaisetsuTag():''}${catTag(n.catType)}${subTagTag(n.subTag)}
 <a href="${esc(url)}" target="_blank" style="color:#1e3a5f; font-size:15px; line-height:1.65em; text-decoration:none; display:block; margin-bottom:5px; font-weight:500;" class="article-title">${esc(n.title)}</a>
 <p style="margin:0; font-size:13px; color:#64748b; line-height:1.9em;">${esc(n.desc)}</p>`;
+  if(hasImg && n.isRepresentative){
+    // ★代表は内部管理用。メール本文には表示しない。
+    // ただし画像は国別のメイン記事として、PC/モバイルともに自然に見える大きめ画像で表示する。
+    return `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom:24px;"><tbody>
+<tr><td style="padding:0 0 14px 0;">
+<a href="${esc(url)}" target="_blank" style="text-decoration:none;"><img src="${esc(n.img)}" alt="" width="624" style="display:block; width:100%; max-width:100%; height:auto; border-radius:8px; border:0;"></a>
+</td></tr>
+<tr><td style="padding:0;">${textBlock}</td></tr>
+</tbody></table>`;
+  }
   if(hasImg){
-    // 画像はメール本文ではあくまで記事サムネイルとして使用。
-    // ★代表は管理用なので、メール上では表示せず、レイアウトも他の記事と同じ自然な表示にする。
+    // 通常記事に画像がある場合は、本文を邪魔しない小さめサムネイルで表示する。
     return `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom:22px;"><tbody>
 <tr><td style="padding:0 0 10px 0;">
-<a href="${esc(url)}" target="_blank"><img src="${esc(n.img)}" alt="" width="180" style="display:block; width:180px; height:110px; max-width:100%; object-fit:cover; border-radius:6px; border:0;"></a>
+<a href="${esc(url)}" target="_blank"><img src="${esc(n.img)}" alt="" width="180" style="display:block; width:180px; height:auto; max-width:100%; border-radius:6px; border:0;"></a>
 </td></tr>
 <tr><td style="padding:0;">${textBlock}</td></tr>
 </tbody></table>`;
@@ -590,6 +603,99 @@ function importFromSheetPaste(){
   render();
   scheduleSave();
   showToast('✅ シートから '+count+' 件を取り込みました。');
+}
+
+
+/* ═══════════ HPアーカイブHTML生成（重複感を減らし、Top Picksはページ内アンカーへ） ═══════════ */
+function visibleCountryData(){
+  return COUNTRIES.map(c=>({country:c, items:state.countries[c.key].filter(n=>n.title.trim())})).filter(x=>x.items.length);
+}
+function representativeOrFirst(items){
+  return items.find(n=>n.isRepresentative) || items[0] || null;
+}
+function plainText(s){return String(s||'').replace(/<[^>]*>/g,'').trim();}
+function uniq(arr){return [...new Set(arr.filter(Boolean))];}
+function archiveArticleId(countryKey,index){return `archive-${countryKey}-${index+1}`;}
+function archiveRepresentativeId(countryKey,items){
+  const idx=Math.max(0,items.findIndex(n=>n.isRepresentative));
+  return archiveArticleId(countryKey,idx);
+}
+function archiveLeadHTML(data){
+  const countries=data.map(x=>x.country.ja).join('・');
+  const cats=uniq(data.flatMap(x=>x.items.map(n=>n.catType))).slice(0,6).join('、');
+  return `<p>「いま知っておきたい海外の動き」を、${esc(countries||'各国')}の各国スタッフがピックアップ。${esc(cats||'訪日観光・インバウンド関連')}など、インバウンド関連の最新ニュースを関連リンクとともに簡潔にご紹介します。</p>`;
+}
+function archiveSummaryHTML(data){
+  const countries=data.map(x=>x.country.ja).join('・');
+  const cats=uniq(data.flatMap(x=>x.items.map(n=>n.catType))).slice(0,8).join('、');
+  const total=data.reduce((sum,x)=>sum+x.items.length,0);
+  return `<h2>今号のポイント（要約）</h2>\n<ul>\n<li>対象国：${esc(countries)}</li>\n<li>掲載ニュース：${total}本</li>\n<li>主なテーマ：${esc(cats||'訪日観光・インバウンド関連')}</li>\n</ul>`;
+}
+function archiveTopPicksHTML(data){
+  const picks=[];
+  data.forEach(x=>{
+    const n=representativeOrFirst(x.items);
+    if(n)picks.push({country:x.country, n, anchor:archiveRepresentativeId(x.country.key,x.items)});
+  });
+  if(!picks.length)return '';
+  return `<h2>Top Picks</h2>\n<ol>\n${picks.map(p=>`<li><a href="#${esc(p.anchor)}">${esc(p.country.ja)}：${esc(p.n.title)}</a></li>`).join('\n')}\n</ol>`;
+}
+function archiveCountryListHTML(data){
+  return `<h2>各国ニュース一覧</h2>\n` + data.map(x=>{
+    const items=x.items.map((n,i)=>{
+      const id=archiveArticleId(x.country.key,i);
+      const tags=uniq([n.srcType,n.catType,n.subTag]).map(t=>`<span style="display:inline-block;background:#f1f5f9;color:#475569;font-size:12px;padding:2px 8px;border-radius:4px;margin:0 4px 6px 0;">${esc(t)}</span>`).join('');
+      const img=(n.isRepresentative && n.img)?`<p><a href="${esc(n.url||'#')}" target="_blank" rel="noopener"><img src="${esc(n.img)}" alt="" style="max-width:100%;height:auto;border-radius:8px;"></a></p>`:'';
+      return `<div id="${esc(id)}" style="margin:0 0 24px 0; scroll-margin-top:90px;">\n${img}\n<p style="margin:0 0 6px 0;">${tags}</p>\n<h3 style="margin:0 0 8px 0;"><a href="${esc(n.url||'#')}" target="_blank" rel="noopener">${esc(n.title)}</a></h3>\n<p>${esc(n.desc)}</p>\n</div>`;
+    }).join('\n');
+    return `<h2>${esc(x.country.flag)} ${esc(x.country.ja)}</h2>\n${items}`;
+  }).join('\n');
+}
+function buildArchiveHTML(){
+  const data=visibleCountryData();
+  if(!data.length)return '<p>ニュースが入力されていません。</p>';
+  return [archiveLeadHTML(data),archiveSummaryHTML(data),archiveTopPicksHTML(data),archiveCountryListHTML(data)].filter(Boolean).join('\n\n');
+}
+function copyArchiveHTML(){
+  const w=validate();
+  if(w.length&&!confirm('⚠️ 確認事項が'+w.length+'件あります。\n\n'+w.join('\n')+'\n\nこのままHPアーカイブHTMLをコピーしますか？'))return;
+  const html=buildArchiveHTML();
+  navigator.clipboard.writeText(html).then(()=>showToast('✅ HPアーカイブHTMLをコピーしました。WordPress本文に貼り付けてください。'),
+    ()=>{const t=document.createElement('textarea');t.value=html;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();showToast('✅ HPアーカイブHTMLをコピーしました。');});
+}
+
+/* ═══════════ 未完了リマインド文生成 ═══════════ */
+function countryCompletionIssues(c){
+  const filled=state.countries[c.key].filter(n=>n.title.trim()||n.url.trim()||n.desc.trim()||n.catType.trim()||n.img.trim());
+  if(!filled.length)return ['未入力'];
+  const issues=[];
+  if(filled.filter(n=>n.title.trim()).length<2)issues.push('ニュース2本以上');
+  const reps=filled.filter(n=>n.isRepresentative);
+  if(!reps.length)issues.push('代表記事の選択');
+  if(reps.length>1)issues.push('代表記事は1本のみ');
+  if(reps.length && !reps.some(n=>n.img.trim()))issues.push('代表記事の画像URL');
+  filled.forEach((n,i)=>{
+    if(n.title.trim()){
+      if(!n.url.trim())issues.push(`記事${i+1} URL`);
+      if(!n.desc.trim())issues.push(`記事${i+1} 概要文`);
+      if(!n.catType.trim())issues.push(`記事${i+1} 代表カテゴリ`);
+    }
+  });
+  return [...new Set(issues)];
+}
+function buildReminderText(){
+  const lines=[];
+  COUNTRIES.forEach(c=>{
+    const issues=countryCompletionIssues(c);
+    if(issues.length)lines.push(`・${c.ja}：${issues.join(' / ')}`);
+  });
+  if(!lines.length)return '各国の入力はすべて完了しています。ありがとうございます。';
+  return `各国担当者の皆さま\n\nメルマガ用ニュース入力のご対応ありがとうございます。\n未完了の国・不足項目は下記です。ステータスが COMPLETE になるよう、本日中に追加入力をお願いします。\n\n${lines.join('\n')}\n\n※各国2〜3本、代表記事1本、代表記事の画像URLは必須です。`;
+}
+function copyReminderText(){
+  const text=buildReminderText();
+  navigator.clipboard.writeText(text).then(()=>showToast('✅ リマインド文をコピーしました。'),
+    ()=>{const t=document.createElement('textarea');t.value=text;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();showToast('✅ リマインド文をコピーしました。');});
 }
 
 /* ═══════════ 入力チェック ═══════════ */
