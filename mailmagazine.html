@@ -40,6 +40,8 @@
   .action-bar{position:sticky;bottom:0;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-top:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;z-index:10;}
   .btn-copy{background:var(--ok);color:#fff;font-size:14px;padding:12px 24px;}
   .btn-preview{background:var(--ink);color:#fff;font-size:14px;padding:12px 20px;}
+  .btn-reset{background:#fff;color:#475569;border:1px solid var(--line);font-size:12px;padding:12px 16px;}
+  .autosave-status{font-size:12px;color:#64748b;}
   .warnbox{background:#fff7ed;border:1px solid #fed7aa;color:var(--warn);padding:10px 12px;border-radius:8px;font-size:12px;margin-bottom:8px;display:none;}
   .warnbox.show{display:block;}.warnbox ul{margin:6px 0 0;padding-left:18px;}
   .hint{font-size:11px;color:#94a3b8;margin-top:2px;}
@@ -115,7 +117,8 @@
   <div class="action-bar">
     <button class="btn btn-preview" onclick="render()">🔄 プレビュー更新</button>
     <button class="btn btn-copy" onclick="copyHTML()">📋 HTMLをコピー（Sansanに貼付）</button>
-    <span id="status"></span>
+    <button class="btn btn-reset" onclick="clearSavedDraft()">🧹 新しい号を作成</button>
+    <span id="status" class="autosave-status"></span>
   </div>
 </div>
 <div class="toast" id="toast"></div>
@@ -138,6 +141,82 @@ state.banners=[{img:'',url:''}];
 
 function blankNews(){return{srcType:'現地メディア',kaisetsu:true,catType:'旅行・観光',title:'',url:'',desc:'',img:''};}
 function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+
+/* ═══════════ 自動保存（localStorage）═══════════ */
+const STORAGE_KEY='gld_mailmag_tool_v2_draft';
+let saveTimer=null;
+let restoredDate='';
+
+function setStatus(msg){
+  const el=document.getElementById('status');
+  if(el)el.textContent=msg||'';
+}
+function scheduleSave(){
+  clearTimeout(saveTimer);
+  saveTimer=setTimeout(saveDraft,300);
+}
+function saveDraft(){
+  try{
+    const dateEl=document.getElementById('haishinbi');
+    const payload={
+      version:2,
+      savedAt:new Date().toISOString(),
+      haishinbi:dateEl?dateEl.value:'',
+      state:state
+    };
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(payload));
+    const tm=new Date().toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'});
+    setStatus('自動保存済み '+tm);
+  }catch(e){
+    setStatus('⚠️ 自動保存できませんでした');
+  }
+}
+function normalizeNews(n){return Object.assign(blankNews(),n||{});}
+function normalizeCorp(it){return Object.assign({title:'',url:'',desc:'',img:''},it||{});}
+function normalizeCase(it){return Object.assign({label:'CASE',title:'',url:'',desc:'',result:'',img:''},it||{});}
+function normalizeColumn(it){return Object.assign({title:'',url:'',desc:'',meta:'',img:''},it||{});}
+function normalizeBanner(it){return Object.assign({img:'',url:''},it||{});}
+function loadDraft(){
+  try{
+    const raw=localStorage.getItem(STORAGE_KEY);
+    if(!raw)return false;
+    const saved=JSON.parse(raw);
+    if(!saved||!saved.state)return false;
+    const st=saved.state;
+    if(st.countries){
+      COUNTRIES.forEach(c=>{
+        const arr=Array.isArray(st.countries[c.key])?st.countries[c.key]:[];
+        state.countries[c.key]=arr.length?arr.map(normalizeNews):[blankNews()];
+      });
+    }
+    state.corp=Array.isArray(st.corp)&&st.corp.length?st.corp.map(normalizeCorp):[{title:'',url:'',desc:'',img:''}];
+    state.cases=Array.isArray(st.cases)&&st.cases.length?st.cases.map(normalizeCase):[{label:'CASE',title:'',url:'',desc:'',result:'',img:''}];
+    state.columns=Array.isArray(st.columns)&&st.columns.length?st.columns.map(normalizeColumn):[{title:'',url:'',desc:'',meta:'',img:''}];
+    state.banners=Array.isArray(st.banners)&&st.banners.length?st.banners.map(normalizeBanner):[{img:'',url:''}];
+    restoredDate=saved.haishinbi||'';
+    return true;
+  }catch(e){
+    return false;
+  }
+}
+function resetState(){
+  state.countries={};
+  COUNTRIES.forEach(c=>state.countries[c.key]=[blankNews()]);
+  state.corp=[{title:'',url:'',desc:'',img:''}];
+  state.cases=[{label:'CASE',title:'',url:'',desc:'',result:'',img:''}];
+  state.columns=[{title:'',url:'',desc:'',meta:'',img:''}];
+  state.banners=[{img:'',url:''}];
+}
+function clearSavedDraft(){
+  if(!confirm('新しい号を作成すると、現在の入力内容はすべてクリアされます。よろしいですか？'))return;
+  try{localStorage.removeItem(STORAGE_KEY);}catch(e){}
+  resetState();
+  document.getElementById('haishinbi').value='2026年6月26日';
+  buildCountries();renderCorp();renderCases();renderColumns();renderBanners();render();
+  saveDraft();
+  showToast('🧹 入力内容をクリアしました。');
+}
 
 /* ═══════════ 各国ニュース UI ═══════════ */
 function buildCountries(){
@@ -180,7 +259,7 @@ function renderCountryItems(key){
   });
   addBtn(body,()=>{state.countries[key].push(blankNews());renderCountryItems(key);});
 }
-function updC(key,i,f,v){state.countries[key][i][f]=v;if(f==='title'){const c=countCountry(key);const el=document.getElementById('cb-'+key);el.textContent=c;el.className='count-badge '+(c?'':'zero');}}
+function updC(key,i,f,v){state.countries[key][i][f]=v;if(f==='title'){const c=countCountry(key);const el=document.getElementById('cb-'+key);el.textContent=c;el.className='count-badge '+(c?'':'zero');}scheduleSave();}
 
 /* ═══════════ 汎用ブロック UI（コーポレート/事例/コラム）═══════════ */
 function buildGenBlock(boxId,arrKey,fields,addFn){
@@ -239,13 +318,14 @@ function renderBanners(){
   });
   addBtn(box,()=>{state.banners.push({img:'',url:''});renderBanners();});
 }
-function updG(kind,i,f,v){state[kind][i][f]=v;}
+function updG(kind,i,f,v){state[kind][i][f]=v;scheduleSave();}
 function delItem(kind,ckey,i){
   if(kind==='countries'){state.countries[ckey].splice(i,1);renderCountryItems(ckey);}
   else{state[kind].splice(i,1);
     ({corp:renderCorp,cases:renderCases,columns:renderColumns,banners:renderBanners})[kind]();}
+  scheduleSave();
 }
-function addBtn(box,fn){const b=document.createElement('button');b.className='btn btn-add';b.textContent='＋ 追加';b.onclick=fn;box.appendChild(b);}
+function addBtn(box,fn){const b=document.createElement('button');b.className='btn btn-add';b.textContent='＋ 追加';b.onclick=()=>{fn();scheduleSave();};box.appendChild(b);}
 function tog(bodyId,arrId){document.getElementById(bodyId).classList.toggle('open');const a=document.getElementById(arrId);a.textContent=a.textContent==='▸'?'▾':'▸';}
 
 /* ═══════════ HTML生成：各パーツ ═══════════ */
@@ -541,9 +621,12 @@ h1.hero-title{font-size:22px !important;}
 </html>`;
 
 /* 初期化 */
+const hasDraft=loadDraft();
 buildCountries();renderCorp();renderCases();renderColumns();renderBanners();
-document.getElementById('haishinbi').value='2026年6月26日';
+document.getElementById('haishinbi').value=restoredDate||'2026年6月26日';
+document.getElementById('haishinbi').addEventListener('input',scheduleSave);
 render();
+setStatus(hasDraft?'前回の入力内容を復元しました':'自動保存：ON');
 </script>
 </body>
 </html>
