@@ -363,16 +363,29 @@ function srcTag(t){return t==='日本語ニュース'
 function badge(text,bg,color){return text?`<span style="display:inline-block; background-color:${bg}; color:${color}; font-size:10px; padding:2px 7px; border-radius:3px; letter-spacing:0.04em; margin-bottom:7px; margin-right:5px;">${esc(text)}</span>`:'';}
 function catTag(t){return badge(t,'#eff6ff','#1d4ed8');}
 function subTagTag(t){return badge(t,'#f8fafc','#64748b');}
-function representativeTag(){return badge('代表記事','#fef2f2','#dc2626');}
+function representativeTag(){return badge('代表記事','#fff7ed','#ea580c');}
 function kaisetsuTag(){return `<span style="display:inline-block; background-color:#f5f3ff; color:#7c3aed; font-size:10px; padding:2px 7px; border-radius:3px; letter-spacing:0.04em; margin-bottom:7px; margin-right:5px;">日本語解説</span>`;}
+
+function cleanImageUrl(v){
+  const s=String(v||'').trim();
+  // Google Sheetsで画像そのものをコピーすると data:image... になることがあります。
+  // メール本文には重すぎるため、公開URL以外は取り込みません。
+  if(/^data:image\//.test(s))return '';
+  return s;
+}
 
 function newsHTML(n){const url=n.url.trim()||'#';
   const hasImg=n.img&&n.img.trim();
   const textBlock=`${n.isRepresentative?representativeTag():''}${srcTag(n.srcType)}${n.kaisetsu?kaisetsuTag():''}${catTag(n.catType)}${subTagTag(n.subTag)}
 <a href="${esc(url)}" target="_blank" style="color:#1e3a5f; font-size:15px; line-height:1.65em; text-decoration:none; display:block; margin-bottom:5px; font-weight:500;" class="article-title">${esc(n.title)}</a>
 <p style="margin:0; font-size:13px; color:#64748b; line-height:1.9em;">${esc(n.desc)}</p>`;
+  if(hasImg && n.isRepresentative){
+    // 代表記事はモバイルでも読みやすいよう、画像を上・本文を下に配置
+    return `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom:22px; background-color:#f8fafc; border-radius:7px; overflow:hidden;"><tbody><tr><td style="padding:14px 14px 0 14px;">
+<a href="${esc(url)}" target="_blank"><img src="${esc(n.img)}" alt="" width="160" style="display:block; width:160px; height:96px; object-fit:cover; border-radius:6px; border:0;"></a>
+</td></tr><tr><td style="padding:12px 14px 16px 14px;">${textBlock}</td></tr></tbody></table>`;
+  }
   if(hasImg){
-    // 左サムネイル + 右テキスト（モバイルでは縦積み）
     return `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom:18px;"><tbody><tr>
 <td width="92" valign="top" class="news-thumb" style="vertical-align:top; padding-right:14px;">
 <a href="${esc(url)}" target="_blank"><img src="${esc(n.img)}" alt="" width="80" style="display:block; width:80px; height:80px; object-fit:cover; border-radius:5px; border:0;"></a>
@@ -555,9 +568,11 @@ function importFromSheetPaste(){
   COUNTRIES.forEach(c=>imported[c.key]=[]);
   let currentKey='';
   let count=0;
+  const seen=new Set();
   rows.forEach(cols=>{
     while(cols.length<9)cols.push('');
     if(looksLikeHeader(cols))return;
+    if(cols.join(' ').includes('* SAMPLE'))return;
     const key=countryKeyFromCell(cols[0])||currentKey;
     if(countryKeyFromCell(cols[0]))currentKey=countryKeyFromCell(cols[0]);
     if(!key)return;
@@ -568,8 +583,11 @@ function importFromSheetPaste(){
     const desc=(cols[5]||'').trim();
     const cat=(cols[6]||'').trim();
     const sub=(cols[7]||'').trim();
-    const img=(cols[8]||'').trim();
+    const img=cleanImageUrl(cols[8]||'');
     if(!title&&!url&&!desc&&!media&&!cat&&!img)return;
+    const sig=key+'|'+(url||title);
+    if(seen.has(sig))return;
+    seen.add(sig);
     imported[key].push({srcType:deriveSrcType(media,url),kaisetsu:true,isRepresentative:representative,media:media,catType:cat,subTag:sub,title:title,url:url,desc:desc,img:img});
     count++;
   });
@@ -598,7 +616,7 @@ function validate(){
       if(n.title.trim()&&!n.desc.trim())w.push(`${c.ja} ニュース${i+1}：メルマガ用概要文が空`);
       if(n.title.trim()&&!n.catType.trim())w.push(`${c.ja} ニュース${i+1}：代表カテゴリが空`);
       if(n.url.trim()&&!/^https?:\/\//.test(n.url.trim()))w.push(`${c.ja} ニュース${i+1}：URLがhttpで始まっていない`);
-      if(n.img&&n.img.trim()&&!/^https?:\/\//.test(n.img.trim())&&!/^data:image\//.test(n.img.trim()))w.push(`${c.ja} ニュース${i+1}：画像URLがhttpで始まっていない`);
+      if(n.img&&n.img.trim()&&!/^https?:\/\//.test(n.img.trim()))w.push(`${c.ja} ニュース${i+1}：画像URLはhttpsの公開URLを入れてください`);
     });
   });
   [['corp','コーポレート'],['cases','事例'],['columns','コラム']].forEach(([k,ja])=>{
