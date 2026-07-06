@@ -164,7 +164,7 @@ state.cases=[{label:'CASE',title:'',url:'',desc:'',result:'',img:''}];
 state.columns=[{title:'',url:'',desc:'',meta:'',img:''}];
 state.banners=[{img:'',url:''}];
 
-function blankNews(){return{srcType:'現地メディア',kaisetsu:true,isRepresentative:false,media:'',catType:'',subTag:'',title:'',url:'',desc:'',img:''};}
+function blankNews(){return{srcType:'現地メディア',kaisetsu:false,isRepresentative:false,media:'',catType:'',subTag:'',title:'',url:'',desc:'',img:''};}
 function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
 
@@ -277,8 +277,9 @@ function renderCountryItems(key){
     </div>
     <label style="display:flex;align-items:center;gap:6px;margin-top:8px;cursor:pointer;">
       <input type="checkbox" ${n.kaisetsu?'checked':''} onchange="updC('${key}',${i},'kaisetsu',this.checked)" style="width:auto;">
-      <span style="color:#7c3aed;font-weight:700;">日本語解説（当社で翻訳・記事化した場合）</span>
+      <span style="color:#7c3aed;font-weight:700;">日本語解説（現地メディアを当社で翻訳・記事化した場合のみ）</span>
     </label>
+    <div class="hint">※ ソースが「日本語ニュース」の場合、このバッジはメールに表示されません。</div>
     <label>タイトル</label><input type="text" value="${esc(n.title)}" oninput="updC('${key}',${i},'title',this.value)">
     <label>URL</label><input type="url" value="${esc(n.url)}" oninput="updC('${key}',${i},'url',this.value)" placeholder="https://...">
     <label>メルマガ用概要文</label><textarea oninput="updC('${key}',${i},'desc',this.value)">${esc(n.desc)}</textarea>
@@ -363,7 +364,7 @@ function srcTag(t){return t==='日本語ニュース'
 function badge(text,bg,color){return text?`<span style="display:inline-block; background-color:${bg}; color:${color}; font-size:10px; padding:2px 7px; border-radius:3px; letter-spacing:0.04em; margin-bottom:7px; margin-right:5px;">${esc(text)}</span>`:'';}
 function catTag(t){return badge(t,'#eff6ff','#1d4ed8');}
 function subTagTag(t){return badge(t,'#f8fafc','#64748b');}
-function representativeTag(){return badge('代表記事','#fff7ed','#ea580c');}
+function representativeTag(){return badge('代表','#fff7ed','#ea580c');}
 function kaisetsuTag(){return `<span style="display:inline-block; background-color:#f5f3ff; color:#7c3aed; font-size:10px; padding:2px 7px; border-radius:3px; letter-spacing:0.04em; margin-bottom:7px; margin-right:5px;">日本語解説</span>`;}
 
 function cleanImageUrl(v){
@@ -376,22 +377,21 @@ function cleanImageUrl(v){
 
 function newsHTML(n){const url=n.url.trim()||'#';
   const hasImg=n.img&&n.img.trim();
-  const textBlock=`${n.isRepresentative?representativeTag():''}${srcTag(n.srcType)}${n.kaisetsu?kaisetsuTag():''}${catTag(n.catType)}${subTagTag(n.subTag)}
+  const textBlock=`${n.isRepresentative?representativeTag():''}${srcTag(n.srcType)}${(n.srcType==='現地メディア'&&n.kaisetsu)?kaisetsuTag():''}${catTag(n.catType)}${subTagTag(n.subTag)}
 <a href="${esc(url)}" target="_blank" style="color:#1e3a5f; font-size:15px; line-height:1.65em; text-decoration:none; display:block; margin-bottom:5px; font-weight:500;" class="article-title">${esc(n.title)}</a>
 <p style="margin:0; font-size:13px; color:#64748b; line-height:1.9em;">${esc(n.desc)}</p>`;
-  if(hasImg && n.isRepresentative){
-    // 代表記事はモバイルでも読みやすいよう、画像を上・本文を下に配置
-    return `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom:22px; background-color:#f8fafc; border-radius:7px; overflow:hidden;"><tbody><tr><td style="padding:14px 14px 0 14px;">
-<a href="${esc(url)}" target="_blank"><img src="${esc(n.img)}" alt="" width="160" style="display:block; width:160px; height:96px; object-fit:cover; border-radius:6px; border:0;"></a>
-</td></tr><tr><td style="padding:12px 14px 16px 14px;">${textBlock}</td></tr></tbody></table>`;
-  }
   if(hasImg){
-    return `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom:18px;"><tbody><tr>
-<td width="92" valign="top" class="news-thumb" style="vertical-align:top; padding-right:14px;">
-<a href="${esc(url)}" target="_blank"><img src="${esc(n.img)}" alt="" width="80" style="display:block; width:80px; height:80px; object-fit:cover; border-radius:5px; border:0;"></a>
-</td>
-<td valign="top" style="vertical-align:top;">${textBlock}</td>
-</tr></tbody></table>`;
+    // 画像ありの記事は、PC/モバイルともに「画像 → タグ/タイトル/概要」の縦型に統一。
+    // モバイルで本文幅が狭くなるのを防ぎ、Sansan貼付後も崩れにくい構造にする。
+    const cardBg=n.isRepresentative?'background-color:#f8fafc; border:1px solid #e2e8f0; border-radius:7px;':'background-color:#ffffff;';
+    const imgSize=n.isRepresentative?'width:180px; height:110px;':'width:150px; height:92px;';
+    const pad=n.isRepresentative?'14px':'0';
+    return `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom:22px; ${cardBg}"><tbody>
+<tr><td style="padding:${pad} ${pad} 10px ${pad};">
+<a href="${esc(url)}" target="_blank"><img src="${esc(n.img)}" alt="" width="180" style="display:block; ${imgSize} max-width:100%; object-fit:cover; border-radius:6px; border:0;"></a>
+</td></tr>
+<tr><td style="padding:0 ${pad} ${pad} ${pad};">${textBlock}</td></tr>
+</tbody></table>`;
   }
   return `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom:18px;"><tbody><tr><td>
 ${textBlock}
@@ -588,7 +588,7 @@ function importFromSheetPaste(){
     const sig=key+'|'+(url||title);
     if(seen.has(sig))return;
     seen.add(sig);
-    imported[key].push({srcType:deriveSrcType(media,url),kaisetsu:true,isRepresentative:representative,media:media,catType:cat,subTag:sub,title:title,url:url,desc:desc,img:img});
+    imported[key].push({srcType:deriveSrcType(media,url),kaisetsu:false,isRepresentative:representative,media:media,catType:cat,subTag:sub,title:title,url:url,desc:desc,img:img});
     count++;
   });
   if(!count){showToast('取り込める行が見つかりませんでした。');return;}
@@ -630,6 +630,8 @@ function validate(){
     if(it.img.trim()&&!/^https?:\/\//.test(it.img.trim()))w.push(`バナー${i+1}：画像URLがhttpで始まっていない`);
     if(it.img.trim()&&!it.url.trim())w.push(`バナー${i+1}：リンク先URLが空`);
   });
+  const kaisetsuCount=COUNTRIES.reduce((sum,c)=>sum+state.countries[c.key].filter(n=>n.title.trim()&&n.srcType==='現地メディア'&&n.kaisetsu).length,0);
+  if(kaisetsuCount>1)w.push(`日本語解説バッジが${kaisetsuCount}件あります。通常はメルマガ1号につき1件程度にしてください。`);
   return w;
 }
 
