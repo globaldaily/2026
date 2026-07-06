@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>メルマガ作成ツール v2 ｜ Global Daily</title>
+<title>メルマガ作成ツール v3 ｜ Global Daily</title>
 <style>
   :root{--ink:#0f172a;--blue:#2563eb;--line:#e2e8f0;--sub:#64748b;--bg:#f8fafc;--card:#fff;--ok:#15803d;--warn:#c2410c;}
   *{box-sizing:border-box;}
@@ -53,13 +53,18 @@
   .device-btns button{background:#f1f5f9;border:1px solid var(--line);border-radius:6px;padding:6px 12px;font-size:12px;cursor:pointer;}
   .device-btns button.active{background:var(--ink);color:#fff;}
   .sec-label{font-size:10px;font-weight:800;letter-spacing:0.1em;color:#94a3b8;margin:16px 0 6px;text-transform:uppercase;}
+  .import-box{min-height:140px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;white-space:pre;}
+  .import-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px;}
+  .btn-import{background:#2563eb;color:#fff;font-size:13px;padding:10px 16px;}
+  .btn-ghost{background:#fff;color:#475569;border:1px solid var(--line);font-size:12px;padding:10px 12px;}
+  .small-note{font-size:11px;color:#64748b;line-height:1.7;margin-top:6px;}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <h1>📧 海外情報ニュース メルマガ作成ツール <span style="font-size:12px;opacity:.6;">v2</span></h1>
-    <p>ブロックを入力するだけ。空のブロックは自動で非表示。タグは触りません。Sansan・Gmail対応。</p>
+    <h1>📧 海外情報ニュース メルマガ作成ツール <span style="font-size:12px;opacity:.6;">v3</span></h1>
+    <p>スプレッドシートから取り込み → プレビュー確認 → Sansan貼付。空のブロックは自動で非表示。</p>
   </header>
 
   <div class="top-action-bar">
@@ -78,31 +83,42 @@
       </div>
 
       <div class="panel">
-        <h2><span class="step-num">2</span>各国ニュース</h2>
+        <h2><span class="step-num">2</span>スプレッドシートから取り込み</h2>
+        <p class="desc">入力シートの「記事入力エリア」をコピーして、下に貼り付けてください。国・タイトル・URL・概要文・カテゴリ・画像URLを自動で入れます。</p>
+        <textarea id="sheetPaste" class="import-box" placeholder="ここにスプレッドシートからコピーした行を貼り付け"></textarea>
+        <div class="import-actions">
+          <button class="btn btn-import" onclick="importFromSheetPaste()">📥 シート内容を取り込む</button>
+          <button class="btn btn-ghost" onclick="document.getElementById('sheetPaste').value=''">貼り付け欄をクリア</button>
+        </div>
+        <div class="small-note">※ 取り込み後も手入力で修正できます。各国につき「★代表」記事は1本、代表記事は画像URL必須です。</div>
+      </div>
+
+      <div class="panel">
+        <h2><span class="step-num">3</span>各国ニュース</h2>
         <p class="desc">9か国・順序固定。ニュースが無い国は空のままでOK（その国は非表示）。</p>
         <div id="countries"></div>
       </div>
 
       <div class="panel">
-        <h2><span class="step-num">3</span>コーポレートニュース</h2>
+        <h2><span class="step-num">4</span>コーポレートニュース</h2>
         <p class="desc">会社のお知らせ・プレスなど。無ければ空欄のまま（非表示）。</p>
         <div id="corpBox"></div>
       </div>
 
       <div class="panel">
-        <h2><span class="step-num">4</span>事例紹介（ケーススタディ）</h2>
+        <h2><span class="step-num">5</span>事例紹介（ケーススタディ）</h2>
         <p class="desc">導入事例・成果紹介。画像URLを入れるとサムネイル表示。</p>
         <div id="caseBox"></div>
       </div>
 
       <div class="panel">
-        <h2><span class="step-num">5</span>コラム</h2>
+        <h2><span class="step-num">6</span>コラム</h2>
         <p class="desc">読み物・オピニオン。無ければ非表示。</p>
         <div id="columnBox"></div>
       </div>
 
       <div class="panel">
-        <h2><span class="step-num">6</span>セミナー・イベント（バナー）</h2>
+        <h2><span class="step-num">7</span>セミナー・イベント（バナー）</h2>
         <p class="desc">デザイン済みバナー画像のURLとリンクを入れるだけ。複数OK。<br>画像は横1200px推奨（JPG/PNG）。</p>
         <div id="bannerBox"></div>
       </div>
@@ -148,7 +164,7 @@ state.cases=[{label:'CASE',title:'',url:'',desc:'',result:'',img:''}];
 state.columns=[{title:'',url:'',desc:'',meta:'',img:''}];
 state.banners=[{img:'',url:''}];
 
-function blankNews(){return{srcType:'現地メディア',kaisetsu:true,catType:'旅行・観光',title:'',url:'',desc:'',img:''};}
+function blankNews(){return{srcType:'現地メディア',kaisetsu:true,isRepresentative:false,media:'',catType:'',subTag:'',title:'',url:'',desc:'',img:''};}
 function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
 
@@ -245,15 +261,19 @@ function renderCountryItems(key){
   state.countries[key].forEach((n,i)=>{
     const d=document.createElement('div');d.className='item';
     d.innerHTML=`${state.countries[key].length>1?`<button class="btn btn-del" onclick="delItem('countries','${key}',${i})">削除</button>`:''}
+    <label style="display:flex;align-items:center;gap:6px;margin-top:2px;cursor:pointer;">
+      <input type="checkbox" ${n.isRepresentative?'checked':''} onchange="updC('${key}',${i},'isRepresentative',this.checked)" style="width:auto;">
+      <span style="color:#dc2626;font-weight:800;">★代表記事（各国1本・画像URL必須）</span>
+    </label>
     <div class="tag-row">
       <div><label>ソース</label><select onchange="updC('${key}',${i},'srcType',this.value)">
         <option ${n.srcType==='現地メディア'?'selected':''}>現地メディア</option>
         <option ${n.srcType==='日本語ニュース'?'selected':''}>日本語ニュース</option></select></div>
-      <div><label>カテゴリ</label><select onchange="updC('${key}',${i},'catType',this.value)">
-        <option ${n.catType==='旅行・観光'?'selected':''}>旅行・観光</option>
-        <option ${n.catType==='経済・ビジネス'?'selected':''}>経済・ビジネス</option>
-        <option ${n.catType==='社会・文化'?'selected':''}>社会・文化</option>
-        <option ${n.catType==='気象・災害対策'?'selected':''}>気象・災害対策</option></select></div>
+      <div><label>メディア名（管理用）</label><input type="text" value="${esc(n.media||'')}" oninput="updC('${key}',${i},'media',this.value)" placeholder="例：人民網日本語版"></div>
+    </div>
+    <div class="tag-row">
+      <div><label>代表カテゴリ</label><input type="text" value="${esc(n.catType||'')}" oninput="updC('${key}',${i},'catType',this.value)" placeholder="例：訪日観光 / エンタメ / 政策・ビザ"></div>
+      <div><label>補足タグ（任意）</label><input type="text" value="${esc(n.subTag||'')}" oninput="updC('${key}',${i},'subTag',this.value)" placeholder="例：オーバーツーリズム"></div>
     </div>
     <label style="display:flex;align-items:center;gap:6px;margin-top:8px;cursor:pointer;">
       <input type="checkbox" ${n.kaisetsu?'checked':''} onchange="updC('${key}',${i},'kaisetsu',this.checked)" style="width:auto;">
@@ -261,8 +281,8 @@ function renderCountryItems(key){
     </label>
     <label>タイトル</label><input type="text" value="${esc(n.title)}" oninput="updC('${key}',${i},'title',this.value)">
     <label>URL</label><input type="url" value="${esc(n.url)}" oninput="updC('${key}',${i},'url',this.value)" placeholder="https://...">
-    <label>概要</label><textarea oninput="updC('${key}',${i},'desc',this.value)">${esc(n.desc)}</textarea>
-    <label>画像URL（任意・代表記事に入れるとサムネイル表示）</label><input type="url" value="${esc(n.img||'')}" oninput="updC('${key}',${i},'img',this.value)" placeholder="https://...">`;
+    <label>メルマガ用概要文</label><textarea oninput="updC('${key}',${i},'desc',this.value)">${esc(n.desc)}</textarea>
+    <label>画像URL（★代表記事は必須・未入力の記事はテキスト表示）</label><input type="url" value="${esc(n.img||'')}" oninput="updC('${key}',${i},'img',this.value)" placeholder="https://...">`;
     body.appendChild(d);
   });
   addBtn(body,()=>{state.countries[key].push(blankNews());renderCountryItems(key);});
@@ -340,12 +360,15 @@ function tog(bodyId,arrId){document.getElementById(bodyId).classList.toggle('ope
 function srcTag(t){return t==='日本語ニュース'
   ?`<span style="display:inline-block; background-color:#eff6ff; color:#1d4ed8; font-size:10px; padding:2px 7px; border-radius:3px; letter-spacing:0.04em; margin-bottom:7px; margin-right:5px;">日本語ニュース</span>`
   :`<span style="display:inline-block; background-color:#f1f5f9; color:#475569; font-size:10px; padding:2px 7px; border-radius:3px; letter-spacing:0.04em; margin-bottom:7px; margin-right:5px;">現地メディア</span>`;}
-function catTag(t){return `<span style="display:inline-block; background-color:#f0fdf4; color:#15803d; font-size:10px; padding:2px 7px; border-radius:3px; letter-spacing:0.04em; margin-bottom:7px;">${esc(t)}</span>`;}
+function badge(text,bg,color){return text?`<span style="display:inline-block; background-color:${bg}; color:${color}; font-size:10px; padding:2px 7px; border-radius:3px; letter-spacing:0.04em; margin-bottom:7px; margin-right:5px;">${esc(text)}</span>`:'';}
+function catTag(t){return badge(t,'#eff6ff','#1d4ed8');}
+function subTagTag(t){return badge(t,'#f8fafc','#64748b');}
+function representativeTag(){return badge('代表記事','#fef2f2','#dc2626');}
 function kaisetsuTag(){return `<span style="display:inline-block; background-color:#f5f3ff; color:#7c3aed; font-size:10px; padding:2px 7px; border-radius:3px; letter-spacing:0.04em; margin-bottom:7px; margin-right:5px;">日本語解説</span>`;}
 
 function newsHTML(n){const url=n.url.trim()||'#';
   const hasImg=n.img&&n.img.trim();
-  const textBlock=`${srcTag(n.srcType)}${n.kaisetsu?kaisetsuTag():''}${catTag(n.catType)}
+  const textBlock=`${n.isRepresentative?representativeTag():''}${srcTag(n.srcType)}${n.kaisetsu?kaisetsuTag():''}${catTag(n.catType)}${subTagTag(n.subTag)}
 <a href="${esc(url)}" target="_blank" style="color:#1e3a5f; font-size:15px; line-height:1.65em; text-decoration:none; display:block; margin-bottom:5px; font-weight:500;" class="article-title">${esc(n.title)}</a>
 <p style="margin:0; font-size:13px; color:#64748b; line-height:1.9em;">${esc(n.desc)}</p>`;
   if(hasImg){
@@ -495,13 +518,89 @@ function buildFull(){
     .replace('{{BANNER}}',bannerHTML());
 }
 
+
+/* ═══════════ スプレッドシート取り込み ═══════════ */
+function normalizeCountryName(v){return String(v||'').replace(/\s/g,'').replace('韓国','韓国').trim();}
+const COUNTRY_ALIASES={
+  '中国':'cn','china':'cn','CHINA':'cn','China':'cn','cn':'cn',
+  '韓国':'kr','韩国':'kr','KOREA':'kr','Korea':'kr','kr':'kr',
+  '台湾':'tw','臺灣':'tw','TAIWAN':'tw','Taiwan':'tw','tw':'tw',
+  '香港':'hk','HONGKONG':'hk','HongKong':'hk','hk':'hk',
+  'タイ':'th','THAILAND':'th','Thailand':'th','th':'th',
+  'ベトナム':'vn','VIETNAM':'vn','Vietnam':'vn','vn':'vn',
+  'インドネシア':'id','INDONESIA':'id','Indonesia':'id','id':'id',
+  'フランス':'fr','FRANCE':'fr','France':'fr','fr':'fr',
+  'U.S.A':'us','USA':'us','アメリカ':'us','米国':'us','UNITEDSTATES':'us','UnitedStates':'us','us':'us'
+};
+function countryKeyFromCell(v){
+  const raw=String(v||'').trim();
+  const compact=normalizeCountryName(raw).replace(/[\.\s]/g,'');
+  return COUNTRY_ALIASES[raw]||COUNTRY_ALIASES[compact]||'';
+}
+function looksLikeHeader(cols){
+  const joined=cols.join(' ');
+  return /タイトル|記事URL|メディア名|概要|代表カテゴリ|画像URL|SAMPLE|記事入力エリア/.test(joined);
+}
+function deriveSrcType(media,url){
+  const s=(media+' '+url).toLowerCase();
+  if(/日本語|japan|recordchina|people\.com\.cn\/n3/.test(s))return '日本語ニュース';
+  return '現地メディア';
+}
+function importFromSheetPaste(){
+  const ta=document.getElementById('sheetPaste');
+  const text=ta?ta.value:'';
+  if(!text.trim()){showToast('貼り付け内容が空です。');return;}
+  const rows=text.replace(/\r/g,'').split('\n').map(r=>r.split('\t'));
+  const imported={};
+  COUNTRIES.forEach(c=>imported[c.key]=[]);
+  let currentKey='';
+  let count=0;
+  rows.forEach(cols=>{
+    while(cols.length<9)cols.push('');
+    if(looksLikeHeader(cols))return;
+    const key=countryKeyFromCell(cols[0])||currentKey;
+    if(countryKeyFromCell(cols[0]))currentKey=countryKeyFromCell(cols[0]);
+    if(!key)return;
+    const representative=String(cols[1]||'').includes('★') || /代表|TRUE|true|✓|☑|○/.test(String(cols[1]||''));
+    const title=(cols[2]||'').trim();
+    const url=(cols[3]||'').trim();
+    const media=(cols[4]||'').trim();
+    const desc=(cols[5]||'').trim();
+    const cat=(cols[6]||'').trim();
+    const sub=(cols[7]||'').trim();
+    const img=(cols[8]||'').trim();
+    if(!title&&!url&&!desc&&!media&&!cat&&!img)return;
+    imported[key].push({srcType:deriveSrcType(media,url),kaisetsu:true,isRepresentative:representative,media:media,catType:cat,subTag:sub,title:title,url:url,desc:desc,img:img});
+    count++;
+  });
+  if(!count){showToast('取り込める行が見つかりませんでした。');return;}
+  COUNTRIES.forEach(c=>{ if(imported[c.key].length) state.countries[c.key]=imported[c.key]; });
+  buildCountries();
+  COUNTRIES.forEach(c=>{ if(imported[c.key].length){ const b=document.getElementById('body-'+c.key); const a=document.getElementById('arr-'+c.key); if(b){b.classList.add('open');} if(a){a.textContent='▾';} }});
+  render();
+  scheduleSave();
+  showToast('✅ シートから '+count+' 件を取り込みました。');
+}
+
 /* ═══════════ 入力チェック ═══════════ */
 function validate(){
   const w=[];
-  COUNTRIES.forEach(c=>state.countries[c.key].forEach((n,i)=>{
-    if(n.title.trim()&&!n.url.trim())w.push(`${c.ja} ニュース${i+1}：URLが空`);
-    if(n.url.trim()&&!/^https?:\/\//.test(n.url.trim()))w.push(`${c.ja} ニュース${i+1}：URLがhttpで始まっていない`);
-  }));
+  COUNTRIES.forEach(c=>{
+    const filled=state.countries[c.key].filter(n=>n.title.trim());
+    if(filled.length){
+      const reps=filled.filter(n=>n.isRepresentative);
+      if(!reps.length)w.push(`${c.ja}：代表記事が未選択`);
+      if(reps.length>1)w.push(`${c.ja}：代表記事が複数選択されています`);
+      reps.forEach((n,i)=>{if(!n.img.trim())w.push(`${c.ja}：代表記事の画像URLが空`);});
+    }
+    state.countries[c.key].forEach((n,i)=>{
+      if(n.title.trim()&&!n.url.trim())w.push(`${c.ja} ニュース${i+1}：URLが空`);
+      if(n.title.trim()&&!n.desc.trim())w.push(`${c.ja} ニュース${i+1}：メルマガ用概要文が空`);
+      if(n.title.trim()&&!n.catType.trim())w.push(`${c.ja} ニュース${i+1}：代表カテゴリが空`);
+      if(n.url.trim()&&!/^https?:\/\//.test(n.url.trim()))w.push(`${c.ja} ニュース${i+1}：URLがhttpで始まっていない`);
+      if(n.img&&n.img.trim()&&!/^https?:\/\//.test(n.img.trim())&&!/^data:image\//.test(n.img.trim()))w.push(`${c.ja} ニュース${i+1}：画像URLがhttpで始まっていない`);
+    });
+  });
   [['corp','コーポレート'],['cases','事例'],['columns','コラム']].forEach(([k,ja])=>{
     state[k].forEach((it,i)=>{
       if(it.title.trim()&&!it.url.trim())w.push(`${ja}${i+1}：URLが空`);
