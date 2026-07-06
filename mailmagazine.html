@@ -90,7 +90,7 @@
           <button class="btn btn-import" onclick="importFromSheetPaste()">📥 シート内容を取り込む</button>
           <button class="btn btn-ghost" onclick="document.getElementById('sheetPaste').value=''">貼り付け欄をクリア</button>
         </div>
-        <div class="small-note">※ 取り込み後も手入力で修正できます。「★代表」は管理用です（メール本文には表示されません）。各国1本、画像URL必須です。</div>
+        <div class="small-note">※ 取り込み後も手入力で修正できます。「★代表」は管理用です（メール本文には表示されません）。同じURLでも取り込みます。各国1本、画像URL必須です。</div>
       </div>
 
       <div class="panel">
@@ -564,7 +564,6 @@ function importFromSheetPaste(){
   COUNTRIES.forEach(c=>imported[c.key]=[]);
   let currentKey='';
   let count=0;
-  const seen=new Set();
   rows.forEach(cols=>{
     while(cols.length<9)cols.push('');
     if(looksLikeHeader(cols))return;
@@ -581,9 +580,6 @@ function importFromSheetPaste(){
     const sub=(cols[7]||'').trim();
     const img=cleanImageUrl(cols[8]||'');
     if(!title&&!url&&!desc&&!media&&!cat&&!img)return;
-    const sig=key+'|'+(url||title);
-    if(seen.has(sig))return;
-    seen.add(sig);
     imported[key].push({srcType:deriveSrcType(media,url),kaisetsu:false,isRepresentative:representative,media:media,catType:cat,subTag:sub,title:title,url:url,desc:desc,img:img});
     count++;
   });
