@@ -90,7 +90,7 @@
           <button class="btn btn-import" onclick="importFromSheetPaste()">📥 シート内容を取り込む</button>
           <button class="btn btn-ghost" onclick="document.getElementById('sheetPaste').value=''">貼り付け欄をクリア</button>
         </div>
-        <div class="small-note">※ 取り込み後も手入力で修正できます。各国につき「★代表」記事は1本、代表記事は画像URL必須です。</div>
+        <div class="small-note">※ 取り込み後も手入力で修正できます。「★代表」は管理用です（メール本文には表示されません）。各国1本、画像URL必須です。</div>
       </div>
 
       <div class="panel">
@@ -169,7 +169,7 @@ function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').repla
 
 
 /* ═══════════ 自動保存（localStorage）═══════════ */
-const STORAGE_KEY='gld_mailmag_tool_v2_draft';
+const STORAGE_KEY='gld_mailmag_tool_v6_draft';
 let saveTimer=null;
 let restoredDate='';
 
@@ -263,7 +263,7 @@ function renderCountryItems(key){
     d.innerHTML=`${state.countries[key].length>1?`<button class="btn btn-del" onclick="delItem('countries','${key}',${i})">削除</button>`:''}
     <label style="display:flex;align-items:center;gap:6px;margin-top:2px;cursor:pointer;">
       <input type="checkbox" ${n.isRepresentative?'checked':''} onchange="updC('${key}',${i},'isRepresentative',this.checked)" style="width:auto;">
-      <span style="color:#dc2626;font-weight:800;">★代表記事（各国1本・画像URL必須）</span>
+      <span style="color:#dc2626;font-weight:800;">★代表記事（管理用・メールには表示されません）</span>
     </label>
     <div class="tag-row">
       <div><label>ソース</label><select onchange="updC('${key}',${i},'srcType',this.value)">
@@ -364,7 +364,6 @@ function srcTag(t){return t==='日本語ニュース'
 function badge(text,bg,color){return text?`<span style="display:inline-block; background-color:${bg}; color:${color}; font-size:10px; padding:2px 7px; border-radius:3px; letter-spacing:0.04em; margin-bottom:7px; margin-right:5px;">${esc(text)}</span>`:'';}
 function catTag(t){return badge(t,'#eff6ff','#1d4ed8');}
 function subTagTag(t){return badge(t,'#f8fafc','#64748b');}
-function representativeTag(){return badge('代表','#fff7ed','#ea580c');}
 function kaisetsuTag(){return `<span style="display:inline-block; background-color:#f5f3ff; color:#7c3aed; font-size:10px; padding:2px 7px; border-radius:3px; letter-spacing:0.04em; margin-bottom:7px; margin-right:5px;">日本語解説</span>`;}
 
 function cleanImageUrl(v){
@@ -377,20 +376,17 @@ function cleanImageUrl(v){
 
 function newsHTML(n){const url=n.url.trim()||'#';
   const hasImg=n.img&&n.img.trim();
-  const textBlock=`${n.isRepresentative?representativeTag():''}${srcTag(n.srcType)}${(n.srcType==='現地メディア'&&n.kaisetsu)?kaisetsuTag():''}${catTag(n.catType)}${subTagTag(n.subTag)}
+  const textBlock=`${srcTag(n.srcType)}${(n.srcType==='現地メディア'&&n.kaisetsu)?kaisetsuTag():''}${catTag(n.catType)}${subTagTag(n.subTag)}
 <a href="${esc(url)}" target="_blank" style="color:#1e3a5f; font-size:15px; line-height:1.65em; text-decoration:none; display:block; margin-bottom:5px; font-weight:500;" class="article-title">${esc(n.title)}</a>
 <p style="margin:0; font-size:13px; color:#64748b; line-height:1.9em;">${esc(n.desc)}</p>`;
   if(hasImg){
-    // 画像ありの記事は、PC/モバイルともに「画像 → タグ/タイトル/概要」の縦型に統一。
-    // モバイルで本文幅が狭くなるのを防ぎ、Sansan貼付後も崩れにくい構造にする。
-    const cardBg=n.isRepresentative?'background-color:#f8fafc; border:1px solid #e2e8f0; border-radius:7px;':'background-color:#ffffff;';
-    const imgSize=n.isRepresentative?'width:180px; height:110px;':'width:150px; height:92px;';
-    const pad=n.isRepresentative?'14px':'0';
-    return `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom:22px; ${cardBg}"><tbody>
-<tr><td style="padding:${pad} ${pad} 10px ${pad};">
-<a href="${esc(url)}" target="_blank"><img src="${esc(n.img)}" alt="" width="180" style="display:block; ${imgSize} max-width:100%; object-fit:cover; border-radius:6px; border:0;"></a>
+    // 画像はメール本文ではあくまで記事サムネイルとして使用。
+    // ★代表は管理用なので、メール上では表示せず、レイアウトも他の記事と同じ自然な表示にする。
+    return `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom:22px;"><tbody>
+<tr><td style="padding:0 0 10px 0;">
+<a href="${esc(url)}" target="_blank"><img src="${esc(n.img)}" alt="" width="180" style="display:block; width:180px; height:110px; max-width:100%; object-fit:cover; border-radius:6px; border:0;"></a>
 </td></tr>
-<tr><td style="padding:0 ${pad} ${pad} ${pad};">${textBlock}</td></tr>
+<tr><td style="padding:0;">${textBlock}</td></tr>
 </tbody></table>`;
   }
   return `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom:18px;"><tbody><tr><td>
