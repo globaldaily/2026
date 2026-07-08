@@ -156,6 +156,24 @@
       transition: color .2s ease;
     }
     .nav a:hover { color: var(--ink); }
+    .nav a {
+      position: relative;
+      padding-bottom: 2px;
+    }
+    .nav a.active {
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .nav a.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -6px;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
 
     /* 헤더 밑 가로 스크롤 탭 인덱스 (모바일/태블릿) */
     .nav-tabs {
@@ -240,11 +258,13 @@
       content: "";
       position: absolute;
       inset: 0;
-      background-image: url('https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/05/ChatGPT-Image-2026%EB%85%84-5%EC%9B%94-22%EC%9D%BC-%EC%98%A4%EC%A0%84-09_56_12-1.png');
-      background-size: cover;
-      background-position: center;
-      opacity: .5;
-      mix-blend-mode: multiply;
+      background-image:
+        linear-gradient(100deg, rgba(9,12,20,.88) 0%, rgba(9,12,20,.74) 32%, rgba(9,12,20,.40) 50%, rgba(9,12,20,.10) 66%, rgba(9,12,20,0) 82%, rgba(9,12,20,.06) 100%),
+        linear-gradient(to bottom, rgba(9,12,20,.28) 0%, rgba(9,12,20,0) 24%, rgba(9,12,20,0) 64%, rgba(9,12,20,.5) 100%),
+        url('https://www.gldaily.com/gld-kanri/wp-content/uploads/2024/08/MakingPhoto_CC02_0-scaled.jpg');
+      background-size: cover, cover, cover;
+      background-position: center, center, center 30%;
+      background-repeat: no-repeat;
       pointer-events: none;
       z-index: 0;
     }
@@ -261,13 +281,14 @@
       align-items: center;
       gap: 10px;
       padding: 7px 14px 7px 8px;
-      border: 1px solid var(--line);
+      border: 1px solid rgba(255,255,255,.35);
       border-radius: 999px;
-      background: var(--bg-soft);
+      background: rgba(255,255,255,.12);
       font-size: 12px;
       font-weight: 600;
       letter-spacing: .04em;
-      color: var(--ink-2);
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(0,0,0,.25);
     }
     .eyebrow-dot {
       display: inline-block;
@@ -297,10 +318,12 @@
       letter-spacing: -.04em;
       font-weight: 800;
       text-wrap: balance;
+      color: #fff;
+      text-shadow: 0 2px 20px rgba(0,0,0,.55);
     }
     .hero h1 em {
       font-style: normal;
-      color: var(--accent);
+      color: #6ea3ff;
       position: relative;
       white-space: nowrap;
     }
@@ -310,34 +333,36 @@
       left: 0; right: 0;
       bottom: -2px;
       height: 2px;
-      background: var(--accent);
-      opacity: .25;
+      background: #6ea3ff;
+      opacity: .35;
     }
     .hero-sub {
       margin: 28px 0 0;
       max-width: 580px;
       font-size: 16px;
-      color: var(--slate);
+      color: rgba(255,255,255,.9);
       line-height: 2;
+      text-shadow: 0 1px 12px rgba(0,0,0,.6);
     }
     .hero-thesis {
       margin: 24px 0 0;
       max-width: 580px;
       padding: 14px 18px 14px 0;
-      border-top: 1px solid var(--line);
+      border-top: 1px solid rgba(255,255,255,.22);
       font-family: var(--t-display);
       font-size: 15px;
       font-weight: 600;
       letter-spacing: -.015em;
-      color: var(--ink-2);
+      color: rgba(255,255,255,.86);
       line-height: 1.6;
       display: flex;
       align-items: center;
       gap: 10px;
+      text-shadow: 0 1px 12px rgba(0,0,0,.6);
     }
     .hero-thesis strong {
       font-weight: 800;
-      color: var(--accent);
+      color: #6ea3ff;
     }
     .hero-thesis-mark {
       color: var(--accent);
@@ -355,7 +380,7 @@
       display: flex;
       align-items: center;
       gap: 16px;
-      color: var(--muted);
+      color: rgba(255,255,255,.7);
       font-size: 12px;
       font-weight: 500;
     }
@@ -369,7 +394,7 @@
       gap: 10px;
       flex-wrap: wrap;
       font-size: 12px;
-      color: var(--muted);
+      color: rgba(255,255,255,.75);
     }
     .hcc-item {
       display: inline-flex;
@@ -377,8 +402,8 @@
       gap: 4px;
       font-weight: 600;
     }
-    .hcc-item:first-child { color: var(--accent); font-weight: 700; }
-    .hcc-divider { color: var(--line); }
+    .hcc-item:first-child { color: #6ea3ff; font-weight: 700; }
+    .hcc-divider { color: rgba(255,255,255,.4); }
 
     /* ===== Sticky Bottom CTA (모바일 전용) ===== */
     .sticky-cta {
@@ -446,11 +471,11 @@
       display: inline-block;
       font-family: var(--t-display);
       font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .22em;
+      font-weight: 700;
+      letter-spacing: .2em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
     .challenges-head h2 {
       margin: 0;
@@ -531,6 +556,27 @@
       background: var(--accent);
       transform: translateY(-2px);
     }
+    .challenges-bridge {
+      max-width: 520px;
+      margin: 4px auto 0;
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--slate);
+    }
+    .challenges-bridge strong { color: var(--ink); font-weight: 700; }
+    .challenges-bridge-arrow {
+      display: block;
+      margin-top: 10px;
+      font-size: 20px;
+      color: var(--accent);
+      font-weight: 700;
+      animation: bridgeBob 1.8s ease-in-out infinite;
+    }
+    @keyframes bridgeBob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(4px); }
+    }
 
     /* Hero stats */
     .hero-stats {
@@ -538,12 +584,12 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 0;
       margin-top: 56px;
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
+      border-top: 1px solid rgba(255,255,255,.22);
+      border-bottom: 1px solid rgba(255,255,255,.22);
     }
     .hero-stat {
       padding: 24px 20px;
-      border-right: 1px solid var(--line);
+      border-right: 1px solid rgba(255,255,255,.18);
     }
     .hero-stat:last-child { border-right: 0; }
     .hero-stat strong {
@@ -553,20 +599,21 @@
       font-weight: 700;
       line-height: 1;
       letter-spacing: -.04em;
-      color: var(--ink);
+      color: #fff;
+      text-shadow: 0 2px 16px rgba(0,0,0,.5);
     }
     .hero-stat b {
       display: block;
       margin-top: 10px;
       font-size: 13px;
       font-weight: 600;
-      color: var(--ink-2);
+      color: rgba(255,255,255,.88);
     }
     .hero-stat small {
       display: block;
       margin-top: 4px;
       font-size: 11px;
-      color: var(--muted);
+      color: rgba(255,255,255,.62);
       line-height: 1.5;
     }
 
@@ -574,9 +621,10 @@
     .hero-visual {
       position: relative;
       width: 100%;
-      max-width: 480px;
+      max-width: 520px;
       margin-left: auto;
-      aspect-ratio: 4 / 5;
+      margin-right: -60px;
+      aspect-ratio: 5 / 4;
     }
     /* 메인 사진 (4:5) */
     .hero-photo {
@@ -600,6 +648,58 @@
       object-fit: cover;
       display: block;
       z-index: 0;
+    }
+    /* ===== 브라우저 창 목업 (제작 콘텐츠 = 횡형 영상) ===== */
+    .hero-browser {
+      position: absolute;
+      left: 50%;
+      top: 52%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 30px 70px rgba(11,18,32,.28), 0 2px 8px rgba(11,18,32,.12);
+      z-index: 2;
+    }
+    .hero-browser-bar {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 11px 14px;
+      background: #f3f4f6;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .hbb-dot {
+      width: 11px; height: 11px; border-radius: 50%;
+      background: #d1d5db;
+    }
+    .hbb-dot:nth-child(1){ background:#ff5f57; }
+    .hbb-dot:nth-child(2){ background:#febc2e; }
+    .hbb-dot:nth-child(3){ background:#28c840; }
+    .hero-browser-url {
+      margin-left: 10px;
+      flex: 1;
+      background: #fff;
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: 12px;
+      color: #6b7280;
+      font-family: var(--t-body);
+      border: 1px solid #e5e7eb;
+    }
+    .hero-browser-screen {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      overflow: hidden;
+    }
+    .hero-browser-screen .hero-media {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
     /* 사진 박스 안 컨테이너 */
     .hero-photo-inner {
@@ -641,8 +741,8 @@
       z-index: 4;
       transform: rotate(-8deg);
     }
-    .tape-top-left { top: -8px; left: 24px; }
-    .tape-top-right { top: -8px; right: 28px; transform: rotate(7deg); }
+    .tape-top-left { top: 8%; left: 6%; }
+.tape-top-right { top: 8%; right: 6%; transform: rotate(7deg); }
     /* 손글씨 메모 */
     .hero-handwriting {
       position: absolute;
@@ -885,6 +985,21 @@
       height: 100%;
       display: block;
     }
+    .sns-play-badge {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(13,13,15,.72);
+      color: #fff;
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: .02em;
+      padding: 4px 8px;
+      border-radius: 999px;
+      white-space: nowrap;
+      backdrop-filter: blur(2px);
+    }
     .dummy-sns-actions {
       display: flex;
       gap: 8px;
@@ -977,10 +1092,32 @@
       font-family: var(--t-display);
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: .22em;
+      letter-spacing: .2em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 18px;
+      margin-bottom: 16px;
+    }
+    /* ===== 통일 eyebrow 라벨: 텍스트 앞 짧은 액센트 선 ===== */
+    .section-head .label::before,
+    .coverage-head .label::before,
+    .markets-statement .label::before,
+    .dist-hero .label::before,
+    .usecase-label::before,
+    .reach-label::before,
+    .challenges-head .micro-label::before,
+    .compare-sub-head .micro-label::before,
+    .faq-head .micro-label::before,
+    .team-timeline-head .micro-label::before,
+    .awards-head .micro-label::before,
+    .form-tag::before {
+      content: "";
+      display: inline-block;
+      width: 22px;
+      height: 2px;
+      margin-right: 10px;
+      vertical-align: middle;
+      background: currentColor;
+      opacity: .9;
     }
     .section-head h2 {
       margin: 0;
@@ -994,6 +1131,18 @@
       margin: 20px 0 0;
       color: var(--slate);
       font-size: 16px;
+    }
+    /* 섹션 간 연결어 (막 전환 브릿지) */
+    .section-head .section-bridge,
+    .section-bridge {
+      margin: 0 auto 6px;
+      max-width: 620px;
+      font-family: var(--t-hand);
+      font-size: clamp(18px, 2.2vw, 24px);
+      font-weight: 600;
+      color: var(--accent);
+      line-height: 1.5;
+      letter-spacing: .01em;
     }
     .section-dark .section-head h2 { color: #fff; }
     .section-dark .section-head p { color: rgba(255,255,255,.7); }
@@ -1351,10 +1500,10 @@
       font-family: var(--t-display);
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: .22em;
+      letter-spacing: .2em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 22px;
+      margin-bottom: 16px;
     }
     .markets-statement-h {
       margin: 0;
@@ -1613,6 +1762,7 @@
       line-height: 1.4;
       color: var(--ink);
       letter-spacing: .005em;
+      white-space: nowrap;
     }
     .pickup-hand em {
       font-style: normal;
@@ -1949,11 +2099,11 @@
       font-family: var(--t-display);
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: .22em;
+      letter-spacing: .2em;
       text-transform: uppercase;
       color: var(--muted);
       display: block;
-      margin-bottom: 8px;
+      margin-bottom: 16px;
     }
     .compare-sub-head h3 {
       margin: 0;
@@ -2033,6 +2183,24 @@
       color: var(--ink-2);
     }
     .compare-card-neutral .compare-title small { color: var(--muted); }
+    /* 비교카드 JAPANKURU 로고 칩 */
+    .compare-icon-logo {
+      width: auto !important;
+      min-width: 60px;
+      height: 38px;
+      background: #fff !important;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0 12px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    .compare-icon-logo img {
+      height: 18px;
+      width: auto;
+      display: block;
+    }
     .compare-section-label {
       font-family: var(--t-display);
       font-size: 10px;
@@ -2549,11 +2717,11 @@
       display: inline-block;
       font-family: var(--t-display);
       font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .22em;
+      font-weight: 700;
+      letter-spacing: .2em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
     .team-timeline-head h3 {
       margin: 0;
@@ -2645,6 +2813,160 @@
       font-weight: 700;
     }
 
+    /* ===== 세로 3-phase 타임라인 ===== */
+    .tl-vertical {
+      max-width: 880px;
+      margin: 8px auto 0;
+      position: relative;
+    }
+    /* 세로 중심선 */
+    .tl-vertical::before {
+      content: "";
+      position: absolute;
+      left: 118px;
+      top: 12px;
+      bottom: 12px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--line) 0%, var(--accent) 88%, var(--accent) 100%);
+    }
+    .tl-phase {
+      position: relative;
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 40px;
+      padding: 0 0 40px 0;
+    }
+    .tl-phase:last-child { padding-bottom: 0; }
+    /* 좌측 phase 마커 */
+    .tl-phase-marker {
+      position: relative;
+      text-align: right;
+      padding-top: 2px;
+    }
+    .tl-phase-num {
+      display: block;
+      font-family: var(--t-display);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      color: var(--accent);
+    }
+    .tl-phase-years {
+      display: block;
+      margin-top: 4px;
+      font-family: var(--t-display);
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -.02em;
+      color: var(--ink);
+    }
+    .tl-phase-title {
+      display: block;
+      margin-top: 2px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--slate);
+    }
+    /* 중심선 위 점 */
+    .tl-phase-body {
+      position: relative;
+      padding: 0 0 4px 4px;
+    }
+    .tl-phase-body::before {
+      content: "";
+      position: absolute;
+      left: -38px;
+      top: 4px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #fff;
+      border: 3px solid var(--line);
+      z-index: 1;
+    }
+    .tl-phase-now .tl-phase-body::before {
+      border-color: var(--accent);
+      background: var(--accent);
+      box-shadow: 0 0 0 5px rgba(32,70,255,.15);
+    }
+    /* 마일스톤 리스트 */
+    .tl-milestones {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .tl-milestones li {
+      display: flex;
+      gap: 14px;
+      align-items: baseline;
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--ink-2);
+    }
+    .tl-yr {
+      flex-shrink: 0;
+      font-family: var(--t-display);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: -.01em;
+      color: var(--accent);
+      width: 38px;
+    }
+    .tl-ev strong { color: var(--ink); font-weight: 700; }
+    /* 성과 뱃지 */
+    .tl-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+    .tl-badge {
+      font-family: var(--t-display);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .01em;
+      color: var(--slate);
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      padding: 5px 11px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .tl-badge-award {
+      color: #b45309;
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+      border-color: rgba(217,119,6,.22);
+      font-weight: 700;
+    }
+    .tl-badge-media {
+      color: var(--accent-ink);
+      background: var(--accent-bg);
+      border-color: rgba(32,70,255,.18);
+      white-space: normal;
+    }
+    @media (max-width: 640px) {
+      .tl-vertical::before { left: 7px; }
+      .tl-phase {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        padding-left: 30px;
+      }
+      .tl-phase-marker {
+        text-align: left;
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .tl-phase-num { display: inline; }
+      .tl-phase-years { margin-top: 0; }
+      .tl-phase-title { margin-top: 0; }
+      .tl-phase-body::before { left: -30px; }
+      .tl-badge { white-space: normal; }
+    }
+
     /* 실적 하이라이트 (수상·출전) */
     .awards-strip {
       max-width: 880px;
@@ -2665,11 +2987,11 @@
       display: inline-block;
       font-family: var(--t-display);
       font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .22em;
+      font-weight: 700;
+      letter-spacing: .2em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 8px;
+      margin-bottom: 16px;
     }
     .awards-head p {
       margin: 0;
@@ -2788,17 +3110,12 @@
       display: inline-block;
       font-family: var(--t-display);
       font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .22em;
+      font-weight: 700;
+      letter-spacing: .2em;
       text-transform: uppercase;
       color: #fff;
-      margin-bottom: 20px;
-      padding: 6px 14px;
-      border: 1px solid rgba(255,255,255,.4);
-      border-radius: 999px;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      background: rgba(11,18,32,.25);
+      margin-bottom: 16px;
+      text-shadow: 0 2px 10px rgba(11,18,32,.7);
     }
     .reach-h {
       margin: 0;
@@ -3018,11 +3335,11 @@
     .coverage-head .label {
       display: inline-block;
       font-family: var(--t-display);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: .15em;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .2em;
       color: var(--accent);
-      margin-bottom: 22px;
+      margin-bottom: 16px;
     }
     .coverage-h {
       margin: 0;
@@ -3218,6 +3535,15 @@
     }
 
     /* 取材스타일 섹션 안의 mini-case는 더 큰 마진 + 살짝 회전 */
+    .coverage-proof-lead {
+      max-width: 860px;
+      margin: 56px auto 24px;
+      text-align: center;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--slate);
+    }
+    .coverage-proof-lead strong { color: var(--ink); font-weight: 700; }
     .coverage-section .mini-case {
       margin: 0 auto 56px;
       transform: rotate(-.5deg);
@@ -3247,11 +3573,11 @@
       text-align: center;
       font-family: var(--t-display);
       font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .18em;
+      font-weight: 700;
+      letter-spacing: .2em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
     .usecase-grid {
       display: grid;
@@ -3521,6 +3847,92 @@
       grid-template-columns: 1fr 1fr;
       gap: 12px;
       width: 100%;
+    }
+    /* ===== 채널별 실제 발信 카드 (RED/FB/IG) ===== */
+    .ch-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 18px rgba(11,18,32,.06);
+      transition: transform .25s ease, box-shadow .25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .ch-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 28px rgba(11,18,32,.12);
+    }
+    /* 이미지 프레임: 원본이 제각각이어도 같은 비율로 통일 (윗부분=썸네일 훅) */
+    .ch-card-thumb {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: var(--bg-soft);
+      position: relative;
+    }
+    .ch-card-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+    .ch-card-body {
+      padding: 12px 14px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+    .ch-card-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .ch-card-badge {
+      font-family: var(--t-display);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .02em;
+      padding: 3px 9px;
+      border-radius: 999px;
+      color: #fff;
+      white-space: nowrap;
+    }
+    .ch-badge-red { background: #ff2442; }
+    .ch-badge-fb  { background: #1877f2; }
+    .ch-badge-ig  { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+    .ch-card-lang {
+      font-family: var(--t-display);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--ink-2);
+      letter-spacing: .01em;
+    }
+    .ch-card-desc {
+      margin: 0;
+      font-size: 11.5px;
+      line-height: 1.6;
+      color: var(--slate);
+    }
+    /* 5장: 3+2 배치가 되도록 마지막 홀로 남는 카드 처리 */
+    @media (min-width: 641px) {
+      .step-visual-edit { grid-template-columns: repeat(3, 1fr); }
+    }
+    /* 04 스텝: 세로 적층 (설명 위, 카드 full-width 아래) */
+    .process-step-stack {
+      grid-template-columns: 1fr !important;
+      gap: 20px !important;
+      align-items: stretch !important;
+    }
+    .process-step-stack .step-visual-edit {
+      min-height: 0;
+      margin-top: 4px;
+    }
+    @media (min-width: 641px) {
+      .process-step-stack .step-visual-edit { grid-template-columns: repeat(5, 1fr); gap: 12px; }
     }
     .article-card {
       position: relative;
@@ -3867,10 +4279,10 @@
       font-family: var(--t-display);
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: .22em;
+      letter-spacing: .2em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
     .dist-hero h2 {
       margin: 0;
@@ -4208,8 +4620,8 @@
       display: inline-block;
       font-family: var(--t-display);
       font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .22em;
+      font-weight: 700;
+      letter-spacing: .2em;
       text-transform: uppercase;
       color: var(--accent);
       margin-bottom: 16px;
@@ -4510,6 +4922,18 @@
       line-height: 1.5;
       color: var(--ink-2);
       cursor: pointer;
+      border-radius: 8px;
+      transition: box-shadow .25s ease, background .25s ease;
+    }
+    .form-consent.consent-attention {
+      background: rgba(32,70,255,.06);
+      box-shadow: 0 0 0 2px var(--accent);
+      animation: consentNudge .35s ease 2;
+    }
+    @keyframes consentNudge {
+      0%, 100% { transform: translateX(0); }
+      30% { transform: translateX(-3px); }
+      70% { transform: translateX(3px); }
     }
     .form-consent input {
       width: 17px;
@@ -4610,15 +5034,45 @@
 
     /* ===== Mini Case Highlight ===== */
     .mini-case {
-      max-width: 720px;
+      max-width: 860px;
       margin: 48px auto 0;
       padding: 32px 36px;
       background: var(--ink);
       color: #fff;
       border-radius: var(--radius-lg);
-      text-align: center;
       position: relative;
       overflow: hidden;
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      text-align: left;
+    }
+    .mini-case-body { flex: 1; min-width: 0; }
+    .mini-case-phone {
+      flex: 0 0 200px;
+      width: 200px;
+      padding: 8px;
+      background: #0d0d0f;
+      border-radius: 30px;
+      box-shadow: 0 20px 44px rgba(0,0,0,.4), 0 0 0 1px rgba(255,255,255,.06) inset;
+      position: relative;
+    }
+    .mini-case-phone .phone-notch {
+      position: absolute;
+      top: 14px; left: 50%;
+      transform: translateX(-50%);
+      width: 46px; height: 5px;
+      background: #2a2a2e;
+      border-radius: 3px;
+      z-index: 2;
+    }
+    .mini-case-phone .phone-screen {
+      background: #fff;
+      border-radius: 24px;
+      overflow: hidden;
+      aspect-ratio: 9 / 16;
+      display: flex;
+      flex-direction: column;
     }
     .mini-case::before {
       content: "";
@@ -4799,6 +5253,9 @@
       html { scroll-padding-top: 120px; }
       .nav { display: none; }
       .nav-tabs { display: block; }
+      .brand-tagline { display: none; }
+      .nav-tab { padding: 7px 13px; font-size: 12.5px; }
+      .nav-tabs-scroll { gap: 2px; padding: 7px 14px; }
       .header-cta-btn { padding: 9px 16px; font-size: 13px; }
       .hero { padding: 72px 0 80px; }
       .hero-grid { grid-template-columns: 1fr; gap: 48px; }
@@ -4876,7 +5333,7 @@
       .hero-stats { grid-template-columns: 1fr; }
       .hero-stat { border-right: 0; border-bottom: 1px solid var(--line); text-align: center; }
       .hero-stat:last-child { border-bottom: 0; }
-      .hero-visual { max-width: 320px; }
+      .hero-visual { max-width: 320px; margin-right: auto; }
       .hero-phone { width: 140px; right: -12px; bottom: -10px; }
       .power-grid { grid-template-columns: 1fr; }
       .creators-grid { grid-template-columns: repeat(2, 1fr); gap: 24px 16px; }
@@ -4940,9 +5397,11 @@
       .award-icon { font-size: 18px; width: 24px; }
       .award-item strong { font-size: 13px; }
       /* mini-case + price-bar 모바일 */
-      .mini-case { padding: 24px 20px; }
-      .mini-case-stats { gap: 16px; }
+      .mini-case { padding: 24px 20px; flex-direction: column; gap: 24px; text-align: center; }
+      .mini-case-body { width: 100%; }
+      .mini-case-stats { gap: 16px; justify-content: center; }
       .mini-case-stat strong { font-size: 36px; }
+      .mini-case-phone { flex: 0 0 auto; width: 180px; margin: 0 auto; }
       .price-bar-inner { flex-direction: column; gap: 10px; }
       .process-arrow svg { transform: rotate(90deg); }
       .process-step { padding: 24px 20px; grid-template-columns: 1fr; gap: 20px; }
@@ -5065,9 +5524,9 @@
         <span class="brand-tagline">Inbound Content Marketing</span>
       </a>
       <nav class="nav" aria-label="primary">
-        <a href="#service">提供サービス</a>
         <a href="#markets">市場別戦略</a>
-        <a href="#distribution">配信網</a>
+        <a href="#service">提供サービス</a>
+        <a href="#coverage">取材スタイル</a>
         <a href="#why">選ばれる理由</a>
         <a href="#behind">制作プロセス</a>
         <a href="#contact">資料請求</a>
@@ -5080,9 +5539,9 @@
     <!-- 모바일/태블릿: 헤더 밑 가로 스크롤 탭 인덱스 -->
     <nav class="nav-tabs" aria-label="section tabs">
       <div class="nav-tabs-scroll">
-        <a href="#service" class="nav-tab">提供サービス</a>
         <a href="#markets" class="nav-tab">市場別戦略</a>
-        <a href="#distribution" class="nav-tab">配信網</a>
+        <a href="#service" class="nav-tab">提供サービス</a>
+        <a href="#coverage" class="nav-tab">取材スタイル</a>
         <a href="#why" class="nav-tab">選ばれる理由</a>
         <a href="#behind" class="nav-tab">制作プロセス</a>
         <a href="#contact" class="nav-tab">資料請求</a>
@@ -5105,8 +5564,8 @@
             <em>コンテンツ</em>で動かす。
           </h1>
           <p class="hero-sub">
-            <strong>8カ国のネイティブクリエイター</strong>が、訪日客に届くコンテンツを国別に企画・制作・配信。<br>
-            旅マエの認知から店頭・EC送客まで、SNS・検索・現地メディアに残る<strong>「ブランド資産」</strong>として設計します ―― それが <strong>JAPANKURU(ジャパンくる)</strong> です。
+            <strong>JAPANKURU(ジャパンくる)</strong>は、8カ国のネイティブが運営する<strong>訪日インバウンド専門の多言語コンテンツメディア</strong>。<br>
+            訪日客に届くコンテンツを国別に企画・制作・配信し、旅マエの認知から店頭・EC送客まで、SNS・検索・現地メディアに残る<strong>「ブランド資産」</strong>として設計します。
           </p>
           <p class="hero-thesis">
             <span class="hero-thesis-mark">—</span>
@@ -5117,7 +5576,7 @@
               無料で資料を受け取る
               <span class="arrow">→</span>
             </a>
-            <a href="#contact" class="btn btn-ghost" data-cta="hero-consult" data-intent="consult">
+            <a href="#contact" class="btn btn-outline-light" data-cta="hero-consult" data-intent="consult">
               無料30分相談を申し込む
             </a>
           </div>
@@ -5153,102 +5612,43 @@
         <!-- Visual: Photo + Phone mockup -->
         <div class="hero-visual" aria-hidden="true">
 
-          <!-- ========== 메인 BTS 영상/이미지 ========== -->
-          <!-- TODO 줄리: 아래 <video> 또는 <img> 중 하나만 사용. URL을 실제 파일로 교체 -->
-          <div class="hero-photo">
-
-            <!-- (A) 영상 사용 시 — autoplay/muted/loop -->
-            <video class="hero-media" autoplay muted loop playsinline preload="metadata" poster="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/03/D4S_5623.jpg">
-              <source src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2025/09/1221_GLD03.m4v" type="video/mp4">
-            </video>
-
-            <!-- (B) 정적 이미지 사용 시 — 위 <video> 통째 삭제하고 아래 주석 해제
-            <img class="hero-media" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/03/D4S_5623.jpg" alt="BTS"/>
-            -->
-
-            <!-- 마스킹테이프 (좌우) -->
-            <div class="tape tape-top-left"></div>
-            <div class="tape tape-top-right"></div>
-
-            <!-- 일본 도시 실루엣 (장식) -->
-            <svg class="skyline" viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYEnd meet">
-              <g fill="#0b1220" opacity=".55">
-                <rect x="10" y="60" width="20" height="60"/>
-                <rect x="35" y="40" width="22" height="80"/>
-                <rect x="62" y="55" width="14" height="65"/>
-                <rect x="80" y="25" width="28" height="95"/>
-                <polygon points="94,25 94,15 108,15 108,25"/>
-                <rect x="115" y="50" width="18" height="70"/>
-                <rect x="138" y="35" width="32" height="85"/>
-                <rect x="175" y="20" width="22" height="100"/>
-                <polygon points="175,20 186,5 197,20"/>
-                <rect x="205" y="48" width="18" height="72"/>
-                <rect x="228" y="30" width="26" height="90"/>
-                <rect x="260" y="55" width="16" height="65"/>
-                <rect x="280" y="42" width="22" height="78"/>
-                <rect x="307" y="35" width="30" height="85"/>
-                <polygon points="322,35 322,22 337,22 337,35"/>
-                <rect x="343" y="55" width="14" height="65"/>
-                <rect x="362" y="40" width="22" height="80"/>
-                <rect x="388" y="60" width="12" height="60"/>
-              </g>
-            </svg>
-
-            <!-- 손글씨 메모 -->
-            <div class="hero-handwriting">
-              現場から、<br>東京にて
-              <svg class="arrow-doodle" width="40" height="20" viewBox="0 0 40 20" fill="none">
-                <path d="M2 4 Q 18 12 35 8" stroke="#0b1220" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-                <path d="M30 5 L 35 8 L 32 13" stroke="#0b1220" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-              </svg>
+          <!-- ========== 制作コンテンツ = ブラウザ窓の中で再生される横型映像 ========== -->
+          <!-- TODO 줄리: L아래 <source src> 를 WordPress에 올린 새 mp4 URL로 교체 -->
+          <div class="hero-browser">
+            <div class="hero-browser-bar">
+              <span class="hbb-dot"></span><span class="hbb-dot"></span><span class="hbb-dot"></span>
+              <span class="hero-browser-url">japankuru.com</span>
             </div>
-
-            <!-- 실제 영상 들어올 자리:
-                 <video autoplay muted loop playsinline preload="metadata"
-                        poster="/lp/japankuru-inbound/hero-poster.jpg"
-                        width="480" height="600">
-                   <source src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2025/09/1221_GLD03.m4v" type="video/mp4">
-                 </video> -->
+            <div class="hero-browser-screen">
+              <!-- (A) 영상 — 데스크톱만 재생(모바일은 poster). 새 mp4 URL로 교체 -->
+              <video class="hero-media" id="heroVideo" muted loop playsinline preload="none" poster="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/07/JR_Nagano_CC30-1-scaled.jpg">
+                <source src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/07/nagano_jr_jk.mp4" type="video/mp4">
+              </video>
+              <!-- (B) 정적 이미지로 하려면 위 video 삭제하고:
+              <img class="hero-media" src="https://www.gldaily.com/.../poster.jpg" alt=""/> -->
+            </div>
           </div>
 
-          <!-- 사진 좌하단 데이터 캡션 -->
+          <!-- 마스킹테이프 (장식) -->
+          <div class="tape tape-top-left"></div>
+          <div class="tape tape-top-right"></div>
+
+          <!-- 손글씨 메모 -->
+          <div class="hero-handwriting">
+            取材が、<br>作品になる。
+            <svg class="arrow-doodle" width="40" height="20" viewBox="0 0 40 20" fill="none">
+              <path d="M2 4 Q 18 12 35 8" stroke="#0b1220" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+              <path d="M30 5 L 35 8 L 32 13" stroke="#0b1220" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+          </div>
+
+          <!-- 데이터 캡션 -->
           <div class="photo-caption">
             <span class="pulse"></span>
             <span class="photo-caption-text">
               <strong>140万+ Audience</strong>
               <small>8カ国・32チャネル</small>
             </span>
-          </div>
-
-          <!-- 폰 모킹업 (사진 우하단 오버랩) -->
-          <div class="hero-phone">
-            <div class="phone-notch"></div>
-            <div class="phone-screen">
-              <!-- 더미 SNS 포스트 -->
-              <div class="dummy-sns">
-                <div class="dummy-sns-head">
-                  <div class="dummy-sns-avatar">JK</div>
-                  <div class="dummy-sns-meta">
-                    <strong>japankuru.tw</strong>
-                    <small>Tokyo · Japan</small>
-                  </div>
-                </div>
-                <div class="dummy-sns-img">
-                  <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/03/D4S_5623.jpg" alt="japankuru.tw 浅草" style="width:100%;height:100%;object-fit:cover;display:block;"/>
-                </div>
-                <div class="dummy-sns-actions">
-                  <span>♥</span><span>💬</span><span>↗</span>
-                </div>
-                <div class="dummy-sns-likes">2,847 likes</div>
-                <div class="dummy-sns-caption">
-                  <strong>japankuru.tw</strong> 浅草で見つけた、隠れた名店☕️ #日本旅行 #浅草グルメ
-                </div>
-              </div>
-
-              <!-- 실제 SNS 캡처 들어올 자리:
-                   <img loading="lazy" src="/lp/japankuru-inbound/sns-post.jpg"
-                        alt="JAPANKURU SNS Post" /> -->
-            </div>
           </div>
 
         </div>
@@ -5266,6 +5666,31 @@
         </div>
       </div>
     </div>
+
+    <!-- ========== 課題 체크리스트 ========== -->
+    <section class="challenges-section">
+      <div class="container">
+        <div class="challenges-card">
+          <div class="challenges-head">
+            <span class="micro-label">よくあるお悩み</span>
+            <h2>こんな課題、<em>ありませんか?</em></h2>
+            <p class="challenges-sub">一つでも当てはまれば、資料がきっとお役に立てます。</p>
+          </div>
+          <ul class="challenges-list">
+            <li><span class="ch-text">インフルエンサー施策は単発で、<strong>継続的な効果が見えない</strong></span></li>
+            <li><span class="ch-text">翻訳だけでは、<strong>現地で反応があるか分からない</strong></span></li>
+            <li><span class="ch-text">国ごとの切り口・視点が必要か、<strong>判断できない</strong></span></li>
+            <li><span class="ch-text">2次活用もできる<strong>"資産になるコンテンツ"が欲しい</strong></span></li>
+            <li><span class="ch-text">インバウンド予算の<strong>効果測定・KPI設計</strong>が難しい</span></li>
+            <li><span class="ch-text">認知から<strong>店頭・EC送客まで一気通貫</strong>で設計したい</span></li>
+          </ul>
+          <a href="#contact" class="challenges-cta" data-cta="challenges" data-intent="document" style="display:none">
+            → まずは資料で確認する
+          </a>
+          <p class="challenges-bridge">その"見えにくさ"には、理由があります。<br><strong>いま、インバウンド市場そのものが大きく変わっているから</strong>です。<span class="challenges-bridge-arrow">↓</span></p>
+        </div>
+      </div>
+    </section>
 
     <!-- ========== Markets — 시장 도입 + 5국 인사이트 ========== -->
     <section id="markets" class="markets-section">
@@ -5474,8 +5899,8 @@
         </p>
 
         <p class="markets-recap markets-recap-latest">
-          <span class="markets-recap-tag markets-recap-tag-latest">最新 · 2026年4月</span>
-          直近の4月も <strong>韓国(+21.7%)・台湾(+19.7%)</strong> など東アジアが牽引。<strong>9市場が4月として過去最高</strong>を記録しました。<span class="markets-recap-note">(JNTO 2026年4月推計値 · 2026年5月20日発表)</span>
+          <span class="markets-recap-tag markets-recap-tag-latest">最新 · 2026年5月</span>
+          直近の5月も <strong>韓国(+15.2%)・台湾(+14.6%)</strong> など東アジアが牽引。<strong>19市場が5月として過去最高</strong>を記録しました。<span class="markets-recap-note">(JNTO 2026年5月推計値 · 2026年6月17日発表)</span>
         </p>
 
         <!-- 출처 footnote 옮기기 -->
@@ -5490,7 +5915,7 @@
           <p class="pickup-hand">
             JAPANKURU が <em>メインで展開中</em> の<br>
             主要 <span class="pickup-num">5</span> 市場 ——
-            それぞれ <em>勝ち筋がちがう</em>。
+            それぞれ <em>勝ち筋がちがう。</em>
           </p>
           <svg class="pickup-arrow" viewBox="0 0 60 30" fill="none" aria-hidden="true">
             <path d="M5 5 Q 30 25 55 12" stroke="#2046ff" stroke-width="1.5" stroke-linecap="round"/>
@@ -5651,7 +6076,7 @@
             </div>
             <p class="market-insight">SEO記事・歴史文化背景の深い解説で、計画段階の調査行動に応える。</p>
             <div class="market-creator">
-              <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2024/08/DSC01179-のコピー-scaled.jpg" alt="Sophia" loading="lazy"/>
+              <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2024/08/IMG_7616.jpg" alt="Sophia" loading="lazy"/>
               <span><small>ネイティブ編集</small><strong>Sophia</strong></span>
             </div>
           </div>
@@ -5677,35 +6102,12 @@
       </div>
     </section>
 
-    <!-- ========== 課題 체크리스트 ========== -->
-    <section class="challenges-section">
-      <div class="container">
-        <div class="challenges-card">
-          <div class="challenges-head">
-            <span class="micro-label">よくあるお悩み</span>
-            <h2>こんな課題、<em>ありませんか?</em></h2>
-            <p class="challenges-sub">一つでも当てはまれば、資料がきっとお役に立てます。</p>
-          </div>
-          <ul class="challenges-list">
-            <li><span class="ch-text">インフルエンサー施策は単発で、<strong>継続的な効果が見えない</strong></span></li>
-            <li><span class="ch-text">翻訳だけでは、<strong>現地で反応があるか分からない</strong></span></li>
-            <li><span class="ch-text">国ごとの切り口・視点が必要か、<strong>判断できない</strong></span></li>
-            <li><span class="ch-text">2次活用もできる<strong>"資産になるコンテンツ"が欲しい</strong></span></li>
-            <li><span class="ch-text">インバウンド予算の<strong>効果測定・KPI設計</strong>が難しい</span></li>
-            <li><span class="ch-text">認知から<strong>店頭・EC送客まで一気通貫</strong>で設計したい</span></li>
-          </ul>
-          <a href="#contact" class="challenges-cta" data-cta="challenges" data-intent="document">
-            → まずは資料で確認する
-          </a>
-        </div>
-      </div>
-    </section>
-
     <!-- ========== Service (Compact) ========== -->
     <section id="service" class="services-section">
       <div class="container">
         <div class="section-head center" style="margin-bottom: 40px;">
           <span class="label">提供サービス</span>
+          <p class="section-bridge">市場ごとに"勝ち筋"が違うなら、打ち手も国別に変える必要があります。</p>
           <h2 style="font-size: clamp(24px, 3vw, 36px);">国別の文脈に合わせて、<br><em style="color:var(--accent); font-style:normal;">企画・取材・制作・配信</em>まで、自社で一貫対応します。</h2>
         </div>
 
@@ -5980,14 +6382,14 @@
           <span class="label">JAPANKURUの取材スタイル</span>
           <h2 class="coverage-h">
             ひとつの現場から、<br>
-            <em>5〜9の母国語コンテンツ</em>へ。
+            <em>5言語の母国語コンテンツ</em>へ。
           </h2>
           <p class="coverage-sub">
             多くの多言語メディアは、原稿を翻訳・編集して多言語化します。<br>
-            JAPANKURUは、<strong>日本側のディレクターが現場で丁寧に取材</strong>し、<strong>5〜9人の各国ネイティブクリエイターが、それぞれの母国の読者に "刺さる切り口" で再構成</strong>する。プロジェクトの目的に応じて、<strong>ネイティブが現場に同行する取材</strong>も組み合わせます。<br>
+            JAPANKURUは、<strong>日本側のディレクターが現場で丁寧に取材</strong>し、<strong>各国のネイティブクリエイターが、それぞれの母国の読者に "刺さる切り口" で再構成</strong>する。プロジェクトの目的に応じて、<strong>ネイティブが現場に同行する取材</strong>も組み合わせます。<br>
             14年運営してきた自社メディアの上に、業界でも稀な取材体制を組み合わせています。
           </p>
-          <p class="coverage-note">※ 対応は8カ国。対象国・施策内容に応じて、5〜9言語で設計します。</p>
+          <p class="coverage-note">※ 英語・韓国語・繁体字・簡体字・タイ語の5言語をベースに、対象国・施策内容に応じて最大8言語まで対応します。</p>
         </div>
 
         <div class="coverage-body">
@@ -5998,68 +6400,27 @@
               <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/01/shooting.jpg" alt="ネイティブクリエイターチームが同じ現場で取材" loading="lazy"/>
               <div class="coverage-photo-cap">
                 <span class="cap-dot"></span>
-                <strong>1つの現場、5〜9人の視点</strong>
+                <strong>1つの現場、5言語の視点</strong>
                 <small>韓国・台湾・タイ・中国・英語圏ネイティブが再構成</small>
               </div>
             </div>
             <div class="coverage-photo coverage-photo-sub">
-              <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/01/img2019041111112721062100.jpg" alt="ネイティブクリエイターチーム" loading="lazy"/>
+              <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/07/Maehara_CC02-scaled-1.webp" alt="ネイティブクリエイターチーム" loading="lazy"/>
             </div>
           </div>
 
-          <!-- 우측: 비교 카드 2개 -->
+          <!-- 우측: JAPANKURU 취재 방식 특징 (비교 아닌 특징 패널) -->
           <div class="coverage-compare">
-
-            <div class="cov-card cov-card-other">
-              <span class="cov-card-tag cov-card-tag-other">一般的な多言語展開</span>
-              <ul class="cov-list">
-                <li><span class="cov-mark">―</span>日本語原稿をベースに翻訳・編集</li>
-                <li><span class="cov-mark">―</span>情報の正確性を重視</li>
-                <li><span class="cov-mark">―</span>サイト掲載が中心になりやすい</li>
-              </ul>
-            </div>
-
             <div class="cov-card cov-card-jk">
-              <span class="cov-card-tag cov-card-tag-jk">JAPANKURU</span>
+              <span class="cov-card-tag cov-card-tag-jk">JAPANKURUの取材</span>
               <ul class="cov-list">
-                <li><span class="cov-mark cov-mark-check">✓</span><strong>取材段階から海外ユーザー視点で設計</strong></li>
-                <li><span class="cov-mark cov-mark-check">✓</span>国別の文脈に合わせてネイティブ編集</li>
-                <li><span class="cov-mark cov-mark-check">✓</span>記事・SNS・ショート動画・提携媒体まで展開</li>
+                <li><span class="cov-mark cov-mark-check">✓</span><strong>取材段階から海外ユーザー視点で設計</strong>（翻訳ベースではない）</li>
+                <li><span class="cov-mark cov-mark-check">✓</span>国別の文脈に合わせて<strong>ネイティブが再構成</strong></li>
+                <li><span class="cov-mark cov-mark-check">✓</span>記事・SNS・ショート動画・提携媒体まで一気通貫で展開</li>
                 <li><span class="cov-mark cov-mark-check">✓</span>必要に応じて<strong>ネイティブも現場へ同行</strong></li>
               </ul>
             </div>
-
           </div>
-        </div>
-
-        <!-- Mini Case — 取材스타일 결과 임팩트 -->
-        <div class="mini-case">
-          <div class="mini-case-tag">事例ハイライト</div>
-          <div class="mini-case-stats">
-            <div class="mini-case-stat">
-              <strong>890<span class="mc-unit">万</span></strong>
-              <small>リーチ</small>
-            </div>
-            <div class="mini-case-divider"></div>
-            <div class="mini-case-stat">
-              <strong>234<span class="mc-unit">回</span></strong>
-              <small>シェア</small>
-            </div>
-            <div class="mini-case-divider"></div>
-            <div class="mini-case-stat">
-              <strong>1<span class="mc-unit">本</span></strong>
-              <small>投稿のみ</small>
-            </div>
-          </div>
-          <p class="mini-case-desc">
-            2026年1月、<strong>『鎌倉の隠れた名店』</strong>を取材。<br>
-            一度の丁寧な現場取材を、台湾担当 <strong>Lucy</strong> が現地読者の感性で再構成 →<br>
-            Facebookで <strong>890万リーチ</strong>、現地コミュニティで自然拡散しました。
-          </p>
-          <p class="mini-case-note">※ 2026年1月実施。Facebook投稿単体の管理画面数値・自社確認。</p>
-          <p class="mini-case-more">
-            ※ 詳しい数値や業種別の活用例は、資料でご紹介しています。
-          </p>
         </div>
 
         <!-- 활용 이미지 3개 (짧게) -->
@@ -6077,6 +6438,61 @@
             <div class="usecase-card">
               <span class="usecase-tag">化粧品メーカー</span>
               <p>体験型記事とSNSショート動画で商品理解を促進。<strong>EC・店舗ページへの送客導線</strong>を設計。</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mini Case — 自社運営メディアのオーガニック実績 -->
+        <p class="coverage-proof-lead">こうした取材の積み重ねから、<strong>こんな反応が生まれることもあります。</strong></p>
+        <div class="mini-case">
+          <div class="mini-case-body">
+            <div class="mini-case-tag">事例ハイライト</div>
+            <div class="mini-case-stats">
+              <div class="mini-case-stat">
+                <strong>100<span class="mc-unit">万+</span></strong>
+                <small>再生（オーガニック）</small>
+              </div>
+              <div class="mini-case-divider"></div>
+              <div class="mini-case-stat">
+                <strong>1<span class="mc-unit">本</span></strong>
+                <small>リールのみ</small>
+              </div>
+            </div>
+            <p class="mini-case-desc">
+              2026年4〜5月、自社運営の<strong>韓国Instagram（@japankuru_kr）</strong>で公開した<br>
+              「ランダム日本旅行地抽選」リールが、<strong>広告費ゼロ・オーガニックで100万再生超</strong>。<br>
+              韓国人旅行者が「大阪が出るまで100回」挑戦するなど、コメント欄が自然に盛り上がりました。
+            </p>
+            <p class="mini-case-note">※ 2026年4〜5月／自社運営アカウントでのオーガニック実績。再生数はInstagram管理画面数値。</p>
+            <p class="mini-case-more">
+              → <a href="https://labo.gldaily.com/field-report/korea-reel-comment-analysis-2026/" target="_blank" rel="noopener">コメント欄の定性分析レポートを読む（G·Labo）</a>
+            </p>
+          </div>
+
+          <!-- 100万再生リール 폰 목업 -->
+          <div class="mini-case-phone" aria-hidden="true">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <div class="dummy-sns">
+                <div class="dummy-sns-head">
+                  <div class="dummy-sns-avatar">JK</div>
+                  <div class="dummy-sns-meta">
+                    <strong>japankuru_kr</strong>
+                    <small>Reel · オーガニック</small>
+                  </div>
+                </div>
+                <div class="dummy-sns-img">
+                  <img loading="lazy" src="https://labo.gldaily.com/wp-content/uploads/2026/05/スクリーンショット-2026-05-12-14.57.01.png" alt="JAPANKURU 韓国Instagram 100万再生リール" style="width:100%;height:100%;object-fit:cover;display:block;"/>
+                  <span class="sns-play-badge">▶ 100万+ 再生</span>
+                </div>
+                <div class="dummy-sns-actions">
+                  <span>♥</span><span>💬</span><span>↗</span>
+                </div>
+                <div class="dummy-sns-likes">オーガニックリーチ</div>
+                <div class="dummy-sns-caption">
+                  <strong>japankuru_kr</strong> ランダム日本旅行地抽選 🎲 韓国人旅行者が100回挑戦 #日本旅行
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -6112,7 +6528,7 @@
             <div class="why-photo-tape why-photo-tape-1"></div>
             <div class="why-photo-tape why-photo-tape-2"></div>
             <div class="why-photo-img">
-              <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/01/shooting.jpg" alt="取材現場" loading="lazy"/>
+              <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2024/08/D4S_3004.jpg" alt="取材現場" loading="lazy"/>
             </div>
             <div class="why-photo-cap">
               <span class="why-photo-dot"></span>
@@ -6201,7 +6617,9 @@
           <!-- RIGHT: JAPANKURU content-driven -->
           <div class="compare-card compare-card-good">
             <div class="compare-head">
-              <div class="compare-icon">JK</div>
+              <div class="compare-icon compare-icon-logo">
+                <img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2023/02/JAPANKURU_RGB-2.png" alt="JAPANKURU" />
+              </div>
               <div class="compare-title">
                 <strong>JAPANKURU(コンテンツ型)</strong>
                 <small>Content-driven Strategy</small>
@@ -6295,15 +6713,15 @@
               <!-- 메이킹 사진 폴라로이드 (TODO: 줄리 — 실제 메이킹 사진으로 교체) -->
               <div class="making-polaroid mp-1" style="--rot: -4deg;">
                 <div class="making-photo">
-                  <img loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/01/shooting.jpg" alt="現地取材" style="width:100%;height:100%;object-fit:cover;"/>
+                  <img loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2024/08/D05_2614.jpg" alt="現地取材" style="width:100%;height:100%;object-fit:cover;"/>
                 </div>
-                <div class="making-cap">浅草にて ★ Lucy</div>
+                <div class="making-cap">新宿にて</div>
               </div>
               <div class="making-polaroid mp-2" style="--rot: 4deg;">
                 <div class="making-photo">
-                  <img loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/01/img2019041111112721062100.jpg" alt="ネイティブチーム取材" style="width:100%;height:100%;object-fit:cover;"/>
+                  <img loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2024/08/MakingPhoto_CC01_0-scaled-e1722583606753.jpg" alt="ネイティブチーム取材" style="width:100%;height:100%;object-fit:cover;"/>
                 </div>
-                <div class="making-cap">取材の裏側 ★ Sou</div>
+                <div class="making-cap">取材の裏側 ★Lucy</div>
               </div>
             </div>
           </div>
@@ -6314,50 +6732,82 @@
               <path d="M2 10 L 38 10" stroke="#2046ff" stroke-width="1.5" stroke-linecap="round"/>
               <path d="M30 4 L 38 10 L 30 16" stroke="#2046ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
             </svg>
-            <span class="process-arrow-note">1回の取材 ──→ 8カ国の言葉に</span>
+            <span class="process-arrow-note">1回の取材 ──→ 5言語のコンテンツに</span>
           </div>
 
-          <!-- STEP 3: 多言語編集 (다국어 기사 카드) -->
-          <div class="process-step">
+          <!-- STEP 3: 多言語編集 (채널별 실제 발信 카드) -->
+          <div class="process-step process-step-stack">
             <div class="step-meta">
               <span class="step-number">04</span>
               <span class="step-tag">多言語編集</span>
             </div>
-            <h3 class="step-title">多言語に編集・展開</h3>
-            <p class="step-desc">単純翻訳ではなく、各国の文脈で編集。1つの取材から、8カ国のネイティブな読み物として展開します。</p>
+            <h3 class="step-title">多言語に編集・展開 ― チャネルごとに最適化</h3>
+            <p class="step-desc">単純翻訳ではなく、各国の文脈で編集。<strong>1つの取材から、5言語(最大8言語)のネイティブコンテンツ</strong>へ。とくにSNSでは、市場ごとの利用チャネルと文化に合わせてトーンや構成を変えています。</p>
             <div class="step-visual step-visual-edit">
-              <span class="visual-note">制作イメージ</span>
-              <!-- 결과물 다국어 기사 카드 (4장 콜라주) -->
-              <div class="article-card ac-1">
-                <div class="ac-flag"><svg viewBox="0 0 30 30"><use href="#flag-tw"/></svg></div>
-                <div class="ac-thumb" style="background: linear-gradient(135deg, #fecaca 0%, #fed7aa 100%);"><span>🍣</span></div>
-                <div class="ac-body">
-                  <div class="ac-lang">繁中</div>
-                  <p class="ac-headline">東京老饕私房菜：當地人才知道的隱藏名店</p>
+              <span class="visual-note">実際の配信例</span>
+              <!-- 채널별 실제 발信 예: 1취재 → 5언어, 채널 특성에 맞게 전개 -->
+              <div class="ch-card">
+                <div class="ch-card-thumb">
+                  <img loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/07/JAPANKURU_LP%E4%BA%8B%E4%BE%8B%E7%94%BB%E5%83%8F_%E7%B0%A1%E4%BD%93RED.png" alt="小红书 簡体字コンテンツ例"/>
+                </div>
+                <div class="ch-card-body">
+                  <div class="ch-card-head">
+                    <span class="ch-card-badge ch-badge-red">RED 小红书</span>
+                    <span class="ch-card-lang">简体字</span>
+                  </div>
+                  <p class="ch-card-desc">モバイル前提。1枚目のフックを強く意識し、リアルな体験レビューで共感を狙う。</p>
                 </div>
               </div>
-              <div class="article-card ac-2">
-                <div class="ac-flag"><svg viewBox="0 0 30 30"><use href="#flag-kr"/></svg></div>
-                <div class="ac-thumb" style="background: linear-gradient(135deg, #fef9c3 0%, #d1fae5 100%);"><span>⛩️</span></div>
-                <div class="ac-body">
-                  <div class="ac-lang">한국어</div>
-                  <p class="ac-headline">현지인이 알려주는 도쿄 골목 맛집 7곳</p>
+
+              <div class="ch-card">
+                <div class="ch-card-thumb">
+                  <img loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/07/JAPANKURU_LP%E4%BA%8B%E4%BE%8B%E7%94%BB%E5%83%8F_%E9%9F%93%E5%9B%BDIG-scaled.jpg" alt="Instagram 韓国語コンテンツ例"/>
+                </div>
+                <div class="ch-card-body">
+                  <div class="ch-card-head">
+                    <span class="ch-card-badge ch-badge-ig">Instagram</span>
+                    <span class="ch-card-lang">한국어</span>
+                  </div>
+                  <p class="ch-card-desc">モバイル前提でサムネイルのフックを重視。読みやすいレイアウトとリアルレビューで共感を得る。</p>
                 </div>
               </div>
-              <div class="article-card ac-3">
-                <div class="ac-flag"><svg viewBox="0 0 30 30"><use href="#flag-th"/></svg></div>
-                <div class="ac-thumb" style="background: linear-gradient(135deg, #dbeafe 0%, #ede9fe 100%);"><span>🍵</span></div>
-                <div class="ac-body">
-                  <div class="ac-lang">ภาษาไทย</div>
-                  <p class="ac-headline">ร้านลับโตเกียวที่คนท้องถิ่นรู้จักจริงๆ</p>
+
+              <div class="ch-card">
+                <div class="ch-card-thumb">
+                  <img loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/07/JAPANKURU_LP%E4%BA%8B%E4%BE%8B%E7%94%BB%E5%83%8F_%E5%8F%B0%E6%B9%BEFB.png" alt="Facebook 台湾繁体字コンテンツ例"/>
+                </div>
+                <div class="ch-card-body">
+                  <div class="ch-card-head">
+                    <span class="ch-card-badge ch-badge-fb">Facebook</span>
+                    <span class="ch-card-lang">繁体字 · 台湾</span>
+                  </div>
+                  <p class="ch-card-desc">FB利用率の高い市場。ネイティブチェックの上、必要な情報を端的に伝える構成。</p>
                 </div>
               </div>
-              <div class="article-card ac-4">
-                <div class="ac-flag"><svg viewBox="0 0 30 30"><use href="#flag-cn"/></svg></div>
-                <div class="ac-thumb" style="background: linear-gradient(135deg, #ffe4e6 0%, #fce7f3 100%);"><span>🍜</span></div>
-                <div class="ac-body">
-                  <div class="ac-lang">简中</div>
-                  <p class="ac-headline">东京当地人才知道的小众美食7选</p>
+
+              <div class="ch-card">
+                <div class="ch-card-thumb">
+                  <img loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/07/JAPANKURU_LP%E4%BA%8B%E4%BE%8B%E7%94%BB%E5%83%8F_%E3%82%BF%E3%82%A4FB.png" alt="Facebook タイ語コンテンツ例"/>
+                </div>
+                <div class="ch-card-body">
+                  <div class="ch-card-head">
+                    <span class="ch-card-badge ch-badge-fb">Facebook</span>
+                    <span class="ch-card-lang">ภาษาไทย</span>
+                  </div>
+                  <p class="ch-card-desc">FB中心の市場。内容をコンパクトに整理し、直感的に伝わる構成を重視。</p>
+                </div>
+              </div>
+
+              <div class="ch-card">
+                <div class="ch-card-thumb">
+                  <img loading="lazy" src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/07/JAPANKURU_LP%E4%BA%8B%E4%BE%8B%E7%94%BB%E5%83%8F_%E8%8B%B1%E8%AA%9EIG-scaled.png" alt="Instagram 英語コンテンツ例"/>
+                </div>
+                <div class="ch-card-body">
+                  <div class="ch-card-head">
+                    <span class="ch-card-badge ch-badge-ig">Instagram</span>
+                    <span class="ch-card-lang">English</span>
+                  </div>
+                  <p class="ch-card-desc">最もベーシックな構成。幅広い地域に向け、誰にでも直感的に伝わることを重視。</p>
                 </div>
               </div>
             </div>
@@ -6377,7 +6827,7 @@
               <span class="step-number">05</span>
               <span class="step-tag">配信</span>
             </div>
-            <h3 class="step-title">8カ国・多媒体に同時配信</h3>
+            <h3 class="step-title">多言語・多媒体に同時配信</h3>
             <p class="step-desc">自社オウンドメディア・SNS・現地提携媒体に展開。単発投稿ではなく、検索にも残る資産として蓄積します。</p>
           </div>
 
@@ -6458,41 +6908,75 @@
             <span class="micro-label">14年の歩み</span>
             <h3>2012年から、ずっと <em>多言語コンテンツ</em>。</h3>
           </div>
-          <div class="timeline-track">
-            <div class="timeline-item">
-              <span class="timeline-year">2012</span>
-              <p class="timeline-event">韓国語版スタート</p>
-            </div>
-            <div class="timeline-item">
-              <span class="timeline-year">2014</span>
-              <p class="timeline-event">繁体字(台湾・香港)版へ拡大</p>
-            </div>
-            <div class="timeline-item">
-              <span class="timeline-year">2016</span>
-              <p class="timeline-event">タイ語版・SNS本格運用</p>
-            </div>
-            <div class="timeline-item">
-              <span class="timeline-year">2018</span>
-              <p class="timeline-event">英語圏進出・米国市場対応</p>
-            </div>
-            <div class="timeline-item">
-              <span class="timeline-year">2020</span>
-              <p class="timeline-event">中国 RED・Weibo 公式運用</p>
-            </div>
-            <div class="timeline-item">
-              <span class="timeline-year">2022</span>
-              <p class="timeline-event">ベトナム・インドネシア展開</p>
-            </div>
-            <div class="timeline-item timeline-item-now">
-              <span class="timeline-year">2025</span>
-              <p class="timeline-event"><strong>8言語・142万フォロワー</strong></p>
-            </div>
-          </div>
 
-          <!-- 타임라인 푸터 — 외부 실적 한 줄 -->
-          <p class="timeline-footnote">
-            この間、台湾ITF(国際旅行博)に2014年から継続出展。<strong>2015〜2018年は4年連続でブースアワードを受賞</strong>。2020年には制作動画が<strong>北関東インバウンドアワード金賞・銅賞</strong>。米国 J-POP SUMMIT 出展(2015)、浅草観光案内所での <strong>JAPANKURU コンシェルジュデスク運営</strong>(2016〜2019)など、現場との接点を積み重ねてきました。
-          </p>
+          <!-- 3-phase 세로 타임라인 -->
+          <div class="tl-vertical">
+
+            <!-- Phase 1 -->
+            <div class="tl-phase">
+              <div class="tl-phase-marker">
+                <span class="tl-phase-num">01</span>
+                <span class="tl-phase-years">2012–2016</span>
+                <span class="tl-phase-title">基盤づくり</span>
+              </div>
+              <div class="tl-phase-body">
+                <ul class="tl-milestones">
+                  <li><span class="tl-yr">2012</span><span class="tl-ev">JAPANKURU公式Facebook Page開設。多言語発信をスタート</span></li>
+                  <li><span class="tl-yr">2013</span><span class="tl-ev">韓・米・香・台・中の<strong>5カ国ネイティブ制作チーム</strong>を構成</span></li>
+                  <li><span class="tl-yr">2014</span><span class="tl-ev">台湾で旅行ガイドブック〈日本回遊〉をプロデュース(現地書店 日本旅行部門 売上TOP5)。米国 J-POP SUMMIT 出展</span></li>
+                  <li><span class="tl-yr">2015</span><span class="tl-ev">日本特許庁に商標登録(JAPANKURU)。J-POP SUMMIT に旅館パビリオンを制作・出展</span></li>
+                  <li><span class="tl-yr">2016</span><span class="tl-ev">japankuru.com 開設(韓・英・簡・繁)。浅草に<strong>コンシェルジュデスク</strong>を開設</span></li>
+                </ul>
+                <div class="tl-badges">
+                  <span class="tl-badge">米国 J-POP SUMMIT 出展(2014〜)</span>
+                  <span class="tl-badge tl-badge-award">🏆 台湾ITF 最優秀人気ブース賞(2015)</span>
+                  <span class="tl-badge tl-badge-award">🏆 台湾ITF 最優秀デザインブース賞(2016)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Phase 2 -->
+            <div class="tl-phase">
+              <div class="tl-phase-marker">
+                <span class="tl-phase-num">02</span>
+                <span class="tl-phase-years">2017–2018</span>
+                <span class="tl-phase-title">グローバル展開</span>
+              </div>
+              <div class="tl-phase-body">
+                <ul class="tl-milestones">
+                  <li><span class="tl-yr">2017</span><span class="tl-ev"><strong>www.japankuru.com 7カ国語サービス開始</strong>(仏・ベトナム・タイを追加)。JAPANKURU Supporters Taiwan 発足。5周年</span></li>
+                  <li><span class="tl-yr">2018</span><span class="tl-ev">JAPANKURU クラウドファンディングサイト(japankurufunding.com)をローンチ。カンヌライオンズ国際クリエイティビティ・フェスティバルに参加</span></li>
+                </ul>
+                <div class="tl-badges">
+                  <span class="tl-badge tl-badge-award">🏆 台湾ITF ブースアワード 4年連続受賞(2015〜2018)</span>
+                  <span class="tl-badge">カンヌライオンズ 参加(2017・2018)</span>
+                  <span class="tl-badge">浅草 コンシェルジュデスク運営(2016〜2019)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Phase 3 (현재) -->
+            <div class="tl-phase tl-phase-now">
+              <div class="tl-phase-marker">
+                <span class="tl-phase-num">03</span>
+                <span class="tl-phase-years">2022–2026</span>
+                <span class="tl-phase-title">成果と信頼</span>
+              </div>
+              <div class="tl-phase-body">
+                <ul class="tl-milestones">
+                  <li><span class="tl-yr">2022</span><span class="tl-ev">インバウンド再開。自治体・企業のインバウンドコンテンツ案件が本格化。JR TIMES(台湾)と連携PRを開始</span></li>
+                  <li><span class="tl-yr">2023</span><span class="tl-ev">JR東日本(JR TIMES)と台湾向け越境EC連携。訪日客向け「JAPANKURUクーポン」サービス開始</span></li>
+                  <li><span class="tl-yr">2024</span><span class="tl-ev">沖縄リールが<strong>130万再生</strong>。japankuru.com <strong>月間200万PV</strong>達成。NAVER BLOG購読 1万人突破</span></li>
+                  <li><span class="tl-yr">2026</span><span class="tl-ev"><strong>5言語対応・140万+フォロワー</strong>。8カ国ネイティブ体制で運営</span></li>
+                </ul>
+                <div class="tl-badges">
+                  <span class="tl-badge tl-badge-media">JK-Daily(韓)・JR TIMES(台)・SANOOK(泰)とコンテンツ連携</span>
+                  <span class="tl-badge">自治体・鉄道・商業施設・メーカーほか制作実績多数</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
 
       </div>
@@ -6648,7 +7132,7 @@
             <span><a href="https://www.gldaily.com/privacy" target="_blank" rel="noopener">プライバシーポリシー</a>に同意します<span class="req">*</span></span>
           </label>
 
-          <button type="submit" class="form-submit" data-cta="form-submit" disabled>
+          <button type="submit" class="form-submit" data-cta="form-submit">
             無料で資料を受け取る →
           </button>
 
@@ -6685,33 +7169,48 @@
       </div>
     </div>
     <div class="container footer-company">
-      <!-- ▼ 줄리: 所在地를 실제 주소로 교체 -->
-      運営会社：株式会社グローバル・デイリー ／ 所在地：東京都台東区〇〇-〇-〇 ／
+      運営会社：株式会社グローバル・デイリー ／ 所在地：東京都台東区東上野4-8-1 TIX TOWER UENO 13階<br>
+      Tel：<a href="tel:03-6860-7011">03-6860-7011</a> ／ E-mail：<a href="mailto:info@gldaily.com">info@gldaily.com</a> ／
       お問い合わせ：<a href="https://www.gldaily.com/contact" target="_blank" rel="noopener">公式お問い合わせフォーム</a>
     </div>
   </footer>
 
   <!-- ========== Tracking: CTA & Form ========== -->
   <script>
-    // 헤더 탭: 현재 섹션 하이라이트 + 탭 자동 스크롤
+    // 헤더 탭/네비: 현재 섹션 하이라이트 + 모바일 탭 자동 스크롤
     (function(){
       var tabs = Array.prototype.slice.call(document.querySelectorAll('.nav-tab'));
-      if (!tabs.length) return;
+      var pcLinks = Array.prototype.slice.call(document.querySelectorAll('.nav a'));
+      if (!tabs.length && !pcLinks.length) return;
       var scroller = document.querySelector('.nav-tabs-scroll');
-      var map = tabs.map(function(t){
-        var id = t.getAttribute('href').slice(1);
-        return { tab: t, section: document.getElementById(id) };
-      }).filter(function(m){ return m.section; });
+
+      // section id → {tab, link} 매핑
+      var byId = {};
+      function register(el){
+        if (!el) return;
+        var href = el.getAttribute('href') || '';
+        if (href.charAt(0) !== '#') return;
+        var id = href.slice(1);
+        var sec = document.getElementById(id);
+        if (!sec) return;
+        byId[id] = byId[id] || { section: sec, els: [] };
+        byId[id].els.push(el);
+      }
+      tabs.forEach(register);
+      pcLinks.forEach(register);
+      var map = Object.keys(byId).map(function(id){ return byId[id]; });
+      if (!map.length) return;
 
       function activate(id){
         map.forEach(function(m){
           var on = m.section.id === id;
-          m.tab.classList.toggle('active', on);
-          if (on && scroller) {
-            // 가로 스크롤만 조정 (세로는 절대 건드리지 않음)
-            var target = m.tab.offsetLeft - (scroller.clientWidth/2) + (m.tab.offsetWidth/2);
-            scroller.scrollTo({ left: target, behavior: 'smooth' });
-          }
+          m.els.forEach(function(el){
+            el.classList.toggle('active', on);
+            if (on && scroller && el.classList.contains('nav-tab')) {
+              var target = el.offsetLeft - (scroller.clientWidth/2) + (el.offsetWidth/2);
+              scroller.scrollTo({ left: target, behavior: 'smooth' });
+            }
+          });
         });
       }
 
@@ -6724,15 +7223,91 @@
       map.forEach(function(m){ io.observe(m.section); });
     })();
 
-    // 개인정보 동의 체크 → 제출 버튼 활성화
+    // 개인정보 동의: 제출 시점 검증 (버튼은 항상 활성 — 미체크 시 체크박스로 안내)
     (function(){
       var consent = document.getElementById('privacyConsent');
-      var submitBtn = document.querySelector('.form-submit');
-      if (consent && submitBtn) {
-        consent.addEventListener('change', function(){
-          submitBtn.disabled = !consent.checked;
+      var form = document.getElementById('lpForm');
+      if (!consent || !form) return;
+      form.addEventListener('submit', function(e){
+        if (consent.checked) return;
+        e.preventDefault();
+        var row = consent.closest('.form-consent') || consent;
+        row.classList.add('consent-attention');
+        row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        consent.focus({ preventScroll: true });
+        setTimeout(function(){ row.classList.remove('consent-attention'); }, 1600);
+      });
+    })();
+
+    // 히어로 영상: 데스크톱 + 모션 허용 환경에서만 로드/재생
+    (function(){
+      var v = document.getElementById('heroVideo');
+      if (!v) return;
+      var wantsVideo = window.matchMedia('(min-width: 981px)').matches
+        && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (wantsVideo) {
+        v.preload = 'auto';
+        v.autoplay = true;
+        var p = v.play();
+        if (p && p.catch) p.catch(function(){});
+      }
+    })();
+
+    // 히어로 숫자 카운트업 (화면 진입 시 1회)
+    (function(){
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var stats = document.querySelectorAll('.hero-stat strong');
+      if (!stats.length || !('IntersectionObserver' in window)) return;
+      var done = false;
+      function animate(el){
+        var node = el.firstChild;
+        if (!node || node.nodeType !== 3) return;
+        var target = parseInt(node.textContent, 10);
+        if (isNaN(target)) return;
+        var t0 = null, dur = 1100;
+        function step(ts){
+          if (!t0) t0 = ts;
+          var k = Math.min((ts - t0) / dur, 1);
+          var eased = 1 - Math.pow(1 - k, 3);
+          node.textContent = Math.round(target * eased);
+          if (k < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+      var io2 = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting && !done) {
+            done = true;
+            stats.forEach(animate);
+            io2.disconnect();
+          }
+        });
+      }, { threshold: 0.4 });
+      io2.observe(stats[0].closest('.hero-stats') || stats[0]);
+    })();
+
+    // 포토스트립: 스크롤 연동 미세 패럴랙스 (데스크톱 한정, Ken Burns와 병행)
+    (function(){
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (!window.matchMedia('(min-width: 981px)').matches) return;
+      var strips = Array.prototype.slice.call(document.querySelectorAll('.photo-strip'));
+      if (!strips.length) return;
+      strips.forEach(function(s){ s.style.willChange = 'transform'; });
+      var ticking = false;
+      function update(){
+        ticking = false;
+        var vh = window.innerHeight;
+        strips.forEach(function(s){
+          var r = s.getBoundingClientRect();
+          if (r.bottom < 0 || r.top > vh) return;
+          var progress = (r.top + r.height / 2 - vh / 2) / vh;
+          s.firstElementChild.style.marginTop = (progress * 28).toFixed(1) + 'px';
         });
       }
+      window.addEventListener('scroll', function(){
+        if (!ticking) { ticking = true; requestAnimationFrame(update); }
+      }, { passive: true });
+      update();
     })();
 
     // CTA click tracking + 폼 intent 자동 선택
