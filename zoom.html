@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>GLOBAL DAILY — オンライン会議 背景画像メーカー（管理用）</title>
+<title>GLOBAL DAILY — オンライン会議 背景画像メーカー（管理用・中央人物版）</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;700;800;900&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/modern-screenshot@4.6.0/dist/index.umd.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -1507,13 +1507,25 @@ html.capture-mode-html, .capture-mode-html body{overflow:auto!important}
 .privacy-note{margin-top:10px;font-size:10.5px;color:#7a8194;font-family:'Noto Sans JP',sans-serif}.privacy-note b{color:#4c5872}
 .validation-msg{display:none;margin-top:10px;padding:9px 12px;border-radius:8px;background:rgba(220,60,60,.08);border:1px solid rgba(220,60,60,.16);color:#a73535;font:11px/1.55 'Noto Sans JP',sans-serif}.validation-msg.show{display:block}
 .guide-toggle{padding:7px 12px;border-radius:8px;border:1px solid rgba(60,120,220,.18);background:#fff;color:#4b68a8;font-size:11px;cursor:pointer;font-family:'Noto Sans JP',sans-serif}.guide-toggle.active{background:#4b68a8;color:white}
-.person-guide{display:none;position:absolute;z-index:30;right:5%;top:21%;width:31%;height:64%;border:2px dashed rgba(70,120,220,.40);border-radius:48% 48% 22% 22%/32% 32% 16% 16%;background:rgba(70,120,220,.045);pointer-events:none}
-.person-guide::before{content:'';position:absolute;left:50%;top:6%;transform:translateX(-50%);width:32%;aspect-ratio:1;border:2px dashed rgba(70,120,220,.40);border-radius:50%}
+.person-guide{display:none;position:absolute;z-index:30;left:50%;top:21%;transform:translateX(-50%);width:25.5%;height:61%;border:2px dashed rgba(70,120,220,.40);border-radius:48% 48% 22% 22%/32% 32% 16% 16%;background:rgba(70,120,220,.045);pointer-events:none}
+.person-guide::before{content:'';position:absolute;left:50%;top:3%;transform:translateX(-50%);width:31%;aspect-ratio:1;border:2px dashed rgba(70,120,220,.40);border-radius:50%}
 .person-guide span{position:absolute;left:50%;bottom:6%;transform:translateX(-50%);white-space:nowrap;padding:5px 9px;border-radius:6px;background:rgba(30,50,90,.78);color:white;font:10px 'Noto Sans JP',sans-serif}
 .frame.show-person-guide .person-guide{display:block}.capture-mode .person-guide{display:none!important}
 .safe-guide{display:none;position:absolute;z-index:29;inset:5%;border:1px dashed rgba(90,100,130,.28);pointer-events:none}.frame.show-person-guide .safe-guide{display:block}.capture-mode .safe-guide{display:none!important}
 .success-panel{display:none;position:fixed;z-index:100000;inset:0;background:rgba(10,15,30,.42);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:20px}.success-panel.show{display:flex}.success-card{width:min(92vw,440px);background:#fff;border-radius:18px;padding:24px;box-shadow:0 24px 80px rgba(0,0,0,.28);font-family:'Noto Sans JP',sans-serif}.success-card h3{font-size:18px;color:#26334f;margin-bottom:8px}.success-card p{font-size:12px;color:#68748d;line-height:1.7}.success-card ol{margin:14px 0 18px 20px;font-size:12px;color:#4d5870;line-height:1.9}.success-card button{width:100%;padding:10px;border:0;border-radius:9px;background:#2f67d8;color:#fff;font-weight:600;cursor:pointer}
 @media(max-width:700px){body{padding:12px 10px 40px}.editor{padding:15px}.editor-grid{grid-template-columns:1fr 1fr}.right-group{margin-left:0;width:100%}#dlBtn{flex:1;justify-content:center}.person-guide span{font-size:8px}}
+
+
+/* Export-only: always produce a full-bleed 1920x1080 image with square corners */
+.frame.exporting{
+  width:1920px!important;
+  height:1080px!important;
+  aspect-ratio:auto!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+.frame.exporting .person-guide,
+.frame.exporting .safe-guide{display:none!important}
 
 </style>
 </head>
@@ -1794,7 +1806,7 @@ html.capture-mode-html, .capture-mode-html body{overflow:auto!important}
     <div class="purpose-ja"><span class="q">&ldquo;情熱&rdquo;</span>と<span class="q">&ldquo;挑戦&rdquo;</span>で、関わる全ての世界を<b>「豊か」</b>に。</div>
   </div>
   <div class="safe-guide"></div>
-  <div class="person-guide"><span>顔・上半身の目安</span></div>
+  <div class="person-guide"><span>顔・上半身の目安（中央）</span></div>
   <div class="noise"></div>
 </div>
 </div>
@@ -2304,6 +2316,20 @@ html.capture-mode-html, .capture-mode-html body{overflow:auto!important}
   }
 
   // Render the frame to a canvas using the best available library
+  function exportBackgroundColor(){
+    if(fr.classList.contains('light')) return '#f0f3fb';
+    if(fr.classList.contains('minimal')) return '#faf8f3';
+    if(fr.classList.contains('sand')) return '#e2d4be';
+    if(fr.classList.contains('champion')) return '#e0c8b0';
+    if(fr.classList.contains('forest')) return '#0f2520';
+    if(fr.classList.contains('slate')) return '#151c2c';
+    if(fr.classList.contains('marble')) return '#0a0a14';
+    if(fr.classList.contains('onyx')) return '#040408';
+    if(fr.classList.contains('imperial')) return '#070f25';
+    if(fr.classList.contains('typo')) return '#0c0e1a';
+    return '#060a18';
+  }
+
   function renderFrameToCanvas(){
     var rect=fr.getBoundingClientRect();
     var w=Math.round(rect.width);
@@ -2318,7 +2344,7 @@ html.capture-mode-html, .capture-mode-html body{overflow:auto!important}
         scale: pixelRatio,
         width: w,
         height: h,
-        backgroundColor: null,
+        backgroundColor: exportBackgroundColor(),
         fetch: { requestInit: { mode: 'cors' } }
       });
     } else if(typeof html2canvas !== 'undefined'){
@@ -2330,7 +2356,7 @@ html.capture-mode-html, .capture-mode-html body{overflow:auto!important}
           height: h,
           useCORS: true,
           allowTaint: false,
-          backgroundColor: null,
+          backgroundColor: exportBackgroundColor(),
           logging: false,
           imageTimeout: 8000
         });
@@ -2415,11 +2441,15 @@ html.capture-mode-html, .capture-mode-html body{overflow:auto!important}
 
     var TARGET_W=1920, TARGET_H=1080;
 
+    // Export at true full-bleed dimensions, independent of preview size.
+    fr.classList.add('exporting');
+
     preloadAssets().then(function(){
       // small delay so re-flow settles
       return new Promise(function(res){ setTimeout(res, 80); });
     }).then(renderFrameToCanvas).then(function(canvas){
-      // Restore mirror state on the live frame
+      // Restore the live preview state
+      fr.classList.remove('exporting');
       if(wasMirrored) fr.classList.add('mirrored');
 
       // Force exact 1920x1080
@@ -2457,7 +2487,8 @@ html.capture-mode-html, .capture-mode-html body{overflow:auto!important}
         resetDlBtn();
       }, 'image/png');
     }).catch(function(err){
-      // Restore mirror state on error
+      // Restore preview state on error
+      fr.classList.remove('exporting');
       if(wasMirrored) fr.classList.add('mirrored');
       console.error('Capture error:', err);
       var msg='✕ 生成失敗。<br/>キャプチャーモード→ノードスクショをお試しください。';
@@ -2466,6 +2497,7 @@ html.capture-mode-html, .capture-mode-html body{overflow:auto!important}
     });
 
     function resetDlBtn(){
+      fr.classList.remove('exporting');
       downloading=false;
       dlBtn.disabled=false;
       flDl.disabled=false;
