@@ -52,18 +52,6 @@ body{min-height:100vh;background:#eef0f5;font-family:'Sora','Noto Sans JP',syste
 .validation-msg.show{display:block}
 
 /* Logo row */
-.logo-row{margin-top:10px;padding:8px 12px;border-radius:8px;border:1px dashed rgba(60,120,220,.20);background:rgba(60,120,220,.02);display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:11px;font-family:'Noto Sans JP',sans-serif;color:#6a7a9a}
-.logo-row.ok{border-color:rgba(58,165,90,.3);background:rgba(58,165,90,.03)}
-.logo-row.warn{border-color:rgba(220,140,30,.3);background:rgba(220,140,30,.03)}
-.logo-row .logo-status{flex:1;line-height:1.5}
-.logo-row .logo-status b{font-weight:500}
-.logo-row.ok .logo-status b{color:#2a8a4a}
-.logo-row.warn .logo-status b{color:#a8650a}
-.logo-upload-btn{padding:6px 12px;border-radius:6px;border:1px solid rgba(60,120,220,.3);background:#fff;color:#3070d8;font-size:10.5px;cursor:pointer;font-family:'Sora',sans-serif;font-weight:500}
-.logo-upload-btn:hover{background:rgba(60,120,220,.06)}
-.logo-revert-btn{padding:6px 10px;border-radius:6px;border:1px solid rgba(0,0,0,.08);background:transparent;color:#a0a4b4;font-size:10px;cursor:pointer;font-family:'Sora',sans-serif}
-.logo-row input[type=file]{display:none}
-.dac-src-btn.active{background:#0f172a;color:#fff;border-color:#0f172a}
 
 /* Help card */
 .help-card{margin-top:12px;border-radius:8px;border:1px solid rgba(154,100,232,.18);background:linear-gradient(135deg,rgba(154,100,232,.04),rgba(100,140,240,.03));overflow:hidden}
@@ -148,8 +136,8 @@ body{min-height:100vh;background:#eef0f5;font-family:'Sora','Noto Sans JP',syste
    ================================================================ */
 .info-panel{
   position:absolute;z-index:6;pointer-events:none;
-  left:13%;width:25%;
-  top:50%;transform:translateY(-50%);
+  left:15.5%;width:22%;
+  top:47%;transform:translateY(-50%);
   display:flex;flex-direction:column;align-items:flex-start;
 }
 .info-panel .company-logo{width:min(15cqw,240px);height:auto;margin-bottom:2.2cqh;filter:var(--logo-filter)}
@@ -167,7 +155,7 @@ body{min-height:100vh;background:#eef0f5;font-family:'Sora','Noto Sans JP',syste
 
 /* Brand mark (optional, on by default) */
 /* DAC Group cluster — top-right, pulled inside the 4:3 gallery-safe zone */
-.dac-cluster{position:absolute;z-index:6;right:14%;top:6%;max-width:30%;pointer-events:none;display:flex;flex-direction:column;align-items:flex-end;gap:1.1cqh}
+.dac-cluster{position:absolute;z-index:6;right:13%;top:6%;max-width:30%;pointer-events:none;display:flex;flex-direction:column;align-items:flex-end;gap:1.1cqh}
 .dac-cluster .dac-logo{width:min(11cqw,180px);height:auto;opacity:.9;display:none}
 .dac-cluster.has-logo .dac-logo{display:block}
 .dac-cluster.has-logo .dac-fallback{display:none}
@@ -182,7 +170,7 @@ body{min-height:100vh;background:#eef0f5;font-family:'Sora','Noto Sans JP',syste
 .frame.brand-off .dac-cluster{display:none}
 
 /* Corporate slogan — bottom-left, inside the 4:3 gallery-safe zone */
-.corp-slogan{position:absolute;z-index:6;left:13%;bottom:6%;pointer-events:none;display:flex;flex-direction:column;gap:.6cqh}
+.corp-slogan{position:absolute;z-index:6;left:15.5%;bottom:6%;pointer-events:none;display:flex;flex-direction:column;gap:.6cqh}
 .corp-slogan .link-world{font-family:'Sora';font-size:1.4cqw;font-weight:500;letter-spacing:.22em;color:var(--company)}
 .corp-slogan .member{font-family:'Sora';font-size:.85cqw;font-weight:300;letter-spacing:.16em;text-transform:uppercase;color:var(--group)}
 .frame.brand-off .corp-slogan{display:none}
@@ -202,7 +190,7 @@ body{min-height:100vh;background:#eef0f5;font-family:'Sora','Noto Sans JP',syste
 .g-11{left:21.9%;right:21.9%;border-left:1px dashed rgba(220,140,30,.6);border-right:1px dashed rgba(220,140,30,.6)}
 .g-11 .g-tag{color:#a8650a;background:rgba(220,140,30,.12);top:26px}
 /* recommended identity band highlight */
-.g-band{position:absolute;left:13%;width:25%;top:50%;transform:translateY(-50%);height:64%;border:1.5px dashed rgba(60,120,220,.5);border-radius:6px;background:rgba(60,120,220,.05)}
+.g-band{position:absolute;left:15.5%;width:22%;top:47%;transform:translateY(-50%);height:60%;border:1.5px dashed rgba(60,120,220,.5);border-radius:6px;background:rgba(60,120,220,.05)}
 .g-band .g-blabel{position:absolute;top:6px;left:6px;font-size:8.5px;color:#3161c8;background:rgba(255,255,255,.6);padding:2px 6px;border-radius:4px}
 /* person silhouette (centre) */
 .g-person{position:absolute;left:50%;top:20%;transform:translateX(-50%);width:24%;height:62%;border:2px dashed rgba(70,120,220,.42);border-radius:48% 48% 22% 22%/32% 32% 16% 16%;background:rgba(70,120,220,.04)}
@@ -291,22 +279,6 @@ html.capture-mode-html,.capture-mode-html body{overflow:auto!important}
 
   <div class="privacy-note">🔒 <b>入力内容はこのブラウザ内にのみ保存</b>され、サーバーには送信されません。共用PCでは使用後に「入力を削除」を押してください。</div>
   <div class="validation-msg" id="validationMsg"></div>
-
-  <div class="logo-row" id="logoRow">
-    <span class="logo-status" id="logoStatus">🔄 ロゴを読み込み中...</span>
-    <input type="file" id="logoFileInput" accept="image/png,image/jpeg,image/svg+xml,image/webp"/>
-    <button class="logo-upload-btn" id="logoUploadBtn">📎 ロゴをアップロード</button>
-    <button class="logo-revert-btn" id="logoRevertBtn" style="display:none">↺ 既定に戻す</button>
-  </div>
-
-  <div class="logo-row" id="dacLogoRow">
-    <span class="logo-status" id="dacLogoStatus">🔴 DAC ロゴを読み込み中...</span>
-    <button class="logo-upload-btn dac-src-btn" id="dacGroupBtn">DAC Group版</button>
-    <button class="logo-upload-btn dac-src-btn" id="dacHoldingsBtn">Holdings版</button>
-    <input type="file" id="dacLogoFileInput" accept="image/png,image/jpeg,image/svg+xml,image/webp"/>
-    <button class="logo-upload-btn" id="dacLogoUploadBtn">📎 アップロード</button>
-    <button class="logo-revert-btn" id="dacLogoRevertBtn" style="display:none">↺ 削除</button>
-  </div>
 
   <div class="help-card" id="helpCard">
     <button class="help-toggle" id="helpToggle">
@@ -480,116 +452,28 @@ html.capture-mode-html,.capture-mode-html body{overflow:auto!important}
     setGuides(p.guides!==false);
   }
 
-  /* ---------- Logo (CORS-safe base64) ---------- */
-  var companyLogo=$('companyLogo'),logoRow=$('logoRow'),logoStatus=$('logoStatus');
-  var logoFileInput=$('logoFileInput'),logoUploadBtn=$('logoUploadBtn'),logoRevertBtn=$('logoRevertBtn');
-  function setLogoStatus(state,html){logoRow.classList.remove('ok','warn');if(state)logoRow.classList.add(state);logoStatus.innerHTML=html;}
-  function setLogoSrc(dataUrl,userUploaded){
-    companyLogo.src=dataUrl;
-    if(userUploaded){logoRevertBtn.style.display='inline-block';setLogoStatus('ok','✓ <b>アップロード済み</b> — PNGに正しく含まれます');}
-    else{logoRevertBtn.style.display='none';setLogoStatus('ok','✓ <b>ロゴを埋め込み済み</b> — PNG出力OK');}
-  }
-  function tryAutoConvertLogo(){
-    setLogoStatus('','🔄 ロゴを変換中...');
-    return fetch(DEFAULT_LOGO_URL,{mode:'cors'})
-      .then(function(res){if(!res.ok)throw new Error('HTTP '+res.status);return res.blob();})
-      .then(function(blob){return new Promise(function(resolve,reject){var r=new FileReader();r.onload=function(){resolve(r.result);};r.onerror=reject;r.readAsDataURL(blob);});})
-      .then(function(dataUrl){setLogoSrc(dataUrl,false);try{localStorage.setItem(LOGO_KEY,JSON.stringify({type:'auto',dataUrl:dataUrl}));}catch(e){}return true;})
-      .catch(function(){
-        setLogoStatus('warn','⚠ プレビュー表示はOKですが、<b>PNGへの自動埋め込みに失敗</b>（CORS制限）。PNGに確実に載せるには右の<b>「📎 ロゴをアップロード」</b>を一度お使いください。');
-        return false;
-      });
-  }
-  function handleLogoUpload(file){
-    if(!file)return;
-    if(!file.type.match(/^image\//)){showToast('✕ 画像ファイルを選んでください','err');return;}
-    if(file.size>5*1024*1024){showToast('✕ 5MB以下の画像を選んでください','err');return;}
-    var r=new FileReader();
-    r.onload=function(){var dataUrl=r.result;setLogoSrc(dataUrl,true);try{localStorage.setItem(LOGO_KEY,JSON.stringify({type:'user',dataUrl:dataUrl,name:file.name}));}catch(e){showToast('⚠ 保存できませんでした（容量制限の可能性）','warn');}showToast('✓ ロゴをアップロードしました','success');};
-    r.onerror=function(){showToast('✕ 読み込みに失敗しました','err');};
-    r.readAsDataURL(file);
-  }
-  function revertLogo(){
-    if(!confirm('ロゴを既定に戻しますか？'))return;
-    try{localStorage.removeItem(LOGO_KEY);}catch(e){}
-    companyLogo.src=DEFAULT_LOGO_URL;logoRevertBtn.style.display='none';tryAutoConvertLogo();
-  }
-  function initLogo(){
-    var cached=null;try{var raw=localStorage.getItem(LOGO_KEY);if(raw)cached=JSON.parse(raw);}catch(e){}
-    if(cached&&cached.dataUrl){setLogoSrc(cached.dataUrl,cached.type==='user');return;}
-    tryAutoConvertLogo();
-  }
-  logoUploadBtn.addEventListener('click',function(){logoFileInput.click();});
-  logoFileInput.addEventListener('change',function(e){var f=e.target.files&&e.target.files[0];if(f)handleLogoUpload(f);e.target.value='';});
-  logoRevertBtn.addEventListener('click',revertLogo);
-  logoRow.addEventListener('dragover',function(e){e.preventDefault();logoRow.style.borderColor='rgba(60,120,220,.5)';});
-  logoRow.addEventListener('dragleave',function(){logoRow.style.borderColor='';});
-  logoRow.addEventListener('drop',function(e){e.preventDefault();logoRow.style.borderColor='';var f=e.dataTransfer.files&&e.dataTransfer.files[0];if(f)handleLogoUpload(f);});
+  /* ---------- Logos (URL preview; best-effort base64 for same-origin export) ---------- */
+  /* Logos are fixed brand assets shown in preview via <img src> (CORS-independent).
+     For the SAVED PNG to embed them, serve the tool same-origin (e.g. on gldaily.com);
+     then this fetch succeeds and the logo is inlined as base64. Cross-origin = preview only. */
+  var companyLogo=$('companyLogo');
+  var dacCluster=$('dacCluster'),dacLogo=$('dacLogo');
+  var DAC_URL='https://www.gldaily.com/gld-kanri/wp-content/uploads/2024/03/dac.png'; /* DAC Group (fixed) */
 
-  /* ---------- DAC logo (Group/Holdings auto-fetch + upload override) ---------- */
-  var DAC_KEY='gld_vbg_dac_v5';
-  var DAC_URLS={
-    group:'https://www.gldaily.com/gld-kanri/wp-content/uploads/2024/03/dac.png',
-    holdings:'https://www.gldaily.com/gld-kanri/wp-content/uploads/2023/02/dac.png'
-  };
-  var dacCluster=$('dacCluster'),dacLogo=$('dacLogo'),dacLogoRow=$('dacLogoRow'),dacLogoStatus=$('dacLogoStatus');
-  var dacFileInput=$('dacLogoFileInput'),dacUploadBtn=$('dacLogoUploadBtn'),dacRevertBtn=$('dacLogoRevertBtn');
-  var dacGroupBtn=$('dacGroupBtn'),dacHoldingsBtn=$('dacHoldingsBtn');
-
-  function dacStatus(state,html){dacLogoRow.classList.remove('ok','warn');if(state)dacLogoRow.classList.add(state);dacLogoStatus.innerHTML=html;}
-  function markDacBtns(which){
-    dacGroupBtn.classList.toggle('active',which==='group');
-    dacHoldingsBtn.classList.toggle('active',which==='holdings');
+  function inlineLogo(imgEl,url,cacheKey,onShown){
+    try{var c=localStorage.getItem(cacheKey);if(c&&c.indexOf('data:')===0){imgEl.src=c;if(onShown)onShown();return;}}catch(e){}
+    imgEl.src=url;if(onShown)onShown();                 /* 1) instant preview via URL */
+    fetch(url,{mode:'cors'})                             /* 2) try to inline for export */
+      .then(function(res){if(!res.ok)throw 0;return res.blob();})
+      .then(function(blob){return new Promise(function(ok,no){var r=new FileReader();r.onload=function(){ok(r.result);};r.onerror=no;r.readAsDataURL(blob);});})
+      .then(function(d){imgEl.src=d;try{localStorage.setItem(cacheKey,d);}catch(e){}})
+      .catch(function(){/* preview stays; PNG embed needs same-origin hosting */});
   }
-  function showDacLogo(dataUrl){dacLogo.src=dataUrl;dacCluster.classList.add('has-logo');dacRevertBtn.style.display='inline-block';}
-  function hideDacLogo(){dacLogo.src='';dacCluster.classList.remove('has-logo');dacRevertBtn.style.display='none';markDacBtns('');dacStatus('','🔴 <b>DAC ロゴ（右上）</b>：未設定。いまは仮の赤文字が表示されます。下のボタンで選ぶか、画像をアップロードしてください。');}
-
-  function urlToDataUrl(url){
-    return fetch(url,{mode:'cors'})
-      .then(function(res){if(!res.ok)throw new Error('HTTP '+res.status);return res.blob();})
-      .then(function(blob){return new Promise(function(resolve,reject){var r=new FileReader();r.onload=function(){resolve(r.result);};r.onerror=reject;r.readAsDataURL(blob);});});
-  }
-  function setDacByUrl(which){
-    markDacBtns(which);
-    var label=which==='group'?'Group版':'Holdings版';
-    var url=DAC_URLS[which];
-    // 1) show immediately via direct <img src> — works even when fetch() is CORS-blocked
-    showDacLogo(url);
-    dacStatus('','🔄 '+label+' を表示中。PNG用の埋め込みを試みています...');
-    // 2) try to inline as base64 so it also lands in the exported PNG
-    urlToDataUrl(url).then(function(dataUrl){
-      dacLogo.src=dataUrl;
-      dacStatus('ok','✓ <b>DACロゴ（'+label+'）設定完了</b> — PNGにも含まれます');
-      try{localStorage.setItem(DAC_KEY,JSON.stringify({type:'url',which:which,dataUrl:dataUrl}));}catch(e){}
-    }).catch(function(){
-      // preview still shows the real logo via URL; only PNG-embedding failed
-      dacStatus('warn','⚠ プレビュー表示はOKですが、<b>PNGへの自動埋め込みに失敗</b>（CORS制限）。PNGに確実に載せるには右の<b>「📎 アップロード」</b>を一度お使いください。');
-      try{localStorage.setItem(DAC_KEY,JSON.stringify({type:'url',which:which}));}catch(e){}
-    });
-  }
-  function handleDacUpload(file){
-    if(!file)return;
-    if(!file.type.match(/^image\//)){showToast('✕ 画像ファイルを選んでください','err');return;}
-    if(file.size>5*1024*1024){showToast('✕ 5MB以下の画像を選んでください','err');return;}
-    var r=new FileReader();
-    r.onload=function(){showDacLogo(r.result);markDacBtns('');dacStatus('ok','✓ <b>アップロードしたDACロゴを設定しました</b>');try{localStorage.setItem(DAC_KEY,JSON.stringify({type:'user',dataUrl:r.result}));}catch(e){showToast('⚠ 保存できませんでした（容量制限の可能性）','warn');}showToast('✓ DACロゴを設定しました','success');};
-    r.onerror=function(){showToast('✕ 読み込みに失敗しました','err');};
-    r.readAsDataURL(file);
-  }
+  function initLogo(){ inlineLogo(companyLogo,DEFAULT_LOGO_URL,LOGO_KEY); }
   function initDacLogo(){
-    var cached=null;try{var raw=localStorage.getItem(DAC_KEY);if(raw)cached=JSON.parse(raw);}catch(e){}
-    if(cached&&cached.type==='user'&&cached.dataUrl){showDacLogo(cached.dataUrl);markDacBtns('');dacStatus('ok','✓ <b>アップロードしたDACロゴを設定済み</b>');return;}
-    if(cached&&cached.type==='url'&&cached.which){setDacByUrl(cached.which);return;}
-    setDacByUrl('group'); // default: Group version
+    dacLogo.onerror=function(){dacCluster.classList.remove('has-logo');}; /* URL unreachable -> red fallback */
+    inlineLogo(dacLogo,DAC_URL,'gld_vbg_dac_v6',function(){dacCluster.classList.add('has-logo');});
   }
-  dacGroupBtn.addEventListener('click',function(){setDacByUrl('group');});
-  dacHoldingsBtn.addEventListener('click',function(){setDacByUrl('holdings');});
-  dacUploadBtn.addEventListener('click',function(){dacFileInput.click();});
-  dacFileInput.addEventListener('change',function(e){var f=e.target.files&&e.target.files[0];if(f)handleDacUpload(f);e.target.value='';});
-  dacRevertBtn.addEventListener('click',function(){if(!confirm('DACロゴを削除しますか？（赤文字表示に戻ります）'))return;try{localStorage.removeItem(DAC_KEY);}catch(e){}hideDacLogo();});
-  dacLogoRow.addEventListener('dragover',function(e){e.preventDefault();dacLogoRow.style.borderColor='rgba(60,120,220,.5)';});
-  dacLogoRow.addEventListener('dragleave',function(){dacLogoRow.style.borderColor='';});
-  dacLogoRow.addEventListener('drop',function(e){e.preventDefault();dacLogoRow.style.borderColor='';var f=e.dataTransfer.files&&e.dataTransfer.files[0];if(f)handleDacUpload(f);});
 
   /* ---------- Size indicator ---------- */
   var cap=false;
