@@ -29,6 +29,15 @@ body{min-height:100vh;background:#eef0f5;font-family:'Sora','Noto Sans JP',syste
 .mode-btn{padding:7px 13px;border-radius:8px;border:1px solid rgba(0,0,0,.08);background:#f7f8fc;color:#6a6e82;font-size:11px;cursor:pointer;transition:all .18s;font-family:'Sora',sans-serif}
 .mode-btn:hover{background:#eef0f8}
 .mode-btn.active{background:#0f172a;color:#fff;border-color:#0f172a}
+.logo-row{margin-top:10px;padding:8px 12px;border-radius:8px;border:1px dashed rgba(60,120,220,.22);background:rgba(60,120,220,.02);display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:11px;font-family:'Noto Sans JP',sans-serif;color:#6a7a9a}
+.logo-row.ok{border-color:rgba(58,165,90,.32);background:rgba(58,165,90,.03)}
+.logo-row .logo-status{flex:1;min-width:220px;line-height:1.5}
+.logo-row .logo-status b{font-weight:500;color:#4c5872}
+.logo-row.ok .logo-status b{color:#2a8a4a}
+.logo-row input[type=file]{display:none}
+.logo-btn{padding:6px 12px;border-radius:6px;border:1px solid rgba(60,120,220,.3);background:#fff;color:#3070d8;font-size:10.5px;cursor:pointer;font-family:'Sora',sans-serif;font-weight:500}
+.logo-btn:hover{background:rgba(60,120,220,.06)}
+.logo-btn.ghost{border-color:rgba(0,0,0,.08);color:#a0a4b4}
 .toggle-btn{padding:7px 12px;border-radius:8px;border:1px solid rgba(60,120,220,.20);background:#fff;color:#4b68a8;font-size:11px;cursor:pointer;font-family:'Sora',sans-serif;transition:all .18s}
 .toggle-btn:hover{background:rgba(60,120,220,.06)}
 .toggle-btn.active{background:#4b68a8;color:#fff;border-color:#4b68a8}
@@ -112,6 +121,24 @@ body{min-height:100vh;background:#eef0f5;font-family:'Sora','Noto Sans JP',syste
   --brand:rgba(20,25,40,.82);--brand-2:rgba(20,25,40,.5);--group:rgba(20,25,40,.4);
   --deco:transparent;--deco-line:transparent;
 }
+.frame.marble{
+  --bg:radial-gradient(ellipse 70% 50% at 25% 35%,rgba(180,180,200,.05),transparent 45%),radial-gradient(ellipse 55% 65% at 75% 65%,rgba(160,160,185,.06),transparent 50%),linear-gradient(140deg,#0e0e16 0%,#1a1a24 35%,#0c0c16 75%,#0a0a14 100%);
+  --export-bg:#0c0c16;--logo-filter:drop-shadow(0 2px 14px rgba(0,0,0,.4)) brightness(1.08);
+  --company:rgba(220,220,240,.42);--name:rgba(248,245,235,.96);--name-en:rgba(220,215,200,.45);
+  --rule:linear-gradient(90deg,rgba(200,200,220,.6),transparent);
+  --dept:rgba(230,230,245,.8);--title:rgba(220,220,240,.55);--email:rgba(220,220,240,.58);--email-ic:rgba(200,200,220,.7);--url:rgba(220,220,240,.4);
+  --brand:#dcdce8;--brand-2:#a0a0b8;--group:rgba(220,220,240,.42);
+  --deco:rgba(200,200,220,.10);--deco-line:rgba(200,200,220,.14);
+}
+.frame.onyx{
+  --bg:radial-gradient(ellipse 60% 40% at 30% 30%,rgba(212,175,55,.07),transparent 50%),radial-gradient(ellipse 50% 60% at 70% 70%,rgba(180,150,50,.04),transparent 55%),linear-gradient(140deg,#080810 0%,#0e0e18 40%,#06060c 75%,#040408 100%);
+  --export-bg:#06060c;--logo-filter:drop-shadow(0 2px 14px rgba(0,0,0,.5)) brightness(1.08);
+  --company:rgba(212,175,55,.5);--name:rgba(252,248,235,.96);--name-en:rgba(212,175,55,.55);
+  --rule:linear-gradient(90deg,#d4af37,rgba(212,175,55,0));
+  --dept:rgba(252,248,235,.8);--title:rgba(252,248,235,.55);--email:rgba(252,248,235,.58);--email-ic:rgba(212,175,55,.72);--url:rgba(252,248,235,.4);
+  --brand:#d4af37;--brand-2:rgba(212,175,55,.65);--group:rgba(212,175,55,.5);
+  --deco:rgba(212,175,55,.10);--deco-line:rgba(212,175,55,.14);
+}
 
 /* ---- Decorative (right side, subtle; hidden in minimal) ---- */
 .deco{position:absolute;inset:0;z-index:1;pointer-events:none}
@@ -127,6 +154,8 @@ body{min-height:100vh;background:#eef0f5;font-family:'Sora','Noto Sans JP',syste
 .frame.light .person-spot,.frame.minimal .person-spot{background:radial-gradient(ellipse 52% 40% at 55% 30%,rgba(255,255,255,.45),transparent 72%)}
 .frame.dark .person-spot{background:radial-gradient(ellipse 52% 40% at 55% 30%,rgba(90,140,230,.16),transparent 72%)}
 .frame.navy .person-spot{background:radial-gradient(ellipse 52% 40% at 55% 30%,rgba(140,160,200,.14),transparent 72%)}
+.frame.marble .person-spot{background:radial-gradient(ellipse 52% 40% at 55% 30%,rgba(180,180,200,.14),transparent 72%)}
+.frame.onyx .person-spot{background:radial-gradient(ellipse 52% 40% at 55% 30%,rgba(212,175,55,.10),transparent 72%)}
 
 /* ================================================================
    IDENTITY PANEL — anchored in the gallery-safe (4:3) LEFT band,
@@ -265,6 +294,9 @@ html.capture-mode-html,.capture-mode-html body{overflow:auto!important}
     <button class="mode-btn" id="btnDark">🌙 ダーク</button>
     <button class="mode-btn" id="btnNavy">🌌 ネイビー</button>
     <button class="mode-btn" id="btnMinimal">□ ミニマル</button>
+    <span class="grp-label" style="margin-left:6px">EXECUTIVE</span>
+    <button class="mode-btn" id="btnMarble">🪨 マーブル</button>
+    <button class="mode-btn" id="btnOnyx">👑 オニキス</button>
     <div class="divider-v"></div>
     <button class="toggle-btn active" id="guideBtn">👤 表示エリアのガイド</button>
     <button class="toggle-btn active" id="brandBtn">✦ ブランド表記</button>
@@ -279,6 +311,15 @@ html.capture-mode-html,.capture-mode-html body{overflow:auto!important}
 
   <div class="privacy-note">🔒 <b>入力内容はこのブラウザ内にのみ保存</b>され、サーバーには送信されません。共用PCでは使用後に「入力を削除」を押してください。</div>
   <div class="validation-msg" id="validationMsg"></div>
+
+  <div class="logo-row" id="logoRow">
+    <span class="logo-status" id="logoStatus">🎨 <b>ロゴ設定（PNG保存用・初回のみ）</b>：GLD・DACロゴをアップロードすると、この端末で作る全PNGにロゴが入ります。</span>
+    <input type="file" id="gldFile" accept="image/png,image/jpeg,image/svg+xml,image/webp"/>
+    <button class="logo-btn" id="gldUploadBtn">📎 GLDロゴ</button>
+    <input type="file" id="dacFile" accept="image/png,image/jpeg,image/svg+xml,image/webp"/>
+    <button class="logo-btn" id="dacUploadBtn">📎 DACロゴ</button>
+    <button class="logo-btn ghost" id="logoClearBtn" style="display:none">↺ リセット</button>
+  </div>
 
   <div class="help-card" id="helpCard">
     <button class="help-toggle" id="helpToggle">
@@ -350,6 +391,8 @@ html.capture-mode-html,.capture-mode-html body{overflow:auto!important}
   <button id="flDark">🌙 ダーク</button>
   <button id="flNavy">🌌 ネイビー</button>
   <button id="flMinimal">□ ミニマル</button>
+  <button id="flMarble">🪨 マーブル</button>
+  <button id="flOnyx">👑 オニキス</button>
   <div class="fl-sep"></div>
   <span class="fl-size ok" id="flSize">— × —</span>
   <button class="fl-dl" id="flDl">⬇ PNG</button>
@@ -411,9 +454,9 @@ html.capture-mode-html,.capture-mode-html body{overflow:auto!important}
   }
 
   /* ---------- Theme ---------- */
-  var MODES=['light','dark','navy','minimal'];
-  var modeBtns={light:$('btnLight'),dark:$('btnDark'),navy:$('btnNavy'),minimal:$('btnMinimal')};
-  var flBtns={light:$('flLight'),dark:$('flDark'),navy:$('flNavy'),minimal:$('flMinimal')};
+  var MODES=['light','dark','navy','minimal','marble','onyx'];
+  var modeBtns={light:$('btnLight'),dark:$('btnDark'),navy:$('btnNavy'),minimal:$('btnMinimal'),marble:$('btnMarble'),onyx:$('btnOnyx')};
+  var flBtns={light:$('flLight'),dark:$('flDark'),navy:$('flNavy'),minimal:$('flMinimal'),marble:$('flMarble'),onyx:$('flOnyx')};
   function currentMode(){for(var i=0;i<MODES.length;i++)if(fr.classList.contains(MODES[i]))return MODES[i];return 'light';}
   function setMode(m){
     if(MODES.indexOf(m)<0)m='light';
@@ -474,6 +517,41 @@ html.capture-mode-html,.capture-mode-html body{overflow:auto!important}
     dacLogo.onerror=function(){dacCluster.classList.remove('has-logo');}; /* URL unreachable -> red fallback */
     inlineLogo(dacLogo,DAC_URL,'gld_vbg_dac_v6',function(){dacCluster.classList.add('has-logo');});
   }
+
+  /* Logo upload (one-time, this browser) — writes to the same cache keys inlineLogo reads,
+     so uploaded logos are embedded (base64) in every exported PNG. */
+  var DAC_CACHE='gld_vbg_dac_v6';
+  var logoStatusEl=$('logoStatus'),logoRowEl=$('logoRow'),logoClearBtn=$('logoClearBtn');
+  function refreshLogoStatus(){
+    var g=false,d=false;
+    try{g=(localStorage.getItem(LOGO_KEY)||'').indexOf('data:')===0;}catch(e){}
+    try{d=(localStorage.getItem(DAC_CACHE)||'').indexOf('data:')===0;}catch(e){}
+    if(g||d){
+      logoRowEl.classList.add('ok');logoClearBtn.style.display='inline-block';
+      logoStatusEl.innerHTML='✓ <b>ロゴ設定済み</b>（'+(g?'GLD':'')+(g&&d?' + ':'')+(d?'DAC':'')+'）— PNGにも入ります';
+    }else{
+      logoRowEl.classList.remove('ok');logoClearBtn.style.display='none';
+      logoStatusEl.innerHTML='🎨 <b>ロゴ設定（PNG保存用・初回のみ）</b>：GLD・DACロゴをアップロードすると、この端末で作る全PNGにロゴが入ります。';
+    }
+  }
+  function uploadLogo(file,imgEl,cacheKey,onShown){
+    if(!file)return;
+    if(!file.type.match(/^image\//)){showToast('✕ 画像ファイルを選んでください','err');return;}
+    if(file.size>5*1024*1024){showToast('✕ 5MB以下の画像を選んでください','err');return;}
+    var r=new FileReader();
+    r.onload=function(){imgEl.src=r.result;if(onShown)onShown();try{localStorage.setItem(cacheKey,r.result);}catch(e){showToast('⚠ 保存できませんでした（容量制限の可能性）','warn');}refreshLogoStatus();showToast('✓ ロゴを設定しました','success');};
+    r.onerror=function(){showToast('✕ 読み込みに失敗しました','err');};
+    r.readAsDataURL(file);
+  }
+  $('gldUploadBtn').addEventListener('click',function(){$('gldFile').click();});
+  $('gldFile').addEventListener('change',function(e){var f=e.target.files&&e.target.files[0];if(f)uploadLogo(f,companyLogo,LOGO_KEY);e.target.value='';});
+  $('dacUploadBtn').addEventListener('click',function(){$('dacFile').click();});
+  $('dacFile').addEventListener('change',function(e){var f=e.target.files&&e.target.files[0];if(f)uploadLogo(f,dacLogo,DAC_CACHE,function(){dacCluster.classList.add('has-logo');});e.target.value='';});
+  logoClearBtn.addEventListener('click',function(){
+    if(!confirm('設定したロゴを削除して、既定（URL）に戻しますか？'))return;
+    try{localStorage.removeItem(LOGO_KEY);localStorage.removeItem(DAC_CACHE);}catch(e){}
+    refreshLogoStatus();initLogo();initDacLogo();showToast('ロゴをリセットしました','');
+  });
 
   /* ---------- Size indicator ---------- */
   var cap=false;
@@ -593,6 +671,7 @@ html.capture-mode-html,.capture-mode-html body{overflow:auto!important}
   /* ---------- Init ---------- */
   initLogo();
   initDacLogo();
+  refreshLogoStatus();
   var saved=loadPreset();
   if(saved){applyPreset(saved);showToast('✓ 前回の入力を復元しました','success');}
   else{em.value=em.value.replace('[at]','@');}
