@@ -463,6 +463,7 @@ html.capture-mode-html,.capture-mode-html body{overflow:auto!important}
     MODES.forEach(function(x){fr.classList.remove(x);if(modeBtns[x])modeBtns[x].classList.remove('active');});
     fr.classList.add(m);if(modeBtns[m])modeBtns[m].classList.add('active');
     MODES.forEach(function(x){if(flBtns[x])flBtns[x].classList.toggle('fl-active',x===m);});
+    if(typeof applyGldForTheme==='function')applyGldForTheme();
   }
 
   /* ---------- Toggles ---------- */
@@ -495,32 +496,60 @@ html.capture-mode-html,.capture-mode-html body{overflow:auto!important}
     setGuides(p.guides!==false);
   }
 
-  /* ---------- Logos (URL preview; best-effort base64 for same-origin export) ---------- */
-  /* Logos are fixed brand assets shown in preview via <img src> (CORS-independent).
-     For the SAVED PNG to embed them, serve the tool same-origin (e.g. on gldaily.com);
-     then this fetch succeeds and the logo is inlined as base64. Cross-origin = preview only. */
+  /* ---------- Logos ----------
+     GLD logo is WHITE. On light/minimal themes a white logo is invisible, so instead of
+     relying on a CSS brightness(0) filter (which screenshot libs may drop), we recolor the
+     logo pixels to dark in a canvas and swap that version in for light themes. Real pixels =
+     visible in BOTH preview and exported PNG. Needs a data: URL (upload or same-origin fetch). */
   var companyLogo=$('companyLogo');
   var dacCluster=$('dacCluster'),dacLogo=$('dacLogo');
   var DAC_URL='https://www.gldaily.com/gld-kanri/wp-content/uploads/2024/03/dac.png'; /* DAC Group (fixed) */
+  var DAC_CACHE='gld_vbg_dac_v6';
+  var GLD_DARK_RGB=[26,34,60]; /* navy-black for light backgrounds */
+  var gldOriginal=null,gldDark=null;
 
-  function inlineLogo(imgEl,url,cacheKey,onShown){
-    try{var c=localStorage.getItem(cacheKey);if(c&&c.indexOf('data:')===0){imgEl.src=c;if(onShown)onShown();return;}}catch(e){}
+  function recolorLogo(dataUrl,rgb,cb){
+    var img=new Image();
+    img.onload=function(){
+      try{
+        var cv=document.createElement('canvas');cv.width=img.naturalWidth||400;cv.height=img.naturalHeight||140;
+        var cx=cv.getContext('2d');cx.drawImage(img,0,0,cv.width,cv.height);
+        var im=cx.getImageData(0,0,cv.width,cv.height),p=im.data;
+        for(var i=0;i<p.length;i+=4){if(p[i+3]>12){p[i]=rgb[0];p[i+1]=rgb[1];p[i+2]=rgb[2];}}
+        cx.putImageData(im,0,0);cb(cv.toDataURL('image/png'));
+      }catch(e){cb(null);}
+    };
+    img.onerror=function(){cb(null);};
+    img.src=dataUrl;
+  }
+  function applyGldForTheme(){
+    var lightBg=fr.classList.contains('light')||fr.classList.contains('minimal');
+    if(lightBg&&gldDark){companyLogo.src=gldDark;companyLogo.style.filter='none';}
+    else if(gldOriginal){companyLogo.src=gldOriginal;companyLogo.style.filter='';}
+    /* if neither (URL-only default), leave src=URL and let CSS --logo-filter handle light preview */
+  }
+  function setGldData(dataUrl){
+    gldOriginal=dataUrl;gldDark=null;
+    recolorLogo(dataUrl,GLD_DARK_RGB,function(dark){gldDark=dark;applyGldForTheme();});
+    applyGldForTheme();
+  }
+
+  function inlineLogo(imgEl,url,cacheKey,onShown,onData){
+    try{var c=localStorage.getItem(cacheKey);if(c&&c.indexOf('data:')===0){if(onData)onData(c);else imgEl.src=c;if(onShown)onShown();return;}}catch(e){}
     imgEl.src=url;if(onShown)onShown();                 /* 1) instant preview via URL */
-    fetch(url,{mode:'cors'})                             /* 2) try to inline for export */
+    fetch(url,{mode:'cors'})                             /* 2) try to inline for export (same-origin) */
       .then(function(res){if(!res.ok)throw 0;return res.blob();})
       .then(function(blob){return new Promise(function(ok,no){var r=new FileReader();r.onload=function(){ok(r.result);};r.onerror=no;r.readAsDataURL(blob);});})
-      .then(function(d){imgEl.src=d;try{localStorage.setItem(cacheKey,d);}catch(e){}})
-      .catch(function(){/* preview stays; PNG embed needs same-origin hosting */});
+      .then(function(d){try{localStorage.setItem(cacheKey,d);}catch(e){}if(onData)onData(d);else imgEl.src=d;})
+      .catch(function(){/* preview stays; PNG embed needs upload or same-origin hosting */});
   }
-  function initLogo(){ inlineLogo(companyLogo,DEFAULT_LOGO_URL,LOGO_KEY); }
+  function initLogo(){ inlineLogo(companyLogo,DEFAULT_LOGO_URL,LOGO_KEY,null,setGldData); }
   function initDacLogo(){
     dacLogo.onerror=function(){dacCluster.classList.remove('has-logo');}; /* URL unreachable -> red fallback */
-    inlineLogo(dacLogo,DAC_URL,'gld_vbg_dac_v6',function(){dacCluster.classList.add('has-logo');});
+    inlineLogo(dacLogo,DAC_URL,DAC_CACHE,function(){dacCluster.classList.add('has-logo');});
   }
 
-  /* Logo upload (one-time, this browser) — writes to the same cache keys inlineLogo reads,
-     so uploaded logos are embedded (base64) in every exported PNG. */
-  var DAC_CACHE='gld_vbg_dac_v6';
+  /* Logo upload (one-time, this browser) — cached to the same keys inlineLogo reads. */
   var logoStatusEl=$('logoStatus'),logoRowEl=$('logoRow'),logoClearBtn=$('logoClearBtn');
   function refreshLogoStatus(){
     var g=false,d=false;
@@ -534,22 +563,23 @@ html.capture-mode-html,.capture-mode-html body{overflow:auto!important}
       logoStatusEl.innerHTML='🎨 <b>ロゴ設定（PNG保存用・初回のみ）</b>：GLD・DACロゴをアップロードすると、この端末で作る全PNGにロゴが入ります。';
     }
   }
-  function uploadLogo(file,imgEl,cacheKey,onShown){
+  function uploadLogo(file,cacheKey,apply){
     if(!file)return;
     if(!file.type.match(/^image\//)){showToast('✕ 画像ファイルを選んでください','err');return;}
     if(file.size>5*1024*1024){showToast('✕ 5MB以下の画像を選んでください','err');return;}
     var r=new FileReader();
-    r.onload=function(){imgEl.src=r.result;if(onShown)onShown();try{localStorage.setItem(cacheKey,r.result);}catch(e){showToast('⚠ 保存できませんでした（容量制限の可能性）','warn');}refreshLogoStatus();showToast('✓ ロゴを設定しました','success');};
+    r.onload=function(){apply(r.result);try{localStorage.setItem(cacheKey,r.result);}catch(e){showToast('⚠ 保存できませんでした（容量制限の可能性）','warn');}refreshLogoStatus();showToast('✓ ロゴを設定しました','success');};
     r.onerror=function(){showToast('✕ 読み込みに失敗しました','err');};
     r.readAsDataURL(file);
   }
   $('gldUploadBtn').addEventListener('click',function(){$('gldFile').click();});
-  $('gldFile').addEventListener('change',function(e){var f=e.target.files&&e.target.files[0];if(f)uploadLogo(f,companyLogo,LOGO_KEY);e.target.value='';});
+  $('gldFile').addEventListener('change',function(e){var f=e.target.files&&e.target.files[0];if(f)uploadLogo(f,LOGO_KEY,setGldData);e.target.value='';});
   $('dacUploadBtn').addEventListener('click',function(){$('dacFile').click();});
-  $('dacFile').addEventListener('change',function(e){var f=e.target.files&&e.target.files[0];if(f)uploadLogo(f,dacLogo,DAC_CACHE,function(){dacCluster.classList.add('has-logo');});e.target.value='';});
+  $('dacFile').addEventListener('change',function(e){var f=e.target.files&&e.target.files[0];if(f)uploadLogo(f,DAC_CACHE,function(d){dacLogo.src=d;dacCluster.classList.add('has-logo');});e.target.value='';});
   logoClearBtn.addEventListener('click',function(){
     if(!confirm('設定したロゴを削除して、既定（URL）に戻しますか？'))return;
     try{localStorage.removeItem(LOGO_KEY);localStorage.removeItem(DAC_CACHE);}catch(e){}
+    gldOriginal=null;gldDark=null;companyLogo.style.filter='';
     refreshLogoStatus();initLogo();initDacLogo();showToast('ロゴをリセットしました','');
   });
 
