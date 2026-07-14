@@ -86,7 +86,7 @@
 
       <div class="panel">
         <h2><span class="step-num">2</span>スプレッドシートから取り込み</h2>
-        <p class="desc">入力シートの「記事入力エリア」をコピーして、下に貼り付けてください。国・タイトル・URL・概要文・カテゴリ・画像URL・画像出典を自動で入れます。</p>
+        <p class="desc">入力シートの「記事入力エリア」をコピーして、下に貼り付けてください。国・タイトル・URL・概要文・カテゴリ・画像URLを自動で入れます。</p>
         <textarea id="sheetPaste" class="import-box" placeholder="ここにスプレッドシートからコピーした行を貼り付け"></textarea>
         <div class="import-actions">
           <button class="btn btn-import" onclick="importFromSheetPaste()">📥 シート内容を取り込む</button>
@@ -168,7 +168,7 @@ state.cases=[{label:'CASE',title:'',url:'',desc:'',result:'',img:''}];
 state.columns=[{title:'',url:'',desc:'',meta:'',img:''}];
 state.banners=[{img:'',url:''}];
 
-function blankNews(){return{srcType:'現地メディア',kaisetsu:false,isRepresentative:false,media:'',catType:'',subTag:'',title:'',url:'',desc:'',img:'',imgCredit:'',imgCreditUrl:''};}
+function blankNews(){return{srcType:'現地メディア',kaisetsu:false,isRepresentative:false,media:'',catType:'',subTag:'',title:'',url:'',desc:'',img:''};}
 function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
 
@@ -287,12 +287,7 @@ function renderCountryItems(key){
     <label>タイトル</label><input type="text" value="${esc(n.title)}" oninput="updC('${key}',${i},'title',this.value)">
     <label>URL</label><input type="url" value="${esc(n.url)}" oninput="updC('${key}',${i},'url',this.value)" placeholder="https://...">
     <label>メルマガ用概要文</label><textarea oninput="updC('${key}',${i},'desc',this.value)">${esc(n.desc)}</textarea>
-    <label>画像URL（★代表記事は必須・未入力の記事はテキスト表示）</label><input type="url" value="${esc(n.img||'')}" oninput="updC('${key}',${i},'img',this.value)" placeholder="https://...">
-    <div class="tag-row">
-      <div><label>画像出典名</label><input type="text" value="${esc(n.imgCredit||'')}" oninput="updC('${key}',${i},'imgCredit',this.value)" placeholder="例：中央通訊社（CNA）"></div>
-      <div><label>画像出典URL</label><input type="url" value="${esc(n.imgCreditUrl||'')}" oninput="updC('${key}',${i},'imgCreditUrl',this.value)" placeholder="原文記事URLまたは画像提供元URL"></div>
-    </div>
-    <div class="hint">※ 画像出典名が入力されている場合、メール本文とHPアーカイブに自動表示されます。</div>`;
+    <label>画像URL（★代表記事は必須・未入力の記事はテキスト表示）</label><input type="url" value="${esc(n.img||'')}" oninput="updC('${key}',${i},'img',this.value)" placeholder="https://...">`;
     body.appendChild(d);
   });
   addBtn(body,()=>{state.countries[key].push(blankNews());renderCountryItems(key);});
@@ -383,17 +378,6 @@ function cleanImageUrl(v){
   return s;
 }
 
-function imageCreditHTML(n){
-  const name=String(n.imgCredit||'').trim();
-  if(!name)return '';
-  const creditUrl=String(n.imgCreditUrl||n.url||'').trim();
-  const label=`画像出典：${esc(name)}`;
-  if(creditUrl && /^https?:\/\//.test(creditUrl)){
-    return `<p style="margin:6px 0 0 0; font-size:10px; color:#94a3b8; line-height:1.5em; text-align:right;"><a href="${esc(creditUrl)}" target="_blank" rel="noopener noreferrer" style="color:#94a3b8; text-decoration:none;">${label}</a></p>`;
-  }
-  return `<p style="margin:6px 0 0 0; font-size:10px; color:#94a3b8; line-height:1.5em; text-align:right;">${label}</p>`;
-}
-
 function newsHTML(n){const url=n.url.trim()||'#';
   const hasImg=n.img&&n.img.trim();
   const textBlock=`${srcTag(n.srcType)}${(n.srcType==='現地メディア'&&n.kaisetsu)?kaisetsuTag():''}${catTag(n.catType)}${subTagTag(n.subTag)}
@@ -404,8 +388,7 @@ function newsHTML(n){const url=n.url.trim()||'#';
     // ただし画像は国別のメイン記事として、PC/モバイルともに自然に見える大きめ画像で表示する。
     return `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom:24px;"><tbody>
 <tr><td style="padding:0 0 14px 0;">
-<a href="${esc(url)}" target="_blank" style="text-decoration:none;"><img src="${esc(n.img)}" alt="" width="624" style="display:block; width:100%; max-width:100%; height:auto; border-radius:8px; border:0;"></a>
-${imageCreditHTML(n)}
+<a href="${esc(url)}" target="_blank" style="text-decoration:none;"><img src="${esc(n.img)}" alt="" style="display:block; width:auto; max-width:100%; height:auto; margin:0 auto; border-radius:8px; border:0;"></a>
 </td></tr>
 <tr><td style="padding:0;">${textBlock}</td></tr>
 </tbody></table>`;
@@ -414,8 +397,7 @@ ${imageCreditHTML(n)}
     // 通常記事に画像がある場合は、本文を邪魔しない小さめサムネイルで表示する。
     return `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom:22px;"><tbody>
 <tr><td style="padding:0 0 10px 0;">
-<a href="${esc(url)}" target="_blank"><img src="${esc(n.img)}" alt="" width="180" style="display:block; width:180px; height:auto; max-width:100%; border-radius:6px; border:0;"></a>
-${imageCreditHTML(n)}
+<a href="${esc(url)}" target="_blank"><img src="${esc(n.img)}" alt="" style="display:block; width:auto; max-width:180px; height:auto; margin:0 auto 0 0; border-radius:6px; border:0;"></a>
 </td></tr>
 <tr><td style="padding:0;">${textBlock}</td></tr>
 </tbody></table>`;
@@ -456,7 +438,7 @@ function corpHTML(){
   let inner=arr.map((it,idx)=>{
     const url=it.url.trim()||'#';
     const thumb=it.img.trim()?`<td width="96" valign="top" style="vertical-align:top; padding-left:14px;" class="corp-thumb">
-<img src="${esc(it.img)}" alt="" width="84" style="display:block; width:84px; height:84px; object-fit:cover; border-radius:4px; border:0;"></td>`:'';
+<img src="${esc(it.img)}" alt="" style="display:block; width:auto; max-width:84px; height:auto; max-height:84px; margin:0 auto; border-radius:4px; border:0;"></td>`:'';
     const mb=idx===arr.length-1?'':' margin-bottom:14px;';
     return `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#f8fafc; border-radius:6px;${mb}"><tbody><tr>
 <td width="4" style="background-color:#2563eb; font-size:1px; line-height:1px; border-radius:6px 0 0 6px;">&nbsp;</td>
@@ -477,7 +459,7 @@ function caseHTML(){
   const arr=state.cases.filter(it=>it.title.trim());if(!arr.length)return'';
   let inner=arr.map((it,idx)=>{
     const url=it.url.trim()||'#';
-    const img=it.img.trim()?`<a href="${esc(url)}" target="_blank" style="text-decoration:none;"><img src="${esc(it.img)}" alt="" width="574" style="display:block; width:100%; max-width:100%; height:auto; border:0; border-radius:6px 6px 0 0;"></a>`:'';
+    const img=it.img.trim()?`<a href="${esc(url)}" target="_blank" style="text-decoration:none;"><img src="${esc(it.img)}" alt="" style="display:block; width:auto; max-width:100%; height:auto; margin:0 auto; border:0; border-radius:6px 6px 0 0;"></a>`:'';
     const result=it.result.trim()?`<p style="margin:0 0 8px 0; font-size:15px; font-weight:700; color:#2563eb; line-height:1.5em;">${esc(it.result)}</p>`:'';
     const mb=idx===arr.length-1?'':' margin-bottom:16px;';
     const topPad=it.img.trim()?'0':'20px';
@@ -503,7 +485,7 @@ function columnHTML(){
     const meta=it.meta.trim()?`<p style="margin:8px 0 0 0; font-size:11px; color:#94a3b8; letter-spacing:0.04em;">${esc(it.meta)}</p>`:'';
     const bb=idx===arr.length-1?'':'border-bottom:1px solid #e2e8f0; ';
     const thumb=it.img.trim()?`<td width="120" valign="top" style="vertical-align:top; padding-right:16px;" class="col-thumb">
-<a href="${esc(url)}" target="_blank"><img src="${esc(it.img)}" alt="" width="108" style="display:block; width:108px; height:72px; object-fit:cover; border-radius:4px; border:0;"></a></td>`:'';
+<a href="${esc(url)}" target="_blank"><img src="${esc(it.img)}" alt="" style="display:block; width:auto; max-width:108px; height:auto; max-height:72px; margin:0 auto; border-radius:4px; border:0;"></a></td>`:'';
     return `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="${bb}padding-bottom:16px; margin-bottom:16px;"><tbody><tr>
 ${thumb}
 <td valign="top" style="vertical-align:top;">
@@ -523,7 +505,7 @@ function bannerHTML(){
   let inner=arr.map(it=>{
     const url=it.url.trim()||'#';
     return `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer" style="display:block; text-decoration:none; margin:0 0 14px 0;">
-<img src="${esc(it.img)}" alt="セミナー・イベント" width="624" style="display:block; width:100%; max-width:100%; height:auto; border:0; border-radius:6px;"></a>`;
+<img src="${esc(it.img)}" alt="セミナー・イベント" style="display:block; width:auto; max-width:100%; height:auto; margin:0 auto; border:0; border-radius:6px;"></a>`;
   }).join('\n');
   return `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#ffffff;"><tbody><tr>
 <td class="pad" style="padding:40px 28px 0 28px;">
@@ -596,7 +578,7 @@ function importFromSheetPaste(){
   let currentKey='';
   let count=0;
   rows.forEach(cols=>{
-    while(cols.length<11)cols.push('');
+    while(cols.length<9)cols.push('');
     if(looksLikeHeader(cols))return;
     if(cols.join(' ').includes('* SAMPLE'))return;
     const key=countryKeyFromCell(cols[0])||currentKey;
@@ -610,10 +592,8 @@ function importFromSheetPaste(){
     const cat=(cols[6]||'').trim();
     const sub=(cols[7]||'').trim();
     const img=cleanImageUrl(cols[8]||'');
-    const imgCredit=(cols[9]||'').trim();
-    const imgCreditUrl=(cols[10]||'').trim();
-    if(!title&&!url&&!desc&&!media&&!cat&&!img&&!imgCredit&&!imgCreditUrl)return;
-    imported[key].push({srcType:deriveSrcType(media,url),kaisetsu:false,isRepresentative:representative,media:media,catType:cat,subTag:sub,title:title,url:url,desc:desc,img:img,imgCredit:imgCredit,imgCreditUrl:imgCreditUrl});
+    if(!title&&!url&&!desc&&!media&&!cat&&!img)return;
+    imported[key].push({srcType:deriveSrcType(media,url),kaisetsu:false,isRepresentative:representative,media:media,catType:cat,subTag:sub,title:title,url:url,desc:desc,img:img});
     count++;
   });
   if(!count){showToast('取り込める行が見つかりませんでした。');return;}
@@ -665,7 +645,7 @@ function archiveCountryListHTML(data){
     const items=x.items.map((n,i)=>{
       const id=archiveArticleId(x.country.key,i);
       const tags=uniq([n.srcType,n.catType,n.subTag]).map(t=>`<span style="display:inline-block;background:#f1f5f9;color:#475569;font-size:12px;padding:2px 8px;border-radius:4px;margin:0 4px 6px 0;">${esc(t)}</span>`).join('');
-      const img=(n.isRepresentative && n.img)?`<p><a href="${esc(n.url||'#')}" target="_blank" rel="noopener"><img src="${esc(n.img)}" alt="" style="max-width:100%;height:auto;border-radius:8px;"></a>${n.imgCredit?`<br><small style="color:#94a3b8;">画像出典：${n.imgCreditUrl?`<a href="${esc(n.imgCreditUrl)}" target="_blank" rel="noopener">${esc(n.imgCredit)}</a>`:esc(n.imgCredit)}</small>`:''}</p>`:'';
+      const img=(n.isRepresentative && n.img)?`<p style="text-align:center;"><a href="${esc(n.url||'#')}" target="_blank" rel="noopener"><img src="${esc(n.img)}" alt="" style="display:block;width:auto;max-width:100%;height:auto;margin:0 auto;border-radius:8px;"></a></p>`:'';
       return `<div id="${esc(id)}" style="margin:0 0 24px 0; scroll-margin-top:90px;">\n${img}\n<p style="margin:0 0 6px 0;">${tags}</p>\n<h3 style="margin:0 0 8px 0;"><a href="${esc(n.url||'#')}" target="_blank" rel="noopener">${esc(n.title)}</a></h3>\n<p>${esc(n.desc)}</p>\n</div>`;
     }).join('\n');
     return `<h2>${esc(x.country.flag)} ${esc(x.country.ja)}</h2>\n${items}`;
@@ -735,8 +715,6 @@ function validate(){
       if(n.title.trim()&&!n.catType.trim())w.push(`${c.ja} ニュース${i+1}：代表カテゴリが空`);
       if(n.url.trim()&&!/^https?:\/\//.test(n.url.trim()))w.push(`${c.ja} ニュース${i+1}：URLがhttpで始まっていない`);
       if(n.img&&n.img.trim()&&!/^https?:\/\//.test(n.img.trim()))w.push(`${c.ja} ニュース${i+1}：画像URLはhttpsの公開URLを入れてください`);
-      if(n.imgCreditUrl&&n.imgCreditUrl.trim()&&!/^https?:\/\//.test(n.imgCreditUrl.trim()))w.push(`${c.ja} ニュース${i+1}：画像出典URLがhttpで始まっていない`);
-      if(n.img&&n.img.trim()&&!n.imgCredit.trim())w.push(`${c.ja} ニュース${i+1}：画像出典名が空`);
     });
   });
   [['corp','コーポレート'],['cases','事例'],['columns','コラム']].forEach(([k,ja])=>{
