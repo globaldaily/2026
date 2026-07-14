@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>メルマガ作成ツール v4.2 ｜ Global Daily</title>
+<title>メルマガ作成ツール v4.3 ｜ Global Daily</title>
 <style>
   :root{--ink:#0f172a;--blue:#2563eb;--line:#e2e8f0;--sub:#64748b;--bg:#f8fafc;--card:#fff;--ok:#15803d;--warn:#c2410c;}
   *{box-sizing:border-box;}
@@ -63,7 +63,7 @@
 <body>
 <div class="wrap">
   <header>
-    <h1>📧 海外情報ニュース メルマガ作成ツール <span style="font-size:12px;opacity:.6;">v4.2</span></h1>
+    <h1>📧 海外情報ニュース メルマガ作成ツール <span style="font-size:12px;opacity:.6;">v4.3</span></h1>
     <p>スプレッドシートから取り込み → メールHTML / HPアーカイブHTML / リマインド文を自動生成。</p>
   </header>
 
@@ -388,7 +388,7 @@ function newsHTML(n){const url=n.url.trim()||'#';
     // ただし画像は国別のメイン記事として、PC/モバイルともに自然に見える大きめ画像で表示する。
     return `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom:24px;"><tbody>
 <tr><td style="padding:0 0 14px 0;">
-<a href="${esc(url)}" target="_blank" style="text-decoration:none;"><img src="${esc(n.img)}" alt="" style="display:block; width:auto; max-width:100%; height:auto; margin:0 auto; border-radius:8px; border:0;"></a>
+<a href="${esc(url)}" target="_blank" style="text-decoration:none;"><img src="${esc(n.img)}" alt="" style="display:block; width:100%; max-width:624px; height:auto; margin:0 auto; border-radius:8px; border:0;"></a>
 </td></tr>
 <tr><td style="padding:0;">${textBlock}</td></tr>
 </tbody></table>`;
@@ -397,7 +397,7 @@ function newsHTML(n){const url=n.url.trim()||'#';
     // 通常記事に画像がある場合は、本文を邪魔しない小さめサムネイルで表示する。
     return `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom:22px;"><tbody>
 <tr><td style="padding:0 0 10px 0;">
-<a href="${esc(url)}" target="_blank" style="display:inline-block; text-decoration:none;"><img src="${esc(n.img)}" alt="" style="display:block; width:180px; height:120px; object-fit:cover; object-position:center top; margin:0; border-radius:6px; border:0; background:#f1f5f9;"></a>
+<a href="${esc(url)}" target="_blank" style="display:inline-block; text-decoration:none;"><img src="${esc(n.img)}" alt="" style="display:block; width:180px; max-width:100%; height:auto; margin:0; border-radius:6px; border:0;"></a>
 </td></tr>
 <tr><td style="padding:0;">${textBlock}</td></tr>
 </tbody></table>`;
