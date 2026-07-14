@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>メルマガ作成ツール v5 ｜ Global Daily</title>
+<title>メルマガ作成ツール v3 ｜ Global Daily</title>
 <style>
   :root{--ink:#0f172a;--blue:#2563eb;--line:#e2e8f0;--sub:#64748b;--bg:#f8fafc;--card:#fff;--ok:#15803d;--warn:#c2410c;}
   *{box-sizing:border-box;}
@@ -63,14 +63,15 @@
 <body>
 <div class="wrap">
   <header>
-    <h1>📧 海外市場ニュース メルマガ作成ツール <span style="font-size:12px;opacity:.6;">v5</span></h1>
-    <p>スプレッドシートから取り込み → メールHTML / HPアーカイブHTMLを自動生成。記事掲載日・画像出典にも対応。</p>
+    <h1>📧 海外情報ニュース メルマガ作成ツール <span style="font-size:12px;opacity:.6;">v4</span></h1>
+    <p>スプレッドシートから取り込み → メールHTML / HPアーカイブHTML / リマインド文を自動生成。</p>
   </header>
 
   <div class="top-action-bar">
     <button class="btn btn-preview" onclick="render()">🔄 プレビュー更新</button>
     <button class="btn btn-copy" onclick="copyHTML()">📋 HTMLをコピー（Sansanに貼付）</button>
     <button class="btn btn-import" onclick="copyArchiveHTML()">🌐 HPアーカイブHTMLをコピー</button>
+    <button class="btn btn-ghost" onclick="copyReminderText()">📣 未完了リマインド文をコピー</button>
     <button class="btn btn-reset" onclick="clearSavedDraft()">🧹 新しい号を作成</button>
     <span class="autosave-status"></span>
   </div>
@@ -79,25 +80,19 @@
     <!-- ===== 左：入力 ===== -->
     <div>
       <div class="panel">
-        <h2><span class="step-num">1</span>配信設定</h2>
-        <label>メルマガ配信日</label>
-        <input type="text" id="haishinbi" placeholder="例：2026年7月16日">
-        <div class="tag-row">
-          <div><label>ニュース対象期間（開始）</label><input type="text" id="coverageStart" placeholder="例：2026年7月10日 10:00"></div>
-          <div><label>ニュース対象期間（終了）</label><input type="text" id="coverageEnd" placeholder="例：2026年7月14日 11:00"></div>
-        </div>
-        <div class="small-note">※ 対象期間を入力すると、本文冒頭に1行だけ表示します。各記事には媒体名と記事掲載日を表示します。</div>
+        <h2><span class="step-num">1</span>配信日</h2>
+        <input type="text" id="haishinbi" placeholder="例：2026年6月26日">
       </div>
 
       <div class="panel">
         <h2><span class="step-num">2</span>スプレッドシートから取り込み</h2>
-        <p class="desc">入力シートの「記事入力エリア」をコピーして、下に貼り付けてください。国・タイトル・URL・媒体・概要文・カテゴリ・画像URL・画像出典・記事掲載日を自動で入れます。</p>
+        <p class="desc">入力シートの「記事入力エリア」をコピーして、下に貼り付けてください。国・タイトル・URL・概要文・カテゴリ・画像URLを自動で入れます。</p>
         <textarea id="sheetPaste" class="import-box" placeholder="ここにスプレッドシートからコピーした行を貼り付け"></textarea>
         <div class="import-actions">
           <button class="btn btn-import" onclick="importFromSheetPaste()">📥 シート内容を取り込む</button>
           <button class="btn btn-ghost" onclick="document.getElementById('sheetPaste').value=''">貼り付け欄をクリア</button>
         </div>
-        <div class="small-note">※ A～L列に対応。従来のA～K列も取り込めます（記事掲載日は空欄）。「★代表」は管理用で、画像は任意です。</div>
+        <div class="small-note">※ 取り込み後も手入力で修正できます。「★代表」は管理用です（メール本文には表示されません）。同じURLでも取り込みます。各国1本、画像URL必須です。</div>
       </div>
 
       <div class="panel">
@@ -150,6 +145,7 @@
     <button class="btn btn-preview" onclick="render()">🔄 プレビュー更新</button>
     <button class="btn btn-copy" onclick="copyHTML()">📋 HTMLをコピー（Sansanに貼付）</button>
     <button class="btn btn-import" onclick="copyArchiveHTML()">🌐 HPアーカイブHTMLをコピー</button>
+    <button class="btn btn-ghost" onclick="copyReminderText()">📣 未完了リマインド文をコピー</button>
     <button class="btn btn-reset" onclick="clearSavedDraft()">🧹 新しい号を作成</button>
     <span class="autosave-status"></span>
   </div>
@@ -172,12 +168,12 @@ state.cases=[{label:'CASE',title:'',url:'',desc:'',result:'',img:''}];
 state.columns=[{title:'',url:'',desc:'',meta:'',img:''}];
 state.banners=[{img:'',url:''}];
 
-function blankNews(){return{srcType:'現地メディア',kaisetsu:false,isRepresentative:false,media:'',publishedAt:'',catType:'',subTag:'',title:'',url:'',desc:'',img:'',imgCredit:'',imgCreditUrl:''};}
+function blankNews(){return{srcType:'現地メディア',kaisetsu:false,isRepresentative:false,media:'',catType:'',subTag:'',title:'',url:'',desc:'',img:''};}
 function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
 
 /* ═══════════ 自動保存（localStorage）═══════════ */
-const STORAGE_KEY='gld_mailmag_tool_v7_draft';
+const STORAGE_KEY='gld_mailmag_tool_v6_draft';
 let saveTimer=null;
 let restoredDate='';
 
@@ -195,8 +191,6 @@ function saveDraft(){
       version:2,
       savedAt:new Date().toISOString(),
       haishinbi:dateEl?dateEl.value:'',
-      coverageStart:document.getElementById('coverageStart')?.value||'',
-      coverageEnd:document.getElementById('coverageEnd')?.value||'',
       state:state
     };
     localStorage.setItem(STORAGE_KEY,JSON.stringify(payload));
@@ -229,8 +223,6 @@ function loadDraft(){
     state.columns=Array.isArray(st.columns)&&st.columns.length?st.columns.map(normalizeColumn):[{title:'',url:'',desc:'',meta:'',img:''}];
     state.banners=Array.isArray(st.banners)&&st.banners.length?st.banners.map(normalizeBanner):[{img:'',url:''}];
     restoredDate=saved.haishinbi||'';
-    window.__restoredCoverageStart=saved.coverageStart||'';
-    window.__restoredCoverageEnd=saved.coverageEnd||'';
     return true;
   }catch(e){
     return false;
@@ -248,9 +240,7 @@ function clearSavedDraft(){
   if(!confirm('新しい号を作成すると、現在の入力内容はすべてクリアされます。よろしいですか？'))return;
   try{localStorage.removeItem(STORAGE_KEY);}catch(e){}
   resetState();
-  document.getElementById('haishinbi').value='';
-  document.getElementById('coverageStart').value='';
-  document.getElementById('coverageEnd').value='';
+  document.getElementById('haishinbi').value='2026年6月26日';
   buildCountries();renderCorp();renderCases();renderColumns();renderBanners();render();
   saveDraft();
   showToast('🧹 入力内容をクリアしました。');
@@ -283,9 +273,8 @@ function renderCountryItems(key){
       <div><label>ソース</label><select onchange="updC('${key}',${i},'srcType',this.value)">
         <option ${n.srcType==='現地メディア'?'selected':''}>現地メディア</option>
         <option ${n.srcType==='日本語ニュース'?'selected':''}>日本語ニュース</option></select></div>
-      <div><label>メディア名（本文表示）</label><input type="text" value="${esc(n.media||'')}" oninput="updC('${key}',${i},'media',this.value)" placeholder="例：中央通訊社（CNA）"></div>
+      <div><label>メディア名（管理用）</label><input type="text" value="${esc(n.media||'')}" oninput="updC('${key}',${i},'media',this.value)" placeholder="例：人民網日本語版"></div>
     </div>
-    <label>記事掲載日（本文表示）</label><input type="text" value="${esc(n.publishedAt||'')}" oninput="updC('${key}',${i},'publishedAt',this.value)" placeholder="例：2026.07.13">
     <div class="tag-row">
       <div><label>代表カテゴリ</label><input type="text" value="${esc(n.catType||'')}" oninput="updC('${key}',${i},'catType',this.value)" placeholder="例：訪日観光 / エンタメ / 政策・ビザ"></div>
       <div><label>補足タグ（任意）</label><input type="text" value="${esc(n.subTag||'')}" oninput="updC('${key}',${i},'subTag',this.value)" placeholder="例：オーバーツーリズム"></div>
@@ -298,22 +287,12 @@ function renderCountryItems(key){
     <label>タイトル</label><input type="text" value="${esc(n.title)}" oninput="updC('${key}',${i},'title',this.value)">
     <label>URL</label><input type="url" value="${esc(n.url)}" oninput="updC('${key}',${i},'url',this.value)" placeholder="https://...">
     <label>メルマガ用概要文</label><textarea oninput="updC('${key}',${i},'desc',this.value)">${esc(n.desc)}</textarea>
-    <label>画像URL（任意・★代表は大きく、通常記事は小さく表示）</label><input type="url" value="${esc(n.img||'')}" oninput="updC('${key}',${i},'img',this.value)" placeholder="https://...">
-    <div class="tag-row">
-      <div><label>画像出典名</label><input type="text" value="${esc(n.imgCredit||'')}" oninput="updC('${key}',${i},'imgCredit',this.value)" placeholder="例：中央通訊社（CNA）"></div>
-      <div><label>画像出典URL</label><input type="url" value="${esc(n.imgCreditUrl||'')}" oninput="updC('${key}',${i},'imgCreditUrl',this.value)" placeholder="原文記事URLまたは画像提供元URL"></div>
-    </div>
-    <div class="hint">※ 画像出典名が入力されている場合、メール本文とHPアーカイブに自動表示されます。</div>`;
+    <label>画像URL（★代表記事は必須・未入力の記事はテキスト表示）</label><input type="url" value="${esc(n.img||'')}" oninput="updC('${key}',${i},'img',this.value)" placeholder="https://...">`;
     body.appendChild(d);
   });
   addBtn(body,()=>{state.countries[key].push(blankNews());renderCountryItems(key);});
 }
-function updC(key,i,f,v){
-  if(f==='isRepresentative'&&v){state.countries[key].forEach((n,idx)=>n.isRepresentative=(idx===i));renderCountryItems(key);}
-  else{state.countries[key][i][f]=v;}
-  if(f==='title'){const c=countCountry(key);const el=document.getElementById('cb-'+key);el.textContent=c;el.className='count-badge '+(c?'':'zero');}
-  scheduleSave();
-}
+function updC(key,i,f,v){state.countries[key][i][f]=v;if(f==='title'){const c=countCountry(key);const el=document.getElementById('cb-'+key);el.textContent=c;el.className='count-badge '+(c?'':'zero');}scheduleSave();}
 
 /* ═══════════ 汎用ブロック UI（コーポレート/事例/コラム）═══════════ */
 function buildGenBlock(boxId,arrKey,fields,addFn){
@@ -399,23 +378,10 @@ function cleanImageUrl(v){
   return s;
 }
 
-function imageCreditHTML(n){
-  const name=String(n.imgCredit||'').trim();
-  if(!name)return '';
-  const creditUrl=String(n.imgCreditUrl||n.url||'').trim();
-  const label=`画像出典：${esc(name)}`;
-  if(creditUrl && /^https?:\/\//.test(creditUrl)){
-    return `<p style="margin:6px 0 0 0; font-size:10px; color:#94a3b8; line-height:1.5em; text-align:right;"><a href="${esc(creditUrl)}" target="_blank" rel="noopener noreferrer" style="color:#94a3b8; text-decoration:none;">${label}</a></p>`;
-  }
-  return `<p style="margin:6px 0 0 0; font-size:10px; color:#94a3b8; line-height:1.5em; text-align:right;">${label}</p>`;
-}
-
 function newsHTML(n){const url=n.url.trim()||'#';
   const hasImg=n.img&&n.img.trim();
-  const meta=[n.media,n.publishedAt].filter(Boolean).map(esc).join(' ｜ ');
-  const metaHTML=meta?`<p style="margin:0 0 7px 0; font-size:11px; color:#94a3b8; line-height:1.5em;">${meta}</p>`:'';
   const textBlock=`${srcTag(n.srcType)}${(n.srcType==='現地メディア'&&n.kaisetsu)?kaisetsuTag():''}${catTag(n.catType)}${subTagTag(n.subTag)}
-${metaHTML}<a href="${esc(url)}" target="_blank" style="color:#1e3a5f; font-size:15px; line-height:1.65em; text-decoration:none; display:block; margin-bottom:5px; font-weight:500;" class="article-title">${esc(n.title)}</a>
+<a href="${esc(url)}" target="_blank" style="color:#1e3a5f; font-size:15px; line-height:1.65em; text-decoration:none; display:block; margin-bottom:5px; font-weight:500;" class="article-title">${esc(n.title)}</a>
 <p style="margin:0; font-size:13px; color:#64748b; line-height:1.9em;">${esc(n.desc)}</p>`;
   if(hasImg && n.isRepresentative){
     // ★代表は内部管理用。メール本文には表示しない。
@@ -423,7 +389,6 @@ ${metaHTML}<a href="${esc(url)}" target="_blank" style="color:#1e3a5f; font-size
     return `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom:24px;"><tbody>
 <tr><td style="padding:0 0 14px 0;">
 <a href="${esc(url)}" target="_blank" style="text-decoration:none;"><img src="${esc(n.img)}" alt="" width="624" style="display:block; width:100%; max-width:100%; height:auto; border-radius:8px; border:0;"></a>
-${imageCreditHTML(n)}
 </td></tr>
 <tr><td style="padding:0;">${textBlock}</td></tr>
 </tbody></table>`;
@@ -433,7 +398,6 @@ ${imageCreditHTML(n)}
     return `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom:22px;"><tbody>
 <tr><td style="padding:0 0 10px 0;">
 <a href="${esc(url)}" target="_blank"><img src="${esc(n.img)}" alt="" width="180" style="display:block; width:180px; height:auto; max-width:100%; border-radius:6px; border:0;"></a>
-${imageCreditHTML(n)}
 </td></tr>
 <tr><td style="padding:0;">${textBlock}</td></tr>
 </tbody></table>`;
@@ -555,9 +519,6 @@ ${inner}
 /* ═══════════ 全体組み立て ═══════════ */
 function buildFull(){
   const date=document.getElementById('haishinbi').value||'（配信日未入力）';
-  const coverageStart=document.getElementById('coverageStart').value.trim();
-  const coverageEnd=document.getElementById('coverageEnd').value.trim();
-  const coverage=(coverageStart&&coverageEnd)?`${coverageStart} ～ ${coverageEnd} JST`:'';
   const countriesHTML=COUNTRIES.map((c,i)=>{
     // 最後に表示される国のdividerを消すため、表示される国だけで最後判定
     return c;
@@ -566,13 +527,12 @@ function buildFull(){
   const visible=COUNTRIES.filter(c=>state.countries[c.key].some(n=>n.title.trim()));
   const newsSection=visible.length? visible.map((c,i)=>countryHTML(c,i===visible.length-1)).join('\n'):'';
   const newsBlock = newsSection?
-    sectionHead("WORLD MARKET TOPICS","海外市場ニュース","#94a3b8")+
+    sectionHead("TODAY'S NEWS","本日の主要海外ニュース","#94a3b8")+
     `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background:#fff;"><tbody><tr><td class="pad-news" style="padding:0 28px;">${newsSection}</td></tr></tbody></table>`
     :'';
 
   return TEMPLATE
     .replace('{{DATE}}',esc(date))
-    .replace('{{COVERAGE_BLOCK}}',coverage?`<p style="margin:12px 0 0 0; font-size:11px; color:#94a3b8; line-height:1.6em;">ニュース対象期間：${esc(coverage)}</p>`:'')
     .replace('{{NEWS}}',newsBlock)
     .replace('{{CORP}}',corpHTML())
     .replace('{{CASE}}',caseHTML())
@@ -618,7 +578,7 @@ function importFromSheetPaste(){
   let currentKey='';
   let count=0;
   rows.forEach(cols=>{
-    while(cols.length<12)cols.push('');
+    while(cols.length<9)cols.push('');
     if(looksLikeHeader(cols))return;
     if(cols.join(' ').includes('* SAMPLE'))return;
     const key=countryKeyFromCell(cols[0])||currentKey;
@@ -632,11 +592,8 @@ function importFromSheetPaste(){
     const cat=(cols[6]||'').trim();
     const sub=(cols[7]||'').trim();
     const img=cleanImageUrl(cols[8]||'');
-    const imgCredit=(cols[9]||'').trim();
-    const imgCreditUrl=(cols[10]||'').trim();
-    const publishedAt=(cols[11]||'').trim();
-    if(!title&&!url&&!desc&&!media&&!cat&&!img&&!imgCredit&&!imgCreditUrl&&!publishedAt)return;
-    imported[key].push({srcType:deriveSrcType(media,url),kaisetsu:false,isRepresentative:representative,media:media,publishedAt:publishedAt,catType:cat,subTag:sub,title:title,url:url,desc:desc,img:img,imgCredit:imgCredit,imgCreditUrl:imgCreditUrl});
+    if(!title&&!url&&!desc&&!media&&!cat&&!img)return;
+    imported[key].push({srcType:deriveSrcType(media,url),kaisetsu:false,isRepresentative:representative,media:media,catType:cat,subTag:sub,title:title,url:url,desc:desc,img:img});
     count++;
   });
   if(!count){showToast('取り込める行が見つかりませんでした。');return;}
@@ -688,9 +645,8 @@ function archiveCountryListHTML(data){
     const items=x.items.map((n,i)=>{
       const id=archiveArticleId(x.country.key,i);
       const tags=uniq([n.srcType,n.catType,n.subTag]).map(t=>`<span style="display:inline-block;background:#f1f5f9;color:#475569;font-size:12px;padding:2px 8px;border-radius:4px;margin:0 4px 6px 0;">${esc(t)}</span>`).join('');
-      const img=(n.isRepresentative && n.img)?`<p><a href="${esc(n.url||'#')}" target="_blank" rel="noopener"><img src="${esc(n.img)}" alt="" style="max-width:100%;height:auto;border-radius:8px;"></a>${n.imgCredit?`<br><small style="color:#94a3b8;">画像出典：${n.imgCreditUrl?`<a href="${esc(n.imgCreditUrl)}" target="_blank" rel="noopener">${esc(n.imgCredit)}</a>`:esc(n.imgCredit)}</small>`:''}</p>`:'';
-      const meta=[n.media,n.publishedAt].filter(Boolean).map(esc).join(' ｜ ');
-      return `<div id="${esc(id)}" style="margin:0 0 24px 0; scroll-margin-top:90px;">\n${img}\n<p style="margin:0 0 6px 0;">${tags}</p>\n${meta?`<p style="margin:0 0 6px 0;color:#94a3b8;font-size:12px;">${meta}</p>`:''}<h3 style="margin:0 0 8px 0;"><a href="${esc(n.url||'#')}" target="_blank" rel="noopener">${esc(n.title)}</a></h3>\n<p>${esc(n.desc)}</p>\n</div>`;
+      const img=(n.isRepresentative && n.img)?`<p><a href="${esc(n.url||'#')}" target="_blank" rel="noopener"><img src="${esc(n.img)}" alt="" style="max-width:100%;height:auto;border-radius:8px;"></a></p>`:'';
+      return `<div id="${esc(id)}" style="margin:0 0 24px 0; scroll-margin-top:90px;">\n${img}\n<p style="margin:0 0 6px 0;">${tags}</p>\n<h3 style="margin:0 0 8px 0;"><a href="${esc(n.url||'#')}" target="_blank" rel="noopener">${esc(n.title)}</a></h3>\n<p>${esc(n.desc)}</p>\n</div>`;
     }).join('\n');
     return `<h2>${esc(x.country.flag)} ${esc(x.country.ja)}</h2>\n${items}`;
   }).join('\n');
@@ -749,18 +705,16 @@ function validate(){
     const filled=state.countries[c.key].filter(n=>n.title.trim());
     if(filled.length){
       const reps=filled.filter(n=>n.isRepresentative);
+      if(!reps.length)w.push(`${c.ja}：代表記事が未選択`);
       if(reps.length>1)w.push(`${c.ja}：代表記事が複数選択されています`);
+      reps.forEach((n,i)=>{if(!n.img.trim())w.push(`${c.ja}：代表記事の画像URLが空`);});
     }
     state.countries[c.key].forEach((n,i)=>{
       if(n.title.trim()&&!n.url.trim())w.push(`${c.ja} ニュース${i+1}：URLが空`);
       if(n.title.trim()&&!n.desc.trim())w.push(`${c.ja} ニュース${i+1}：メルマガ用概要文が空`);
       if(n.title.trim()&&!n.catType.trim())w.push(`${c.ja} ニュース${i+1}：代表カテゴリが空`);
-      if(n.title.trim()&&!n.media.trim())w.push(`${c.ja} ニュース${i+1}：メディア名が空`);
-      if(n.title.trim()&&!n.publishedAt.trim())w.push(`${c.ja} ニュース${i+1}：記事掲載日が空`);
       if(n.url.trim()&&!/^https?:\/\//.test(n.url.trim()))w.push(`${c.ja} ニュース${i+1}：URLがhttpで始まっていない`);
       if(n.img&&n.img.trim()&&!/^https?:\/\//.test(n.img.trim()))w.push(`${c.ja} ニュース${i+1}：画像URLはhttpsの公開URLを入れてください`);
-      if(n.imgCreditUrl&&n.imgCreditUrl.trim()&&!/^https?:\/\//.test(n.imgCreditUrl.trim()))w.push(`${c.ja} ニュース${i+1}：画像出典URLがhttpで始まっていない`);
-      if(n.img&&n.img.trim()&&!n.imgCredit.trim())w.push(`${c.ja} ニュース${i+1}：画像出典名が空`);
     });
   });
   [['corp','コーポレート'],['cases','事例'],['columns','コラム']].forEach(([k,ja])=>{
@@ -848,7 +802,7 @@ h1.hero-title{font-size:22px !important;}
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:18px;"><tbody><tr><td height="1" style="background-color:rgba(255,255,255,0.08); font-size:1px; line-height:1px;">&nbsp;</td></tr></tbody></table>
 <p style="margin:20px 0 5px 0; font-size:10px; font-weight:800; color:#2563eb; letter-spacing:0.18em; line-height:1;">NEWSLETTER</p>
 <h1 class="hero-title" style="margin:0 0 8px 0; font-size:26px; font-weight:300; color:#ffffff; line-height:1.25em; letter-spacing:0.04em;">海外情報ニュース</h1>
-<p style="margin:0; font-size:13px; color:rgba(255,255,255,0.45); line-height:1.65em;">海外市場の変化を、日本企業・インバウンド施策の視点でお届けします</p>
+<p style="margin:0; font-size:13px; color:rgba(255,255,255,0.45); line-height:1.65em;">観光・インバウンド関連の海外動向を各国スタッフがお届けします</p>
 </td></tr>
 </tbody></table>
 
@@ -856,8 +810,7 @@ h1.hero-title{font-size:22px !important;}
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#ffffff;"><tbody><tr>
 <td class="pad" style="padding:28px 28px 0 28px;">
 <p style="margin:0 0 14px 0; font-size:14px; color:#0f172a; line-height:1.5em;">((#宛先の会社名#)) ((#宛先の氏名 (姓)#)) 様</p>
-<p style="margin:0; font-size:14px; color:#64748b; line-height:1.9em;">海外現地メディアや公的データから、<span style="color:#0f172a;">「日本企業がいま知っておきたい海外市場の動き」</span>を編集部が厳選してお届けします。</p>
-{{COVERAGE_BLOCK}}
+<p style="margin:0; font-size:14px; color:#64748b; line-height:1.9em;">観光・インバウンドに関わる<span style="color:#0f172a;">「いま知っておきたい海外の動き」</span>を、各国スタッフがピックアップしてお届けします。</p>
 </td></tr></tbody></table>
 
 {{NEWS}}
@@ -895,10 +848,8 @@ h1.hero-title{font-size:22px !important;}
 /* 初期化 */
 const hasDraft=loadDraft();
 buildCountries();renderCorp();renderCases();renderColumns();renderBanners();
-document.getElementById('haishinbi').value=restoredDate||'';
-document.getElementById('coverageStart').value=window.__restoredCoverageStart||'';
-document.getElementById('coverageEnd').value=window.__restoredCoverageEnd||'';
-['haishinbi','coverageStart','coverageEnd'].forEach(id=>document.getElementById(id).addEventListener('input',scheduleSave));
+document.getElementById('haishinbi').value=restoredDate||'2026年6月26日';
+document.getElementById('haishinbi').addEventListener('input',scheduleSave);
 render();
 setStatus(hasDraft?'前回の入力内容を復元しました':'自動保存：ON');
 </script>
