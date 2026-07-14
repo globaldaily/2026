@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>メルマガ作成ツール v5 ｜ Global Daily</title>
+<style>
+  :root{--ink:#0f172a;--blue:#2563eb;--line:#e2e8f0;--sub:#64748b;--bg:#f8fafc;--card:#fff;--ok:#15803d;--warn:#c2410c;}
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Hiragino Sans','Hiragino Kaku Gothic ProN',Meiryo,sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.6;}
+  .wrap{max-width:1680px;margin:0 auto;padding:20px;}
+  header{background:var(--ink);color:#fff;padding:20px 24px;border-radius:10px;}
+  header h1{margin:0;font-size:18px;font-weight:600;}
+  header p{margin:6px 0 0;font-size:12px;color:rgba(255,255,255,0.6);}
+  .layout{display:grid;grid-template-columns:minmax(480px,0.82fr) minmax(760px,1.18fr);gap:18px;margin-top:16px;align-items:start;}
+  @media(max-width:1260px){.layout{grid-template-columns:1fr;}}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:12px;}
+  .panel h2{margin:0 0 4px;font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px;}
+  .panel .desc{font-size:11px;color:#94a3b8;margin:0 0 12px;}
+  .step-num{background:var(--blue);color:#fff;width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;flex:none;}
+  label{display:block;font-size:12px;font-weight:600;color:var(--sub);margin:10px 0 4px;}
+  input,textarea,select{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:6px;font-size:13px;font-family:inherit;}
+  input:focus,textarea:focus,select:focus{outline:2px solid var(--blue);border-color:var(--blue);}
+  textarea{resize:vertical;min-height:52px;}
+  .country-block,.gen-block{border:1px solid var(--line);border-radius:8px;margin-bottom:10px;overflow:hidden;}
+  .block-head{background:#f1f5f9;padding:10px 12px;font-weight:700;font-size:13px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;}
+  .block-head .flag{font-size:16px;}
+  .block-body{padding:12px;display:none;}
+  .block-body.open{display:block;}
+  .item{border:1px dashed var(--line);border-radius:6px;padding:10px;margin-bottom:8px;position:relative;background:#fcfdfe;}
+  .tag-row{display:flex;gap:8px;}.tag-row>div{flex:1;}
+  .three{display:flex;gap:8px;}.three>div{flex:1;}
+  .btn{border:none;border-radius:6px;padding:8px 12px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;}
+  .btn-add{background:#eff6ff;color:var(--blue);border:1px solid #bfdbfe;width:100%;margin-top:4px;}
+  .btn-del{background:#fef2f2;color:#dc2626;border:1px solid #fecaca;position:absolute;top:8px;right:8px;padding:3px 8px;font-size:11px;}
+  .count-badge{background:var(--blue);color:#fff;font-size:11px;padding:1px 7px;border-radius:10px;margin-left:6px;}
+  .count-badge.zero{background:#cbd5e1;}
+  .toggle-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+  .preview-frame{width:100%;height:78vh;min-height:760px;border:1px solid var(--line);border-radius:8px;background:#fff;}
+  .action-bar{position:sticky;bottom:0;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-top:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;z-index:10;}
+  .top-action-bar{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+  .preview-panel{position:sticky;top:16px;}
+  .btn-copy{background:var(--ok);color:#fff;font-size:14px;padding:12px 24px;}
+  .btn-preview{background:var(--ink);color:#fff;font-size:14px;padding:12px 20px;}
+  .btn-reset{background:#fff;color:#475569;border:1px solid var(--line);font-size:12px;padding:12px 16px;}
+  .autosave-status{font-size:12px;color:#64748b;}
+  .warnbox{background:#fff7ed;border:1px solid #fed7aa;color:var(--warn);padding:10px 12px;border-radius:8px;font-size:12px;margin-bottom:8px;display:none;}
+  .warnbox.show{display:block;}.warnbox ul{margin:6px 0 0;padding-left:18px;}
+  .hint{font-size:11px;color:#94a3b8;margin-top:2px;}
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 24px;border-radius:8px;font-size:14px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:100;}
+  .toast.show{opacity:1;}
+  .device-btns{display:inline-flex;gap:4px;margin-left:auto;}
+  .device-btns button{background:#f1f5f9;border:1px solid var(--line);border-radius:6px;padding:6px 12px;font-size:12px;cursor:pointer;}
+  .device-btns button.active{background:var(--ink);color:#fff;}
+  .sec-label{font-size:10px;font-weight:800;letter-spacing:0.1em;color:#94a3b8;margin:16px 0 6px;text-transform:uppercase;}
+  .import-box{min-height:140px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;white-space:pre;}
+  .import-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px;}
+  .btn-import{background:#2563eb;color:#fff;font-size:13px;padding:10px 16px;}
+  .btn-ghost{background:#fff;color:#475569;border:1px solid var(--line);font-size:12px;padding:10px 12px;}
+  .small-note{font-size:11px;color:#64748b;line-height:1.7;margin-top:6px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>📧 海外市場ニュース メルマガ作成ツール <span style="font-size:12px;opacity:.6;">v5</span></h1>
+    <p>スプレッドシートから取り込み → メールHTML / HPアーカイブHTMLを自動生成。記事掲載日・画像出典にも対応。</p>
+  </header>
+
+  <div class="top-action-bar">
+    <button class="btn btn-preview" onclick="render()">🔄 プレビュー更新</button>
+    <button class="btn btn-copy" onclick="copyHTML()">📋 HTMLをコピー（Sansanに貼付）</button>
+    <button class="btn btn-import" onclick="copyArchiveHTML()">🌐 HPアーカイブHTMLをコピー</button>
+    <button class="btn btn-reset" onclick="clearSavedDraft()">🧹 新しい号を作成</button>
+    <span class="autosave-status"></span>
+  </div>
+
+  <div class="layout">
+    <!-- ===== 左：入力 ===== -->
+    <div>
+      <div class="panel">
+        <h2><span class="step-num">1</span>配信設定</h2>
+        <label>メルマガ配信日</label>
+        <input type="text" id="haishinbi" placeholder="例：2026年7月16日">
+        <div class="tag-row">
+          <div><label>ニュース対象期間（開始）</label><input type="text" id="coverageStart" placeholder="例：2026年7月10日 10:00"></div>
+          <div><label>ニュース対象期間（終了）</label><input type="text" id="coverageEnd" placeholder="例：2026年7月14日 11:00"></div>
+        </div>
+        <div class="small-note">※ 対象期間を入力すると、本文冒頭に1行だけ表示します。各記事には媒体名と記事掲載日を表示します。</div>
+      </div>
+
+      <div class="panel">
+        <h2><span class="step-num">2</span>スプレッドシートから取り込み</h2>
+        <p class="desc">入力シートの「記事入力エリア」をコピーして、下に貼り付けてください。国・タイトル・URL・媒体・概要文・カテゴリ・画像URL・画像出典・記事掲載日を自動で入れます。</p>
+        <textarea id="sheetPaste" class="import-box" placeholder="ここにスプレッドシートからコピーした行を貼り付け"></textarea>
+        <div class="import-actions">
+          <button class="btn btn-import" onclick="importFromSheetPaste()">📥 シート内容を取り込む</button>
+          <button class="btn btn-ghost" onclick="document.getElementById('sheetPaste').value=''">貼り付け欄をクリア</button>
+        </div>
+        <div class="small-note">※ A～L列に対応。従来のA～K列も取り込めます（記事掲載日は空欄）。「★代表」は管理用で、画像は任意です。</div>
+      </div>
+
+      <div class="panel">
+        <h2><span class="step-num">3</span>各国ニュース</h2>
+        <p class="desc">9か国・順序固定。ニュースが無い国は空のままでOK（その国は非表示）。</p>
+        <div id="countries"></div>
+      </div>
+
+      <div class="panel">
+        <h2><span class="step-num">4</span>コーポレートニュース</h2>
+        <p class="desc">会社のお知らせ・プレスなど。無ければ空欄のまま（非表示）。</p>
+        <div id="corpBox"></div>
+      </div>
+
+      <div class="panel">
+        <h2><span class="step-num">5</span>事例紹介（ケーススタディ）</h2>
+        <p class="desc">導入事例・成果紹介。画像URLを入れるとサムネイル表示。</p>
+        <div id="caseBox"></div>
+      </div>
+
+      <div class="panel">
+        <h2><span class="step-num">6</span>コラム</h2>
+        <p class="desc">読み物・オピニオン。無ければ非表示。</p>
+        <div id="columnBox"></div>
+      </div>
+
+      <div class="panel">
+        <h2><span class="step-num">7</span>セミナー・イベント（バナー）</h2>
+        <p class="desc">デザイン済みバナー画像のURLとリンクを入れるだけ。複数OK。<br>画像は横1200px推奨（JPG/PNG）。</p>
+        <div id="bannerBox"></div>
+      </div>
+    </div>
+
+    <!-- ===== 右：プレビュー ===== -->
+    <div>
+      <div class="panel preview-panel">
+        <h2>📱 プレビュー
+          <span class="device-btns">
+            <button id="btn-mobile" class="active" onclick="setDevice('mobile')">モバイル</button>
+            <button id="btn-pc" onclick="setDevice('pc')">PC</button>
+          </span>
+        </h2>
+        <div class="warnbox" id="warnbox"></div>
+        <iframe class="preview-frame" id="preview"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div class="action-bar">
+    <button class="btn btn-preview" onclick="render()">🔄 プレビュー更新</button>
+    <button class="btn btn-copy" onclick="copyHTML()">📋 HTMLをコピー（Sansanに貼付）</button>
+    <button class="btn btn-import" onclick="copyArchiveHTML()">🌐 HPアーカイブHTMLをコピー</button>
+    <button class="btn btn-reset" onclick="clearSavedDraft()">🧹 新しい号を作成</button>
+    <span class="autosave-status"></span>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ═══════════ データ定義 ═══════════ */
+const COUNTRIES=[
+ {key:'cn',ja:'中国',en:'CHINA',flag:'🇨🇳'},{key:'kr',ja:'韓国',en:'KOREA',flag:'🇰🇷'},
+ {key:'tw',ja:'台湾',en:'TAIWAN',flag:'🇹🇼'},{key:'hk',ja:'香港',en:'HONG KONG',flag:'🇭🇰'},
+ {key:'th',ja:'タイ',en:'THAILAND',flag:'🇹🇭'},{key:'vn',ja:'ベトナム',en:'VIETNAM',flag:'🇻🇳'},
+ {key:'id',ja:'インドネシア',en:'INDONESIA',flag:'🇮🇩'},{key:'fr',ja:'フランス',en:'FRANCE',flag:'🇫🇷'},
+ {key:'us',ja:'U.S.A',en:'UNITED STATES',flag:'🇺🇸'}
+];
+const state={countries:{},corp:[],cases:[],columns:[],banners:[]};
+COUNTRIES.forEach(c=>state.countries[c.key]=[blankNews()]);
+state.corp=[{title:'',url:'',desc:'',img:''}];
+state.cases=[{label:'CASE',title:'',url:'',desc:'',result:'',img:''}];
+state.columns=[{title:'',url:'',desc:'',meta:'',img:''}];
+state.banners=[{img:'',url:''}];
+
+function blankNews(){return{srcType:'現地メディア',kaisetsu:false,isRepresentative:false,media:'',publishedAt:'',catType:'',subTag:'',title:'',url:'',desc:'',img:'',imgCredit:'',imgCreditUrl:''};}
+function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+
+/* ═══════════ 自動保存（localStorage）═══════════ */
+const STORAGE_KEY='gld_mailmag_tool_v7_draft';
+let saveTimer=null;
+let restoredDate='';
+
+function setStatus(msg){
+  document.querySelectorAll('.autosave-status').forEach(el=>{el.textContent=msg||'';});
+}
+function scheduleSave(){
+  clearTimeout(saveTimer);
+  saveTimer=setTimeout(saveDraft,300);
+}
+function saveDraft(){
+  try{
+    const dateEl=document.getElementById('haishinbi');
+    const payload={
+      version:2,
+      savedAt:new Date().toISOString(),
+      haishinbi:dateEl?dateEl.value:'',
+      coverageStart:document.getElementById('coverageStart')?.value||'',
+      coverageEnd:document.getElementById('coverageEnd')?.value||'',
+      state:state
+    };
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(payload));
+    const tm=new Date().toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'});
+    setStatus('自動保存済み '+tm);
+  }catch(e){
+    setStatus('⚠️ 自動保存できませんでした');
+  }
+}
+function normalizeNews(n){return Object.assign(blankNews(),n||{});}
+function normalizeCorp(it){return Object.assign({title:'',url:'',desc:'',img:''},it||{});}
+function normalizeCase(it){return Object.assign({label:'CASE',title:'',url:'',desc:'',result:'',img:''},it||{});}
+function normalizeColumn(it){return Object.assign({title:'',url:'',desc:'',meta:'',img:''},it||{});}
+function normalizeBanner(it){return Object.assign({img:'',url:''},it||{});}
+function loadDraft(){
+  try{
+    const raw=localStorage.getItem(STORAGE_KEY);
+    if(!raw)return false;
+    const saved=JSON.parse(raw);
+    if(!saved||!saved.state)return false;
+    const st=saved.state;
+    if(st.countries){
+      COUNTRIES.forEach(c=>{
+        const arr=Array.isArray(st.countries[c.key])?st.countries[c.key]:[];
+        state.countries[c.key]=arr.length?arr.map(normalizeNews):[blankNews()];
+      });
+    }
+    state.corp=Array.isArray(st.corp)&&st.corp.length?st.corp.map(normalizeCorp):[{title:'',url:'',desc:'',img:''}];
+    state.cases=Array.isArray(st.cases)&&st.cases.length?st.cases.map(normalizeCase):[{label:'CASE',title:'',url:'',desc:'',result:'',img:''}];
+    state.columns=Array.isArray(st.columns)&&st.columns.length?st.columns.map(normalizeColumn):[{title:'',url:'',desc:'',meta:'',img:''}];
+    state.banners=Array.isArray(st.banners)&&st.banners.length?st.banners.map(normalizeBanner):[{img:'',url:''}];
+    restoredDate=saved.haishinbi||'';
+    window.__restoredCoverageStart=saved.coverageStart||'';
+    window.__restoredCoverageEnd=saved.coverageEnd||'';
+    return true;
+  }catch(e){
+    return false;
+  }
+}
+function resetState(){
+  state.countries={};
+  COUNTRIES.forEach(c=>state.countries[c.key]=[blankNews()]);
+  state.corp=[{title:'',url:'',desc:'',img:''}];
+  state.cases=[{label:'CASE',title:'',url:'',desc:'',result:'',img:''}];
+  state.columns=[{title:'',url:'',desc:'',meta:'',img:''}];
+  state.banners=[{img:'',url:''}];
+}
+function clearSavedDraft(){
+  if(!confirm('新しい号を作成すると、現在の入力内容はすべてクリアされます。よろしいですか？'))return;
+  try{localStorage.removeItem(STORAGE_KEY);}catch(e){}
+  resetState();
+  document.getElementById('haishinbi').value='';
+  document.getElementById('coverageStart').value='';
+  document.getElementById('coverageEnd').value='';
+  buildCountries();renderCorp();renderCases();renderColumns();renderBanners();render();
+  saveDraft();
+  showToast('🧹 入力内容をクリアしました。');
+}
+
+/* ═══════════ 各国ニュース UI ═══════════ */
+function buildCountries(){
+  const box=document.getElementById('countries');box.innerHTML='';
+  COUNTRIES.forEach(c=>{
+    const b=document.createElement('div');b.className='country-block';
+    const cnt=countCountry(c.key);
+    b.innerHTML=`<div class="block-head" onclick="tog('body-${c.key}','arr-${c.key}')">
+      <span><span class="flag">${c.flag}</span> ${c.ja} <span class="count-badge ${cnt?'':'zero'}" id="cb-${c.key}">${cnt}</span></span>
+      <span id="arr-${c.key}">▸</span></div>
+      <div class="block-body" id="body-${c.key}"></div>`;
+    box.appendChild(b);renderCountryItems(c.key);
+  });
+}
+function countCountry(key){return state.countries[key].filter(n=>n.title.trim()).length;}
+function renderCountryItems(key){
+  const body=document.getElementById('body-'+key);body.innerHTML='';
+  state.countries[key].forEach((n,i)=>{
+    const d=document.createElement('div');d.className='item';
+    d.innerHTML=`${state.countries[key].length>1?`<button class="btn btn-del" onclick="delItem('countries','${key}',${i})">削除</button>`:''}
+    <label style="display:flex;align-items:center;gap:6px;margin-top:2px;cursor:pointer;">
+      <input type="checkbox" ${n.isRepresentative?'checked':''} onchange="updC('${key}',${i},'isRepresentative',this.checked)" style="width:auto;">
+      <span style="color:#dc2626;font-weight:800;">★代表記事（管理用・メールには表示されません）</span>
+    </label>
+    <div class="tag-row">
+      <div><label>ソース</label><select onchange="updC('${key}',${i},'srcType',this.value)">
+        <option ${n.srcType==='現地メディア'?'selected':''}>現地メディア</option>
+        <option ${n.srcType==='日本語ニュース'?'selected':''}>日本語ニュース</option></select></div>
+      <div><label>メディア名（本文表示）</label><input type="text" value="${esc(n.media||'')}" oninput="updC('${key}',${i},'media',this.value)" placeholder="例：中央通訊社（CNA）"></div>
+    </div>
+    <label>記事掲載日（本文表示）</label><input type="text" value="${esc(n.publishedAt||'')}" oninput="updC('${key}',${i},'publishedAt',this.value)" placeholder="例：2026.07.13">
+    <div class="tag-row">
+      <div><label>代表カテゴリ</label><input type="text" value="${esc(n.catType||'')}" oninput="updC('${key}',${i},'catType',this.value)" placeholder="例：訪日観光 / エンタメ / 政策・ビザ"></div>
+      <div><label>補足タグ（任意）</label><input type="text" value="${esc(n.subTag||'')}" oninput="updC('${key}',${i},'subTag',this.value)" placeholder="例：オーバーツーリズム"></div>
+    </div>
+    <label style="display:flex;align-items:center;gap:6px;margin-top:8px;cursor:pointer;">
+      <input type="checkbox" ${n.kaisetsu?'checked':''} onchange="updC('${key}',${i},'kaisetsu',this.checked)" style="width:auto;">
+      <span style="color:#7c3aed;font-weight:700;">日本語解説（現地メディアを当社で翻訳・記事化した場合のみ）</span>
+    </label>
+    <div class="hint">※ ソースが「日本語ニュース」の場合、このバッジはメールに表示されません。</div>
+    <label>タイトル</label><input type="text" value="${esc(n.title)}" oninput="updC('${key}',${i},'title',this.value)">
+    <label>URL</label><input type="url" value="${esc(n.url)}" oninput="updC('${key}',${i},'url',this.value)" placeholder="https://...">
+    <label>メルマガ用概要文</label><textarea oninput="updC('${key}',${i},'desc',this.value)">${esc(n.desc)}</textarea>
+    <label>画像URL（任意・★代表は大きく、通常記事は小さく表示）</label><input type="url" value="${esc(n.img||'')}" oninput="updC('${key}',${i},'img',this.value)" placeholder="https://...">
+    <div class="tag-row">
+      <div><label>画像出典名</label><input type="text" value="${esc(n.imgCredit||'')}" oninput="updC('${key}',${i},'imgCredit',this.value)" placeholder="例：中央通訊社（CNA）"></div>
+      <div><label>画像出典URL</label><input type="url" value="${esc(n.imgCreditUrl||'')}" oninput="updC('${key}',${i},'imgCreditUrl',this.value)" placeholder="原文記事URLまたは画像提供元URL"></div>
+    </div>
+    <div class="hint">※ 画像出典名が入力されている場合、メール本文とHPアーカイブに自動表示されます。</div>`;
+    body.appendChild(d);
+  });
+  addBtn(body,()=>{state.countries[key].push(blankNews());renderCountryItems(key);});
+}
+function updC(key,i,f,v){
+  if(f==='isRepresentative'&&v){state.countries[key].forEach((n,idx)=>n.isRepresentative=(idx===i));renderCountryItems(key);}
+  else{state.countries[key][i][f]=v;}
+  if(f==='title'){const c=countCountry(key);const el=document.getElementById('cb-'+key);el.textContent=c;el.className='count-badge '+(c?'':'zero');}
+  scheduleSave();
+}
+
+/* ═══════════ 汎用ブロック UI（コーポレート/事例/コラム）═══════════ */
+function buildGenBlock(boxId,arrKey,fields,addFn){
+  // fields: 各アイテムの入力欄定義
+}
+function renderCorp(){
+  const box=document.getElementById('corpBox');box.innerHTML='';
+  state.corp.forEach((it,i)=>{
+    const d=document.createElement('div');d.className='item';
+    d.innerHTML=`${state.corp.length>1?`<button class="btn btn-del" onclick="delItem('corp',null,${i})">削除</button>`:''}
+    <label>タイトル</label><input type="text" value="${esc(it.title)}" oninput="updG('corp',${i},'title',this.value)">
+    <label>URL</label><input type="url" value="${esc(it.url)}" oninput="updG('corp',${i},'url',this.value)" placeholder="https://...">
+    <label>概要</label><textarea oninput="updG('corp',${i},'desc',this.value)">${esc(it.desc)}</textarea>
+    <label>画像URL（任意・入れるとサムネ表示）</label><input type="url" value="${esc(it.img)}" oninput="updG('corp',${i},'img',this.value)" placeholder="https://...">`;
+    box.appendChild(d);
+  });
+  addBtn(box,()=>{state.corp.push({title:'',url:'',desc:'',img:''});renderCorp();});
+}
+function renderCases(){
+  const box=document.getElementById('caseBox');box.innerHTML='';
+  state.cases.forEach((it,i)=>{
+    const d=document.createElement('div');d.className='item';
+    d.innerHTML=`${state.cases.length>1?`<button class="btn btn-del" onclick="delItem('cases',null,${i})">削除</button>`:''}
+    <label>ラベル</label><input type="text" value="${esc(it.label)}" oninput="updG('cases',${i},'label',this.value)" placeholder="CASE / 導入事例 など">
+    <label>タイトル</label><input type="text" value="${esc(it.title)}" oninput="updG('cases',${i},'title',this.value)">
+    <label>成果・サマリ（任意・強調表示）</label><input type="text" value="${esc(it.result)}" oninput="updG('cases',${i},'result',this.value)" placeholder="例：3年で訪日客7.5倍">
+    <label>概要</label><textarea oninput="updG('cases',${i},'desc',this.value)">${esc(it.desc)}</textarea>
+    <label>URL</label><input type="url" value="${esc(it.url)}" oninput="updG('cases',${i},'url',this.value)" placeholder="https://...">
+    <label>画像URL（任意）</label><input type="url" value="${esc(it.img)}" oninput="updG('cases',${i},'img',this.value)" placeholder="https://...">`;
+    box.appendChild(d);
+  });
+  addBtn(box,()=>{state.cases.push({label:'CASE',title:'',url:'',desc:'',result:'',img:''});renderCases();});
+}
+function renderColumns(){
+  const box=document.getElementById('columnBox');box.innerHTML='';
+  state.columns.forEach((it,i)=>{
+    const d=document.createElement('div');d.className='item';
+    d.innerHTML=`${state.columns.length>1?`<button class="btn btn-del" onclick="delItem('columns',null,${i})">削除</button>`:''}
+    <label>タイトル</label><input type="text" value="${esc(it.title)}" oninput="updG('columns',${i},'title',this.value)">
+    <label>メタ（任意・著者/読了時間など）</label><input type="text" value="${esc(it.meta)}" oninput="updG('columns',${i},'meta',this.value)" placeholder="例：編集部 ・ 5分で読めます">
+    <label>概要</label><textarea oninput="updG('columns',${i},'desc',this.value)">${esc(it.desc)}</textarea>
+    <label>URL</label><input type="url" value="${esc(it.url)}" oninput="updG('columns',${i},'url',this.value)" placeholder="https://...">
+    <label>画像URL（任意）</label><input type="url" value="${esc(it.img)}" oninput="updG('columns',${i},'img',this.value)" placeholder="https://...">`;
+    box.appendChild(d);
+  });
+  addBtn(box,()=>{state.columns.push({title:'',url:'',desc:'',meta:'',img:''});renderColumns();});
+}
+function renderBanners(){
+  const box=document.getElementById('bannerBox');box.innerHTML='';
+  state.banners.forEach((it,i)=>{
+    const d=document.createElement('div');d.className='item';
+    d.innerHTML=`${state.banners.length>1?`<button class="btn btn-del" onclick="delItem('banners',null,${i})">削除</button>`:''}
+    <label>バナー画像URL</label><input type="url" value="${esc(it.img)}" oninput="updG('banners',${i},'img',this.value)" placeholder="https://...（横1200px推奨）">
+    <label>リンク先URL</label><input type="url" value="${esc(it.url)}" oninput="updG('banners',${i},'url',this.value)" placeholder="https://...">`;
+    box.appendChild(d);
+  });
+  addBtn(box,()=>{state.banners.push({img:'',url:''});renderBanners();});
+}
+function updG(kind,i,f,v){state[kind][i][f]=v;scheduleSave();}
+function delItem(kind,ckey,i){
+  if(kind==='countries'){state.countries[ckey].splice(i,1);renderCountryItems(ckey);}
+  else{state[kind].splice(i,1);
+    ({corp:renderCorp,cases:renderCases,columns:renderColumns,banners:renderBanners})[kind]();}
+  scheduleSave();
+}
+function addBtn(box,fn){const b=document.createElement('button');b.className='btn btn-add';b.textContent='＋ 追加';b.onclick=()=>{fn();scheduleSave();};box.appendChild(b);}
+function tog(bodyId,arrId){document.getElementById(bodyId).classList.toggle('open');const a=document.getElementById(arrId);a.textContent=a.textContent==='▸'?'▾':'▸';}
+
+/* ═══════════ HTML生成：各パーツ ═══════════ */
+function srcTag(t){return t==='日本語ニュース'
+  ?`<span style="display:inline-block; background-color:#eff6ff; color:#1d4ed8; font-size:10px; padding:2px 7px; border-radius:3px; letter-spacing:0.04em; margin-bottom:7px; margin-right:5px;">日本語ニュース</span>`
+  :`<span style="display:inline-block; background-color:#f1f5f9; color:#475569; font-size:10px; padding:2px 7px; border-radius:3px; letter-spacing:0.04em; margin-bottom:7px; margin-right:5px;">現地メディア</span>`;}
+function badge(text,bg,color){return text?`<span style="display:inline-block; background-color:${bg}; color:${color}; font-size:10px; padding:2px 7px; border-radius:3px; letter-spacing:0.04em; margin-bottom:7px; margin-right:5px;">${esc(text)}</span>`:'';}
+function catTag(t){return badge(t,'#eff6ff','#1d4ed8');}
+function subTagTag(t){return badge(t,'#f8fafc','#64748b');}
+function kaisetsuTag(){return `<span style="display:inline-block; background-color:#f5f3ff; color:#7c3aed; font-size:10px; padding:2px 7px; border-radius:3px; letter-spacing:0.04em; margin-bottom:7px; margin-right:5px;">日本語解説</span>`;}
+
+function cleanImageUrl(v){
+  const s=String(v||'').trim();
+  // Google Sheetsで画像そのものをコピーすると data:image... になることがあります。
+  // メール本文には重すぎるため、公開URL以外は取り込みません。
+  if(/^data:image\//.test(s))return '';
+  return s;
+}
+
+function imageCreditHTML(n){
+  const name=String(n.imgCredit||'').trim();
+  if(!name)return '';
+  const creditUrl=String(n.imgCreditUrl||n.url||'').trim();
+  const label=`画像出典：${esc(name)}`;
+  if(creditUrl && /^https?:\/\//.test(creditUrl)){
+    return `<p style="margin:6px 0 0 0; font-size:10px; color:#94a3b8; line-height:1.5em; text-align:right;"><a href="${esc(creditUrl)}" target="_blank" rel="noopener noreferrer" style="color:#94a3b8; text-decoration:none;">${label}</a></p>`;
+  }
+  return `<p style="margin:6px 0 0 0; font-size:10px; color:#94a3b8; line-height:1.5em; text-align:right;">${label}</p>`;
+}
+
+function newsHTML(n){const url=n.url.trim()||'#';
+  const hasImg=n.img&&n.img.trim();
+  const meta=[n.media,n.publishedAt].filter(Boolean).map(esc).join(' ｜ ');
+  const metaHTML=meta?`<p style="margin:0 0 7px 0; font-size:11px; color:#94a3b8; line-height:1.5em;">${meta}</p>`:'';
+  const textBlock=`${srcTag(n.srcType)}${(n.srcType==='現地メディア'&&n.kaisetsu)?kaisetsuTag():''}${catTag(n.catType)}${subTagTag(n.subTag)}
+${metaHTML}<a href="${esc(url)}" target="_blank" style="color:#1e3a5f; font-size:15px; line-height:1.65em; text-decoration:none; display:block; margin-bottom:5px; font-weight:500;" class="article-title">${esc(n.title)}</a>
+<p style="margin:0; font-size:13px; color:#64748b; line-height:1.9em;">${esc(n.desc)}</p>`;
+  if(hasImg && n.isRepresentative){
+    // ★代表は内部管理用。メール本文には表示しない。
+    // ただし画像は国別のメイン記事として、PC/モバイルともに自然に見える大きめ画像で表示する。
+    return `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom:24px;"><tbody>
+<tr><td style="padding:0 0 14px 0;">
+<a href="${esc(url)}" target="_blank" style="text-decoration:none;"><img src="${esc(n.img)}" alt="" width="624" style="display:block; width:100%; max-width:100%; height:auto; border-radius:8px; border:0;"></a>
+${imageCreditHTML(n)}
+</td></tr>
+<tr><td style="padding:0;">${textBlock}</td></tr>
+</tbody></table>`;
+  }
+  if(hasImg){
+    // 通常記事に画像がある場合は、本文を邪魔しない小さめサムネイルで表示する。
+    return `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom:22px;"><tbody>
+<tr><td style="padding:0 0 10px 0;">
+<a href="${esc(url)}" target="_blank"><img src="${esc(n.img)}" alt="" width="180" style="display:block; width:180px; height:auto; max-width:100%; border-radius:6px; border:0;"></a>
+${imageCreditHTML(n)}
+</td></tr>
+<tr><td style="padding:0;">${textBlock}</td></tr>
+</tbody></table>`;
+  }
+  return `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom:18px;"><tbody><tr><td>
+${textBlock}
+</td></tr></tbody></table>`;
+}
+
+function countryHTML(c,isLast){
+  const arr=state.countries[c.key].filter(n=>n.title.trim());
+  if(!arr.length)return'';
+  const items=arr.map(newsHTML).join('\n');
+  const divider=isLast?'':`<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin:28px 0 0 0;"><tbody><tr><td height="1" style="background-color:#e2e8f0; font-size:1px;">&nbsp;</td></tr></tbody></table>`;
+  return `<!-- ${c.ja} -->
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:28px;"><tbody><tr><td>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="padding-bottom:12px; border-bottom:1px solid #e2e8f0; margin-bottom:18px;"><tbody><tr>
+<td><p style="margin:0; font-size:14px; font-weight:700; color:#0f172a;">${c.flag}&nbsp; ${c.ja}</p></td>
+<td style="text-align:right;"><span style="font-size:10px; color:#cbd5e1; letter-spacing:0.08em;">${c.en}</span></td>
+</tr></tbody></table>
+${items}
+</td></tr></tbody></table>
+${divider}`;
+}
+
+// セクション見出し（共通）
+function sectionHead(labelEN,titleJA,accent){
+  return `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#ffffff;"><tbody><tr>
+<td class="pad" style="padding:40px 28px 0 28px;">
+<p style="margin:0 0 8px 0; font-size:10px; font-weight:800; color:${accent}; letter-spacing:0.18em;">${labelEN}</p>
+<h2 style="margin:0; font-size:19px; font-weight:700; color:#0f172a; line-height:1.3em; letter-spacing:-0.01em; border-bottom:2px solid #0f172a; padding-bottom:12px;">${titleJA}</h2>
+</td></tr></tbody></table>`;
+}
+
+// コーポレートニュース：左アクセントバー型
+function corpHTML(){
+  const arr=state.corp.filter(it=>it.title.trim());if(!arr.length)return'';
+  let inner=arr.map((it,idx)=>{
+    const url=it.url.trim()||'#';
+    const thumb=it.img.trim()?`<td width="96" valign="top" style="vertical-align:top; padding-left:14px;" class="corp-thumb">
+<img src="${esc(it.img)}" alt="" width="84" style="display:block; width:84px; height:84px; object-fit:cover; border-radius:4px; border:0;"></td>`:'';
+    const mb=idx===arr.length-1?'':' margin-bottom:14px;';
+    return `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#f8fafc; border-radius:6px;${mb}"><tbody><tr>
+<td width="4" style="background-color:#2563eb; font-size:1px; line-height:1px; border-radius:6px 0 0 6px;">&nbsp;</td>
+<td class="corp-pad" style="padding:16px 18px;"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr>
+<td valign="top" style="vertical-align:top;">
+<span style="display:inline-block; background-color:#0f172a; color:#fff; font-size:9px; font-weight:700; padding:2px 8px; border-radius:2px; letter-spacing:0.1em; margin-bottom:8px;">NEWS</span>
+<a href="${esc(url)}" target="_blank" style="display:block; color:#0f172a; font-size:15px; font-weight:600; line-height:1.5em; text-decoration:none; margin-bottom:6px;" class="article-title">${esc(it.title)}</a>
+<p style="margin:0; font-size:13px; color:#64748b; line-height:1.85em;">${esc(it.desc)}</p></td>
+${thumb}
+</tr></tbody></table></td></tr></tbody></table>`;
+  }).join('\n');
+  return sectionHead("CORPORATE NEWS","会社からのお知らせ","#2563eb")+
+    `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background:#fff;"><tbody><tr><td class="pad" style="padding:20px 28px 0 28px;">${inner}</td></tr></tbody></table>`;
+}
+
+// 事例：画像上・カード型
+function caseHTML(){
+  const arr=state.cases.filter(it=>it.title.trim());if(!arr.length)return'';
+  let inner=arr.map((it,idx)=>{
+    const url=it.url.trim()||'#';
+    const img=it.img.trim()?`<a href="${esc(url)}" target="_blank" style="text-decoration:none;"><img src="${esc(it.img)}" alt="" width="574" style="display:block; width:100%; max-width:100%; height:auto; border:0; border-radius:6px 6px 0 0;"></a>`:'';
+    const result=it.result.trim()?`<p style="margin:0 0 8px 0; font-size:15px; font-weight:700; color:#2563eb; line-height:1.5em;">${esc(it.result)}</p>`:'';
+    const mb=idx===arr.length-1?'':' margin-bottom:16px;';
+    const topPad=it.img.trim()?'0':'20px';
+    return `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="border:1px solid #e2e8f0; border-radius:6px; overflow:hidden;${mb}"><tbody>
+<tr><td style="padding:0;">${img}</td></tr>
+<tr><td class="mobile-card-pad" style="padding:18px 20px 20px 20px;">
+<span style="display:inline-block; background-color:#eff6ff; color:#1d4ed8; font-size:10px; font-weight:700; padding:3px 9px; border-radius:3px; letter-spacing:0.12em; margin-bottom:10px;">${esc(it.label||'CASE')}</span>
+<a href="${esc(url)}" target="_blank" style="display:block; color:#0f172a; font-size:17px; font-weight:700; line-height:1.5em; text-decoration:none; margin-bottom:8px;" class="mobile-small-title">${esc(it.title)}</a>
+${result}
+<p style="margin:0 0 14px 0; font-size:13px; color:#64748b; line-height:1.9em;">${esc(it.desc)}</p>
+<a href="${esc(url)}" target="_blank" style="display:inline-block; font-size:12px; font-weight:700; color:#0f172a; text-decoration:none; border-bottom:2px solid #2563eb; padding-bottom:2px;">詳しく見る &#x2192;</a>
+</td></tr></tbody></table>`;
+  }).join('\n');
+  return sectionHead("CASE STUDY","導入事例・活用事例","#2563eb")+
+    `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background:#fff;"><tbody><tr><td class="pad" style="padding:20px 28px 0 28px;">${inner}</td></tr></tbody></table>`;
+}
+
+// コラム：横並び（画像小さめ左）
+function columnHTML(){
+  const arr=state.columns.filter(it=>it.title.trim());if(!arr.length)return'';
+  let inner=arr.map((it,idx)=>{
+    const url=it.url.trim()||'#';
+    const meta=it.meta.trim()?`<p style="margin:8px 0 0 0; font-size:11px; color:#94a3b8; letter-spacing:0.04em;">${esc(it.meta)}</p>`:'';
+    const bb=idx===arr.length-1?'':'border-bottom:1px solid #e2e8f0; ';
+    const thumb=it.img.trim()?`<td width="120" valign="top" style="vertical-align:top; padding-right:16px;" class="col-thumb">
+<a href="${esc(url)}" target="_blank"><img src="${esc(it.img)}" alt="" width="108" style="display:block; width:108px; height:72px; object-fit:cover; border-radius:4px; border:0;"></a></td>`:'';
+    return `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="${bb}padding-bottom:16px; margin-bottom:16px;"><tbody><tr>
+${thumb}
+<td valign="top" style="vertical-align:top;">
+<span style="display:inline-block; color:#7c3aed; font-size:10px; font-weight:800; letter-spacing:0.14em; margin-bottom:6px;">COLUMN</span>
+<a href="${esc(url)}" target="_blank" style="display:block; color:#0f172a; font-size:15px; font-weight:600; line-height:1.55em; text-decoration:none; margin-bottom:5px;" class="article-title">${esc(it.title)}</a>
+<p style="margin:0; font-size:13px; color:#64748b; line-height:1.85em;">${esc(it.desc)}</p>
+${meta}
+</td></tr></tbody></table>`;
+  }).join('\n');
+  return sectionHead("COLUMN","コラム・読み物","#7c3aed")+
+    `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background:#fff;"><tbody><tr><td class="pad" style="padding:20px 28px 0 28px;">${inner}</td></tr></tbody></table>`;
+}
+
+// セミナーバナー：画像通し
+function bannerHTML(){
+  const arr=state.banners.filter(it=>it.img.trim());if(!arr.length)return'';
+  let inner=arr.map(it=>{
+    const url=it.url.trim()||'#';
+    return `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer" style="display:block; text-decoration:none; margin:0 0 14px 0;">
+<img src="${esc(it.img)}" alt="セミナー・イベント" width="624" style="display:block; width:100%; max-width:100%; height:auto; border:0; border-radius:6px;"></a>`;
+  }).join('\n');
+  return `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#ffffff;"><tbody><tr>
+<td class="pad" style="padding:40px 28px 0 28px;">
+<p style="margin:0 0 6px 0; font-size:10px; font-weight:800; color:#ea580c; letter-spacing:0.22em;">SEMINAR &amp; EVENT</p>
+<p style="margin:0 0 16px 0; font-family:'Georgia','游明朝','Yu Mincho','YuMincho','Hiragino Mincho ProN',serif; font-size:22px; font-weight:400; color:#0f172a; line-height:1.5em; letter-spacing:0.02em;">申込受付中のセミナー・イベント</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom:20px;"><tbody><tr><td height="2" style="background-color:#0f172a; font-size:1px; line-height:1px;">&nbsp;</td></tr></tbody></table>
+${inner}
+</td></tr></tbody></table>`;
+}
+
+/* ═══════════ 全体組み立て ═══════════ */
+function buildFull(){
+  const date=document.getElementById('haishinbi').value||'（配信日未入力）';
+  const coverageStart=document.getElementById('coverageStart').value.trim();
+  const coverageEnd=document.getElementById('coverageEnd').value.trim();
+  const coverage=(coverageStart&&coverageEnd)?`${coverageStart} ～ ${coverageEnd} JST`:'';
+  const countriesHTML=COUNTRIES.map((c,i)=>{
+    // 最後に表示される国のdividerを消すため、表示される国だけで最後判定
+    return c;
+  });
+  // 表示される国リストを先に確定
+  const visible=COUNTRIES.filter(c=>state.countries[c.key].some(n=>n.title.trim()));
+  const newsSection=visible.length? visible.map((c,i)=>countryHTML(c,i===visible.length-1)).join('\n'):'';
+  const newsBlock = newsSection?
+    sectionHead("WORLD MARKET TOPICS","海外市場ニュース","#94a3b8")+
+    `<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background:#fff;"><tbody><tr><td class="pad-news" style="padding:0 28px;">${newsSection}</td></tr></tbody></table>`
+    :'';
+
+  return TEMPLATE
+    .replace('{{DATE}}',esc(date))
+    .replace('{{COVERAGE_BLOCK}}',coverage?`<p style="margin:12px 0 0 0; font-size:11px; color:#94a3b8; line-height:1.6em;">ニュース対象期間：${esc(coverage)}</p>`:'')
+    .replace('{{NEWS}}',newsBlock)
+    .replace('{{CORP}}',corpHTML())
+    .replace('{{CASE}}',caseHTML())
+    .replace('{{COLUMN}}',columnHTML())
+    .replace('{{BANNER}}',bannerHTML());
+}
+
+
+/* ═══════════ スプレッドシート取り込み ═══════════ */
+function normalizeCountryName(v){return String(v||'').replace(/\s/g,'').replace('韓国','韓国').trim();}
+const COUNTRY_ALIASES={
+  '中国':'cn','china':'cn','CHINA':'cn','China':'cn','cn':'cn',
+  '韓国':'kr','韩国':'kr','KOREA':'kr','Korea':'kr','kr':'kr',
+  '台湾':'tw','臺灣':'tw','TAIWAN':'tw','Taiwan':'tw','tw':'tw',
+  '香港':'hk','HONGKONG':'hk','HongKong':'hk','hk':'hk',
+  'タイ':'th','THAILAND':'th','Thailand':'th','th':'th',
+  'ベトナム':'vn','VIETNAM':'vn','Vietnam':'vn','vn':'vn',
+  'インドネシア':'id','INDONESIA':'id','Indonesia':'id','id':'id',
+  'フランス':'fr','FRANCE':'fr','France':'fr','fr':'fr',
+  'U.S.A':'us','USA':'us','アメリカ':'us','米国':'us','UNITEDSTATES':'us','UnitedStates':'us','us':'us'
+};
+function countryKeyFromCell(v){
+  const raw=String(v||'').trim();
+  const compact=normalizeCountryName(raw).replace(/[\.\s]/g,'');
+  return COUNTRY_ALIASES[raw]||COUNTRY_ALIASES[compact]||'';
+}
+function looksLikeHeader(cols){
+  const joined=cols.join(' ');
+  return /タイトル|記事URL|メディア名|概要|代表カテゴリ|画像URL|SAMPLE|記事入力エリア/.test(joined);
+}
+function deriveSrcType(media,url){
+  const s=(media+' '+url).toLowerCase();
+  if(/日本語|japan|recordchina|people\.com\.cn\/n3/.test(s))return '日本語ニュース';
+  return '現地メディア';
+}
+function importFromSheetPaste(){
+  const ta=document.getElementById('sheetPaste');
+  const text=ta?ta.value:'';
+  if(!text.trim()){showToast('貼り付け内容が空です。');return;}
+  const rows=text.replace(/\r/g,'').split('\n').map(r=>r.split('\t'));
+  const imported={};
+  COUNTRIES.forEach(c=>imported[c.key]=[]);
+  let currentKey='';
+  let count=0;
+  rows.forEach(cols=>{
+    while(cols.length<12)cols.push('');
+    if(looksLikeHeader(cols))return;
+    if(cols.join(' ').includes('* SAMPLE'))return;
+    const key=countryKeyFromCell(cols[0])||currentKey;
+    if(countryKeyFromCell(cols[0]))currentKey=countryKeyFromCell(cols[0]);
+    if(!key)return;
+    const representative=String(cols[1]||'').includes('★') || /代表|TRUE|true|✓|☑|○/.test(String(cols[1]||''));
+    const title=(cols[2]||'').trim();
+    const url=(cols[3]||'').trim();
+    const media=(cols[4]||'').trim();
+    const desc=(cols[5]||'').trim();
+    const cat=(cols[6]||'').trim();
+    const sub=(cols[7]||'').trim();
+    const img=cleanImageUrl(cols[8]||'');
+    const imgCredit=(cols[9]||'').trim();
+    const imgCreditUrl=(cols[10]||'').trim();
+    const publishedAt=(cols[11]||'').trim();
+    if(!title&&!url&&!desc&&!media&&!cat&&!img&&!imgCredit&&!imgCreditUrl&&!publishedAt)return;
+    imported[key].push({srcType:deriveSrcType(media,url),kaisetsu:false,isRepresentative:representative,media:media,publishedAt:publishedAt,catType:cat,subTag:sub,title:title,url:url,desc:desc,img:img,imgCredit:imgCredit,imgCreditUrl:imgCreditUrl});
+    count++;
+  });
+  if(!count){showToast('取り込める行が見つかりませんでした。');return;}
+  COUNTRIES.forEach(c=>{ if(imported[c.key].length) state.countries[c.key]=imported[c.key]; });
+  buildCountries();
+  COUNTRIES.forEach(c=>{ if(imported[c.key].length){ const b=document.getElementById('body-'+c.key); const a=document.getElementById('arr-'+c.key); if(b){b.classList.add('open');} if(a){a.textContent='▾';} }});
+  render();
+  scheduleSave();
+  showToast('✅ シートから '+count+' 件を取り込みました。');
+}
+
+
+/* ═══════════ HPアーカイブHTML生成（重複感を減らし、Top Picksはページ内アンカーへ） ═══════════ */
+function visibleCountryData(){
+  return COUNTRIES.map(c=>({country:c, items:state.countries[c.key].filter(n=>n.title.trim())})).filter(x=>x.items.length);
+}
+function representativeOrFirst(items){
+  return items.find(n=>n.isRepresentative) || items[0] || null;
+}
+function plainText(s){return String(s||'').replace(/<[^>]*>/g,'').trim();}
+function uniq(arr){return [...new Set(arr.filter(Boolean))];}
+function archiveArticleId(countryKey,index){return `archive-${countryKey}-${index+1}`;}
+function archiveRepresentativeId(countryKey,items){
+  const idx=Math.max(0,items.findIndex(n=>n.isRepresentative));
+  return archiveArticleId(countryKey,idx);
+}
+function archiveLeadHTML(data){
+  const countries=data.map(x=>x.country.ja).join('・');
+  const cats=uniq(data.flatMap(x=>x.items.map(n=>n.catType))).slice(0,6).join('、');
+  return `<p>「いま知っておきたい海外の動き」を、${esc(countries||'各国')}の各国スタッフがピックアップ。${esc(cats||'訪日観光・インバウンド関連')}など、インバウンド関連の最新ニュースを関連リンクとともに簡潔にご紹介します。</p>`;
+}
+function archiveSummaryHTML(data){
+  const countries=data.map(x=>x.country.ja).join('・');
+  const cats=uniq(data.flatMap(x=>x.items.map(n=>n.catType))).slice(0,8).join('、');
+  const total=data.reduce((sum,x)=>sum+x.items.length,0);
+  return `<h2>今号のポイント（要約）</h2>\n<ul>\n<li>対象国：${esc(countries)}</li>\n<li>掲載ニュース：${total}本</li>\n<li>主なテーマ：${esc(cats||'訪日観光・インバウンド関連')}</li>\n</ul>`;
+}
+function archiveTopPicksHTML(data){
+  const picks=[];
+  data.forEach(x=>{
+    const n=representativeOrFirst(x.items);
+    if(n)picks.push({country:x.country, n, anchor:archiveRepresentativeId(x.country.key,x.items)});
+  });
+  if(!picks.length)return '';
+  return `<h2>Top Picks</h2>\n<ol>\n${picks.map(p=>`<li><a href="#${esc(p.anchor)}">${esc(p.country.ja)}：${esc(p.n.title)}</a></li>`).join('\n')}\n</ol>`;
+}
+function archiveCountryListHTML(data){
+  return `<h2>各国ニュース一覧</h2>\n` + data.map(x=>{
+    const items=x.items.map((n,i)=>{
+      const id=archiveArticleId(x.country.key,i);
+      const tags=uniq([n.srcType,n.catType,n.subTag]).map(t=>`<span style="display:inline-block;background:#f1f5f9;color:#475569;font-size:12px;padding:2px 8px;border-radius:4px;margin:0 4px 6px 0;">${esc(t)}</span>`).join('');
+      const img=(n.isRepresentative && n.img)?`<p><a href="${esc(n.url||'#')}" target="_blank" rel="noopener"><img src="${esc(n.img)}" alt="" style="max-width:100%;height:auto;border-radius:8px;"></a>${n.imgCredit?`<br><small style="color:#94a3b8;">画像出典：${n.imgCreditUrl?`<a href="${esc(n.imgCreditUrl)}" target="_blank" rel="noopener">${esc(n.imgCredit)}</a>`:esc(n.imgCredit)}</small>`:''}</p>`:'';
+      const meta=[n.media,n.publishedAt].filter(Boolean).map(esc).join(' ｜ ');
+      return `<div id="${esc(id)}" style="margin:0 0 24px 0; scroll-margin-top:90px;">\n${img}\n<p style="margin:0 0 6px 0;">${tags}</p>\n${meta?`<p style="margin:0 0 6px 0;color:#94a3b8;font-size:12px;">${meta}</p>`:''}<h3 style="margin:0 0 8px 0;"><a href="${esc(n.url||'#')}" target="_blank" rel="noopener">${esc(n.title)}</a></h3>\n<p>${esc(n.desc)}</p>\n</div>`;
+    }).join('\n');
+    return `<h2>${esc(x.country.flag)} ${esc(x.country.ja)}</h2>\n${items}`;
+  }).join('\n');
+}
+function buildArchiveHTML(){
+  const data=visibleCountryData();
+  if(!data.length)return '<p>ニュースが入力されていません。</p>';
+  return [archiveLeadHTML(data),archiveSummaryHTML(data),archiveTopPicksHTML(data),archiveCountryListHTML(data)].filter(Boolean).join('\n\n');
+}
+function copyArchiveHTML(){
+  const w=validate();
+  if(w.length&&!confirm('⚠️ 確認事項が'+w.length+'件あります。\n\n'+w.join('\n')+'\n\nこのままHPアーカイブHTMLをコピーしますか？'))return;
+  const html=buildArchiveHTML();
+  navigator.clipboard.writeText(html).then(()=>showToast('✅ HPアーカイブHTMLをコピーしました。WordPress本文に貼り付けてください。'),
+    ()=>{const t=document.createElement('textarea');t.value=html;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();showToast('✅ HPアーカイブHTMLをコピーしました。');});
+}
+
+/* ═══════════ 未完了リマインド文生成 ═══════════ */
+function countryCompletionIssues(c){
+  const filled=state.countries[c.key].filter(n=>n.title.trim()||n.url.trim()||n.desc.trim()||n.catType.trim()||n.img.trim());
+  if(!filled.length)return ['未入力'];
+  const issues=[];
+  if(filled.filter(n=>n.title.trim()).length<2)issues.push('ニュース2本以上');
+  const reps=filled.filter(n=>n.isRepresentative);
+  if(!reps.length)issues.push('代表記事の選択');
+  if(reps.length>1)issues.push('代表記事は1本のみ');
+  if(reps.length && !reps.some(n=>n.img.trim()))issues.push('代表記事の画像URL');
+  filled.forEach((n,i)=>{
+    if(n.title.trim()){
+      if(!n.url.trim())issues.push(`記事${i+1} URL`);
+      if(!n.desc.trim())issues.push(`記事${i+1} 概要文`);
+      if(!n.catType.trim())issues.push(`記事${i+1} 代表カテゴリ`);
+    }
+  });
+  return [...new Set(issues)];
+}
+function buildReminderText(){
+  const lines=[];
+  COUNTRIES.forEach(c=>{
+    const issues=countryCompletionIssues(c);
+    if(issues.length)lines.push(`・${c.ja}：${issues.join(' / ')}`);
+  });
+  if(!lines.length)return '各国の入力はすべて完了しています。ありがとうございます。';
+  return `各国担当者の皆さま\n\nメルマガ用ニュース入力のご対応ありがとうございます。\n未完了の国・不足項目は下記です。ステータスが COMPLETE になるよう、本日中に追加入力をお願いします。\n\n${lines.join('\n')}\n\n※各国2〜3本、代表記事1本、代表記事の画像URLは必須です。`;
+}
+function copyReminderText(){
+  const text=buildReminderText();
+  navigator.clipboard.writeText(text).then(()=>showToast('✅ リマインド文をコピーしました。'),
+    ()=>{const t=document.createElement('textarea');t.value=text;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();showToast('✅ リマインド文をコピーしました。');});
+}
+
+/* ═══════════ 入力チェック ═══════════ */
+function validate(){
+  const w=[];
+  COUNTRIES.forEach(c=>{
+    const filled=state.countries[c.key].filter(n=>n.title.trim());
+    if(filled.length){
+      const reps=filled.filter(n=>n.isRepresentative);
+      if(reps.length>1)w.push(`${c.ja}：代表記事が複数選択されています`);
+    }
+    state.countries[c.key].forEach((n,i)=>{
+      if(n.title.trim()&&!n.url.trim())w.push(`${c.ja} ニュース${i+1}：URLが空`);
+      if(n.title.trim()&&!n.desc.trim())w.push(`${c.ja} ニュース${i+1}：メルマガ用概要文が空`);
+      if(n.title.trim()&&!n.catType.trim())w.push(`${c.ja} ニュース${i+1}：代表カテゴリが空`);
+      if(n.title.trim()&&!n.media.trim())w.push(`${c.ja} ニュース${i+1}：メディア名が空`);
+      if(n.title.trim()&&!n.publishedAt.trim())w.push(`${c.ja} ニュース${i+1}：記事掲載日が空`);
+      if(n.url.trim()&&!/^https?:\/\//.test(n.url.trim()))w.push(`${c.ja} ニュース${i+1}：URLがhttpで始まっていない`);
+      if(n.img&&n.img.trim()&&!/^https?:\/\//.test(n.img.trim()))w.push(`${c.ja} ニュース${i+1}：画像URLはhttpsの公開URLを入れてください`);
+      if(n.imgCreditUrl&&n.imgCreditUrl.trim()&&!/^https?:\/\//.test(n.imgCreditUrl.trim()))w.push(`${c.ja} ニュース${i+1}：画像出典URLがhttpで始まっていない`);
+      if(n.img&&n.img.trim()&&!n.imgCredit.trim())w.push(`${c.ja} ニュース${i+1}：画像出典名が空`);
+    });
+  });
+  [['corp','コーポレート'],['cases','事例'],['columns','コラム']].forEach(([k,ja])=>{
+    state[k].forEach((it,i)=>{
+      if(it.title.trim()&&!it.url.trim())w.push(`${ja}${i+1}：URLが空`);
+      if(it.url.trim()&&!/^https?:\/\//.test(it.url.trim()))w.push(`${ja}${i+1}：URLがhttpで始まっていない`);
+      if(it.img&&it.img.trim()&&!/^https?:\/\//.test(it.img.trim()))w.push(`${ja}${i+1}：画像URLがhttpで始まっていない`);
+    });
+  });
+  state.banners.forEach((it,i)=>{
+    if(it.img.trim()&&!/^https?:\/\//.test(it.img.trim()))w.push(`バナー${i+1}：画像URLがhttpで始まっていない`);
+    if(it.img.trim()&&!it.url.trim())w.push(`バナー${i+1}：リンク先URLが空`);
+  });
+  const kaisetsuCount=COUNTRIES.reduce((sum,c)=>sum+state.countries[c.key].filter(n=>n.title.trim()&&n.srcType==='現地メディア'&&n.kaisetsu).length,0);
+  if(kaisetsuCount>1)w.push(`日本語解説バッジが${kaisetsuCount}件あります。通常はメルマガ1号につき1件程度にしてください。`);
+  return w;
+}
+
+/* ═══════════ 描画・コピー ═══════════ */
+let device='mobile';
+function setDevice(d){device=d;
+  document.getElementById('btn-mobile').classList.toggle('active',d==='mobile');
+  document.getElementById('btn-pc').classList.toggle('active',d==='pc');
+  render();}
+function render(){
+  const html=buildFull();
+  const f=document.getElementById('preview');
+  f.style.maxWidth=device==='mobile'?'380px':'100%';
+  f.style.margin=device==='mobile'?'0 auto':'0';
+  f.srcdoc=html;
+  const w=validate();const wb=document.getElementById('warnbox');
+  if(w.length){wb.classList.add('show');wb.innerHTML='⚠️ 確認してください：<ul>'+w.map(x=>`<li>${x}</li>`).join('')+'</ul>';}
+  else wb.classList.remove('show');
+}
+function copyHTML(){
+  const w=validate();
+  if(w.length&&!confirm('⚠️ 確認事項が'+w.length+'件：\n\n'+w.join('\n')+'\n\nこのままコピーしますか？'))return;
+  const html=buildFull();
+  navigator.clipboard.writeText(html).then(()=>showToast('✅ コピー完了。Sansanの本文に貼り付けてください。'),
+    ()=>{const t=document.createElement('textarea');t.value=html;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();showToast('✅ コピー完了。');});
+}
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
+
+/* ═══════════ 骨組みテンプレート ═══════════ */
+const TEMPLATE=`<!doctype html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>グローバル・デイリー海外情報ニュース</title>
+<style type="text/css">
+@media only screen and (max-width:640px){
+.outer-wrap{margin:0 !important;}
+.pad{padding-left:20px !important;padding-right:20px !important;}
+.pad-hero{padding:26px 20px 22px 20px !important;}
+.pad-news{padding:0 20px !important;}
+.pad-footer{padding-left:16px !important;padding-right:16px !important;}
+.mobile-card-pad{padding:18px 16px !important;}
+.mobile-small-title{font-size:16px !important;}
+.corp-thumb,.col-thumb{display:none !important;}
+.news-thumb{padding-right:12px !important;}
+.news-thumb img{width:64px !important;height:64px !important;}
+.article-title{font-size:14px !important;}
+h1.hero-title{font-size:22px !important;}
+}
+</style>
+</head>
+<body style="margin:0; padding:0; background-color:#ffffff; -webkit-text-size-adjust:100%; font-family:'Helvetica Neue', Arial, 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;">
+<div style="display:none; max-height:0; overflow:hidden; font-size:1px; line-height:1px; color:#eef0f3;">本日の海外ニュース</div>
+<table class="outer-wrap" border="0" cellspacing="0" cellpadding="0" align="center" width="100%" style="width:100%; max-width:680px; margin:0 auto;">
+<tbody><tr><td>
+
+<!-- HERO -->
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#0f172a;">
+<tbody>
+<tr><td width="72%" height="3" style="background-color:#2563eb; font-size:1px; line-height:1px;">&nbsp;</td>
+<td width="28%" height="3" style="background-color:#1e40af; font-size:1px; line-height:1px;">&nbsp;</td></tr>
+<tr><td class="pad-hero" colspan="2" style="padding:30px 28px 26px 28px;">
+<table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr>
+<td align="left" valign="middle" style="vertical-align:middle;">
+<img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2025/07/GLD_type02_white_1178_785-2-1.png" alt="グローバル・デイリー" width="108" style="display:block; width:108px; height:auto; border:0;"></td>
+<td align="right" valign="middle" style="text-align:right; vertical-align:middle; white-space:nowrap;">
+<span style="font-size:11px; color:rgba(255,255,255,0.45); letter-spacing:0.06em;">{{DATE}}</span></td>
+</tr></tbody></table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:18px;"><tbody><tr><td height="1" style="background-color:rgba(255,255,255,0.08); font-size:1px; line-height:1px;">&nbsp;</td></tr></tbody></table>
+<p style="margin:20px 0 5px 0; font-size:10px; font-weight:800; color:#2563eb; letter-spacing:0.18em; line-height:1;">NEWSLETTER</p>
+<h1 class="hero-title" style="margin:0 0 8px 0; font-size:26px; font-weight:300; color:#ffffff; line-height:1.25em; letter-spacing:0.04em;">海外情報ニュース</h1>
+<p style="margin:0; font-size:13px; color:rgba(255,255,255,0.45); line-height:1.65em;">海外市場の変化を、日本企業・インバウンド施策の視点でお届けします</p>
+</td></tr>
+</tbody></table>
+
+<!-- 挨拶 -->
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#ffffff;"><tbody><tr>
+<td class="pad" style="padding:28px 28px 0 28px;">
+<p style="margin:0 0 14px 0; font-size:14px; color:#0f172a; line-height:1.5em;">((#宛先の会社名#)) ((#宛先の氏名 (姓)#)) 様</p>
+<p style="margin:0; font-size:14px; color:#64748b; line-height:1.9em;">海外現地メディアや公的データから、<span style="color:#0f172a;">「日本企業がいま知っておきたい海外市場の動き」</span>を編集部が厳選してお届けします。</p>
+{{COVERAGE_BLOCK}}
+</td></tr></tbody></table>
+
+{{NEWS}}
+{{CORP}}
+{{CASE}}
+{{COLUMN}}
+{{BANNER}}
+
+<!-- FOOTER -->
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#0f172a; margin-top:44px;">
+<tbody><tr><td class="pad pad-footer" style="padding:36px 28px 30px 28px;">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom:24px;"><tbody><tr>
+<td style="vertical-align:top; width:55%;">
+<a href="https://www.gldaily.com" target="_blank" rel="noopener noreferrer">
+<img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2025/07/GLD_type02_white_1178_785-2-1.png" alt="グローバル・デイリー" width="100" style="display:block; max-width:100px; height:auto; border:0; margin-bottom:14px;"></a>
+<p style="margin:0; font-size:12px; color:rgba(255,255,255,0.4); line-height:1.9em;">〒110-0015<br>東京都台東区東上野4-8-1<br>TIX TOWER UENO 13階</p></td>
+<td style="vertical-align:top; text-align:right; width:45%;">
+<p style="margin:0 0 8px 0;"><a href="tel:+81368607011" style="font-size:13px; color:rgba(255,255,255,0.6); text-decoration:none;">03-6860-7011</a></p>
+<p style="margin:0 0 8px 0;"><a href="mailto:info@gldaily.com" style="font-size:13px; color:rgba(255,255,255,0.6); text-decoration:none;">info@gldaily.com</a></p>
+<p style="margin:0 0 8px 0;"><a href="https://www.gldaily.com" target="_blank" style="font-size:13px; color:rgba(255,255,255,0.6); text-decoration:none;">www.gldaily.com</a></p>
+<p style="margin:0 0 8px 0;"><a href="https://www.facebook.com/globaldailytokyo" target="_blank" style="font-size:13px; color:rgba(255,255,255,0.6); text-decoration:none;">Facebook</a></p>
+<p style="margin:0;"><a href="https://www.instagram.com/globaldaily_japan/" target="_blank" style="font-size:13px; color:rgba(255,255,255,0.6); text-decoration:none;">Instagram</a></p>
+</td></tr></tbody></table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td height="1" style="background-color:rgba(255,255,255,0.08); font-size:1px; line-height:1px;">&nbsp;</td></tr></tbody></table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td style="padding-top:20px; text-align:center;">
+<p style="margin:0 0 6px 0; font-size:11px; color:rgba(255,255,255,0.3); line-height:1.7em;">配信停止をご希望の場合は <a href="mailto:info@gldaily.com?subject=ニュースレター配信停止希望" style="color:rgba(255,255,255,0.5); text-decoration:underline;">info@gldaily.com</a> までご連絡ください。</p>
+<p style="margin:0; font-size:11px; color:rgba(255,255,255,0.3); line-height:1.7em;">&copy; 2026 Global Daily Inc. All rights reserved.</p>
+</td></tr></tbody></table>
+</td></tr></tbody></table>
+
+</td></tr></tbody></table>
+</body>
+</html>`;
+
+/* 初期化 */
+const hasDraft=loadDraft();
+buildCountries();renderCorp();renderCases();renderColumns();renderBanners();
+document.getElementById('haishinbi').value=restoredDate||'';
+document.getElementById('coverageStart').value=window.__restoredCoverageStart||'';
+document.getElementById('coverageEnd').value=window.__restoredCoverageEnd||'';
+['haishinbi','coverageStart','coverageEnd'].forEach(id=>document.getElementById(id).addEventListener('input',scheduleSave));
+render();
+setStatus(hasDraft?'前回の入力内容を復元しました':'自動保存：ON');
+</script>
+</body>
+</html>
