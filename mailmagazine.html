@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>メルマガ作成ツール v3 ｜ Global Daily</title>
+<title>メルマガ作成ツール v4.1 ｜ Global Daily</title>
 <style>
   :root{--ink:#0f172a;--blue:#2563eb;--line:#e2e8f0;--sub:#64748b;--bg:#f8fafc;--card:#fff;--ok:#15803d;--warn:#c2410c;}
   *{box-sizing:border-box;}
@@ -63,7 +63,7 @@
 <body>
 <div class="wrap">
   <header>
-    <h1>📧 海外情報ニュース メルマガ作成ツール <span style="font-size:12px;opacity:.6;">v4</span></h1>
+    <h1>📧 海外情報ニュース メルマガ作成ツール <span style="font-size:12px;opacity:.6;">v4.1</span></h1>
     <p>スプレッドシートから取り込み → メールHTML / HPアーカイブHTML / リマインド文を自動生成。</p>
   </header>
 
@@ -568,41 +568,106 @@ function deriveSrcType(media,url){
   if(/日本語|japan|recordchina|people\.com\.cn\/n3/.test(s))return '日本語ニュース';
   return '現地メディア';
 }
+function parseTSV(text){
+  // Google Sheets / Excel のTSVを、引用符内の改行も壊さず解析する。
+  const rows=[];
+  let row=[], field='', inQuotes=false;
+  const s=String(text||'')
+    .replace(/^\uFEFF/,'')
+    .replace(/^```(?:text|tsv)?\s*/i,'')
+    .replace(/\s*```$/,'');
+  for(let i=0;i<s.length;i++){
+    const ch=s[i];
+    if(ch==='"'){
+      if(inQuotes && s[i+1]==='"'){field+='"';i++;}
+      else inQuotes=!inQuotes;
+    }else if(ch==='\t' && !inQuotes){
+      row.push(field); field='';
+    }else if((ch==='\n' || ch==='\r') && !inQuotes){
+      if(ch==='\r' && s[i+1]==='\n')i++;
+      row.push(field);
+      if(row.some(v=>String(v).trim()!==''))rows.push(row);
+      row=[]; field='';
+    }else{
+      field+=ch;
+    }
+  }
+  row.push(field);
+  if(row.some(v=>String(v).trim()!==''))rows.push(row);
+  return rows;
+}
+
 function importFromSheetPaste(){
   const ta=document.getElementById('sheetPaste');
   const text=ta?ta.value:'';
   if(!text.trim()){showToast('貼り付け内容が空です。');return;}
-  const rows=text.replace(/\r/g,'').split('\n').map(r=>r.split('\t'));
+
+  const rows=parseTSV(text);
+  const maxCols=rows.reduce((m,r)=>Math.max(m,r.length),0);
+  if(maxCols<3){
+    showToast('❌ タブ区切りとして認識できません。スプレッドシートのセル範囲を直接コピーしてください。');
+    return;
+  }
+
   const imported={};
   COUNTRIES.forEach(c=>imported[c.key]=[]);
   let currentKey='';
   let count=0;
+  let skipped=0;
+
   rows.forEach(cols=>{
     while(cols.length<9)cols.push('');
     if(looksLikeHeader(cols))return;
     if(cols.join(' ').includes('* SAMPLE'))return;
-    const key=countryKeyFromCell(cols[0])||currentKey;
-    if(countryKeyFromCell(cols[0]))currentKey=countryKeyFromCell(cols[0]);
-    if(!key)return;
+
+    const detectedKey=countryKeyFromCell(cols[0]);
+    const key=detectedKey||currentKey;
+    if(detectedKey)currentKey=detectedKey;
+    if(!key){skipped++;return;}
+
     const representative=String(cols[1]||'').includes('★') || /代表|TRUE|true|✓|☑|○/.test(String(cols[1]||''));
     const title=(cols[2]||'').trim();
     const url=(cols[3]||'').trim();
     const media=(cols[4]||'').trim();
-    const desc=(cols[5]||'').trim();
+    const desc=(cols[5]||'').replace(/\s*\n\s*/g,' ').trim();
     const cat=(cols[6]||'').trim();
     const sub=(cols[7]||'').trim();
     const img=cleanImageUrl(cols[8]||'');
+
     if(!title&&!url&&!desc&&!media&&!cat&&!img)return;
-    imported[key].push({srcType:deriveSrcType(media,url),kaisetsu:false,isRepresentative:representative,media:media,catType:cat,subTag:sub,title:title,url:url,desc:desc,img:img});
+    imported[key].push({
+      srcType:deriveSrcType(media,url),
+      kaisetsu:false,
+      isRepresentative:representative,
+      media:media,
+      catType:cat,
+      subTag:sub,
+      title:title.replace(/\s*\n\s*/g,' '),
+      url:url,
+      desc:desc,
+      img:img
+    });
     count++;
   });
-  if(!count){showToast('取り込める行が見つかりませんでした。');return;}
+
+  if(!count){
+    showToast('❌ 取込0件。第1列の国名とタブ区切りを確認してください。');
+    return;
+  }
+
   COUNTRIES.forEach(c=>{ if(imported[c.key].length) state.countries[c.key]=imported[c.key]; });
   buildCountries();
-  COUNTRIES.forEach(c=>{ if(imported[c.key].length){ const b=document.getElementById('body-'+c.key); const a=document.getElementById('arr-'+c.key); if(b){b.classList.add('open');} if(a){a.textContent='▾';} }});
+  COUNTRIES.forEach(c=>{
+    if(imported[c.key].length){
+      const b=document.getElementById('body-'+c.key);
+      const a=document.getElementById('arr-'+c.key);
+      if(b)b.classList.add('open');
+      if(a)a.textContent='▾';
+    }
+  });
   render();
   scheduleSave();
-  showToast('✅ シートから '+count+' 件を取り込みました。');
+  showToast('✅ '+count+'件を取り込みました'+(skipped?'（未判定 '+skipped+'行）':'')+'。');
 }
 
 
