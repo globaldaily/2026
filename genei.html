@@ -478,6 +478,11 @@
   .excl-grid .xthumb{width:24px;height:24px;border-radius:6px;background:repeating-linear-gradient(45deg,#EFF3F5,#EFF3F5 5px,#E5EBEE 5px,#E5EBEE 10px);flex:none;position:relative}
   .excl-grid .xthumb::after{content:"✕";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#B6C2C8;font-size:12px;font-weight:900}
 
+
+  /* ===== SNS post mockup (STEP2) ===== */
+  .postmock{width:100%;margin:6px 0 12px;display:block}
+  .postmock svg{width:100%;height:auto;display:block;filter:drop-shadow(0 6px 14px rgba(12,110,137,.14))}
+
   /* ============ DESKTOP ============ */
   @media (min-width:768px){
     .hero{padding:56px 24px 60px}
@@ -818,19 +823,102 @@
     </div>
     <div class="wrap">
       <h2 class="sec-title maru"><span class="en">HOW TO ENTRY</span>応募方法</h2>
-      <p class="sec-lead"><span class="stickr k">かんたん3STEP</span> お一人様何口でも応募できます。</p>
+      <p class="sec-lead"><span class="stickr k">かんたん2STEP</span> お一人様何口でも応募できます。</p>
 
       <div class="steps">
         <div class="step">
           <span class="step-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           <div class="step-head"><div class="step-num maru"><small>STEP</small><b>1</b></div><h3 class="maru">さがして、撮る</h3></div>
           <p>ドン・キホーテやドラッグストアの棚で「健栄かばくんシリーズ」を見つけて撮影。<br>ご自宅にある対象商品の撮影でもOK。<br>「健栄かばくん」POPを見つけたら一緒に撮ると◎<span class="opt">任意</span></p>
-          <div class="ph" style="min-height:130px;margin-top:auto">店頭で商品を撮影するイメージ<br><small>差し替え</small></div>
+          <div class="postmock" aria-hidden="true">
+            <svg viewBox="0 0 420 268" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="6" width="408" height="256" rx="16" fill="#EAF7FB" stroke="#CDE6ED" stroke-width="2"/>
+              <!-- shelves -->
+              <rect x="30" y="150" width="360" height="7" rx="3" fill="#C9DFE7"/>
+              <rect x="30" y="94" width="360" height="7" rx="3" fill="#C9DFE7"/>
+              <!-- upper shelf products -->
+              <g opacity=".55">
+                <rect x="52" y="62" width="24" height="32" rx="4" fill="#fff" stroke="#8FC3D4" stroke-width="2"/>
+                <rect x="84" y="56" width="22" height="38" rx="4" fill="#fff" stroke="#8FC3D4" stroke-width="2"/>
+                <rect x="114" y="64" width="26" height="30" rx="4" fill="#fff" stroke="#8FC3D4" stroke-width="2"/>
+                <rect x="292" y="58" width="24" height="36" rx="4" fill="#fff" stroke="#8FC3D4" stroke-width="2"/>
+                <rect x="324" y="66" width="22" height="28" rx="4" fill="#fff" stroke="#8FC3D4" stroke-width="2"/>
+                <rect x="352" y="60" width="24" height="34" rx="4" fill="#fff" stroke="#8FC3D4" stroke-width="2"/>
+              </g>
+              <!-- kabakun POP on the shelf -->
+              <g>
+                <rect x="46" y="112" width="46" height="34" rx="6" fill="#fff" stroke="#F0593C" stroke-width="2.4"/>
+                <ellipse cx="69" cy="130" rx="14" ry="10" fill="#F2B8A6"/>
+                <ellipse cx="69" cy="124" rx="9" ry="7" fill="#F5C7B7"/>
+                <circle cx="65" cy="122" r="1.6" fill="#5B3B32"/><circle cx="73" cy="122" r="1.6" fill="#5B3B32"/>
+                <path d="M56 138h26v4H56z" fill="#F0593C" opacity=".8"/>
+                <path d="M69 112 l0 -10" stroke="#F0593C" stroke-width="2.4"/>
+              </g>
+              <!-- target products on lower shelf -->
+              <rect x="132" y="112" width="30" height="38" rx="5" fill="#fff" stroke="#17A2C6" stroke-width="2.5"/>
+              <rect x="138" y="120" width="18" height="13" rx="2" fill="#17A2C6" opacity=".3"/>
+              <rect x="172" y="106" width="26" height="44" rx="5" fill="#fff" stroke="#17A2C6" stroke-width="2.5"/>
+              <rect x="180" y="92" width="11" height="15" rx="3" fill="#0C6E89"/>
+              <rect x="206" y="116" width="32" height="34" rx="5" fill="#fff" stroke="#17A2C6" stroke-width="2.5"/>
+              <circle cx="222" cy="132" r="9" fill="#17A2C6" opacity=".3"/>
+              <!-- phone framing the shot -->
+              <rect x="252" y="104" width="112" height="140" rx="14" fill="#fff" stroke="#123C4A" stroke-width="3"/>
+              <rect x="262" y="116" width="92" height="104" rx="6" fill="#DFF1F7"/>
+              <g stroke="#F0593C" stroke-width="3" stroke-linecap="round">
+                <path d="M272 132v-8h8"/><path d="M344 132v-8h-8"/><path d="M272 204v8h8"/><path d="M344 204v8h-8"/>
+              </g>
+              <rect x="288" y="146" width="18" height="26" rx="3" fill="#fff" stroke="#17A2C6" stroke-width="2"/>
+              <ellipse cx="322" cy="168" rx="13" ry="10" fill="#F2B8A6"/>
+              <ellipse cx="322" cy="162" rx="8" ry="6" fill="#F5C7B7"/>
+              <circle cx="319" cy="161" r="1.4" fill="#5B3B32"/><circle cx="325" cy="161" r="1.4" fill="#5B3B32"/>
+              <circle cx="308" cy="232" r="7" fill="none" stroke="#123C4A" stroke-width="2.5"/>
+              <!-- sparkles -->
+              <g stroke="#FFD84D" stroke-width="3" stroke-linecap="round">
+                <line x1="238" y1="76" x2="238" y2="86"/><line x1="233" y1="81" x2="243" y2="81"/>
+                <line x1="386" y1="120" x2="386" y2="128"/><line x1="382" y1="124" x2="390" y2="124"/>
+              </g>
+            </svg>
+          </div>
         </div>
 
         <div class="step">
           <div class="step-head"><div class="step-num maru"><small>STEP</small><b>2</b></div><h3 class="maru">SNSに投稿して応募完了</h3></div>
           <p>撮った写真に<b>3つの指定ハッシュタグ</b>をつけて、<b class="hi">公開設定</b>のアカウントから投稿。<br><b>投稿した時点で応募完了です。</b>フォーム入力は不要。</p>
+          <div class="postmock" aria-hidden="true">
+            <svg viewBox="0 0 420 268" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="6" width="408" height="256" rx="16" fill="#fff" stroke="#CDE6ED" stroke-width="2"/>
+              <!-- header -->
+              <circle cx="34" cy="36" r="13" fill="#BDEAF5"/>
+              <path d="M34 32a5 5 0 1 1 0 10a5 5 0 1 1 0-10 M24 48a10 10 0 0 1 20 0z" fill="#7FBBCE"/>
+              <rect x="56" y="29" width="86" height="8" rx="4" fill="#123C4A" opacity=".55"/>
+              <rect x="56" y="42" width="54" height="6" rx="3" fill="#123C4A" opacity=".22"/>
+              <circle cx="384" cy="30" r="2" fill="#9FB6BE"/><circle cx="384" cy="37" r="2" fill="#9FB6BE"/><circle cx="384" cy="44" r="2" fill="#9FB6BE"/>
+              <!-- photo -->
+              <rect x="6" y="60" width="408" height="120" fill="#EAF7FB"/>
+              <rect x="150" y="86" width="46" height="72" rx="6" fill="#fff" stroke="#17A2C6" stroke-width="2.5"/>
+              <rect x="156" y="96" width="34" height="26" rx="3" fill="#17A2C6" opacity=".28"/>
+              <rect x="156" y="128" width="26" height="5" rx="2.5" fill="#17A2C6" opacity=".45"/>
+              <rect x="212" y="98" width="34" height="60" rx="5" fill="#fff" stroke="#17A2C6" stroke-width="2.5"/>
+              <rect x="222" y="80" width="14" height="20" rx="4" fill="#0C6E89"/>
+              <rect x="217" y="112" width="24" height="20" rx="3" fill="#17A2C6" opacity=".28"/>
+              <ellipse cx="288" cy="140" rx="30" ry="22" fill="#F2B8A6"/>
+              <ellipse cx="288" cy="126" rx="20" ry="15" fill="#F5C7B7"/>
+              <circle cx="281" cy="122" r="2.6" fill="#5B3B32"/><circle cx="295" cy="122" r="2.6" fill="#5B3B32"/>
+              <ellipse cx="288" cy="132" rx="9" ry="5" fill="#E39C88"/>
+              <path d="M262 150 h52 v8 h-52z" fill="#F0593C" opacity=".85"/>
+              <g stroke="#FFD84D" stroke-width="3" stroke-linecap="round">
+                <line x1="112" y1="84" x2="112" y2="94"/><line x1="107" y1="89" x2="117" y2="89"/>
+                <line x1="330" y1="104" x2="330" y2="112"/><line x1="326" y1="108" x2="334" y2="108"/>
+              </g>
+              <!-- actions -->
+              <path d="M32 200c-8-6-12-10-12-15a6.5 6.5 0 0 1 12-3a6.5 6.5 0 0 1 12 3c0 5-4 9-12 15z" fill="none" stroke="#123C4A" stroke-width="2.4" opacity=".7"/>
+              <path d="M62 186h20a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H72l-6 5v-5h-4a4 4 0 0 1-4-4v-10a4 4 0 0 1 4-4z" fill="none" stroke="#123C4A" stroke-width="2.2" opacity=".7"/>
+              <path d="M104 196l22-9-8 22-4-9z" fill="none" stroke="#123C4A" stroke-width="2.2" stroke-linejoin="round" opacity=".7"/>
+              <!-- caption -->
+              <rect x="22" y="216" width="150" height="7" rx="3.5" fill="#123C4A" opacity=".2"/>
+              <text x="22" y="243" font-family="Zen Maru Gothic, sans-serif" font-weight="700" font-size="14" fill="#17A2C6">#かばくんをさがせ #健栄 #PR</text>
+            </svg>
+          </div>
           <div class="hashtags3">
             <span class="hashtag maru">#かばくんをさがせ</span>
             <span class="hashtag maru">#健栄</span>
