@@ -257,7 +257,7 @@
   /* ----- JAPANKURU site chrome ----- */
   .site-header{position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 1px 8px rgba(12,110,137,.06)}
   .site-header .bar{max-width:var(--wrap);margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 18px}
-  .jk-logo{display:flex;align-items:center;gap:9px;text-decoration:none}
+  .jk-logo{display:flex;align-items:center;gap:9px;text-decoration:none;min-height:44px;padding:4px 0}
   .jk-logo-img{height:28px;width:auto;display:block}
   .jk-logo-fb{display:flex;align-items:center;gap:9px}
   .kenei-img{height:30px;width:auto;display:block}
@@ -267,19 +267,19 @@
   .sf-logo-chip img{height:28px;width:auto;display:block}
   .jk-logo .mark{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--coral),#ff8a5c);display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--maru);font-weight:900;font-size:17px;box-shadow:0 2px 6px rgba(240,89,60,.4)}
   .jk-logo .wordmark{font-family:var(--maru);font-weight:900;font-size:19px;letter-spacing:.02em;color:var(--ink);line-height:1}
-  .jk-logo .ph-note{display:block;font-size:8px;font-weight:500;color:#9bb3bc;letter-spacing:.04em;margin-top:2px}
+  .jk-logo .ph-note{display:block;font-size:9px;font-weight:500;color:#9bb3bc;letter-spacing:.04em;margin-top:2px}
   .jk-nav{display:none;align-items:center;gap:20px;font-size:13px;font-weight:700}
   .jk-nav a{color:var(--ink);text-decoration:none}
   #prize,#items,#entry,#contact{scroll-margin-top:64px}
   .jk-right{display:flex;align-items:center;gap:12px}
   .jk-lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;font-size:11px;font-weight:700}
-  .jk-lang span{padding:5px 9px;color:#789}
+  .jk-lang span{padding:14px 14px;color:#789;line-height:1;cursor:pointer}
   .jk-lang span.on{background:var(--aqua);color:#fff}
-  .jk-menu{width:26px;height:18px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;background:none;border:0;padding:0}
+  .jk-menu{width:44px;height:44px;display:flex;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;background:none;border:0;padding:0 9px;-webkit-tap-highlight-color:transparent}
   .jk-menu i{height:2.5px;width:100%;background:var(--ink);border-radius:2px;transition:transform .25s,opacity .2s}
-  .jk-menu.open i:nth-child(1){transform:translateY(7.75px) rotate(45deg)}
+  .jk-menu.open i:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
   .jk-menu.open i:nth-child(2){opacity:0}
-  .jk-menu.open i:nth-child(3){transform:translateY(-7.75px) rotate(-45deg)}
+  .jk-menu.open i:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
   .jk-drawer{display:none;border-top:1px solid var(--line);background:#fff}
   .jk-drawer.open{display:block}
   .jk-drawer a{display:block;padding:15px 22px;font-family:var(--maru);font-weight:700;color:var(--ink);text-decoration:none;border-bottom:1px solid #EAF3F6}
@@ -295,7 +295,7 @@
   .sf-brand .ph-note{font-size:9px;color:#5e8290;margin-top:6px}
   .sf-links{display:flex;flex-wrap:wrap;gap:26px}
   .sf-col h4{font-family:var(--maru);font-weight:700;font-size:12px;color:#cfe6ee;margin-bottom:8px;letter-spacing:.04em}
-  .sf-col a{display:block;color:#9fc2cd;text-decoration:none;font-size:12px;line-height:2;opacity:.85}
+  .sf-col a{display:block;color:#9fc2cd;text-decoration:none;font-size:12.5px;line-height:1.6;padding:12px 0;opacity:.85}
   .sf-copy{border-top:1px solid #1d4451;padding-top:16px;font-size:11px;color:#6e94a1;text-align:center}
 
   /* ----- Mondo figure placeholder ----- */
@@ -337,6 +337,12 @@
   .leadcopy{display:inline-block;font-family:var(--maru);font-weight:700;font-size:clamp(15px,3.4vw,20px);color:var(--aqua-deep);transform:rotate(-2deg);margin:6px 0 2px;position:relative}
   .leadcopy::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:8px;background:rgba(23,162,198,.18);border-radius:4px;z-index:-1}
   .leadcopy b{color:var(--coral)}
+  .step p .hi{background:linear-gradient(transparent 62%,var(--sun) 62%);color:var(--coral-deep);font-family:var(--maru);font-size:14px}
+  .flow .fs.done{background:var(--sun);border-color:#E6BE2E;box-shadow:0 3px 0 #d9b02b}
+  .flow .fs.done .ft{color:var(--ink)}
+  button.cta{border:0;cursor:pointer;font-family:var(--maru)}
+  .copied{position:fixed;left:50%;bottom:88px;transform:translateX(-50%);background:var(--ink);color:#fff;font-family:var(--maru);font-weight:700;font-size:13px;padding:11px 20px;border-radius:999px;z-index:99;opacity:0;transition:opacity .25s;pointer-events:none}
+  .copied.show{opacity:1}
   .cta-note{font-size:10px;color:#8aa2ab;text-align:center;margin-top:7px;line-height:1.6}
   .pills{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px}
   .pill{background:#fff;border:2px solid var(--aqua);border-radius:999px;padding:6px 14px;font-size:12px;font-weight:700;color:var(--aqua-deep)}
@@ -384,7 +390,7 @@
   /* ===== talent cut-outs (no frame) ===== */
   .cut{position:absolute;z-index:6;pointer-events:none;filter:drop-shadow(0 14px 22px rgba(12,60,74,.28))}
   .cut img{width:100%;height:auto;display:block}
-  .cut .dummy{position:absolute;left:50%;transform:translateX(-50%);bottom:-6px;background:rgba(18,60,74,.78);color:#fff;font-size:8px;font-weight:700;padding:2px 7px;border-radius:5px;white-space:nowrap}
+  .cut .dummy{position:absolute;left:50%;transform:translateX(-50%);bottom:-6px;background:rgba(18,60,74,.78);color:#fff;font-size:9px;font-weight:700;padding:2px 7px;border-radius:5px;white-space:nowrap}
   .cut-hero{width:150px;right:4px;bottom:0}
   .cut-prize{display:none;width:170px;right:6px;bottom:0}
   .cut-entry{display:none;width:150px;left:-14px;bottom:-14px}
@@ -514,7 +520,7 @@
     .excl-grid .xitem{font-size:12px;padding:6px 13px 6px 7px}
     .excl-grid .xthumb{width:30px;height:30px}
 
-    .steps{grid-template-columns:repeat(3,1fr);gap:18px}
+    .steps{grid-template-columns:repeat(2,1fr);gap:22px}
     .step-arrow{left:auto;right:-24px;bottom:auto;top:50%;transform:translateY(-50%) rotate(0deg)}
     .kaba-peek{display:block}
     .mondo-hero{width:150px;right:-16px;bottom:-12px}
@@ -644,9 +650,8 @@
         <div class="flow">
           <span class="fs"><span class="fn maru">1</span><span class="ft">商品を撮る</span></span>
           <span class="fa">→</span>
-          <span class="fs"><span class="fn maru">2</span><span class="ft">SNSに投稿</span></span>
-          <span class="fa">→</span>
-          <span class="fs"><span class="fn maru">3</span><span class="ft">応募フォームで完了</span></span>
+          <span class="fs"><span class="fn maru">2</span><span class="ft">タグをつけて投稿</span></span>
+          <span class="fs done"><span class="ft">応募完了！</span></span>
         </div>
         <div class="flow-win">ドラッグストアで「かばくん」をさがして応募！<br><b>日台往復旅行券・ひらパーチケット・かばくんグッズ</b>が当たる。</div>
         <div class="pills">
@@ -699,8 +704,8 @@
           <div class="memo-note">※キャラクター紹介文はドラフトです。公式設定・登録商標表記は健栄製薬様のご確認をお願いします。</div>
         </div>
 
-        <div class="hero-cta"><a class="cta maru" href="#" onclick="return false">いますぐ応募する<span class="ar">→</span></a>
-          <div class="cta-note">※応募フォームのURLは未定です（決定後に差し替え）</div></div>
+        <div class="hero-cta"><button class="cta maru" type="button" data-copy>ハッシュタグをコピー<span class="ar">→</span></button>
+          <div class="cta-note">タグをコピーして、SNSに投稿するだけで応募完了！<br>応募フォームへの登録は必要ありません。</div></div>
       </div>
     </div>
   </header>
@@ -750,7 +755,7 @@
         <div class="teaser">
           <span class="tt maru">第2弾 予告</span>
           <span class="td">2026.12/1（火）〜 2027.2/28（日）</span>
-          <span class="tx">かばくんオリジナル<b>ぬいぐるみ</b>＋健栄製薬お楽しみ袋、健栄賞、絶叫賞、日台往復旅行券をご用意予定。<b>賞品内容・当選者数は決定次第このページで公開します。</b></span>
+          <span class="tx"><b>第1弾と同じ賞品構成・当選人数</b>で開催予定。カバくん賞は<b>オリジナルぬいぐるみ</b>＋健栄製薬お楽しみ袋に変わります。</span>
         </div>
 
         <p class="prize-note">※賞品画像は手配中です。第2弾の賞品構成・当選者数は資料内で数値の相違があるため<strong>要確認（暫定）</strong>。デザインはイメージです。</p>
@@ -819,36 +824,26 @@
         <div class="step">
           <span class="step-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           <div class="step-head"><div class="step-num maru"><small>STEP</small><b>1</b></div><h3 class="maru">さがして、撮る</h3></div>
-          <p>ドン・キホーテやドラッグストアの棚で「健栄かばくんシリーズ」を見つけて撮影。<br><b>自宅にある対象商品の撮影でもOK！</b><br>「健栄かばくん」POPを見つけたら一緒に撮ると◎<span class="opt">任意</span></p>
+          <p>ドン・キホーテやドラッグストアの棚で「健栄かばくんシリーズ」を見つけて撮影。<br>ご自宅にある対象商品の撮影でもOK。<br>「健栄かばくん」POPを見つけたら一緒に撮ると◎<span class="opt">任意</span></p>
           <div class="ph" style="min-height:130px;margin-top:auto">店頭で商品を撮影するイメージ<br><small>差し替え</small></div>
         </div>
 
         <div class="step">
-          <span class="step-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          <div class="step-head"><div class="step-num maru"><small>STEP</small><b>2</b></div><h3 class="maru">SNSに投稿</h3></div>
-          <p>撮った写真に<b>3つの指定ハッシュタグ</b>をつけてSNSにアップ。<br>※3つとも付いていない投稿は無効です。</p>
+          <div class="step-head"><div class="step-num maru"><small>STEP</small><b>2</b></div><h3 class="maru">SNSに投稿して応募完了</h3></div>
+          <p>撮った写真に<b>3つの指定ハッシュタグ</b>をつけて、<b class="hi">公開設定</b>のアカウントから投稿。<br><b>投稿した時点で応募完了です。</b>フォーム入力は不要。</p>
           <div class="hashtags3">
             <span class="hashtag maru">#かばくんをさがせ</span>
             <span class="hashtag maru">#健栄</span>
             <span class="hashtag maru">#PR</span>
           </div>
         </div>
-
-        <div class="step">
-          <div class="step-head"><div class="step-num maru"><small>STEP</small><b>3</b></div><h3 class="maru">応募ページで完了</h3></div>
-          <p>キャンペーンサイトの応募ページで必要事項を記入し、ハッシュタグ付き投稿を登録して応募完了！</p>
-          <div class="kaba-step">
-            <img src="https://www.kenei-pharm.com/kabakun-series/assets/img/hand-sanitizer/mv_illust.png" alt="かばくん"
-                 onerror="this.parentElement.outerHTML='&lt;div class=&quot;ph&quot; style=&quot;min-height:130px;margin-top:auto&quot;&gt;応募フォーム入力イメージ&lt;br&gt;&lt;small&gt;差し替え&lt;/small&gt;&lt;/div&gt;'">
-          </div>
-        </div>
       </div>
 
       <div class="anyq maru">＼ お一人様 何口でも応募可能！ ／</div>
-      <div class="entry-cta"><a class="cta maru" href="#" onclick="return false">応募ページへ進む<span class="ar">→</span></a>
-        <div class="cta-note">※応募フォームのURLは未定です（決定後に差し替え）</div>
+      <div class="entry-cta"><button class="cta maru" type="button" data-copy>ハッシュタグをコピー<span class="ar">→</span></button>
+        <div class="cta-note">タグをコピーして、SNSに投稿するだけで応募完了！<br>応募フォームへの登録は必要ありません。</div>
       </div>
-      <div class="notebox">※応募には、店頭で撮影・購入された対象商品、または<b>自宅にある対象商品</b>を撮影し、指定の3つのハッシュタグ（#かばくんをさがせ／#健栄／#PR）をつけてSNSにアップしてください。<br>※3つのハッシュタグが揃っていない投稿は無効となります。<br>※不正が発覚した場合は、該当応募者のすべての応募を無効とさせていただきます。<br>※店舗によっては「健栄かばくん」POPや対象商品を見つけられない場合があります。POPがなくても<b>対象商品の写真だけで応募できます</b>。</div>
+      <div class="notebox">※店頭またはご自宅にある対象商品を撮影し、指定の3つのハッシュタグ（#かばくんをさがせ／#健栄／#PR）をつけてSNSに投稿してください。<b>投稿をもって応募完了</b>となります。<br>※<b>公開設定</b>のアカウントからご投稿ください。非公開設定の投稿、3つのハッシュタグが揃っていない投稿は無効となります。<br>※当選発表は本ページ上で行います。ご当選された方は、事務局までご連絡ください（詳細は応募規約をご確認ください）。<br>※抽選の対象は、応募規約の条件を満たす投稿に限ります。<br>※不正が発覚した場合は、該当応募者のすべての応募を無効とさせていただきます。</div>
     </div>
   </section>
 
@@ -860,44 +855,102 @@
         <summary class="maru">応募規約 <span class="plus">＋</span></summary>
         <div class="body">
           <p style="font-weight:700;margin-bottom:8px">健栄製薬「かばくんをさがせ！」プレゼントキャンペーン応募規約</p>
-          <p>健栄製薬株式会社（以下、当社）が運営する本キャンペーンの注意事項を含む本規約にご同意のうえご応募ください。応募方法に従って応募された場合、応募者は本規約に同意したものとみなします。対象商品は医薬品のため、キャンペーン参加者は下記いずれかの効能効果のために使用する方とさせていただきます。パッケージ記載の用法用量・注意事項をご確認のうえご使用ください。</p>
+          <p>健栄製薬株式会社（以下、当社）が運営する本キャンペーンの注意事項を含む本規約にご同意のうえご応募ください。<strong>指定の方法でご投稿いただいた時点で、本規約に同意いただいたものとみなします。</strong>対象商品は医薬品のため、キャンペーン参加者は下記いずれかの効能効果のために使用する方とさせていただきます。パッケージ記載の用法用量・注意事項をご確認のうえご使用ください。</p>
+
           <p style="font-weight:700;margin-top:10px">【効能効果】</p>
           <ul>
             <li>健栄のどスプレー：のどの炎症によるのどのあれ・いたみ・はれ・不快感・声がれ</li>
             <li>健栄のどスプレーアズレン：のどの炎症によるのどの痛み・はれ・あれ・不快感・声がれ、口内炎</li>
             <li>アズレンEトローチ：炎症作用をもち、炎症による“はれ”などの症状に使用</li>
           </ul>
+
           <p style="font-weight:700;margin-top:10px">【応募期間】</p>
           <ul>
-            <li>第1弾：2026年9月1日(火)〜11月30日(月)／アップロード有効期間 11月30日(月)23:59まで</li>
-            <li>第2弾：2026年12月1日(火)〜2027年2月28日(日)／アップロード有効期間 2月28日(日)23:59まで</li>
-            <li>当選発表は賞品の発送をもって代えさせていただきます。</li>
+            <li>第1弾：2026年9月1日(火)0:00〜11月30日(月)23:59</li>
+            <li>第2弾：2026年12月1日(火)0:00〜2027年2月28日(日)23:59</li>
+            <li>上記期間内に投稿されたものを有効とします。</li>
           </ul>
+
           <p style="font-weight:700;margin-top:10px">【対象商品】</p>
           <ul>
             <li>健栄のどスプレー（第3類医薬品）容量：12ml・25ml・50ml</li>
             <li>健栄のどスプレーアズレン（第3類医薬品）容量：30ml</li>
             <li>アズレンEトローチ（第3類医薬品）容量：24錠入り</li>
+            <li>健栄うがい薬シリーズ、うがい薬アズレンCPC、うがい薬CPCは対象外です。</li>
+          </ul>
+
+
+          <p style="font-weight:700;margin-top:10px">【賞品・当選者数】</p>
+          <p>第1弾・第2弾ともに、下記の内容で各100名様にプレゼントいたします。</p>
+          <ul>
+            <li>カバくん賞：かばくんオリジナルグッズ＋健栄製薬お楽しみ袋　77名様<br>
+              　※第1弾はオリジナル目印チャーム、第2弾はオリジナルぬいぐるみとなります</li>
+            <li>絶叫賞：大阪ひらかたパーク「ひらパーGo! Go! チケット」　20名様</li>
+            <li>A賞：日本＝台湾 往復旅行券（10万円分）　1名様</li>
+            <li>B賞：日本＝台湾 往復旅行券（5万円分）　2名様</li>
           </ul>
           <p style="font-weight:700;margin-top:10px">【応募方法】</p>
           <ul>
-            <li>店頭で撮影・購入、または自宅にある対象商品を撮影し、指定の3つのハッシュタグ（#かばくんをさがせ／#健栄／#PR）をつけてSNSにアップしご応募ください。</li>
-            <li>指定ハッシュタグがない投稿は無効となります。</li>
-            <li>不正が発覚した場合、該当応募者のすべての応募を無効とします。</li>
-            <li>おひとり様何口でも応募可能。ただしご当選はおひとり様1回までとします。</li>
+            <li><strong>本キャンペーンへのご応募に、対象商品のご購入は必要ありません。</strong></li>
+            <li>①店頭またはご自宅にある対象商品を撮影してください。</li>
+            <li>②指定の3つのハッシュタグ（#かばくんをさがせ／#健栄／#PR）をつけて、ご自身のSNSアカウントから投稿してください。</li>
+            <li><strong>ご投稿をもって応募完了となります。</strong>応募用の登録ページやフォームへのご入力は必要ありません。</li>
+            <li>おひとり様何口でもご応募いただけます。ただしご当選はおひとり様1回までとします。</li>
           </ul>
+
+          <p style="font-weight:700;margin-top:10px">【有効なご応募の条件】</p>
+          <ul>
+            <li>アカウントが<strong>公開設定</strong>であること（非公開設定の投稿は内容を確認できないため無効となります）</li>
+            <li>指定の3つのハッシュタグがすべて付与されていること</li>
+            <li>応募期間内の投稿であること</li>
+            <li>対象商品が明瞭に写っていること</li>
+            <li>応募者ご本人が撮影した写真であること</li>
+            <li><strong>当社が確認できた投稿を有効なご応募として取り扱います。</strong>SNSの仕様・通信状況・アカウント設定等により当社が投稿を確認できない場合、ご応募は無効となります。あらかじめご了承ください。</li>
+          </ul>
+
+          <p style="font-weight:700;margin-top:10px">【抽選・当選発表について】</p>
+          <ul>
+            <li>抽選の対象は、<strong>本規約の条件を満たす投稿に限ります。</strong></li>
+            <li>抽選後、当選候補となった方の投稿内容を確認させていただきます。条件を満たさないことが判明した場合は無効とし、別の方を選出します。</li>
+            <li><strong>当選発表は本ページ上で行います。</strong>当選されたアカウント名（一部を伏せた形）を掲載しますので、該当された方は掲載期間内に事務局メールアドレス宛にご連絡ください。</li>
+            <li>当選発表：第1弾 2026年12月15日(火)／第2弾 2027年3月15日(月) 本ページにて掲載</li>
+            <li><strong>当社のSNS公式アカウントから、当選のご連絡やダイレクトメッセージをお送りすることは一切ありません。</strong>なりすましや偽アカウントにご注意ください。</li>
+            <li>当選発表の掲載期間は、掲載開始から30日間です。</li>
+            <li>ご当選された方は、掲載開始から<strong>14日以内</strong>に事務局メールアドレス宛にご連絡ください。期間内にご連絡がない場合、当選を無効とさせていただきます。</li>
+            <li>ご連絡いただいた方に、お届け先ご登録のご案内をお送りします。</li>
+            <li>事務局開局期間：2026年9月1日(火)〜2027年4月30日(金)</li>
+            <li>抽選および当選についてのお問い合わせにはお答えできません。</li>
+            <li>当選の権利はご本人のもので、第三者への譲渡・賞品の交換・換金はできません。</li>
+            <li>賞品の発送は、第1弾 2026年12月下旬より、第2弾 2027年3月下旬より順次行う予定です。都合により発送スケジュールが変更となる場合があります。</li>
+            <li>住所不備・受取拒否・長期不在等により賞品が返送された場合、事務局開局期間内にご連絡がとれないときは当選の権利を無効とさせていただきます。</li>
+            <li>賞品のオークション等への出品はご遠慮ください。</li>
+            <li>賞品のデザイン・仕様は予告なく変更となる場合があります。</li>
+          </ul>
+
+          <p style="font-weight:700;margin-top:10px">【個人情報の取扱いについて】</p>
+          <ul>
+            <li><strong>ご応募の時点では、当社は個人情報を取得いたしません。</strong></li>
+            <li>ご当選が確定した方からのみ、賞品発送のためにお名前・ご住所・お電話番号・メールアドレスをお伺いします。</li>
+            <li>お預かりした個人情報は、当社が責任をもって管理し、賞品の発送および本キャンペーンの運営のみに使用します。ご本人の承諾なく、業務委託先を除く第三者へ提供することはありません（法令等により開示を求められた場合を除く）。</li>
+            <li>賞品の発送完了後、所定の期間を経て適切に廃棄します。</li>
+            <li>個人情報に関する当社の考えは、プライバシー・ポリシー（https://www.kenei-pharm.com/privacy/）に記載しています。</li>
+          </ul>
+
+          <p style="font-weight:700;margin-top:10px">【投稿内容について】</p>
+          <ul>
+            <li>投稿写真の著作権・肖像権について、第三者の権利を侵害しないようご注意ください。</li>
+            <li>第三者を撮影した写真、公序良俗に反する内容を含む投稿は無効とします。</li>
+            <li>当社は、応募者の投稿を当社の広告・SNS等に転載することはありません。</li>
+          </ul>
+
           <p style="font-weight:700;margin-top:10px">【注意事項】</p>
           <ul>
-            <li>未成年者が応募する場合は親権者の同意を得たうえでご応募ください。</li>
-            <li>当選の権利は本人のもので、第三者への譲渡・賞品の交換・換金はできません。</li>
-            <li>賞品のデザイン・仕様は予告なく変更となる場合があります。賞品発送は2026年12月下旬頃を予定。</li>
+            <li>未成年の方は、保護者の同意を得たうえでご応募ください。</li>
             <li>当社社員および関係者は応募できません。</li>
-            <li>当社は本キャンペーンの全部または一部を、事前通知なく変更・中止する場合があります。</li>
+            <li>ご応募に際して発生する通信料等は応募者のご負担となります。</li>
+            <li>不正が発覚した場合、該当応募者のすべての応募を無効とします。</li>
+            <li>当社は本キャンペーンの全部または一部を、事前の通知なく変更・中止する場合があります。</li>
           </ul>
-          <p style="font-weight:700;margin-top:10px">【なりすまし注意】</p>
-          <p>当選連絡等を健栄製薬公式SNS（X：@kenei_pharm／Instagram：@kenei_official_jp／TikTok：@kenei_pharm）から行うことはありません。偽アカウントからのDMは開かず破棄してください。</p>
-          <p style="font-weight:700;margin-top:10px">【個人情報の取扱い】</p>
-          <p>ご提供いただいた個人情報は当社が責任をもって管理し、賞品発送および商品・サービス改善、個人を特定しない統計等にのみ利用します。詳細は当社プライバシー・ポリシー（https://www.kenei-pharm.com/privacy/）をご確認ください。</p>
         </div>
       </details>
     </div>
@@ -915,10 +968,10 @@
       <div class="office maru">「#かばくんをさがせ！」プレゼントキャンペーン事務局</div>
       <div class="mail maru">info@××××-cp.jp</div>
       <div class="fine">
-        受付期間：2026年9月1日(火)〜11月30日(月)【第1弾】<br>
-        対応時間：10:00〜17:00（土・日・祝・年末年始を除く平日）<br>
-        開局期間：2026年11月30日(月)まで<br>
-        ※受信は24時間受け付けておりますが、ご返答にはお時間を頂戴します。
+        開局期間：2026年9月1日(火)〜2027年4月30日(金)<br>
+        対応時間：10:00〜17:00（土・日・祝日・年末年始を除く平日）<br>
+        ※受信は24時間受け付けておりますが、ご返答にはお時間を頂戴します。<br>
+        ※ご当選された方は、当選発表の掲載期間内にこちらのメールアドレスまでご連絡ください。
       </div>
     </div>
   </section>
@@ -957,7 +1010,27 @@
   </footer>
 
   <!-- sticky CTA (mobile only) -->
-  <div class="sticky"><div class="wrap"><a class="cta maru" href="#" onclick="return false">いますぐ応募する<span class="ar">→</span></a></div></div>
+  <div class="sticky"><div class="wrap"><button class="cta maru" type="button" data-copy>ハッシュタグをコピー<span class="ar">→</span></button></div></div>
 
+  <div class="copied" id="copiedToast">ハッシュタグをコピーしました！</div>
+  <script>
+    (function(){
+      var TAGS='#かばくんをさがせ #健栄 #PR';
+      var toast=document.getElementById('copiedToast');
+      function flash(){toast.classList.add('show');setTimeout(function(){toast.classList.remove('show');},1800);}
+      document.querySelectorAll('[data-copy]').forEach(function(btn){
+        btn.addEventListener('click',function(){
+          if(navigator.clipboard&&navigator.clipboard.writeText){
+            navigator.clipboard.writeText(TAGS).then(flash).catch(fallback);
+          } else { fallback(); }
+          function fallback(){
+            var t=document.createElement('textarea');t.value=TAGS;t.style.position='fixed';t.style.opacity='0';
+            document.body.appendChild(t);t.select();try{document.execCommand('copy');flash();}catch(e){}
+            document.body.removeChild(t);
+          }
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
