@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>二つの成長市場を、迎えにいく。｜タイ・インドネシア インバウンドセミナー</title>
+<style>
+  :root{
+    --paper:#FBF6EC; --paper2:#F4ECDC; --ink:#20211E; --ink2:#5c5a51;
+    --line:#DCCFB8; --thai:#C1122B; --thai-navy:#241E46; --teal:#0E7C74; --indo:#E1231C; --gold:#E29A2E;
+    --serif:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    --sans:"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.85;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 32px}
+  .serif{font-family:var(--serif)}
+  section{padding:90px 0}
+
+  /* CSS FLAGS */
+  .flag{display:inline-block;background-size:100% 100%;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+  .flag.th{background:linear-gradient(#A51931 16.66%,#fff 16.66% 33.33%,#241E46 33.33% 66.66%,#fff 66.66% 83.33%,#A51931 83.33%)}
+  .flag.id{background:linear-gradient(#E70011 50%,#fff 50%)}
+
+  /* NAV */
+  .nav{position:sticky;top:0;z-index:50;background:rgba(251,246,236,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:16px;padding-bottom:16px}
+  .logo{font-family:var(--serif);font-weight:700;font-size:17px;letter-spacing:.04em}
+  .logo em{font-style:normal;color:var(--indo)}
+  .nav a.apply{font-size:13px;font-weight:800;letter-spacing:.04em;border-bottom:2px solid var(--indo);padding-bottom:3px}
+
+  /* HERO — bold colored banner */
+  .hero{position:relative;overflow:hidden;color:#fff;
+    background:
+      radial-gradient(circle at 10% 12%,rgba(255,255,255,.15),transparent 38%),
+      radial-gradient(circle at 94% 88%,rgba(255,255,255,.10),transparent 42%),
+      linear-gradient(135deg,#C1122B 0%,#A0142A 42%,#0E7C74 100%)}
+  .hero-copy{max-width:1120px;margin:0 auto;padding:44px 32px 48px}
+  .hero-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:30px}
+  .htag{background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.45);padding:8px 16px;border-radius:2px;font-size:13px;font-weight:800;letter-spacing:.02em}
+  .htag.free{background:#fff;color:var(--thai);border-color:#fff}
+  .hero-grid{display:grid;grid-template-columns:1fr 320px;gap:46px;align-items:center}
+  .hero-eyebrow{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:800;letter-spacing:.04em;color:#FFD98A;margin-bottom:18px}
+  .hero-eyebrow .flag{width:26px;height:17px}
+  h1.hero-h{font-family:var(--serif);font-weight:700;font-size:clamp(34px,5.2vw,60px);line-height:1.24;letter-spacing:.01em;color:#fff}
+  h1.hero-h .mk{background:linear-gradient(transparent 56%,rgba(226,154,46,.7) 56%);padding:0 .06em}
+  .hero-lead{margin-top:22px;font-size:16px;line-height:1.9;color:rgba(255,255,255,.94);max-width:600px}
+  .hero-lead b{color:#FFE0A3;font-weight:800;font-family:var(--serif);font-size:1.18em}
+  .value-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .vchip{display:flex;align-items:center;gap:9px;background:rgba(0,0,0,.16);border:1px solid rgba(255,255,255,.3);border-radius:4px;padding:11px 16px;font-size:14px;font-weight:800}
+  .vchip i{font-style:normal;font-family:var(--serif);color:#FFD98A;font-size:16px}
+
+  .hero-guests{display:flex;align-items:center;gap:14px 24px;margin-top:32px;flex-wrap:wrap}
+  .hg-label{font-size:11px;font-weight:800;letter-spacing:.12em;color:#FFD98A}
+  .hg-list{display:flex;gap:22px;flex-wrap:wrap}
+  .hg{display:flex;align-items:center;gap:11px}
+  .hg img{width:48px;height:48px;border-radius:50%;object-fit:cover;object-position:center 15%;border:2px solid rgba(255,255,255,.6)}
+  .hg b{display:block;font-size:10px;font-weight:800;letter-spacing:.04em;color:rgba(255,255,255,.8)}
+  .hg .nm{font-family:var(--serif);font-size:15px;font-weight:700;color:#fff}
+  .hg small{display:block;font-size:11px;color:#FFD98A;font-weight:800}
+
+  /* HERO info card */
+  .info-card{background:#fff;color:var(--ink);border-radius:6px;padding:6px 24px 24px;box-shadow:0 22px 50px rgba(0,0,0,.3)}
+  .ic-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:15px 2px;border-bottom:1px solid var(--line)}
+  .ic-k{font-size:12px;font-weight:800;color:var(--ink2);letter-spacing:.04em}
+  .ic-v{font-family:var(--serif);font-size:16px;font-weight:700;text-align:right}
+  .ic-v.big{font-size:20px;color:var(--thai)}
+  .ic-cta{display:block;text-align:center;background:var(--indo);color:#fff;font-weight:900;font-size:17px;padding:16px;border-radius:3px;margin-top:20px;transition:.2s}
+  .ic-cta:hover{background:#c31f18}
+  .ic-note{text-align:center;font-size:11px;color:var(--ink2);margin-top:10px}
+
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:32px}.info-card{max-width:440px}}
+
+  /* section accent bar for scannability */
+  .lead-head:before{content:"";display:block;width:46px;height:4px;background:var(--indo);margin-bottom:22px;border-radius:2px}
+  .prog .lead-head:before{background:var(--gold)}
+
+  /* KOL PHOTO + REACH */
+  .standee-frame.has-photo{border-style:solid;border-color:rgba(255,255,255,.9)}
+  .standee-frame img{width:100%;height:100%;object-fit:cover;object-position:center 15%}
+  .standee .cap small{display:block;font-family:var(--sans);font-size:10px;font-weight:700;color:var(--ink2);letter-spacing:.02em}
+  .standee .cap .reach{display:block;font-family:var(--sans);font-style:normal;font-size:10px;font-weight:800;color:var(--thai);margin-top:4px;letter-spacing:.01em}
+  .standee .cap .reach.idr{color:var(--indo)}
+  .spk-ava.photo{background:none;border:1px solid var(--line);overflow:hidden}
+  .spk-ava.photo img{width:100%;height:100%;object-fit:cover;object-position:center 15%}
+  .spk-reach{display:flex;gap:26px;margin-top:14px;flex-wrap:wrap}
+  .spk-reach span{font-family:var(--serif);font-weight:700;font-size:19px;color:var(--ink);line-height:1.1}
+  .spk-reach u{display:block;text-decoration:none;font-family:var(--sans);font-size:10px;font-weight:800;letter-spacing:.06em;color:var(--ink2);margin-bottom:1px}
+  .spk-reach i{font-style:normal;font-size:12px;color:var(--ink2)}
+  @media(max-width:620px){.spk-reach{gap:18px}.spk-reach span{font-size:16px}}
+
+  /* SECTION HEADS */
+  .lead-head{max-width:760px;margin-bottom:8px}
+  h2.sec{font-family:var(--serif);font-size:clamp(26px,4vw,40px);font-weight:700;line-height:1.4;letter-spacing:.01em}
+  h2.sec .accent{color:var(--indo)}
+  .sec-sub{color:var(--ink2);font-size:16px;max-width:680px;margin-top:16px}
+  .sec-sub b{color:var(--ink);font-weight:800}
+  .rule{height:1px;background:var(--line);border:none;margin:0}
+
+  /* WHY — editorial numbered rows */
+  .why-row{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:34px 0;border-top:1px solid var(--line);align-items:start}
+  .why-row:last-child{border-bottom:1px solid var(--line)}
+  .why-no{font-family:var(--serif);font-size:44px;line-height:1;color:var(--gold);font-weight:700}
+  .why-row h3{font-family:var(--serif);font-size:22px;font-weight:700;margin-bottom:6px}
+  .why-row p{color:var(--ink2);font-size:15.5px;max-width:640px}
+  @media(max-width:620px){.why-row{grid-template-columns:1fr;gap:6px;padding:26px 0}.why-no{font-size:34px}}
+
+  /* DATA — big number editorial spread */
+  .data{background:var(--paper2)}
+  .spread{margin-top:44px;display:grid;grid-template-columns:1fr 1px 1fr;gap:0 46px}
+  .spread .divider{background:var(--line)}
+  .country{padding-top:6px}
+  .country-name{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+  .country-name .flag{width:52px;height:35px}
+  .country-name h3{font-family:var(--serif);font-size:30px;font-weight:700}
+  .country-tag{font-size:12.5px;font-weight:800;letter-spacing:.04em;color:var(--ink2);padding-bottom:20px;border-bottom:1px solid var(--line)}
+  .metric{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)}
+  .metric .mlab{font-size:13px;color:var(--ink2);line-height:1.4;flex-shrink:0}
+  .metric .mval{font-family:var(--serif);font-weight:700;font-size:clamp(28px,4.2vw,42px);line-height:1;text-align:right;letter-spacing:.01em}
+  .metric .mval u{text-decoration:none;font-size:16px;margin-left:2px}
+  .metric .mval em{display:block;font-family:var(--sans);font-style:normal;font-size:13px;font-weight:800;color:var(--teal);margin-top:6px}
+  .th-c .metric .mval{color:var(--thai)}
+  .id-c .metric .mval{color:var(--indo)}
+  .data-note{font-size:12px;color:var(--ink2);margin-top:26px;line-height:1.7;max-width:900px}
+  .data-note a{text-decoration:underline}
+  @media(max-width:720px){.spread{grid-template-columns:1fr;gap:40px}.spread .divider{display:none}}
+
+  /* POTENTIAL — pie share + growth */
+  .pie-cap{font-size:14px;color:var(--ink2);margin-top:40px}
+  .pie-cap b{font-family:var(--serif);color:var(--ink);font-size:18px}
+  .pie-bar{display:flex;height:60px;border-radius:4px;overflow:hidden;margin-top:14px;border:1px solid var(--line)}
+  .pie-bar span{height:100%}
+  .pie-bar .mut{background:#E6DAC4}
+  .pie-bar .mut:nth-of-type(even){background:#DBCCB0}
+  .pie-bar .th{background:var(--thai)}
+  .pie-bar .id{background:var(--indo)}
+  .pie-leg{display:flex;flex-wrap:wrap;gap:24px;margin-top:16px;font-size:13px;color:var(--ink2);font-weight:700}
+  .pie-leg .key{display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:-2px;margin-right:7px}
+  .pie-leg .key.th{background:var(--thai)}.pie-leg .key.id{background:var(--indo)}.pie-leg .key.mut{background:#E6DAC4}
+
+  .pot-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:48px}
+  .pot-country{padding:4px 0}
+  .pot-country + .pot-country{border-left:1px solid var(--line);padding-left:46px;margin-left:46px}
+  .pc-head{display:flex;align-items:center;gap:12px}
+  .pc-head .flag{width:48px;height:32px}
+  .pc-head h3{font-family:var(--serif);font-size:27px;font-weight:700}
+  .pc-rank{font-size:13.5px;color:var(--ink2);margin:10px 0 22px;padding-bottom:22px;border-bottom:1px solid var(--line)}
+  .pc-rank b{font-family:var(--serif);color:var(--ink);font-size:15px}
+  .pc-grow{display:flex;gap:40px}
+  .pc-grow span{font-size:12px;color:var(--ink2);display:block;margin-bottom:2px}
+  .pc-grow b{font-family:var(--serif);font-size:clamp(30px,5vw,46px);font-weight:700;line-height:1}
+  .th-c .pc-grow b{color:var(--thai)} .id-c .pc-grow b{color:var(--indo)}
+  .pc-read{font-family:var(--serif);font-size:16px;margin-top:20px;line-height:1.75}
+  @media(max-width:680px){.pot-grid{grid-template-columns:1fr}.pot-country + .pot-country{border-left:none;padding-left:0;margin-left:0;border-top:1px solid var(--line);padding-top:30px;margin-top:30px}}
+
+  /* BRIDGE — needs → offer */
+  .bridge-grid{display:grid;grid-template-columns:1fr 56px 1fr;align-items:start;gap:24px;margin-top:46px}
+  .bridge-col h4{font-family:var(--serif);font-size:19px;font-weight:700;margin-bottom:8px}
+  .bridge-col.offer h4{color:var(--indo)}
+  .bridge-col ol{list-style:none;counter-reset:n}
+  .bridge-col li{padding:16px 0;border-top:1px solid var(--line);font-size:15px;color:var(--ink2);display:flex;gap:14px;align-items:baseline}
+  .bridge-col li:before{content:counter(n);counter-increment:n;font-family:var(--serif);font-weight:700;color:var(--gold);flex-shrink:0}
+  .bridge-col.offer li:before{color:var(--indo)}
+  .bridge-arrow{align-self:center;text-align:center;font-family:var(--serif);font-size:44px;color:var(--gold);line-height:1}
+  @media(max-width:720px){.bridge-grid{grid-template-columns:1fr;gap:4px}.bridge-arrow{transform:rotate(90deg);margin:8px 0}}
+
+  /* DRILL-DOWN: donut → ASEAN bars */
+  .drill{display:grid;grid-template-columns:auto auto 1fr;gap:36px;align-items:center;margin-top:46px}
+  .drill-pie{text-align:center}
+  .donut{width:264px;height:264px;margin:0 auto}
+  .donut-cap{margin-top:10px;font-size:12px;color:var(--ink2)}
+  .drill-arrow{font-family:var(--serif);font-size:15px;color:var(--gold);text-align:center;font-weight:700;line-height:1.6}
+  .bars-cap{font-size:13px;color:var(--ink2);margin-bottom:16px;border-bottom:1px solid var(--line);padding-bottom:12px}
+  .bars-cap b{font-family:var(--serif);color:var(--ink);font-size:17px}
+  .bar-row{display:grid;grid-template-columns:112px 1fr auto;align-items:center;gap:12px;padding:6px 0}
+  .bar-row .bl{font-size:13px;color:var(--ink2);text-align:right}
+  .bar-row .bt{height:22px;border-radius:3px;background:#DBCCB0;min-width:3px}
+  .bar-row.th .bt{background:var(--thai)}
+  .bar-row.id .bt{background:var(--indo)}
+  .bar-row.th .bl,.bar-row.id .bl{font-weight:800;color:var(--ink)}
+  .bar-row .bv{font-family:var(--serif);font-size:15px;font-weight:700;white-space:nowrap}
+  .bar-row .bv u{text-decoration:none;font-size:11px;color:var(--ink2)}
+  @media(max-width:860px){.drill{grid-template-columns:1fr;gap:22px}.drill-arrow{transform:rotate(90deg)}}
+
+  .pc-head .pc-badge{font-family:var(--sans);font-size:11px;font-weight:800;letter-spacing:.04em;padding:3px 10px;border-radius:2px;background:var(--thai);color:#fff;margin-left:2px}
+  .pc-head .pc-badge.id{background:var(--indo)}
+  .pc-grow em{font-style:normal;font-size:10px;opacity:.65;margin-left:5px;letter-spacing:0}
+
+  /* MARKETS — full-bleed alternating bands */
+  .mkt{padding:78px 0;border-top:1px solid var(--line)}
+  .mkt.th-band{background:linear-gradient(180deg,#FBF3E4,var(--paper))}
+  .mkt.id-band{background:linear-gradient(180deg,#EAF4F2,var(--paper))}
+  .mkt-top{display:flex;align-items:center;gap:18px;margin-bottom:6px}
+  .mkt-top .flag{width:64px;height:43px}
+  .mkt-en{font-size:12px;letter-spacing:.18em;color:var(--ink2);font-weight:800}
+  .mkt h3{font-family:var(--serif);font-size:clamp(24px,3.4vw,34px);font-weight:700;line-height:1.35;margin:2px 0 6px;max-width:760px}
+  .mkt .tag{color:var(--ink2);font-size:15px;margin-bottom:30px}
+  .mkt-points{columns:2;column-gap:48px}
+  .mkt-points p{break-inside:avoid;padding:16px 0;border-top:1px solid var(--line);font-size:15px;color:var(--ink2)}
+  .mkt-points p b{color:var(--ink);font-family:var(--serif);font-weight:700;display:block;font-size:16px;margin-bottom:1px}
+  .trial{margin-top:34px;font-size:16px;font-weight:700;font-family:var(--serif);padding-left:18px;border-left:4px solid var(--gold)}
+  .id-band .trial{border-left-color:var(--teal)}
+  .trial small{display:block;font-family:var(--sans);font-weight:700;font-size:12.5px;color:var(--ink2);letter-spacing:.04em;margin-bottom:2px}
+  @media(max-width:620px){.mkt-points{columns:1}}
+
+  /* PROGRAM — editorial timeline */
+  .prog{background:var(--ink);color:var(--paper)}
+  .prog h2.sec{color:var(--paper)}
+  .prog h2.sec .accent{color:var(--gold)}
+  .prog .sec-sub{color:#b9b6ac}
+  .tl{margin-top:48px}
+  .tl-row{display:grid;grid-template-columns:150px 1fr;gap:28px;padding:26px 0;border-top:1px solid rgba(255,255,255,.16)}
+  .tl-row:last-child{border-bottom:1px solid rgba(255,255,255,.16)}
+  .tl-time{font-family:var(--serif);font-size:16px;color:var(--gold);font-weight:700}
+  .tl-time small{display:block;font-family:var(--sans);font-size:12px;color:#8f8c84;font-weight:700;margin-top:3px}
+  .tl-row h4{font-family:var(--serif);font-size:20px;font-weight:700;margin-bottom:5px}
+  .tl-row .who{font-size:13px;color:#b9b6ac;margin-bottom:12px}
+  .tl-steps{display:flex;flex-direction:column;gap:2px}
+  .tl-steps div{display:flex;justify-content:space-between;gap:16px;font-size:14px;color:#e4e1d8;padding:7px 0;border-bottom:1px dotted rgba(255,255,255,.14)}
+  .tl-steps div:last-child{border-bottom:none}
+  .tl-steps span{color:#8f8c84;font-weight:700;white-space:nowrap}
+  .tl-plain h4{margin-bottom:0}
+  @media(max-width:620px){.tl-row{grid-template-columns:1fr;gap:10px}}
+
+  /* SPEAKERS — roster rows */
+  .spk-row{display:grid;grid-template-columns:88px 1fr;gap:24px;padding:28px 0;border-top:1px solid var(--line);align-items:center}
+  .spk-row:last-child{border-bottom:1px solid var(--line)}
+  .spk-ava{width:88px;height:88px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:30px;font-weight:700;color:#fff;background:linear-gradient(140deg,var(--thai),var(--teal))}
+  .spk-ava.fl{background:var(--paper2);border:1px solid var(--line)}
+  .spk-ava.fl .flag{width:46px;height:31px}
+  .spk-role{font-size:12px;font-weight:800;letter-spacing:.06em;color:var(--indo)}
+  .spk-name{font-family:var(--serif);font-size:22px;font-weight:700;margin:2px 0}
+  .spk-name .st{font-family:var(--sans);font-size:11px;font-weight:800;letter-spacing:.04em;margin-left:10px;padding:2px 9px;border:1px solid var(--line);border-radius:2px;color:var(--ink2);vertical-align:middle}
+  .spk-name .st.fix{color:var(--teal);border-color:var(--teal)}
+  .spk-desc{color:var(--ink2);font-size:15px;max-width:720px}
+  .team-block{display:grid;grid-template-columns:88px 1fr;gap:24px;padding:30px 0;border-top:1px solid var(--line);align-items:start}
+  .team-badge{width:88px;height:88px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:15px;font-weight:700;color:#fff;background:linear-gradient(140deg,var(--thai),var(--teal));flex-shrink:0}
+  .team-name{font-family:var(--serif);font-size:23px;font-weight:700;margin:3px 0 8px;line-height:1.35}
+  .team-members{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+  .team-members span{background:var(--paper2);border:1px solid var(--line);border-radius:2px;padding:8px 18px;font-family:var(--serif);font-weight:700;font-size:15px}
+  .team-members span small{font-family:var(--sans);font-size:10px;font-weight:700;color:var(--ink2);margin-left:5px}
+  .spk-guest-label{margin-top:34px;font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--indo)}
+  @media(max-width:620px){.team-block{grid-template-columns:56px 1fr;gap:16px}.team-badge{width:56px;height:56px;font-size:12px}}
+  @media(max-width:620px){.spk-row{grid-template-columns:60px 1fr;gap:16px}.spk-ava{width:60px;height:60px;font-size:22px}.spk-ava.fl .flag{width:34px;height:23px}}
+
+  /* BENEFITS */
+  .ben-row{display:grid;grid-template-columns:60px 1fr;gap:22px;padding:30px 0;border-top:1px solid var(--line);align-items:baseline}
+  .ben-row:last-child{border-bottom:1px solid var(--line)}
+  .ben-no{font-family:var(--serif);font-size:22px;color:var(--indo);font-weight:700}
+  .ben-row h3{font-family:var(--serif);font-size:21px;font-weight:700;margin-bottom:5px}
+  .ben-row p{color:var(--ink2);font-size:15.5px;max-width:720px}
+
+  /* OUTLINE */
+  .out-row{display:grid;grid-template-columns:200px 1fr;gap:20px;padding:20px 0;border-top:1px solid var(--line);font-size:15.5px}
+  .out-row:last-child{border-bottom:1px solid var(--line)}
+  .out-row .oh{font-family:var(--serif);font-weight:700}
+  @media(max-width:560px){.out-row{grid-template-columns:1fr;gap:2px}}
+
+  /* FINAL */
+  .final{background:var(--ink);color:var(--paper);text-align:center}
+  .final h2{font-family:var(--serif);font-size:clamp(28px,4.4vw,46px);font-weight:700;line-height:1.35}
+  .final h2 .mk{color:var(--gold)}
+  .final p{margin-top:18px;color:#c7c4ba;font-size:16px}
+  .final .hero-cta{display:inline-flex;align-items:center;gap:12px;margin-top:34px;background:var(--indo);color:#fff;font-weight:900;font-size:17px;padding:16px 40px;border-radius:3px;transition:.2s}
+  .final .hero-cta:hover{background:#c31f18;transform:translateY(-1px)}
+  .final .hero-cta .free{font-size:11px;background:#fff;color:var(--indo);padding:2px 8px;border-radius:2px;font-weight:900}
+  .final .note{margin-top:16px;font-size:12.5px;color:#8f8c84}
+
+  /* MID CTA BAND */
+  .cta-band{background:linear-gradient(135deg,#C1122B,#0E7C74);color:#fff;text-align:center;padding:58px 0}
+  .cta-band h3{font-family:var(--serif);font-size:clamp(21px,3.1vw,30px);font-weight:700;line-height:1.5}
+  .cta-band .btn{display:inline-block;margin-top:24px;background:#fff;color:var(--thai);font-weight:900;font-size:16px;padding:15px 42px;border-radius:3px;transition:.2s}
+  .cta-band .btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(0,0,0,.25)}
+
+  footer{background:var(--ink);color:#8f8c84;border-top:1px solid rgba(255,255,255,.12);text-align:center;padding:30px;font-size:12.5px}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <div class="logo">タイ<em>×</em>インドネシア インバウンドセミナー</div>
+    <a href="#apply" class="apply">無料で申し込む →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-copy">
+    <div class="hero-top">
+      <span class="htag free">参加費 無料</span>
+      <span class="htag">オンライン(ZOOM) ／ 会場</span>
+      <span class="htag">自治体・DMO・企業・観光事業者向け</span>
+    </div>
+    <div class="hero-grid">
+      <div class="hero-left">
+        <div class="hero-eyebrow"><span class="flag th"></span><span class="flag id"></span>タイ × インドネシア インバウンドセミナー</div>
+        <h1 class="hero-h">二つの成長市場を、<br><span class="mk">「迎えにいく」</span>。</h1>
+        <p class="hero-lead">訪日消費はいずれも過去最高を更新中 —— タイ <b>+11.6%</b>、インドネシア <b>+18.0%</b>。伸び続ける二つの市場を読み解き、成功事例に学び、旅行者を“迎えにいく”実践知を2時間で。</p>
+        <div class="value-chips">
+          <div class="vchip"><i>01</i>市場の全体像と“いま”</div>
+          <div class="vchip"><i>02</i>成果の出た訪日プロモ事例</div>
+          <div class="vchip"><i>03</i>セミナー限定トライアル</div>
+        </div>
+        <div class="hero-guests">
+          <span class="hg-label">＋ 特別ゲスト</span>
+          <div class="hg-list">
+            <div class="hg"><img src="kol_kirarista.png" alt="KIRARISTA"><div><b>タイ KOL</b><span class="nm">KIRARISTA</span><small>計 約45万フォロワー</small></div></div>
+            <div class="hg"><img src="kol_anisa.png" alt="吉田アニサ"><div><b>インドネシア KOL</b><span class="nm">吉田アニサ</span><small>計 約45万フォロワー</small></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="ic-row"><span class="ic-k">開催日</span><span class="ic-v big">10.23<span style="font-size:13px">（金）</span></span></div>
+        <div class="ic-row"><span class="ic-k">時間</span><span class="ic-v">15:00 – 17:00</span></div>
+        <div class="ic-row"><span class="ic-k">形式</span><span class="ic-v">会場 / オンライン</span></div>
+        <div class="ic-row"><span class="ic-k">参加費</span><span class="ic-v">無料</span></div>
+        <a href="#apply" class="ic-cta">無料で申し込む →</a>
+        <div class="ic-note">定員制・先着順です</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- WHY -->
+<section>
+  <div class="wrap">
+    <div class="lead-head">
+      <h2 class="sec">「これから」ではなく、<span class="accent">もう始まっている</span>市場。</h2>
+      <p class="sec-sub">人口・経済成長・訪日熱が揃うタイとインドネシア。SNSとインフルエンサーが購買を動かすこの市場では、先に動いたブランドが選ばれています。</p>
+    </div>
+    <div style="margin-top:40px">
+      <div class="why-row">
+        <div class="why-no">01</div>
+        <div>
+          <h3>成長する購買力</h3>
+          <p>インドネシアは世界第4位の人口とGDPの伸び。Z世代・ミレニアル世代の購買力が急速に高まり、日本旅行が現実的な選択肢になっています。</p>
+        </div>
+      </div>
+      <div class="why-row">
+        <div class="why-no">02</div>
+        <div>
+          <h3>コト消費へのシフト</h3>
+          <p>日本リピーターの多いタイでは、買い物中心の「モノ消費」から、体験を重視する「コト消費」へと関心が移っています。</p>
+        </div>
+      </div>
+      <div class="why-row">
+        <div class="why-no">03</div>
+        <div>
+          <h3>SNSが動かす市場</h3>
+          <p>Facebook・YouTube・Instagram、そしてインフルエンサー（KOL）の影響力が、旅先の意思決定を大きく左右します。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POTENTIAL -->
+<section class="data">
+  <div class="wrap">
+    <div class="lead-head">
+      <h2 class="sec">9.5兆円のパイの中で、<span class="accent">ASEANが伸びている</span>。</h2>
+      <p class="sec-sub">2025年、日本のインバウンド消費は9兆4,549億円と過去最高。その大きなパイから東南アジア（ASEAN）を取り出すと、<b>タイが最大、インドネシアが最速で伸長</b>。二つの市場は、この成長の中心にいます。</p>
+    </div>
+
+    <div class="drill">
+      <div class="drill-pie">
+        <div id="donut" class="donut"></div>
+        <div class="donut-cap">2025年 訪日外国人 旅行消費額（確報）</div>
+      </div>
+      <div class="drill-arrow">ASEANを<br>取り出すと</div>
+      <div class="drill-bars">
+        <div class="bars-cap">東南アジア（ASEAN）＝ <b>約1兆1,241億円</b>（全体の11.9%）／ 市場別・旅行消費額</div>
+        <div class="bar-row th"><span class="bl">タイ</span><span class="bt" style="width:100%"></span><span class="bv">2,527<u>億円</u></span></div>
+        <div class="bar-row"><span class="bl">シンガポール</span><span class="bt" style="width:91%"></span><span class="bv">2,308</span></div>
+        <div class="bar-row"><span class="bl">ベトナム</span><span class="bt" style="width:81%"></span><span class="bv">2,055</span></div>
+        <div class="bar-row"><span class="bl">フィリピン</span><span class="bt" style="width:65%"></span><span class="bv">1,636</span></div>
+        <div class="bar-row"><span class="bl">マレーシア</span><span class="bt" style="width:56%"></span><span class="bv">1,406</span></div>
+        <div class="bar-row id"><span class="bl">インドネシア</span><span class="bt" style="width:52%"></span><span class="bv">1,309<u>億円</u></span></div>
+      </div>
+    </div>
+
+    <div class="pot-grid">
+      <div class="pot-country th-c">
+        <div class="pc-head"><span class="flag th"></span><h3>タイ</h3><span class="pc-badge">ASEAN 最大</span></div>
+        <div class="pc-rank">旅行消費額 <b>2,527億円</b>（ASEAN 1位・全市場 第7位）　｜　訪日客 約123万人</div>
+        <div class="pc-grow">
+          <div><span>消費額 前年比<em>2025年</em></span><b>+11.6%</b></div>
+          <div><span>最新・2026年4-6月期</span><b>718<u>億円</u></b></div>
+        </div>
+        <p class="pc-read">リピーターが多く、通年で二桁成長を続けるASEAN最大の消費市場。※2026年4-6月期は夏場の需要調整で横ばい（前年同期比+0.3%）、“再活性”が鍵に。</p>
+      </div>
+      <div class="pot-country id-c">
+        <div class="pc-head"><span class="flag id"></span><h3>インドネシア</h3><span class="pc-badge id">ASEAN 最速</span></div>
+        <div class="pc-rank">旅行消費額 1,309億円（2025年）　｜　訪日客 約64万人・平均15.3泊の長期滞在</div>
+        <div class="pc-grow">
+          <div><span>消費額 前年比<em>2025年</em></span><b>+18.0%</b></div>
+          <div><span>最新・2026年4-6月期</span><b>+40.3%</b></div>
+        </div>
+        <p class="pc-read">シェアはまだ小さいが、消費額の伸びはASEAN随一。2026年4-6月期は前年同期比+40.3%とさらに加速する、“最も勢いのある市場”。</p>
+      </div>
+    </div>
+    <p class="data-note">出典：観光庁「インバウンド消費動向調査」2025年 年次報告書（確報／2026年3月31日）および 2026年4-6月期（1次速報／2026年7月15日）／ 日本政府観光局（JNTO）「訪日外客数」（2026年7月15日発表）。円グラフ・シェア・順位は旅行消費額ベース。速報値・推計値・暫定値を含みます。ご掲載・配布の際は最新の公式値をご確認ください。</p>
+  </div>
+</section>
+
+<!-- BRIDGE -->
+<section>
+  <div class="wrap">
+    <div class="lead-head">
+      <h2 class="sec">成長市場を、<span class="accent">成果に変える</span>には。</h2>
+      <p class="sec-sub">伸びている市場も、“正しく届ける”準備がなければ取りこぼす。成長市場に必要なことと、私たちがこのセミナーで用意するものは、こう対応しています。</p>
+    </div>
+    <div class="bridge-grid">
+      <div class="bridge-col need">
+        <h4>成長市場に必要な、3つのこと</h4>
+        <ol>
+          <li>各市場の“実態”を理解する（リピーター／コト消費、ムスリム／若年層）</li>
+          <li>現地のSNS・KOLを通じて、確実に届ける</li>
+          <li>成功事例に基づいて、施策を設計する</li>
+        </ol>
+      </div>
+      <div class="bridge-arrow">→</div>
+      <div class="bridge-col offer">
+        <h4>だから、本セミナーが用意するもの</h4>
+        <ol>
+          <li>タイ・インドネシアの市場解説（担当営業）</li>
+          <li>各国KOLによる、最新トレンドの“生の声”</li>
+          <li>訪日プロモーションの成功事例（非公開事例）</li>
+          <li>セミナー限定の、特別トライアルご提案</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MID CTA -->
+<section class="cta-band">
+  <div class="wrap">
+    <h3>成長市場の“いま”と“打ち手”を、2時間で。<br>まずは、無料で参加してみませんか。</h3>
+    <a href="#apply" class="btn">無料で申し込む →</a>
+  </div>
+</section>
+
+<!-- THAILAND -->
+<section class="mkt th-band">
+  <div class="wrap">
+    <div class="mkt-top"><span class="flag th"></span><span class="mkt-en">THAILAND</span></div>
+    <h3>日本リピーターと、強いSNS影響力。</h3>
+    <p class="tag">訪日情報とトレンド、そして成功事例からひも解く。</p>
+    <div class="mkt-points">
+      <p><b>訪日情報とトレンド</b>最新の関心テーマと、来訪動機の変化を読み解く。</p>
+      <p><b>リピーターの多さ</b>「モノ消費」から「コト消費」への移行が進行中。</p>
+      <p><b>SNS・KOLの影響力</b>Facebook / YouTube / Instagram が購買を動かす。</p>
+      <p><b>訪日プロモーション成功事例</b>クライアント名は非公開でご紹介します。</p>
+    </div>
+    <div class="trial"><small>セミナー限定・特別ご提案</small>お得なトライアル ― タイ連合企画・単独プラン</div>
+  </div>
+</section>
+
+<!-- INDONESIA -->
+<section class="mkt id-band">
+  <div class="wrap">
+    <div class="mkt-top"><span class="flag id"></span><span class="mkt-en">INDONESIA</span></div>
+    <h3>人口世界第4位。若年層とムスリム対応が鍵。</h3>
+    <p class="tag">FITの急増と、日本文化への強い関心。</p>
+    <div class="mkt-points">
+      <p><b>市場規模と成長</b>世界第4位の人口、GDPの継続的な増加。</p>
+      <p><b>若年層の購買力</b>Z世代・ミレニアル世代が消費を牽引。</p>
+      <p><b>ムスリム市場対応</b>ハラール・礼拝スペース・食対応の重要性。</p>
+      <p><b>FITの急増</b>J-POP・アニメなど日本文化への関心の高さ。</p>
+      <p><b>SNS・KOLの影響力</b>Facebook / YouTube / Instagram が浸透。</p>
+      <p><b>PR事例</b>クライアント名は非公開でご紹介します。</p>
+    </div>
+    <div class="trial"><small>セミナー限定・特別ご提案</small>お得なトライアル ― インドネシア連合企画・単独プラン</div>
+  </div>
+</section>
+
+<!-- PROGRAM -->
+<section class="prog">
+  <div class="wrap">
+    <div class="lead-head">
+      <h2 class="sec">当日の<span class="accent">プログラム</span>。<span style="font-family:var(--sans);font-size:15px;font-weight:400;color:#b9b6ac">（全105分）</span></h2>
+      <p class="sec-sub">タイ・インドネシアの2部構成。各部とも、市場解説 → 最新トレンド → 事例 → トライアル提案 → 質疑応答まで一気通貫でお届けします。</p>
+    </div>
+
+    <div class="tl">
+      <div class="tl-row tl-plain">
+        <div class="tl-time">15:00–15:05<small>5分</small></div>
+        <div><h4>オープニング</h4><div class="who" style="margin:0">本日のゴールと進め方</div></div>
+      </div>
+
+      <div class="tl-row">
+        <div class="tl-time">15:05–15:55<small>50分 ／ 第1部</small></div>
+        <div>
+          <h4>タイ市場 ― 規模で選ばれ続ける市場を、明日の打ち手に</h4>
+          <div class="who">この50分でわかること</div>
+          <div class="tl-steps">
+            <div>タイ市場のいま ― リピーターの動向と「コト消費」への変化<span>10分</span></div>
+            <div>現地の最新トレンド ― SNSで“いま響くもの”（各国KOLの生の声つき）<span>15分</span></div>
+            <div>訪日プロモーション成功事例 ― 実際に成果が出た打ち手に学ぶ<span>10分</span></div>
+            <div>セミナー限定・特別トライアルのご提案<span>5分</span></div>
+            <div>質疑応答<span>10分</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-row tl-plain">
+        <div class="tl-time">15:55–16:00<small>5分</small></div>
+        <div><h4>休憩</h4></div>
+      </div>
+
+      <div class="tl-row">
+        <div class="tl-time">16:00–16:40<small>40分 ／ 第2部</small></div>
+        <div>
+          <h4>インドネシア市場 ― 最も勢いのある市場の攻略法</h4>
+          <div class="who">この40分でわかること</div>
+          <div class="tl-steps">
+            <div>インドネシア市場のいま ― 若年層の購買力・FIT急増・ムスリム対応の勘所<span>10分</span></div>
+            <div>現地の最新トレンド ― 日本文化人気の実態（各国KOLの生の声つき）<span>10分</span></div>
+            <div>訪日プロモーション事例 ― 現地に届いた打ち手<span>5分</span></div>
+            <div>セミナー限定・特別トライアルのご提案<span>5分</span></div>
+            <div>質疑応答<span>10分</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-row tl-plain">
+        <div class="tl-time">16:40–16:45<small>5分</small></div>
+        <div><h4>クロージング</h4><div class="who" style="margin:0">アンケート・個別相談のご案内</div></div>
+      </div>
+
+      <div class="tl-row tl-plain">
+        <div class="tl-time">16:45–17:00</div>
+        <div><h4>名刺交換・個別相談</h4><div class="who" style="margin:0">自社の状況に合わせた個別相談も承ります</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPEAKERS -->
+<section>
+  <div class="wrap">
+    <div class="lead-head">
+      <h2 class="sec">登壇者</h2>
+      <p class="sec-sub">ASEAN市場に特化したグローバル・デイリーの専門チームが解説。さらに、各国の人気KOLが特別ゲストとして登壇します。</p>
+    </div>
+    <div style="margin-top:40px">
+      <div class="team-block">
+        <div class="team-badge">解説</div>
+        <div>
+          <div class="spk-role">グローバル・デイリー ／ ASEAN専門チーム</div>
+          <div class="team-name">ASEAN（タイ・インドネシア特化）チーム</div>
+          <div class="spk-desc">両市場に精通した専門チームが、市場の全体像から訪日プロモーションの成功事例まで、現場目線で「明日から動ける」実践知を解説します。</div>
+          <div class="team-members">
+            <span>田中</span>
+            <span>ノア<small>タイ担当</small></span>
+            <span>佐藤<small>タイ担当</small></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="spk-guest-label">＋ 特別ゲスト（各国KOL）</div>
+
+      <div class="spk-row">
+        <div class="spk-ava photo"><img src="kol_kirarista.png" alt="KIRARISTA"></div>
+        <div>
+          <div class="spk-role">ゲストスピーカー ／ タイ KOL</div>
+          <div class="spk-name">KIRARISTA（キラリスター）</div>
+          <div class="spk-desc">タイのインフルエンサー視点で、生活者に響く最新トレンドをお話しします。</div>
+          <div class="spk-reach">
+            <span><u>YouTube</u>13.6<i>万</i></span>
+            <span><u>Facebook</u>23.7<i>万</i></span>
+            <span><u>Instagram</u>8.2<i>万</i></span>
+          </div>
+        </div>
+      </div>
+      <div class="spk-row">
+        <div class="spk-ava photo"><img src="kol_anisa.png" alt="吉田アニサ"></div>
+        <div>
+          <div class="spk-role">ゲストスピーカー ／ インドネシア KOL</div>
+          <div class="spk-name">吉田アニサ<span class="st fix">登壇確定</span></div>
+          <div class="spk-desc">インドネシアの若年層・ムスリム市場のリアルを、当事者目線で解説します。</div>
+          <div class="spk-reach">
+            <span><u>Instagram</u>40.5<i>万</i></span>
+            <span><u>TikTok</u>4.5<i>万</i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="data">
+  <div class="wrap">
+    <div class="lead-head">
+      <h2 class="sec">ご参加特典・<span class="accent">ネクストステップ</span>。</h2>
+    </div>
+    <div style="margin-top:36px">
+      <div class="ben-row">
+        <div class="ben-no">01</div>
+        <div>
+          <h3>参加社限定・特別料金</h3>
+          <p>2027年ソンクラーン（タイ正月）に向けた企画を含む、参加社限定のセミナー特別料金をご提案します。</p>
+        </div>
+      </div>
+      <div class="ben-row">
+        <div class="ben-no">02</div>
+        <div>
+          <h3>個別相談のご案内</h3>
+          <p>セミナー後、各営業担当者と名刺交換。貴社の状況に合わせた進め方を個別にご相談いただけます。</p>
+        </div>
+      </div>
+      <div class="ben-row">
+        <div class="ben-no">03</div>
+        <div>
+          <h3>持ち帰れる実践知</h3>
+          <p>成功したプロモーション事例をベースに、自社で応用できる考え方をお持ち帰りいただけます。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUTLINE -->
+<section>
+  <div class="wrap">
+    <div class="lead-head"><h2 class="sec">開催概要</h2></div>
+    <div style="margin-top:34px">
+      <div class="out-row"><div class="oh">セミナー名</div><div>なぜ今、東南アジア市場なのか？ ― 市場の成長と可能性について</div></div>
+      <div class="out-row"><div class="oh">開催日時</div><div>2026年10月23日（金）15:00 – 17:00</div></div>
+      <div class="out-row"><div class="oh">開催形式</div><div>会場（オフライン）／ オンライン（ZOOM）</div></div>
+      <div class="out-row"><div class="oh">参加費</div><div>無料</div></div>
+      <div class="out-row"><div class="oh">対象</div><div>自治体・DMOのインバウンド担当者、東南アジア進出を検討中の企業、観光事業者、インバウンドのマーケティング・営業ご担当者</div></div>
+      <div class="out-row"><div class="oh">内容</div><div>タイ・インドネシア市場の最新動向、訪日プロモーション事例、セミナー限定トライアルのご提案、質疑応答</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL -->
+<section class="final" id="apply">
+  <div class="wrap">
+    <h2>成長市場は、<br><span class="mk">先に動いた人</span>から選ばれる。</h2>
+    <p>参加費無料。会場・オンラインどちらでもご参加いただけます。</p>
+    <a href="#" class="hero-cta"><span class="free">無料</span>セミナーに申し込む</a>
+    <div class="note">※お申し込みフォームのURLをこちらに設定してください。定員に達し次第、締め切らせていただきます。</div>
+  </div>
+</section>
+
+<footer>
+  © 2026 タイ×インドネシア インバウンドセミナー ／ お問い合わせは主催者までご連絡ください。
+</footer>
+
+<script>
+(function(){
+  // 2025年 旅行消費額シェア（%）。ASEANは6か国を1ウェッジに集約して強調。
+  var data=[
+    {v:21.2,c:'#D9C9AB'},  // 中国
+    {v:12.7,c:'#CDBB97'},  // 台湾
+    {v:11.8,c:'#D9C9AB'},  // 米国
+    {v:10.5,c:'#CDBB97'},  // 韓国
+    {v:5.9, c:'#D9C9AB'},  // 香港
+    {v:4.3, c:'#CDBB97'},  // 豪州
+    {v:11.9,c:'#E29A2E', pop:true}, // ASEAN（強調・突出）
+    {v:21.7,c:'#EBE0CC'}   // その他
+  ];
+  var cx=132, cy=132, R=116, r=68, off=12;
+  function pol(px,py,rr,deg){var a=(deg-90)*Math.PI/180;return[px+rr*Math.cos(a),py+rr*Math.sin(a)];}
+  function seg(px,py,a0,a1){
+    var large=(a1-a0)>180?1:0;
+    var o0=pol(px,py,R,a0),o1=pol(px,py,R,a1),i1=pol(px,py,r,a1),i0=pol(px,py,r,a0);
+    return 'M'+o0[0]+' '+o0[1]+' A'+R+' '+R+' 0 '+large+' 1 '+o1[0]+' '+o1[1]+
+           ' L'+i1[0]+' '+i1[1]+' A'+r+' '+r+' 0 '+large+' 0 '+i0[0]+' '+i0[1]+' Z';
+  }
+  var ang=0, paths='';
+  for(var k=0;k<data.length;k++){
+    var a0=ang, a1=ang+data[k].v*3.6; ang=a1;
+    var px=cx, py=cy;
+    if(data[k].pop){var mid=(a0+a1)/2, p=pol(0,0,off,mid); px=cx+p[0]; py=cy+p[1];}
+    paths+='<path d="'+seg(px,py,a0,a1)+'" fill="'+data[k].c+'" stroke="#F4ECDC" stroke-width="2.5"/>';
+  }
+  var center='<text x="132" y="126" text-anchor="middle" font-family="serif" font-size="13" fill="#5c5a51">2025年</text>'+
+             '<text x="132" y="150" text-anchor="middle" font-family="serif" font-size="20" font-weight="700" fill="#20211E">9.5兆円</text>';
+  var el=document.getElementById('donut');
+  if(el){el.innerHTML='<svg viewBox="0 0 264 264" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">'+paths+center+'</svg>';}
+})();
+</script>
+</body>
+</html>
