@@ -31,47 +31,56 @@
   .logo em{font-style:normal;color:var(--indo)}
   .nav a.apply{font-size:13px;font-weight:800;letter-spacing:.04em;border-bottom:2px solid var(--indo);padding-bottom:3px}
 
-  /* HERO — bold colored banner */
+  /* HERO — dry, flag-forward */
   .hero{position:relative;overflow:hidden;color:#fff;
-    background:
-      radial-gradient(circle at 10% 12%,rgba(255,255,255,.15),transparent 38%),
-      radial-gradient(circle at 94% 88%,rgba(255,255,255,.10),transparent 42%),
-      linear-gradient(135deg,#C1122B 0%,#A0142A 42%,#0E7C74 100%)}
-  .hero-copy{max-width:1120px;margin:0 auto;padding:44px 32px 48px}
-  .hero-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:30px}
-  .htag{background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.45);padding:8px 16px;border-radius:2px;font-size:13px;font-weight:800;letter-spacing:.02em}
-  .htag.free{background:#fff;color:var(--thai);border-color:#fff}
-  .hero-grid{display:grid;grid-template-columns:1fr 320px;gap:46px;align-items:center}
-  .hero-eyebrow{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:800;letter-spacing:.04em;color:#FFD98A;margin-bottom:18px}
+    background:radial-gradient(circle at 88% 6%,rgba(255,255,255,.05),transparent 40%),linear-gradient(162deg,#242C33 0%,#2C383D 100%)}
+  .hero-copy{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:40px 32px 0}
+  .hero-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:32px}
+  .htag{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.34);padding:8px 16px;border-radius:2px;font-size:13px;font-weight:800;letter-spacing:.02em}
+  .htag.free{background:#fff;color:var(--ink);border-color:#fff}
+  .htag.hot{background:var(--indo);border-color:var(--indo)}
+  .hero-grid{max-width:770px}
+  .hero-eyebrow{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:800;letter-spacing:.04em;color:#E4C994;margin-bottom:18px}
   .hero-eyebrow .flag{width:26px;height:17px}
-  h1.hero-h{font-family:var(--serif);font-weight:700;font-size:clamp(34px,5.2vw,60px);line-height:1.24;letter-spacing:.01em;color:#fff}
-  h1.hero-h .mk{background:linear-gradient(transparent 56%,rgba(226,154,46,.7) 56%);padding:0 .06em}
-  .hero-lead{margin-top:22px;font-size:16px;line-height:1.9;color:rgba(255,255,255,.94);max-width:600px}
-  .hero-lead b{color:#FFE0A3;font-weight:800;font-family:var(--serif);font-size:1.18em}
+  h1.hero-h{font-family:var(--serif);font-weight:700;font-size:clamp(32px,4.8vw,54px);line-height:1.3;letter-spacing:.01em;color:#fff}
+  .hero-lead{margin-top:22px;font-size:16px;line-height:1.9;color:rgba(255,255,255,.9);max-width:600px}
+  .hero-lead b{color:#EBD199;font-weight:800;font-family:var(--serif);font-size:1.12em}
   .value-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
-  .vchip{display:flex;align-items:center;gap:9px;background:rgba(0,0,0,.16);border:1px solid rgba(255,255,255,.3);border-radius:4px;padding:11px 16px;font-size:14px;font-weight:800}
-  .vchip i{font-style:normal;font-family:var(--serif);color:#FFD98A;font-size:16px}
+  .vchip{display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.22);border-radius:4px;padding:11px 16px;font-size:14px;font-weight:800}
+  .vchip i{font-style:normal;font-family:var(--serif);color:#E4C994;font-size:16px}
 
-  .hero-guests{display:flex;align-items:center;gap:14px 24px;margin-top:32px;flex-wrap:wrap}
-  .hg-label{font-size:11px;font-weight:800;letter-spacing:.12em;color:#FFD98A}
+  .hero-guests{display:flex;align-items:center;gap:14px 24px;margin-top:30px;flex-wrap:wrap}
+  .hg-label{font-size:11px;font-weight:800;letter-spacing:.12em;color:#E4C994}
   .hg-list{display:flex;gap:22px;flex-wrap:wrap}
   .hg{display:flex;align-items:center;gap:11px}
-  .hg img{width:48px;height:48px;border-radius:50%;object-fit:cover;object-position:center 15%;border:2px solid rgba(255,255,255,.6)}
-  .hg b{display:block;font-size:10px;font-weight:800;letter-spacing:.04em;color:rgba(255,255,255,.8)}
+  .hg img{width:46px;height:46px;border-radius:50%;object-fit:cover;object-position:center 15%;border:2px solid rgba(255,255,255,.5)}
+  .hg b{display:block;font-size:10px;font-weight:800;letter-spacing:.04em;color:rgba(255,255,255,.75)}
   .hg .nm{font-family:var(--serif);font-size:15px;font-weight:700;color:#fff}
-  .hg small{display:block;font-size:11px;color:#FFD98A;font-weight:800}
+  .hg small{display:block;font-size:11px;color:#E4C994;font-weight:800}
 
-  /* HERO info card */
-  .info-card{background:#fff;color:var(--ink);border-radius:6px;padding:6px 24px 24px;box-shadow:0 22px 50px rgba(0,0,0,.3)}
-  .ic-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:15px 2px;border-bottom:1px solid var(--line)}
-  .ic-k{font-size:12px;font-weight:800;color:var(--ink2);letter-spacing:.04em}
-  .ic-v{font-family:var(--serif);font-size:16px;font-weight:700;text-align:right}
-  .ic-v.big{font-size:20px;color:var(--thai)}
-  .ic-cta{display:block;text-align:center;background:var(--indo);color:#fff;font-weight:900;font-size:17px;padding:16px;border-radius:3px;margin-top:20px;transition:.2s}
-  .ic-cta:hover{background:#c31f18}
-  .ic-note{text-align:center;font-size:11px;color:var(--ink2);margin-top:10px}
+  /* HERO background flag layer (subtle) */
+  .hero-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;
+    -webkit-mask-image:linear-gradient(103deg,transparent 20%,#000 58%);mask-image:linear-gradient(103deg,transparent 20%,#000 58%)}
+  .bgflag{position:absolute;width:540px;height:360px;border-radius:16px;opacity:.5;background-size:100% 100%;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+  .bgflag.th{top:-40px;right:150px;transform:rotate(-13deg);background-image:linear-gradient(#A51931 16.66%,#fff 16.66% 33.33%,#241E46 33.33% 66.66%,#fff 66.66% 83.33%,#A51931 83.33%)}
+  .bgflag.id{bottom:-90px;right:-70px;transform:rotate(-13deg);background-image:linear-gradient(#E70011 50%,#fff 50%)}
 
-  @media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:32px}.info-card{max-width:440px}}
+  /* HERO info bar */
+  .hero-bar{display:flex;align-items:center;flex-wrap:wrap;gap:16px 0;margin-top:40px;border-top:1px solid rgba(255,255,255,.16);padding:22px 0 30px}
+  .hb{padding-right:24px;margin-right:24px;border-right:1px solid rgba(255,255,255,.16)}
+  .hb span{display:block;font-size:10px;letter-spacing:.06em;color:rgba(255,255,255,.6);margin-bottom:3px}
+  .hb b{font-family:var(--serif);font-size:16px;font-weight:700;color:#fff}
+  .hb.cap b{color:#EBD199}
+  .hb-cta{margin-left:auto;background:var(--indo);color:#fff;font-weight:900;font-size:15px;padding:13px 28px;border-radius:3px;transition:.2s}
+  .hb-cta:hover{background:#c31f18}
+  .hb-gcal{align-self:center;margin-left:16px;font-size:12.5px;font-weight:800;color:rgba(255,255,255,.8);text-decoration:underline}
+  .hb-gcal:hover{color:#fff}
+
+  @media(max-width:860px){
+    .bgflag{opacity:.1}
+    .hb-cta{margin-left:0;width:100%;text-align:center}
+    .hb-gcal{margin-left:0}
+  }
 
   /* section accent bar for scannability */
   .lead-head:before{content:"";display:block;width:46px;height:4px;background:var(--indo);margin-bottom:22px;border-radius:2px}
@@ -234,6 +243,7 @@
   .spk-name{font-family:var(--serif);font-size:22px;font-weight:700;margin:2px 0}
   .spk-name .st{font-family:var(--sans);font-size:11px;font-weight:800;letter-spacing:.04em;margin-left:10px;padding:2px 9px;border:1px solid var(--line);border-radius:2px;color:var(--ink2);vertical-align:middle}
   .spk-name .st.fix{color:var(--teal);border-color:var(--teal)}
+  .spk-name .st.online{color:#fff;background:var(--teal);border-color:var(--teal)}
   .spk-desc{color:var(--ink2);font-size:15px;max-width:720px}
   .team-block{display:grid;grid-template-columns:88px 1fr;gap:24px;padding:30px 0;border-top:1px solid var(--line);align-items:start}
   .team-badge{width:88px;height:88px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:15px;font-weight:700;color:#fff;background:linear-gradient(140deg,var(--thai),var(--teal));flex-shrink:0}
@@ -242,6 +252,15 @@
   .team-members span{background:var(--paper2);border:1px solid var(--line);border-radius:2px;padding:8px 18px;font-family:var(--serif);font-weight:700;font-size:15px}
   .team-members span small{font-family:var(--sans);font-size:10px;font-weight:700;color:var(--ink2);margin-left:5px}
   .spk-guest-label{margin-top:34px;font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--indo)}
+  .team-photo{width:88px;height:88px;border-radius:50%;border:2px dashed var(--line);background:var(--paper2);display:flex;align-items:center;justify-content:center;text-align:center;flex-shrink:0}
+  .team-photo span{font-size:11px;font-weight:800;color:var(--ink2);line-height:1.35}
+  .team-photo em{font-style:normal;font-size:9px;opacity:.65;display:block}
+  .feat2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:8px 0 42px}
+  .feat2-item{display:flex;gap:16px;background:var(--paper2);border:1px solid var(--line);border-left:4px solid var(--indo);border-radius:4px;padding:20px 22px}
+  .feat2-no{font-family:var(--serif);font-size:24px;font-weight:700;color:var(--indo);line-height:1;flex-shrink:0}
+  .feat2-item b{display:block;font-family:var(--serif);font-size:17px;font-weight:700;margin-bottom:5px}
+  .feat2-item div{font-size:14px;color:var(--ink2);line-height:1.7}
+  @media(max-width:680px){.feat2{grid-template-columns:1fr}}
   @media(max-width:620px){.team-block{grid-template-columns:56px 1fr;gap:16px}.team-badge{width:56px;height:56px;font-size:12px}}
   @media(max-width:620px){.spk-row{grid-template-columns:60px 1fr;gap:16px}.spk-ava{width:60px;height:60px;font-size:22px}.spk-ava.fl .flag{width:34px;height:23px}}
 
@@ -288,17 +307,18 @@
 
 <!-- HERO -->
 <header class="hero">
+  <div class="hero-bg" aria-hidden="true"><span class="bgflag th"></span><span class="bgflag id"></span></div>
   <div class="hero-copy">
     <div class="hero-top">
       <span class="htag free">参加費 無料</span>
-      <span class="htag">オンライン(ZOOM) ／ 会場</span>
-      <span class="htag">自治体・DMO・企業・観光事業者向け</span>
+      <span class="htag">会場開催（オフライン）</span>
+      <span class="htag hot">30社限定・先着順</span>
     </div>
     <div class="hero-grid">
       <div class="hero-left">
         <div class="hero-eyebrow"><span class="flag th"></span><span class="flag id"></span>タイ × インドネシア インバウンドセミナー</div>
-        <h1 class="hero-h">二つの成長市場を、<br><span class="mk">「迎えにいく」</span>。</h1>
-        <p class="hero-lead">訪日消費はいずれも過去最高を更新中 —— タイ <b>+11.6%</b>、インドネシア <b>+18.0%</b>。伸び続ける二つの市場を読み解き、成功事例に学び、旅行者を“迎えにいく”実践知を2時間で。</p>
+        <h1 class="hero-h">なぜ今、タイ・インドネシア<br>市場なのか。</h1>
+        <p class="hero-lead">訪日消費はいずれも過去最高を更新。タイ <b>+11.6%</b>、インドネシア <b>+18.0%</b>。二つの成長市場の最新動向と、成果につながるプロモーション手法を、データと事例で解説します。</p>
         <div class="value-chips">
           <div class="vchip"><i>01</i>市場の全体像と“いま”</div>
           <div class="vchip"><i>02</i>成果の出た訪日プロモ事例</div>
@@ -307,20 +327,21 @@
         <div class="hero-guests">
           <span class="hg-label">＋ 特別ゲスト</span>
           <div class="hg-list">
-            <div class="hg"><img src="kol_kirarista.png" alt="KIRARISTA"><div><b>タイ KOL</b><span class="nm">KIRARISTA</span><small>計 約45万フォロワー</small></div></div>
-            <div class="hg"><img src="kol_anisa.png" alt="吉田アニサ"><div><b>インドネシア KOL</b><span class="nm">吉田アニサ</span><small>計 約45万フォロワー</small></div></div>
+            <div class="hg"><img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/07/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88-2026-07-27-17.37.52.png" alt="KIRARISTA"><div><b>タイ KOL</b><span class="nm">KIRARISTA</span><small>計 約45万フォロワー</small></div></div>
+            <div class="hg"><img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/07/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88-2026-07-27-17.38.53.png" alt="吉田アニサ"><div><b>インドネシア KOL</b><span class="nm">吉田アニサ</span><small>計 約45万フォロワー</small></div></div>
           </div>
         </div>
       </div>
 
-      <div class="info-card">
-        <div class="ic-row"><span class="ic-k">開催日</span><span class="ic-v big">10.23<span style="font-size:13px">（金）</span></span></div>
-        <div class="ic-row"><span class="ic-k">時間</span><span class="ic-v">15:00 – 17:00</span></div>
-        <div class="ic-row"><span class="ic-k">形式</span><span class="ic-v">会場 / オンライン</span></div>
-        <div class="ic-row"><span class="ic-k">参加費</span><span class="ic-v">無料</span></div>
-        <a href="#apply" class="ic-cta">無料で申し込む →</a>
-        <div class="ic-note">定員制・先着順です</div>
-      </div>
+    </div>
+
+    <div class="hero-bar">
+      <div class="hb"><span>開催日</span><b>2026.10.23（金）</b></div>
+      <div class="hb"><span>時間</span><b>15:00 – 17:00</b></div>
+      <div class="hb"><span>形式</span><b>会場開催（オフライン）</b></div>
+      <div class="hb cap"><span>定員</span><b>30社限定・先着順</b></div>
+      <a href="#apply" class="hb-cta">無料で申し込む →</a>
+      <a class="hb-gcal" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%E3%82%BF%E3%82%A4%C3%97%E3%82%A4%E3%83%B3%E3%83%89%E3%83%8D%E3%82%B7%E3%82%A2+%E3%82%A4%E3%83%B3%E3%83%90%E3%82%A6%E3%83%B3%E3%83%89%E3%82%BB%E3%83%9F%E3%83%8A%E3%83%BC+%E2%80%95+%E3%81%AA%E3%81%9C%E4%BB%8A%E3%80%81%E6%9D%B1%E5%8D%97%E3%82%A2%E3%82%B8%E3%82%A2%E5%B8%82%E5%A0%B4%E3%81%AA%E3%81%AE%E3%81%8B%EF%BC%9F&dates=20261023T150000%2F20261023T170000&ctz=Asia%2FTokyo&details=%E3%82%BF%E3%82%A4%E3%83%BB%E3%82%A4%E3%83%B3%E3%83%89%E3%83%8D%E3%82%B7%E3%82%A2%E5%B8%82%E5%A0%B4%E3%81%AE%E6%9C%80%E6%96%B0%E5%8B%95%E5%90%91%E3%80%81%E8%A8%AA%E6%97%A5%E3%83%97%E3%83%AD%E3%83%A2%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E6%88%90%E5%8A%9F%E4%BA%8B%E4%BE%8B%E3%80%81%E3%82%BB%E3%83%9F%E3%83%8A%E3%83%BC%E9%99%90%E5%AE%9A%E3%83%88%E3%83%A9%E3%82%A4%E3%82%A2%E3%83%AB%E3%81%AE%E3%81%94%E6%8F%90%E6%A1%88%E3%80%82%E4%BC%9A%E5%A0%B4%E9%96%8B%E5%82%AC%EF%BC%88%E3%82%AA%E3%83%95%E3%83%A9%E3%82%A4%E3%83%B3%EF%BC%89%E3%80%82%E5%8F%82%E5%8A%A0%E8%B2%BB%E7%84%A1%E6%96%99%E3%83%BB30%E7%A4%BE%E9%99%90%E5%AE%9A%E3%83%BB%E5%85%88%E7%9D%80%E9%A0%86%E3%80%82&location=%E4%BC%9A%E5%A0%B4%E9%96%8B%E5%82%AC%EF%BC%88%E3%82%AA%E3%83%95%E3%83%A9%E3%82%A4%E3%83%B3%EF%BC%89">📅 カレンダー登録</a>
     </div>
   </div>
 </header>
@@ -440,7 +461,7 @@
 <!-- MID CTA -->
 <section class="cta-band">
   <div class="wrap">
-    <h3>成長市場の“いま”と“打ち手”を、2時間で。<br>まずは、無料で参加してみませんか。</h3>
+    <h3>タイ・インドネシア市場の最新動向と、<br>成果につながるプロモーション手法を2時間で解説します。</h3>
     <a href="#apply" class="btn">無料で申し込む →</a>
   </div>
 </section>
@@ -546,19 +567,31 @@
   <div class="wrap">
     <div class="lead-head">
       <h2 class="sec">登壇者</h2>
-      <p class="sec-sub">ASEAN市場に特化したグローバル・デイリーの専門チームが解説。さらに、各国の人気KOLが特別ゲストとして登壇します。</p>
+      <p class="sec-sub">現地の“いま”を知るKOLと、数多くの事例を持つASEAN専門チーム。この2つが揃うのが、本セミナーの特長です。</p>
     </div>
-    <div style="margin-top:40px">
+
+    <div class="feat2" style="margin-top:36px">
+      <div class="feat2-item">
+        <span class="feat2-no">01</span>
+        <div><b>現地KOLが“生の声”を届ける</b>タイ・インドネシアの人気インフルエンサーが登壇し、生活者のリアルな反応を直接お伝えします。</div>
+      </div>
+      <div class="feat2-item">
+        <span class="feat2-no">02</span>
+        <div><b>事例を持つASEAN専門チームが解説</b>数多くの訪日プロモーションを手がけたグローバル・デイリーのASEAN専門チームが、実際の成功事例で解説します。</div>
+      </div>
+    </div>
+
+    <div>
       <div class="team-block">
-        <div class="team-badge">解説</div>
+        <div class="team-photo"><span><img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/07/スクリーンショット-2026-07-27-17.50.54.png" alt="tanaka"></div>
         <div>
-          <div class="spk-role">グローバル・デイリー ／ ASEAN専門チーム</div>
+          <div class="spk-role">解説 ／ グローバル・デイリー ASEAN専門チーム</div>
           <div class="team-name">ASEAN（タイ・インドネシア特化）チーム</div>
-          <div class="spk-desc">両市場に精通した専門チームが、市場の全体像から訪日プロモーションの成功事例まで、現場目線で「明日から動ける」実践知を解説します。</div>
+          <div class="spk-desc">数多くの訪日プロモーション事例を持つ専門チームが、市場の全体像から具体的な打ち手までを、現場目線で「明日から動ける」形に落とし込んで解説します。</div>
           <div class="team-members">
             <span>田中</span>
             <span>ノア<small>タイ担当</small></span>
-            <span>佐藤<small>タイ担当</small></span>
+            <span>佐藤<small>インドネシア担当</small></span>
           </div>
         </div>
       </div>
@@ -566,10 +599,10 @@
       <div class="spk-guest-label">＋ 特別ゲスト（各国KOL）</div>
 
       <div class="spk-row">
-        <div class="spk-ava photo"><img src="kol_kirarista.png" alt="KIRARISTA"></div>
+        <div class="spk-ava photo"><img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/07/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88-2026-07-27-17.37.52.png" alt="KIRARISTA"></div>
         <div>
           <div class="spk-role">ゲストスピーカー ／ タイ KOL</div>
-          <div class="spk-name">KIRARISTA（キラリスター）</div>
+          <div class="spk-name">KIRARISTA（キラリスター）<span class="st online">オンライン登壇予定</span></div>
           <div class="spk-desc">タイのインフルエンサー視点で、生活者に響く最新トレンドをお話しします。</div>
           <div class="spk-reach">
             <span><u>YouTube</u>13.6<i>万</i></span>
@@ -579,7 +612,7 @@
         </div>
       </div>
       <div class="spk-row">
-        <div class="spk-ava photo"><img src="kol_anisa.png" alt="吉田アニサ"></div>
+        <div class="spk-ava photo"><img src="https://www.gldaily.com/gld-kanri/wp-content/uploads/2026/07/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88-2026-07-27-17.38.53.png" alt="吉田アニサ"></div>
         <div>
           <div class="spk-role">ゲストスピーカー ／ インドネシア KOL</div>
           <div class="spk-name">吉田アニサ<span class="st fix">登壇確定</span></div>
@@ -633,8 +666,9 @@
     <div style="margin-top:34px">
       <div class="out-row"><div class="oh">セミナー名</div><div>なぜ今、東南アジア市場なのか？ ― 市場の成長と可能性について</div></div>
       <div class="out-row"><div class="oh">開催日時</div><div>2026年10月23日（金）15:00 – 17:00</div></div>
-      <div class="out-row"><div class="oh">開催形式</div><div>会場（オフライン）／ オンライン（ZOOM）</div></div>
+      <div class="out-row"><div class="oh">開催形式</div><div>会場開催（オフライン）</div></div>
       <div class="out-row"><div class="oh">参加費</div><div>無料</div></div>
+      <div class="out-row"><div class="oh">定員</div><div>30社限定・先着順（定員に達し次第、締め切ります）</div></div>
       <div class="out-row"><div class="oh">対象</div><div>自治体・DMOのインバウンド担当者、東南アジア進出を検討中の企業、観光事業者、インバウンドのマーケティング・営業ご担当者</div></div>
       <div class="out-row"><div class="oh">内容</div><div>タイ・インドネシア市場の最新動向、訪日プロモーション事例、セミナー限定トライアルのご提案、質疑応答</div></div>
     </div>
@@ -644,8 +678,8 @@
 <!-- FINAL -->
 <section class="final" id="apply">
   <div class="wrap">
-    <h2>成長市場は、<br><span class="mk">先に動いた人</span>から選ばれる。</h2>
-    <p>参加費無料。会場・オンラインどちらでもご参加いただけます。</p>
+    <h2>ご参加のお申し込み</h2>
+    <p>2026年10月23日（金）15:00–17:00 ／ 会場開催（オフライン）／ 参加費無料 ／ 30社限定・先着順</p>
     <a href="#" class="hero-cta"><span class="free">無料</span>セミナーに申し込む</a>
     <div class="note">※お申し込みフォームのURLをこちらに設定してください。定員に達し次第、締め切らせていただきます。</div>
   </div>
