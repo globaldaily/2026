@@ -1141,10 +1141,60 @@
   #entry .hashtags3 .hashtag{background:linear-gradient(135deg,var(--ink),#1d5a6d)!important;color:#fff;border:none}
   /* 見出し脇のステッカー：ピンク/パープル→構造色に */
   #entry .stickr.k{background:var(--aqua-deep);box-shadow:0 3px 8px rgba(12,110,137,.18)}
+
+  /* ============================================================
+     トーン整理 v2（2026-08-17）— 当選賞品 / 対象商品 / 応募規約 / お問い合わせ / 開催概要
+     ルールは v1 と同じ:
+       コーラル = 押すもの（CTA）＋1ブロック1箇所の数値/最重要ワード
+       アクア   = 構造（ラベル・番号・枠・見出し）
+       イエロー = 賞品ボックス（.hook / .pz-hero）だけ
+       パープル・ピンク・ゴールドは使わない
+     ============================================================ */
+
+  /* --- 開催概要：見出しのイエローバー→アクア --- */
+  .sec.outline .ol-h::before{background:var(--aqua)}
+
+  /* --- 当選賞品 --- */
+  #prize .stickr.p{background:var(--aqua-deep);box-shadow:0 3px 8px rgba(12,110,137,.18)}
+  /* 角のリボン：コーラル面→白。CTAと同じ色を使わない */
+  #prize .prize-ribbon{background:#fff;color:var(--aqua-deep);box-shadow:0 3px 8px rgba(0,0,0,.14)}
+  /* 「第1弾 受付中」：イエロー→白（イエローは賞品ボックス専用） */
+  #prize .now-tag{background:#fff;color:var(--aqua-deep);box-shadow:0 3px 0 rgba(255,255,255,.45)}
+  /* 賞ラベル：コーラル／パープルの2色→構造色に統一 */
+  #prize .pcard.k .plabel2{background:var(--aqua-deep)}
+  #prize .pcard.t .plabel2{background:#3E86A0}
+  /* 当選数だけは強調を残す（このカード唯一の強調） */
+  #prize .pcard .pnum2{color:var(--coral-deep)}
+  /* 賞品ボックス（いちばんの目玉）はイエローのまま＝ヒーローの.hookと同じ役割 */
+
+  /* --- 対象商品 --- */
+  /* 指示バー：コーラル面はCTAと紛らわしいので構造色に */
+  #items .pick-banner{background:var(--aqua-deep);box-shadow:0 5px 14px rgba(12,110,137,.20)}
+  /* 誤解防止バナー：強調は「購入不要」1点に絞る */
+  #items .items-guard{background:#F4FAFC;border-color:#BFE0EA;color:#3C6474}
+  #items .items-guard b{color:var(--ink)}
+  #items .items-guard em{color:var(--coral-deep)}
+  /* 注意書き：イエロー地→ニュートラル */
+  #items .notebox{background:#F4F8FA;border:1px solid #DCEAEF;color:#4E6B76}
+  #items .notebox b{color:var(--ink)}
+  /* 商品カード：区分バッジはすべて同じ構造色 */
+  #items .prod .badge.med{background:#EDF6F9;color:var(--aqua-deep);border-color:#D5E7ED}
+  #items .prod .badge.vol{background:#EDF6F9;color:var(--aqua-deep);border:1px solid #D5E7ED}
+  #items .prod{border-color:#DCEAEF !important}
+  /* 各カードの「対象」バッジ：コーラル4連発はCTAと競合するので構造色に */
+  #items .prod::before{background:var(--aqua-deep)}
+
+  /* --- 応募規約 --- */
+  #rules details.rules{border-color:#DCEAEF}
+  #rules details.rules .body{color:#4E6B76}
+
+  /* --- お問い合わせ：クリーム→ページ全体と揃うニュートラルに --- */
+  .contact{background:#F6FAFB}
+  .contact .fine{color:#6F8F9A}
 </style>
 </head>
 <body>
-<div style="position:fixed;bottom:8px;right:8px;z-index:99999;background:#123C4A;color:#fff;font-size:10px;padding:3px 8px;border-radius:6px;font-family:sans-serif;opacity:.85;pointer-events:none">v.0817-1300</div>
+<div style="position:fixed;bottom:8px;right:8px;z-index:99999;background:#123C4A;color:#fff;font-size:10px;padding:3px 8px;border-radius:6px;font-family:sans-serif;opacity:.85;pointer-events:none">v.0817-1430</div>
 
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <symbol id="mondoSearch" viewBox="0 0 180 300">
