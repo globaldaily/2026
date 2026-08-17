@@ -1036,10 +1036,41 @@
   @media (min-width:768px){ .contact .cut-contact{width:196px} .contact{padding-bottom:272px}
     .contact .cut-contact img{height:236px;width:auto;object-fit:cover;object-position:top center} }
   @media (min-width:1080px){ .contact .cut-contact{width:212px} .contact .cut-contact img{height:252px} .contact{padding-bottom:290px} }
+
+  /* ==== ヒーロー吹き出し：夢多さんのセリフとして明示（2026-08-17） ==== */
+  .hero .mondo-bubble{background:#fff;border:3px solid var(--aqua);border-radius:20px;
+        padding:16px 16px 14px;box-shadow:0 8px 20px rgba(12,110,137,.16);
+        transform:rotate(-1deg);overflow:visible}
+  .hero .mondo-bubble .mb-tw{font-size:15px;line-height:1.8;font-weight:700;text-shadow:none;color:var(--ink)}
+  .hero .mondo-bubble .mb-tw b{color:var(--coral-deep)}
+  .hero .mondo-bubble .mb-tw .tw-tag{font-size:1em;padding:1px 7px;box-shadow:0 2px 4px rgba(216,67,42,.16)}
+  .hero .mb-who{position:absolute;top:-13px;left:18px;z-index:2;background:var(--aqua);color:#fff;
+        font-size:11px;font-weight:700;padding:3px 13px;border-radius:999px;letter-spacing:.03em;white-space:nowrap;
+        box-shadow:0 3px 8px rgba(12,110,137,.22)}
+  /* しっぽ：下向き（モバイル・タブレット） */
+  .hero .mondo-bubble .mb-tail{display:block;position:absolute;left:auto;top:auto;right:36px;bottom:-19px;
+        width:0;height:0;border:none;
+        border-left:13px solid transparent;border-right:13px solid transparent;border-top:19px solid var(--aqua)}
+  .hero .mondo-bubble .mb-tail::after{content:"";position:absolute;left:-9px;top:-23px;
+        width:0;height:0;border:none;
+        border-left:9px solid transparent;border-right:9px solid transparent;border-top:14px solid #fff}
+  /* 幅と位置の調整 */
+  @media (max-width:767px){ .hero .mondo-bubble{left:2%!important;max-width:300px} }
+  @media (min-width:768px){ .hero .mondo-bubble{max-width:304px;left:-16%} }
+  @media (min-width:1140px){ .hero .mondo-bubble{max-width:326px;left:-20%} }
+  /* しっぽ：右向き（夢多さんが真横に立つPC） */
+  @media (min-width:1140px){
+    .hero .mondo-bubble .mb-tail{right:-19px;bottom:30px;
+          border-left:19px solid var(--aqua);border-right:none;
+          border-top:13px solid transparent;border-bottom:13px solid transparent}
+    .hero .mondo-bubble .mb-tail::after{left:-23px;top:-9px;
+          border-left:14px solid #fff;border-right:none;
+          border-top:9px solid transparent;border-bottom:9px solid transparent}
+  }
 </style>
 </head>
 <body>
-<div style="position:fixed;bottom:8px;right:8px;z-index:99999;background:#123C4A;color:#fff;font-size:10px;padding:3px 8px;border-radius:6px;font-family:sans-serif;opacity:.85;pointer-events:none">v.0817-0930</div>
+<div style="position:fixed;bottom:8px;right:8px;z-index:99999;background:#123C4A;color:#fff;font-size:10px;padding:3px 8px;border-radius:6px;font-family:sans-serif;opacity:.85;pointer-events:none">v.0817-1000</div>
 
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <symbol id="mondoSearch" viewBox="0 0 180 300">
@@ -1152,7 +1183,8 @@
 
         <div class="hero-figs">
           <div class="mondo-bubble maru">
-            <p class="mb-tw">在店頭找到<b>河馬君</b>，<br>拍照加上<b class="tw-tag">#かばくんをさがせ</b><br>等指定的3個標籤發文，<br>就有機會抽中好禮！</p>
+            <span class="mb-who maru">夢多さん</span>
+            <p class="mb-tw">店頭で<b>カバくん</b>を見つけたら、<br>写真に<b class="tw-tag">#かばくんをさがせ</b>など<br>指定の<b>3つのタグ</b>をつけて投稿！<br>それだけで応募完了だよ！</p>
             <span class="mb-tail"></span>
           </div>
 <div class="fig-search">
