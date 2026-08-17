@@ -1069,10 +1069,82 @@
           border-left:14px solid #fff;border-right:none;
           border-top:9px solid transparent;border-bottom:9px solid transparent}
   }
+
+  /* ============================================================
+     トーン整理 v1（2026-08-17）— 対象: ヒーロー / 応募方法
+     方針: 色数を減らすのではなく「役割」を固定する
+       コーラル = 押すもの（CTA）と、1ブロック1箇所の最重要ワード
+       アクア   = 構造（ラベル・番号・枠）
+       イエロー = 賞品ボックス（ヒーローの.hook）だけ
+     ============================================================ */
+
+  /* --- ヒーロー背景：多色グラデ→アクア基調の1色グラデに --- */
+  header.hero{background:linear-gradient(180deg,#DCF1F8 0%,#EFF9FC 46%,#FFFFFF 100%)!important}
+  header.hero::after{opacity:.5}
+  header.hero .confetti{display:none}
+  header.hero .dood.spark{opacity:.45}
+
+  /* --- 見出しまわり：強調をひとつに --- */
+  header.hero .navi-line,header.hero .hero-top .brand{color:var(--aqua-deep)}
+  header.hero h1 .hl::after{background:#FFE9A8;height:14px;opacity:.9}
+  header.hero .hero-status{border-color:rgba(12,110,137,.14);box-shadow:0 2px 8px rgba(12,110,137,.07)}
+  header.hero .hero-lead{color:#3C6474;font-weight:500}
+  header.hero .hero-lead b{font-weight:700;color:var(--ink)}
+
+  /* --- 3ステップ：色を持たせず構造色に統一 --- */
+  header.hero .hero-steps span{background:rgba(255,255,255,.92);border-color:rgba(12,110,137,.13);box-shadow:none}
+  header.hero .hero-steps span b{background:var(--aqua)}
+  header.hero .hero-steps span:last-of-type b{background:var(--aqua)}
+  header.hero .hero-steps i{color:#9DBEC9}
+
+  /* --- 吹き出し：コーラルは「どっちか1枚でOK！」1箇所だけ --- */
+  header.hero .mondo-bubble{border-color:#8ECBDD;box-shadow:0 6px 14px rgba(12,110,137,.10)}
+  header.hero .mondo-bubble .mb-tail{border-top-color:#8ECBDD}
+  @media (min-width:1140px){ header.hero .mondo-bubble .mb-tail{border-left-color:#8ECBDD;border-top-color:transparent} }
+  header.hero .mb-who{background:var(--aqua-deep);box-shadow:none}
+  header.hero .mondo-bubble .mb-tw b{color:var(--ink)}
+  header.hero .mondo-bubble .mb-tw b.hi-1{color:var(--coral-deep)}
+
+  /* --- 商品カードのキャプション：イエローチップ→ニュートラルに --- */
+  header.hero .fs-caption{background:#fff!important;border:2px solid #BFE0EA!important;box-shadow:0 4px 10px rgba(12,110,137,.10)!important}
+  header.hero .fs-caption span{color:#5C7F8B}
+  header.hero .fs-caption b{color:var(--aqua-deep)}
+  header.hero .fs-found{background:var(--aqua-deep);color:#fff;box-shadow:none}
+
+  /* --- 応募方法セクション --- */
+  #entry{background:linear-gradient(180deg,#FFFFFF,#F5FAFC)}
+  #entry.sec.alt::before{opacity:.28}
+
+  /* STEP番号：イエロー→アクア基調 */
+  #entry .step-num{background:#E4F4F9;color:var(--aqua-deep);box-shadow:0 3px 0 #C6E4EE}
+
+  /* 「応募のしかたは2つ」：イエロー箱→白ベースの枠に */
+  #entry .route-lead{background:#fff;border:2px solid #BFE0EA;color:var(--ink);
+        box-shadow:0 2px 8px rgba(12,110,137,.06)}
+  #entry .route-lead b{color:var(--aqua-deep)}
+  #entry .route-lead em{background:linear-gradient(transparent 62%,rgba(240,89,60,.22) 62%);color:var(--coral-deep);font-weight:800}
+
+  /* A・Bカードを対等に見せる（Bのクリーム地／金枠をやめる） */
+  #entry .route.rB{border-color:var(--line);background:#fff}
+  #entry .route.rB .rt-ill rect:first-of-type{fill:#FFF9EE;stroke:#F0E4CC}
+  #entry .rt-note{color:#6F8F9A;font-weight:600}
+
+  /* 注意書き：イエロー地→ニュートラル。強調は最小限 */
+  #entry .notebox{background:#F4F8FA;border:1px solid #DCEAEF;color:#4E6B76}
+  #entry .notebox b{color:var(--ink)}
+  #entry .notebox b.hi{color:var(--coral-deep)}
+
+  /* お一人様バー：面で塗らずに軽く */
+  #entry .anyq{background:#E4F4F9;color:var(--aqua-deep);box-shadow:0 3px 0 #C6E4EE}
+
+  /* ハッシュタグチップ：コピーする実データなので視認性は落とさない */
+  #entry .hashtags3 .hashtag{background:linear-gradient(135deg,var(--ink),#1d5a6d)!important;color:#fff;border:none}
+  /* 見出し脇のステッカー：ピンク/パープル→構造色に */
+  #entry .stickr.k{background:var(--aqua-deep);box-shadow:0 3px 8px rgba(12,110,137,.18)}
 </style>
 </head>
 <body>
-<div style="position:fixed;bottom:8px;right:8px;z-index:99999;background:#123C4A;color:#fff;font-size:10px;padding:3px 8px;border-radius:6px;font-family:sans-serif;opacity:.85;pointer-events:none">v.0817-1130</div>
+<div style="position:fixed;bottom:8px;right:8px;z-index:99999;background:#123C4A;color:#fff;font-size:10px;padding:3px 8px;border-radius:6px;font-family:sans-serif;opacity:.85;pointer-events:none">v.0817-1300</div>
 
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <symbol id="mondoSearch" viewBox="0 0 180 300">
@@ -1186,7 +1258,7 @@
         <div class="hero-figs">
           <div class="mondo-bubble maru">
             <span class="mb-who maru">夢多さん</span>
-            <p class="mb-tw"><b>商品をさがして撮る</b>、<br><b>カバくんのまね</b>で撮る。<br>どっちか1枚でOK！<br><b>3つのタグ</b>をつけて投稿してね！</p>
+            <p class="mb-tw"><b>商品をさがして撮る</b>、<br><b>カバくんのまね</b>で撮る。<br><b class="hi-1">どっちか1枚でOK！</b><br><b>3つのタグ</b>をつけて投稿してね！</p>
             <span class="mb-tail"></span>
           </div>
 <div class="fig-search">
@@ -1465,7 +1537,7 @@
       </div>
 
       <div class="anyq maru">＼ お一人様 何口でも応募可能！ ／</div>
-      <div class="notebox">※応募方法A（対象商品の撮影）または応募方法B（お口を開けてピースサインをしたまねっこ写真）のいずれかを撮影し、指定の3つのハッシュタグ（#かばくんをさがせ／#健栄／#PR）をつけてSNSに投稿してください。<b>投稿をもって応募完了</b>となります。<br>※応募方法Bは対象商品が写っていなくても応募できます。<br>※<b>公開設定</b>のアカウントからご投稿ください。非公開設定の投稿、3つのハッシュタグが揃っていない投稿は無効となります。<br>※当選発表は本ページ上で行います。ご当選された方は、事務局までご連絡ください（詳細は応募規約をご確認ください）。<br>※抽選の対象は、応募規約の条件を満たす投稿に限ります。<br>※不正が発覚した場合は、該当応募者のすべての応募を無効とさせていただきます。</div>
+      <div class="notebox">※応募方法A（対象商品の撮影）または応募方法B（お口を開けてピースサインをしたまねっこ写真）のいずれかを撮影し、指定の3つのハッシュタグ（#かばくんをさがせ／#健栄／#PR）をつけてSNSに投稿してください。<b class="hi">投稿をもって応募完了</b>となります。<br>※応募方法Bは対象商品が写っていなくても応募できます。<br>※<b>公開設定</b>のアカウントからご投稿ください。非公開設定の投稿、3つのハッシュタグが揃っていない投稿は無効となります。<br>※当選発表は本ページ上で行います。ご当選された方は、事務局までご連絡ください（詳細は応募規約をご確認ください）。<br>※抽選の対象は、応募規約の条件を満たす投稿に限ります。<br>※不正が発覚した場合は、該当応募者のすべての応募を無効とさせていただきます。</div>
     </div>
   </section>
 
