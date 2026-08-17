@@ -1058,6 +1058,8 @@
   @media (max-width:767px){ .hero .mondo-bubble{left:2%!important;max-width:300px} }
   @media (min-width:768px){ .hero .mondo-bubble{max-width:304px;left:-4%} }
   @media (min-width:1140px){ .hero .mondo-bubble{max-width:326px;left:-5%} }
+  /* 768-899px はビジュアル列が狭く箱が広げられないため文字を少し縮める */
+  @media (min-width:768px) and (max-width:899px){ .hero .mondo-bubble .mb-tw{font-size:13.3px;line-height:1.75} }
   /* しっぽ：右向き（夢多さんが真横に立つPC） */
   @media (min-width:1140px){
     .hero .mondo-bubble .mb-tail{right:-19px;bottom:30px;
@@ -1070,7 +1072,7 @@
 </style>
 </head>
 <body>
-<div style="position:fixed;bottom:8px;right:8px;z-index:99999;background:#123C4A;color:#fff;font-size:10px;padding:3px 8px;border-radius:6px;font-family:sans-serif;opacity:.85;pointer-events:none">v.0817-1030</div>
+<div style="position:fixed;bottom:8px;right:8px;z-index:99999;background:#123C4A;color:#fff;font-size:10px;padding:3px 8px;border-radius:6px;font-family:sans-serif;opacity:.85;pointer-events:none">v.0817-1130</div>
 
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <symbol id="mondoSearch" viewBox="0 0 180 300">
@@ -1184,7 +1186,7 @@
         <div class="hero-figs">
           <div class="mondo-bubble maru">
             <span class="mb-who maru">夢多さん</span>
-            <p class="mb-tw">店頭で<b>カバくん</b>を見つけたら、<br>写真に<b class="tw-tag">#かばくんをさがせ</b>など<br>指定の<b>3つのタグ</b>をつけて投稿！<br>それだけで応募完了だよ！</p>
+            <p class="mb-tw"><b>商品をさがして撮る</b>、<br><b>カバくんのまね</b>で撮る。<br>どっちか1枚でOK！<br><b>3つのタグ</b>をつけて投稿してね！</p>
             <span class="mb-tail"></span>
           </div>
 <div class="fig-search">
